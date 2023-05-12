@@ -13,6 +13,6 @@ spring:
       ddl-auto: update
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://localhost:3306/digitalbooking
-    username: root
-    password: 1234
+    url: jdbc:mysql://db.ctd.academy:3306/0523TDPRON2C03LAED1021PT_GRUPO1
+    username: 0523TDPRON2C03LAED1021PT_GRUPO1
+    password: iele4aiR

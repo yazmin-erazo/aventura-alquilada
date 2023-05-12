@@ -1,5 +1,6 @@
 package com.digitalbooking.digitalbooking.infrastructure.product.adapter;
 
+import com.digitalbooking.digitalbooking.infrastructure.category.adapter.CategoryEntity;
 import lombok.Data;
 
 import javax.persistence.*;
@@ -19,5 +20,7 @@ public class ProductEntity {
     private String description;
     private String size;
     private String gender;
-
+    private BigDecimal deposit;
+    @ManyToOne
+    private CategoryEntity category;
 }

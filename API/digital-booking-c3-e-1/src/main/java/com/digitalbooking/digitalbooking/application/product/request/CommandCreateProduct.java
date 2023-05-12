@@ -14,13 +14,13 @@ import java.math.BigDecimal;
 public class CommandCreateProduct {
 
     @JsonProperty
-    @Schema(allowableValues = {"Bicicleta"})
+    @Schema(allowableValues = {"Carpa"})
     private String name;
     @JsonProperty
-    @Schema(allowableValues = {"GW"})
+    @Schema(allowableValues = {"Mountain Hardware"})
     private String brand;
     @JsonProperty
-    @Schema(allowableValues = {"Reacondicionado"})
+    @Schema(allowableValues = {"Nueva"})
     private String state;
     @JsonProperty
     @Schema(allowableValues = {"100"})
@@ -29,9 +29,15 @@ public class CommandCreateProduct {
     @Schema(allowableValues = {"Esta es la descripción"})
     private String description;
     @JsonProperty
-    @Schema(allowableValues = {"50"})
+    @Schema(allowableValues = {"8 personas"})
     private String size;
     @JsonProperty
-    @Schema(allowableValues = {"male"})
+    @Schema(allowableValues = {"No tiene"})
     private String gender;
+    @JsonProperty
+    @Schema(allowableValues = {"10"})
+    private BigDecimal deposit;
+    @JsonProperty
+    @Schema(allowableValues = {"1"})
+    private Long idCategory;
 }

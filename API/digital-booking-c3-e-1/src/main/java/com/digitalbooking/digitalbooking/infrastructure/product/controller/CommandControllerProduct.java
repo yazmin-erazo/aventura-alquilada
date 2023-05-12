@@ -21,7 +21,7 @@ public class CommandControllerProduct {
 
     @PostMapping
     @Operation(summary = "Create Product ", description = "Method to create a new product")
-    public ResponseEntity<CommandResponse<Long>> createProduct(@RequestBody CommandCreateProduct commandCreateProduct) {
+    public ResponseEntity<CommandResponse<Long>> createProduct(@RequestBody CommandCreateProduct commandCreateProduct) throws Exception {
         return new ResponseEntity<>(new CommandResponse<>(productHandler.createProduct(commandCreateProduct)), HttpStatus.CREATED);
     }
 

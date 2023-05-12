@@ -12,8 +12,8 @@ public class ProductHandler {
     @Autowired
     ServiceProduct serviceProduct;
 
-    public Long createProduct(CommandCreateProduct createProduct){
-        return serviceProduct.createProduct(Product.create(createProduct.getName(), createProduct.getBrand(), createProduct.getState(), createProduct.getPrice(), createProduct.getDescription(), createProduct.getSize(), createProduct.getGender()));
+    public Long createProduct(CommandCreateProduct createProduct) throws Exception {
+        return serviceProduct.createProduct(Product.create(createProduct.getName(), createProduct.getBrand(), createProduct.getState(), createProduct.getPrice(), createProduct.getDescription(), createProduct.getSize(), createProduct.getGender(),createProduct.getDeposit(),createProduct.getIdCategory()));
     }
 
 }
