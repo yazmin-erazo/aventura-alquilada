@@ -1,12 +1,14 @@
 import "./App.css";
-import Header from "./Components/Header";
-import Footer from "./Components/Footer";
-import "typeface-roboto";
+import { Outlet } from "react-router-dom";
+import Header from "./components/common/Header"
+import Footer from "./components/common/Footer"
+//import "typeface-roboto";
 
 function App() {
   return (
     <>
       <Header />
+      <Outlet />
       <Footer />
     </>
   );
