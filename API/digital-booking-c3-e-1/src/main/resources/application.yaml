@@ -1,0 +1,18 @@
+server:
+  port: 8080
+  servlet:
+    context-path: /digitalbooking
+    session:
+      timeout: 21600s
+springdoc:
+  swagger-ui:
+    path: /swagger-ui.html
+spring:
+  jpa:
+    hibernate:
+      ddl-auto: update
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://db.ctd.academy:3306/0523TDPRON2C03LAED1021PT_GRUPO1
+    username: 0523TDPRON2C03LAED1021PT_GRUPO1
+    password: iele4aiR
