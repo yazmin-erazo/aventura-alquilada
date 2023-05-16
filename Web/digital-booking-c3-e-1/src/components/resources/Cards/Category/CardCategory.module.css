@@ -1,0 +1,106 @@
+@import "/src/styles/variables.css";
+@import "/src/styles/global.css";
+
+.card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 0px 0px 16px;
+  gap: 1px;
+  width: 187px;
+  height: 194px;
+  left: 20.54px;
+  top: 44.52px;
+  background: #fbfcfe;
+  border-width: 1px 1px 5px 1px;
+  border-style: solid;
+  border-color: #c3d4e4;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.card:hover{
+    box-shadow: 0px 0px 24px rgba(103, 132, 156, 0.5);
+}
+
+.header {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-end;
+  padding: 0px;
+  gap: 6px;
+  width: 155px;
+  height: 24px;
+  flex: none;
+  order: 1;
+  flex-grow: 0;
+}
+
+.header img {
+  width: 24px;
+  height: 24px;
+}
+
+.header h3 {
+  line-height: 20px;
+  margin: 0;
+  padding: 0;
+  font: var(--h4);
+  color: var(--secondary-600);
+}
+
+.content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+  
+}
+
+.categoryImage {
+  width: 185px;
+  height: 140px;
+  position: relative;
+  clip-path: polygon(0 0, 50px 0, 187px 0px, 187px 140px, 0 93px);
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+  border-radius: 4px 4px 0 0;
+  overflow: hidden;
+}
+
+/* --------------------------- MEDIA QUERIES ---------------------------*/
+@media (max-width: 768px) {
+  .card {
+    width: auto;
+    height: 110px;
+    flex-direction: row;
+    border-width: 1px;
+    padding: 0;
+    border: 1px solid var(--secondary-50);
+  }
+  .header {
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-evenly;
+    gap: 16px;
+  }
+  .header h3 {
+    font: var(--body-16);
+    font-weight: 700;
+  }
+  .content {
+    width: auto;
+  }
+
+  .categoryImage {
+    display: none;
+  }
+
+  .header img {
+    width: 2rem;
+    height: 2rem;
+  }
+
+}
