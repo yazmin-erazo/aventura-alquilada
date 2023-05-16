@@ -1,0 +1,41 @@
+@import "/src/styles/variables.css";
+@import "/src/styles/global.css";
+
+
+
+
+.searchContainer {
+  background-color: var(--secondary-600);
+  height: 10vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.categoriesContainer{
+  background-color: var(--secondary-50);
+  margin-bottom: 52px;
+}
+
+.colorBoxContainer {
+  position: fixed;
+  left: 0;
+  right: 0;
+  top: 0;
+  height: 62vh;
+  background-color: var(--secondary-50);
+  z-index: -1;
+  width: 100%;
+}
+
+.subtitle {
+  font: var(--h3);
+  color: var(--secondary-300);
+  margin-bottom: 16px;
+  line-height: 2rem;
+  border-bottom: 1px solid var(--secondary-50);
+  margin-bottom: 32px;
+  letter-spacing: 1px;
+}
+
+
