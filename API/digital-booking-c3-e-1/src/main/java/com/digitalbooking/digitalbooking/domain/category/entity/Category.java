@@ -8,12 +8,13 @@ import lombok.Getter;
 public final class Category {
     private Long id;
     private String name;
+    private String imageURL;
 
     public static Category create(Long id) throws Exception {
-        return new Category(id, "");
+        return new Category(id, "", "");
     }
 
-    public static Category reBuild(Long id, String name)  {
-        return new Category(id, name);
+    public static Category reBuild(Long id, String name, String imageURL)  {
+        return new Category(id, name, imageURL);
     }
 }
