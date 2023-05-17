@@ -21,6 +21,8 @@ public class ProductEntity {
     private String size;
     private String gender;
     private BigDecimal deposit;
+    private String imageURL;
+    private Boolean isDelete;
     @ManyToOne
     private CategoryEntity category;
 }

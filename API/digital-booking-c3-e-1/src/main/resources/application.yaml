@@ -16,3 +16,8 @@ spring:
     url: jdbc:mysql://db.ctd.academy:3306/0523TDPRON2C03LAED1021PT_GRUPO1
     username: 0523TDPRON2C03LAED1021PT_GRUPO1
     password: iele4aiR
+aws:
+  profile: default
+  s3:
+    bucketname: c3-e1-digital-booking
+    imagepath: img

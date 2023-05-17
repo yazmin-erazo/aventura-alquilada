@@ -25,4 +25,9 @@ public class CommandControllerProduct {
         return new ResponseEntity<>(new CommandResponse<>(productHandler.createProduct(commandCreateProduct)), HttpStatus.CREATED);
     }
 
+    @DeleteMapping("{id-product}")
+    @Operation(summary = "Delete Product", description = "Method to delete a product")
+    public ResponseEntity<CommandResponse<String>> deleteProduct(@PathVariable("id-product") Long id) {
+        return new ResponseEntity<>(new CommandResponse<>(productHandler.deleteProduct(id)), HttpStatus.OK);
+    }
 }
