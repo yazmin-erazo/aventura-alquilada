@@ -7,7 +7,7 @@ const Footer = () => {
         <div className="isologotipo">
           <img
             className="logo"
-            src="/isologotipo.png"
+            src="/isologotipo.svg"
             alt="isologotipo de Digital Booking"
           />
           <img
