@@ -5,7 +5,7 @@ import lombok.Getter;
 
 @Getter
 @AllArgsConstructor
-public class Category {
+public final class Category {
     private Long id;
     private String name;
 
