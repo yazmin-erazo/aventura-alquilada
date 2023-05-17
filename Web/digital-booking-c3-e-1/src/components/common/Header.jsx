@@ -6,7 +6,7 @@ const Header = () => {
     <div className="header">
       <div className="headerContainer">
         <Link to="/">
-          <img src="/Digital Booking.png" alt="logotipo Digital Booking" />
+          <img src="/Digital Booking.svg" alt="logotipo Digital Booking" />
         </Link>
         <div className="headerBtn">
           <button className="cuentaBtn">Crear cuenta</button>
