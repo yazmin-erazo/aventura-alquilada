@@ -14,7 +14,7 @@ const Header = () => {
         </div>
         <nav>
           <input type="checkbox" id="menu" />
-          <label className="menuIcon" for="menu">
+          <label className="menuIcon" htmlFor="menu">
             {" "}
             ☰{" "}
           </label>
