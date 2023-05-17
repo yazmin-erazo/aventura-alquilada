@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useParams, useNavigate  } from 'react-router-dom';
 import ButtonPrimary from '../../common/Buttons/ButtonPrimary';
-import { FaChevronLeft} from 'react-icons/fa';
+import { FaArrowLeft } from 'react-icons/fa';
 import styles from './ProductDetails.module.css'
 import axios from "axios";
 
@@ -32,7 +32,9 @@ const ProductDetails = () => {
     <>
       <div className={styles.detailsHeader}>
           <p>{product.name}</p>
-          <ButtonPrimary onClick={() => navigate(-1)}><FaChevronLeft /></ButtonPrimary>
+          <div onClick={() => navigate(-1)}>
+            <ButtonPrimary><FaArrowLeft /></ButtonPrimary>
+          </div>
           {/* <button onClick={() => navigate(-1)}><i className="fa-solid fa-chevron-left"></i></button> */}
       </div>
       <div className={styles.colorBoxContainer}></div>
