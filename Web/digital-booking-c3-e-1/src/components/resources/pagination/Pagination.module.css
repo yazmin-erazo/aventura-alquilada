@@ -1,0 +1,30 @@
+@import "/src/styles/variables.css";
+@import "/src/styles/global.css";
+
+ul.pagination {
+  margin-top: 0;
+  margin-bottom: 0;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+}
+
+/* ul.pagination  li.pageItem.active a.pageLink {
+    color: saturate(darken(var(--bg-general), 50%), 5%) !important;
+    background-color: saturate(lighten(var(--bg-general), 7.5%), 2.5%) !important;
+    border-color: var(--bg-general) !important;
+    
+}
+
+  a.pageLink {
+    padding: 0.75rem 1rem;
+    min-width: 3.5rem;
+    text-align: center;
+    box-shadow: none !important;
+    border-color: var(--bg-general) !important;
+    color: saturate(darken(var(--bg-general), 30%), 10%);
+    font-weight: 900;
+    font-size: 1rem;
+
+}
+a.pageLink:hover {
+  background-color: var(--bg-white-50);
+} */
