@@ -64,7 +64,7 @@
     },
     {
       "id": 8,
-      "name": "Nombre 1",
+      "name": "Nombre 8",
       "image": "https://dummyimage.com/200x150/EEF3F9/aaa",
       "price": 10.99,
       "brand": "Marca 1",
@@ -73,7 +73,7 @@
     },
     {
       "id": 9,
-      "name": "Nombre 2",
+      "name": "Nombre 9",
       "image": "https://dummyimage.com/200x150/EEF3F9/aaa",
       "price": 19.99,
       "brand": "Marca 2",
@@ -82,7 +82,7 @@
     },
     {
       "id": 10,
-      "name": "Nombre 3",
+      "name": "Nombre 10",
       "image": "https://dummyimage.com/200x150/EEF3F9/aaa",
       "price": 8.99,
       "brand": "Marca 3",
@@ -91,7 +91,7 @@
     },
     {
       "id": 11,
-      "name": "Nombre 4",
+      "name": "Nombre 11",
       "image": "https://dummyimage.com/200x150/EEF3F9/aaa",
       "price": 7.99,
       "brand": "Marca 3",
@@ -100,7 +100,7 @@
     },
     {
       "id": 12,
-      "name": "Nombre 5",
+      "name": "Nombre 12",
       "image": "https://dummyimage.com/200x150/EEF3F9/aaa",
       "price": 7.99,
       "brand": "Marca 3",
@@ -109,7 +109,7 @@
     },
     {
       "id": 13,
-      "name": "Nombre 6",
+      "name": "Nombre 13",
       "image": "https://dummyimage.com/200x150/EEF3F9/aaa",
       "price": 7.99,
       "brand": "Marca 3",
@@ -118,7 +118,7 @@
     },
     {
       "id": 14,
-      "name": "Nombre 7",
+      "name": "Nombre 14",
       "image": "https://dummyimage.com/200x150/EEF3F9/aaa",
       "price": 7.99,
       "brand": "Marca 3",

@@ -1,15 +1,17 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import ProductCard from "../../resources/Cards/Recommended/ProductCard";
 import styles from "./RecommendedList.module.css";
-import axios from "axios";
 import { useNavigate } from 'react-router-dom';
 import Pagination from "../../resources/pagination/Pagination";
+import { ProductsContext } from "../../../context/ProductsContext";
 
 const RecommendedList = () => {
+
+  const data = useContext(ProductsContext)
   const [products, setProducts] = useState([]);
   const navigate = useNavigate();
   const [currentProducts, setCurrentProducts] = useState([])
-  let pageLimit = 10;
+  const pageLimit = 10;
 
   const onPageChanged = data => {
     const offset = (data.currentPage - 1) * data.pageLimit;
@@ -17,14 +19,8 @@ const RecommendedList = () => {
   }
 
   useEffect(() => {
-    axios.get("/db.json")
-      .then(response => {
-        setProducts(response.data);
-      })
-      .catch(error => {
-        console.log(error);
-      });
-  }, [currentProducts]);
+    setProducts(data)
+  }, [currentProducts, data]);
 
   return (
     <div className={styles.container}>
@@ -37,7 +33,7 @@ const RecommendedList = () => {
         )) 
       }
       </div>
-      { products.length > 0 &&
+      {products.length > 0 &&
         <Pagination onPageChanged = {onPageChanged} limit = {pageLimit} total = {products.length}  />
       }
     </div>

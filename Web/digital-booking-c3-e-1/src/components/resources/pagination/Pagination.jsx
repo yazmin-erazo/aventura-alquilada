@@ -29,11 +29,11 @@ const Pagination = (props) => {
         if (totalPages > 5) {
             const startPage = Math.max(2, currentPage - 1);
             const endPage = Math.min(totalPages - 1, currentPage + 1);
-            let pages = range(startPage, endPage);
+            let pages = [currentPage];
 
             const hasLeftSpill = startPage > 2;
             const hasRightSpill = (totalPages - endPage) > 1;
-            const spillOffset = 5 - (pages.length + 1);
+            const spillOffset = 5 - (totalPages.length + 1);
 
             // Caso en el que no tenga flechita a la izq
             // 1 2 3 > 10
