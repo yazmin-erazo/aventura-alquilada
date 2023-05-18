@@ -21,7 +21,7 @@ const RecommendedList = () => {
     <div className={styles.container}>
       <div className={styles.recommendedList}>
         {products.map((product) => (
-          <Link key={product.id} to="/detalles"><ProductCard product={product} /></Link> 
+          <Link key={product.id} to="/detalles/"><ProductCard product={product} /></Link> 
         ))}
       </div>
     </div>
