@@ -4,15 +4,12 @@ import { FaChevronLeft, FaChevronRight } from 'react-icons/fa';
 
 const Pagination = (props) => {
 
-    const [totalResults, setTotalResults] = useState(null);
-    const [pageLimit, setPageLimit] = useState();
     const [currentPage, setCurrentPage] = useState(1);
+
+    const totalPages = Math.ceil(props.total / props.limit);
 
     const LEFT_PAGE = 'LEFT';
     const RIGHT_PAGE = 'RIGHT';
-
-    //Quiero el total de páginas en un número entero redondeando para arriba así la última página puede tener menos de 10 productos
-    const totalPages = Math.ceil(totalResults / pageLimit);
 
     //Función para determinar los números que irán en el paginador, dependiendo de la página en la que estoy parado
     const range = (from, to) => {
@@ -67,7 +64,6 @@ const Pagination = (props) => {
         fetchPageNumbers();
         const paginationData = {
             currentPage: currentPage,
-            pageLimit: pageLimit,
             totalPages: totalPages
         };
         props.onPageChanged(paginationData)
@@ -93,13 +89,11 @@ const Pagination = (props) => {
     useEffect( () => {
         console.log(props);
         goToPage(currentPage);
-        setTotalResults(props.total);
-        setPageLimit(props.limit);
-    }, [currentPage])
+    }, [])
 
     return (
         <>
-            {(!totalResults || totalPages === 1) ? null :
+            {(!props.total || totalPages === 1) ? null :
 
                 <div>
                     <ul className={styles.pagination}>
