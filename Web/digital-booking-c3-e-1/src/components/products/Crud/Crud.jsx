@@ -1,26 +1,18 @@
-import { useCallback, useEffect, useState } from "react";
+import { useCallback, useEffect, useState, useContext } from "react";
 import TableRow from "../../common/Table/TableRow";
-import axios from "axios";
 import styles from "./Crud.module.css";
 import ButtonPrimary from "../../common/Buttons/ButtonPrimary";
 import { Link } from "react-router-dom";
+import { ProductsContext } from "../../../context/ProductsContext";
 
 const Crud = () => {
-  const [products, setProducts] = useState([]);
 
+  const [products, setProducts] = useState([]);
+  const data = useContext(ProductsContext)
   
   useEffect(() => {
-
-    const fetchProducts = async () => {
-      try {
-        const response = await axios.get("/db.json");
-        setProducts(response.data);
-      } catch (error) {
-        console.log("Error al obtener los productos", error);
-      }
-    };
-    fetchProducts();
-  }, []);
+    setProducts(data.products);
+  }, [data]);
 
 // usecallback para memorizar y asegurarnos de que no se creara una nueva instancia en cada renderizado
   const handleDelete = useCallback((productId) => {
