@@ -2,10 +2,11 @@ import { useEffect, useState } from "react";
 import ProductCard from "../../resources/Cards/Recommended/ProductCard";
 import styles from "./RecommendedList.module.css";
 import axios from "axios";
-import { Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 const RecommendedList = () => {
   const [products, setProducts] = useState([]);
+  const navigate = useNavigate();
 
   useEffect(() => {
     axios.get("/db.json")
@@ -21,7 +22,7 @@ const RecommendedList = () => {
     <div className={styles.container}>
       <div className={styles.recommendedList}>
         {products.map((product) => (
-          <Link key={product.id} to="/detalles"><ProductCard product={product} /></Link> 
+          <div key={product.id} onClick={() => navigate(`/products/${product.id}`)}><ProductCard product={product} /></div> 
         ))}
       </div>
     </div>

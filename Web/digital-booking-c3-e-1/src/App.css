@@ -4,6 +4,11 @@
 * {
   box-sizing: border-box;
   margin: 0px;
+  font: var(--body-14-normal);
+}
+
+body{
+  min-height: 100vh;
 }
 :root {
   --line-stroke: rgba(20, 24, 61, 1);
@@ -33,6 +38,10 @@
 }
 .header img {
   margin-left: 56px;
+}
+
+.outlet {
+  min-height: calc(100vh - 200px);
 }
 
 .cuentaBtn,
@@ -235,3 +244,4 @@ li:hover {
     }
   }
 }
+
