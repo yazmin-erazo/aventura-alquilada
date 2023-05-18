@@ -8,8 +8,6 @@ import RecommendedList from "./Recommended/RecommendedList";
 const HomePage = () => {
   return (
     <>
-      <header />
-
       <div className={styles.searchContainer}>
         <div className={styles.searchBox}>
           <SearchEngine />
@@ -39,8 +37,6 @@ const HomePage = () => {
           </div>
         </section>
       </div>
-
-      <footer />
     </>
   );
 };
