@@ -6,7 +6,10 @@ ul.pagination {
   margin-bottom: 0;
   box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
 }
-
+ul {
+    z-index: 10;
+    display: block;
+}
 /* ul.pagination  li.pageItem.active a.pageLink {
     color: saturate(darken(var(--bg-general), 50%), 5%) !important;
     background-color: saturate(lighten(var(--bg-general), 7.5%), 2.5%) !important;

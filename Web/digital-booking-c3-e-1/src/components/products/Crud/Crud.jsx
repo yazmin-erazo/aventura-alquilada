@@ -2,6 +2,7 @@ import { useCallback, useEffect, useState, useContext } from "react";
 import TableRow from "../../common/Table/TableRow";
 import styles from "./Crud.module.css";
 import ButtonPrimary from "../../common/Buttons/ButtonPrimary";
+import axios from "axios";
 import { Link } from "react-router-dom";
 import { ProductsContext } from "../../../context/ProductsContext";
 
@@ -17,6 +18,7 @@ const Crud = () => {
 // usecallback para memorizar y asegurarnos de que no se creara una nueva instancia en cada renderizado
   const handleDelete = useCallback((productId) => {
     try {
+      axios.delete(`http://localhost:8080/digitalbooking/product/${productId}`)
       const updatedProducts = products.filter(
         (product) => product.id !== productId
       );

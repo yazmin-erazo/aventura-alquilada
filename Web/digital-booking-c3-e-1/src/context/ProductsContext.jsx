@@ -9,7 +9,7 @@ const ProductsDataContext = ({children}) => {
   const [products, setProducts] = useState([]);
 
   useEffect(() => {
-    axios.get("/db.json")
+    axios.get("http://localhost:8080/digitalbooking/product/products")
       .then(response => {
         setProducts(response.data)
       })

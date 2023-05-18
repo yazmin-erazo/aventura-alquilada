@@ -4,7 +4,7 @@ import { FaChevronLeft, FaChevronRight } from 'react-icons/fa';
 
 const Pagination = (props) => {
 
-    const [currentPage, setCurrentPage] = useState(1);
+    
 
     const totalPages = Math.ceil(props.total / props.limit);
 
@@ -24,9 +24,9 @@ const Pagination = (props) => {
     const fetchPageNumbers = () => {
 
         if (totalPages > 5) {
-            const startPage = Math.max(2, currentPage - 1);
-            const endPage = Math.min(totalPages - 1, currentPage + 1);
-            let pages = [currentPage];
+            const startPage = Math.max(2, props.currentPage - 1);
+            const endPage = Math.min(totalPages - 1, props.currentPage + 1);
+            let pages = [props.currentPage];
 
             const hasLeftSpill = startPage > 2;
             const hasRightSpill = (totalPages - endPage) > 1;
@@ -60,27 +60,23 @@ const Pagination = (props) => {
 
     
     const goToPage = page => {
-        setCurrentPage(page)
+        props.onPageChanged()
+        props.setCurrentPage(page)
         fetchPageNumbers();
-        const paginationData = {
-            currentPage: currentPage,
-            totalPages: totalPages
-        };
-        props.onPageChanged(paginationData)
     }
     
     const handleMoveLeft = e => {
         e.preventDefault();
-        goToPage(currentPage - 1);
+        goToPage(props.currentPage - 1);
     }
     
     const handleMoveRight = e => {
         e.preventDefault();
-        goToPage(currentPage + 1);
+        goToPage(props.currentPage + 1);
     }
     
-    const handleClick = page => e => {
-        e.preventDefault();
+    const handleClick = page => {
+       // e.preventDefault();
         goToPage(page);
     }
     
@@ -88,7 +84,7 @@ const Pagination = (props) => {
     
     useEffect( () => {
         console.log(props);
-        goToPage(currentPage);
+        goToPage(props.currentPage);
     }, [])
 
     return (
@@ -112,8 +108,8 @@ const Pagination = (props) => {
                                         <span><FaChevronRight /></span>
                                     </a>
                                 </li>)
-                            } else { return (<li key={index} className={styles.pageItem + (currentPage === page) ? styles.active : ''}>
-                                <a className={styles.pageLink} onClick={handleClick(page)}>{page}</a>
+                            } else { return (<li key={index} className={styles.pageItem + (props.currentPage === page) ? styles.active : ''}>
+                                <a className={styles.pageLink} onClick={() => handleClick(page)}>{page}</a>
                             </li>)
                             }})}
                     </ul>
