@@ -24,25 +24,23 @@ const RecommendedList = ({ selectedCategory }) => {
   }
 
   useEffect(() => {
-    let url = "db.json";
+    // let url = "http://localhost:8080/digitalbooking/category/categories";
 
-    if (selectedCategory) {
-      url += `?category=${selectedCategory.id}`;
-    }
+    // if (selectedCategory) {
+    //   url += `?category=${selectedCategory.id}`;
+    // }
     setProducts(data.products)
-
-
-      setShuffledProducts(data.products.sort(() => Math.random() - 0.5));
+    setShuffledProducts(data.products.sort(() => Math.random() - 0.5));
   }, [selectedCategory, data, currentPage]);
 
   useEffect(() => {
     // Agregar un pequeño retraso antes de actualizar los productos filtrados
     const delay = setTimeout(() => {
       const filtered = selectedCategory
-        ? shuffledProducts.filter((product) => product.category === selectedCategory.name)
+        ? setProducts( shuffledProducts.filter((product) => product.category === selectedCategory.name))
         : shuffledProducts;
 
-      setFilteredProducts(filtered);
+      // setFilteredProducts(filtered);
     }, 100);
 
     return () => clearTimeout(delay); // Limpiar el temporizador en caso de que se desmonte el componente
