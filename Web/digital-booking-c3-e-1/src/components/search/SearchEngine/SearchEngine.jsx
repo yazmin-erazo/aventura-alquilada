@@ -7,7 +7,7 @@ const SearchEngine = (props) => {
       <div className={styles.inputWrapper}>
         <input
           type="text"
-          className={styles.input}
+          className={styles.inputSearch}
           placeholder="Buscar por actividad, equipo..."
         />
         <button className={styles["search-icon-button"]} type="button">

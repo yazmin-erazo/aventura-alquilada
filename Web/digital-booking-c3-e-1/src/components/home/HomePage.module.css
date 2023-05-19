@@ -2,8 +2,6 @@
 @import "/src/styles/global.css";
 
 
-
-
 .searchContainer {
   background-color: var(--secondary-600);
   height: 10vh;

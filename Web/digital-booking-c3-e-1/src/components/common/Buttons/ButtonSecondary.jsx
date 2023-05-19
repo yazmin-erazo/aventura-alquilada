@@ -1,16 +1,16 @@
-import Styles from "./ButtonSecondary.module.css";
+import { BsArrowUpRight } from "react-icons/bs";
+import styles from "./ButtonSecondary.module.css";
 
-const ButtonSecondary = (props) => {
+const ButtonSecondary = ({ children }) => {
   return (
     <div className={styles["button-container"]}>
-      <div className={styles["primary-button"]} onClick={props.onClickPrimary}>
-        {props.children[0]}
+      <div className={styles["primary-button"]}>
+      { children }
       </div>
       <div
         className={styles["secondary-button"]}
-        onClick={props.onClickSecondary}
       >
-        {props.children[1]}
+       <BsArrowUpRight className={styles.icon}/>
       </div>
     </div>
   );

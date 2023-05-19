@@ -1,30 +1,25 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import { useParams, useNavigate  } from 'react-router-dom';
 import ButtonPrimary from '../../common/Buttons/ButtonPrimary';
 import { FaArrowLeft } from 'react-icons/fa';
 import styles from './ProductDetails.module.css'
-import axios from "axios";
+import { ProductsContext } from '../../../context/ProductsContext';
 
-const ProductDetails = () => {
+const ProductDetails = ({product}) => {
 
+  const data = useContext(ProductsContext);
   const [products, setProducts] = useState([])
   const params = useParams();
   const navigate = useNavigate();
-  let product = {}
-  
-  useEffect(() => {
-    axios.get("/db.json")
-    .then(response => {
-      setProducts(response.data);
-    })
-    .catch(error => {
-      console.log(error);
-    });
-  }, []);
+
   
   product = products.find( p => {
     return (p.id === parseInt(params.id))
   })
+
+  useEffect(() => {
+    setProducts(data.products)
+  }, [data]);
 
   return (
     <>
@@ -39,7 +34,7 @@ const ProductDetails = () => {
       </div>
       <div className={styles.colorBoxContainer}></div>
       <div className={styles.productDetails}>
-        <img src={product.image} alt={product.name} />
+        <img src={product.imageURL} alt={product.name} />
         <div className={styles.description}>
           <div className={styles.category}>{product.category}</div>
           <h3>{product.name}</h3>

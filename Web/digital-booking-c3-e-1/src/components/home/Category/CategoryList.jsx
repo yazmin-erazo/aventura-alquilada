@@ -5,32 +5,22 @@ import { IoIosArrowForward } from "react-icons/io";
 import { IoIosArrowBack } from "react-icons/io";
 import axios from "axios";
 
-const CategoryList = () => {
-  const listRef = useRef(null); // referencia al contenedor de la lista de categorías
-  const [showLeftArrow, setShowLeftArrow] = useState(true);
-  const [showRightArrow, setShowRightArrow] = useState(true);
-  const [products, setProducts] = useState([]);
+const CategoryList = ({ onCategoryClick }) => {
+  const listRef = useRef(null);
+  const [showLeftArrow, setShowLeftArrow] = useState(false);
+  const [showRightArrow, setShowRightArrow] = useState(false);
+  const [categories, setCategories] = useState([]);
 
   const handleScroll = (scrollOffset) => {
     listRef.current.scrollLeft += scrollOffset;
   };
 
   const handleScrollEnd = () => {
-    if (listRef.current.scrollLeft === 0) {
-      setShowLeftArrow(false);
-    } else {
-      setShowLeftArrow(true);
-    }
-
-    if (
-      listRef.current.scrollLeft + listRef.current.clientWidth >=
-      listRef.current.scrollWidth
-    ) {
-      setShowRightArrow(false);
-    } else {
-      setShowRightArrow(true);
-    }
-    console.log(listRef.current.scrollLeft);
+    setShowLeftArrow(listRef.current.scrollLeft > 0);
+    setShowRightArrow(
+      listRef.current.scrollLeft + listRef.current.clientWidth <
+        listRef.current.scrollWidth
+    );
   };
 
   useEffect(() => {
@@ -38,14 +28,22 @@ const CategoryList = () => {
   }, []);
 
   useEffect(() => {
-    axios.get("/db.json")
-      .then(response => {
-        setProducts(response.data);
-      })
-      .catch(error => {
+    const fetchCategories = async () => {
+      try {
+        const response = await axios.get('http://localhost:8080/digitalbooking/category/categories');
+        setCategories(response.data);
+      } catch (error) {
         console.log(error);
-      });
+      }
+    };
+
+    fetchCategories();
   }, []);
+
+  const handleCategoryClick = (category) => {
+    console.log(category);
+    onCategoryClick(category);
+  };
 
   return (
     <div className={styles.container}>
@@ -64,8 +62,12 @@ const CategoryList = () => {
         onScroll={handleScrollEnd}
       >
         <div className={styles.categoryList}>
-          {products.map((product) => (
-            <CardCategory key={product.id} product={product} />
+          {categories.map((category) => (
+            <CardCategory
+              key={category.id}
+              category={category}
+              onCategoryClick={handleCategoryClick}
+            />
           ))}
         </div>
       </div>

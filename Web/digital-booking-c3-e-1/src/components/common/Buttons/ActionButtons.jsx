@@ -1,14 +1,15 @@
-import { BsTrash, BsPencil } from 'react-icons/bs';
-import styles from './ActionButtons.module.css'
+import { FaRegTrashAlt} from 'react-icons/fa';
+import { FiEdit} from 'react-icons/fi';
+import styles from "./ActionButtons.module.css";
 
 const ActionButtons = ({ onDelete, onEdit }) => {
   return (
-    <div className={styles.button}>
-      <button onClick={onDelete}>
-        <BsTrash />
+    <div className={styles["action-buttons"]}>
+      <button className={`${styles["action-button"]} ${styles["action-button-delete"]}`} onClick={onDelete}>
+        <FaRegTrashAlt />
       </button>
-      <button onClick={onEdit}>
-        <BsPencil />
+      <button className={`${styles["action-button"]} ${styles["action-button-edit"]}`} onClick={onEdit}>
+        <FiEdit />
       </button>
     </div>
   );

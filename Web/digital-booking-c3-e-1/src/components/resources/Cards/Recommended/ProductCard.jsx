@@ -1,11 +1,11 @@
-import ButtonPrimary from "../../../common/Buttons/ButtonPrimary";
+import ButtonSecondary from "../../../common/Buttons/ButtonSecondary";
 import styles from "./ProductCard.module.css";
 import { AiOutlineClockCircle } from 'react-icons/ai';
 
 const ProductCard = ({ product }) => {
   return (
     <div className={styles.card}>
-      <img src={product.image} alt={product.name} className={styles.image} />
+      <img src={product.imageURL} alt={product.name} className={styles.image} />
       <div className={styles.details}>
         <h3 className={styles.title}>{product.name}</h3>
         <div className={styles.priceAndType}>
@@ -15,7 +15,7 @@ const ProductCard = ({ product }) => {
             <span className={styles.typeDuration}>2 hours</span>
           </div>
         </div>
-        <ButtonPrimary>Ver detalles</ButtonPrimary>
+        <ButtonSecondary>Ver detalles</ButtonSecondary>
       </div>
     </div>
   );
