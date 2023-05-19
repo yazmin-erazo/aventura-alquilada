@@ -1,0 +1,39 @@
+@import "/src/styles/variables.css";
+@import "/src/styles/global.css";
+
+
+.button-container{
+    width: 200px;
+    margin: 48px 0 32px 0;
+}
+
+.table {
+    width: 100%;
+    overflow-x: auto; 
+    border-collapse: collapse;
+    color:var(--sencondary-600)
+  }
+
+  .table thead {
+    background-color: var(--black); 
+    color: white;
+    display: table-header-group;
+  }
+  
+  .table th {
+    padding: 10px;
+    display: table-cell; /* para que las celdas se muestren en horizontal */
+    flex: none;
+    order: 0;
+    flex-grow: 0;
+    text-align: left;
+    font: var(--body-14-normal);
+  }
+
+.actions-th{
+    width: 120px;
+    position: sticky;
+    right: 0;
+    z-index: 1;
+    background-color: var(--state-available);
+}

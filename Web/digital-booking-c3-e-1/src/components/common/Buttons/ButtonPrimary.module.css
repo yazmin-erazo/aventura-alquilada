@@ -1,0 +1,20 @@
+@import "/src/styles/variables.css";
+@import "/src/styles/global.css";
+
+.button {
+  width: 100%;
+  height: 40px;
+  background: var(--secondary-600);
+  border-radius: 4px;
+  color: var(--white-100);
+  font: var(--body-14-normal);
+  border: none;
+  max-width: 506px;
+  cursor: pointer;
+}
+
+.button:hover {
+  background: var(--primary-300);
+  color: var(--secondary-600);
+  font-weight: 500;
+}
