@@ -7,7 +7,7 @@
   flex-direction: row;
   align-items: flex-start;
   height: 42px;
-  left: 50.63px;  
+  left: 50.63px;
   top: 184.32px;
 }
 
@@ -21,7 +21,7 @@
   border-radius: 4px;
 }
 
-.input {
+.inputSearch {
   flex: 1;
   background: none;
   border: none;

@@ -1,13 +1,17 @@
-import Banner from '../common/Banner/Banner'
-import SearchEngine from '../search/SearchEngine/SearchEngine'
+import Banner from "../common/Banner/Banner";
+import SearchEngine from "../search/SearchEngine/SearchEngine";
 import CategoryList from "./Category/CategoryList";
 import styles from "./HomePage.module.css";
 import RecommendedList from "./Recommended/RecommendedList";
+import { useState } from "react";
 
 
 const HomePage = () => {
+  const [selectedCategory, setSelectedCategory] = useState(null);
+
   return (
     <>
+
       <div className={styles.searchContainer}>
         <div className={styles.searchBox}>
           <SearchEngine />
@@ -26,14 +30,14 @@ const HomePage = () => {
 
         <section className={styles.categoriesContainer}>
           <div className={styles.categoryListContainer}>
-            <CategoryList />
+            <CategoryList onCategoryClick={setSelectedCategory} />
           </div>
         </section>
 
         <section className={styles.recommendedContainer}>
           <h3 className={styles.subtitle}>Recomendados</h3>
           <div className={styles.productGrid}>
-            <RecommendedList />
+            <RecommendedList selectedCategory={selectedCategory} />
           </div>
         </section>
       </div>
