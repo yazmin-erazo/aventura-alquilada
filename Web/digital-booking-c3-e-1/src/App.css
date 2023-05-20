@@ -1,6 +1,8 @@
 @import "/src/styles/variables.css";
 @import "/src/styles/global.css";
 
+
+
 /* * {
   box-sizing: border-box;
   margin: 0px;
@@ -35,11 +37,23 @@ body{
   align-items: center;
   width: 100vw;
   height: 80px;
-}
-.header img {
-  margin-left: 56px;
+  
 }
 
+.header img {
+  margin-left: 56px;
+
+}
+
+.lemaHeader{
+  color: var(--secondary-600);
+  font: var(--body-16);
+  margin-left: 25%;
+  font-style: oblique;
+}
+.noUnderlined{
+  text-decoration: none;
+}
 .outlet {
   min-height: calc(100vh - 200px);
 }
@@ -212,6 +226,11 @@ li:hover {
       width: 178px;
       height: 16px;
     }
+    .lemaHeader{
+      font: var(--body-12);
+      margin-left: 18%;
+
+    }
     .cuentaBtn,
     .sesionBtn {
       display: none;
@@ -222,7 +241,7 @@ li:hover {
       position: absolute;
       position: fixed;
       margin-top: 0px;
-      margin-left: 90%;
+      margin-left: 88%;
     }
     .footerContainer {
       display: flex;

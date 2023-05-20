@@ -5,8 +5,9 @@ const Header = () => {
   return (
     <div className="header">
       <div className="headerContainer">
-        <Link to="/">
+        <Link to="/" className="noUnderlined">
           <img src="/Digital Booking.svg" alt="logotipo Digital Booking" />
+          <p className="lemaHeader">Sin equipo no hay aventura</p>
         </Link>
         <div className="headerBtn">
           <button className="cuentaBtn">Crear cuenta</button>
