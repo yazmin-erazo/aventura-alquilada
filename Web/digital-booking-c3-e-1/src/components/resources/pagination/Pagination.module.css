@@ -1,33 +1,59 @@
 @import "/src/styles/variables.css";
 @import "/src/styles/global.css";
 
-ul.pagination {
-  margin-top: 0;
-  margin-bottom: 0;
-  box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+
+.pagination-container {
+    background-color: var(--white-100);
+    height: 10vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+.pagination {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  padding: 8px 0;
+  gap: 10px;
+  width: 574px;
+  height: 56px;
+  background: var(--white-100);
+  border: 1px solid var(--secondary-100);
+  border-radius: 6px;
 }
+
+
+.btn-back,
+.btn-forward,
+.btn-numbers-pagination {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 96px;
+  height: 40px;
+  background: var(--white-100);
+  border: none;
+  border-radius: 6px;
+  font: var(--body-16);
+  color: var(--black);
+  cursor: pointer;
+  gap: 6px;
+}
+
+.btn-back:hover,
+.btn-forward:hover,
+.btn-numbers-pagination:hover {
+  background: var(--secondary-100);
+}
+
+.btn-numbers-pagination {
+  width: 40px;
+  height: 40px;
+  border-radius: 4px;
+}
+
 ul {
-    z-index: 10;
-    display: block;
+  list-style: none;
 }
-/* ul.pagination  li.pageItem.active a.pageLink {
-    color: saturate(darken(var(--bg-general), 50%), 5%) !important;
-    background-color: saturate(lighten(var(--bg-general), 7.5%), 2.5%) !important;
-    border-color: var(--bg-general) !important;
-    
-}
-
-  a.pageLink {
-    padding: 0.75rem 1rem;
-    min-width: 3.5rem;
-    text-align: center;
-    box-shadow: none !important;
-    border-color: var(--bg-general) !important;
-    color: saturate(darken(var(--bg-general), 30%), 10%);
-    font-weight: 900;
-    font-size: 1rem;
-
-}
-a.pageLink:hover {
-  background-color: var(--bg-white-50);
-} */
