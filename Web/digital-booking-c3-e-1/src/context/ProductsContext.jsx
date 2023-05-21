@@ -13,7 +13,6 @@ const ProductsDataContext = ({children}) => {
       try {
         const data = await ProductsService.getAll();
         setProducts(data);
-        console.log(data);
       }
       catch (err) {
         console.log(`Error al cargar productos: ${err}`);

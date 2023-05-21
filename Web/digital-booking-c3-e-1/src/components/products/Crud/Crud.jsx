@@ -5,6 +5,7 @@ import ButtonPrimary from "../../common/Buttons/ButtonPrimary";
 import axios from "axios";
 import { Link } from "react-router-dom";
 import { ProductsContext } from "../../../context/ProductsContext";
+import ProductsService from "../../../shared/services/ProductsService";
 
 const Crud = () => {
 
@@ -16,9 +17,9 @@ const Crud = () => {
   }, [data]);
 
 // usecallback para memorizar y asegurarnos de que no se creara una nueva instancia en cada renderizado
-  const handleDelete = useCallback((productId) => {
+  const handleDelete = useCallback(async (productId) => {
     try {
-      axios.delete(`http://localhost:8080/digitalbooking/product/${productId}`)
+      await ProductsService.deleteByID(productId)
       const updatedProducts = products.filter(
         (product) => product.id !== productId
       );
