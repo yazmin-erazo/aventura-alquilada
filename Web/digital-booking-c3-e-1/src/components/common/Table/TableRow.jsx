@@ -7,7 +7,7 @@ const TableRow = ({ product, onDelete, onEdit }) => {
       <td>{product.id}</td>
       <td>
         <img
-          src={product.image}
+          src={product.imageURL}
           alt={product.name}
           className={styles["product-image"]}
         />

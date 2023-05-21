@@ -91,25 +91,25 @@ const Pagination = (props) => {
         <>
             {(!props.total || totalPages === 1) ? null :
 
-                <div>
+                <div className={styles["pagination-container"]}>
                     <ul className={styles.pagination}>
                         {pages.map((page, index) => {
                             if(page === LEFT_PAGE){ 
                                 return(
-                            <li key={index} className={styles.pageItem}>
+                            <li key={index} className={styles["btn-back"]}>
                                 <a className={styles.pageLink} onClick={handleMoveLeft}>
                                     <span><FaChevronLeft /></span>
                                 </a>
                             </li>)
                             } else if(page === RIGHT_PAGE) {
                                 return (
-                                <li key={index} className={styles.pageItem}>
+                                <li key={index} className={styles["btn-forward"]}>
                                     <a className={styles.pageLink} onClick={handleMoveRight}>
                                         <span><FaChevronRight /></span>
                                     </a>
                                 </li>)
                             } else { return (<li key={index} className={styles.pageItem + (props.currentPage === page) ? styles.active : ''}>
-                                <a className={styles.pageLink} onClick={() => handleClick(page)}>{page}</a>
+                                <a className={["btn-numbers-pagination"]} onClick={() => handleClick(page)}>{page}</a>
                             </li>)
                             }})}
                     </ul>
