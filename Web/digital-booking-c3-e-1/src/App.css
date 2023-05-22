@@ -23,7 +23,7 @@ body{
 } */
 
 .header {
-  position: fixed;
+  position: sticky;
   width: 100vw;
   height: 80px;
   left: 0;
@@ -55,7 +55,7 @@ body{
   text-decoration: none;
 }
 .outlet {
-  min-height: calc(100vh - 200px);
+  min-height: calc(100vh - 140px);
 }
 .cuentaBtn,
 .sesionBtn {
@@ -84,6 +84,7 @@ body{
   flex: none;
   order: 0;
   flex-grow: 0;
+  padding: 0 10px;
 }
 nav {
   margin-top: 100px;
