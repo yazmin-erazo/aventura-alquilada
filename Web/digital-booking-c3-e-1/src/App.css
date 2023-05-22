@@ -1,6 +1,8 @@
 @import "/src/styles/variables.css";
 @import "/src/styles/global.css";
 
+
+
 /* * {
   box-sizing: border-box;
   margin: 0px;
@@ -21,7 +23,7 @@ body{
 } */
 
 .header {
-  position: fixed;
+  position: sticky;
   width: 100vw;
   height: 80px;
   left: 0;
@@ -33,18 +35,27 @@ body{
   display: flex;
   justify-content: space-between;
   align-items: center;
-  width: 90%;
-  max-width: 1024px;
-  margin: 0 auto;
+  width: 100vw;
+  height: 80px;
+  
 }
+
 .header img {
-  margin-left: 0;
-  margin-right: auto;
-  transform: translateX(-50%);
-  left: 50%;
+  margin-left: 56px;
+
+}
+
+.lemaHeader{
+  color: var(--secondary-600);
+  font: var(--body-16);
+  margin-left: 25%;
+  font-style: oblique;
+}
+.noUnderlined{
+  text-decoration: none;
 }
 .outlet {
-  min-height: calc(100vh - 200px);
+  min-height: calc(100vh - 140px);
 }
 .cuentaBtn,
 .sesionBtn {
@@ -73,6 +84,7 @@ body{
   flex: none;
   order: 0;
   flex-grow: 0;
+  padding: 0 10px;
 }
 nav {
   margin-top: 100px;
@@ -204,38 +216,43 @@ li:hover {
   }
 }
 
-@media (max-width: 768px) {
-  .header img {
-    margin-left: 60px;
-    width: 178px;
-    height: 16px;
-  }
-  .cuentaBtn,
-  .sesionBtn {
-    display: none;
-  }
+  @media (max-width: 768px) {
+    .header img {
+      margin-left: 24px;
+      width: 178px;
+      height: 16px;
+    }
+    .lemaHeader{
+      font: var(--body-12);
+      margin-left: 18%;
 
-  nav {
-    display: block;
-    position: absolute;
-    position: fixed;
-    margin-top: 0px;
-    margin-left: 90%;
-  }
-  .footerContainer {
-    display: flex;
-    justify-content: space-evenly;
-    align-items: center;
-    width: 100%;
-    height: 60px;
-  }
-  .logo {
-    width: 60px;
-    height: 30px;
-  }
-  .lema {
-    display: none;
-  }
+    }
+    .cuentaBtn,
+    .sesionBtn {
+      display: none;
+    }
+
+    nav {
+      display: block;
+      position: absolute;
+      position: fixed;
+      margin-top: 0px;
+      margin-left: 88%;
+    }
+    .footerContainer {
+      display: flex;
+      justify-content: space-evenly;
+      align-items: center;
+      width: 100%;
+      height: 60px;
+    }
+    .logo {
+      width: 60px;
+      height: 30px;
+    }
+    .lema {
+      display: none;
+    }
 
   .footerIcons {
     display: none;
