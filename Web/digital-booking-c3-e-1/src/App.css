@@ -57,6 +57,7 @@ body{
 .outlet {
   min-height: calc(100vh - 140px);
 }
+
 .cuentaBtn,
 .sesionBtn {
   font-size: var(--body-16);

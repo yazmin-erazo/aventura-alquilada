@@ -4,6 +4,7 @@ import styles from "./CategoryList.module.css";
 import { IoIosArrowForward } from "react-icons/io";
 import { IoIosArrowBack } from "react-icons/io";
 import axios from "axios";
+import CategoryService from "../../../shared/services/CategoryService";
 
 const CategoryList = ({ onCategoryClick }) => {
   const listRef = useRef(null);
@@ -30,8 +31,8 @@ const CategoryList = ({ onCategoryClick }) => {
   useEffect(() => {
     const fetchCategories = async () => {
       try {
-        const response = await axios.get('http://localhost:8080/digitalbooking/category/categories');
-        setCategories(response.data);
+        const response = await CategoryService.getAll();
+        setCategories(response);
       } catch (error) {
         console.log(error);
       }
