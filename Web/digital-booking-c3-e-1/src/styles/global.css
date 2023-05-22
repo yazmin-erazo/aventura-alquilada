@@ -11,6 +11,7 @@
 
 body {
   background-color: var(--bg-white-50);
+  overflow-x: hidden;
 }
 
 .container {
