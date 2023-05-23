@@ -23,7 +23,7 @@ body{
 } */
 
 .header {
-  position: sticky;
+  position:-webkit-sticky;
   width: 100vw;
   height: 80px;
   left: 0;
@@ -41,18 +41,9 @@ body{
 }
 
 .header img {
-  margin-left: 56px;
-
-}
-
-.lemaHeader{
-  color: var(--secondary-600);
-  font: var(--body-16);
-  margin-left: 25%;
-  font-style: oblique;
-}
-.noUnderlined{
-  text-decoration: none;
+  margin-left: -40%;
+  margin-right: auto;
+  transform: translateX(-50%);
 }
 .outlet {
   min-height: calc(100vh - 140px);
