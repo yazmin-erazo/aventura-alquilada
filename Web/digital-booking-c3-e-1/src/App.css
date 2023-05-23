@@ -21,7 +21,7 @@ body{
 } */
 
 .header {
-  position: sticky;
+  position:-webkit-sticky;
   width: 100vw;
   height: 80px;
   left: 0;
@@ -38,10 +38,9 @@ body{
   margin: 0 auto;
 }
 .header img {
-  margin-left: 0;
+  margin-left: -40%;
   margin-right: auto;
   transform: translateX(-50%);
-  left: 50%;
 }
 .outlet {
   min-height: calc(100vh - 140px);
