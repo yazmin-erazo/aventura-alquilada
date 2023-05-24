@@ -47,11 +47,11 @@ public final class Product {
         Validator.validateMandatory(description, "La descripción es requerida para crear un producto");
         Validator.validateMandatory(size, "La talla es requerida para crear un producto");
         Validator.validateMandatory(gender, "El género es requerido para crear un producto");
-        Validator.validateMandatory(deposit, "El depósito es requerido para crear un producto");
+        //Validator.validateMandatory(deposit, "El depósito es requerido para crear un producto");
         Validator.validateMandatory(image, "La imagen es requerida para crear un producto");
         Validator.validateMandatory(fileName, "El nombre del archivo es requerido para crear un producto");
         Validator.validateGreater(price, BigDecimal.valueOf(0), "El precio debe ser mayor que cero");
-        Validator.validateGreater(deposit, BigDecimal.valueOf(0), "El deposito debe ser mayor que cero");
+        //Validator.validateGreater(deposit, BigDecimal.valueOf(0), "El deposito debe ser mayor que cero");
 
         Category category = Category.create(idCategory);
         return new Product(0L,name,brand,state,price,description,size,gender, deposit, category, image, fileName);
