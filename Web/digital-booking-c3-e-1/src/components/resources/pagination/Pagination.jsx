@@ -4,7 +4,7 @@ import { FaChevronLeft, FaChevronRight } from 'react-icons/fa';
 
 const Pagination = (props) => {
 
-    
+
 
     const totalPages = Math.ceil(props.total / props.limit);
 
@@ -58,31 +58,32 @@ const Pagination = (props) => {
         return range(1, totalPages);
     }
 
-    
+
     const goToPage = page => {
-        props.onPageChanged()
-        props.setCurrentPage(page)
+        props.setCurrentPage(page);
+        props.onPageChanged();
         fetchPageNumbers();
     }
-    
+
+
     const handleMoveLeft = e => {
         e.preventDefault();
         goToPage(props.currentPage - 1);
     }
-    
+
     const handleMoveRight = e => {
         e.preventDefault();
         goToPage(props.currentPage + 1);
     }
-    
+
     const handleClick = page => {
-       // e.preventDefault();
+        // e.preventDefault();
         goToPage(page);
     }
-    
+
     const pages = fetchPageNumbers();
-    
-    useEffect( () => {
+
+    useEffect(() => {
         console.log(props);
         goToPage(props.currentPage);
     }, [])
@@ -94,24 +95,32 @@ const Pagination = (props) => {
                 <div className={styles["pagination-container"]}>
                     <ul className={styles.pagination}>
                         {pages.map((page, index) => {
-                            if(page === LEFT_PAGE){ 
-                                return(
-                            <li key={index} className={styles["btn-back"]}>
-                                <a className={styles.pageLink} onClick={handleMoveLeft}>
-                                    <span><FaChevronLeft /></span>
-                                </a>
-                            </li>)
-                            } else if(page === RIGHT_PAGE) {
+                            if (page === LEFT_PAGE) {
                                 return (
-                                <li key={index} className={styles["btn-forward"]}>
-                                    <a className={styles.pageLink} onClick={handleMoveRight}>
-                                        <span><FaChevronRight /></span>
+                                    <li key={index} className={styles["btn-back"]}>
+                                        <a className={styles.pageLink} onClick={handleMoveLeft}>
+                                            <span><FaChevronLeft /></span>
+                                        </a>
+                                    </li>)
+                            } else if (page === RIGHT_PAGE) {
+                                return (
+                                    <li key={index} className={styles["btn-forward"]}>
+                                        <a className={styles.pageLink} onClick={handleMoveRight}>
+                                            <span><FaChevronRight /></span>
+                                        </a>
+                                    </li>)
+                            } else {
+                                return (<li key={index} className={styles.pageItem + (props.currentPage === page) ? styles.active : ''}>
+                                    <a
+                                        className={`${styles.pageLink} ${props.currentPage === page ? styles.active : ''}`}
+                                        onClick={() => handleClick(page)}
+                                    >
+                                        {page}
                                     </a>
+
                                 </li>)
-                            } else { return (<li key={index} className={styles.pageItem + (props.currentPage === page) ? styles.active : ''}>
-                                <a className={["btn-numbers-pagination"]} onClick={() => handleClick(page)}>{page}</a>
-                            </li>)
-                            }})}
+                            }
+                        })}
                     </ul>
                 </div>
             }
