@@ -7,7 +7,7 @@ const Header = () => {
       <div className="headerContainer">
         <Link to="/" className="noUnderlined">
           <img src="/Digital Booking.svg" alt="logotipo Digital Booking" />
-          <p className="lemaHeader">Sin equipo no hay aventura</p>
+          <h5 className="lemaHeader">Sin equipo no hay aventura</h5>
         </Link>
         <div className="headerBtn">
           <button className="cuentaBtn">Crear cuenta</button>
