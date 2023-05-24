@@ -3,27 +3,8 @@
 
 
 
-/* * {
-  box-sizing: border-box;
-  margin: 0px;
-  font: var(--body-14-normal);
-}
-
-body{
-  min-height: 100vh;
-}
-:root {
-  --line-stroke: rgba(20, 24, 61, 1);
-  --bg-white-50: #fbfcfe;
-  --secondary-600: #37536b;
-  --body-16: 400 1rem / normal Roboto;
-  --white-100: #ffffff;
-  --black: #1c262f;
-  --primary-300: #a6cf7e;
-} */
-
 .header {
-  position:-webkit-sticky;
+  position:sticky;
   width: 100vw;
   height: 80px;
   left: 0;
@@ -41,13 +22,17 @@ body{
 }
 
 .header img {
-  margin-left: 53%;
-  margin-right: auto;
-  transform: translateX(-50%);
+  margin-left: 56px;
 }
 
 .lemaHeader{
-  margin-left: 3%;
+  color: var(--secondary-600);
+  font: var(--body-16);
+  margin-left: 25%;
+  font-style: oblique;
+}
+.noUnderlined{
+  text-decoration: none;
 }
 
 .outlet {
@@ -86,6 +71,7 @@ body{
 nav {
   margin-top: 100px;
   display: none;
+  position: sticky;
 }
 .footer {
   box-sizing: border-box;
@@ -182,19 +168,23 @@ li:hover {
 }
 
 @media (max-width: 1024px) {
+   .header img {
+    margin-left: 40px;
+    width: 380px;
+    height: 30px;
+  }
   .cuentaBtn,
   .sesionBtn {
     font-size: var(--body-16);
     height: 37px;
-    width: auto; 
-    flex-grow: 1; 
-    max-width: 160px; 
-    margin-right: 10px; 
+    width: 150px;
+    left: 176px;
+    top: 0px;
     border-radius: 4px;
   }
   .sesionBtn {
-    line-height: 37px; 
-    margin-right: 20px; 
+    margin-right: 40px;
+    line-height: 18.5px; 
   }
   .logo {
     width: 70px;
@@ -218,13 +208,13 @@ li:hover {
 
   @media (max-width: 768px) {
     .header img {
-      margin-left: 24px;
+      margin-left: 35px;
       width: 178px;
       height: 16px;
     }
     .lemaHeader{
       font: var(--body-12);
-      margin-left: 18%;
+      margin-left: 20%;
     }
     .cuentaBtn,
     .sesionBtn {
@@ -233,7 +223,7 @@ li:hover {
 
     nav {
       display: block;
-      position: absolute;
+      /* position: absolute; */
       position: fixed;
       margin-top: 0px;
       margin-left: 88%;
