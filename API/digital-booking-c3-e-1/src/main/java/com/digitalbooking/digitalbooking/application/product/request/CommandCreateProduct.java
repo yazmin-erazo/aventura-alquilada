@@ -26,7 +26,7 @@ public class CommandCreateProduct {
     @Schema(allowableValues = {"100"})
     private BigDecimal price;
     @JsonProperty
-    @Schema(allowableValues = {"Esta es la descripción"})
+    @Schema(allowableValues = {"El Wagontop™ es un camping completo para 8 personas, duradero, resistente al agua y fácil de montar. Además, tiene un 50% más de espacio que una tienda estándar para 8 personas."})
     private String description;
     @JsonProperty
     @Schema(allowableValues = {"8 personas"})
@@ -46,4 +46,10 @@ public class CommandCreateProduct {
     @JsonProperty
     @Schema(allowableValues = {"Carpa.jpg"})
     private String fileName;
+    @JsonProperty
+    @Schema(allowableValues = {"Amarillo"})
+    private String color;
+    @JsonProperty
+    @Schema(allowableValues = {"Poliéster"})
+    private String material;
 }

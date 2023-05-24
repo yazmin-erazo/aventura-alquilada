@@ -23,6 +23,8 @@ public class ProductEntity {
     private BigDecimal deposit;
     private String imageURL;
     private Boolean isDelete;
+    private String color;
+    private String material;
     @ManyToOne
     private CategoryEntity category;
 }

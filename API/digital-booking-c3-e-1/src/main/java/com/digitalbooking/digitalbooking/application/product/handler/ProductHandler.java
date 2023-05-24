@@ -26,7 +26,9 @@ public class ProductHandler {
                 createProduct.getDeposit(),
                 createProduct.getIdCategory(),
                 createProduct.getImage(),
-                createProduct.getFileName()
+                createProduct.getFileName(),
+                createProduct.getColor(),
+                createProduct.getMaterial()
         ));
     }
 

@@ -22,6 +22,8 @@ public class ProductDTO {
     private BigDecimal deposit;
     private String category;
     private String imageURL;
+    private String color;
+    private String material;
 
     /*public Product parseToProduct(){
         return Product.reconstruir()
