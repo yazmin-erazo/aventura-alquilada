@@ -1,6 +1,7 @@
 package com.digitalbooking.digitalbooking.infrastructure.product.adapter;
 
 import org.springframework.data.jpa.repository.JpaRepository;
+import software.amazon.awssdk.services.s3.endpoints.internal.Value;
 
 import java.util.List;
 import java.util.Optional;
@@ -11,5 +12,6 @@ public interface RepositoryProductMySql extends JpaRepository< ProductEntity, Lo
 
     Optional<ProductEntity> findByIdAndIsDelete(Long id, Boolean isDelete);
 
+    Optional<ProductEntity> findByName(String name);
 
 }
