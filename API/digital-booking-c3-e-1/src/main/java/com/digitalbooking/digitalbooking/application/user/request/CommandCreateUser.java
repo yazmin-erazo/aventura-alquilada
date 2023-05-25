@@ -14,16 +14,16 @@ import java.math.BigDecimal;
 public class CommandCreateUser {
 
     @JsonProperty
-    @Schema(allowableValues = {"Carpa"})
+    @Schema(allowableValues = {"Maria"})
     private String name;
     @JsonProperty
-    @Schema(allowableValues = {"Mountain Hardware"})
+    @Schema(allowableValues = {"Garcia"})
     private String lastName;
     @JsonProperty
-    @Schema(allowableValues = {"Nueva"})
+    @Schema(allowableValues = {"maria.garcia.123@gmail.com"})
     private String email;
     @JsonProperty
-    @Schema(allowableValues = {"100"})
+    @Schema(allowableValues = {"12345"})
     private String password;
 
 }

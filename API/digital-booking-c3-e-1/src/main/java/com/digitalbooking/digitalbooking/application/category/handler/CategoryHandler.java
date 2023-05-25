@@ -1,7 +1,6 @@
 package com.digitalbooking.digitalbooking.application.category.handler;
 
 import com.digitalbooking.digitalbooking.application.category.request.CommandCreateCategory;
-import com.digitalbooking.digitalbooking.application.product.request.CommandCreateProduct;
 import com.digitalbooking.digitalbooking.domain.category.dto.CategoryDTO;
 import com.digitalbooking.digitalbooking.domain.category.entity.Category;
 import com.digitalbooking.digitalbooking.domain.category.service.ServiceCategory;

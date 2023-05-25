@@ -31,7 +31,7 @@ public class CategoryRepositoryImpl implements CategoryRepository {
 
     @Override
     public String saveImage(String fileName, String image) {
-        return productS3.saveImage(fileName, image);
+        return productS3.saveImage(String.format("category/%s",fileName), image);
     }
 
     @Override
