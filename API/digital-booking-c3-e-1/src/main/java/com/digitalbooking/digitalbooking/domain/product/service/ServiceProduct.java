@@ -22,7 +22,7 @@ public class ServiceProduct {
     @Autowired
     CategoryRepository categoryRepository;
 
-    public Long createProduct(Product product) throws Exception {
+    public Long createProduct(Product product){
         Optional<CategoryDTO> category = categoryRepository.findById(product.getCategory().getId());
         category.orElseThrow(() -> new ExceptionInvalidValue("category not found"));
         repositoryProduct.findByName(product.getName()).ifPresent(productDTO -> {throw new ExceptionInvalidValue("El nombre del producto: "+productDTO.getName()+", ya existe");});
