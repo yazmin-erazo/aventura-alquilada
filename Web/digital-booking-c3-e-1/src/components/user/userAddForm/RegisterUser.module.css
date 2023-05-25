@@ -5,7 +5,11 @@
     justify-content: center;
 
 }
-.form-container{
+.form-container, h2, p{
     margin-left: 15px;
     width: 506px;
+}
+h2, p{
+    text-align: center;
+    color: var(--primary-300);
 }
