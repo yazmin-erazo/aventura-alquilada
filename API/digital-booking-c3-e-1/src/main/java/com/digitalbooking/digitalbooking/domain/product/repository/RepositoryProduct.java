@@ -5,6 +5,7 @@ import com.digitalbooking.digitalbooking.domain.product.dto.ProductDTO;
 import com.digitalbooking.digitalbooking.domain.product.entity.Product;
 
 import java.util.List;
+import java.util.Optional;
 
 public interface RepositoryProduct {
 
@@ -15,6 +16,8 @@ public interface RepositoryProduct {
     List<ProductDTO> getAll();
 
     ProductDTO findById(Long id);
+
+    Optional<ProductDTO> findByName(String name);
 
     void deleteProduct(Long id);
 }
