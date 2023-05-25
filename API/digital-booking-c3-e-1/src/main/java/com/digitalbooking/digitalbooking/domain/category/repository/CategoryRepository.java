@@ -13,7 +13,7 @@ public interface CategoryRepository {
 
     String saveImage(String fileName, String image);
 
-    Optional<Category> findById(Long id);
+    Optional<CategoryDTO> findById(Long id);
 
     List<CategoryDTO> getAll();
 }

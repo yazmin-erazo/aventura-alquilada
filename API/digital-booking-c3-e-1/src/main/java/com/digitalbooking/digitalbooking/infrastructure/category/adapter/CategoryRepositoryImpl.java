@@ -35,9 +35,9 @@ public class CategoryRepositoryImpl implements CategoryRepository {
     }
 
     @Override
-    public Optional<Category> findById(Long id) {
+    public Optional<CategoryDTO> findById(Long id) {
         Optional<CategoryEntity> category = categoryRepositoryMySql.findById(id);
-        return category.map(c -> Category.reBuild(c.getId(), c.getName(), c.getImageURL(), c.getDescription(), c.getFileName()));
+        return category.map(MapToCategory::mapToCategory);
     }
 
     @Override
