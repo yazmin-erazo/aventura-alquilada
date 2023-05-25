@@ -25,6 +25,7 @@ public class ServiceProduct {
     public Long createProduct(Product product) throws Exception {
         Optional<Category> category = categoryRepository.findById(product.getCategory().getId());
         category.orElseThrow(() -> new ExceptionInvalidValue("category not found"));
+        repositoryProduct.findByName(product.getName()).ifPresent(productDTO -> {throw new ExceptionInvalidValue("El nombre del producto: "+productDTO.getName()+", ya existe");});
         String imageURL = repositoryProduct.saveImage(String.format("%s%s%s",product.getName().trim(),product.getBrand().replace(" ",""),product.getFileName().trim()), product.getImage());
         return repositoryProduct.save(product,imageURL);
     }
