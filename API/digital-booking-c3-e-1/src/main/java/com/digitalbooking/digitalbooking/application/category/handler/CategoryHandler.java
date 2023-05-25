@@ -18,10 +18,11 @@ public class CategoryHandler {
     ServiceCategory serviceCategory;
 
     public Long createCategory(CommandCreateCategory createCategory) throws Exception {
-        return serviceCategory.createCategory(Category.create(createCategory.getName(),
-               createCategory.getImage(),
-               createCategory.getDescription(),
-               createCategory.getFileName()
+        return serviceCategory.createCategory(Category.create(
+                createCategory.getName(),
+                createCategory.getImage(),
+                createCategory.getDescription(),
+                createCategory.getFileName()
 
         ));
     }
@@ -30,7 +31,7 @@ public class CategoryHandler {
         return serviceCategory.getCategories();
     }
 
-    public Optional<Category> findById(Long id) {
+    public Optional<CategoryDTO> findById(Long id) {
         return serviceCategory.getCategory(id);
     }
 }

@@ -15,8 +15,8 @@ public class ServiceCategory {
     @Autowired
     CategoryRepository categoryRepository;
 
-    public Long createCategory(Category category) {
-        String imageURL = categoryRepository.saveImage(category.getFileName(), category.getImageURL());
+    public Long createCategory(Category category) throws Exception{
+        String imageURL = categoryRepository.saveImage(String.format("%s%s",category.getName().trim().replace(" ",""),category.getFileName().replace(" ","").trim()), category.getImage());
         return categoryRepository.save(category, imageURL);
 
     }
@@ -25,7 +25,7 @@ public class ServiceCategory {
         return categoryRepository.getAll();
     }
 
-    public Optional<Category> getCategory(Long id) {
+    public Optional<CategoryDTO> getCategory(Long id) {
         return categoryRepository.findById(id);
     }
 }

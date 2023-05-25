@@ -29,7 +29,7 @@ public class QueryControllerCategory {
 
     @GetMapping("{id-category}")
     @Operation(summary = "find category", description = "Method to find category by Id")
-    public ResponseEntity<Optional<Category>> getCategory(@PathVariable("id-category") Long id) {
+    public ResponseEntity<Optional<CategoryDTO>> getCategory(@PathVariable("id-category") Long id) {
         return ResponseEntity.ok(categoryHandler.findById(id));
     }
 

@@ -12,18 +12,18 @@ import lombok.NoArgsConstructor;
 public class CommandCreateCategory {
 
    @JsonProperty
-   @Schema(allowableValues = {"Este es el nombre."})
+   @Schema(allowableValues = {"Natación"})
    private String name;
 
    @JsonProperty
-   @Schema(allowableValues = {"Esta es la imagen."})
+   @Schema(allowableValues = {"/9j/4AAQSkZJRgABAgEASABIAAD/4SyjRXhpZgA"})
    private String image;
 
    @JsonProperty
-   @Schema(allowableValues = {"Esta es la descripción."})
+   @Schema(allowableValues = {"Alquile con nosotros y haga de cada brazada una victoria"})
    private String description;
 
    @JsonProperty
-   @Schema(allowableValues = {"Este es el nombre del archivo."})
+   @Schema(allowableValues = {"Natacion.jpg"})
    private String fileName;
 }
