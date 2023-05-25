@@ -25,5 +25,12 @@ public class CommandControllerUser {
         return new ResponseEntity<>(new CommandResponse<>(userHandler.createUser(commandCreateUser)), HttpStatus.CREATED);
     }
 
+    @GetMapping("activate")
+    @Operation(summary = "activate user", description = "endpoint used to activate a user")
+    public ResponseEntity<String> activateUser(){
+        return ResponseEntity.ok("<h1>Activado!!!!!</h1>");
+    }
+
+
 
 }

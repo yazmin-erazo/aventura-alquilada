@@ -44,12 +44,8 @@ public final class Product {
                                  String image,
                                  String fileName,
                                  String color,
-<<<<<<< Updated upstream
                                  String material,
                                  List<ImageProduct> imageProducts) throws Exception {
-=======
-                                 String material) {
->>>>>>> Stashed changes
         Validator.validateMandatory(name, "El nombre es requerido para crear un producto");
         Validator.validateMandatory(brand, "La marca es requerida para crear un producto");
         Validator.validateMandatory(state, "El estado es requerido para crear un producto");
