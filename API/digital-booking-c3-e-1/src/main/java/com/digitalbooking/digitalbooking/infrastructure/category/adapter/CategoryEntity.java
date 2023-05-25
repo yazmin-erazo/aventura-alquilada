@@ -13,5 +13,7 @@ public class CategoryEntity {
     private Long id;
     private String name;
     private String imageURL;
+    private String description;
+    private String fileName;
 
 }
