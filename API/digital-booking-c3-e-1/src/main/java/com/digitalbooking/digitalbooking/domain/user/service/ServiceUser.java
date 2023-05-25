@@ -14,7 +14,7 @@ public class ServiceUser {
     @Autowired
     RepositoryUser repositoryUser;
 
-    public Long createUser(User user) {
+    public Long createUser(User user) throws Exception {
         repositoryUser.findByEmail(user.getEmail()).ifPresent(userDTO -> {throw new ExceptionInvalidValue("Un usuario asociado al correo electrónico "+userDTO.getEmail()+", ya existe");});
         return repositoryUser.save(user);
     }
