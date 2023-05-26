@@ -31,11 +31,11 @@ public class CommandControllerUser {
     public ResponseEntity<String> activateUser(@Parameter(description = "User Token", required = true) @RequestParam("token")String token){
         userHandler.validateUser(token);
         return ResponseEntity.ok("<html>"
-                + "<body style='background-color: #F5F5F5; text-align: center; padding:50px;'>"
-                + "<h1 style='color: #000080;'>¡Activación exitosa!</h1>"
-                + "<p style='color: #000080; font-size: 18px;'>Tu cuenta ha sido activada con éxito. Ahora puedes ingresar a Digital Booking y disfrutar de nuestros servicios.</p>"
-                + "</body>"
-                + "</html>");
+                + "<body style='background-color: #F5F5F5; text-align: center; padding:50px; font-family: Arial, sans-serif;'>" +
+                "    <h1 style='color: #2f6304; border-bottom: 2px solid #2f6304; padding-bottom: 10px;'>¡Activación exitosa!</h1>" +
+                "    <p style='color: #00008B; font-size: 18px; line-height: 1.5; max-width: 600px; margin: 30px auto;'>Tu cuenta ha sido activada con éxito. Ahora puedes ingresar a <span style='color: #008000; font-weight: bold;'>Digital</span> <span style='color: #00008B; font-weight: bold;'>Booking</span> y disfrutar de nuestros servicios.</p>\n" +
+                "</body>"+
+                "</html>");
     }
 
 
