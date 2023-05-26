@@ -1,0 +1,50 @@
+image: node:14
+
+stages:
+    - build_frontend
+    - test_frontend
+    - build_backend
+    - test_backend
+    - deploy
+
+before_script:
+    - apt-get update
+
+build_frontend:
+    stage: build_frontend
+    script:
+        - cd Web
+        - npm install
+        - npm run build
+
+test_frontend:
+    stage: test_frontend
+    script:
+        - echo "Running fronend tests"
+
+build_backend:
+    stage: build_backend
+    script:
+        - cd API/digital-booking-c3-e-1
+        - mvn clean package
+            - docker build -t equipamiento-deportivo-image .
+
+test_backend:
+    stage: test_backend
+    script:
+        - echo "Running backend tests"
+
+
+deploy_frontend:
+  stage: deploy
+  script:
+    - cd Web
+    - npm install
+    - npm run build
+    - aws configure set aws_access_key_id $AWS_ACCESS_KEY_ID
+    - aws configure set aws_secret_access_key $AWS_SECRET_ACCESS_KEY
+    - aws configure set default.region $AWS_DEFAULT_REGION
+    - aws s3 sync dist/ s3://$S3_BUCKET_FRONTEND
+  artifacts:
+    paths:
+      - Web/dist/*
