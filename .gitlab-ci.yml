@@ -13,7 +13,7 @@ before_script:
 build_frontend:
     stage: build_frontend
     script:
-        - cd Web
+        - cd Web/digital-booking-c3-e-1
         - npm install
         - npm run build
 
