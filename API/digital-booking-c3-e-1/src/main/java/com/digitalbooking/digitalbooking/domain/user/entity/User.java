@@ -1,11 +1,12 @@
 package com.digitalbooking.digitalbooking.domain.user.entity;
 
 import com.digitalbooking.digitalbooking.common.validations.Validator;
-import com.digitalbooking.digitalbooking.domain.user.entity.User;
+
+
+
+
 import lombok.AllArgsConstructor;
 import lombok.Getter;
-
-import java.math.BigDecimal;
 
 @Getter
 @AllArgsConstructor
@@ -15,6 +16,7 @@ public final class User {
     private String lastName;
     private String email;
     private String password;
+    private Boolean isActive;
 
     private User(Long id) {
         this.id = id;
@@ -28,9 +30,10 @@ public final class User {
         Validator.validateMandatory(name, "El nombre es requerido para crear un usuario");
         Validator.validateMandatory(lastName, "El apellido es requerido para crear un usuario");
         Validator.validateMandatory(email, "El correo electrónico es requerido para crear un usuario");
+        Validator.validateEmailFormat(email, "El formato del correo electrónico no es válido");
         Validator.validateMandatory(password, "La contraseña es requerida para crear un usuario");
 
-        return new User(0L,name,lastName,email,password);
+        return new User(0L,name,lastName,email,password,false);
     }
 
 }

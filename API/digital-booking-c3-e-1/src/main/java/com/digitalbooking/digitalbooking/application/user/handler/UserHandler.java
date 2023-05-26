@@ -7,8 +7,6 @@ import com.digitalbooking.digitalbooking.domain.user.service.ServiceUser;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import java.util.List;
-
 @Component
 public class UserHandler {
     @Autowired
@@ -28,5 +26,9 @@ public class UserHandler {
 
     public UserDTO findByEmail(String email) {
         return serviceUser.getUser(email);
+    }
+
+    public void validateUser(String token){
+        serviceUser.validateUser(token);
     }
 }

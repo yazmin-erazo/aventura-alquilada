@@ -3,7 +3,6 @@ package com.digitalbooking.digitalbooking.infrastructure.user.adapter;
 import lombok.Data;
 
 import javax.persistence.*;
-import java.math.BigDecimal;
 
 @Data
 @Entity
@@ -16,4 +15,6 @@ public class UserEntity {
     private String lastName;
     private String email;
     private String password;
+    private String token;
+    private Boolean isActive;
 }
