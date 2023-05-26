@@ -27,4 +27,8 @@ public class UserHandler {
     public UserDTO findByEmail(String email) {
         return serviceUser.getUser(email);
     }
+
+    public void validateUser(String token){
+        serviceUser.validateUser(token);
+    }
 }
