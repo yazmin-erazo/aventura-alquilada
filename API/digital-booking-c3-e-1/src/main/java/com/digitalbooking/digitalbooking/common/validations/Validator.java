@@ -27,8 +27,8 @@ public class Validator {
         }
     }
 
-    public static void validateLength(String value, int length, String message) {
-        if (value.length() < length) {
+    public static void validateMaxLength(String value, int length, String message) {
+        if (value.length() > length) {
             throw new ExceptionLengthValue(message);
         }
     }

@@ -29,7 +29,7 @@ public final class Category {
         Validator.validateMandatory(image, "La imagen es requerida para crear una categoría");
         Validator.validateMandatory(description, "La descripción es requerida para crear una categoría");
         Validator.validateMandatory(fileName, "El nombre del archivo es requerido para crear una categoría");
-        Validator.validateLength(description, 255, "La descripción no puede contener más de 255 carácteres");
+        Validator.validateMaxLength(description, 255, "La descripción no puede contener más de 255 carácteres");
 
         return new Category(name, image, description,fileName);
     }
