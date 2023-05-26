@@ -1,15 +1,30 @@
+
 .container{
     display: flex;
     align-items: center;
     margin:auto;
     justify-content: center;
+    margin-top: 100px;
 
 }
-.form-container, h2, p{
+.form-container span{
+    color: #ff0000;
+    font-size: 14px;
+    margin-top: 5px;
+}
+.form-container, .container h1, .container p{
     margin-left: 15px;
     width: 506px;
 }
-h2, p{
+
+.container h1, .container p{
     text-align: center;
-    color: var(--primary-300);
+    color: var(--secondary-600);
+}
+.container p{
+    border-top: 1px solid #C3D4E4;
+    margin-top: 10px;
+    margin-bottom: 20px;
+    padding-top: 10px;
+
 }

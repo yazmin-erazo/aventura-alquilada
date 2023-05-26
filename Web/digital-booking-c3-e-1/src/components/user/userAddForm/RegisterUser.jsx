@@ -122,13 +122,13 @@ const RegisterUser = () => {
 
   return (
     <div className= {styles.container}>
-      <img src="/registerUser.png" alt="" />
+      <img src="/registerUser.png" alt="imagen" />
       <div>
-        <h2>
+        <h1>
           Registrate
-        </h2>
+        </h1>
         <p>
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Quibusdam molestiae quisquam, consectetur vitae cum commodi! Earum, fugiat quo magni natus tempore hic nihil! Enim nam, eligendi praesentium aspernatur sunt accusantium.
+          Registrate para alquilar equipamiento deportivo de calidad y disfutar de emocionantes aventuras al aire libre
         </p>
       <form className={styles["form-container"]}onSubmit={handleSubmit}>
         {/* <label className="form-label">Nombre</label>
@@ -145,7 +145,7 @@ const RegisterUser = () => {
           Nombre
         </InputWithLabel>
 
-        {formErrors.name && <span className="form-error">{formErrors.name}</span>}
+        {formErrors.name && <span className={styles["form-error"]}>{formErrors.name}</span>}
         {/* <label className="form-label">Apellido</label>
         <input className="form-input"
         type="text"
@@ -158,7 +158,7 @@ const RegisterUser = () => {
           Apellido
         </InputWithLabel>
 
-         {formErrors.lastName && <span className="form-error">{formErrors.lastName}</span>}
+         {formErrors.lastName && <span className={styles["form-error"]}>{formErrors.lastName}</span>}
 
 {/* <label className="form-label">Email</label>
 <input className="form-input"
@@ -169,7 +169,7 @@ onChange={(event) => setUser({ ...user, email: event.target.value })} */}
           Email
         </InputWithLabel>
 
-         {formErrors.email && <span className="form-error">{formErrors.email}</span>} 
+         {formErrors.email && <span className={styles["form-error"]}>{formErrors.email}</span>} 
 
 {/* <label className="form-label">Contraseña</label>
 <input className="form-input"
@@ -183,7 +183,7 @@ type="password"
           Contraseña
         </InputWithLabel>
 
-         {formErrors.password && <span className="form-error">{formErrors.password}</span>}
+         {formErrors.password && <span className={styles["form-error"]}>{formErrors.password}</span>}
         {/* <label className="form-label">Verifique la contraseña</label>
         <input className="form-input"
         type="password"
@@ -197,7 +197,7 @@ type="password"
           Confirmación de contraseña
         </InputWithLabel>
 
-        {formErrors.checkPassword && <span className="form-error">{formErrors.checkPassword}</span>}
+        {formErrors.checkPassword && <span>{formErrors.checkPassword}</span>}
 
         <ButtonPrimary onClick={handleSubmit}>Enviar</ButtonPrimary>
 
