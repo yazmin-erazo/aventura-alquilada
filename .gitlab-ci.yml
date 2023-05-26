@@ -10,8 +10,8 @@ stages:
 before_script:
     - apt-get update
     - apt-get install -y docker.io
-    - PATH=/opt/apache-maven-3.8.6/bin:/usr/local/openjdk-11/bin:$PATH
-    - JAVA_HOME=/usr/local/openjdk-11
+    - export PATH=/opt/apache-maven-3.8.6/bin:/usr/local/openjdk-11/bin:$PATH
+    - export JAVA_HOME=/usr/local/openjdk-11
 
 build_frontend:
     stage: build_frontend
