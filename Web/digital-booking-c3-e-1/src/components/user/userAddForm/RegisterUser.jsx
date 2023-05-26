@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import InputWithLabel from "../../common/input/InputWithLabel";
 import ButtonPrimary from "../../common/Buttons/ButtonPrimary";
 import styles from "./registerUser.module.css";
-import AuthService from "../../../shared/services/AuthService"
+import AuthService from "../../../shared/services/AuthService";
 
 const RegisterUser = () => {
   const [user, setUser] = useState({
@@ -35,6 +35,7 @@ const RegisterUser = () => {
       const nameRegex = /^[a-zA-ZáÁéÉíÍóÓúÚñÑüÜ'][a-zA-ZáÁéÉíÍóÓúÚñÑüÜ\s']*$/;
 
       const passwordRegex = /^(?=.*[a-zA-Z])(?=.*\d)[a-zA-Z\d]+$/;
+      const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
 
       if (!user.name) {
         errors.name = "El nombre es obligatorio";
@@ -61,7 +62,7 @@ const RegisterUser = () => {
       if (!user.email) {
         errors.email = "El email es obligatorio";
         isValid = false;
-      } else if (!/\S+@\S+\.\S+/.test(user.email)) {
+      } else if (!emailRegex.test(user.email)) {
         errors.email = "El email no es válido";
         isValid = false;
       }
@@ -96,113 +97,107 @@ const RegisterUser = () => {
       return isValid;
     };
 
-    const userData={
-      name:user.name, lastName: user.lastName, email:user.email, password:user.password
-    }
-    
-        const sendUser= async()=>{
-          try{
-            AuthService.register(userData)
-            console.log(userData);
-          }
-          catch{
-            err=>console.log(err);
-          }
-        }
-        
-        if (validateForm()) {
-      sendUser();
+    const userData = {
+      name: user.name,
+      lastName: user.lastName,
+      email: user.email,
+      password: user.password,
+    };
 
+    const sendUser = async () => {
+      try {
+        AuthService.register(userData);
+        console.log(userData);
+      } catch {
+        (err) => console.log(err);
+      }
+    };
+
+    if (validateForm()) {
+      sendUser();
     } else {
       console.log("El formulario contiene errores");
     }
-    
-
   };
 
   return (
-    <div className= {styles.container}>
+    <div className={styles.container}>
       <img src="/registerUser.png" alt="imagen" />
       <div>
-        <h1>
-          Registrate
-        </h1>
+        <h1>Registrate</h1>
         <p>
-          Registrate para alquilar equipamiento deportivo de calidad y disfutar de emocionantes aventuras al aire libre
+          Registrate para alquilar equipamiento deportivo de calidad y disfutar
+          de emocionantes aventuras al aire libre
         </p>
-      <form className={styles["form-container"]}onSubmit={handleSubmit}>
-        {/* <label className="form-label">Nombre</label>
-        <input className="form-input"
-          type="text"
-          onChange={(event) =>
-            setUser({ ...user, name: event.target.value })
-          }
-          
-        /> */}
-        <InputWithLabel type={"text"} value={user.name} onChange={(event) =>
-            setUser({ ...user, name: event.target.value })
-          }>
-          Nombre
-        </InputWithLabel>
+        <form className={styles["form-container"]} onSubmit={handleSubmit}>
+          <InputWithLabel
+            type={"text"}
+            value={user.name}
+            onChange={(event) => setUser({ ...user, name: event.target.value })}
+          >
+            Nombre
+          </InputWithLabel>
 
-        {formErrors.name && <span className={styles["form-error"]}>{formErrors.name}</span>}
-        {/* <label className="form-label">Apellido</label>
-        <input className="form-input"
-        type="text"
-        onChange={(event) =>
-          setUser({ ...user, lastName: event.target.value })
-        }
-      /> */}
-        <InputWithLabel type={"text"} value={user.lastName} onChange={(event) =>
-          setUser({ ...user, lastName: event.target.value })}>
-          Apellido
-        </InputWithLabel>
+          {formErrors.name && (
+            <span className={styles["form-error"]}>{formErrors.name}</span>
+          )}
 
-         {formErrors.lastName && <span className={styles["form-error"]}>{formErrors.lastName}</span>}
+          <InputWithLabel
+            type={"text"}
+            value={user.lastName}
+            onChange={(event) =>
+              setUser({ ...user, lastName: event.target.value })
+            }
+          >
+            Apellido
+          </InputWithLabel>
 
-{/* <label className="form-label">Email</label>
-<input className="form-input"
-type="email"
-onChange={(event) => setUser({ ...user, email: event.target.value })} */}
- 
-        <InputWithLabel type={"email"}value={user.email} onChange={(event) => setUser({ ...user, email: event.target.value })}>
-          Email
-        </InputWithLabel>
+          {formErrors.lastName && (
+            <span className={styles["form-error"]}>{formErrors.lastName}</span>
+          )}
 
-         {formErrors.email && <span className={styles["form-error"]}>{formErrors.email}</span>} 
+          <InputWithLabel
+            type={"email"}
+            value={user.email}
+            onChange={(event) =>
+              setUser({ ...user, email: event.target.value })
+            }
+          >
+            Email
+          </InputWithLabel>
 
-{/* <label className="form-label">Contraseña</label>
-<input className="form-input"
-type="password"
-          onChange={(event) =>
-            setUser({ ...user, password: event.target.value })
-          }
-        /> */} 
-        <InputWithLabel type={"password"}value={user.password} onChange={(event) =>
-            setUser({ ...user, password: event.target.value })}>
-          Contraseña
-        </InputWithLabel>
+          {formErrors.email && (
+            <span className={styles["form-error"]}>{formErrors.email}</span>
+          )}
 
-         {formErrors.password && <span className={styles["form-error"]}>{formErrors.password}</span>}
-        {/* <label className="form-label">Verifique la contraseña</label>
-        <input className="form-input"
-        type="password"
-        onChange={(event) =>
-          setUser({ ...user, checkPassword: event.target.value })
-        }
-      />  */}
+          <InputWithLabel
+            type={"password"}
+            value={user.password}
+            onChange={(event) =>
+              setUser({ ...user, password: event.target.value })
+            }
+          >
+            Contraseña
+          </InputWithLabel>
 
-        <InputWithLabel type={"password"} value={user.checkPassword} onChange={(event) =>
-          setUser({ ...user, checkPassword: event.target.value })}>
-          Confirmación de contraseña
-        </InputWithLabel>
+          {formErrors.password && (
+            <span className={styles["form-error"]}>{formErrors.password}</span>
+          )}
 
-        {formErrors.checkPassword && <span>{formErrors.checkPassword}</span>}
+          <InputWithLabel
+            type={"password"}
+            value={user.checkPassword}
+            onChange={(event) =>
+              setUser({ ...user, checkPassword: event.target.value })
+            }
+          >
+            Confirmación de contraseña
+          </InputWithLabel>
 
-        <ButtonPrimary onClick={handleSubmit}>Enviar</ButtonPrimary>
+          {formErrors.checkPassword && <span>{formErrors.checkPassword}</span>}
 
-        {/* <button className="form-submit-button">Enviar</button> */}
-      </form>
+          <ButtonPrimary onClick={handleSubmit}>Enviar</ButtonPrimary>
+        </form>
       </div>
     </div>
   );
