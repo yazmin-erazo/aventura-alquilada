@@ -26,6 +26,19 @@ public class MailRepositoryImpl implements MailRepository {
             + "</body>"
             + "</html>";
 
+    private final String templateHtmlAccountAvailableMail = "<html>"
+            + "<body>"
+            + "<p>Hola %s,</p>"
+            + "<p>¡Tu cuenta ahora está disponible! Esperamos que disfrutes de nuestra plataforma y descubras todos los beneficios que tenemos para ti.</p>"
+            + "<p>Para iniciar sesión, por favor haz clic en el botón a continuación:</p>"
+            + "<p>Utilizando el siguiente email: %s</p>"
+            + "<p><a href='%s' style='padding:10px; background-color: #ADD8E6; color: #006400; text-align: center; text-decoration: none; display: inline-block; border-radius: 5px;'>Iniciar sesión</a></p>"
+            + "<p>Si tienes algún problema para acceder a tu cuenta, por favor, no dudes en ponerte en contacto con nosotros.</p>"
+            + "<p>Saludos,</p>"
+            + "<p>El equipo de Digital Booking</p>"
+            + "</body>"
+            + "</html>";
+
     @Override
     public void sendEmailValidateAccount(String to, String subject, String username, String activationUrl)  {
         MimeMessage msg = emailSender.createMimeMessage();
@@ -35,6 +48,23 @@ public class MailRepositoryImpl implements MailRepository {
             String htmlMsg = String.format(templateHtmlValidateAccountMail, username, activationUrl);
             msg.setContent(htmlMsg, "text/html");
             helper.setTo(to);
+            helper.setFrom("digitalhouse.dh123@gmail.com");
+            helper.setSubject(subject);
+        } catch (MessagingException e) {
+            //throw new RuntimeException(e);
+        }
+        emailSender.send(msg);
+    }
+
+    @Override
+    public void sendEmailAccountActivate(String email, String subject, String name, String urlValidation) {
+        MimeMessage msg = emailSender.createMimeMessage();
+        MimeMessageHelper helper = null;
+        try {
+            helper = new MimeMessageHelper(msg, false, "utf-8");
+            String htmlMsg = String.format(templateHtmlAccountAvailableMail, name,email, urlValidation);
+            msg.setContent(htmlMsg, "text/html");
+            helper.setTo(email);
             helper.setFrom("digitalhouse.dh123@gmail.com");
             helper.setSubject(subject);
         } catch (MessagingException e) {

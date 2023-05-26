@@ -16,9 +16,10 @@ public class RepositoryUserImpl implements RepositoryUser {
     @Autowired
     RepositoryUserMySql repositoryUserMySql;
     @Override
-    public Long save(User user) {
+    public Long save(User user, String token) {
         UserEntity userEntity = new UserEntity();
         BeanUtils.copyProperties(user,userEntity);
+        userEntity.setToken(token);
         return repositoryUserMySql.save(userEntity).getId();
     }
 
@@ -30,5 +31,17 @@ public class RepositoryUserImpl implements RepositoryUser {
     @Override
     public Optional<UserDTO> findByEmail(String email) {
         return repositoryUserMySql.findByEmail(email).map(MapToUser::mapToUser);
+    }
+
+    @Override
+    public Optional<UserDTO> findByToken(String token) {
+        return repositoryUserMySql.findByToken(token).map(MapToUser::mapToUser);
+    }
+
+    @Override
+    public void activateUser(Long id) {
+        var user = repositoryUserMySql.findById(id).get();
+        user.setIsActive(true);
+        repositoryUserMySql.save(user);
     }
 }

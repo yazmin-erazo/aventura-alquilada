@@ -7,9 +7,13 @@ import java.util.Optional;
 
 public interface RepositoryUser {
 
-    Long save(User user);
+    Long save(User user , String token);
 
     UserDTO findById(Long id);
 
     Optional<UserDTO> findByEmail(String email);
+
+    Optional<UserDTO> findByToken(String token);
+
+    void activateUser(Long id);
 }

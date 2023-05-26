@@ -11,4 +11,7 @@ public interface RepositoryUserMySql extends JpaRepository< UserEntity, Long > {
 
     Optional<UserEntity> findByEmail(String email);
 
+    Optional<UserEntity> findByToken(String token);
+
+
 }
