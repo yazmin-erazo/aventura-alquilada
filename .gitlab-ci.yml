@@ -31,6 +31,8 @@ build_backend:
     services:
         - docker:dind
     script:
+        - echo "Localizado JDK"
+        - echo $JAVA_HOME
         - apt-get update
         - apt-get install -y maven
         - cd API/digital-booking-c3-e-1
