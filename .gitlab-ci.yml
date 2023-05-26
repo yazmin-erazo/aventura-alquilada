@@ -30,6 +30,7 @@ build_backend:
         - apt-get install -y maven
         - cd API/digital-booking-c3-e-1
         - mvn clean package
+        - cd ../../
         - docker build -t equipamiento-deportivo-image .
 
 test_backend:
