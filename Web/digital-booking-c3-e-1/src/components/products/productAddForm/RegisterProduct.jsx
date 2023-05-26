@@ -2,10 +2,11 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import InputWithLabel from "../../common/input/InputWithLabel";
 import ButtonPrimary from "../../common/Buttons/ButtonPrimary";
-import Select from "../../common/select/select";
+import Select from "../../common/select/Select";
 import ProductConditionSelect from "../../common/select/ProductConditionSelect";
 import styles from "./RegisterProduct.module.css";
 import ImageUpload from "../../common/inputImage/ImageUpload";
+
 
 const RegisterProduct = () => {
   const [categories, setCategories] = useState([]);
