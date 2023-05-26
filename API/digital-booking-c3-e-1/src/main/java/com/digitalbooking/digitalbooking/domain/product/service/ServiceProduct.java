@@ -30,6 +30,15 @@ public class ServiceProduct {
         return repositoryProduct.save(product,imageURL);
     }
 
+    public String updateProduct(Product product) throws Exception {
+        Optional<CategoryDTO> category = categoryRepository.findById(product.getCategory().getId());
+        category.orElseThrow(() -> new ExceptionInvalidValue("category not found"));
+
+        repositoryProduct.updateProduct(product);
+
+        return "Producto actualizado correctamente";
+    }
+
     public List<ProductDTO> getProducts(){
         return repositoryProduct.getAll();
     }

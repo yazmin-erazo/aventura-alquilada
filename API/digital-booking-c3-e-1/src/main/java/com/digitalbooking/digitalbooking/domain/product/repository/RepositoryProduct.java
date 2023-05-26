@@ -11,6 +11,8 @@ public interface RepositoryProduct {
 
     Long save(Product product, String imageURL);
 
+    void updateProduct(Product product);
+
     String saveImage(String fileName, String image);
 
     List<ProductDTO> getAll();

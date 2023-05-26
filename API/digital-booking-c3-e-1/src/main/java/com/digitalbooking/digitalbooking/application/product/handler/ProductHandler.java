@@ -1,6 +1,7 @@
 package com.digitalbooking.digitalbooking.application.product.handler;
 
 import com.digitalbooking.digitalbooking.application.product.request.CommandCreateProduct;
+import com.digitalbooking.digitalbooking.application.product.request.CommandUpdateProduct;
 import com.digitalbooking.digitalbooking.domain.product.dto.ProductDTO;
 import com.digitalbooking.digitalbooking.domain.product.entity.Product;
 import com.digitalbooking.digitalbooking.domain.product.service.ServiceProduct;
@@ -29,6 +30,11 @@ public class ProductHandler {
                 createProduct.getFileName(),
                 createProduct.getColor(),
                 createProduct.getMaterial()
+        ));
+    }
+
+    public String updateProduct(Long id, CommandUpdateProduct updateProduct) throws Exception {
+        return serviceProduct.updateProduct(Product.update(id, updateProduct.getIdCategory()
         ));
     }
 

@@ -34,6 +34,15 @@ public class RepositoryProductImpl implements RepositoryProduct {
     }
 
     @Override
+    public void updateProduct(Product product){
+        ProductEntity productEntity = repositoryProductMySql.findById(product.getId()).orElseThrow(()->new ExceptionNullValue("Producto no encontrado"));
+        CategoryEntity category = new CategoryEntity();
+        category.setId(product.getCategory().getId());
+        productEntity.setCategory(category);
+        repositoryProductMySql.save(productEntity);
+    }
+
+    @Override
     public String saveImage(String fileName, String image) {
         return productS3.saveImage(fileName, image);
     }
