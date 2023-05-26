@@ -9,6 +9,7 @@ stages:
 
 before_script:
     - apt-get update
+    - apt-get install -y docker.io
 
 build_frontend:
     stage: build_frontend
