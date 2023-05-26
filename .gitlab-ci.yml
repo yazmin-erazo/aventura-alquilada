@@ -25,9 +25,11 @@ test_frontend:
 build_backend:
     stage: build_backend
     script:
+        - apt-get update
+        - apt-get install -y maven
         - cd API/digital-booking-c3-e-1
         - mvn clean package
-            - docker build -t equipamiento-deportivo-image .
+        - docker build -t equipamiento-deportivo-image .
 
 test_backend:
     stage: test_backend
