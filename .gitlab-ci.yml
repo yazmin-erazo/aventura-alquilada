@@ -31,8 +31,6 @@ build_backend:
     services:
         - docker:dind
     script:
-        - echo "Localizado JDK"
-        - echo $JAVA_HOME
         - apt-get update
         - apt-get install -y maven
         - cd API/digital-booking-c3-e-1
@@ -42,8 +40,6 @@ build_backend:
     artifacts:
         paths:
             - API/digital-booking-c3-e-1/target/*.jar
-        variables:
-            JAVA_HOME: $JAVA_HOME
 
 test_backend:
     stage: test_backend
