@@ -21,7 +21,7 @@ public class CommandCreateUser {
     @Schema(allowableValues = {"maria.garcia.123@gmail.com"})
     private String email;
     @JsonProperty
-    @Schema(allowableValues = {"12345"})
+    @Schema(allowableValues = {"digitalDb12"})
     private String password;
 
 }
