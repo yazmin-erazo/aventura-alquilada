@@ -2,7 +2,7 @@ FROM openjdk:11-jre-slim
 
 WORKDIR /app
 
-COPY target/my-api.jar .
+COPY target/equipamiento-deportivo.jar .
 
 EXPOSE 8080
 
