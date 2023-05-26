@@ -26,6 +26,7 @@ public final class User {
         Validator.validateMandatory(name, "El nombre es requerido para crear un usuario");
         Validator.validateMandatory(lastName, "El apellido es requerido para crear un usuario");
         Validator.validateMandatory(email, "El correo electrónico es requerido para crear un usuario");
+        Validator.validateEmailFormat(email, "El formato del correo electrónico no es válido");
         Validator.validateMandatory(password, "La contraseña es requerida para crear un usuario");
 
         return new User(0L,name,lastName,email,password,false);
