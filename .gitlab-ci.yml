@@ -39,6 +39,11 @@ build_backend:
         - mvn clean package
         - cd ../../
         - docker build -t equipamiento-deportivo-image .
+    artifacts:
+        paths:
+            - API/digital-booking-c3-e-1/target/*.jar
+        variables:
+            JAVA_HOME: $JAVA_HOME
 
 test_backend:
     stage: test_backend
