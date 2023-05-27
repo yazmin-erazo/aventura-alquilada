@@ -31,7 +31,7 @@
   
 }
 
-.registerCategoryContainer {
+.registerRoleContainer {
   color: var(--secondary-600);
   width: 100%;
   display: flex;
@@ -40,9 +40,39 @@
   margin-bottom: 2rem;
 }
 
-.registerCategoryForm {
+.registerRoleForm {
   width: 50%;
 }
+
+.permissionsContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .category {
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+  }
+  
+  .category h4 {
+    margin: 0;
+  }
+  
+  .category-permissions {
+    display: flex;
+    align-items: center;
+    margin-left: 10px;
+  }
+  
+  .category-permissions label {
+    margin-right: 10px;
+  }
+  
+  .category-permissions input[type="checkbox"] {
+    margin-right: 5px;
+  }
 
 .previewContainer {
     width: 100%;

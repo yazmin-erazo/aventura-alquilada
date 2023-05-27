@@ -37,6 +37,7 @@
 
 .outlet {
   min-height: calc(100vh - 140px);
+  margin-left: 250px;
 }
 
 .cuentaBtn,
@@ -225,6 +226,8 @@ li:hover {
   }
 }
 
+
+
   @media (max-width: 768px) {
     .header img {
       margin-left: 35px;
@@ -265,6 +268,10 @@ li:hover {
   .footerIcons {
     display: none;
   }
+  .outlet {
+    min-height: calc(100vh - 140px);
+    margin-left: 0;
+  }
 }
 
 @media (max-width: 320px) {
@@ -278,3 +285,4 @@ li:hover {
     display: none;
   }
 }
+

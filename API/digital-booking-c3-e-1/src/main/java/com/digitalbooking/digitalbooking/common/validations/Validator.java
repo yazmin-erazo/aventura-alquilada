@@ -137,7 +137,7 @@ public class Validator {
     }
 
     public static void validateOnlyChars(String value, String message) {
-        if (!value.matches("[a-zA-Z]+")) {
+        if (!value.matches("^[A-Za-zÁÉÍÓÚáéíóúñÑ ]+$")) {
             throw new ExceptionInvalidValue(message);
         }
     }
