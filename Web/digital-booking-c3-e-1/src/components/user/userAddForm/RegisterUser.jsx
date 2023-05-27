@@ -3,6 +3,30 @@ import InputWithLabel from "../../common/input/InputWithLabel";
 import ButtonPrimary from "../../common/Buttons/ButtonPrimary";
 import styles from "./registerUser.module.css";
 import AuthService from "../../../shared/services/AuthService";
+import { AiFillEye, AiFillEyeInvisible } from 'react-icons/ai';
+
+const PasswordInput = ({ isVisible, setIsVisible, ...restProps }) => (
+  <div style={{ position: "relative" }}>
+    <InputWithLabel
+      type={isVisible ? "text" : "password"}
+      {...restProps}
+    />
+    <button class="isible"
+      type="button"
+      onClick={() => setIsVisible(!isVisible)}
+      style={{
+        position: "absolute",
+        right: "10px",
+        top: "72%",
+        transform: "translateY(-50%)",
+        backgroundColor: "transparent",
+        border: "none",
+      }}
+    >
+      {isVisible ? <AiFillEyeInvisible size={24} /> : <AiFillEye size={24} />}
+    </button>
+  </div>
+);
 
 const RegisterUser = () => {
   const [user, setUser] = useState({
@@ -18,7 +42,12 @@ const RegisterUser = () => {
     email: "",
     password: "",
     checkPassword: "",
+    terms: "",
   });
+
+  const [isTermsChecked, setIsTermsChecked] = useState(false);
+  const [isPasswordVisible, setIsPasswordVisible] = useState(false);
+  const [isCheckPasswordVisible, setIsCheckPasswordVisible] = useState(false);
 
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -90,6 +119,10 @@ const RegisterUser = () => {
         isValid = false;
       } else if (user.password !== user.checkPassword) {
         errors.checkPassword = "Las contraseñas no coinciden";
+        isValid = false;
+      }
+      if (!isTermsChecked) {
+        errors.terms = "Debe aceptar los términos y condiciones";
         isValid = false;
       }
 
@@ -170,31 +203,35 @@ const RegisterUser = () => {
             <span className={styles["form-error"]}>{formErrors.email}</span>
           )}
 
-          <InputWithLabel
-            type={"password"}
+          <PasswordInput
             value={user.password}
-            onChange={(event) =>
-              setUser({ ...user, password: event.target.value })
-            }
+            onChange={(event) => setUser({ ...user, password: event.target.value })}
+            isVisible={isPasswordVisible}
+            setIsVisible={setIsPasswordVisible}
           >
             Contraseña
-          </InputWithLabel>
+          </PasswordInput>
 
-          {formErrors.password && (
-            <span className={styles["form-error"]}>{formErrors.password}</span>
-          )}
-
-          <InputWithLabel
-            type={"password"}
+          <PasswordInput
             value={user.checkPassword}
-            onChange={(event) =>
-              setUser({ ...user, checkPassword: event.target.value })
-            }
+            onChange={(event) => setUser({ ...user, checkPassword: event.target.value })}
+            isVisible={isCheckPasswordVisible}
+            setIsVisible={setIsCheckPasswordVisible}
           >
             Confirmación de contraseña
-          </InputWithLabel>
+          </PasswordInput>
 
-          {formErrors.checkPassword && <span>{formErrors.checkPassword}</span>}
+          <label>
+            <input
+              type="checkbox"
+              checked={isTermsChecked}
+              onChange={() => setIsTermsChecked(!isTermsChecked)}
+            />
+            He leído y acepto los términos y condiciones
+          </label>
+          {formErrors.terms && (
+            <span className={styles["form-error"]}>{formErrors.terms}</span>
+          )}
 
           <ButtonPrimary onClick={handleSubmit}>Enviar</ButtonPrimary>
         </form>
