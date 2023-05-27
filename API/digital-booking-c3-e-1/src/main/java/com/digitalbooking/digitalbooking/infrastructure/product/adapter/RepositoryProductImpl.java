@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Repository
@@ -21,7 +22,7 @@ public class RepositoryProductImpl implements RepositoryProduct {
     @Autowired
     RepositoryProductMySql repositoryProductMySql;
     @Override
-    public Long save(Product product, String imageURL) {
+    public Long save(Product product, String imageURL, List<String> secundaryImages) {
         ProductEntity productEntity = new ProductEntity();
         BeanUtils.copyProperties(product,productEntity);
         CategoryEntity category = new CategoryEntity();
@@ -29,6 +30,7 @@ public class RepositoryProductImpl implements RepositoryProduct {
         productEntity.setCategory(category);
         productEntity.setImageURL(imageURL);
         productEntity.setIsDelete(Boolean.FALSE);
+        productEntity.setImageProductEntity(secundaryImages.stream().map(secundaryImage -> ImageProductEntity.builder().imageURL(secundaryImage).productEntity(productEntity).build()).collect(Collectors.toList()));
         return repositoryProductMySql.save(productEntity).getId();
     }
 
@@ -45,6 +47,11 @@ public class RepositoryProductImpl implements RepositoryProduct {
     @Override
     public ProductDTO findById(Long id) {
         return repositoryProductMySql.findByIdAndIsDelete(id,Boolean.FALSE).map(MapToProduct::mapToProduct).orElseThrow(()->new ExceptionNullValue("Producto no encontrado"));
+    }
+
+    @Override
+    public Optional<ProductDTO> findByName(String name) {
+        return repositoryProductMySql.findByName(name).map(MapToProduct::mapToProduct);
     }
 
     @Override

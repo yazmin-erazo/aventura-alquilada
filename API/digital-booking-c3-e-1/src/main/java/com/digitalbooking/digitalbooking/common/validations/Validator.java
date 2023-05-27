@@ -27,8 +27,8 @@ public class Validator {
         }
     }
 
-    public static void validateLength(String value, int length, String message) {
-        if (value.length() < length) {
+    public static void validateMaxLength(String value, int length, String message) {
+        if (value.length() > length) {
             throw new ExceptionLengthValue(message);
         }
     }
@@ -122,6 +122,34 @@ public class Validator {
     public static void validateNull(Object data, String message) {
         if (data == null) {
             throw new ExceptionNullValue(message);
+        }
+    }
+
+    private static final Pattern EMAIL_PATTERN = Pattern.compile(
+            "^[A-Za-z0-9+_.-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,}$"
+    );
+
+    public static void validateEmailFormat(String email, String message) {
+        Matcher matcher = EMAIL_PATTERN.matcher(email);
+        if (!matcher.matches()) {
+            throw new ExceptionInvalidValue(message);
+        }
+    }
+
+    public static void validateOnlyChars(String value, String message) {
+        if (!value.matches("[a-zA-Z]+")) {
+            throw new ExceptionInvalidValue(message);
+        }
+    }
+
+    public static void validatePassword(String value, String message) {
+        String passwordRegex = "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)[a-zA-Z\\d]{3,}$";
+
+        Pattern pattern = Pattern.compile(passwordRegex);
+        Matcher matcher = pattern.matcher(value);
+
+        if (!matcher.matches()) {
+            throw new ExceptionInvalidValue(message);
         }
     }
 }

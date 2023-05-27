@@ -3,7 +3,6 @@ import { Outlet } from "react-router-dom";
 import { ProductsDataContext } from "./context/ProductsContext";
 import Header from "./components/common/Header"
 import Footer from "./components/common/Footer"
-//import "typeface-roboto";
 
 function App() {
 

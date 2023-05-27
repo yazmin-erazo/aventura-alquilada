@@ -10,7 +10,9 @@ const Header = () => {
           <h5 className="lemaHeader">Sin equipo no hay aventura</h5>
         </Link>
         <div className="headerBtn">
+          <Link to="auth/register">
           <button className="cuentaBtn">Crear cuenta</button>
+          </Link>
           <Link to='login'>
           <button className="sesionBtn">Iniciar sesión</button>
           </Link>

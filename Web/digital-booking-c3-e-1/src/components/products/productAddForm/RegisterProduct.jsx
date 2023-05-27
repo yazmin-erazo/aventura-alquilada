@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import InputWithLabel from "../../common/input/InputWithLabel";
 import ButtonPrimary from "../../common/Buttons/ButtonPrimary";
-import Select from "../../common/select/select";
+import Select from "../../common/select/Select";
 import ProductConditionSelect from "../../common/select/ProductConditionSelect";
 import styles from "./RegisterProduct.module.css";
 import ImageUpload from "../../common/inputImage/ImageUpload";
@@ -12,6 +12,7 @@ import ProductsService from '../../../shared/services/ProductsService'
 const RegisterProduct = () => {
   const [categories, setCategories] = useState([]);
   const [selectedCategoryId, setSelectedCategoryId] = useState("");
+  const [errorMessage, setErrorMessage] = useState("");
 
   const [formData, setFormData] = useState({
     selectedCategory: "",
@@ -21,6 +22,9 @@ const RegisterProduct = () => {
     brand: "",
     selectedImage: null,
     description: "",
+    color: "",
+    material: "",
+    size: "",
     fileName: "",
   });
 
@@ -41,7 +45,7 @@ const RegisterProduct = () => {
     if (name === "selectedCategory") {
       setSelectedCategoryId(value);
     }
-  
+
     setFormData((prevFormData) => ({
       ...prevFormData,
       [name]: value,
@@ -50,13 +54,13 @@ const RegisterProduct = () => {
 
   const handleImageUpload = (file) => {
     const fileName = file.name.split(".")[0];
-  
+
     // Convertir la imagen en base64
     const reader = new FileReader();
     reader.onload = () => {
       const base64Image = reader.result;
       const base64ImageWithoutPrefix = base64Image.replace(/^data:image\/[a-z]+;base64,/, '');
-  
+
       setFormData((prevFormData) => ({
         ...prevFormData,
         selectedImage: base64ImageWithoutPrefix,
@@ -76,6 +80,9 @@ const RegisterProduct = () => {
       selectedCondition,
       description,
       selectedImage,
+      color,
+      material,
+      size,
       fileName
     } = formData;
 
@@ -88,6 +95,9 @@ const RegisterProduct = () => {
       state: selectedCondition,
       description: description,
       image: selectedImage,
+      color: color,
+      material: material,
+      size: size,
       fileName: fileName,
     };
     console.log("Datos del producto:", productData);
@@ -105,7 +115,13 @@ const RegisterProduct = () => {
         selectedImage: null,
         description: "",
         brand: "",
+        color: "",
+        material: "",
+        size: "",
+        fileName:"",
       });
+      setErrorMessage(""); //Limpiar el mensaje de error
+    }
     } catch (error) {
       console.error("Error al registrar el producto:", error);
     }
@@ -129,6 +145,7 @@ const RegisterProduct = () => {
             >
               Nombre:
             </InputWithLabel>
+
             <InputWithLabel
               type="text"
               value={formData.brand}
@@ -138,6 +155,7 @@ const RegisterProduct = () => {
             >
               Marca:
             </InputWithLabel>
+
             <InputWithLabel
               type="number"
               value={formData.productPrice}
@@ -153,7 +171,7 @@ const RegisterProduct = () => {
               value={selectedCategoryId}
               onChange={(id) => handleInputChange("selectedCategoryId", id)}
             >
-              Categoría
+              Categoría:
             </Select>
 
             <ProductConditionSelect
@@ -162,8 +180,38 @@ const RegisterProduct = () => {
                 handleInputChange("selectedCondition", state)
               }
             >
-              Condición
+              Condición:
             </ProductConditionSelect>
+
+            <InputWithLabel
+              type="text"
+              value={formData.color}
+              onChange={(event) =>
+              handleInputChange("color", event.target.value)
+            }
+            >
+              Color:
+            </InputWithLabel>
+
+            <InputWithLabel
+              type="text"
+              value={formData.material}
+              onChange={(event) =>
+              handleInputChange("material", event.target.value)
+            }
+            >
+              Material:
+            </InputWithLabel>
+
+            <InputWithLabel
+              type="text"
+              value={formData.size}
+              onChange={(event) =>
+              handleInputChange("size", event.target.value)
+            }
+            >
+              Talla/Tamaño:
+            </InputWithLabel>
 
             <ImageUpload onImageUpload={handleImageUpload} />
 
