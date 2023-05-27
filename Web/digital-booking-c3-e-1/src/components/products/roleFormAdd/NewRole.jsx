@@ -118,7 +118,6 @@ const NewRole = () => {
 
                         <div className={styles.permissionsContainer}>
                             <div className={styles.category}>
-
                                 <h4>Categorías</h4>
                                 <div className={styles.categoryPermissions}>
                                     <label>
