@@ -19,10 +19,12 @@ ReactDOM.createRoot(document.getElementById("root")).render(
       <Route path="/" element={<App />}>
         <Route path='/' element={<Home />} />
         <Route path='products/:id' element={<Details />} />
-        <Route path='admin/add' element={<AddProduct />} />
+        <Route path='admin/product/add' element={<AddProduct />} />
         <Route path='admin/' element={<Crud />} />
         <Route path='admin/category/add' element={<NewCategory />} />
         <Route path='admin/role/add' element={<NewRole />} />
+        <Route path='login' element={<Login />} />
+        <Route path='auth/register' element={<RegisterUser />} />
       </Route>
     </Routes>
     </React.StrictMode>

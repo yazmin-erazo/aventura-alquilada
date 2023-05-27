@@ -1,6 +1,10 @@
 @import "/src/styles/variables.css";
 @import "/src/styles/global.css";
 
+.roleContainer {
+  height: 100vh;
+}
+
 .containerForm{
     width: 90%;
     max-width: 1280px;
