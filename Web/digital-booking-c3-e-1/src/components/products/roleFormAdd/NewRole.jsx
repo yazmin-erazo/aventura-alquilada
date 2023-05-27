@@ -1,5 +1,4 @@
-import { useEffect, useState } from "react";
-import axios from "axios";
+import React, { useState } from "react";
 import InputWithLabel from "../../common/input/InputWithLabel";
 import ButtonPrimary from "../../common/Buttons/ButtonPrimary";
 import styles from "./NewRole.module.css";
@@ -81,8 +80,25 @@ const NewRole = () => {
         console.log("Datos del nuevo rol:", formData);
     };
 
+    const CheckItem = ({children}) => (
+        <label>
+        <input
+            type="checkbox"
+            checked={formData.permissions.categories.list}
+            onChange={(event) =>
+                handlePermissionChange(
+                    "categories",
+                    "list",
+                    event.target.checked
+                )
+            }
+        />
+        {children}
+    </label>
+    )
+
     return (
-        <div>
+        <div className={styles.roleContainer}>
             <header className={styles.header}>
                 <h2>Agregar nuevo rol</h2>
             </header>
@@ -120,34 +136,10 @@ const NewRole = () => {
                             <div className={styles.category}>
                                 <h4>Categorías</h4>
                                 <div className={styles.categoryPermissions}>
-                                    <label>
-                                        <input
-                                            type="checkbox"
-                                            checked={formData.permissions.categories.list}
-                                            onChange={(event) =>
-                                                handlePermissionChange(
-                                                    "categories",
-                                                    "list",
-                                                    event.target.checked
-                                                )
-                                            }
-                                        />
-                                        Listar
-                                    </label>
-                                    <label>
-                                        <input
-                                            type="checkbox"
-                                            checked={formData.permissions.categories.add}
-                                            onChange={(event) =>
-                                                handlePermissionChange(
-                                                    "categories",
-                                                    "add",
-                                                    event.target.checked
-                                                )
-                                            }
-                                        />
+                                    <CheckItem>Listar</CheckItem>
+                                    <CheckItem>
                                         Agregar
-                                    </label>
+                                    </CheckItem>
                                     <label>
                                         <input
                                             type="checkbox"

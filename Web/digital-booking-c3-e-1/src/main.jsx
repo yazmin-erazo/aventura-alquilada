@@ -11,7 +11,6 @@ import "./index.css";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import RegisterUser from "./components/user/userAddForm/RegisterUser.jsx";
 import Login from "./components/login/Login.jsx";
-import NewCategory from "./components/products/categoryAddForm/NewCategory.jsx";
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <BrowserRouter>
