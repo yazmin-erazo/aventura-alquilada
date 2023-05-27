@@ -1,0 +1,14 @@
+.item {
+    display: flex;
+    align-items: flex-start;
+    padding: 9px 10px;
+    gap: 10px;
+    width: 202px;
+    height: 36px;
+    left: 24px;
+    background: #12334F;
+    border-radius: 6px;
+    color: white;
+    font: var(--body-14-normal);
+    margin-top: 32px;
+  }
