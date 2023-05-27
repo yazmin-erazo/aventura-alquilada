@@ -6,7 +6,8 @@ import Select from "../../common/select/Select";
 import ProductConditionSelect from "../../common/select/ProductConditionSelect";
 import styles from "./RegisterProduct.module.css";
 import ImageUpload from "../../common/inputImage/ImageUpload";
-
+import CategoryService from '../../../shared/services/CategoryService'
+import ProductsService from '../../../shared/services/ProductsService'
 
 const RegisterProduct = () => {
   const [categories, setCategories] = useState([]);
@@ -33,10 +34,7 @@ const RegisterProduct = () => {
 
   const fetchCategories = async () => {
     try {
-      const response = await axios.get(
-        "http://localhost:8080/digitalbooking/category/categories"
-      );
-      const categoriesData = response.data;
+      const categoriesData = await CategoryService.getAll();
       setCategories(categoriesData);
     } catch (error) {
       console.error("Error al obtener las categorías:", error);
@@ -105,20 +103,8 @@ const RegisterProduct = () => {
     console.log("Datos del producto:", productData);
 
     try {
-
-      const response = await axios.get(
-        "http://localhost:8080/digitalbooking/product/check?name=${productName}"
-      );
-      const productExists = response.data.exists;
-      
-      if (productExists) {
-        setErrorMessage("El nombre del producto ya esta en uso. Por favor, escriba otro");
-      } else {
-        await axios.post(
-        "http://localhost:8080/digitalbooking/product",
-        productData
-        );
-        console.log("Producto registrado con éxito:", productData); 
+      await ProductsService.create(productData);
+      console.log("Producto registrado con éxito:", productData);
 
       // Reiniciar los campos del formulario después de enviar los datos
       setFormData({
@@ -135,9 +121,7 @@ const RegisterProduct = () => {
         fileName:"",
       });
       setErrorMessage(""); //Limpiar el mensaje de error
-    }
     } catch (error) {
-      console.log(error.response.data);
       console.error("Error al registrar el producto:", error);
     }
   };

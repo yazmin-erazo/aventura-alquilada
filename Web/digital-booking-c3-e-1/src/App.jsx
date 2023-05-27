@@ -8,13 +8,13 @@ function App() {
 
   return (
     <>
-        <Header />
+      <Header />
         <div className="outlet">
-        <ProductsDataContext>
-          <Outlet />
-      </ProductsDataContext>
+          <ProductsDataContext>
+            <Outlet />
+          </ProductsDataContext>
         </div>
-        <Footer />
+      <Footer />
     </>
   );
 }
