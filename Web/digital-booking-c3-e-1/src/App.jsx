@@ -16,7 +16,7 @@ function App() {
             <Outlet />
           </ProductsDataContext>
         </div>
-        <Footer />
+      <Footer />
     </>
   );
 }

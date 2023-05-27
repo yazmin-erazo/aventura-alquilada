@@ -56,7 +56,7 @@ const NewCategory = () => {
 
         try {
             const response = await axios.get(
-                `http://localhost:8080/digitalbooking/category/check?title=${title}`
+                `http://localhost:8080/digitalbooking/categories/check?title=${title}`
             );
             const categoryExists = response.data.exists;
 

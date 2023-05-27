@@ -13,7 +13,9 @@ const Header = () => {
           <Link to="auth/register">
           <button className="cuentaBtn">Crear cuenta</button>
           </Link>
+          <Link to='login'>
           <button className="sesionBtn">Iniciar sesión</button>
+          </Link>
         </div>
         <nav>
           <input type="checkbox" id="menu" />

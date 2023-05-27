@@ -37,6 +37,7 @@
   display: flex;
   flex-direction: row;
   font: var(--body-14-normal);
+  margin-bottom: 2rem;
 }
 
 .registerCategoryForm {
