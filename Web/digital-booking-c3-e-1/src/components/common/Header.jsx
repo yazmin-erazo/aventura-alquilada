@@ -11,7 +11,9 @@ const Header = () => {
         </Link>
         <div className="headerBtn">
           <button className="cuentaBtn">Crear cuenta</button>
+          <Link to='login'>
           <button className="sesionBtn">Iniciar sesión</button>
+          </Link>
         </div>
         <nav>
           <input type="checkbox" id="menu" />

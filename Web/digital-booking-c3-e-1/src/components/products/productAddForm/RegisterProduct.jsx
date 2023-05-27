@@ -6,6 +6,8 @@ import Select from "../../common/select/select";
 import ProductConditionSelect from "../../common/select/ProductConditionSelect";
 import styles from "./RegisterProduct.module.css";
 import ImageUpload from "../../common/inputImage/ImageUpload";
+import CategoryService from '../../../shared/services/CategoryService'
+import ProductsService from '../../../shared/services/ProductsService'
 
 const RegisterProduct = () => {
   const [categories, setCategories] = useState([]);
@@ -28,10 +30,7 @@ const RegisterProduct = () => {
 
   const fetchCategories = async () => {
     try {
-      const response = await axios.get(
-        "http://localhost:8080/digitalbooking/category/categories"
-      );
-      const categoriesData = response.data;
+      const categoriesData = await CategoryService.getAll();
       setCategories(categoriesData);
     } catch (error) {
       console.error("Error al obtener las categorías:", error);
@@ -94,10 +93,7 @@ const RegisterProduct = () => {
     console.log("Datos del producto:", productData);
 
     try {
-      await axios.post(
-        "http://localhost:8080/digitalbooking/product",
-        productData
-      );
+      await ProductsService.create(productData);
       console.log("Producto registrado con éxito:", productData);
 
       // Reiniciar los campos del formulario después de enviar los datos
@@ -111,7 +107,6 @@ const RegisterProduct = () => {
         brand: "",
       });
     } catch (error) {
-      console.log(error.response.data);
       console.error("Error al registrar el producto:", error);
     }
   };
