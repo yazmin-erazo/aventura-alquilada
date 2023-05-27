@@ -124,9 +124,9 @@ const RegisterUser = () => {
     <div className={styles.container}>
       <img src="/registerUser.png" alt="imagen" />
       <div>
-        <h1>Registrate</h1>
+        <h1>Registrarte</h1>
         <p>
-          Registrate para alquilar equipamiento deportivo de calidad y disfutar
+          Registrate para alquilar equipamiento deportivo de calidad y disfrutar
           de emocionantes aventuras al aire libre
         </p>
         <form className={styles["form-container"]} onSubmit={handleSubmit}>
