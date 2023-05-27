@@ -3,8 +3,32 @@ import InputWithLabel from "../../common/input/InputWithLabel";
 import ButtonPrimary from "../../common/Buttons/ButtonPrimary";
 import styles from "./registerUser.module.css";
 import AuthService from "../../../shared/services/AuthService";
-import Swal from 'sweetalert2';
-import 'sweetalert2/dist/sweetalert2.css';
+import { AiOutlineEye, AiOutlineEyeInvisible } from "react-icons/ai";
+
+const PasswordInput = ({ isVisible, setIsVisible, ...restProps }) => (
+  <div style={{ position: "relative" }}>
+    <InputWithLabel type={isVisible ? "text" : "password"} {...restProps} />
+    <button
+      class="isible"
+      type="button"
+      onClick={() => setIsVisible(!isVisible)}
+      style={{
+        position: "absolute",
+        right: "10px",
+        top: "72%",
+        transform: "translateY(-50%)",
+        backgroundColor: "transparent",
+        border: "none",
+      }}
+    >
+      {isVisible ? (
+        <AiOutlineEyeInvisible size={24} />
+      ) : (
+        <AiOutlineEye size={24} />
+      )}
+    </button>
+  </div>
+);
 
 const RegisterUser = () => {
   const [user, setUser] = useState({
@@ -20,9 +44,12 @@ const RegisterUser = () => {
     email: "",
     password: "",
     checkPassword: "",
+    terms: "",
   });
 
-
+  const [isTermsChecked, setIsTermsChecked] = useState(false);
+  const [isPasswordVisible, setIsPasswordVisible] = useState(false);
+  const [isCheckPasswordVisible, setIsCheckPasswordVisible] = useState(false);
 
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -83,7 +110,8 @@ const RegisterUser = () => {
         errors.password = "La contraseña debe tener al menos 3 caracteres";
         isValid = false;
       } else if (!passwordRegex.test(user.password)) {
-        errors.password = "La contraseña debe tener al menos una letra minúscula, una mayúscula y un número";
+        errors.password =
+          "La contraseña debe tener al menos una letra minúscula, una mayúscula y un número";
         isValid = false;
       }
 
@@ -96,6 +124,10 @@ const RegisterUser = () => {
         isValid = false;
       } else if (user.password !== user.checkPassword) {
         errors.checkPassword = "Las contraseñas no coinciden";
+        isValid = false;
+      }
+      if (!isTermsChecked) {
+        errors.terms = "Debe aceptar los términos y condiciones";
         isValid = false;
       }
 
@@ -118,30 +150,25 @@ const RegisterUser = () => {
         (err) => console.log(err);
       }
     };
-    
+
     if (validateForm()) {
       sendUser();
-
     } else {
       console.log("El formulario contiene errores");
-      
     }
-   
-    
   };
-  
-  
+
   return (
     <div className={styles.container}>
-      <img src="/registerUser.png" alt="imagen" />
+      <img className={styles["registerUser-img"]} src="/registerUser.png" alt="imagen" />
       <div>
-        <h1>Registrate</h1>
+        <h1>Registrarte</h1>
         <p>
-          Registrate para alquilar equipamiento deportivo de calidad y disfutar
+          Registrate para alquilar equipamiento deportivo de calidad y disfrutar
           de emocionantes aventuras al aire libre
         </p>
         <form className={styles["form-container"]} onSubmit={handleSubmit}>
-          <InputWithLabel
+          <InputWithLabel 
             type={"text"}
             value={user.name}
             onChange={(event) => setUser({ ...user, name: event.target.value })}
@@ -181,31 +208,44 @@ const RegisterUser = () => {
             <span className={styles["form-error"]}>{formErrors.email}</span>
           )}
 
-          <InputWithLabel
-            type={"password"}
+          <PasswordInput
             value={user.password}
             onChange={(event) =>
               setUser({ ...user, password: event.target.value })
             }
+            isVisible={isPasswordVisible}
+            setIsVisible={setIsPasswordVisible}
           >
-            Contraseña (debe contener al menos tres caracteres, una letra mayúscula, minúscula y un número) 
-          </InputWithLabel>
+            Contraseña
+          </PasswordInput>
 
           {formErrors.password && (
             <span className={styles["form-error"]}>{formErrors.password}</span>
           )}
-
-          <InputWithLabel
-            type={"password"}
+          <PasswordInput
             value={user.checkPassword}
             onChange={(event) =>
               setUser({ ...user, checkPassword: event.target.value })
             }
+            isVisible={isCheckPasswordVisible}
+            setIsVisible={setIsCheckPasswordVisible}
           >
             Confirmación de contraseña
-          </InputWithLabel>
-
+          </PasswordInput>
           {formErrors.checkPassword && <span>{formErrors.checkPassword}</span>}
+          <br />
+          <label>
+            <input
+              type="checkbox"
+              checked={isTermsChecked}
+              onChange={() => setIsTermsChecked(!isTermsChecked)}
+            />
+            He leído y acepto los términos y condiciones
+          </label>
+          <br />
+          {formErrors.terms && (
+            <span className={styles["form-error"]}>{formErrors.terms}</span>
+          )}
 
           <ButtonPrimary onClick={handleSubmit}>Enviar</ButtonPrimary>
         </form>
