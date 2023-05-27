@@ -38,15 +38,6 @@
   color: var(--state-reserved);
 }
 
-.button:hover,
-.button.active {
-  color: var(--state-reserved);
-}
-
-.button:hover::before {
-  content: "●";
-}
-
 @media (max-width: 767px) {
   .dashboard {
     display: none;
