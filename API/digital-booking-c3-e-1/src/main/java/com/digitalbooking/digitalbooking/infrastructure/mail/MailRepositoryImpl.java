@@ -14,30 +14,32 @@ public class MailRepositoryImpl implements MailRepository {
     @Autowired
     private JavaMailSender emailSender;
 
-    private final String templateHtmlValidateAccountMail = "<html>"
-            + "<body>"
-            + "<p>Hola %s,</p>"
-            + "<p>Gracias por registrarte. ¡Estamos emocionados de tenerte como parte de nuestra comunidad!</p>"
-            + "<p>Para activar tu cuenta, por favor haz clic en el botón a continuación:</p>"
-            + "<p><a href='%s' style='padding:10px; background-color: #ADD8E6; color: #006400; text-align: center; text-decoration: none; display: inline-block; border-radius: 5px;'>Activar Cuenta</a></p>"
-            + "<p>Si no activas tu cuenta dentro de las próximas 48 horas, el sistema desactivará tu cuenta y necesitarás registrarte de nuevo para usar el sitio.</p>"
-            + "<p>Saludos,</p>"
-            + "<p>El equipo de Digital Booking</p>"
-            + "</body>"
-            + "</html>";
+    private final String templateHtmlValidateAccountMail = "<html>" +
+            "<body style='background-color: #F5F5F5; text-align: center; padding:50px; font-family: Arial, sans-serif;'>" +
+            "<p>Hola %s,</p>" +
+            "<p>Gracias por registrarte. ¡Estamos emocionados de tenerte como parte de nuestra comunidad!</p>" +
+            "<p>Para activar tu cuenta, por favor haz clic en el botón a continuación:</p>" +
+            "<p><a href='%s' style='padding:10px; background-color: #2f6304; color: #FFFFFF; text-align: center; text-decoration: none; display: inline-block; border-radius: 5px;'>Activar Cuenta</a></p>" +
+            "<p>Si no activas tu cuenta dentro de las próximas 48 horas, el sistema desactivará tu cuenta y necesitarás registrarte de nuevo para usar el sitio.</p>" +
+            "<p>Saludos,</p>" +
+            "<p>El equipo de <span style='color: #008000;'>Digital</span> <span style='color: #00008B;'>Booking</span></p>" +
+            "</body>" +
+            "</html>";
 
-    private final String templateHtmlAccountAvailableMail = "<html>"
-            + "<body>"
-            + "<p>Hola %s,</p>"
-            + "<p>¡Tu cuenta ahora está disponible! Esperamos que disfrutes de nuestra plataforma y descubras todos los beneficios que tenemos para ti.</p>"
-            + "<p>Para iniciar sesión, por favor haz clic en el botón a continuación:</p>"
-            + "<p>Utilizando el siguiente email: %s</p>"
-            + "<p><a href='%s' style='padding:10px; background-color: #ADD8E6; color: #006400; text-align: center; text-decoration: none; display: inline-block; border-radius: 5px;'>Iniciar sesión</a></p>"
-            + "<p>Si tienes algún problema para acceder a tu cuenta, por favor, no dudes en ponerte en contacto con nosotros.</p>"
-            + "<p>Saludos,</p>"
-            + "<p>El equipo de Digital Booking</p>"
-            + "</body>"
-            + "</html>";
+    private final String templateHtmlAccountAvailableMail = "<html>" +
+            "<body style='background-color: #F5F5F5; text-align: center; padding:50px; font-family: Arial, sans-serif;'>" +
+            "<p>Hola %s,</p>" +
+            "<p>¡Tu cuenta ahora está disponible! Esperamos que disfrutes de nuestra plataforma y descubras todos los beneficios que tenemos para ti.</p>" +
+            "<p>Para iniciar sesión, por favor haz clic en el botón a continuación:</p>" +
+            "<p>Utilizando el siguiente email: %s</p>" +
+            "<div style='margin: 20px 0;'>" +
+            "    <a href='%s' style='padding:15px; background-color: #2f6304; color: #FFFFFF; text-align: center; text-decoration: none; display: inline-block; border-radius: 5px; font-size: 18px;'>Iniciar sesión</a>" +
+            "</div>" +
+            "<p>Si tienes algún problema para acceder a tu cuenta, por favor, no dudes en ponerte en contacto con nosotros.</p>" +
+            "<p>Saludos,</p>" +
+            "<p>El equipo de <span style='color: #008000;'>Digital</span> <span style='color: #00008B;'>Booking</span></p>" +
+            "</body>" +
+            "</html>";
 
     @Override
     public void sendEmailValidateAccount(String to, String subject, String username, String activationUrl)  {

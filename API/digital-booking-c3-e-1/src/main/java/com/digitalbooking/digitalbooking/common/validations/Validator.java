@@ -135,4 +135,21 @@ public class Validator {
             throw new ExceptionInvalidValue(message);
         }
     }
+
+    public static void validateOnlyChars(String value, String message) {
+        if (!value.matches("[a-zA-Z]+")) {
+            throw new ExceptionInvalidValue(message);
+        }
+    }
+
+    public static void validatePassword(String value, String message) {
+        String passwordRegex = "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)[a-zA-Z\\d]{3,}$";
+
+        Pattern pattern = Pattern.compile(passwordRegex);
+        Matcher matcher = pattern.matcher(value);
+
+        if (!matcher.matches()) {
+            throw new ExceptionInvalidValue(message);
+        }
+    }
 }
