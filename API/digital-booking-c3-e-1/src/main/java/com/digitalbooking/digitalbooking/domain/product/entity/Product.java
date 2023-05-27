@@ -32,6 +32,11 @@ public final class Product {
         this.id = id;
     }
 
+    private Product(Long id, Category category) {
+        this.id = id;
+        this.category = category;
+    }
+
     public static Product create(String name,
                                  String brand,
                                  String state,
@@ -63,6 +68,15 @@ public final class Product {
 
         Category category = Category.create(idCategory);
         return new Product(0L,name,brand,state,price,description,size,gender, deposit, category, image, fileName, color, material, imageProducts);
+    }
+
+    public static Product update(Long id,
+                                 Long idCategory) throws Exception {
+        Validator.validateMandatory(id, "El Id es requerido para actualizar el producto");
+        Validator.validateMandatory(idCategory, "La categoría es requerida para actualizar el producto");
+
+        Category category = Category.create(idCategory);
+        return new Product(id, category);
     }
 
     public static Product createById(Long id){
