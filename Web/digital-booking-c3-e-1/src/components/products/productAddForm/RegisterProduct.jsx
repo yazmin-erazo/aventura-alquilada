@@ -121,7 +121,6 @@ const RegisterProduct = () => {
         fileName:"",
       });
       setErrorMessage(""); //Limpiar el mensaje de error
-    }
     } catch (error) {
       console.error("Error al registrar el producto:", error);
     }
