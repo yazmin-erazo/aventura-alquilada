@@ -40,7 +40,7 @@ const Crud = () => {
     <>
       <section className={styles["container"]} >
         <div className={styles["button-container"]}>
-        <Link to="add">
+        <Link to="products/add">
           <ButtonPrimary>Agregar producto</ButtonPrimary>
         </Link>
         </div>
