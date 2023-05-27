@@ -25,4 +25,4 @@ email:
   subject: Activar Cuenta
   urlvalidation: http://localhost:8080/digitalbooking/user/activate?token=%s
   subjectlogin: Cuenta Activada
-  urllogin: urlparaellogin
+  urllogin: http://localhost:5173/login

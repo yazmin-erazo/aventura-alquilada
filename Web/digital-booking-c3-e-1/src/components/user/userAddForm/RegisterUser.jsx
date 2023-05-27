@@ -3,7 +3,7 @@ import InputWithLabel from "../../common/input/InputWithLabel";
 import ButtonPrimary from "../../common/Buttons/ButtonPrimary";
 import styles from "./registerUser.module.css";
 import AuthService from "../../../shared/services/AuthService";
-import { AiFillEye, AiFillEyeInvisible } from 'react-icons/ai';
+import { AiOutlineEye, AiOutlineEyeInvisible } from 'react-icons/ai';
 
 const PasswordInput = ({ isVisible, setIsVisible, ...restProps }) => (
   <div style={{ position: "relative" }}>
@@ -23,7 +23,7 @@ const PasswordInput = ({ isVisible, setIsVisible, ...restProps }) => (
         border: "none",
       }}
     >
-      {isVisible ? <AiFillEyeInvisible size={24} /> : <AiFillEye size={24} />}
+      {isVisible ? <AiOutlineEyeInvisible size={24} /> : <AiOutlineEye size={24} />}
     </button>
   </div>
 );
