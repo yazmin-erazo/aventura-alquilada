@@ -1,0 +1,25 @@
+package com.digitalbooking.digitalbooking.infrastructure.user.controller;
+
+import com.digitalbooking.digitalbooking.application.user.handler.UserHandler;
+import com.digitalbooking.digitalbooking.domain.user.dto.UserDTO;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
+
+@CrossOrigin(origins = "*")
+@RestController
+@RequestMapping("/user")
+@Tag(name = "Controller to fetch users")
+public class QueryControllerUser {
+
+    @Autowired
+    private UserHandler userHandler;
+
+    @GetMapping("{id-user}")
+    @Operation(summary = "find user", description = "Method to find user by Id")
+    public ResponseEntity<UserDTO> getUser(@PathVariable("id-user") Long id) {
+        return ResponseEntity.ok(userHandler.findById(id));
+    }
+}

@@ -3,20 +3,18 @@ import { Outlet } from "react-router-dom";
 import { ProductsDataContext } from "./context/ProductsContext";
 import Header from "./components/common/Header"
 import Footer from "./components/common/Footer"
-//import ProductForm from "../src/components/products/productAddForm/RegisterProduct"
-//import "typeface-roboto";
 
 function App() {
 
   return (
     <>
-        <Header />
+      <Header />
         <div className="outlet">
-        <ProductsDataContext>
-          <Outlet />
-      </ProductsDataContext>
+          <ProductsDataContext>
+            <Outlet />
+          </ProductsDataContext>
         </div>
-        <Footer />
+      <Footer />
     </>
   );
 }

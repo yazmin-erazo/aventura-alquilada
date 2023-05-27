@@ -51,7 +51,15 @@
     font-weight: 600;
     font: var(--h3);
     line-height: 1.5;
+    display: flex;
+    align-items: center;
   }
+  
+  .price::before {
+    content: '\0024';
+    margin-right: 5px;
+  }
+  
   
   .type {
     display: flex;
