@@ -24,8 +24,12 @@ const Header = () => {
             ☰{" "}
           </label>
           <ul>
+            <Link to ="auth/register"className="noUnderlined">
             <li>Crear cuenta</li>
+            </Link>
+            <Link to='login'className="noUnderlined">
             <li>Iniciar sesión</li>
+            </Link>
           </ul>
         </nav>
       </div>

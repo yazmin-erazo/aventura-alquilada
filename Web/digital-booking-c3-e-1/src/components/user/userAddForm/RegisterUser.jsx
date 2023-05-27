@@ -3,6 +3,8 @@ import InputWithLabel from "../../common/input/InputWithLabel";
 import ButtonPrimary from "../../common/Buttons/ButtonPrimary";
 import styles from "./registerUser.module.css";
 import AuthService from "../../../shared/services/AuthService";
+import Swal from 'sweetalert2';
+import 'sweetalert2/dist/sweetalert2.css';
 
 const RegisterUser = () => {
   const [user, setUser] = useState({
@@ -20,6 +22,8 @@ const RegisterUser = () => {
     checkPassword: "",
   });
 
+
+
   const handleSubmit = (event) => {
     event.preventDefault();
 
@@ -34,7 +38,9 @@ const RegisterUser = () => {
       };
       const nameRegex = /^[a-zA-ZáÁéÉíÍóÓúÚñÑüÜ'][a-zA-ZáÁéÉíÍóÓúÚñÑüÜ\s']*$/;
 
-      const passwordRegex = /^(?=.*[a-zA-Z])(?=.*\d)[a-zA-Z\d]+$/;
+      const passwordRegex = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{3,}$/;
+
+      // /^(?=.*[a-zA-Z])(?=.*\d)[a-zA-Z\d]+$/;
       const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
 
       if (!user.name) {
@@ -52,10 +58,10 @@ const RegisterUser = () => {
         errors.lastName = "El apellido es obligatorio";
         isValid = false;
       } else if (user.lastName.trim() !== user.lastName) {
-        errors.lastName = "El apellido no debe contener espacios al principio";
+        errors.lastName = "El apellido no debe tener espacios al principio";
         isValid = false;
       } else if (!nameRegex.test(user.lastName)) {
-        errors.lastName = "El apellido contiene caracteres no válidos";
+        errors.lastName = "El apellido tiene caracteres no válidos";
         isValid = false;
       }
 
@@ -71,13 +77,13 @@ const RegisterUser = () => {
         errors.password = "La contraseña es obligatoria";
         isValid = false;
       } else if (user.password.trim() !== user.password) {
-        errors.password = "La contraseña no debe contener espacios";
+        errors.password = "La contraseña no debe tener espacios";
         isValid = false;
-      } else if (user.password.length < 6) {
-        errors.password = "La contraseña debe tener al menos 6 caracteres";
+      } else if (user.password.length < 3) {
+        errors.password = "La contraseña debe tener al menos 3 caracteres";
         isValid = false;
       } else if (!passwordRegex.test(user.password)) {
-        errors.password = "La contraseña debe contener letras y números";
+        errors.password = "La contraseña debe tener al menos una letra minúscula, una mayúscula y un número";
         isValid = false;
       }
 
@@ -112,14 +118,19 @@ const RegisterUser = () => {
         (err) => console.log(err);
       }
     };
-
+    
     if (validateForm()) {
       sendUser();
+
     } else {
       console.log("El formulario contiene errores");
+      
     }
+   
+    
   };
-
+  
+  
   return (
     <div className={styles.container}>
       <img src="/registerUser.png" alt="imagen" />
@@ -177,7 +188,7 @@ const RegisterUser = () => {
               setUser({ ...user, password: event.target.value })
             }
           >
-            Contraseña
+            Contraseña (debe contener al menos tres caracteres, una letra mayúscula, minúscula y un número) 
           </InputWithLabel>
 
           {formErrors.password && (

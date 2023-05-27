@@ -6,6 +6,8 @@
     margin:auto;
     justify-content: space-evenly;
     background-color: var(--bg-general);
+    height: calc(100vh - 140px);
+    width: 100%;
 
 }
 .form-container span{
