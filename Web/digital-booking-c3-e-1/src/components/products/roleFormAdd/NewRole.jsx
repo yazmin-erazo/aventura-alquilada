@@ -5,43 +5,43 @@ import styles from "./NewRole.module.css";
 
 const NewRole = () => {
     const [formData, setFormData] = useState({
-      roleName: "",
-      permissions: {
-        categories: {
-          list: false,
-          add: false,
-          edit: false,
-          delete: false,
+        roleName: "",
+        permissions: {
+            categories: {
+                list: false,
+                add: false,
+                edit: false,
+                delete: false,
+            },
+            products: {
+                list: false,
+                add: false,
+                edit: false,
+                delete: false,
+            },
+            users: {
+                list: false,
+                add: false,
+                edit: false,
+                delete: false,
+            },
+            roles: {
+                list: false,
+                add: false,
+                edit: false,
+                delete: false,
+            },
         },
-        products: {
-          list: false,
-          add: false,
-          edit: false,
-          delete: false,
-        },
-        users: {
-          list: false,
-          add: false,
-          edit: false,
-          delete: false,
-        },
-        roles: {
-          list: false,
-          add: false,
-          edit: false,
-          delete: false,
-        },
-      },
-      selectAll: false,
+        selectAll: false,
     });
-  
+
     const handleInputChange = (name, value) => {
-      setFormData((prevFormData) => ({
-        ...prevFormData,
-        [name]: value,
-      }));
+        setFormData((prevFormData) => ({
+            ...prevFormData,
+            [name]: value,
+        }));
     };
-  
+
     const handlePermissionChange = (category, action, checked) => {
         setFormData((prevFormData) => ({
             ...prevFormData,
@@ -54,7 +54,7 @@ const NewRole = () => {
             },
         }));
     };
-  
+
     const handleSelectAllChange = (checked) => {
         setFormData((prevFormData) => ({
             ...prevFormData,
@@ -79,19 +79,19 @@ const NewRole = () => {
         // Enviar los datos al servidor
         console.log("Datos del nuevo rol:", formData);
     };
-  
+
     const CheckItem = ({ category, action, name, children }) => (
-      <label>
-        <div>{name}</div>
-        <input
-          type="checkbox"
-          checked={formData.permissions[category][action]}
-          onChange={(event) =>
-            handlePermissionChange(category, action, event.target.checked)
-          }
-        />
-        {children}
-      </label>
+        <label>
+            <div>{name}</div>
+            <input
+                type="checkbox"
+                checked={formData.permissions[category][action]}
+                onChange={(event) =>
+                    handlePermissionChange(category, action, event.target.checked)
+                }
+            />
+            {children}
+        </label>
     );
 
     return (
@@ -163,22 +163,22 @@ const NewRole = () => {
                                 </div>
                                 <div className={styles.categoryPermissions}>
                                     <CheckItem
-                                        category="categories"
+                                        category="products"
                                         action="list"
                                         name="Listar"
                                     />
                                     <CheckItem
-                                        category="categories"
+                                        category="products"
                                         action="add"
                                         name="Agregar"
                                     />
                                     <CheckItem
-                                        category="categories"
+                                        category="products"
                                         action="edit"
                                         name="Editar"
                                     />
                                     <CheckItem
-                                        category="categories"
+                                        category="products"
                                         action="delete"
                                         name="Eliminar"
                                     />
@@ -191,22 +191,22 @@ const NewRole = () => {
                                 </div>
                                 <div className={styles.categoryPermissions}>
                                     <CheckItem
-                                        category="categories"
+                                        category="users"
                                         action="list"
                                         name="Listar"
                                     />
                                     <CheckItem
-                                        category="categories"
+                                        category="users"
                                         action="add"
                                         name="Agregar"
                                     />
                                     <CheckItem
-                                        category="categories"
+                                        category="users"
                                         action="edit"
                                         name="Editar"
                                     />
                                     <CheckItem
-                                        category="categories"
+                                        category="users"
                                         action="delete"
                                         name="Eliminar"
                                     />
@@ -219,32 +219,31 @@ const NewRole = () => {
                                 </div>
                                 <div className={styles.categoryPermissions}>
                                     <CheckItem
-                                        category="categories"
+                                        category="roles"
                                         action="list"
                                         name="Listar"
                                     />
                                     <CheckItem
-                                        category="categories"
+                                        category="roles"
                                         action="add"
                                         name="Agregar"
                                     />
                                     <CheckItem
-                                        category="categories"
+                                        category="roles"
                                         action="edit"
                                         name="Editar"
                                     />
                                     <CheckItem
-                                        category="categories"
+                                        category="roles"
                                         action="delete"
                                         name="Eliminar"
                                     />
                                 </div>
                             </div>
+                            <ButtonPrimary className={styles.submitBtn} onClick={handleSubmit}>
+                                Agregar rol
+                            </ButtonPrimary>
                         </div>
-
-                        <ButtonPrimary className={styles.submitBtn} onClick={handleSubmit}>
-                            Agregar rol
-                        </ButtonPrimary>
                     </div>
                 </div>
             </div>
