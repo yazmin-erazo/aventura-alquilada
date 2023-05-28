@@ -1,3 +1,6 @@
+@import "/src/styles/variables.css";
+@import "/src/styles/global.css";
+
 .container {
   width: 100%;
   overflow-x: hidden;
@@ -13,7 +16,7 @@
   gap: 20px;
 }
 
-/* ---------------------------------- */
+----------------------------------
 
 .categoryListContainer {
   display: flex;
@@ -21,6 +24,7 @@
   overflow-x: hidden;
   -webkit-overflow-scrolling: touch;
   scroll-behavior: smooth;
+  z-index: -1;
 }
 
 .categoryListContainer {
@@ -32,13 +36,22 @@
   scroll-behavior: smooth;
 }
 
-/* ----- hidden scroll ----- */
+/*Ocultar escroll*/
 .categoryListContainer::-webkit-scrollbar {
   width: 10px;
   height: 0;
   background-color: transparent;
 }
 
+/* .categoryListContainer::-webkit-scrollbar-thumb {
+  background-color: rgba(0, 0, 0, 0.2);
+  border-radius: 10px;
+} */
+
+/* .categoryListContainer::-webkit-scrollbar-thumb:hover {
+  background-color: rgba(0, 0, 0, 0.3);
+} */
+/*Fin de ocultar scroll*/
 
 .overlay {
   position: absolute;
@@ -46,7 +59,7 @@
   right: 0;
   width: 157px;
   height: 100%;
-  background: linear-gradient(to right, rgba(222, 231, 240, 0), #DEE7F0);
+  background: linear-gradient(to right, rgba(195, 212, 228, 0), var(--secondary-50));
   pointer-events: none;
   z-index: 1;
 }
@@ -64,8 +77,9 @@
   transform: translateY(-50%);
 }
 
-.buttonLeftA,
-.buttonRightB {
+.buttonLeft,
+.buttonRight {
+  position: relative; 
   display: flex;
   justify-content: center;
   align-items: center;
@@ -81,17 +95,21 @@
   opacity: 0.5;
 }
 
-.button {
-  position: absolute;
-  top: 50%;
-  transform: translateY(-50%);
+.buttonLeft {
+  left: 0; 
 }
 
-.buttonLeftA {
-  left: 0;
-}
-
-.buttonRightB {
+.buttonRight {
   right: 0;
-  z-index: 2
 }
+
+
+
+/* ---------------------------- */
+
+
+/* @media screen and (max-width: 600px) {
+  .categoryList {
+    flex-wrap: wrap;
+  }
+} */

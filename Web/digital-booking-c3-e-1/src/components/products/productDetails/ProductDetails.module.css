@@ -6,7 +6,7 @@
     justify-content: space-between;
     align-items: center;
     padding: 2% 5%;
-    background-color: var(--secondary-50);
+    background-color: var(--secondary-100);
 }
 
 .detailsHeader p {
@@ -27,7 +27,6 @@
 
 .productDetails {
     display: flex;
-    flex-direction: column;
     justify-content: space-evenly;
     margin: 20px;
 }
@@ -39,39 +38,33 @@
 .productDetails .description {
     display: flex;
     flex-direction: column;
-    height: 20%;
-    /*padding-left: 8%;*/
+    width: 40%;
+    padding-left: 8%;
 }
 
 .productDetails .description h3 {
-    font: var(--h2);
+    font: var(--h1);
     color: var(--primary-600);
-    padding:  0;
-    margin-left: 2%;
+    padding: 2% 0;
 }
 
 .productDetails .description .category {
     background-color: var(--secondary-300);
     font-size: 12px;
     border-radius: 6px;
-    padding: 7px;
-    margin: 1%;
+    padding: 8px;
     text-align: center;
     width: fit-content;
-    
 }
 
 .productDetails .description .productDescription {
-    font: var(--body-12);
-    margin:  2%;
-    text-align: justify ;
+    font: var(--body-16);
+    margin: 5% 0;
 }
 
 .productDetails .description .price {
     color: var(--semantics-info);
     font: var(--h3);
-    text-align:right;
-    margin-right: 10%;
 }
 
 .colorBoxContainer {
@@ -79,74 +72,10 @@
     left: 0;
     right: 0;
     top: 0;
-    height: 70vh;
+    height: 60vh;
     background-color: var(--secondary-50);
     z-index: -1;
     width: 100%;
-    
-}
-
-.photo{
-    background-color: var(--secondary-100);
-    display: flex;
-    flex-wrap: wrap;
-    width: 80%;
-    height: auto;
-}
-
-.photoPrincipal{
-    width: 50%;
-    height: 100%;
-}
-.photoSecondary{
-    width: 50%;
-    height: 50%;
-}
-
-.productFeature{
-margin: 40px;
-/*background-color: blueviolet;*/
-}
-
-.feature{
-  display: flex;
-  flex-wrap: wrap;
-  border-top: 1px solid var(--secondary-200);
-  margin-left: 20px;
-  margin-right: 50px;
- /* background-color: rgb(202, 226, 43);*/
-  
-}
-
-.titleFeature{
-    font: var(--h4);
-    color: var(--secondary-600);
-    margin-left: 40px;
-    margin-bottom: 10px;
-}
-
-.textFeature{
-    flex-basis: 25%;
-    margin-top: 20px;
-    font: var(--body-14-normal);
-    color: var( --secondary-600);
-}
-
-.photoSecondary{
-    display: flex;
-   flex-wrap: wrap;
-}
-
-.photoSecondary img{
-    flex-basis: 50%;
-  max-width: 50%;
-  height: auto;
-}
-
-.button{
-background-color: none;
-font: var(--body-12);
-color: var( --state-available)
 }
 
 @media (max-width: 768px) {
@@ -158,16 +87,4 @@ color: var( --state-available)
         width: 100%;
         margin: 5% 0;
     }
-    .textFeature{
-        flex-basis: 50%;
-    }
-    
-    }
-
-    @media (max-width: 450px) {
-        .feature{
-            display: flex;
-            flex-direction: column;
-         }
-         .textFeature{
-            margin-top: 10px;}}
+}

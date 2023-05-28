@@ -10,7 +10,11 @@ const Footer = () => {
             src="/isologotipo.svg"
             alt="isologotipo de Digital Booking"
           />
-          <img className="lema" src="/lema.png" alt="lema de Digital Booking" />
+          <img
+            className="lema"
+            src="/lema.png"
+            alt="lema de Digital Booking"
+          />
           <img
             className="copyright"
             src="/copyright.png"
