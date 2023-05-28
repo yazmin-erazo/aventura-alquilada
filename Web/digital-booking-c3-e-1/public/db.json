@@ -1,128 +1,156 @@
 [
-    {
-      "id": 1,
-      "name": "Nombre 1",
-      "image": "https://dummyimage.com/200x150/EEF3F9/aaa",
-      "price": 10.99,
-      "brand": "Marca 1",
-      "description": "Descripción 1",
-      "category": "Camping"
-    },
-    {
-      "id": 2,
-      "name": "Nombre 2",
-      "image": "https://dummyimage.com/200x150/EEF3F9/aaa",
-      "price": 19.99,
-      "brand": "Marca 2",
-      "description": "Descripción 2",
-      "category": "Snowboard"
-    },
-    {
-      "id": 3,
-      "name": "Nombre 3",
-      "image": "https://dummyimage.com/200x150/EEF3F9/aaa",
-      "price": 8.99,
-      "brand": "Marca 3",
-      "description": "Descripción 3",
-      "category": "Surf"
-    },
-    {
-      "id": 4,
-      "name": "Nombre 4",
-      "image": "https://dummyimage.com/200x150/EEF3F9/aaa",
-      "price": 7.99,
-      "brand": "Marca 3",
-      "description": "Descripción 3",
-      "category": "Esquí"
-    },
-    {
-      "id": 5,
-      "name": "Nombre 5",
-      "image": "https://dummyimage.com/200x150/EEF3F9/aaa",
-      "price": 7.99,
-      "brand": "Marca 3",
-      "description": "Descripción 3",
-      "category": "Bicicletas"
-    },
-    {
-      "id": 6,
-      "name": "Nombre 6",
-      "image": "https://dummyimage.com/200x150/EEF3F9/aaa",
-      "price": 7.99,
-      "brand": "Marca 3",
-      "description": "Descripción 3",
-      "category": "Escalada"
-    },
-    {
-      "id": 7,
-      "name": "Nombre 7",
-      "image": "https://dummyimage.com/200x150/EEF3F9/aaa",
-      "price": 7.99,
-      "brand": "Marca 3",
-      "description": "Descripción 3",
-      "category": "Acuáticos"
-    },
-    {
-      "id": 8,
-      "name": "Nombre 8",
-      "image": "https://dummyimage.com/200x150/EEF3F9/aaa",
-      "price": 10.99,
-      "brand": "Marca 1",
-      "description": "Descripción 1",
-      "category": "Camping"
-    },
-    {
-      "id": 9,
-      "name": "Nombre 9",
-      "image": "https://dummyimage.com/200x150/EEF3F9/aaa",
-      "price": 19.99,
-      "brand": "Marca 2",
-      "description": "Descripción 2",
-      "category": "Snowboard"
-    },
-    {
-      "id": 10,
-      "name": "Nombre 10",
-      "image": "https://dummyimage.com/200x150/EEF3F9/aaa",
-      "price": 8.99,
-      "brand": "Marca 3",
-      "description": "Descripción 3",
-      "category": "Surf"
-    },
-    {
-      "id": 11,
-      "name": "Nombre 11",
-      "image": "https://dummyimage.com/200x150/EEF3F9/aaa",
-      "price": 7.99,
-      "brand": "Marca 3",
-      "description": "Descripción 3",
-      "category": "Esquí"
-    },
-    {
-      "id": 12,
-      "name": "Nombre 12",
-      "image": "https://dummyimage.com/200x150/EEF3F9/aaa",
-      "price": 7.99,
-      "brand": "Marca 3",
-      "description": "Descripción 3",
-      "category": "Bicicletas"
-    },
-    {
-      "id": 13,
-      "name": "Nombre 13",
-      "image": "https://dummyimage.com/200x150/EEF3F9/aaa",
-      "price": 7.99,
-      "brand": "Marca 3",
-      "description": "Descripción 3",
-      "category": "Escalada"
-    },
-    {
-      "id": 14,
-      "name": "Nombre 14",
-      "image": "https://dummyimage.com/200x150/EEF3F9/aaa",
-      "price": 7.99,
-      "brand": "Marca 3",
-      "description": "Descripción 3",
-      "category": "Acuáticos"
-    }
-  ]
+  {
+    "id": 1,
+    "name": "Sobrecarpa con Porch o Avance",
+    "image": "https://picsum.photos/250/250",
+    "price": 10.99,
+    "brand": "Marca 1",
+    "description": "Una tarjeta es un buen componente para mostrar detalles. Presenta campos de texto apilados en un orden lógico, con una imagen opcional arriba o al lado izquierdo del texto. Las tarjetas están diseñadas para usarse en filas o apilarse una encima de la otra.",
+    "category": "Camping",
+    "ratings": [2, 4, 5, 1],
+    "categoryId": "1"
+  },
+  {
+    "id": 2,
+    "name": "Nombre 2",
+    "image": "https://dummyimage.com/250x250/EEF3F9/aaa",
+    "price": 19.99,
+    "brand": "Marca 2",
+    "description": "Descripción 2",
+    "category": "Snowboard",
+    "ratings": [3, 5, 1],
+    "categoryId": "2"
+  },
+  {
+    "id": 3,
+    "name": "Nombre 3",
+    "image": "https://dummyimage.com/250x250/EEF3F9/aaa",
+    "price": 8.99,
+    "brand": "Marca 3",
+    "description": "Descripción 3",
+    "category": "Surf",
+    "ratings": [2, 4, 5, 3],
+    "categoryId": "3"
+  },
+  {
+    "id": 4,
+    "name": "Nombre 4",
+    "image": "https://dummyimage.com/250x250/EEF3F9/aaa",
+    "price": 7.99,
+    "brand": "Marca 3",
+    "description": "Descripción 3",
+    "category": "Esquí",
+    "ratings": [3, 5, 1],
+    "categoryId": "4"
+  },
+  {
+    "id": 5,
+    "name": "Nombre 5",
+    "image": "https://dummyimage.com/250x250/EEF3F9/aaa",
+    "price": 54.59,
+    "brand": "Marca 3",
+    "description": "Descripción 3",
+    "category": "Bicicletas",
+    "ratings": [2, 4, 5],
+    "categoryId": "5"
+  },
+  {
+    "id": 6,
+    "name": "Nombre 6",
+    "image": "https://dummyimage.com/250x250/EEF3F9/aaa",
+    "price": 85.99,
+    "brand": "Marca 6",
+    "description": "Descripción 6",
+    "category": "Escalada",
+    "ratings": [3, 5, 1],
+    "categoryId": "6"
+  },
+  {
+    "id": 7,
+    "name": "Nombre 7",
+    "image": "https://dummyimage.com/250x250/EEF3F9/aaa",
+    "price": 65.99,
+    "brand": "Marca 7",
+    "description": "Descripción 7",
+    "category": "Acuáticos",
+    "ratings": [2, 4, 5],
+    "categoryId": "7"
+  },
+  {
+    "id": 8,
+    "name": "Nombre 8",
+    "image": "https://dummyimage.com/250x250/EEF3F9/aaa",
+    "price": 10.99,
+    "brand": "Marca 8",
+    "description": "Descripción 8",
+    "category": "Camping",
+    "ratings": [3, 5, 1],
+    "categoryId": "1"
+  },
+  {
+    "id": 9,
+    "name": "Nombre 9",
+    "image": "https://dummyimage.com/250x250/EEF3F9/aaa",
+    "price": 19.99,
+    "brand": "Marca 9",
+    "description": "Descripción 9",
+    "category": "Snowboard",
+    "ratings": [2, 4, 5],
+    "categoryId": "2"
+  },
+  {
+    "id": 10,
+    "name": "Nombre 10",
+    "image": "https://dummyimage.com/250x250/EEF3F9/aaa",
+    "price": 8.25,
+    "brand": "Marca 10",
+    "description": "Descripción 10",
+    "category": "Surf",
+    "ratings": [3, 5, 1],
+    "categoryId": "3"
+  },
+  {
+    "id": 11,
+    "name": "Nombre 11",
+    "image": "https://dummyimage.com/250x250/EEF3F9/aaa",
+    "price": 47.52,
+    "brand": "Marca 11",
+    "description": "Descripción 11",
+    "category": "Esquí",
+    "ratings": [2, 4, 5],
+    "categoryId": "4"
+  },
+  {
+    "id": 12,
+    "name": "Nombre 12",
+    "image": "https://dummyimage.com/250x250/EEF3F9/aaa",
+    "price": 425.99,
+    "brand": "Marca 12",
+    "description": "Descripción 12",
+    "category": "Bicicletas",
+    "ratings": [3, 5, 1],
+    "categoryId": "5"
+  },
+  {
+    "id": 13,
+    "name": "Nombre 13",
+    "image": "https://dummyimage.com/250x250/EEF3F9/aaa",
+    "price": 5.89,
+    "brand": "Marca 13",
+    "description": "Descripción 13",
+    "category": "Escalada",
+    "ratings": [2, 4, 5],
+    "categoryId": "6"
+  },
+  {
+    "id": 14,
+    "name": "Nombre 14",
+    "image": "https://dummyimage.com/250x250/EEF3F9/aaa",
+    "price": 4.59,
+    "brand": "Marca 14",
+    "description": "Descripción 14",
+    "category": "Acuáticos",
+    "ratings": [3, 5, 1],
+    "categoryId": "7"
+  }
+]

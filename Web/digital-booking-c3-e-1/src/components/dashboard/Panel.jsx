@@ -70,8 +70,8 @@ const Panel = () => {
         </MenuItem>
 
         <MenuItem
-          to="admin/add/"
-          isActive={location.pathname === "/admin/add/"}
+          to="admin/product/add/"
+          isActive={location.pathname === "/admin/product/add"}
         >
           <Button text="Agregar producto" />
         </MenuItem>
