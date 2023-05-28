@@ -1,25 +1,77 @@
-@import "/src/styles/variables.css";
-@import "/src/styles/global.css";
-
 .recommendedList {
   display: flex;
   flex-wrap: wrap;
-  justify-content: flex-start;
+  justify-content: space-between;
   padding: 10px;
   gap: 20px;
 }
 
 .recommendedList > * {
-  flex: 1 1 250px;
-  max-width: 100%;
+  flex: 1 1 calc(50% - 10px);
+  max-width: calc(50% - 10px);
 }
 
-  
-  
-  .recommendedList::after {
-    content: "";
-    flex-grow: 6; /* Hacer que el pseudo-elemento se expanda para llenar el espacio disponible en la última fila */
-    height: 0; /* Establecer la altura en cero para que no ocupe espacio */
-    min-width: 250px; /* Establecer una anchura mínima para asegurar que el pseudo-elemento tenga el mismo ancho que las tarjetas */
-    
+.recommendedList::after {
+  content: "";
+  flex-grow: 6;
+  height: 0;
+  min-width: 250px;
+}
+
+.link {
+  all: initial;
+}
+
+
+/* ------------ Transition */
+
+.recommendedList .fade {
+  animation: fade-in 300ms ease-in;
+}
+
+
+@keyframes fade-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.fade-enter {
+  opacity: 0;
+}
+
+.fade-enter-active {
+  animation: fade-in 300ms ease-in forwards;
+}
+
+.fade-exit {
+  opacity: 1;
+}
+
+.fade-exit-active {
+  animation: fade-in 300ms ease-out reverse forwards;
+}
+
+
+
+/* -------- CON PANEL DE ADMINISTRACIÓN --------- */
+@media (max-width: 1024px) {
+  .recommendedList > * {
+    flex: 1 1 100%;
+    max-width: 100%;
+  }
+}
+
+@media (max-width: 768px) {
+  .recommendedList {
+    justify-content: flex-start;
+  }
+
+  .recommendedList > * {
+    flex: 1 1 100%;
+    max-width: 100%;
+  }
 }

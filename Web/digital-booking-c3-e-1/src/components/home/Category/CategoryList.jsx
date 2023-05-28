@@ -3,13 +3,12 @@ import CardCategory from "../../resources/Cards/Category/CardCategory";
 import styles from "./CategoryList.module.css";
 import { IoIosArrowForward } from "react-icons/io";
 import { IoIosArrowBack } from "react-icons/io";
-import axios from "axios";
 import CategoryService from "../../../shared/services/CategoryService";
 
 const CategoryList = ({ onCategoryClick }) => {
   const listRef = useRef(null);
   const [showLeftArrow, setShowLeftArrow] = useState(false);
-  const [showRightArrow, setShowRightArrow] = useState(false);
+  const [showRightArrow, setShowRightArrow] = useState(true);
   const [categories, setCategories] = useState([]);
 
   const handleScroll = (scrollOffset) => {
@@ -18,15 +17,17 @@ const CategoryList = ({ onCategoryClick }) => {
 
   const handleScrollEnd = () => {
     setShowLeftArrow(listRef.current.scrollLeft > 0);
-    setShowRightArrow(
-      listRef.current.scrollLeft + listRef.current.clientWidth <
-        listRef.current.scrollWidth
-    );
+    const containerWidth = listRef.current.clientWidth;
+    const scrollableWidth = listRef.current.scrollWidth;
+    const maxScrollLeft = scrollableWidth - containerWidth;
+    const remainingScroll = maxScrollLeft - listRef.current.scrollLeft;
+
+    setShowRightArrow(remainingScroll > 0);
   };
 
   useEffect(() => {
     handleScrollEnd();
-  }, []);
+  }, [categories]);
 
   useEffect(() => {
     const fetchCategories = async () => {
@@ -46,6 +47,7 @@ const CategoryList = ({ onCategoryClick }) => {
     onCategoryClick(category);
   };
 
+
   return (
     <div className={styles.container}>
       <div
@@ -53,7 +55,7 @@ const CategoryList = ({ onCategoryClick }) => {
         style={{
           background: showLeftArrow
             ? "transparent"
-            : "linear-gradient(to right, rgba(195, 212, 228, 0), rgb(195, 212, 228, 1))",
+            : "linear-gradient(to right, rgba(195, 212, 228, 0), #DEE7F0)",
           color: showLeftArrow ? "white" : "transparent",
         }}
       ></div>
@@ -72,38 +74,37 @@ const CategoryList = ({ onCategoryClick }) => {
           ))}
         </div>
       </div>
-      <div className={styles.ButtonsContainer}>
-        <button
-          className={styles.buttonLeft}
-          onClick={() => {
-            handleScroll(-210);
-            setShowLeftArrow(false);
-          }}
-          style={{
-            backgroundColor: showLeftArrow
-              ? "var(--secondary-300)"
-              : "transparent",
-            color: showLeftArrow ? "white" : "transparent",
-          }}
-        >
-          <IoIosArrowBack />
-        </button>
-        <button
-          className={styles.buttonRight}
-          onClick={() => {
-            handleScroll(210);
-            setShowRightArrow(false);
-          }}
-          style={{
-            backgroundColor: showRightArrow
-              ? "var(--secondary-300)"
-              : "transparent",
-            color: showRightArrow ? "white" : "transparent",
-          }}
-        >
-          <IoIosArrowForward />
-        </button>
-      </div>
+
+      <button
+        className={`${styles.buttonLeftA} ${styles.button}`}
+        onClick={() => {
+          handleScroll(-210);
+          setShowLeftArrow(false);
+        }}
+        style={{
+          backgroundColor: showLeftArrow
+            ? "var(--secondary-300)"
+            : "transparent",
+          color: showLeftArrow ? "white" : "transparent",
+        }}
+      >
+        <IoIosArrowBack />
+      </button>
+      <button
+        className={`${styles.buttonRightB} ${styles.button}`}
+        onClick={() => {
+          handleScroll(210);
+          // setShowRightArrow(true);
+        }}
+        style={{
+          backgroundColor: showRightArrow
+            ? "var(--secondary-300)"
+            : "transparent",
+          color: showRightArrow ? "white" : "transparent",
+        }}
+      >
+        <IoIosArrowForward />
+      </button>
     </div>
   );
 };

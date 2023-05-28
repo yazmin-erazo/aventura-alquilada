@@ -4,12 +4,15 @@ import com.digitalbooking.digitalbooking.common.exception.ExceptionNullValue;
 import com.digitalbooking.digitalbooking.domain.user.dto.UserDTO;
 import com.digitalbooking.digitalbooking.domain.user.entity.User;
 import com.digitalbooking.digitalbooking.domain.user.repository.RepositoryUser;
+import com.digitalbooking.digitalbooking.infrastructure.product.MapToProduct;
 import com.digitalbooking.digitalbooking.infrastructure.user.MapToUser;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Repository
 public class RepositoryUserImpl implements RepositoryUser {
@@ -36,6 +39,11 @@ public class RepositoryUserImpl implements RepositoryUser {
     @Override
     public Optional<UserDTO> findByToken(String token) {
         return repositoryUserMySql.findByToken(token).map(MapToUser::mapToUser);
+    }
+
+    @Override
+    public List<UserDTO> getAll() {
+        return repositoryUserMySql.findAll().stream().map(MapToUser::mapToUser).collect(Collectors.toList());
     }
 
     @Override
