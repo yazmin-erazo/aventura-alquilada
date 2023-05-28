@@ -11,6 +11,5 @@ public interface RepositoryProductMySql extends JpaRepository< ProductEntity, Lo
 
     Optional<ProductEntity> findByIdAndIsDelete(Long id, Boolean isDelete);
 
-    Optional<ProductEntity> findByName(String name);
 
 }

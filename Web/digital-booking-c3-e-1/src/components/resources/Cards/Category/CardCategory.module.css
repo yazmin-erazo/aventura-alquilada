@@ -1,3 +1,6 @@
+@import "/src/styles/variables.css";
+@import "/src/styles/global.css";
+
 .card {
   display: flex;
   flex-direction: column;
@@ -23,7 +26,7 @@
 .header {
   display: flex;
   flex-direction: row;
-  align-items: center;
+  align-items: flex-end;
   padding: 0px;
   gap: 6px;
   width: 155px;
@@ -31,7 +34,6 @@
   flex: none;
   order: 1;
   flex-grow: 0;
-  gap: 8px;
 }
 
 .header img {
@@ -84,17 +86,6 @@
     justify-content: space-evenly;
     gap: 16px;
   }
-
-  .header .icon {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 2rem;
-    height: 2rem;
-    font-size: 1.5rem;
-    color: var(--secondary-600);
-  }
-
   .header h3 {
     font: var(--body-16);
     font-weight: 700;
