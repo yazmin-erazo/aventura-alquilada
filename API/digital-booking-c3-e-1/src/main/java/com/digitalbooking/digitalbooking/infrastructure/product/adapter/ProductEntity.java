@@ -5,6 +5,7 @@ import lombok.Data;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
+import java.util.List;
 
 @Data
 @Entity
@@ -27,4 +28,6 @@ public class ProductEntity {
     private String material;
     @ManyToOne
     private CategoryEntity category;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "productEntity")
+    private List<ImageProductEntity> imageProductEntity;
 }

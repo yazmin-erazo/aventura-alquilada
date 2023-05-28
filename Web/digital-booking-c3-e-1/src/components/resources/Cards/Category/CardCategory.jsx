@@ -7,9 +7,7 @@ import { MdOutlineSnowboarding } from "react-icons/md";
 import { FaMountain } from "react-icons/fa";
 import { FaSwimmer } from "react-icons/fa";
 
-
 const CardCategory = ({ category, onCategoryClick }) => {
-
   const categoryIcons = {
     1: TbTent, // Icono para ID 1: Camping
     2: MdOutlineSnowboarding, // Icono para ID 2: Snowboard
@@ -30,15 +28,16 @@ const CardCategory = ({ category, onCategoryClick }) => {
   return (
     <div className={styles.card} onClick={handleClick}>
       <div className={styles.header}>
-        {CategoryIcon && <CategoryIcon size={24} color={iconColor} />}{" "}
+        {CategoryIcon && (
+          <div className={`${styles.icon} icon`}>
+            <CategoryIcon size={24} color={iconColor} />
+          </div>
+        )}{" "}
         <h3>{category.name}</h3>
       </div>
       <div className={styles.content}>
         <div className={styles.categoryImage}>
-          <img
-            src={category.imageURL}
-            alt={category.name}
-          />
+          <img src={category.imageURL} alt={category.name} />
         </div>
       </div>
     </div>
