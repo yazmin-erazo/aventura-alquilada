@@ -94,20 +94,6 @@ const NewRole = () => {
       </label>
     );
 
-    const CheckItem = ({ category, action, name, children }) => (
-        <label>
-            <div>{name}</div>
-            <input
-                type="checkbox"
-                checked={formData.permissions[category][action]}
-                onChange={(event) =>
-                    handlePermissionChange(category, action, event.target.checked)
-                }
-            />
-            {children}
-        </label>
-    );
-
     return (
         <div>
             <header className={styles.header}>
