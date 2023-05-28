@@ -24,6 +24,10 @@
   text-align: center;
   color: var(--secondary-600);
 }
+.container h1{
+font: var(--h2);
+
+}
 .container p {
   border-top: 1px solid #c3d4e4;
   margin-top: 10px;

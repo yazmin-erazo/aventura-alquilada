@@ -4,6 +4,11 @@ import ButtonPrimary from "../../common/Buttons/ButtonPrimary";
 import styles from "./registerUser.module.css";
 import AuthService from "../../../shared/services/AuthService";
 import { AiOutlineEye, AiOutlineEyeInvisible } from "react-icons/ai";
+import axios from 'axios';
+import Swal from 'sweetalert2';
+
+
+
 
 const PasswordInput = ({ isVisible, setIsVisible, ...restProps }) => (
   <div style={{ position: "relative" }}>
@@ -51,6 +56,9 @@ const RegisterUser = () => {
   const [isPasswordVisible, setIsPasswordVisible] = useState(false);
   const [isCheckPasswordVisible, setIsCheckPasswordVisible] = useState(false);
 
+ 
+
+
   const handleSubmit = (event) => {
     event.preventDefault();
 
@@ -67,7 +75,6 @@ const RegisterUser = () => {
 
       const passwordRegex = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{3,}$/;
 
-      // /^(?=.*[a-zA-Z])(?=.*\d)[a-zA-Z\d]+$/;
       const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
 
       if (!user.name) {
@@ -127,7 +134,7 @@ const RegisterUser = () => {
         isValid = false;
       }
       if (!isTermsChecked) {
-        errors.terms = "Debe aceptar los términos y condiciones";
+        errors.terms = "Debes aceptar los términos y condiciones";
         isValid = false;
       }
 
@@ -157,12 +164,13 @@ const RegisterUser = () => {
       console.log("El formulario contiene errores");
     }
   };
+  
 
   return (
     <div className={styles.container}>
       <img className={styles["registerUser-img"]} src="/registerUser.png" alt="imagen" />
       <div>
-        <h1>Registrarte</h1>
+        <h1>Registrate</h1>
         <p>
           Registrate para alquilar equipamiento deportivo de calidad y disfrutar
           de emocionantes aventuras al aire libre
