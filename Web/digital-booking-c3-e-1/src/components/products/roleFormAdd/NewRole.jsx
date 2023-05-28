@@ -5,43 +5,43 @@ import styles from "./NewRole.module.css";
 
 const NewRole = () => {
     const [formData, setFormData] = useState({
-        roleName: "",
-        permissions: {
-            categories: {
-                list: false,
-                add: false,
-                edit: false,
-                delete: false,
-            },
-            products: {
-                list: false,
-                add: false,
-                edit: false,
-                delete: false,
-            },
-            users: {
-                list: false,
-                add: false,
-                edit: false,
-                delete: false,
-            },
-            roles: {
-                list: false,
-                add: false,
-                edit: false,
-                delete: false,
-            },
+      roleName: "",
+      permissions: {
+        categories: {
+          list: false,
+          add: false,
+          edit: false,
+          delete: false,
         },
-        selectAll: false,
+        products: {
+          list: false,
+          add: false,
+          edit: false,
+          delete: false,
+        },
+        users: {
+          list: false,
+          add: false,
+          edit: false,
+          delete: false,
+        },
+        roles: {
+          list: false,
+          add: false,
+          edit: false,
+          delete: false,
+        },
+      },
+      selectAll: false,
     });
-
+  
     const handleInputChange = (name, value) => {
-        setFormData((prevFormData) => ({
-            ...prevFormData,
-            [name]: value,
-        }));
+      setFormData((prevFormData) => ({
+        ...prevFormData,
+        [name]: value,
+      }));
     };
-
+  
     const handlePermissionChange = (category, action, checked) => {
         setFormData((prevFormData) => ({
             ...prevFormData,
@@ -52,13 +52,13 @@ const NewRole = () => {
                     [action]: checked,
                 },
             },
-            selectAll: false, // Desactivar "Seleccionar todo" al cambiar un permiso individualmente
         }));
     };
-
+  
     const handleSelectAllChange = (checked) => {
-        setFormData((prevFormData) => {
-            const updatedPermissions = Object.keys(prevFormData.permissions).reduce(
+        setFormData((prevFormData) => ({
+            ...prevFormData,
+            permissions: Object.keys(prevFormData.permissions).reduce(
                 (acc, category) => ({
                     ...acc,
                     [category]: Object.keys(prevFormData.permissions[category]).reduce(
@@ -70,20 +70,29 @@ const NewRole = () => {
                     ),
                 }),
                 {}
-            );
-
-            return {
-                ...prevFormData,
-                permissions: updatedPermissions,
-                selectAll: checked,
-            };
-        });
+            ),
+            selectAll: checked,
+        }));
     };
 
-    const handleSubmit = () => {
+    const handleSubmit = async () => {
         // Enviar los datos al servidor
         console.log("Datos del nuevo rol:", formData);
     };
+  
+    const CheckItem = ({ category, action, name, children }) => (
+      <label>
+        <div>{name}</div>
+        <input
+          type="checkbox"
+          checked={formData.permissions[category][action]}
+          onChange={(event) =>
+            handlePermissionChange(category, action, event.target.checked)
+          }
+        />
+        {children}
+      </label>
+    );
 
     const CheckItem = ({ category, action, name, children }) => (
         <label>
