@@ -43,42 +43,41 @@ const NewRole = () => {
     };
   
     const handlePermissionChange = (category, action, checked) => {
-      setFormData((prevFormData) => ({
-        ...prevFormData,
-        permissions: {
-          ...prevFormData.permissions,
-          [category]: {
-            ...prevFormData.permissions[category],
-            [action]: checked,
-          },
-        },
-        selectAll: false, // Desactivar "Seleccionar todo" al cambiar un permiso individualmente
-      }));
+        setFormData((prevFormData) => ({
+            ...prevFormData,
+            permissions: {
+                ...prevFormData.permissions,
+                [category]: {
+                    ...prevFormData.permissions[category],
+                    [action]: checked,
+                },
+            },
+        }));
     };
   
     const handleSelectAllChange = (checked) => {
-      setFormData((prevFormData) => {
-        const updatedPermissions = {
-          ...prevFormData.permissions,
-        };
-  
-        Object.keys(updatedPermissions).forEach((category) => {
-          Object.keys(updatedPermissions[category]).forEach((action) => {
-            updatedPermissions[category][action] = checked;
-          });
-        });
-  
-        return {
-          ...prevFormData,
-          permissions: updatedPermissions,
-          selectAll: checked,
-        };
-      });
+        setFormData((prevFormData) => ({
+            ...prevFormData,
+            permissions: Object.keys(prevFormData.permissions).reduce(
+                (acc, category) => ({
+                    ...acc,
+                    [category]: Object.keys(prevFormData.permissions[category]).reduce(
+                        (acc, action) => ({
+                            ...acc,
+                            [action]: checked,
+                        }),
+                        {}
+                    ),
+                }),
+                {}
+            ),
+            selectAll: checked,
+        }));
     };
-  
-    const handleSubmit = () => {
-      // Enviar los datos al servidor
-      console.log("Datos del nuevo rol:", formData);
+
+    const handleSubmit = async () => {
+        // Enviar los datos al servidor
+        console.log("Datos del nuevo rol:", formData);
     };
   
     const CheckItem = ({ category, action, name, children }) => (
@@ -93,6 +92,20 @@ const NewRole = () => {
         />
         {children}
       </label>
+    );
+
+    const CheckItem = ({ category, action, name, children }) => (
+        <label>
+            <div>{name}</div>
+            <input
+                type="checkbox"
+                checked={formData.permissions[category][action]}
+                onChange={(event) =>
+                    handlePermissionChange(category, action, event.target.checked)
+                }
+            />
+            {children}
+        </label>
     );
 
     return (

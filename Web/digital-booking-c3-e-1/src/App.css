@@ -37,6 +37,7 @@
 
 .outlet {
   min-height: calc(100vh - 140px);
+  margin-left: 250px;
 }
 
 .cuentaBtn,
@@ -167,6 +168,25 @@ li:hover {
   font-size: 18px;
 }
 
+.header ul.user-profile li {
+  border: none;
+  font: var(--body-12);
+  margin-left: 20px;
+}
+
+.header ul.user-profile hr {
+  margin: 0 10px;
+  border: 0 none var(--secondary-200);
+  border-top: 1px solid var(--secondary-200);
+  height: 1px;
+  display: block;
+  clear: both;
+}
+
+.header nav .userDataIcon {
+  display: block;
+}
+
 @media (max-width: 1024px) {
    .header img {
     margin-left: 40px;
@@ -205,6 +225,8 @@ li:hover {
     margin-right: 40px;
   }
 }
+
+
 
   @media (max-width: 768px) {
     .header img {
@@ -246,6 +268,10 @@ li:hover {
   .footerIcons {
     display: none;
   }
+  .outlet {
+    min-height: calc(100vh - 140px);
+    margin-left: 0;
+  }
 }
 
 @media (max-width: 320px) {
@@ -259,3 +285,4 @@ li:hover {
     display: none;
   }
 }
+
