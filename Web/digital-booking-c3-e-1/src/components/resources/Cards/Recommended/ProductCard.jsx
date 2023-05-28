@@ -3,6 +3,7 @@ import styles from "./ProductCard.module.css";
 import { AiOutlineClockCircle } from 'react-icons/ai';
 
 const ProductCard = ({ product }) => {
+
   return (
     <div className={styles.card}>
       <img src={product.imageURL} alt={product.name} className={styles.image} />

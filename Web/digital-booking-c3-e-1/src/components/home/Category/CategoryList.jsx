@@ -47,6 +47,7 @@ const CategoryList = ({ onCategoryClick }) => {
     onCategoryClick(category);
   };
 
+
   return (
     <div className={styles.container}>
       <div
