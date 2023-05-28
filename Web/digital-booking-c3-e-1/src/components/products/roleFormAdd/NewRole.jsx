@@ -52,13 +52,13 @@ const NewRole = () => {
                     [action]: checked,
                 },
             },
+            selectAll: false, // Desactivar "Seleccionar todo" al cambiar un permiso individualmente
         }));
     };
 
     const handleSelectAllChange = (checked) => {
-        setFormData((prevFormData) => ({
-            ...prevFormData,
-            permissions: Object.keys(prevFormData.permissions).reduce(
+        setFormData((prevFormData) => {
+            const updatedPermissions = Object.keys(prevFormData.permissions).reduce(
                 (acc, category) => ({
                     ...acc,
                     [category]: Object.keys(prevFormData.permissions[category]).reduce(
@@ -70,35 +70,37 @@ const NewRole = () => {
                     ),
                 }),
                 {}
-            ),
-            selectAll: checked,
-        }));
+            );
+
+            return {
+                ...prevFormData,
+                permissions: updatedPermissions,
+                selectAll: checked,
+            };
+        });
     };
 
-    const handleSubmit = async () => {
+    const handleSubmit = () => {
         // Enviar los datos al servidor
         console.log("Datos del nuevo rol:", formData);
     };
 
-    const CheckItem = ({children}) => (
+    const CheckItem = ({ category, action, name, children }) => (
         <label>
-        <input
-            type="checkbox"
-            checked={formData.permissions.categories.list}
-            onChange={(event) =>
-                handlePermissionChange(
-                    "categories",
-                    "list",
-                    event.target.checked
-                )
-            }
-        />
-        {children}
-    </label>
-    )
+            <div>{name}</div>
+            <input
+                type="checkbox"
+                checked={formData.permissions[category][action]}
+                onChange={(event) =>
+                    handlePermissionChange(category, action, event.target.checked)
+                }
+            />
+            {children}
+        </label>
+    );
 
     return (
-        <div className={styles.roleContainer}>
+        <div>
             <header className={styles.header}>
                 <h2>Agregar nuevo rol</h2>
             </header>
@@ -106,7 +108,6 @@ const NewRole = () => {
             <div className={styles.containerForm}>
                 <div className={styles.registerRoleContainer}>
                     <div className={styles.registerRoleForm}>
-
                         <InputWithLabel
                             type="text"
                             value={formData.roleName}
@@ -134,228 +135,114 @@ const NewRole = () => {
 
                         <div className={styles.permissionsContainer}>
                             <div className={styles.category}>
-                                <h4>Categorías</h4>
+                                <div className={styles.categoryName}>
+                                    <h4>Categorías</h4>
+                                </div>
                                 <div className={styles.categoryPermissions}>
-                                    <CheckItem>Listar</CheckItem>
-                                    <CheckItem>
-                                        Agregar
-                                    </CheckItem>
-                                    <label>
-                                        <input
-                                            type="checkbox"
-                                            checked={formData.permissions.categories.edit}
-                                            onChange={(event) =>
-                                                handlePermissionChange(
-                                                    "categories",
-                                                    "edit",
-                                                    event.target.checked
-                                                )
-                                            }
-                                        />
-                                        Editar
-                                    </label>
-                                    <label>
-                                        <input
-                                            type="checkbox"
-                                            checked={formData.permissions.categories.delete}
-                                            onChange={(event) =>
-                                                handlePermissionChange(
-                                                    "categories",
-                                                    "delete",
-                                                    event.target.checked
-                                                )
-                                            }
-                                        />
-                                        Eliminar
-                                    </label>
+                                    <CheckItem
+                                        category="categories"
+                                        action="list"
+                                        name="Listar"
+                                    />
+                                    <CheckItem
+                                        category="categories"
+                                        action="add"
+                                        name="Agregar"
+                                    />
+                                    <CheckItem
+                                        category="categories"
+                                        action="edit"
+                                        name="Editar"
+                                    />
+                                    <CheckItem
+                                        category="categories"
+                                        action="delete"
+                                        name="Eliminar"
+                                    />
                                 </div>
                             </div>
 
                             <div className={styles.category}>
-
-                                <h4>Productos</h4>
+                                <div className={styles.categoryName}>
+                                    <h4>Productos</h4>
+                                </div>
                                 <div className={styles.categoryPermissions}>
-                                    <label>
-                                        <input
-                                            type="checkbox"
-                                            checked={formData.permissions.products.list}
-                                            onChange={(event) =>
-                                                handlePermissionChange(
-                                                    "products",
-                                                    "list",
-                                                    event.target.checked
-                                                )
-                                            }
-                                        />
-                                        Listar
-                                    </label>
-                                    <label>
-                                        <input
-                                            type="checkbox"
-                                            checked={formData.permissions.products.add}
-                                            onChange={(event) =>
-                                                handlePermissionChange(
-                                                    "products",
-                                                    "add",
-                                                    event.target.checked
-                                                )
-                                            }
-                                        />
-                                        Agregar
-                                    </label>
-                                    <label>
-                                        <input
-                                            type="checkbox"
-                                            checked={formData.permissions.products.edit}
-                                            onChange={(event) =>
-                                                handlePermissionChange(
-                                                    "products",
-                                                    "edit",
-                                                    event.target.checked
-                                                )
-                                            }
-                                        />
-                                        Editar
-                                    </label>
-                                    <label>
-                                        <input
-                                            type="checkbox"
-                                            checked={formData.permissions.products.delete}
-                                            onChange={(event) =>
-                                                handlePermissionChange(
-                                                    "products",
-                                                    "delete",
-                                                    event.target.checked
-                                                )
-                                            }
-                                        />
-                                        Eliminar
-                                    </label>
+                                    <CheckItem
+                                        category="categories"
+                                        action="list"
+                                        name="Listar"
+                                    />
+                                    <CheckItem
+                                        category="categories"
+                                        action="add"
+                                        name="Agregar"
+                                    />
+                                    <CheckItem
+                                        category="categories"
+                                        action="edit"
+                                        name="Editar"
+                                    />
+                                    <CheckItem
+                                        category="categories"
+                                        action="delete"
+                                        name="Eliminar"
+                                    />
                                 </div>
                             </div>
 
                             <div className={styles.category}>
-                                <h4>Usuarios</h4>
+                                <div className={styles.categoryName}>
+                                    <h4>Usuarios</h4>
+                                </div>
                                 <div className={styles.categoryPermissions}>
-                                    <label>
-                                        <input
-                                            type="checkbox"
-                                            checked={formData.permissions.users.list}
-                                            onChange={(event) =>
-                                                handlePermissionChange(
-                                                    "users",
-                                                    "list",
-                                                    event.target.checked
-                                                )
-                                            }
-                                        />
-                                        Listar
-                                    </label>
-                                    <label>
-                                        <input
-                                            type="checkbox"
-                                            checked={formData.permissions.users.add}
-                                            onChange={(event) =>
-                                                handlePermissionChange(
-                                                    "users",
-                                                    "add",
-                                                    event.target.checked
-                                                )
-                                            }
-                                        />
-                                        Agregar
-                                    </label>
-                                    <label>
-                                        <input
-                                            type="checkbox"
-                                            checked={formData.permissions.users.edit}
-                                            onChange={(event) =>
-                                                handlePermissionChange(
-                                                    "users",
-                                                    "edit",
-                                                    event.target.checked
-                                                )
-                                            }
-                                        />
-                                        Editar
-                                    </label>
-                                    <label>
-                                        <input
-                                            type="checkbox"
-                                            checked={formData.permissions.users.delete}
-                                            onChange={(event) =>
-                                                handlePermissionChange(
-                                                    "users",
-                                                    "delete",
-                                                    event.target.checked
-                                                )
-                                            }
-                                        />
-                                        Eliminar
-                                    </label>
+                                    <CheckItem
+                                        category="categories"
+                                        action="list"
+                                        name="Listar"
+                                    />
+                                    <CheckItem
+                                        category="categories"
+                                        action="add"
+                                        name="Agregar"
+                                    />
+                                    <CheckItem
+                                        category="categories"
+                                        action="edit"
+                                        name="Editar"
+                                    />
+                                    <CheckItem
+                                        category="categories"
+                                        action="delete"
+                                        name="Eliminar"
+                                    />
                                 </div>
                             </div>
 
                             <div className={styles.category}>
-
-                                <h4>Roles</h4>
+                                <div className={styles.categoryName}>
+                                    <h4>Roles</h4>
+                                </div>
                                 <div className={styles.categoryPermissions}>
-                                    <label>
-                                        <input
-                                            type="checkbox"
-                                            checked={formData.permissions.roles.list}
-                                            onChange={(event) =>
-                                                handlePermissionChange(
-                                                    "roles",
-                                                    "list",
-                                                    event.target.checked
-                                                )
-                                            }
-                                        />
-                                        Listar
-                                    </label>
-                                    <label>
-                                        <input
-                                            type="checkbox"
-                                            checked={formData.permissions.roles.add}
-                                            onChange={(event) =>
-                                                handlePermissionChange(
-                                                    "roles",
-                                                    "add",
-                                                    event.target.checked
-                                                )
-                                            }
-                                        />
-                                        Agregar
-                                    </label>
-                                    <label>
-                                        <input
-                                            type="checkbox"
-                                            checked={formData.permissions.roles.edit}
-                                            onChange={(event) =>
-                                                handlePermissionChange(
-                                                    "roles",
-                                                    "edit",
-                                                    event.target.checked
-                                                )
-                                            }
-                                        />
-                                        Editar
-                                    </label>
-                                    <label>
-                                        <input
-                                            type="checkbox"
-                                            checked={formData.permissions.roles.delete}
-                                            onChange={(event) =>
-                                                handlePermissionChange(
-                                                    "roles",
-                                                    "delete",
-                                                    event.target.checked
-                                                )
-                                            }
-                                        />
-                                        Eliminar
-                                    </label>
+                                    <CheckItem
+                                        category="categories"
+                                        action="list"
+                                        name="Listar"
+                                    />
+                                    <CheckItem
+                                        category="categories"
+                                        action="add"
+                                        name="Agregar"
+                                    />
+                                    <CheckItem
+                                        category="categories"
+                                        action="edit"
+                                        name="Editar"
+                                    />
+                                    <CheckItem
+                                        category="categories"
+                                        action="delete"
+                                        name="Eliminar"
+                                    />
                                 </div>
                             </div>
                         </div>
@@ -367,9 +254,7 @@ const NewRole = () => {
                 </div>
             </div>
         </div>
-
     );
 };
 
 export default NewRole;
-

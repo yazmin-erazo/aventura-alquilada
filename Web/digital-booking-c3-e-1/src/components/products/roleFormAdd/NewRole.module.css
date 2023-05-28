@@ -1,10 +1,6 @@
 @import "/src/styles/variables.css";
 @import "/src/styles/global.css";
 
-.roleContainer {
-  height: 100vh;
-}
-
 .containerForm{
     width: 90%;
     max-width: 1280px;
@@ -48,35 +44,41 @@
   width: 50%;
 }
 
+.selectAllContainer {
+  margin: 1rem; 
+}
+
 .permissionsContainer {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-  }
-  
-  .category {
-    margin-bottom: 20px;
-    display: flex;
-    align-items: center;
-  }
-  
-  .category h4 {
-    margin: 0;
-  }
-  
-  .category-permissions {
-    display: flex;
-    align-items: center;
-    margin-left: 10px;
-  }
-  
-  .category-permissions label {
-    margin-right: 10px;
-  }
-  
-  .category-permissions input[type="checkbox"] {
-    margin-right: 5px;
-  }
+  display: flex;
+  flex-direction: column;
+}
+
+.category {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 20px;
+}
+
+.category h4 {
+  margin-bottom: 10px;
+}
+
+.categoryPermissions {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-gap: 10px;
+  align-items: center;
+}
+
+.categoryPermissions h5 {
+  margin: 0;
+}
+
+.categoryName {
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
+}
 
 .previewContainer {
     width: 100%;
