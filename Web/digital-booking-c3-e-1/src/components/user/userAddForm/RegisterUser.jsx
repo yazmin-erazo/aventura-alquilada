@@ -151,7 +151,7 @@ const RegisterUser = () => {
 
     const sendUser = async () => {
       try {
-        AuthService.register(userData);
+       await AuthService.register(userData);
         console.log(userData);
       } catch {
         (err) => console.log(err);
