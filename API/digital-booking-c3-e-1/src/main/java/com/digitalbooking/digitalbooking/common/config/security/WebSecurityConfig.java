@@ -68,6 +68,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/digitalbooking/auth/**","/user/activate", "/common/**", "/swagger-ui/**", "/v2/api-docs", "/configuration/ui", "/swagger-resources",
                         "/configuration/security", "/swagger-ui.html", "/webjars/**")
                 .permitAll()
+                .antMatchers(HttpMethod.GET, "/user/activate")
+                .permitAll()
                 .antMatchers(HttpMethod.GET, "/user/**")
                 .authenticated()
                 .antMatchers(HttpMethod.POST, "/product/**", "/category/**")

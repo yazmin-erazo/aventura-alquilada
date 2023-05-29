@@ -1,6 +1,7 @@
 package com.digitalbooking.digitalbooking.infrastructure.role.controller;
 
 
+import com.digitalbooking.digitalbooking.application.product.request.CommandUpdateProduct;
 import com.digitalbooking.digitalbooking.application.role.handler.RoleHandler;
 import com.digitalbooking.digitalbooking.application.role.request.CommandCreateRole;
 import com.digitalbooking.digitalbooking.common.response.CommandResponse;
@@ -26,4 +27,10 @@ public class CommandControllerRole {
     public ResponseEntity<CommandResponse<Long>> createRole(@RequestBody CommandCreateRole commandCreateRole) throws Exception {
         return new ResponseEntity<>(new CommandResponse<>(roleHandler.createRole(commandCreateRole)), HttpStatus.CREATED);
     }
+
+    /*@PutMapping("{id-role}")
+    @Operation(summary = "Update Role", description = "Method to update a role")
+    public ResponseEntity<CommandResponse<String>> updateRole(@PathVariable("id-role") Long id, @RequestBody CommandUpdateRole commandUpdateRole) throws Exception {
+        return new ResponseEntity<>(new CommandResponse<>(roleHandler.updateRole(id, commandUpdateRole)), HttpStatus.OK);
+    }*/
 }
