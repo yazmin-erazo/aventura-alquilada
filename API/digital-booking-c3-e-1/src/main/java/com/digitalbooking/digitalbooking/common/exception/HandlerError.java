@@ -6,6 +6,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
@@ -26,6 +27,7 @@ public class HandlerError extends ResponseEntityExceptionHandler {
         STATE_CODE.put(ExceptionInvalidValue.class.getSimpleName(), HttpStatus.BAD_REQUEST.value());
         STATE_CODE.put(ExceptionNullValue.class.getSimpleName(), HttpStatus.NOT_FOUND.value());
         STATE_CODE.put(ExceptionMandatoryValue.class.getSimpleName(), HttpStatus.BAD_REQUEST.value());
+        STATE_CODE.put(BadCredentialsException.class.getSimpleName(), HttpStatus.UNAUTHORIZED.value());
         STATE_CODE.put(TecnicalException.class.getSimpleName(), HttpStatus.INTERNAL_SERVER_ERROR.value());
 
 
@@ -38,6 +40,9 @@ public class HandlerError extends ResponseEntityExceptionHandler {
         String exceptionName = exception.getClass().getSimpleName();
         String message = exception.getMessage();
         Integer code = STATE_CODE.get(exceptionName);
+        if(code == HttpStatus.UNAUTHORIZED.value()){
+            message = "Credenciales incorrectas o el usuario no se encuentra activo";
+        }
 
         if (code != null) {
             ErrorResponse error = new ErrorResponse(exceptionName, message);

@@ -26,3 +26,7 @@ email:
   urlvalidation: http://localhost:8080/digitalbooking/user/activate?token=%s
   subjectlogin: Cuenta Activada
   urllogin: http://localhost:5173/login
+
+app:
+  jwtSecret: 95a59bb848e94d00842bb39ecf6f8fcf
+  jwtExpirationMs: 86400000
