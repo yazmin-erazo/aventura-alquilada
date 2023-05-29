@@ -21,13 +21,13 @@ public class CommandControllerProduct {
     ProductHandler productHandler;
 
     @PostMapping
-    @Operation(summary = "Create Product ", description = "Method to create a new product")
+    @Operation(summary = "Create Product", description = "Method to create a new product")
     public ResponseEntity<CommandResponse<Long>> createProduct(@RequestBody CommandCreateProduct commandCreateProduct) throws Exception {
         return new ResponseEntity<>(new CommandResponse<>(productHandler.createProduct(commandCreateProduct)), HttpStatus.CREATED);
     }
 
     @PutMapping("{id-product}")
-    @Operation(summary = "Update Product ", description = "Method to update a product")
+    @Operation(summary = "Update Product", description = "Method to update a product")
     public ResponseEntity<CommandResponse<String>> updateProduct(@PathVariable("id-product") Long id, @RequestBody CommandUpdateProduct commandUpdateProduct) throws Exception {
         return new ResponseEntity<>(new CommandResponse<>(productHandler.updateProduct(id, commandUpdateProduct)), HttpStatus.OK);
     }
