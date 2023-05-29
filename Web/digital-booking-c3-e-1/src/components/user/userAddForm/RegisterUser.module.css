@@ -4,9 +4,13 @@
   margin: auto;
   justify-content: space-evenly;
   background-color: var(--bg-general);
-  height: calc(100vh - 140px);
   width: 100%;
 }
+
+.form-register {
+  margin: 20px 0;
+}
+
 .form-container span {
   color: #ff0000;
   font-size: 14px;

@@ -5,11 +5,11 @@ const UserContext = createContext();
 
 const UserDataContext = ({ children }) => {
     const [currentUser, setCurrentUser] = useState({
-        name: "Naty",
-        lastName: "Moreira",
-        role: "admin"
+        name: "",
+        lastName: "",
+        role: ""
     });
-    const [isLoggedIn, setIsLoggedIn] = useState(true);
+    const [isLoggedIn, setIsLoggedIn] = useState(false);
 
     useEffect(() => {
         const fetchData = () => {
