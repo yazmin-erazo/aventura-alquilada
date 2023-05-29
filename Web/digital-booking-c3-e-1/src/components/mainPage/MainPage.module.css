@@ -1,0 +1,7 @@
+.outlet {
+    min-height: calc(100vh - 140px);
+  }
+  
+  .withPanel {
+    margin-left: 250px;
+  }

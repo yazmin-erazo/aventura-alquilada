@@ -4,12 +4,12 @@ import com.digitalbooking.digitalbooking.common.exception.ExceptionNullValue;
 import com.digitalbooking.digitalbooking.domain.user.dto.UserDTO;
 import com.digitalbooking.digitalbooking.domain.user.entity.User;
 import com.digitalbooking.digitalbooking.domain.user.repository.RepositoryUser;
-import com.digitalbooking.digitalbooking.infrastructure.product.MapToProduct;
 import com.digitalbooking.digitalbooking.infrastructure.user.MapToUser;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -19,10 +19,11 @@ public class RepositoryUserImpl implements RepositoryUser {
     @Autowired
     RepositoryUserMySql repositoryUserMySql;
     @Override
-    public Long save(User user, String token) {
+    public Long save(User user, String token, LocalDateTime generatingDate) {
         UserEntity userEntity = new UserEntity();
         BeanUtils.copyProperties(user,userEntity);
         userEntity.setToken(token);
+        userEntity.setGeneratingDate(generatingDate);
         return repositoryUserMySql.save(userEntity).getId();
     }
 
@@ -51,5 +52,10 @@ public class RepositoryUserImpl implements RepositoryUser {
         var user = repositoryUserMySql.findById(id).get();
         user.setIsActive(true);
         repositoryUserMySql.save(user);
+    }
+
+    @Override
+    public void deleteUserByTokenExp(Long id) {
+        repositoryUserMySql.deleteById(id);
     }
 }

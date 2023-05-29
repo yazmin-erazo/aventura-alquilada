@@ -4,9 +4,12 @@ import styles from "./panel.module.css";
 import { FiLayers, FiBriefcase, FiUsers } from "react-icons/fi";
 import { BiGridAlt } from "react-icons/Bi";
 import { Link, useLocation } from "react-router-dom";
+import { useContext } from "react";
+import { UserContext } from "../../context/AuthContext";
 
 const Panel = () => {
   const location = useLocation();
+  const user = useContext(UserContext);
 
   const MenuItem = ({ to, isActive, children }) => (
     <Link to={to} className={isActive ? styles.activeLink : styles.link}>
@@ -14,7 +17,11 @@ const Panel = () => {
     </Link>
   );
 
+  console.log(user);
+
   return (
+    <>
+    { user.currentUser.role === "admin" && 
     <div className={styles.dashboard}>
       <div>
         <div className={styles.title}>Dashboard</div>
@@ -77,6 +84,8 @@ const Panel = () => {
         </MenuItem>
       </div>
     </div>
+  }
+  </>
   );
 };
 

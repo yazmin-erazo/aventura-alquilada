@@ -9,7 +9,7 @@ const UserDataContext = ({ children }) => {
         lastName: "Moreira",
         role: "admin"
     });
-    const [isLoggedIn, setIsLoggedIn] = useState(false);
+    const [isLoggedIn, setIsLoggedIn] = useState(true);
 
     useEffect(() => {
         const fetchData = () => {
