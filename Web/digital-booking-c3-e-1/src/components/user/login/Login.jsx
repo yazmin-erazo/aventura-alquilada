@@ -1,8 +1,7 @@
 import React, { useState } from 'react';
-// import AuthService from '../shared/services/AuthService';
-import InputWithLabel from '../common/input/InputWithLabel';
+import InputWithLabel from '../../common/input/InputWithLabel';
 import styles from './Login.module.css'
-import ButtonPrimary from '../common/Buttons/ButtonPrimary';
+import ButtonPrimary from '../../common/Buttons/ButtonPrimary';
 
 const Login = () => {
 
