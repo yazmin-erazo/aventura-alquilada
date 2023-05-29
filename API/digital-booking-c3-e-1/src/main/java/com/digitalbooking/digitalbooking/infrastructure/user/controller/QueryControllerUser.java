@@ -1,7 +1,6 @@
 package com.digitalbooking.digitalbooking.infrastructure.user.controller;
 
 import com.digitalbooking.digitalbooking.application.user.handler.UserHandler;
-import com.digitalbooking.digitalbooking.domain.product.dto.ProductDTO;
 import com.digitalbooking.digitalbooking.domain.user.dto.UserDTO;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;

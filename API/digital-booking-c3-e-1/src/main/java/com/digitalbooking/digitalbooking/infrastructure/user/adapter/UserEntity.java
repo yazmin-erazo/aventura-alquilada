@@ -3,6 +3,7 @@ package com.digitalbooking.digitalbooking.infrastructure.user.adapter;
 import lombok.Data;
 
 import javax.persistence.*;
+import java.time.LocalDateTime;
 
 @Data
 @Entity
@@ -17,4 +18,5 @@ public class UserEntity {
     private String password;
     private String token;
     private Boolean isActive;
+    private LocalDateTime GeneratingDate;
 }

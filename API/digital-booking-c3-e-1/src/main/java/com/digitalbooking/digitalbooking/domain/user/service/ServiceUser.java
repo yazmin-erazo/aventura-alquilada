@@ -2,20 +2,25 @@ package com.digitalbooking.digitalbooking.domain.user.service;
 
 import com.digitalbooking.digitalbooking.common.exception.ExceptionInvalidValue;
 import com.digitalbooking.digitalbooking.common.exception.ExceptionNullValue;
+import com.digitalbooking.digitalbooking.domain.auth.entity.UserDetailsImpl;
 import com.digitalbooking.digitalbooking.domain.mail.MailRepository;
-import com.digitalbooking.digitalbooking.domain.product.dto.ProductDTO;
 import com.digitalbooking.digitalbooking.domain.user.dto.UserDTO;
 import com.digitalbooking.digitalbooking.domain.user.entity.User;
 import com.digitalbooking.digitalbooking.domain.user.repository.RepositoryUser;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.UUID;
 
 @Service
-public class ServiceUser {
+public class ServiceUser implements UserDetailsService {
     @Autowired
     RepositoryUser repositoryUser;
 
@@ -36,10 +41,11 @@ public class ServiceUser {
 
     public Long createUser(User user) {
         repositoryUser.findByEmail(user.getEmail()).ifPresent(userDTO -> {throw new ExceptionInvalidValue("Un usuario asociado al correo electrónico "+userDTO.getEmail()+", ya existe");});
-        String uniqueID = UUID.randomUUID().toString();
-        var userId = repositoryUser.save(user, uniqueID);
-        String token = String.format(urlValidation,uniqueID);
-        mailRepository.sendEmailValidateAccount(user.getEmail(), subject, user.getName(),token);
+        String token = UUID.randomUUID().toString();
+        LocalDateTime generatingDate = LocalDateTime.now();
+        var userId = repositoryUser.save(user, token, generatingDate);
+        String urlToken = String.format(urlValidation,token);
+        mailRepository.sendEmailValidateAccount(user.getEmail(), subject, user.getName(),urlToken);
         return userId;
     }
 
@@ -57,7 +63,27 @@ public class ServiceUser {
 
     public void validateUser(String token) {
         UserDTO user = repositoryUser.findByToken(token).orElseThrow(() -> new ExceptionNullValue("El token no pertenece a ningún usuario"));
-        repositoryUser.activateUser(user.getId());
-        mailRepository.sendEmailAccountActivate(user.getEmail(), subjectLogin, user.getName(), urlLogin);
+        LocalDateTime currentDate = LocalDateTime.now();
+        LocalDateTime expirationDate = user.getGeneratingDate().plusHours(48L);
+        if (currentDate.isBefore(expirationDate)&&!user.getIsActive()){
+            repositoryUser.activateUser(user.getId());
+            mailRepository.sendEmailAccountActivate(user.getEmail(), subjectLogin, user.getName(), urlLogin);
+        }else {
+            if (!user.getIsActive()){
+                repositoryUser.deleteUserByTokenExp(user.getId());
+                throw new ExceptionInvalidValue("Se superaron las 48 horas, el token ha expirado, debes registrarte nuevamente");
+            }else {
+                throw new ExceptionInvalidValue("Su cuenta ya ha sido activada");
+            }
+        }
+    }
+    @Override
+    @Transactional
+    public UserDetails loadUserByUsername(String email) {
+        UserDTO user = repositoryUser.findByEmail(email).orElseThrow(() -> new ExceptionInvalidValue("El usuario con el correo suministrado no existe"));
+        if (!user.getIsActive()) {
+            throw new UsernameNotFoundException("El usuario con email: " + email + " no está activo");
+        }
+        return UserDetailsImpl.build(user);
     }
 }
