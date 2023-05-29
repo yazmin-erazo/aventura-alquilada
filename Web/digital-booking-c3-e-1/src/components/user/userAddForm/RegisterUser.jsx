@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import InputWithLabel from "../../common/input/InputWithLabel";
 import ButtonPrimary from "../../common/Buttons/ButtonPrimary";
-import styles from "./registerUser.module.css";
+import styles from "./RegisterUser.module.css";
 import AuthService from "../../../shared/services/AuthService";
 import { AiOutlineEye, AiOutlineEyeInvisible } from "react-icons/ai";
 import axios from 'axios';
