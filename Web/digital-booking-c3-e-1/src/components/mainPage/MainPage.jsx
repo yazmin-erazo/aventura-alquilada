@@ -1,7 +1,7 @@
 import React, { useContext } from 'react';
 import { Outlet } from "react-router-dom";
 import { ProductsDataContext } from "../../context/ProductsContext";
-import Panel from "../dashboard/panel";
+import Panel from "../dashboard/Panel";
 import { UserContext } from '../../context/AuthContext';
 import styles from './MainPage.module.css'
 

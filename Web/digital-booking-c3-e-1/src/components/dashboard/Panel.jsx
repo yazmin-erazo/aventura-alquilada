@@ -2,7 +2,7 @@ import Button from "../resources/dashboard/Button";
 import DashboardSection from "../resources/dashboard/DashboardSection";
 import styles from "./panel.module.css";
 import { FiLayers, FiBriefcase, FiUsers } from "react-icons/fi";
-import { BiGridAlt } from "react-icons/Bi";
+import { BiGridAlt } from "react-icons/bi";
 import { Link, useLocation } from "react-router-dom";
 import { useContext } from "react";
 import { UserContext } from "../../context/AuthContext";
