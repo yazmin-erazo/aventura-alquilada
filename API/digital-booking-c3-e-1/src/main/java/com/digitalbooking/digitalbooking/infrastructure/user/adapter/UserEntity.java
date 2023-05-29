@@ -1,5 +1,6 @@
 package com.digitalbooking.digitalbooking.infrastructure.user.adapter;
 
+import com.digitalbooking.digitalbooking.infrastructure.role.adapter.RoleEntity;
 import lombok.Data;
 
 import javax.persistence.*;
@@ -19,4 +20,6 @@ public class UserEntity {
     private String token;
     private Boolean isActive;
     private LocalDateTime GeneratingDate;
+    @ManyToOne
+    private RoleEntity roleEntity;
 }
