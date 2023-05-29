@@ -65,7 +65,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                 .and()
                 .authorizeRequests()
-                .antMatchers("/digitalbooking/auth/**", "/common/**", "/swagger-ui/**", "/v2/api-docs", "/configuration/ui", "/swagger-resources",
+                .antMatchers("/digitalbooking/auth/**","/user/activate", "/common/**", "/swagger-ui/**", "/v2/api-docs", "/configuration/ui", "/swagger-resources",
                         "/configuration/security", "/swagger-ui.html", "/webjars/**")
                 .permitAll()
                 .antMatchers(HttpMethod.GET, "/user/activate")
