@@ -1,9 +1,9 @@
 package com.digitalbooking.digitalbooking.infrastructure.role.controller;
 
 
-import com.digitalbooking.digitalbooking.application.product.request.CommandUpdateProduct;
 import com.digitalbooking.digitalbooking.application.role.handler.RoleHandler;
 import com.digitalbooking.digitalbooking.application.role.request.CommandCreateRole;
+import com.digitalbooking.digitalbooking.application.role.request.CommandUpdateRole;
 import com.digitalbooking.digitalbooking.common.response.CommandResponse;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -28,9 +28,15 @@ public class CommandControllerRole {
         return new ResponseEntity<>(new CommandResponse<>(roleHandler.createRole(commandCreateRole)), HttpStatus.CREATED);
     }
 
-    /*@PutMapping("{id-role}")
+    @PutMapping
     @Operation(summary = "Update Role", description = "Method to update a role")
-    public ResponseEntity<CommandResponse<String>> updateRole(@PathVariable("id-role") Long id, @RequestBody CommandUpdateRole commandUpdateRole) throws Exception {
-        return new ResponseEntity<>(new CommandResponse<>(roleHandler.updateRole(id, commandUpdateRole)), HttpStatus.OK);
-    }*/
+    public ResponseEntity<CommandResponse<String>> updateRole(@RequestBody CommandUpdateRole commandUpdateRole) throws Exception {
+        return new ResponseEntity<>(new CommandResponse<>(roleHandler.updateRole(commandUpdateRole)), HttpStatus.OK);
+    }
+
+    @DeleteMapping("{id-role}")
+    @Operation(summary = "Delete role", description = "Method to delete a role")
+    public ResponseEntity<CommandResponse<String>> deleteRole(@PathVariable("id-role") Long id) {
+        return new ResponseEntity<>(new CommandResponse<>(roleHandler.deleteRole(id)), HttpStatus.OK);
+    }
 }

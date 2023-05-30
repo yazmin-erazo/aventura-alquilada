@@ -68,15 +68,13 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/digitalbooking/auth/**","/user/activate", "/common/**", "/swagger-ui/**", "/v2/api-docs", "/configuration/ui", "/swagger-resources",
                         "/configuration/security", "/swagger-ui.html", "/webjars/**")
                 .permitAll()
-                .antMatchers(HttpMethod.GET, "/user/activate")
-                .permitAll()
-                .antMatchers(HttpMethod.GET, "/user/**")
+                .antMatchers(HttpMethod.GET, "/user/**","/role/**")
                 .authenticated()
-                .antMatchers(HttpMethod.POST, "/product/**", "/category/**")
+                .antMatchers(HttpMethod.POST, "/product/**", "/category/**","/role/**")
                 .authenticated()
-                .antMatchers(HttpMethod.PUT, "/product/**")
+                .antMatchers(HttpMethod.PUT, "/product/**","/role/**")
                 .authenticated()
-                .antMatchers(HttpMethod.DELETE, "/product/**")
+                .antMatchers(HttpMethod.DELETE, "/product/**","/role/**")
                 .authenticated();
 
         http.addFilterBefore(
