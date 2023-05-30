@@ -16,6 +16,8 @@ public class UserDetailsImpl implements UserDetails {
     private final String name;
     private final String email;
     private final String lastName;
+
+    private final String role;
     @JsonIgnore
     private final String password;
 
@@ -24,12 +26,14 @@ public class UserDetailsImpl implements UserDetails {
             String name,
             String lastName,
             String email,
-            String password) {
+            String password,
+            String role) {
         this.id = id;
         this.name = name;
         this.lastName = lastName;
         this.email = email;
         this.password = password;
+        this.role = role;
     }
 
     public static UserDetailsImpl build(UserDTO user) {
@@ -39,7 +43,8 @@ public class UserDetailsImpl implements UserDetails {
                 user.getName(),
                 user.getLastName(),
                 user.getEmail(),
-                user.getPassword());
+                user.getPassword(),
+                user.getRole());
     }
 
 
@@ -57,6 +62,10 @@ public class UserDetailsImpl implements UserDetails {
 
     public String getLastName() {
         return lastName;
+    }
+
+    public String getRole() {
+        return role;
     }
 
     @Override
