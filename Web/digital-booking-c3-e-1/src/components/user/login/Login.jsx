@@ -2,22 +2,24 @@ import React, { useState } from 'react';
 import InputWithLabel from '../../common/input/InputWithLabel';
 import styles from './Login.module.css'
 import ButtonPrimary from '../../common/Buttons/ButtonPrimary';
-import { useForm } from "react-hook-form";
-import ValidationService from '../../../shared/services/ValidationService';
 import AuthService from '../../../shared/services/AuthService';
 
 const Login = () => {
 
     const [userData, setUserData] = useState({
       email: "",
-      pass: ""
+      password: ""
     });
-  
-    const { register, handleSubmit, formState: {errors} } = useForm({mode: "onChange"});
 
-    const onSubmitHandler = async (data) => {
-      setUserData(data);
-      await AuthService.login(userData);
+    const onSubmitHandler = async (e) => {
+      e.preventDefault()
+      try{
+        const data = await AuthService.login(userData);
+        sessionStorage.setItem('token', data.response.jwt);
+      }
+      catch{
+        err => console.log(err);
+      }
     }
 
   return (
@@ -29,24 +31,10 @@ const Login = () => {
         <h2>¡Listo para un nuevo desafío!</h2>
         <hr />
         <p>Encuentra todo lo que necesitas para hacer de tu próxima experiencia deportiva una increíble aventura</p>
-        <form onSubmit={handleSubmit(onSubmitHandler)}>
-          <InputWithLabel type = {"text"} {...register("email", {
-            required: ValidationService.errorMessages.req,
-            pattern: {
-              value: ValidationService.patterns.email,
-              message: ValidationService.errorMessages.email
-            }
-          })} name="email" value={userData.email}>Email</InputWithLabel>
-          {errors.email && errors.email.message}
-          <InputWithLabel type={"password"} {...register("pass",{
-            required: ValidationService.errorMessages.req,
-            pattern: {
-              value: ValidationService.patterns.pass,
-              message: ValidationService.errorMessages.pass
-            }
-          })} name="pass" value={userData.pass}>Contraseña</InputWithLabel>
-          {errors.pass && errors.pass.message}
-          <ButtonPrimary type="submit">Iniciar Sesión</ButtonPrimary>
+        <form>
+          <InputWithLabel type = {"text"} name="email" onChange={(event) => setUserData({...userData, email: event.target.value})}>Email</InputWithLabel>
+          <InputWithLabel type={"password"} name="password" onChange={(event) => setUserData({...userData, password: event.target.value})}>Contraseña</InputWithLabel>
+          <ButtonPrimary onClick={onSubmitHandler}>Iniciar Sesión</ButtonPrimary>
         </form>
       </div>
     </div>

@@ -1,3 +1,4 @@
+import React from "react";
 import "./App.css";
 import { UserDataContext } from "./context/AuthContext";
 import Header from "./components/common/Header";

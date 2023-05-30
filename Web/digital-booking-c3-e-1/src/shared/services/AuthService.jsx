@@ -3,7 +3,7 @@ import Swal from 'sweetalert2';
 
 const AUTH_ENDPOINTS = {
     REGISTER: "user",
-    LOGIN: "",
+    LOGIN: "auth",
     ACTIVATE: "user/activate"
 }
 

@@ -10,6 +10,9 @@ const UserDataContext = ({ children }) => {
         role: ""
     });
     const [isLoggedIn, setIsLoggedIn] = useState(false);
+    const [value, setValue] = useState()
+
+    window.addEventListener('storage', () => setValue(JSON.parse(sessionStorage.getItem('token'))));
 
     useEffect(() => {
         const fetchData = () => {
@@ -20,7 +23,7 @@ const UserDataContext = ({ children }) => {
             }
         }
         fetchData();
-    }, []);
+    }, [value]);
 
     return (
         <>

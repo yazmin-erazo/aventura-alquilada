@@ -3,18 +3,19 @@
 
 .container {
     display: flex;
-    height: calc(100vh - 140px);
+    align-items: center;
+    min-height: calc(100vh - 140px);
     width: 100%;
     background-color: var(--bg-general);
 }
 
 .container img {
-    height: 100%;
+    width: 97%;
 }
 
 .container .form {
     margin: 20px auto;
-    width: 35%;
+    min-width: 35%;
     color: var(--secondary-200);
 }
 
