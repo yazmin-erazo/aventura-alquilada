@@ -11,6 +11,4 @@ public interface RepositoryRoleMySql extends JpaRepository<RoleEntity, Long > {
 
     Optional<RoleEntity> findByIdAndIsDelete(Long id, Boolean isDelete);
 
-    Optional<RoleEntity> findByName(String name);
-
 }

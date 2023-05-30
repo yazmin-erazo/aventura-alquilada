@@ -33,29 +33,35 @@ public class Role {
     private Boolean rentCreate;
     private Boolean rentUpdate;
     private Boolean rentDelete;
+    private Boolean isDelete;
+
+    public Role(Long id) {
+        this.id = id;
+    }
+
 
     public static Role create(String name,
-                                 Boolean categoryList,
-                                 Boolean categoryCreate,
-                                 Boolean categoryUpdate,
-                                 Boolean categoryDelete,
-                                 Boolean productList,
-                                 Boolean productCreate,
-                                 Boolean productUpdate,
-                                 Boolean productDelete,
-                                 Boolean userList,
-                                 Boolean userCreate,
-                                 Boolean userUpdate,
-                                 Boolean userDelete,
-                                 Boolean roleList,
-                                 Boolean roleCreate,
-                                 Boolean roleUpdate,
-                                 Boolean roleDelete,
-                                 Boolean rentList,
-                                 Boolean rentCreate,
-                                 Boolean rentUpdate,
-                                 Boolean rentDelete) {
-        Validator.validateMandatory(name, "El nombre es requerido para crear un producto");
+                              Boolean categoryList,
+                              Boolean categoryCreate,
+                              Boolean categoryUpdate,
+                              Boolean categoryDelete,
+                              Boolean productList,
+                              Boolean productCreate,
+                              Boolean productUpdate,
+                              Boolean productDelete,
+                              Boolean userList,
+                              Boolean userCreate,
+                              Boolean userUpdate,
+                              Boolean userDelete,
+                              Boolean roleList,
+                              Boolean roleCreate,
+                              Boolean roleUpdate,
+                              Boolean roleDelete,
+                              Boolean rentList,
+                              Boolean rentCreate,
+                              Boolean rentUpdate,
+                              Boolean rentDelete) {
+        Validator.validateMandatory(name, "El nombre es requerido para crear un rol");
 
         return new Role(0L,
                 name,
@@ -78,7 +84,60 @@ public class Role {
                 rentList,
                 rentCreate,
                 rentUpdate,
-                rentDelete);
+                rentDelete,
+                false);
     }
 
+    public static Role update(Long id,
+                              String name,
+                              Boolean categoryList,
+                              Boolean categoryCreate,
+                              Boolean categoryUpdate,
+                              Boolean categoryDelete,
+                              Boolean productList,
+                              Boolean productCreate,
+                              Boolean productUpdate,
+                              Boolean productDelete,
+                              Boolean userList,
+                              Boolean userCreate,
+                              Boolean userUpdate,
+                              Boolean userDelete,
+                              Boolean roleList,
+                              Boolean roleCreate,
+                              Boolean roleUpdate,
+                              Boolean roleDelete,
+                              Boolean rentList,
+                              Boolean rentCreate,
+                              Boolean rentUpdate,
+                              Boolean rentDelete) {
+
+        return new Role(id,
+                name,
+                categoryList,
+                categoryCreate,
+                categoryUpdate,
+                categoryDelete,
+                productList,
+                productCreate,
+                productUpdate,
+                productDelete,
+                userList,
+                userCreate,
+                userUpdate,
+                userDelete,
+                roleList,
+                roleCreate,
+                roleUpdate,
+                roleDelete,
+                rentList,
+                rentCreate,
+                rentUpdate,
+                rentDelete,
+                false);
+    }
+
+    public static Role createById(Long id) {
+        Validator.validateMandatory(id, "El Id es requerido para eliminar un rol");
+        return new Role(id);
+    }
 }
