@@ -10,6 +10,8 @@ import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Component;
 
 import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
 
 @Component
 public class JwtUtils {
@@ -25,8 +27,14 @@ public class JwtUtils {
 
         UserDetailsImpl userPrincipal = (UserDetailsImpl) authentication.getPrincipal();
 
+        HashMap<String, Object> claims = new HashMap<>();
+        claims.put("name", userPrincipal.getName());
+        claims.put("lastname", userPrincipal.getLastName());
+        claims.put("role", userPrincipal.getRole());
+
         return Jwts.builder()
                 .setSubject((userPrincipal.getUsername()))
+                .addClaims(claims)
                 .setIssuedAt(new Date())
                 .setExpiration(new Date((new Date()).getTime() + jwtExpirationMs))
                 .signWith(SignatureAlgorithm.HS512, jwtSecret)

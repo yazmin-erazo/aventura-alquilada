@@ -21,4 +21,5 @@ public class UserDTO {
     private LocalDateTime GeneratingDate;
     @JsonIgnore
     private Boolean isActive;
+    private String role;
 }

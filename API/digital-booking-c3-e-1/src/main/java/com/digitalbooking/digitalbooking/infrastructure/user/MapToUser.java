@@ -9,7 +9,7 @@ public class MapToUser {
     public static UserDTO mapToUser(UserEntity userEntity){
         UserDTO user = new UserDTO();
         BeanUtils.copyProperties(userEntity,user);
-
+        user.setRole(userEntity.getRoleEntity().getName());
         return user;
     }
 
