@@ -28,4 +28,9 @@ public class ServiceCategory {
     public Optional<CategoryDTO> getCategory(Long id) {
         return categoryRepository.findById(id);
     }
+
+    public String deleteCategory(Category category) {
+        categoryRepository.deleteCategory(category.getId());
+        return "Categoría eliminada correctamente.";
+    }
 }

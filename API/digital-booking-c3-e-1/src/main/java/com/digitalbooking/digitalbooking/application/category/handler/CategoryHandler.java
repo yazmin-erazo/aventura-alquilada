@@ -33,4 +33,8 @@ public class CategoryHandler {
     public Optional<CategoryDTO> findById(Long id) {
         return serviceCategory.getCategory(id);
     }
+
+    public String deleteCategory(Long id) {
+        return serviceCategory.deleteCategory(Category.createById(id));
+    }
 }
