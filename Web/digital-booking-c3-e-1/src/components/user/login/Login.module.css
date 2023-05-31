@@ -32,6 +32,13 @@
     margin-top: 5%;
 }
 
+.form-error {
+    color: var(--semantics-error);
+    position: relative;
+    top: -10px;
+    font-size: 12px;
+}
+
 .container hr {
     margin: 20px 0;
     border: 0 none var(--secondary-200);

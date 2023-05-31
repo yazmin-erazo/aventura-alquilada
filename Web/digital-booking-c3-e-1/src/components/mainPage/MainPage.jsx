@@ -7,15 +7,17 @@ import styles from './MainPage.module.css'
 
 const MainPage = () => {
 
-    const user = useContext(UserContext);
-    const style = user.currentUser.role == "admin" ? styles.withPanel : "";
+    const {user} = useContext(UserContext);
+    const style = user.role == "Admin" ? styles.withPanel : "";
 
   return (
     <>
-    <Panel />
     <div className={`${styles.outlet} ${style}`}> 
+    <Panel />
       <ProductsDataContext>
+        <div className={styles.main}>
         <Outlet />
+        </div>
       </ProductsDataContext>
     </div>
     </>

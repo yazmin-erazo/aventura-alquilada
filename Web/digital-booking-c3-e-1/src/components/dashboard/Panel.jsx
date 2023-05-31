@@ -9,7 +9,7 @@ import { UserContext } from "../../context/AuthContext";
 
 const Panel = () => {
   const location = useLocation();
-  const user = useContext(UserContext);
+  const {user} = useContext(UserContext);
 
   const MenuItem = ({ to, isActive, children }) => (
     <Link to={to} className={isActive ? styles.activeLink : styles.link}>
@@ -17,11 +17,9 @@ const Panel = () => {
     </Link>
   );
 
-  console.log(user);
-
   return (
     <>
-    { user.currentUser.role === "admin" && 
+    { user.role === "Admin" && 
     <div className={styles.dashboard}>
       <div>
         <div className={styles.title}>Dashboard</div>

@@ -4,12 +4,14 @@ import { UserContext } from "../../context/AuthContext";
 
 const Header = () => {
 
-  const user = useContext(UserContext);
+  const {isLogedIn, user, dispatch} = useContext(UserContext);
   const navigate = useNavigate();
   const logoutHandler = () => {
-    sessionStorage.clear();
-    navigate('/')
+    dispatch({type: "LOGOUT"})
+    navigate('/');
   }
+
+  console.log(user);
 
   return (
     <div className="header">
@@ -18,15 +20,15 @@ const Header = () => {
           <img src="/Digital Booking.svg" alt="logotipo Digital Booking" />
           <h5 className="lemaHeader">Sin equipo no hay aventura</h5>
         </Link>
-        { user.isLoggedIn ? <div>
+        { isLogedIn ? <div>
           <input type="checkbox" id="userData" />
           <label className="userDataIcon" htmlFor="userData">
             <div className="user-name">
-              {user.currentUser.name + " " + user.currentUser.lastName}
+              {user.name + " " + user.lastname}
             </div>
             <div className="user-logo">
               <div>
-                {user.currentUser.name.slice(0, 1) + user.currentUser.lastName.slice(0, 1)}
+                {user.name.slice(0, 1) + user.lastname.slice(0, 1)}
               </div>
             </div>
           </label>
@@ -49,7 +51,7 @@ const Header = () => {
         </div> 
         }
         <nav>
-          { user.isLoggedIn ? <ul className="user-profile">
+          { isLogedIn ? <ul className="user-profile">
             <li>Perfil</li>
             <hr />
             <li>Mis favoritos</li>
