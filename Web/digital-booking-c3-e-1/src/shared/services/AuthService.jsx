@@ -27,7 +27,21 @@ const AuthService = {
     },
            
     login: (userData) => API.post(AUTH_ENDPOINTS.LOGIN, userData).then(
-        res => res.data
+      res => {
+        Swal.close();
+        return res.data
+      }
+    ).catch( err => {
+        Swal.fire({
+          title: 'Error al iniciar sessión',
+          text: err.response.data.mensaje,
+          confirmButtonText: 'Entendido',
+          confirmButtonColor: '#a6cf7e'
+        }).then( result => {
+          if(result.isConfirmed)
+            Swal.close();
+        })
+      }
     ),
 
     activate: (params) => API.get(AUTH_ENDPOINTS.ACTIVATE + params).then(
