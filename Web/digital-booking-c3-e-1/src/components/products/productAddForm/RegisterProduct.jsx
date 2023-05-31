@@ -1,13 +1,12 @@
 import { useEffect, useState } from "react";
-import axios from "axios";
 import InputWithLabel from "../../common/input/InputWithLabel";
 import ButtonPrimary from "../../common/Buttons/ButtonPrimary";
 import Select from "../../common/select/Select";
 import ProductConditionSelect from "../../common/select/ProductConditionSelect";
 import styles from "./RegisterProduct.module.css";
-import ImageUpload from "../../common/inputImage/ImageUpload";
-import CategoryService from '../../../shared/services/CategoryService'
-import ProductsService from '../../../shared/services/ProductsService'
+import CategoryService from "../../../shared/services/CategoryService";
+import ProductsService from "../../../shared/services/ProductsService";
+import InputUploadImages from "../../common/inputImage/InputUploadImages";
 
 const RegisterProduct = () => {
   const [categories, setCategories] = useState([]);
@@ -20,7 +19,7 @@ const RegisterProduct = () => {
     productName: "",
     productPrice: "",
     brand: "",
-    selectedImage: null,
+    selectedImages: [],
     description: "",
     color: "",
     material: "",
@@ -52,22 +51,33 @@ const RegisterProduct = () => {
     }));
   };
 
-  const handleImageUpload = (file) => {
-    const fileName = file.name.split(".")[0];
+  const handleImageUpload = (files) => {
+    const updatedImages = [];
 
-    // Convertir la imagen en base64
-    const reader = new FileReader();
-    reader.onload = () => {
-      const base64Image = reader.result;
-      const base64ImageWithoutPrefix = base64Image.replace(/^data:image\/[a-z]+;base64,/, '');
+    Array.from(files).forEach((file) => {
+      const fileName = file.name.split(".")[0];
+      const reader = new FileReader();
 
-      setFormData((prevFormData) => ({
-        ...prevFormData,
-        selectedImage: base64ImageWithoutPrefix,
-        fileName: fileName, // Agregar el nombre de la imagen al estado
-      }));
-    };
-    reader.readAsDataURL(file);
+      reader.onload = () => {
+        const base64Image = reader.result;
+        const base64ImageWithoutPrefix = base64Image.replace(
+          /^data:image\/[a-z]+;base64,/,
+          ""
+        );
+
+        updatedImages.push({
+          image: base64ImageWithoutPrefix,
+          fileName: fileName,
+        });
+      };
+
+      reader.readAsDataURL(file);
+    });
+
+    setFormData((prevFormData) => ({
+      ...prevFormData,
+      selectedImages: updatedImages,
+    }));
   };
 
   const handleSubmit = async () => {
@@ -79,11 +89,11 @@ const RegisterProduct = () => {
       selectedCategoryId,
       selectedCondition,
       description,
-      selectedImage,
+      selectedImages,
       color,
       material,
       size,
-      fileName
+      fileName,
     } = formData;
 
     const productData = {
@@ -94,7 +104,7 @@ const RegisterProduct = () => {
       idCategory: selectedCategoryId,
       state: selectedCondition,
       description: description,
-      image: selectedImage,
+      images: selectedImages,
       color: color,
       material: material,
       size: size,
@@ -118,7 +128,7 @@ const RegisterProduct = () => {
         color: "",
         material: "",
         size: "",
-        fileName:"",
+        fileName: "",
       });
       setErrorMessage(""); //Limpiar el mensaje de error
     } catch (error) {
@@ -186,8 +196,8 @@ const RegisterProduct = () => {
               type="text"
               value={formData.color}
               onChange={(event) =>
-              handleInputChange("color", event.target.value)
-            }
+                handleInputChange("color", event.target.value)
+              }
             >
               Color:
             </InputWithLabel>
@@ -196,8 +206,8 @@ const RegisterProduct = () => {
               type="text"
               value={formData.material}
               onChange={(event) =>
-              handleInputChange("material", event.target.value)
-            }
+                handleInputChange("material", event.target.value)
+              }
             >
               Material:
             </InputWithLabel>
@@ -206,13 +216,13 @@ const RegisterProduct = () => {
               type="text"
               value={formData.size}
               onChange={(event) =>
-              handleInputChange("size", event.target.value)
-            }
+                handleInputChange("size", event.target.value)
+              }
             >
               Talla/Tamaño:
             </InputWithLabel>
 
-            <ImageUpload onImageUpload={handleImageUpload} />
+            <InputUploadImages onImageUpload={handleImageUpload} />
 
             <textarea
               className={styles.textareaField}
