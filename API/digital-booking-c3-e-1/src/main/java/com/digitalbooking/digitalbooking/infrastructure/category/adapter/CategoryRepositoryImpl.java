@@ -1,5 +1,6 @@
 package com.digitalbooking.digitalbooking.infrastructure.category.adapter;
 
+import com.digitalbooking.digitalbooking.common.exception.ExceptionNullValue;
 import com.digitalbooking.digitalbooking.domain.category.dto.CategoryDTO;
 import com.digitalbooking.digitalbooking.domain.category.entity.Category;
 import com.digitalbooking.digitalbooking.domain.category.repository.CategoryRepository;
@@ -43,5 +44,12 @@ public class CategoryRepositoryImpl implements CategoryRepository {
     @Override
     public List<CategoryDTO> getAll() {
         return categoryRepositoryMySql.findAll().stream().map(MapToCategory::mapToCategory).collect(Collectors.toList());
+    }
+
+    @Override
+    public void deleteCategory(Long id) {
+        CategoryEntity categoryEntity = categoryRepositoryMySql.findByIdAndIsDelete(id, Boolean.FALSE).orElseThrow(() -> new ExceptionNullValue("Categoría no encontrada."));
+        categoryEntity.setIsDelete(Boolean.TRUE);
+        categoryRepositoryMySql.save(categoryEntity);
     }
 }

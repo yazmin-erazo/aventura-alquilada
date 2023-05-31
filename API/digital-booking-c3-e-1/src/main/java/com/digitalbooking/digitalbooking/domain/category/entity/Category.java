@@ -20,6 +20,10 @@ public final class Category {
         this.fileName = fileName;
     }
 
+    private Category(Long id) {
+        this.id = id;
+    }
+
     public static Category create(Long id) {
         return new Category(id, "", "", "", "");
     }
@@ -36,5 +40,10 @@ public final class Category {
 
     public static Category reBuild(Long id, String name, String image, String description)  {
         return new Category(id, name, image, description, "");
+    }
+
+    public static Category createById(Long id) {
+        Validator.validateMandatory(id, "El Id es requerido para eliminar una categoría.");
+        return new Category(id);
     }
 }
