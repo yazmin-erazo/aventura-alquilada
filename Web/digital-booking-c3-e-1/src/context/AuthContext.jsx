@@ -1,30 +1,58 @@
-import jwtDecode from "jwt-decode";
-import React, { createContext, useState, useEffect } from "react";
+import React, { createContext, useReducer } from "react";
 
 const UserContext = createContext();
 
-const UserDataContext = ({ children }) => {
-    const [currentUser, setCurrentUser] = useState({
-        name: "Naty",
-        lastName: "Moreira",
-        role: "admin"
-    });
-    const [isLoggedIn, setIsLoggedIn] = useState(true);
 
-    useEffect(() => {
-        const fetchData = () => {
-            const token = JSON.parse(sessionStorage.getItem('token'));
-            if(token) {
-                setIsLoggedIn(true);
-                setCurrentUser(jwtDecode(token))
-            }
+const initialState = {
+        user: JSON.parse(sessionStorage.getItem('user')) || {
+            name: "",
+            lastname: "",
+            role: ""
+        },
+        token: sessionStorage.getItem('token') || "",
+        isLogedIn: sessionStorage.getItem('token') ? true : false
+    }
+
+    const authReducer = (state, action) => {
+        switch (action.type) {
+            case "LOGIN":
+                sessionStorage.setItem('token', action.payload.token);
+                sessionStorage.setItem('user', JSON.stringify(action.payload.user));
+                return {
+                    ...state,
+                    user: action.payload.user, 
+                    isLogedIn: true,
+                    token: action.payload.token
+                }
+            case "LOGOUT":
+                sessionStorage.clear();
+                return {
+                    ...state,
+                    user: { name: "",
+                    lastname: "",
+                    role: "" },
+                    token: "",
+                    isLogedIn: false
+                }
+                
+                default:
+                    return state;
         }
-        fetchData();
-    }, []);
-
+    }
+    
+    const UserDataContext = ({ children }) => {
+    
+    const [state, dispatch] = useReducer( authReducer, initialState )
+    
+    const data = {
+        dispatch,
+        user: state.user,
+        isLogedIn: state.isLogedIn
+    }
+    
     return (
         <>
-            <UserContext.Provider value={{currentUser, isLoggedIn}}>
+            <UserContext.Provider value={data}>
                 {children}
             </UserContext.Provider>
         </>

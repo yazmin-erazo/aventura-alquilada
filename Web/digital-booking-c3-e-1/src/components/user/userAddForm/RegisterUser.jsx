@@ -4,17 +4,12 @@ import ButtonPrimary from "../../common/Buttons/ButtonPrimary";
 import styles from "./RegisterUser.module.css";
 import AuthService from "../../../shared/services/AuthService";
 import { AiOutlineEye, AiOutlineEyeInvisible } from "react-icons/ai";
-import axios from 'axios';
-import Swal from 'sweetalert2';
-
-
-
 
 const PasswordInput = ({ isVisible, setIsVisible, ...restProps }) => (
   <div style={{ position: "relative" }}>
     <InputWithLabel type={isVisible ? "text" : "password"} {...restProps} />
     <button
-      class="isible"
+      className="isible"
       type="button"
       onClick={() => setIsVisible(!isVisible)}
       style={{
@@ -169,7 +164,7 @@ const RegisterUser = () => {
   return (
     <div className={styles.container}>
       <img className={styles["registerUser-img"]} src="/registerUser.png" alt="imagen" />
-      <div>
+      <div className={styles["form-register"]}>
         <h1>Registrate</h1>
         <p>
           Registrate para alquilar equipamiento deportivo de calidad y disfrutar

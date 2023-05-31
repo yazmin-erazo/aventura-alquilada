@@ -3,5 +3,9 @@
   }
   
   .withPanel {
-    margin-left: 250px;
+    display: flex;
+  }
+
+  .withPanel .main {
+    max-width: calc(100vw - 250px);
   }
