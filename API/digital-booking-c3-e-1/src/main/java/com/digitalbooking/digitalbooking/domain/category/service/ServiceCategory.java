@@ -29,8 +29,8 @@ public class ServiceCategory {
         return categoryRepository.findById(id);
     }
 
-    public String deleteCategory(Category category) {
+    public String deleteCategory(Category category) throws Exception {
         categoryRepository.deleteCategory(category.getId());
-        return "Categoría eliminada correctamente.";
+        return "Categoría eliminada correctamente";
     }
 }

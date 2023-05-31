@@ -106,4 +106,13 @@ public class ServiceCategoryTest {
         verify(categoryRepository, times(1)).findById(categoryId);
     }
 
+    @Test
+    void testDeleteCategorySuccess() throws Exception {
+        Category category = Category.createById(1L);
+        String message = serviceCategory.deleteCategory(category);
+
+        assertEquals("Categoría eliminada correctamente", message);
+        verify(categoryRepository, times(1)).deleteCategory(anyLong());
+    }
+
 }
