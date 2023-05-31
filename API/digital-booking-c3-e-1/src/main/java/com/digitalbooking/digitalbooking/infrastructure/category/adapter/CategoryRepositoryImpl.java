@@ -48,7 +48,7 @@ public class CategoryRepositoryImpl implements CategoryRepository {
 
     @Override
     public void deleteCategory(Long id) {
-        CategoryEntity categoryEntity = categoryRepositoryMySql.findByIdAndIsDelete(id, Boolean.FALSE).orElseThrow(() -> new ExceptionNullValue("Categoría no encontrada."));
+        CategoryEntity categoryEntity = categoryRepositoryMySql.findByIdAndIsDelete(id, Boolean.FALSE).orElseThrow(() -> new ExceptionNullValue("Categoría no encontrada"));
         categoryEntity.setIsDelete(Boolean.TRUE);
         categoryRepositoryMySql.save(categoryEntity);
     }

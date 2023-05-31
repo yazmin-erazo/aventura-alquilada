@@ -27,7 +27,7 @@ public class CommandControllerCategory {
 
    @DeleteMapping("{id-category}")
    @Operation(summary = "Delete Category", description = "Method to delete a category")
-   public ResponseEntity<CommandResponse<String>> deleteCategory(@PathVariable("id-category") Long id) {
+   public ResponseEntity<CommandResponse<String>> deleteCategory(@PathVariable("id-category") Long id) throws Exception{
       return new ResponseEntity<>(new CommandResponse<>(categoryHandler.deleteCategory(id)), HttpStatus.OK);
    }
 }

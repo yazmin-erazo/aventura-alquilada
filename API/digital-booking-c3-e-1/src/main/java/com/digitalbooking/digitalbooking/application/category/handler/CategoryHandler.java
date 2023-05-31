@@ -34,7 +34,7 @@ public class CategoryHandler {
         return serviceCategory.getCategory(id);
     }
 
-    public String deleteCategory(Long id) {
+    public String deleteCategory(Long id) throws Exception{
         return serviceCategory.deleteCategory(Category.createById(id));
     }
 }

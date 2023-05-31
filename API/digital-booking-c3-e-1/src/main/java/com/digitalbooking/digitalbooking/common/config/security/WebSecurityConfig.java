@@ -74,7 +74,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .authenticated()
                 .antMatchers(HttpMethod.PUT, "/product/**","/role/**")
                 .authenticated()
-                .antMatchers(HttpMethod.DELETE, "/product/**","/role/**")
+                .antMatchers(HttpMethod.DELETE, "/product/**","/role/**","/category/**")
                 .authenticated();
 
         http.addFilterBefore(
