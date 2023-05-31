@@ -6,69 +6,76 @@ import AuthService from '../../../shared/services/AuthService';
 import ValidationService from '../../../shared/services/ValidationService';
 import { UserContext } from '../../../context/AuthContext';
 import jwtDecode from "jwt-decode";
+import Swal from 'sweetalert2';
+import { useNavigate } from 'react-router-dom';
+import { PasswordInput } from '../userAddForm/RegisterUser';
 
 const Login = () => {
 
-  const {dispatch} = useContext(UserContext)
+  const { dispatch } = useContext(UserContext)
+  const navigate = useNavigate();
+  const [isPasswordVisible, setIsPasswordVisible] = useState(false);
 
-    const [userData, setUserData] = useState({
-      email: "",
-      password: ""
-    });
+  const [userData, setUserData] = useState({
+    email: "",
+    password: ""
+  });
 
-    const [ errors, setErrors] = useState({
-      email: "",
-      password: ""
-    })
+  const [errors, setErrors] = useState({
+    email: "",
+    password: ""
+  })
 
+  const onSubmitHandler = (e) => {
+    e.preventDefault()
+    
     let isValid = true;
-      const validateForm = () => {
-
-        if (!userData.email) {
-          errors.email = ValidationService.errorMessages.req;
-          isValid = false;
-        } else if (!ValidationService.patterns.email.test(userData.email)) {
-          errors.email = ValidationService.errorMessages.email;
-          isValid = false;
-        }
-  
-        if (!userData.password) {
-          errors.password = ValidationService.errorMessages.req;
-          isValid = false;
-        } else if (userData.password.trim().length < 3 !== userData.password && !ValidationService.patterns.pass.test(userData.password)) {
-          errors.password = ValidationService.errorMessages.pass;
-          isValid = false;
-        } 
-
-        setErrors(errors)
-        return isValid;
+    const errors = {
+      email: "",
+      password: "",
+    };
+    const validateForm = () => {
+      
+      if (!userData.email) {
+        errors.email = ValidationService.errorMessages.req;
+        isValid = false;
+      } else if (!ValidationService.patterns.email.test(userData.email)) {
+        errors.email = ValidationService.errorMessages.email;
+        isValid = false;
       }
 
-    useEffect(()=>{
-      validateForm();
-    },[errors])
-
-    const onSubmitHandler = (e) => {
-      e.preventDefault()
-      validateForm()
-
-      const logIn = async () => {
-        try{
-          const data = await AuthService.login(userData);
-          console.log(data.response);
-          const user = jwtDecode(data.response.jwt)
-          console.log(user);
-          dispatch({ type: "LOGIN", payload: {token: data.response.jwt, user: user} })
-        }
-        catch{
-          err => console.log(err);
-        }
-        
-      }
-      if(isValid)
-        logIn();
-
+      if (!userData.password) {
+        errors.password = ValidationService.errorMessages.req;
+        isValid = false;
+      } else if (userData.password.trim().length < 3 !== userData.password && !ValidationService.patterns.pass.test(userData.password)) {
+      errors.password = ValidationService.errorMessages.pass;
+      isValid = false;
     }
+    
+    setErrors(errors)
+    return isValid;
+  }
+  
+  
+  
+  validateForm()
+  
+  const logIn = async () => {
+      Swal.fire({
+        title: 'Iniciando sesión',
+        didOpen: () => { Swal.showLoading() }
+      })
+      const data = await AuthService.login(userData);
+      if (data) {
+        const user = jwtDecode(data.response.jwt);
+        dispatch({ type: "LOGIN", payload: { token: data.response.jwt, user: user } })
+        navigate('/')
+      }
+    }
+
+    if (isValid)
+      logIn();
+  }
 
   return (
     <div className={styles.container}>
@@ -80,11 +87,20 @@ const Login = () => {
         <hr />
         <p>Encuentra todo lo que necesitas para hacer de tu próxima experiencia deportiva una increíble aventura</p>
         <form>
-          <InputWithLabel type = {"text"} name="email" onChange={(event) => setUserData({...userData, email: event.target.value})}>Email</InputWithLabel>
+          <InputWithLabel type={"text"} name="email" onChange={(event) => setUserData({ ...userData, email: event.target.value })}>Email</InputWithLabel>
           {errors.email && (
             <span className={styles["form-error"]}>{errors.email}</span>
           )}
-          <InputWithLabel type={"password"} name="password" onChange={(event) => setUserData({...userData, password: event.target.value})}>Contraseña</InputWithLabel>
+          <PasswordInput
+            value={userData.password}
+            onChange={(event) =>
+              setUserData({ ...userData, password: event.target.value })
+            }
+            isVisible={isPasswordVisible}
+            setIsVisible={setIsPasswordVisible}
+          >
+            Contraseña
+          </PasswordInput>
           {errors.password && (
             <span className={styles["form-error"]}>{errors.password}</span>
           )}

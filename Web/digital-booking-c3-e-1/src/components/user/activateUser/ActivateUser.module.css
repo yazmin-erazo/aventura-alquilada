@@ -1,0 +1,10 @@
+.card {
+    position: relative;
+    width: 50%;
+    margin-left: 25%;
+    top: 8vh;
+    border: solid var(--secondary-300) 2px;
+    color: var(--primary-300);
+    padding: 10%;
+    text-align: center;
+}

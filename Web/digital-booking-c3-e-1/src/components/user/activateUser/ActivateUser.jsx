@@ -1,20 +1,22 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useSearchParams } from 'react-router-dom'
 import AuthService from '../../../shared/services/AuthService';
+import styles from './ActivateUser.module.css'
 
 const ActivateUser = () => {
 
     const [params] = useSearchParams();
     const token = params.get('token')
-    console.log(token);
+    const [response, setResponse] = useState();
 
     useEffect( () => {
         const callingAPI = async () =>{
             try{ 
-            await AuthService.activate(`?token=${token}`);
+              const res = await AuthService.activate(`?token=${token}`);
+              setResponse(res)
             }
             catch (err) {
-            console.log(`Error al validar el email: ${err}`);
+              setResponse(err.response);
             }
         };
         callingAPI();
@@ -22,9 +24,9 @@ const ActivateUser = () => {
     )
 
   return (
-    <div>Se ha activado correctamente su cuenta.
-        Revise su correo.
-    </div>
+    <>
+     { response && (response.status == 200 ? response.data : <div className={styles.card}> {( response.status == 500 ? "Ha ocurrido un error de servidor" : response.data.mensaje)} </div>)}
+    </>
   )
 }
 
