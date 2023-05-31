@@ -2,7 +2,6 @@ import { useCallback, useEffect, useState } from "react";
 import TableRow from "../../common/Table/TableRow";
 import styles from "./EditRole.module.css";
 import ButtonPrimary from "../../common/Buttons/ButtonPrimary";
-import axios from "axios";
 import { Link } from "react-router-dom";
 import RolesService from "../../../shared/services/RolesService";
 
