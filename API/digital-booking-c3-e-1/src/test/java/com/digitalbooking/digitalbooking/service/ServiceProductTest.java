@@ -156,4 +156,39 @@ class ServiceProductTest {
         assertEquals("El material es requerido para crear un producto", exception.getMessage());
     }
 
+    @Test
+    void testUpdateProductSuccess() throws Exception {
+        Product product = Product.create("Carpa Nemo", "Nemo Wagontop", "Nueva", BigDecimal.valueOf(150),"Descripción test", "8 personas", "No aplica", null, 1L, "Test Base64", "Carpa1", "Amarillo", "Poliéster", List.of());
+        CategoryDTO category = new CategoryDTO(1L, "Camping", "", "");
+        when(categoryRepository.findById(anyLong())).thenReturn(Optional.of(category));
+
+        String message = serviceProduct.updateProduct(product);
+
+        assertEquals("Producto actualizado correctamente", message);
+        verify(categoryRepository, times(1)).findById(anyLong());
+        verify(repositoryProduct, times(1)).updateProduct(any(Product.class));
+    }
+
+    @Test
+    void testUpdateProductErrorWhenCategoryDoesntExist() throws Exception {
+        Product product = Product.create("Carpa Nemo", "Nemo Wagontop", "Nueva", BigDecimal.valueOf(150),"Descripción test", "8 personas", "No aplica", null, 1L, "Test Base64", "Carpa1", "Amarillo", "Poliéster" ,List.of());
+
+        when(categoryRepository.findById(anyLong())).thenReturn(Optional.empty());
+
+        assertThrows(ExceptionInvalidValue.class, () -> serviceProduct.updateProduct(product));
+
+        verify(categoryRepository, times(1)).findById(anyLong());
+        verify(repositoryProduct, times(0)).updateProduct(any(Product.class));
+    }
+
+    @Test
+    void testDeleteProductSuccess() throws Exception {
+        Product product = Product.create("Carpa Nemo", "Nemo Wagontop", "Nueva", BigDecimal.valueOf(150),"Descripción test", "8 personas", "No aplica", null, 1L, "Test Base64", "Carpa1", "Amarillo", "Poliéster", List.of());
+
+        String message = serviceProduct.deleteProduct(product);
+
+        assertEquals("Producto eliminado correctamente", message);
+        verify(repositoryProduct, times(1)).deleteProduct(anyLong());
+    }
+
 }
