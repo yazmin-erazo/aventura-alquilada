@@ -1,4 +1,5 @@
-import React from "react";
+import { AiOutlineCopyright } from "react-icons/ai";
+import { FiGitlab, FiInstagram } from "react-icons/fi";
 
 const Footer = () => {
   return (
@@ -7,21 +8,31 @@ const Footer = () => {
         <div className="isologotipo">
           <img
             className="logo"
-            src="/isologotipo.svg"
+            src="https://c3-e1-digital-booking.s3.us-east-2.amazonaws.com/img/isologotipo.svg"
             alt="isologotipo de Digital Booking"
           />
-          <img className="lema" src="/lema.png" alt="lema de Digital Booking" />
-          <img
-            className="copyright"
-            src="/copyright.png"
-            alt="imagen copyright"
-          />
+          <p>Sin equipo no hay aventura</p>
+          <div className="copyright">
+            <AiOutlineCopyright />{" "}
+            <p>
+              2023<span>|</span> Copyright
+            </p>
+          </div>
         </div>
+
         <div className="footerIcons">
-          <img src="/icon facebook.png" alt="icono Facebook" />
-          <img src="/Vector.png" alt="icono Linkedin" />
-          <img src="/tweet.png" alt="icono Tweeter" />
-          <img src="/insta.png" alt="icono Instagram" />
+          <a
+            href="https://gitlab.ctd.academy/ctd/hispanos/proyecto-integrador-1/proyecto-integrador-0523/1021pt-c3/equipo-01"
+            className="icon-link"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <FiGitlab className="icon" />
+          </a>
+          <a href="#" className="icon-link">
+            {" "}
+            <FiInstagram class="icon" />
+          </a>
         </div>
       </div>
     </div>
