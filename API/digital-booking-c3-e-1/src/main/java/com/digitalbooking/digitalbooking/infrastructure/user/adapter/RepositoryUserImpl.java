@@ -4,6 +4,8 @@ import com.digitalbooking.digitalbooking.common.exception.ExceptionNullValue;
 import com.digitalbooking.digitalbooking.domain.user.dto.UserDTO;
 import com.digitalbooking.digitalbooking.domain.user.entity.User;
 import com.digitalbooking.digitalbooking.domain.user.repository.RepositoryUser;
+import com.digitalbooking.digitalbooking.infrastructure.role.adapter.RepositoryRoleMySql;
+import com.digitalbooking.digitalbooking.infrastructure.role.adapter.RoleEntity;
 import com.digitalbooking.digitalbooking.infrastructure.user.MapToUser;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,12 +20,17 @@ import java.util.stream.Collectors;
 public class RepositoryUserImpl implements RepositoryUser {
     @Autowired
     RepositoryUserMySql repositoryUserMySql;
+
+    @Autowired
+    RepositoryRoleMySql repositoryRoleMySql;
     @Override
     public Long save(User user, String token, LocalDateTime generatingDate) {
+        Optional<RoleEntity> roleEntity = repositoryRoleMySql.findById(user.getRole().getId());
         UserEntity userEntity = new UserEntity();
         BeanUtils.copyProperties(user,userEntity);
         userEntity.setToken(token);
         userEntity.setGeneratingDate(generatingDate);
+        userEntity.setRoleEntity(roleEntity.get());
         return repositoryUserMySql.save(userEntity).getId();
     }
 
