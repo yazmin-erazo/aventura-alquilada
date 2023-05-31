@@ -1,6 +1,7 @@
 package com.digitalbooking.digitalbooking.domain.user.entity;
 
 import com.digitalbooking.digitalbooking.common.validations.Validator;
+import com.digitalbooking.digitalbooking.domain.role.entity.Role;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 
@@ -13,6 +14,7 @@ public final class User {
     private String email;
     private String password;
     private Boolean isActive;
+    private Role role;
 
     private User(Long id) {
         this.id = id;
@@ -21,8 +23,7 @@ public final class User {
     public static User create(String name,
                                  String lastName,
                                  String email,
-                                 String password
-                                ) throws Exception {
+                                 String password) throws Exception {
         Validator.validateMandatory(name, "El nombre es requerido para crear un usuario");
         Validator.validateMandatory(lastName, "El apellido es requerido para crear un usuario");
         Validator.validateMandatory(email, "El correo electrónico es requerido para crear un usuario");
@@ -33,7 +34,9 @@ public final class User {
         Validator.validateOnlyChars(name, "El nombre debe contener solo letras");
         Validator.validateOnlyChars(lastName, "El apellido debe contener solo letras");
         //Validator.validatePassword(password, "La contraseña debe tener al menos 3 caracteres, al menos una letra mayúscula, una letra minúscula y un número");
-        return new User(0L,name,lastName,email,password,false);
+
+        Role role1 = Role.createById(21L);
+        return new User(0L,name,lastName,email,password,false,role1);
     }
 
 }
