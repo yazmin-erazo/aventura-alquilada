@@ -44,7 +44,7 @@ public class ServiceUser implements UserDetailsService {
     private String urlLogin;
 
     public Long createUser(User user) {
-        roleRepository.findByIdAndIsDelete(user.getId()).orElseThrow(() -> new ExceptionInvalidValue("El rol no existe") );
+        roleRepository.findByIdAndIsDelete(user.getRole().getId()).orElseThrow(() -> new ExceptionInvalidValue("El rol no existe") );
         repositoryUser.findByEmail(user.getEmail()).ifPresent(userDTO -> {throw new ExceptionInvalidValue("Un usuario asociado al correo electrónico "+userDTO.getEmail()+", ya existe");});
         String token = UUID.randomUUID().toString();
         LocalDateTime generatingDate = LocalDateTime.now();
