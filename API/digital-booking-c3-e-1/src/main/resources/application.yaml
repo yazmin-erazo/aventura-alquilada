@@ -27,7 +27,7 @@ email:
   subject: Activar Cuenta
   urlvalidation: http://localhost:5173/user/activate?token=%s
   subjectlogin: Cuenta Activada
-  urllogin: http://127.0.0.1:5173/login
+  urllogin: http://localhost:5173/login
 
 app:
   jwtSecret: 95a59bb848e94d00842bb39ecf6f8fcf
