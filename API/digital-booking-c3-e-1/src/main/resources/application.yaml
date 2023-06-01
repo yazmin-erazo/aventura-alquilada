@@ -8,6 +8,8 @@ springdoc:
   swagger-ui:
     path: /swagger-ui.html
 spring:
+  main:
+    allow-bean-definition-overriding: true
   jpa:
     hibernate:
       ddl-auto: update

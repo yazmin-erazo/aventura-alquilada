@@ -26,6 +26,11 @@ public class RoleRepositoryImpl implements RoleRepository {
     }
 
     @Override
+    public Optional<RoleDTO> findByNameAndIsDelete(String name) {
+        return repositoryRoleMySql.findByNameAndIsDelete(name, false).map(MapToRole::mapToRole);
+    }
+
+    @Override
     public void updateRole(Role role) {
         RoleEntity roleEntity = new RoleEntity();
         BeanUtils.copyProperties(role,roleEntity);

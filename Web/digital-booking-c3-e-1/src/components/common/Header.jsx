@@ -10,8 +10,6 @@ const Header = () => {
     navigate("/");
   };
 
-  console.log(user);
-
   return (
     <div className="header">
       <div className="headerContainer">

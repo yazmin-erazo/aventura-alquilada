@@ -1,51 +1,46 @@
-@import "/src/styles/variables.css";
-@import "/src/styles/global.css";
-
 .imageUploadContainer {
-    max-width: 506px;
-    margin-bottom: 16px;
-  }
-  
-  .label {
-    font: var(--body-14-normal);
-    color: var(--secondary-600); 
-  }
-  
-  .fileInput {
-    width: 100%;
-    height: 40px;
-    background: var(--white-100);
-    border: 0.5px solid var(--secondary-100); 
-    border-radius: 5px;
-    padding: 11px 12px;
-    font-size: 14px;
-    margin-top: 8px;
-  }
-  
-  .previewContainer {
-    margin-top: 8px;
-  }
-  
-  .previewImage {
-    max-width: 100%;
-    height: auto;
-    border-radius: 4px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  }
+  max-width: 506px;
+  margin-bottom: 16px;
+}
 
-  .uploadButton {
-    margin-top: 8px;
-    padding: 8px 16px;
-    font-size: 14px;
-    background-color: var(--state-available);
-    color: var(--white-100);
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-  }
-  
-  .uploadButton:hover {
-    background-color: #0056b3; 
-  }
+.label {
+  font: var(--body-14-normal);
+  color: var(--secondary-600);
+}
 
-  
+.fileInput {
+  width: 100%;
+  height: 40px;
+  background: var(--white-100);
+  border: 0.5px solid var(--secondary-100);
+  border-radius: 5px;
+  padding: 11px 12px;
+  font-size: 14px;
+  margin-top: 8px;
+}
+
+.previewContainer {
+  margin-top: 8px;
+}
+
+.previewImage {
+  max-width: 100%;
+  height: auto;
+  border-radius: 4px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.uploadButton {
+  margin-top: 8px;
+  padding: 8px 16px;
+  font-size: 14px;
+  background-color: var(--state-available);
+  color: var(--white-100);
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.uploadButton:hover {
+  background-color: #0056b3;
+}

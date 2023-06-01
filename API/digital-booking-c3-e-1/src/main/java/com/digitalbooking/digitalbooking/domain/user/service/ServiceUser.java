@@ -4,6 +4,7 @@ import com.digitalbooking.digitalbooking.common.exception.ExceptionInvalidValue;
 import com.digitalbooking.digitalbooking.common.exception.ExceptionNullValue;
 import com.digitalbooking.digitalbooking.domain.auth.entity.UserDetailsImpl;
 import com.digitalbooking.digitalbooking.domain.mail.MailRepository;
+import com.digitalbooking.digitalbooking.domain.role.repository.RoleRepository;
 import com.digitalbooking.digitalbooking.domain.user.dto.UserDTO;
 import com.digitalbooking.digitalbooking.domain.user.entity.User;
 import com.digitalbooking.digitalbooking.domain.user.repository.RepositoryUser;
@@ -27,6 +28,9 @@ public class ServiceUser implements UserDetailsService {
     @Autowired
     MailRepository mailRepository;
 
+    @Autowired
+    RoleRepository roleRepository;
+
     @Value("${email.subject}")
     private String subject;
 
@@ -40,6 +44,7 @@ public class ServiceUser implements UserDetailsService {
     private String urlLogin;
 
     public Long createUser(User user) {
+        roleRepository.findByIdAndIsDelete(user.getId()).orElseThrow(() -> new ExceptionInvalidValue("El rol no existe") );
         repositoryUser.findByEmail(user.getEmail()).ifPresent(userDTO -> {throw new ExceptionInvalidValue("Un usuario asociado al correo electrónico "+userDTO.getEmail()+", ya existe");});
         String token = UUID.randomUUID().toString();
         LocalDateTime generatingDate = LocalDateTime.now();
