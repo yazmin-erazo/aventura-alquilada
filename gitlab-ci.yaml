@@ -67,10 +67,9 @@ test-api:
       - API/digital-booking-c3-e-1/target/surefire-reports/
       - API/digital-booking-c3-e-1/target/site/jacoco/
   only:
-    - main
-    # - main@develop
-    # - changes
-    # - API/digital-booking-c3-e-1/**/*   
+    - main@develop
+    - changes
+    - API/digital-booking-c3-e-1/**/*   
 
 coverage-report:
   stage: coverage report
@@ -89,6 +88,10 @@ coverage-report:
       junit:
         - "**/target/surefire-reports/TEST-*.xml"
         #- "**/target/failsafe-reports/TEST-*.xml"
+  only:
+    - main@develop
+    - changes
+    - API/digital-booking-c3-e-1/**/*   
 
 build-api:
   stage: build
@@ -100,7 +103,9 @@ build-api:
     paths:
       - API/digital-booking-c3-e-1/target/equipamiento-deportivo.jar
   only:
-    - main
+    - main@develop
+    - changes
+    - API/digital-booking-c3-e-1/**/*   
 
 deploy_to_ec2:
   stage: deploy
@@ -118,4 +123,6 @@ deploy_to_ec2:
     - scp API/digital-booking-c3-e-1/target/equipamiento-deportivo.jar ubuntu@$EC2_INSTANCE_IP:~/equipamiento-deportivo/
     - ssh ubuntu@$EC2_INSTANCE_IP "sudo systemctl start equipamiento-deportivo.service"
   only:
-    - main
+    - main@develop
+    - changes
+    - API/digital-booking-c3-e-1/**/*   
