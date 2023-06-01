@@ -98,6 +98,7 @@ const Login = () => {
             }
             isVisible={isPasswordVisible}
             setIsVisible={setIsPasswordVisible}
+            right="180px"
           >
             Contraseña
           </PasswordInput>
