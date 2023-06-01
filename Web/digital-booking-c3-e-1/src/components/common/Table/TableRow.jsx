@@ -5,13 +5,16 @@ const TableRow = ({ product, onDelete, onEdit }) => {
   return (
     <tr className={styles["table-row"]}>
       <td>{product.id}</td>
-      <td>
+      {
+        (product.imageURL || product.imageURL === "") &&
+        <td>
         <img
           src={product.imageURL}
           alt={product.name}
           className={styles["product-image"]}
-        />
+          />
       </td>
+        }
       <td>{product.name}</td>
       <td>{product.price}</td>
       <td>{product.brand}</td>

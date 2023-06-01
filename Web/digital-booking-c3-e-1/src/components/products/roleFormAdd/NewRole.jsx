@@ -2,6 +2,8 @@ import React, { useState } from "react";
 import InputWithLabel from "../../common/input/InputWithLabel";
 import ButtonPrimary from "../../common/Buttons/ButtonPrimary";
 import styles from "./NewRole.module.css";
+import RolesService from "../../../shared/services/RolesService";
+import { useParams } from "react-router-dom";
 
 const NewRole = () => {
     const [formData, setFormData] = useState({
@@ -31,9 +33,17 @@ const NewRole = () => {
                 edit: false,
                 delete: false,
             },
+            rent: {
+                list: false,
+                add: false,
+                edit: false,
+                delete: false,
+            }
         },
         selectAll: false,
     });
+
+    const id = useParams();
 
     const handleInputChange = (name, value) => {
         setFormData((prevFormData) => ({
@@ -76,7 +86,30 @@ const NewRole = () => {
     };
 
     const handleSubmit = async () => {
-        // Enviar los datos al servidor
+        const payload = {
+            "name": formData.roleName,
+            "categoryList": formData.permissions.categories.list,
+            "categoryCreate": formData.permissions.categories.add,
+            "categoryUpdate": formData.permissions.categories.edit,
+            "categoryDelete": formData.permissions.categories.delete,
+            "productList": formData.permissions.products.list,
+            "productCreate": formData.permissions.products.add,
+            "productUpdate": formData.permissions.products.edit,
+            "productDelete": formData.permissions.products.delete,
+            "userList": formData.permissions.users.list,
+            "userCreate": formData.permissions.users.add,
+            "userUpdate": formData.permissions.users.edit,
+            "userDelete": formData.permissions.users.delete,
+            "roleList": formData.permissions.roles.list,
+            "roleCreate": formData.permissions.roles.add,
+            "roleUpdate": formData.permissions.roles.edit,
+            "roleDelete": formData.permissions.roles.delete,
+            "rentList": formData.permissions.rent.list,
+            "rentCreate": formData.permissions.rent.add,
+            "rentUpdate": formData.permissions.rent.edit,
+            "rentDelete": formData.permissions.rent.delete
+        }
+        RolesService.create(payload)
         console.log("Datos del nuevo rol:", formData);
     };
 

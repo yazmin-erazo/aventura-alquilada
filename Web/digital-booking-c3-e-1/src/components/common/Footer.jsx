@@ -31,7 +31,7 @@ const Footer = () => {
           </a>
           <a href="#" className="icon-link">
             {" "}
-            <FiInstagram class="icon" />
+            <FiInstagram className="icon" />
           </a>
         </div>
       </div>
