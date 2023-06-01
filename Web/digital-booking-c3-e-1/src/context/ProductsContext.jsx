@@ -19,7 +19,7 @@ const ProductsDataContext = ({children}) => {
     };
      fetchData();
   }, []);
-
+  
   return (
     <>
         <ProductsContext.Provider value = {{products}}>
