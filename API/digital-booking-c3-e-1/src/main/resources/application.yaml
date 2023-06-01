@@ -25,7 +25,7 @@ aws:
     imagepath: img
 email:
   subject: Activar Cuenta
-  urlvalidation: http://127.0.0.1:5173/user/activate?token=%s
+  urlvalidation: http://localhost:5173/user/activate?token=%s
   subjectlogin: Cuenta Activada
   urllogin: http://127.0.0.1:5173/login
 
