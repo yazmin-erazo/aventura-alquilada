@@ -1,9 +1,10 @@
 import API from "../environment/APIConfig";
 
 const ROLES_ENDPOINTS = {
-    ALL_PRODUCTS: 'role/roles',
-    CREATE_PRODUCT: 'role',
-    DELETE_PRODUCT: 'role/'
+    ALL_ROLES: 'role/roles',
+    CREATE_ROLE: 'role',
+    DELETE_ROLE: 'role/',
+    ROLE_DETAILS: 'role'
 }
 
 const RolesService = {

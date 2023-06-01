@@ -4,9 +4,11 @@ import InputWithLabel from "../../common/input/InputWithLabel";
 import ButtonPrimary from "../../common/Buttons/ButtonPrimary";
 import styles from "./NewCategory.module.css";
 import ImageUpload from "../../common/inputImage/ImageUpload";
+import CategoryService from '../../../shared/services/CategoryService';
+import Swal from 'sweetalert2';
 
 const NewCategory = () => {
-    const [errorMessage, setErrorMessage] = useState("");
+    const [categories, setCategories] = useState("");
 
     const [formData, setFormData] = useState({
         title: "",
@@ -47,7 +49,7 @@ const NewCategory = () => {
         const { title, description, selectedImage, fileName } = formData;
 
         const categoryData = {
-            title: title,
+            name: title,
             description: description,
             image: selectedImage,
             fileName: fileName,
@@ -55,19 +57,22 @@ const NewCategory = () => {
         console.log("Datos de la categoría:", categoryData);
 
         try {
-            const response = await axios.get(
-                `http://localhost:8080/digitalbooking/categories/check?title=${title}`
-            );
-            const categoryExists = response.data.exists;
-
+            const response = await CategoryService.getAll();
+            setCategories(response)
+            let categoryExists = false;
+            categories.map( cat => cat.name === categoryData.name ? categoryExists = true : null)
+            if(categoryData.name == "" || categoryData.description == "" || categoryData.image == null)
+                categoryExists = true
             if (categoryExists) {
-                setErrorMessage("El título de la categoría ya está en uso. Por favor, escriba otro");
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Error',
+                    text: 'La categoría ya existe o falta completar un campo',
+                    confirmButtonColor: '#a6cf7e'
+                  })
             } else {
-                await axios.post(
-                    "http://localhost:8080/digitalbooking/category",
-                    categoryData
-                );
-                console.log("Categoría registrada con éxito:", categoryData);
+                await CategoryService.create(categoryData);
+                console.log("Categoría registrada con éxito: ", categoryData);
 
                 // Reiniciar los campos del formulario después de enviar los datos
                 setFormData({
@@ -79,7 +84,7 @@ const NewCategory = () => {
                 setErrorMessage(""); // Limpiar el mensaje de error
             }
         } catch (error) {
-            console.log(error.response.data);
+            console.log(error.response);
             console.error("Error al registrar la categoría:", error);
         }
     };

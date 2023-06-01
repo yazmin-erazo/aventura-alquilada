@@ -25,7 +25,7 @@ const ActivateUser = () => {
 
   return (
     <>
-     { response && (response.status == 200 ? response.data : <div className={styles.card}> {( response.status == 500 ? "Ha ocurrido un error de servidor" : response.data.mensaje)} </div>)}
+     { response && (response.status == 200 ? <div> <h1>¡Activación exitosa!</h1>    <p>Tu cuenta ha sido activada con éxito. Ahora puedes ingresar a <span>Digital</span> <span>Booking</span> y disfrutar de nuestros servicios.</p></div> : <div className={styles.card}> {( response.status == 500 ? "Ha ocurrido un error de servidor" : response.data.mensaje)} </div>)}
     </>
   )
 }
