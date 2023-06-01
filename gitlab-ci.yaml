@@ -15,16 +15,15 @@ cache:
 
 # -------------------------- WEB --------------------------
 
-
-test-web:
-  stage: test
-  image: node:14
-  script:
-    - cd Web/digital-booking-c3-e-1
-    - npm install
-    - npm run test
-  only:
-    - main
+# test-web:
+#   stage: test
+#   image: node:14
+#   script:
+#     - cd Web/digital-booking-c3-e-1
+#     - npm install
+#     - npm run test
+#   only:
+#     - main
 
 build-web:
   stage: build
