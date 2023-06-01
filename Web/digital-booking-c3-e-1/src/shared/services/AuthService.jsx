@@ -17,7 +17,7 @@ const AuthService = {
       })
       .catch(error => {
           console.log(error);
-          if (error.response && error.response.status === 400) {
+          if (error.response && error.response.status !== 500) {
             Swal.fire('Error', 'El usuario ya se encuentra registrado', 'error');
           } else {
             Swal.fire('Error', 'Ha ocurrido un error en el servidor', 'error');
@@ -45,7 +45,7 @@ const AuthService = {
     ),
 
     activate: (params) => API.get(AUTH_ENDPOINTS.ACTIVATE + params).then(
-      res => res.data
+      res => res
     )
 }
 

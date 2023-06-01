@@ -17,7 +17,7 @@ import ActivateUser from "./components/user/activateUser/ActivateUser.jsx";
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <BrowserRouter>
-    <React.StrictMode>
+    {/* <React.StrictMode> */}
     <Routes>
       <Route path="/" element={<App />}>
         <Route path='/' element={<Home />} />
@@ -27,12 +27,13 @@ ReactDOM.createRoot(document.getElementById("root")).render(
         <Route path='admin/' element={<Crud />} />
         <Route path='admin/category/add' element={<NewCategory />} />
         <Route path='admin/role/add' element={<NewRole />} />
+        <Route path='admin/role/edit/:id' element={<NewRole />} />
         <Route path='admin/role/edit' element={<EditRole />} />
         <Route path='login' element={<Login />} />
         <Route path='auth/register' element={<RegisterUser />} />
         <Route path='user/activate' element={<ActivateUser />} />
       </Route>
     </Routes>
-    </React.StrictMode>
+    {/* </React.StrictMode> */}
   </BrowserRouter>
 );
