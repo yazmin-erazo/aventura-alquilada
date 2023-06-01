@@ -80,7 +80,7 @@ const Login = () => {
   return (
     <div className={styles.container}>
       <div>
-        <img src="/LoginPic.png" alt="Hombre escalando" />
+        <img src="https://c3-e1-digital-booking.s3.us-east-2.amazonaws.com/img/LoginPic.png" alt="Hombre escalando" />
       </div>
       <div className={styles.form}>
         <h2>¡Listo para un nuevo desafío!</h2>

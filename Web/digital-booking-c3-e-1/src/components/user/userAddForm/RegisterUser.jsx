@@ -163,7 +163,7 @@ const RegisterUser = () => {
 
   return (
     <div className={styles.container}>
-      <img className={styles["registerUser-img"]} src="/registerUser.png" alt="imagen" />
+      <img className={styles["registerUser-img"]} src="https://c3-e1-digital-booking.s3.us-east-2.amazonaws.com/img/registerUser.png" alt="imagen" />
       <div className={styles["form-register"]}>
         <h1>Registrate</h1>
         <p>
