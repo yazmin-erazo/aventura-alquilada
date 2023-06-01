@@ -18,8 +18,7 @@ import java.math.BigDecimal;
 import java.util.List;
 import java.util.Optional;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.Mockito.*;
@@ -115,4 +114,65 @@ public class ServiceCategoryTest {
         verify(categoryRepository, times(1)).deleteCategory(anyLong());
     }
 
+    @Test
+    void testCreateWithId() {
+        Long id = 1L;
+
+        Category category = Category.create(id);
+
+        assertNotNull(category);
+        assertEquals(id, category.getId());
+        assertEquals(category.getName(),"");
+        assertEquals(category.getDescription(),"");
+        assertEquals(category.getImage(),"");
+        assertEquals(category.getFileName(),"");
+    }
+
+    @Test
+    void testCreateWithValues() {
+        String name = "Camping";
+        String description = "Descripción de prueba";
+        String image = "Imagen de prueba";
+        String fileName = "Archivo de prueba";
+
+        Category category = Category.create(name, image, description, fileName);
+
+        assertNotNull(category);
+        assertNull(category.getId());
+        assertEquals(name, category.getName());
+        assertEquals(description, category.getDescription());
+        assertEquals(image, category.getImage());
+        assertEquals(fileName, category.getFileName());
+    }
+
+    @Test
+    void testReBuild() {
+        Long id = 1L;
+        String name = "Camping";
+        String description = "Descripción de prueba";
+        String image = "Imagen de prueba";
+
+        Category category = Category.reBuild(id, name, image, description);
+
+        assertNotNull(category);
+        assertEquals(id, category.getId());
+        assertEquals(name, category.getName());
+        assertEquals(image, category.getImage());
+        assertEquals(description, category.getDescription());
+        assertEquals(category.getFileName(),"");
+    }
+
+    @Test
+    void testCreateById() {
+        Long id = 1L;
+
+        Category category = Category.createById(id);
+
+        assertNotNull(category);
+        assertEquals(id, category.getId());
+        assertNull(category.getName());
+        assertNull(category.getDescription());
+        assertNull(category.getImage());
+        assertNull(category.getFileName());
+    }
 }
