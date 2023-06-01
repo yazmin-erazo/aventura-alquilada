@@ -166,14 +166,9 @@ const RegisterUser = () => {
 
   const handleResendEmail = async () => {
     try {
-      const response = await fetch(`http://localhost:8080/digitalbooking/user/activation/email/send/${encodeURIComponent(user.email)}`, {
-        method: "GET",
-        headers: {
-          "Accept": "application/json",
-        },
-      });
+      const response = await AuthService.resendEmail(encodeURIComponent(user.email))
   
-      if (response.ok) {
+      if (response.status === 200) {
         Swal.fire({
           icon: 'success',
           title: 'Correo de activación reenviado',

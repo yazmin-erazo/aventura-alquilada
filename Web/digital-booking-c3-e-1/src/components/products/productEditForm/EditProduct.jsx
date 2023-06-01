@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import InputWithLabel from "../../common/input/InputWithLabel";
 import ButtonPrimary from "../../common/Buttons/ButtonPrimary";
 import Select from "../../common/select/Select";
-import ProductConditionSelect from "../../common/select/ProductConditionSelect";
+import Swal from 'sweetalert2';
 import styles from "./EditProduct.module.css";
 import CategoryService from "../../../shared/services/CategoryService";
 import ProductsService from "../../../shared/services/ProductsService";
@@ -66,9 +66,15 @@ const EditProduct = () => {
     };
     console.log("Datos del producto:" + productId, productData);
 
+    Swal.fire({
+      title: 'Editando...',
+      didOpen: () => { Swal.showLoading() }
+    })
     try {
-      var response = await ProductsService.updateByID(productId, productData);
-      console.log("Producto editado con éxito:", productId);
+      const response = await ProductsService.updateByID(productId, productData);
+      Swal.close();
+      Swal.fire('Éxito', "Producto editado con éxito", 'success')
+      console.log("Producto editado con éxito", productId);
       console.log(response);
 
       // Reiniciar los campos del formulario después de enviar los datos
@@ -89,6 +95,8 @@ const EditProduct = () => {
       //navigate(-1);
       
     } catch (error) {
+      Swal.close();
+      Swal.fire('Error', "Error al editar el producto", 'error' )
       console.error("Error al editar el producto:", error);
     }
   };

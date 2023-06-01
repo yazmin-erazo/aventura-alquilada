@@ -4,7 +4,8 @@ import Swal from 'sweetalert2';
 const AUTH_ENDPOINTS = {
     REGISTER: "user",
     LOGIN: "auth",
-    ACTIVATE: "user/activate"
+    ACTIVATE: "user/activate",
+    RESEND_EMAIL: "user/activation/email/send/"
 }
 
 const AuthService = {
@@ -45,6 +46,10 @@ const AuthService = {
     ),
 
     activate: (params) => API.get(AUTH_ENDPOINTS.ACTIVATE + params).then(
+      res => res
+    ),
+
+    resendEmail: (params) => API.get(AUTH_ENDPOINTS.RESEND_EMAIL + params).then(
       res => res
     )
 }

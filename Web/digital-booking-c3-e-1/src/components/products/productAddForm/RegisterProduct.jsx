@@ -19,6 +19,7 @@ const RegisterProduct = () => {
     productName: "",
     productPrice: "",
     brand: "",
+    image: "",
     selectedImages: [],
     description: "",
     color: "",
@@ -66,8 +67,8 @@ const RegisterProduct = () => {
         );
 
         updatedImages.push({
-          image: base64ImageWithoutPrefix,
           fileName: fileName,
+          image: base64ImageWithoutPrefix,
         });
       };
 
@@ -78,6 +79,7 @@ const RegisterProduct = () => {
       ...prevFormData,
       selectedImages: updatedImages,
     }));
+
   };
 
   const handleSubmit = async () => {
@@ -89,6 +91,7 @@ const RegisterProduct = () => {
       selectedCategoryId,
       selectedCondition,
       description,
+      image,
       selectedImages,
       color,
       material,
@@ -100,15 +103,15 @@ const RegisterProduct = () => {
       name: productName,
       brand: brand,
       price: productPrice,
-      category: selectedCategory,
       idCategory: selectedCategoryId,
       state: selectedCondition,
       description: description,
-      images: selectedImages,
+      fileName: selectedImages[0].fileName,
+      image: selectedImages[0].image,
+      secondaryImages: selectedImages,
       color: color,
       material: material,
       size: size,
-      fileName: fileName,
     };
     console.log("Datos del producto:", productData);
 

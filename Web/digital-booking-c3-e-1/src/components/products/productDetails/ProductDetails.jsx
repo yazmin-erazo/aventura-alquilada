@@ -14,12 +14,18 @@ import ImageGallery from "../../common/imagegalery/imagegalery/ImageGallery";
 import Qualification from "../../resources/qualification/Qualification";
 import RatingStats from "../../resources/rating/RatingStats";
 
-const ProductDetails = ({ product }) => {
+const ProductDetails = () => {
   const data = useContext(ProductsContext);
   const [products, setProducts] = useState([]);
   const params = useParams();
   const navigate = useNavigate();
   const [images, setImages] = useState([]);
+  // const [product, setProduct] = useState()
+
+    const product = products.find((p) => {
+      return p.id === parseInt(params.id);
+    });
+  
 
   useEffect(() => {
     const exampleImages = [
@@ -50,15 +56,18 @@ const ProductDetails = ({ product }) => {
       },
     ];
 
+    // const producImages = [
+    //   product.imageURL
+    // ]
+    //   product.secondaryImages.map( img => producImages.push(img))
+
     setImages(exampleImages);
   }, []);
 
-  product = products.find((p) => {
-    return p.id === parseInt(params.id);
-  });
-
+  
   useEffect(() => {
     setProducts(data.products);
+    // searchProduct();
   }, [data]);
 
   // const categoryIcons = {
