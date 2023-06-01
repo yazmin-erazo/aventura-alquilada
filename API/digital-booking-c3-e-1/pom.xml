@@ -113,6 +113,7 @@
 						<exclude>**/application/**</exclude>
 						<exclude>**/common/**</exclude>
 						<exclude>**/dto/**</exclude>
+						<exclude>**/DigitalbookingApplication.class</exclude>
 					</excludes>
 				</configuration>
 				<executions>

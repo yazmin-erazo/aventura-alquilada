@@ -83,7 +83,4 @@ public final class Product {
         Validator.validateMandatory(id, "El Id es requerido para eliminar un producto");
         return new Product(id);
     }
-
-    //public static Product rebuild(Long id, String name, String brand, String state, BigDecimal price, String description, String size, String gender, BigDecimal deposit)
-
 }

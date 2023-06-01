@@ -5,7 +5,7 @@ import styles from "./RegisterUser.module.css";
 import AuthService from "../../../shared/services/AuthService";
 import { AiOutlineEye, AiOutlineEyeInvisible } from "react-icons/ai";
 
-export const PasswordInput = ({ isVisible, setIsVisible, ...restProps }) => (
+export const PasswordInput = ({ isVisible, setIsVisible, right = "10px", ...restProps }) => (
   <div style={{ position: "relative" }}>
     <InputWithLabel type={isVisible ? "text" : "password"} {...restProps} />
     <button
@@ -14,7 +14,7 @@ export const PasswordInput = ({ isVisible, setIsVisible, ...restProps }) => (
       onClick={() => setIsVisible(!isVisible)}
       style={{
         position: "absolute",
-        right: "10px",
+        right: right, 
         top: "72%",
         transform: "translateY(-50%)",
         backgroundColor: "transparent",

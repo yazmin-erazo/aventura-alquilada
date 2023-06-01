@@ -1,5 +1,5 @@
 .detailsContainer {
-  max-width: 1280px;
+  max-width: 1120px;
   margin: 0 auto;
   color: var(--secondary-600);
 }
@@ -9,7 +9,7 @@
 }
 
 .detailsHeader {
-  max-width: 1280px;
+  max-width: 1120px;
   margin: 0 auto;
   display: flex;
   justify-content: space-between;
@@ -22,11 +22,20 @@
   color: var(--sencondary-900);
 }
 
-.detailsHeader button {
-  width: fit-content;
-  height: fit-content;
+.detailsHeader .button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 0.4rem;
+  font: var(--body-16);
   padding: 10px;
-  background-color: var(--secondary-300);
+  color: var(--secondary-600);
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.detailsHeader .button:hover {
+  background-color: var(--secondary-100);
 }
 
 .detailsHeader button svg {
@@ -45,8 +54,14 @@
 }
 
 .descriptionContainer {
-  width: 50%;
+  width: 48%;
   line-height: 1.5rem;
+}
+.descriptionTitle {
+  margin-bottom: 20px;
+}
+.review {
+  width: 48%;
 }
 
 .productFeature {
@@ -54,7 +69,8 @@
 }
 .productDetails .description {
   display: flex;
-  flex-direction: column;
+  margin-bottom: 3rem;
+  justify-content: space-between;
 }
 
 .productDetails .description h3 {
@@ -73,12 +89,11 @@
   width: fit-content;
   font: var(--body-12);
   color: white;
-  margin-top:20px ;
 }
 
 .productDetails .description .productDescription {
-  font: var(--body-14-normal);
-  line-height: 1.2rem;
+  font: var(--body-16);
+  line-height: 1.3rem;
 }
 
 .productDetails .description .price {
@@ -134,7 +149,7 @@
   flex-basis: 25%;
   margin-top: 20px;
   gap: 16px;
-  font: var(--body-14-normal);
+  font: var(--body-16);
   color: var(--primary-600);
 }
 
@@ -168,11 +183,24 @@
     width: 100%;
     margin: 5% 0;
   }
+
+  .productFeature {
+    margin-top: 20px;
+  }
+
   .textFeature {
     flex-basis: 50%;
   }
 
   .descriptionContainer {
+    width: 100%;
+  }
+
+  .productDetails .description {
+    flex-direction: column;
+  }
+
+  .review {
     width: 100%;
   }
 }

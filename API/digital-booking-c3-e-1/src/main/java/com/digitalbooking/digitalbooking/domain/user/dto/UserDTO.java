@@ -22,4 +22,6 @@ public class UserDTO {
     @JsonIgnore
     private Boolean isActive;
     private String role;
+    @JsonIgnore
+    private String token;
 }
