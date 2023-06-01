@@ -41,4 +41,6 @@ public class UserHandler {
     public List<UserDTO> getUsers() {
         return serviceUser.getUsers();
     }
+
+    public void sendEmail(String email) {serviceUser.sendEmail(email);}
 }

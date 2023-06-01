@@ -29,5 +29,4 @@ public class AuthService {
 
         return jwt;
     }
-
 }
