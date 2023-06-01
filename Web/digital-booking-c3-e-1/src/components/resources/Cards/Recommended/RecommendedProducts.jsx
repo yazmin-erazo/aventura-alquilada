@@ -6,8 +6,9 @@ import { MdOutlineSurfing, MdDownhillSkiing, MdDirectionsBike, MdOutlineSnowboar
 import { FaMountain, FaSwimmer } from "react-icons/fa";
 import { BsClock } from "react-icons/bs";
 import { FaStar } from "react-icons/fa";
+import RatingStats from "../../rating/RatingStats";
 
-const RecommendedProducts = ({ product, rentalType, categories }) => {
+const RecommendedProducts = ({ product, rentalType }) => {
   
   const calculateAverageRating = (ratings) => {
     if (Array.isArray(ratings) && ratings.length > 0) {
@@ -55,8 +56,9 @@ const RecommendedProducts = ({ product, rentalType, categories }) => {
         <div className={styles.ratingAndCategory}>
           {" "}
           <div className={styles.rating}>
-            <div className={styles.ratingStars}>{renderRatingStars()}</div>
-            <p className={styles.numRatings}>{numRatings}</p>
+            <div className={styles.ratingStars}><RatingStats/></div>
+            {/* <div className={styles.ratingStars}>{renderRatingStars()}</div> */}
+            {/* <p className={styles.numRatings}>{numRatings}</p> */}
           </div>
           {CategoryIcon && (
             <div className={styles.categoryIconContainer}>
