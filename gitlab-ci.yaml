@@ -94,10 +94,8 @@ build-api:
   stage: build
   image: maven:3.6-jdk-11
   script:
-    - echo "Building app..."
     - cd API/digital-booking-c3-e-1
     - mvn clean package -DskipTests=true
-    - echo "Finished building the app."
   artifacts:
     paths:
       - API/digital-booking-c3-e-1/target/equipamiento-deportivo.jar
