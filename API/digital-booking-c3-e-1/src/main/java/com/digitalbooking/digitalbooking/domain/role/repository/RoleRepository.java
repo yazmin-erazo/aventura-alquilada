@@ -11,6 +11,8 @@ public interface RoleRepository {
 
     Optional<RoleDTO> findByIdAndIsDelete(Long id);
 
+    Optional<RoleDTO> findByNameAndIsDelete(String name);
+
    void updateRole(Role role);
 
     void deleteRole(Long id);
@@ -18,6 +20,7 @@ public interface RoleRepository {
     Long createRole(Role role);
 
     List<RoleDTO> getAll();
+
 
 
 }
