@@ -20,19 +20,12 @@ const ProductDetails = () => {
   const params = useParams();
   const navigate = useNavigate();
   const [images, setImages] = useState([]);
-  const [product, setProduct] = useState()
+  // const [product, setProduct] = useState()
 
-  const searchProduct = () => {
-
-    setProduct(products.find((p) => {
+    const product = products.find((p) => {
       return p.id === parseInt(params.id);
-    }));
-  }
-
-  useEffect(() => {
-    setProducts(data.products);
-    searchProduct();
-  }, [data]);
+    });
+  
 
   useEffect(() => {
     const exampleImages = [
@@ -63,13 +56,19 @@ const ProductDetails = () => {
       },
     ];
 
-    const producImages = [
-      product.imageURL
-    ]
-      product.secondaryImages.map( img => producImages.push(img))
+    // const producImages = [
+    //   product.imageURL
+    // ]
+    //   product.secondaryImages.map( img => producImages.push(img))
 
-    setImages(producImages);
+    setImages(exampleImages);
   }, []);
+
+  
+  useEffect(() => {
+    setProducts(data.products);
+    // searchProduct();
+  }, [data]);
 
   // const categoryIcons = {
   //   Camping: TbTent,

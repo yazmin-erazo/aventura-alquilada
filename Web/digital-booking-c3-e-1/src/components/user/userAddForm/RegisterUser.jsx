@@ -52,7 +52,7 @@ const RegisterUser = () => {
   const [isPasswordVisible, setIsPasswordVisible] = useState(false);
   const [isCheckPasswordVisible, setIsCheckPasswordVisible] = useState(false);
   const [showResendMessage, setShowResendMessage] = useState(false);
-  const [isEmailSent, setIsEmailSent] = useState(true); //VOLVER A FALSE ANTES DE SUBIRLO!!
+  const [isEmailSent, setIsEmailSent] = useState(false);
 
 
 

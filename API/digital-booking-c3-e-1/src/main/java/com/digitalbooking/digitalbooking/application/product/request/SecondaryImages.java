@@ -9,7 +9,7 @@ import lombok.NoArgsConstructor;
 @Getter
 @AllArgsConstructor
 @NoArgsConstructor
-public class SecundaryImages {
+public class SecondaryImages {
     @JsonProperty
     @Schema(allowableValues = {"/9j/4AAQ6iwEuaM1Fuo3UWA/9k="})
     private String image;

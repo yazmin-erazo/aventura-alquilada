@@ -2,7 +2,7 @@ import { useCallback, useEffect, useState, useContext } from "react";
 import TableRow from "../../common/Table/TableRow";
 import styles from "./Crud.module.css";
 import ButtonPrimary from "../../common/Buttons/ButtonPrimary";
-import axios from "axios";
+import Pagination from "../../resources/pagination/Pagination";
 import { Link } from "react-router-dom";
 import { ProductsContext } from "../../../context/ProductsContext";
 import ProductsService from "../../../shared/services/ProductsService";
@@ -13,10 +13,23 @@ const Crud = () => {
   const navigate = useNavigate();
   const [products, setProducts] = useState([]);
   const data = useContext(ProductsContext)
+  const [currentProducts, setCurrentProducts] = useState([]);
+  const [currentPage, setCurrentPage] = useState(1);
+
+  const pageLimit = 5;
   
   useEffect(() => {
     setProducts(data.products);
   }, [data]);
+
+  useEffect(() => {
+    onPageChanged();
+  }, [currentPage, products]);
+
+  const onPageChanged = () => {
+    const offset = (currentPage - 1) * pageLimit;
+    setCurrentProducts(products.slice(offset, offset + pageLimit));
+  };
 
 // usecallback para memorizar y asegurarnos de que no se creara una nueva instancia en cada renderizado
   const handleDelete = useCallback(async (productId) => {
@@ -62,7 +75,8 @@ const handleEdit = useCallback((product) => {
             </tr>
           </thead>
           <tbody>
-            {products.map((product) => (
+
+            {currentProducts.map((product) => (
               <TableRow
                 key={product.id}
                 product={product}
@@ -72,6 +86,13 @@ const handleEdit = useCallback((product) => {
             ))}
           </tbody>
         </table>
+            <Pagination
+        onPageChanged={onPageChanged}
+        limit={pageLimit}
+        total={products.length}
+        currentPage={currentPage}
+        setCurrentPage={setCurrentPage}
+      />
       </section>
     </>
   );

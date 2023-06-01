@@ -28,11 +28,11 @@ const Panel = () => {
         {/* ------------------ USERS ------------------  */}
 
         <DashboardSection icon={FiUsers} size={24} text="Usuarios" />
-        <MenuItem to="usuarios/" isActive={location.pathname === "/usuarios/"}>
+        <MenuItem to="#" isActive={location.pathname === "/usuarios/"}>
           <Button text="Listar todos" />
         </MenuItem>
         <MenuItem
-          to="nuevousuario/"
+          to="#"
           isActive={location.pathname === "/nuevousuario/"}
         >
           <Button text="Agregar usuario" />
@@ -55,7 +55,7 @@ const Panel = () => {
         <DashboardSection icon={BiGridAlt} size={24} text="Categorias" />
 
         <MenuItem
-          to="categorias/"
+          to="#"
           isActive={location.pathname === "/categorias/"}
         >
           <Button text="Listar todos" />
