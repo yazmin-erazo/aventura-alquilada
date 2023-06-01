@@ -37,4 +37,8 @@ public class RoleService {
     public RoleDTO getRole(Long id) {
         return roleRepository.findByIdAndIsDelete(id).orElseThrow(()->new ExceptionNullValue("Rol no encontrado"));
     }
+
+    public RoleDTO getRoleByName(String name) {
+        return roleRepository.findByNameAndIsDelete(name).orElseThrow(()->new ExceptionNullValue("Rol no encontrado"));
+    }
 }
