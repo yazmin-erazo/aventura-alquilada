@@ -39,7 +39,7 @@ public final class Category {
     }
 
     public static Category reBuild(Long id, String name, String image, String description)  {
-        return new Category(id, name, image, description, "");
+        return new Category(id, name, description, image, "");
     }
 
     public static Category createById(Long id) {
