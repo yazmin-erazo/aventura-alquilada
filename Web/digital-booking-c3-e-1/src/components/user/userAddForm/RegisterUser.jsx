@@ -1,9 +1,10 @@
-import React, { useState, useEffect } from "react";
+import React, { useState} from "react";
 import InputWithLabel from "../../common/input/InputWithLabel";
 import ButtonPrimary from "../../common/Buttons/ButtonPrimary";
 import styles from "./RegisterUser.module.css";
 import AuthService from "../../../shared/services/AuthService";
 import { AiOutlineEye, AiOutlineEyeInvisible } from "react-icons/ai";
+import Swal from 'sweetalert2';
 
 export const PasswordInput = ({ isVisible, setIsVisible, right = "10px", ...restProps }) => (
   <div style={{ position: "relative" }}>
@@ -14,7 +15,7 @@ export const PasswordInput = ({ isVisible, setIsVisible, right = "10px", ...rest
       onClick={() => setIsVisible(!isVisible)}
       style={{
         position: "absolute",
-        right: right, 
+        right: right,
         top: "72%",
         transform: "translateY(-50%)",
         backgroundColor: "transparent",
@@ -50,8 +51,10 @@ const RegisterUser = () => {
   const [isTermsChecked, setIsTermsChecked] = useState(false);
   const [isPasswordVisible, setIsPasswordVisible] = useState(false);
   const [isCheckPasswordVisible, setIsCheckPasswordVisible] = useState(false);
+  const [showResendMessage, setShowResendMessage] = useState(false);
+  const [isEmailSent, setIsEmailSent] = useState(false);
 
- 
+
 
 
   const handleSubmit = (event) => {
@@ -146,10 +149,11 @@ const RegisterUser = () => {
 
     const sendUser = async () => {
       try {
-       await AuthService.register(userData);
+        await AuthService.register(userData);
+        setIsEmailSent(true);
         console.log(userData);
-      } catch {
-        (err) => console.log(err);
+      } catch (err) {
+        console.log(err);
       }
     };
 
@@ -159,7 +163,38 @@ const RegisterUser = () => {
       console.log("El formulario contiene errores");
     }
   };
+
+  const handleResendEmail = async () => {
+    try {
+      const response = await fetch(`http://localhost:8080/digitalbooking/user/activation/email/send/${encodeURIComponent(user.email)}`, {
+        method: "GET",
+        headers: {
+          "Accept": "application/json",
+        },
+      });
   
+      if (response.ok) {
+        Swal.fire({
+          icon: 'success',
+          title: 'Correo de activación reenviado',
+          text: 'El correo de activación ha sido reenviado exitosamente.',
+        }).then((result) => {
+        });
+      } else {
+        Swal.fire({
+          icon: 'error',
+          title: 'Error al reenviar el correo de activación',
+          text: 'Ha ocurrido un error al reenviar el correo de activación. Por favor, intenta nuevamente más tarde.',
+        });
+      }
+    } catch (error) {
+      Swal.fire({
+        icon: 'error',
+        title: 'Error al reenviar el correo de activación',
+        text: 'Ha ocurrido un error al reenviar el correo de activación. Por favor, intenta nuevamente más tarde.',
+      });
+    }
+  };  
 
   return (
     <div className={styles.container}>
@@ -171,7 +206,7 @@ const RegisterUser = () => {
           de emocionantes aventuras al aire libre
         </p>
         <form className={styles["form-container"]} onSubmit={handleSubmit}>
-          <InputWithLabel 
+          <InputWithLabel
             type={"text"}
             value={user.name}
             onChange={(event) => setUser({ ...user, name: event.target.value })}
@@ -252,6 +287,28 @@ const RegisterUser = () => {
 
           <ButtonPrimary onClick={handleSubmit}>Enviar</ButtonPrimary>
         </form>
+        {isEmailSent && !showResendMessage && (
+            <p>
+              Si no recibiste el correo de activación, por favor, haz clic{" "}
+              <button
+                onClick={handleResendEmail}
+                style={{
+                  width: "15%",
+                  height: "40px",
+                  background: "var(--secondary-600)",
+                  borderRadius: "4px",
+                  color: "var(--white-100)",
+                  font: "var(--body-14-normal)",
+                  border: "none",
+                  maxWidth: "506px",
+                  cursor: "pointer",
+                }}
+              >
+                aquí
+              </button>{" "}
+              para reenviarlo.
+            </p>
+          )}
       </div>
     </div>
   );
