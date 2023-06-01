@@ -4,6 +4,7 @@ import App from "./App.jsx";
 import Home from "./components/home/HomePage.jsx"
 import Details from "./components/products/productDetails/ProductDetails.jsx"
 import AddProduct from './components/products/productAddForm/RegisterProduct.jsx';
+import EditProduct from './components/products/productEditForm/EditProduct.jsx';
 import NewCategory from "./components/products/categoryAddForm/NewCategory.jsx";
 import NewRole from "./components/products/roleFormAdd/NewRole.jsx";
 import EditRole from "./components/products/editRole/EditRole.jsx";
@@ -22,6 +23,7 @@ ReactDOM.createRoot(document.getElementById("root")).render(
         <Route path='/' element={<Home />} />
         <Route path='products/:id' element={<Details />} />
         <Route path='admin/product/add' element={<AddProduct />} />
+        <Route path='admin/product/edit' element={<EditProduct />} />
         <Route path='admin/' element={<Crud />} />
         <Route path='admin/category/add' element={<NewCategory />} />
         <Route path='admin/role/add' element={<NewRole />} />
