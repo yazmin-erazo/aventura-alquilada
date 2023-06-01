@@ -7,8 +7,10 @@ import { Link } from "react-router-dom";
 import { ProductsContext } from "../../../context/ProductsContext";
 import ProductsService from "../../../shared/services/ProductsService";
 
-const Crud = () => {
+import { useNavigate } from 'react-router-dom';
 
+const Crud = () => {
+  const navigate = useNavigate();
   const [products, setProducts] = useState([]);
   const data = useContext(ProductsContext)
   
@@ -30,11 +32,12 @@ const Crud = () => {
     }
   }, [products]);
 
+const handleEdit = useCallback((product) => {
+  console.log("Editando producto:", product);
+  console.log("Editando producto con ID:", product.id);
 
-  const handleEdit = useCallback((productId) => {
-    console.log("Editando producto con ID:", productId);
-  }, []);
-
+  navigate('product/edit', {state:{product:product}});
+}, [navigate]);
 
   return (
     <>
@@ -64,7 +67,7 @@ const Crud = () => {
                 key={product.id}
                 product={product}
                 onDelete={() => handleDelete(product.id)}
-                onEdit={() => handleEdit(product.id)}
+                onEdit={() => handleEdit(product)}
               />
             ))}
           </tbody>

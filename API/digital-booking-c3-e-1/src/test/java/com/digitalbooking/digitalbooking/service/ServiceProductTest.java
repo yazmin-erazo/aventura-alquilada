@@ -3,9 +3,9 @@ package com.digitalbooking.digitalbooking.service;
 import com.digitalbooking.digitalbooking.common.exception.ExceptionInvalidValue;
 import com.digitalbooking.digitalbooking.common.exception.ExceptionMandatoryValue;
 import com.digitalbooking.digitalbooking.domain.category.dto.CategoryDTO;
-import com.digitalbooking.digitalbooking.domain.category.entity.Category;
 import com.digitalbooking.digitalbooking.domain.category.repository.CategoryRepository;
 import com.digitalbooking.digitalbooking.domain.product.dto.ProductDTO;
+import com.digitalbooking.digitalbooking.domain.product.entity.ImageProduct;
 import com.digitalbooking.digitalbooking.domain.product.entity.Product;
 import com.digitalbooking.digitalbooking.domain.product.repository.RepositoryProduct;
 import com.digitalbooking.digitalbooking.domain.product.service.ServiceProduct;
@@ -16,11 +16,11 @@ import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.math.BigDecimal;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
 
 @ExtendWith(MockitoExtension.class)
@@ -191,4 +191,91 @@ class ServiceProductTest {
         verify(repositoryProduct, times(1)).deleteProduct(anyLong());
     }
 
+    @Test
+    void testCreateProduct() throws Exception {
+        Long id = 0L;
+        String name = "Test Product";
+        String brand = "Test Brand";
+        String state = "Test State";
+        BigDecimal price = BigDecimal.valueOf(10.99);
+        String description = "Test Description";
+        String size = "Test Size";
+        String gender = "Test Gender";
+        BigDecimal deposit = BigDecimal.valueOf(5.0);
+        Long idCategory = 1L;
+        String image = "Test Image";
+        String fileName = "Test FileName";
+        String color = "Test Color";
+        String material = "Test Material";
+        List<ImageProduct> imageProducts = new ArrayList<>();
+
+        Product product = Product.create(name, brand, state, price, description, size, gender,
+                deposit, idCategory, image, fileName, color, material, imageProducts);
+
+        assertNotNull(product);
+        assertEquals(id, product.getId());
+        assertEquals(name, product.getName());
+        assertEquals(brand, product.getBrand());
+        assertEquals(state, product.getState());
+        assertEquals(price, product.getPrice());
+        assertEquals(description, product.getDescription());
+        assertEquals(size, product.getSize());
+        assertEquals(gender, product.getGender());
+        assertEquals(deposit, product.getDeposit());
+        assertEquals(idCategory, product.getCategory().getId());
+        assertEquals(image, product.getImage());
+        assertEquals(fileName, product.getFileName());
+        assertEquals(color, product.getColor());
+        assertEquals(material, product.getMaterial());
+        assertEquals(imageProducts, product.getImageProducts());
+    }
+
+    @Test
+    void testUpdateProduct() throws Exception {
+        Long id = 1L;
+        Long idCategory = 2L;
+
+        Product product = Product.update(id, idCategory);
+
+        assertNotNull(product);
+        assertEquals(id, product.getId());
+        assertNull(product.getName());
+        assertNull(product.getBrand());
+        assertNull(product.getState());
+        assertNull(product.getPrice());
+        assertNull(product.getDescription());
+        assertNull(product.getSize());
+        assertNull(product.getGender());
+        assertNull(product.getDeposit());
+        assertEquals(idCategory, product.getCategory().getId());
+        assertNull(product.getImage());
+        assertNull(product.getFileName());
+        assertNull(product.getColor());
+        assertNull(product.getMaterial());
+        assertNull(product.getImageProducts());
+    }
+
+    @Test
+    void testCreateById() {
+        Long id = 1L;
+
+        Product product = Product.createById(id);
+
+        assertNotNull(product);
+        assertEquals(id, product.getId());
+        assertNull(product.getName());
+        assertNull(product.getBrand());
+        assertNull(product.getState());
+        assertNull(product.getPrice());
+        assertNull(product.getDescription());
+        assertNull(product.getSize());
+        assertNull(product.getGender());
+        assertNull(product.getDeposit());
+        assertNull(product.getCategory());
+        assertNull(product.getImage());
+        assertNull(product.getFileName());
+        assertNull(product.getColor());
+        assertNull(product.getMaterial());
+        assertNull(product.getImageProducts());
+    }
 }
