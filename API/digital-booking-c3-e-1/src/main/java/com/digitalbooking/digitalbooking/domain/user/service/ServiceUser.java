@@ -91,4 +91,10 @@ public class ServiceUser implements UserDetailsService {
         }
         return UserDetailsImpl.build(user);
     }
+
+    public void sendEmail(String email) {
+        UserDTO userDTO = repositoryUser.findByEmail(email).orElseThrow(() -> new ExceptionInvalidValue("El usuario con el correo suministrado no existe"));
+        String urlToken = String.format(urlValidation,userDTO.getToken());
+        mailRepository.sendEmailValidateAccount(userDTO.getEmail(), subject, userDTO.getName(),urlToken);
+    }
 }

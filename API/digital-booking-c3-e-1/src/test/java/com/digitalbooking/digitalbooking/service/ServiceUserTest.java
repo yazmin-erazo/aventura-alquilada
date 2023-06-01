@@ -31,7 +31,7 @@ import static org.mockito.Mockito.when;
 @ContextConfiguration(classes = {DigitalConfigurationTest.class}, loader = AnnotationConfigContextLoader.class)
 @ExtendWith(SpringExtension.class)
 @TestPropertySource(properties = {"email.urlvalidation=http://127.0.0.1:5173/user/activate?token=%s"})
-public class ServiceUserTest {
+class ServiceUserTest {
 
     @Autowired
     private RepositoryUser repositoryUser;
@@ -125,7 +125,7 @@ public class ServiceUserTest {
         String token = "testToken";
         LocalDateTime currentDate = LocalDateTime.now();
         LocalDateTime expirationDate = currentDate.plusHours(48L);
-        UserDTO user = new UserDTO(1L, "Lore", "Sanchez", "lorena@l.com", token, currentDate, false, token);
+        UserDTO user = new UserDTO(1L, "Lore", "Sanchez", "lorena@l.com", token, currentDate, false, token,token);
 
         when(repositoryUser.findByToken(token)).thenReturn(Optional.of(user));
 
@@ -145,7 +145,7 @@ public class ServiceUserTest {
         String token = "expiredToken";
         LocalDateTime currentDate = LocalDateTime.now();
         LocalDateTime expirationDate = currentDate.minusHours(48L);
-        UserDTO user = new UserDTO(1L, "Lore", "Sanchez", "lorena@l.com", token, expirationDate, false, token);
+        UserDTO user = new UserDTO(1L, "Lore", "Sanchez", "lorena@l.com", token, expirationDate, false, token,token);
 
         when(repositoryUser.findByToken(token)).thenReturn(Optional.of(user));
 
@@ -162,7 +162,7 @@ public class ServiceUserTest {
         String token = "activatedToken";
         LocalDateTime currentDate = LocalDateTime.now();
         LocalDateTime expirationDate = currentDate.plusHours(48L);
-        UserDTO user = new UserDTO(1L, "Lore", "Sanchez", "lorena@l.com", token, expirationDate, true, token);
+        UserDTO user = new UserDTO(1L, "Lore", "Sanchez", "lorena@l.com", token, expirationDate, true, token,token);
 
         when(repositoryUser.findByToken(token)).thenReturn(Optional.of(user));
 

@@ -33,4 +33,10 @@ public class QueryControllerUser {
     public ResponseEntity<List<UserDTO>> listUsers(){
         return ResponseEntity.ok(userHandler.getUsers());
     }
+
+    @GetMapping("activation/email/send/{email}")
+    @Operation(summary = "send email", description = "Send validation email to user")
+    public void sendEmail(@PathVariable("email") String email){
+        userHandler.sendEmail(email);
+    }
 }
