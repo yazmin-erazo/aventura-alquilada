@@ -4,7 +4,8 @@ const PRODUCTS_ENDPOINTS = {
     ALL_PRODUCTS: 'product/products',
     PRODUCT_DETAILS: 'product/',
     CREATE_PRODUCT: 'product',
-    DELETE_PRODUCT: 'product/'
+    DELETE_PRODUCT: 'product/',
+    UPDATE_PRODUCT: 'product/'
 }
 
 const ProductsService = {
@@ -21,7 +22,12 @@ const ProductsService = {
         res => res.data
     ),
 
-    deleteByID: id => API.delete(PRODUCTS_ENDPOINTS.DELETE_PRODUCT + id)
+    deleteByID: id => API.delete(PRODUCTS_ENDPOINTS.DELETE_PRODUCT + id),
+
+    updateByID: (id, product) => API.put(PRODUCTS_ENDPOINTS.UPDATE_PRODUCT + id, product)
+    .then(
+        res => res.data
+    )
 
 }
 
