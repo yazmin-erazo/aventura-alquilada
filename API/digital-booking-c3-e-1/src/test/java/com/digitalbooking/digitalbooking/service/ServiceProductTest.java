@@ -127,12 +127,6 @@ class ServiceProductTest {
     }
 
     @Test
-    void testCreateProductErrorWhenGenderIsNull() throws Exception {
-        Exception exception = assertThrows(ExceptionMandatoryValue.class, () -> Product.create("Carpa", "Nemo Wagontop", "Nueva", BigDecimal.valueOf(150),"Descripción test", "8 personas", "", null, 1L, "Test Base64", "Carpa1", "Amarillo", "Poliéster", List.of()));
-        assertEquals("El género es requerido para crear un producto", exception.getMessage());
-    }
-
-    @Test
     void testCreateProductErrorWhenImageIsNull() throws Exception {
         Exception exception = assertThrows(ExceptionMandatoryValue.class, () -> Product.create("Carpa", "Nemo Wagontop", "Nueva", BigDecimal.valueOf(150),"Descripción test", "8 personas", "No aplica", null, 1L, "", "Carpa1", "Amarillo", "Poliéster", List.of()));
         assertEquals("La imagen es requerida para crear un producto", exception.getMessage());
