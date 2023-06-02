@@ -22,7 +22,6 @@ aws:
   profile: default
   s3:
     bucketname: c3-e1-digital-booking
-<<<<<<< HEAD
     imagepath: img
 email:
   subject: Activar Cuenta
@@ -33,6 +32,3 @@ email:
 app:
   jwtSecret: 95a59bb848e94d00842bb39ecf6f8fcf
   jwtExpirationMs: 86400000
-=======
-    imagepath: img
->>>>>>> c745d2fd0d4da77d38337c252e93018b79633e50

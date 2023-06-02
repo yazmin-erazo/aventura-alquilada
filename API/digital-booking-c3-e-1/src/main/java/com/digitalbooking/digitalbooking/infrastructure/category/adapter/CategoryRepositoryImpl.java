@@ -5,6 +5,8 @@ import com.digitalbooking.digitalbooking.domain.category.dto.CategoryDTO;
 import com.digitalbooking.digitalbooking.domain.category.entity.Category;
 import com.digitalbooking.digitalbooking.domain.category.repository.CategoryRepository;
 import com.digitalbooking.digitalbooking.infrastructure.category.MapToCategory;
+import com.digitalbooking.digitalbooking.infrastructure.product.adapter.ProductS3;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
@@ -15,9 +17,11 @@ import java.util.stream.Collectors;
 @Repository
 public class CategoryRepositoryImpl implements CategoryRepository {
     @Autowired
+    ProductS3 productS3;
+    @Autowired
     CategoryRepositoryMySql categoryRepositoryMySql;
+
     @Override
-<<<<<<< HEAD
     public Long save(Category category, String imageURL) {
         CategoryEntity categoryEntity = new CategoryEntity();
         BeanUtils.copyProperties(category, categoryEntity);
@@ -33,11 +37,8 @@ public class CategoryRepositoryImpl implements CategoryRepository {
 
     @Override
     public Optional<CategoryDTO> findById(Long id) {
-=======
-    public Optional<Category> findById(Long id) {
->>>>>>> c745d2fd0d4da77d38337c252e93018b79633e50
         Optional<CategoryEntity> category = categoryRepositoryMySql.findById(id);
-        return category.map(c -> Category.reBuild(c.getId(), c.getName(), c.getImageURL()));
+        return category.map(MapToCategory::mapToCategory);
     }
 
     @Override

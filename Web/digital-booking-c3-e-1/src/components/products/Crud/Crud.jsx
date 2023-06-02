@@ -59,7 +59,7 @@ const handleEdit = useCallback((product) => {
     <>
       <section className={styles["container"]} >
         <div className={styles["button-container"]}>
-        <Link to="add">
+        <Link to="product/add">
           <ButtonPrimary>Agregar producto</ButtonPrimary>
         </Link>
         </div>

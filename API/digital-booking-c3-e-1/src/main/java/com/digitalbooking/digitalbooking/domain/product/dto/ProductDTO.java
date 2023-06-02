@@ -5,6 +5,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.math.BigDecimal;
+import java.util.List;
 
 @Data
 @AllArgsConstructor
@@ -24,10 +25,7 @@ public class ProductDTO {
     private String imageURL;
     private String color;
     private String material;
-<<<<<<< HEAD
     private List<ImageProductDTO> secondaryImages;
-=======
->>>>>>> c745d2fd0d4da77d38337c252e93018b79633e50
 
     /*public Product parseToProduct(){
         return Product.reconstruir()

@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 import React, { useContext } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { UserContext } from "../../context/AuthContext";
@@ -11,12 +10,6 @@ const Header = () => {
     navigate("/");
   };
 
-=======
-import React from "react";
-import { Link } from "react-router-dom";
-
-const Header = () => {
->>>>>>> c745d2fd0d4da77d38337c252e93018b79633e50
   return (
     <div className="header">
       <div className="headerContainer">
@@ -27,7 +20,6 @@ const Header = () => {
           />
           <h5 className="lemaHeader">Sin equipo no hay aventura</h5>
         </Link>
-<<<<<<< HEAD
         {isLogedIn ? (
           <div>
             <input type="checkbox" id="userData" />
@@ -87,22 +79,6 @@ const Header = () => {
               </ul>
             </>
           )}
-=======
-        <div className="headerBtn">
-          <button className="cuentaBtn">Crear cuenta</button>
-          <button className="sesionBtn">Iniciar sesión</button>
-        </div>
-        <nav>
-          <input type="checkbox" id="menu" />
-          <label className="menuIcon" htmlFor="menu">
-            {" "}
-            ☰{" "}
-          </label>
-          <ul>
-            <li>Crear cuenta</li>
-            <li>Iniciar sesión</li>
-          </ul>
->>>>>>> c745d2fd0d4da77d38337c252e93018b79633e50
         </nav>
       </div>
     </div>

@@ -2,6 +2,7 @@ package com.digitalbooking.digitalbooking.infrastructure.product.controller;
 
 import com.digitalbooking.digitalbooking.application.product.handler.ProductHandler;
 import com.digitalbooking.digitalbooking.application.product.request.CommandCreateProduct;
+import com.digitalbooking.digitalbooking.application.product.request.CommandUpdateProduct;
 import com.digitalbooking.digitalbooking.common.response.CommandResponse;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -27,7 +28,6 @@ public class CommandControllerProduct {
         return new ResponseEntity<>(new CommandResponse<>(productHandler.createProduct(commandCreateProduct)), HttpStatus.CREATED);
     }
 
-<<<<<<< HEAD
     @PutMapping("{id-product}")
     @PreAuthorize("@authorizationFilter.hasPermission('productUpdate')")
     @Operation(summary = "Update Product", description = "Method to update a product")
@@ -35,8 +35,6 @@ public class CommandControllerProduct {
         return new ResponseEntity<>(new CommandResponse<>(productHandler.updateProduct(id, commandUpdateProduct)), HttpStatus.OK);
     }
 
-=======
->>>>>>> c745d2fd0d4da77d38337c252e93018b79633e50
     @DeleteMapping("{id-product}")
     @PreAuthorize("@authorizationFilter.hasPermission('productDelete')")
     @Operation(summary = "Delete Product", description = "Method to delete a product")

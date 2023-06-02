@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Repository
@@ -21,11 +22,7 @@ public class RepositoryProductImpl implements RepositoryProduct {
     @Autowired
     RepositoryProductMySql repositoryProductMySql;
     @Override
-<<<<<<< HEAD
     public Long save(Product product, String imageURL, List<String> secondaryImages) {
-=======
-    public Long save(Product product, String imageURL) {
->>>>>>> c745d2fd0d4da77d38337c252e93018b79633e50
         ProductEntity productEntity = new ProductEntity();
         BeanUtils.copyProperties(product,productEntity);
         CategoryEntity category = new CategoryEntity();
@@ -33,11 +30,17 @@ public class RepositoryProductImpl implements RepositoryProduct {
         productEntity.setCategory(category);
         productEntity.setImageURL(imageURL);
         productEntity.setIsDelete(Boolean.FALSE);
-<<<<<<< HEAD
         productEntity.setImageProductEntity(secondaryImages.stream().map(secondaryImage -> ImageProductEntity.builder().imageURL(secondaryImage).productEntity(productEntity).build()).collect(Collectors.toList()));
-=======
->>>>>>> c745d2fd0d4da77d38337c252e93018b79633e50
         return repositoryProductMySql.save(productEntity).getId();
+    }
+
+    @Override
+    public void updateProduct(Product product){
+        ProductEntity productEntity = repositoryProductMySql.findById(product.getId()).orElseThrow(()->new ExceptionNullValue("Producto no encontrado"));
+        CategoryEntity category = new CategoryEntity();
+        category.setId(product.getCategory().getId());
+        productEntity.setCategory(category);
+        repositoryProductMySql.save(productEntity);
     }
 
     @Override
@@ -53,6 +56,11 @@ public class RepositoryProductImpl implements RepositoryProduct {
     @Override
     public ProductDTO findById(Long id) {
         return repositoryProductMySql.findByIdAndIsDelete(id,Boolean.FALSE).map(MapToProduct::mapToProduct).orElseThrow(()->new ExceptionNullValue("Producto no encontrado"));
+    }
+
+    @Override
+    public Optional<ProductDTO> findByName(String name) {
+        return repositoryProductMySql.findByName(name).map(MapToProduct::mapToProduct);
     }
 
     @Override
