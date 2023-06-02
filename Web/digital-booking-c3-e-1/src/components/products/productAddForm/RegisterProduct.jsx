@@ -7,6 +7,8 @@ import styles from "./RegisterProduct.module.css";
 import CategoryService from "../../../shared/services/CategoryService";
 import ProductsService from "../../../shared/services/ProductsService";
 import InputUploadImages from "../../common/inputImage/InputUploadImages";
+import Swal from 'sweetalert2';
+
 
 const RegisterProduct = () => {
   const [categories, setCategories] = useState([]);
@@ -117,7 +119,13 @@ const RegisterProduct = () => {
 
     try {
       await ProductsService.create(productData);
-      console.log("Producto registrado con éxito:", productData);
+      
+      // Mostrar un mensaje de éxito al usuario con sweetalert2
+      Swal.fire(
+        '¡Registrado!',
+        'El producto ha sido registrado exitosamente.',
+        'success'
+      );
 
       // Reiniciar los campos del formulario después de enviar los datos
       setFormData({
@@ -135,7 +143,12 @@ const RegisterProduct = () => {
       });
       setErrorMessage(""); //Limpiar el mensaje de error
     } catch (error) {
-      console.error("Error al registrar el producto:", error);
+      // En caso de error al registrar el producto
+      Swal.fire(
+        'Error',
+        'Ha ocurrido un error al registrar el producto.',
+        'error'
+      );
     }
   };
 
