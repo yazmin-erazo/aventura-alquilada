@@ -15,7 +15,7 @@ const ProductsService = {
 
     getById: id => API.get(PRODUCTS_ENDPOINTS.PRODUCT_DETAILS + id)
         .then(
-            res => res
+            res => res.data
         ),
 
     create: payload => API.post(PRODUCTS_ENDPOINTS.CREATE_PRODUCT, payload).then(
@@ -25,7 +25,7 @@ const ProductsService = {
     deleteByID: id => 
         API.delete(PRODUCTS_ENDPOINTS.DELETE_PRODUCT + id)
         .then(
-            res => res.data
+            res => res
         ),
 
     updateByID: (id, product) => API.put(PRODUCTS_ENDPOINTS.UPDATE_PRODUCT + id, product)
