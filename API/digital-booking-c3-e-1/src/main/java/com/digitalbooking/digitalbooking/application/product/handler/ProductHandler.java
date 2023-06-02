@@ -32,7 +32,7 @@ public class ProductHandler {
                 createProduct.getFileName(),
                 createProduct.getColor(),
                 createProduct.getMaterial(),
-                createProduct.getSecundaryImages().stream().map(p -> ImageProduct.create(p.getImage(),p.getFileName())).collect(Collectors.toList())
+                createProduct.getSecondaryImages().stream().map(p -> ImageProduct.create(p.getImage(),p.getFileName())).collect(Collectors.toList())
         ));
     }
 

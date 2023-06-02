@@ -54,5 +54,5 @@ public class CommandCreateProduct {
     @Schema(allowableValues = {"Poliéster"})
     private String material;
     @JsonProperty
-    private List<SecundaryImages> secundaryImages;
+    private List<SecondaryImages> secondaryImages;
 }
