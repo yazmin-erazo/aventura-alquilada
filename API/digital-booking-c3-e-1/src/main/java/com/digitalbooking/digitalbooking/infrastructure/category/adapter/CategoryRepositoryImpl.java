@@ -26,7 +26,7 @@ public class CategoryRepositoryImpl implements CategoryRepository {
         CategoryEntity categoryEntity = new CategoryEntity();
         BeanUtils.copyProperties(category, categoryEntity);
         categoryEntity.setImageURL(imageURL);
-
+        categoryEntity.setIsDelete(false);
         return categoryRepositoryMySql.save(categoryEntity).getId();
     }
 
