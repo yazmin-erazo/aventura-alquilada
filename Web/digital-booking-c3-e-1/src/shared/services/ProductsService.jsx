@@ -1,5 +1,4 @@
 import API from "../environment/APIConfig";
-import Swal from 'sweetalert2';
 
 const PRODUCTS_ENDPOINTS = {
     ALL_PRODUCTS: 'product/products',
@@ -16,36 +15,18 @@ const ProductsService = {
 
     getById: id => API.get(PRODUCTS_ENDPOINTS.PRODUCT_DETAILS + id)
         .then(
-            res => res.data
+            res => res
         ),
 
     create: payload => API.post(PRODUCTS_ENDPOINTS.CREATE_PRODUCT, payload).then(
         res => res.data
     ),
 
-    deleteByID: id => Swal.fire({
-        title: 'Are you sure?',
-        text: "You won't be able to revert this!",
-        icon: 'warning',
-        showCancelButton: true,
-        confirmButtonColor: '#a6cf7e',
-        cancelButtonColor: '#fd7053',
-        cancelButtonText: 'No',
-        confirmButtonText: 'Yes, delete it!'
-    }).then((result) => {
-        if (result.isConfirmed) {
-            API.delete(PRODUCTS_ENDPOINTS.DELETE_PRODUCT + id)
-            Swal.fire(
-                'Deleted!',
-                'Your file has been deleted.',
-                'success'
-            )
-            return res.data
-        }
-        else {
-            Swal.close();
-        }
-    }),
+    deleteByID: id => 
+        API.delete(PRODUCTS_ENDPOINTS.DELETE_PRODUCT + id)
+        .then(
+            res => res.data
+        ),
 
     updateByID: (id, product) => API.put(PRODUCTS_ENDPOINTS.UPDATE_PRODUCT + id, product)
         .then(
