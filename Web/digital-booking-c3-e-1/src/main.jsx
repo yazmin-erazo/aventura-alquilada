@@ -14,6 +14,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import RegisterUser from "./components/user/userAddForm/RegisterUser.jsx";
 import Login from "./components/user/login/Login.jsx";
 import ActivateUser from "./components/user/activateUser/ActivateUser.jsx";
+import CrudCategory from "./components/products/CrudCategories/CrudCategory.jsx";
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <BrowserRouter>
@@ -26,6 +27,7 @@ ReactDOM.createRoot(document.getElementById("root")).render(
         <Route path='admin/product/edit' element={<EditProduct />} />
         <Route path='admin/' element={<Crud />} />
         <Route path='admin/category/add' element={<NewCategory />} />
+        <Route path='admin/category/list' element={<CrudCategory />} />
         <Route path='admin/role/add' element={<NewRole />} />
         <Route path='admin/role/edit/:id' element={<NewRole />} />
         <Route path='admin/role/edit' element={<EditRole />} />

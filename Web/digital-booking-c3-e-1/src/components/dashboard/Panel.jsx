@@ -55,7 +55,7 @@ const Panel = () => {
         <DashboardSection icon={BiGridAlt} size={24} text="Categorias" />
 
         <MenuItem
-          to="#"
+          to="admin/category/list"
           isActive={location.pathname === "/categorias/"}
         >
           <Button text="Listar todos" />
