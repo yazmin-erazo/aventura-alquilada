@@ -34,12 +34,15 @@ const Crud = () => {
 // usecallback para memorizar y asegurarnos de que no se creara una nueva instancia en cada renderizado
   const handleDelete = useCallback(async (productId) => {
     try {
-      await ProductsService.deleteByID(productId)
-      const updatedProducts = products.filter(
-        (product) => product.id !== productId
-      );
-      setProducts(updatedProducts);
-      console.log("Producto eliminado con ID:", productId);
+      const res = await ProductsService.deleteByID(productId)
+      console.log(res);
+      if(res.status == 200){
+        const updatedProducts = products.filter(
+          (product) => product.id !== productId
+          );
+          setProducts(updatedProducts);
+          console.log("Producto eliminado con ID:", productId);
+        }
     } catch (error) {
       console.log("Error al eliminar el producto", error);
     }

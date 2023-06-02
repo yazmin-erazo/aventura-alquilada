@@ -40,6 +40,7 @@ const ProductsService = {
                 'Your file has been deleted.',
                 'success'
             )
+            return res.data
         }
         else {
             Swal.close();
