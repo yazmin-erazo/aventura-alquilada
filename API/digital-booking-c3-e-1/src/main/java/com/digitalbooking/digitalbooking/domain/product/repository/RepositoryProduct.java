@@ -9,7 +9,7 @@ import java.util.Optional;
 
 public interface RepositoryProduct {
 
-    Long save(Product product, String imageURL, List<String> secundaryImages);
+    Long save(Product product, String imageURL, List<String> secondaryImages);
 
     void updateProduct(Product product);
 

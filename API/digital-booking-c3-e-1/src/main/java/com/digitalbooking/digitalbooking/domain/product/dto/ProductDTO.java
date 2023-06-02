@@ -25,7 +25,7 @@ public class ProductDTO {
     private String imageURL;
     private String color;
     private String material;
-    private List<ImageProductDTO> secundaryImages;
+    private List<ImageProductDTO> secondaryImages;
 
     /*public Product parseToProduct(){
         return Product.reconstruir()

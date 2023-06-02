@@ -22,7 +22,7 @@ public class RepositoryProductImpl implements RepositoryProduct {
     @Autowired
     RepositoryProductMySql repositoryProductMySql;
     @Override
-    public Long save(Product product, String imageURL, List<String> secundaryImages) {
+    public Long save(Product product, String imageURL, List<String> secondaryImages) {
         ProductEntity productEntity = new ProductEntity();
         BeanUtils.copyProperties(product,productEntity);
         CategoryEntity category = new CategoryEntity();
@@ -30,7 +30,7 @@ public class RepositoryProductImpl implements RepositoryProduct {
         productEntity.setCategory(category);
         productEntity.setImageURL(imageURL);
         productEntity.setIsDelete(Boolean.FALSE);
-        productEntity.setImageProductEntity(secundaryImages.stream().map(secundaryImage -> ImageProductEntity.builder().imageURL(secundaryImage).productEntity(productEntity).build()).collect(Collectors.toList()));
+        productEntity.setImageProductEntity(secondaryImages.stream().map(secondaryImage -> ImageProductEntity.builder().imageURL(secondaryImage).productEntity(productEntity).build()).collect(Collectors.toList()));
         return repositoryProductMySql.save(productEntity).getId();
     }
 
