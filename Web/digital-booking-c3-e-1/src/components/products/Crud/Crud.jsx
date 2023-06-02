@@ -44,34 +44,36 @@ const Crud = () => {
   // usecallback para memorizar y asegurarnos de que no se creara una nueva instancia en cada renderizado
   const handleDelete = (productId) => {
     Swal.fire({
-      title: 'Are you sure?',
-      text: "You won't be able to revert this!",
+      title: '¿Estás seguro?',
+      text: "¡No podrás revertir esta acción!",
       icon: 'warning',
       showCancelButton: true,
       confirmButtonColor: '#a6cf7e',
       cancelButtonColor: '#fd7053',
       cancelButtonText: 'No',
-      confirmButtonText: 'Yes, delete it!'
+      confirmButtonText: 'Sí, ¡Eliminar!'
     }).then( async(result) => {
       if (result.isConfirmed) {
         try {
           const res = await ProductsService.deleteByID(productId)
-          console.log(res);
-          if (res.status == 200) {
+          if (res.status === 200) {
             const updatedProducts = products.filter(
               (product) => product.id !== productId
             );
             setProducts(updatedProducts);
             setReload(!reload)
-            console.log("Producto eliminado con ID:", productId);
             Swal.fire(
-              'Deleted!',
-              'Your file has been deleted.',
+              '¡Eliminado!',
+              'El producto ha sido eliminado.',
               'success'
             )
           }
         } catch (error) {
-          console.log("Error al eliminar el producto", error);
+          Swal.fire(
+            'Error',
+            'Ha ocurrido un error al eliminar el producto.',
+            'error'
+          )
         }
       }
       else {
