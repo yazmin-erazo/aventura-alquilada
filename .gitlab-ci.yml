@@ -23,8 +23,7 @@ test-web:
     - npm install
     - npm run test
   only:
-    - develop
-    - changes
+    - main
 
 build-web:
   stage: build
@@ -37,8 +36,7 @@ build-web:
     paths:
       - Web/digital-booking-c3-e-1/dist/
   only:
-    - develop
-    - changes
+    - main
 
 deploy_to_s3:
   stage: deploy
@@ -52,8 +50,7 @@ deploy_to_s3:
     - aws s3 rm s3://$S3_BUCKET_FRONTEND --recursive
     - aws s3 sync Web/digital-booking-c3-e-1/dist s3://$S3_BUCKET_FRONTEND --acl public-read
   only:
-    - develop
-    - changes
+    - main
 
 
 # -------------------------- API --------------------------
@@ -70,8 +67,7 @@ test-api:
       - API/digital-booking-c3-e-1/target/surefire-reports/
       - API/digital-booking-c3-e-1/target/site/jacoco/
   only:
-    - develop
-    - changes
+    - main
 
 coverage-report:
   stage: coverage report
@@ -90,9 +86,6 @@ coverage-report:
       junit:
         - "**/target/surefire-reports/TEST-*.xml"
         #- "**/target/failsafe-reports/TEST-*.xml"
-  only:
-    - develop
-    - changes
 
 build-api:
   stage: build
@@ -104,8 +97,7 @@ build-api:
     paths:
       - API/digital-booking-c3-e-1/target/equipamiento-deportivo.jar
   only:
-    - develop
-    - changes  
+    - main
 
 deploy_to_ec2:
   stage: deploy
@@ -123,5 +115,4 @@ deploy_to_ec2:
     - scp API/digital-booking-c3-e-1/target/equipamiento-deportivo.jar ubuntu@$EC2_INSTANCE_IP:~/equipamiento-deportivo/
     - ssh ubuntu@$EC2_INSTANCE_IP "sudo systemctl start equipamiento-deportivo.service"
   only:
-    - develop
-    - changes   
+    - main  
