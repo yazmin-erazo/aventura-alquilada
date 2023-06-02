@@ -2,9 +2,26 @@ import { useState } from "react";
 import styles from "./ImageGallery.module.css";
 import ImagePopup from "./ImagePopup";
 
-const ImageGallery = ({ images }) => {
-  const mainImage = images[0];
-  const gridImages = images.slice(1, 5);
+const ImageGallery = ({ product }) => {
+  //const mainImage = images[0];
+  //const gridImages = images.slice(1, 5);
+
+  const mainImage = {
+    id: 0,
+    title: "Imagen principal",
+    url: product?.imageURL,
+  }
+
+  const secondaryImages = product?.secondaryImages.map((image, index) => ({
+    id: index ,
+    title: "Imagen ${index+1}",
+    url: image.imageURL
+  }));
+
+  const images = [mainImage].concat(secondaryImages);
+
+  const gridImages = secondaryImages.slice(0, 4)
+
   const [isPopupOpen, setIsPopupOpen] = useState(false);
 
   const handleViewMore = () => {

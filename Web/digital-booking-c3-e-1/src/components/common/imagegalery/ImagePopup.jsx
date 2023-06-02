@@ -1,4 +1,5 @@
 import { Modal, Carousel } from "react-bootstrap";
+import styles from "./ImageGallery.module.css";
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 const ImagePopup = ({ images, onClose }) => {
@@ -8,7 +9,7 @@ const ImagePopup = ({ images, onClose }) => {
         <Carousel>
           {images.map((image) => (
             <Carousel.Item key={image.id}>
-              <img src={image.url} alt={image.title} />
+              <img className={styles.imagesize}  src={image.url} alt={image.title} />
             </Carousel.Item>
           ))}
         </Carousel>

@@ -26,44 +26,6 @@ const ProductDetails = () => {
       return p.id === parseInt(params.id);
     });
   
-
-  useEffect(() => {
-    const exampleImages = [
-      {
-        id: 1,
-        title: "Imagen principal",
-        url: "https://picsum.photos/500/500?random",
-      },
-      {
-        id: 2,
-        title: "Imagen 1",
-        url: "https://picsum.photos/500/500?random",
-      },
-      {
-        id: 3,
-        title: "Imagen 2",
-        url: "https://picsum.photos/500/500?random",
-      },
-      {
-        id: 4,
-        title: "Imagen 3",
-        url: "https://picsum.photos/500/500?random",
-      },
-      {
-        id: 5,
-        title: "Imagen 4",
-        url: "https://picsum.photos/500/500?random",
-      },
-    ];
-
-    // const producImages = [
-    //   product.imageURL
-    // ]
-    //   product.secondaryImages.map( img => producImages.push(img))
-
-    setImages(exampleImages);
-  }, []);
-
   
   useEffect(() => {
     setProducts(data.products);
@@ -98,7 +60,7 @@ const ProductDetails = () => {
           </div>
 
           <div className={styles.detailsContainer}>
-            <ImageGallery images={images} />
+            <ImageGallery product={product} />
             <div className={styles.productDetails}>
               <div className={styles.description}>
                 {/* <div className={styles.category}>{product.category}</div> */}
