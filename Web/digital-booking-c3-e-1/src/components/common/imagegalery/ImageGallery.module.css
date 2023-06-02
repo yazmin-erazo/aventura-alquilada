@@ -5,6 +5,12 @@
   padding: 16px;
 }
 
+.imagesize{
+  width: 100%; 
+  height: auto;
+}
+
+
 .mainImage {
   width: 50%;
 }
