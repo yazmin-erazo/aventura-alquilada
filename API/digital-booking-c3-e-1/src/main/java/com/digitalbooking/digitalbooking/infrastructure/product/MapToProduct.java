@@ -14,7 +14,7 @@ public class MapToProduct {
         ProductDTO product = new ProductDTO();
         BeanUtils.copyProperties(productEntity,product);
         product.setCategory(productEntity.getCategory().getName());
-        product.setSecundaryImages(productEntity.getImageProductEntity().stream().map(MapToProduct::mapToImageProductDTO).collect(Collectors.toList()));
+        product.setSecondaryImages(productEntity.getImageProductEntity().stream().map(MapToProduct::mapToImageProductDTO).collect(Collectors.toList()));
         return product;
     }
 
