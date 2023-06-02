@@ -1,6 +1,5 @@
 package com.digitalbooking.digitalbooking.domain.category.entity;
 
-import com.digitalbooking.digitalbooking.common.validations.Validator;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 
@@ -9,17 +8,13 @@ import lombok.Getter;
 public final class Category {
     private Long id;
     private String name;
-    private String description;
-    private String image;
-    private String fileName;
+    private String imageURL;
 
-    private  Category(String name, String image, String description, String fileName) {
-        this.name = name;
-        this.image = image;
-        this.description = description;
-        this.fileName = fileName;
+    public static Category create(Long id) throws Exception {
+        return new Category(id, "", "");
     }
 
+<<<<<<< HEAD
     private Category(Long id) {
         this.id = id;
     }
@@ -45,5 +40,9 @@ public final class Category {
     public static Category createById(Long id) {
         Validator.validateMandatory(id, "El Id es requerido para eliminar una categoría.");
         return new Category(id);
+=======
+    public static Category reBuild(Long id, String name, String imageURL)  {
+        return new Category(id, name, imageURL);
+>>>>>>> c745d2fd0d4da77d38337c252e93018b79633e50
     }
 }

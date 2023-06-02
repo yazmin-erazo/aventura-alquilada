@@ -13,7 +13,10 @@ public class CategoryEntity {
     private Long id;
     private String name;
     private String imageURL;
+<<<<<<< HEAD
     private String description;
     private Boolean isDelete;
+=======
+>>>>>>> c745d2fd0d4da77d38337c252e93018b79633e50
 
 }

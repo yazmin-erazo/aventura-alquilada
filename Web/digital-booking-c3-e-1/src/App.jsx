@@ -6,8 +6,8 @@ import Footer from "./components/common/Footer";
 import MainPage from "./components/mainPage/MainPage";
 
 function App() {
+
   return (
-    // Linea 40 y 254 estilos del panel de administración
     <>
     <UserDataContext>
       <Header />

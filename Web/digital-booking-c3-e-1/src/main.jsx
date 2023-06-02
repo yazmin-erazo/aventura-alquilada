@@ -5,8 +5,6 @@ import Home from "./components/home/HomePage.jsx"
 import Details from "./components/products/productDetails/ProductDetails.jsx"
 import AddProduct from './components/products/productAddForm/RegisterProduct.jsx';
 import EditProduct from './components/products/productEditForm/EditProduct.jsx';
-import NewCategory from "./components/products/categoryAddForm/NewCategory.jsx";
-import NewRole from "./components/products/roleFormAdd/NewRole.jsx";
 import EditRole from "./components/products/editRole/EditRole.jsx";
 import Crud from "./components/products/Crud/Crud.jsx";
 import "./index.css";
