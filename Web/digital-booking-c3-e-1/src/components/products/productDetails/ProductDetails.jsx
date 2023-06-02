@@ -10,7 +10,7 @@ import { TfiRulerAlt } from "react-icons/tfi";
 import { FiInfo } from "react-icons/fi";
 import { MdOutlineTexture } from "react-icons/md";
 import { AiOutlineClockCircle } from "react-icons/ai";
-import ImageGallery from "../../common/imagegalery/imagegalery/ImageGallery";
+import ImageGallery from "../../common/imagegalery/ImageGallery";
 import Qualification from "../../resources/qualification/Qualification";
 import RatingStats from "../../resources/rating/RatingStats";
 

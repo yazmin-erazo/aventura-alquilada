@@ -9,3 +9,9 @@
   .withPanel .main {
     max-width: calc(100vw - 250px);
   }
+
+  @media (max-width: 767px) { 
+    .withPanel .main {
+      max-width: 100vw;
+    }
+  }

@@ -57,22 +57,22 @@ const NewCategory = () => {
         console.log("Datos de la categoría:", categoryData);
 
         try {
-            const response = await CategoryService.getAll();
-            setCategories(response)
             let categoryExists = false;
             categories.map( cat => cat.name === categoryData.name ? categoryExists = true : null)
             if(categoryData.name == "" || categoryData.description == "" || categoryData.image == null)
-                categoryExists = true
+            categoryExists = true
             if (categoryExists) {
                 Swal.fire({
                     icon: 'error',
                     title: 'Error',
                     text: 'La categoría ya existe o falta completar un campo',
                     confirmButtonColor: '#a6cf7e'
-                  })
+                })
             } else {
                 await CategoryService.create(categoryData);
                 console.log("Categoría registrada con éxito: ", categoryData);
+                const response = await CategoryService.getAll();
+                setCategories(response)
 
                 // Reiniciar los campos del formulario después de enviar los datos
                 setFormData({
@@ -81,13 +81,26 @@ const NewCategory = () => {
                     selectedImage: null,
                     fileName: "",
                 });
-                setErrorMessage(""); // Limpiar el mensaje de error
             }
         } catch (error) {
             console.log(error.response);
             console.error("Error al registrar la categoría:", error);
         }
     };
+
+    useEffect(() => {
+        const fetchCategories = async () => {
+            try {
+                const data = await CategoryService.getAll();
+                setCategories(data);
+              }
+              catch (err) {
+                console.log(`Error al cargar categorías: ${err}`);
+              }
+            }
+
+        fetchCategories()
+    },[])
 
     return (
         <div>
