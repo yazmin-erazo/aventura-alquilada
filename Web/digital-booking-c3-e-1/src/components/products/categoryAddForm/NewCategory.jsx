@@ -81,7 +81,6 @@ const NewCategory = () => {
                     selectedImage: null,
                     fileName: "",
                 });
-                setErrorMessage(""); // Limpiar el mensaje de error
             }
         } catch (error) {
             console.log(error.response);
@@ -89,8 +88,18 @@ const NewCategory = () => {
         }
     };
 
-    useEffect(async ()=> {
-        setCategories(await CategoryService.getAll())
+    useEffect(() => {
+        const fetchCategories = async () => {
+            try {
+                const data = await CategoryService.getAll();
+                setCategories(data);
+              }
+              catch (err) {
+                console.log(`Error al cargar categorías: ${err}`);
+              }
+            }
+
+        fetchCategories()
     },[])
 
     return (
