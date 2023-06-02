@@ -1,6 +1,7 @@
 package com.digitalbooking.digitalbooking.domain.product.service;
 
 import com.digitalbooking.digitalbooking.common.exception.ExceptionInvalidValue;
+import com.digitalbooking.digitalbooking.domain.category.dto.CategoryDTO;
 import com.digitalbooking.digitalbooking.domain.category.repository.CategoryRepository;
 import com.digitalbooking.digitalbooking.domain.product.dto.ProductDTO;
 import com.digitalbooking.digitalbooking.domain.product.entity.Product;
@@ -9,6 +10,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 public class ServiceProduct {
@@ -19,11 +22,22 @@ public class ServiceProduct {
     @Autowired
     CategoryRepository categoryRepository;
 
-    public Long createProduct(Product product) throws Exception {
-        var category = categoryRepository.findById(product.getCategory().getId());
+    public Long createProduct(Product product){
+        Optional<CategoryDTO> category = categoryRepository.findById(product.getCategory().getId());
         category.orElseThrow(() -> new ExceptionInvalidValue("category not found"));
-        String imageURL = repositoryProduct.saveImage(String.format("%s%s%s",product.getName().trim(),product.getBrand().replace(" ",""),product.getFileName().trim()), product.getImage());
-        return repositoryProduct.save(product,imageURL);
+        repositoryProduct.findByName(product.getName()).ifPresent(productDTO -> {throw new ExceptionInvalidValue("El nombre del producto: "+productDTO.getName()+", ya existe");});
+        String mainImageURL = repositoryProduct.saveImage(String.format("%s%s%s",product.getName().trim().replace(" ",""),product.getBrand().replace(" ",""),product.getFileName().trim().replace(" ","")), product.getImage());
+        List<String> secondaryImages = product.getImageProducts().stream().map(imageProduct -> repositoryProduct.saveImage(String.format("%s%s%s",product.getName().trim().replace(" ",""),product.getBrand().replace(" ",""),imageProduct.getFileName().trim().replace(" ","")), imageProduct.getImage())).collect(Collectors.toList());
+        return repositoryProduct.save(product,mainImageURL,secondaryImages);
+    }
+
+    public String updateProduct(Product product) throws Exception {
+        Optional<CategoryDTO> category = categoryRepository.findById(product.getCategory().getId());
+        category.orElseThrow(() -> new ExceptionInvalidValue("category not found"));
+
+        repositoryProduct.updateProduct(product);
+
+        return "Producto actualizado correctamente";
     }
 
     public List<ProductDTO> getProducts(){

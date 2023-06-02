@@ -1,0 +1,27 @@
+.ratingStatsItem {
+  display: flex;
+  align-items: baseline;
+}
+
+.ratingStatsAverage {
+  display: flex;
+  align-items: baseline;
+  margin-right: 16px;
+}
+
+.ratingStatsIcon {
+  font-size: 24px;
+  margin-right: 4px;
+  color: #ffc107;
+}
+
+.ratingStatsRating {
+  font-size: 24px;
+  font-weight: bold;
+  color: #ffc107;
+}
+
+.ratingStatsTotal {
+  font-size: 14px;
+  color: #777;
+}

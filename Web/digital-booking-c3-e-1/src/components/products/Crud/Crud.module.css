@@ -2,6 +2,9 @@
 @import "/src/styles/global.css";
 
 
+.container {
+  width: calc(100vw - 250px);
+}
 .button-container{
     width: 200px;
     margin: 48px 0 32px 0;

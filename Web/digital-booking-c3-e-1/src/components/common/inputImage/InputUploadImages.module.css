@@ -1,0 +1,27 @@
+.imageUploadContainer {
+  max-width: 506px;
+  margin-bottom: 16px;
+  border: 2px dashed #ccc;
+  padding: 16px;
+  text-align: center;
+  cursor: pointer;
+  margin-top: 32px;
+}
+
+.imageUploadContainer p {
+  font-size: 14px;
+  color: #888;
+  margin: 8px 0;
+}
+
+.imageUploadContainer p:hover {
+  color: #555;
+}
+
+.imageUploadContainer p:hover::before {
+  color: #777;
+}
+
+.imageUploadContainer:hover {
+  border-color: #555;
+}

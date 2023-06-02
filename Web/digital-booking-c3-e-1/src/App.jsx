@@ -1,21 +1,19 @@
+import React from "react";
 import "./App.css";
-import { Outlet } from "react-router-dom";
-import { ProductsDataContext } from "./context/ProductsContext";
-import Header from "./components/common/Header"
-import Footer from "./components/common/Footer"
-//import "typeface-roboto";
+import { UserDataContext } from "./context/AuthContext";
+import Header from "./components/common/Header";
+import Footer from "./components/common/Footer";
+import MainPage from "./components/mainPage/MainPage";
 
 function App() {
-
   return (
+    // Linea 40 y 254 estilos del panel de administración
     <>
-        <Header />
-        <div className="outlet">
-        <ProductsDataContext>
-          <Outlet />
-      </ProductsDataContext>
-        </div>
-        <Footer />
+    <UserDataContext>
+      <Header />
+      <MainPage />
+      <Footer />
+    </UserDataContext>
     </>
   );
 }

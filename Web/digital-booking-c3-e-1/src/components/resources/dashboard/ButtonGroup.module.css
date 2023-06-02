@@ -1,0 +1,13 @@
+.buttonGroup {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding: 0px;
+  gap: 12px;
+  width: 164px;
+  height: 48px;
+  left: 47px;
+  color: white;
+  font: var(--body-14-normal);
+  margin: 0 12px;
+}

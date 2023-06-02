@@ -1,15 +1,17 @@
 import { useEffect, useState } from "react";
-import axios from "axios";
 import InputWithLabel from "../../common/input/InputWithLabel";
 import ButtonPrimary from "../../common/Buttons/ButtonPrimary";
-import Select from "../../common/select/select";
+import Select from "../../common/select/Select";
 import ProductConditionSelect from "../../common/select/ProductConditionSelect";
 import styles from "./RegisterProduct.module.css";
-import ImageUpload from "../../common/inputImage/ImageUpload";
+import CategoryService from "../../../shared/services/CategoryService";
+import ProductsService from "../../../shared/services/ProductsService";
+import InputUploadImages from "../../common/inputImage/InputUploadImages";
 
 const RegisterProduct = () => {
   const [categories, setCategories] = useState([]);
   const [selectedCategoryId, setSelectedCategoryId] = useState("");
+  const [errorMessage, setErrorMessage] = useState("");
 
   const [formData, setFormData] = useState({
     selectedCategory: "",
@@ -17,8 +19,12 @@ const RegisterProduct = () => {
     productName: "",
     productPrice: "",
     brand: "",
-    selectedImage: null,
+    image: "",
+    selectedImages: [],
     description: "",
+    color: "",
+    material: "",
+    size: "",
     fileName: "",
   });
 
@@ -28,10 +34,7 @@ const RegisterProduct = () => {
 
   const fetchCategories = async () => {
     try {
-      const response = await axios.get(
-        "http://localhost:8080/digitalbooking/category/categories"
-      );
-      const categoriesData = response.data;
+      const categoriesData = await CategoryService.getAll();
       setCategories(categoriesData);
     } catch (error) {
       console.error("Error al obtener las categorías:", error);
@@ -42,29 +45,41 @@ const RegisterProduct = () => {
     if (name === "selectedCategory") {
       setSelectedCategoryId(value);
     }
-  
+
     setFormData((prevFormData) => ({
       ...prevFormData,
       [name]: value,
     }));
   };
 
-  const handleImageUpload = (file) => {
-    const fileName = file.name.split(".")[0];
-  
-    // Convertir la imagen en base64
-    const reader = new FileReader();
-    reader.onload = () => {
-      const base64Image = reader.result;
-      const base64ImageWithoutPrefix = base64Image.replace(/^data:image\/[a-z]+;base64,/, '');
-  
-      setFormData((prevFormData) => ({
-        ...prevFormData,
-        selectedImage: base64ImageWithoutPrefix,
-        fileName: fileName, // Agregar el nombre de la imagen al estado
-      }));
-    };
-    reader.readAsDataURL(file);
+  const handleImageUpload = (files) => {
+    const updatedImages = [];
+
+    Array.from(files).forEach((file) => {
+      const fileName = file.name.split(".")[0];
+      const reader = new FileReader();
+
+      reader.onload = () => {
+        const base64Image = reader.result;
+        const base64ImageWithoutPrefix = base64Image.replace(
+          /^data:image\/[a-z]+;base64,/,
+          ""
+        );
+
+        updatedImages.push({
+          fileName: fileName,
+          image: base64ImageWithoutPrefix,
+        });
+      };
+
+      reader.readAsDataURL(file);
+    });
+
+    setFormData((prevFormData) => ({
+      ...prevFormData,
+      selectedImages: updatedImages,
+    }));
+
   };
 
   const handleSubmit = async () => {
@@ -76,28 +91,32 @@ const RegisterProduct = () => {
       selectedCategoryId,
       selectedCondition,
       description,
-      selectedImage,
-      fileName
+      image,
+      selectedImages,
+      color,
+      material,
+      size,
+      fileName,
     } = formData;
 
     const productData = {
       name: productName,
       brand: brand,
       price: productPrice,
-      category: selectedCategory,
       idCategory: selectedCategoryId,
       state: selectedCondition,
       description: description,
-      image: selectedImage,
-      fileName: fileName,
+      fileName: selectedImages[0].fileName,
+      image: selectedImages[0].image,
+      secondaryImages: selectedImages,
+      color: color,
+      material: material,
+      size: size,
     };
     console.log("Datos del producto:", productData);
 
     try {
-      await axios.post(
-        "http://localhost:8080/digitalbooking/product",
-        productData
-      );
+      await ProductsService.create(productData);
       console.log("Producto registrado con éxito:", productData);
 
       // Reiniciar los campos del formulario después de enviar los datos
@@ -109,9 +128,13 @@ const RegisterProduct = () => {
         selectedImage: null,
         description: "",
         brand: "",
+        color: "",
+        material: "",
+        size: "",
+        fileName: "",
       });
+      setErrorMessage(""); //Limpiar el mensaje de error
     } catch (error) {
-      console.log(error.response.data);
       console.error("Error al registrar el producto:", error);
     }
   };
@@ -134,6 +157,7 @@ const RegisterProduct = () => {
             >
               Nombre:
             </InputWithLabel>
+
             <InputWithLabel
               type="text"
               value={formData.brand}
@@ -143,6 +167,7 @@ const RegisterProduct = () => {
             >
               Marca:
             </InputWithLabel>
+
             <InputWithLabel
               type="number"
               value={formData.productPrice}
@@ -158,7 +183,7 @@ const RegisterProduct = () => {
               value={selectedCategoryId}
               onChange={(id) => handleInputChange("selectedCategoryId", id)}
             >
-              Categoría
+              Categoría:
             </Select>
 
             <ProductConditionSelect
@@ -167,10 +192,40 @@ const RegisterProduct = () => {
                 handleInputChange("selectedCondition", state)
               }
             >
-              Condición
+              Condición:
             </ProductConditionSelect>
 
-            <ImageUpload onImageUpload={handleImageUpload} />
+            <InputWithLabel
+              type="text"
+              value={formData.color}
+              onChange={(event) =>
+                handleInputChange("color", event.target.value)
+              }
+            >
+              Color:
+            </InputWithLabel>
+
+            <InputWithLabel
+              type="text"
+              value={formData.material}
+              onChange={(event) =>
+                handleInputChange("material", event.target.value)
+              }
+            >
+              Material:
+            </InputWithLabel>
+
+            <InputWithLabel
+              type="text"
+              value={formData.size}
+              onChange={(event) =>
+                handleInputChange("size", event.target.value)
+              }
+            >
+              Talla/Tamaño:
+            </InputWithLabel>
+
+            <InputUploadImages onImageUpload={handleImageUpload} />
 
             <textarea
               className={styles.textareaField}

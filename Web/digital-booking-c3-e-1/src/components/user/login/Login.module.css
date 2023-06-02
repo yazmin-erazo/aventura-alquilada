@@ -1,0 +1,49 @@
+@import "/src/styles/variables.css";
+@import "/src/styles/global.css";
+
+.container {
+    display: flex;
+    align-items: center;
+    min-height: calc(100vh - 140px);
+    width: 100%;
+    background-color: var(--bg-general);
+}
+
+.container img {
+    width: 97%;
+}
+
+.container .form {
+    margin: 20px auto;
+    min-width: 35%;
+    color: var(--secondary-200);
+}
+
+.container .form h2 {
+    font: var(--h2);
+    color: var(--secondary-600);
+}
+
+.container .form h2, .container .form p {
+    margin: 0 20px;
+}
+
+.container .form form {
+    margin-top: 5%;
+}
+
+.form-error {
+    color: var(--semantics-error);
+    position: relative;
+    top: -10px;
+    font-size: 12px;
+}
+
+.container hr {
+    margin: 20px 0;
+    border: 0 none var(--secondary-200);
+    border-top: 1px solid var(--secondary-200);
+    height: 1px;
+    display: block;
+    clear: both;
+}

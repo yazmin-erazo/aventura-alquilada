@@ -8,6 +8,8 @@ springdoc:
   swagger-ui:
     path: /swagger-ui.html
 spring:
+  main:
+    allow-bean-definition-overriding: true
   jpa:
     hibernate:
       ddl-auto: update
@@ -21,3 +23,12 @@ aws:
   s3:
     bucketname: c3-e1-digital-booking
     imagepath: img
+email:
+  subject: Activar Cuenta
+  urlvalidation: http://localhost:5173/user/activate?token=%s
+  subjectlogin: Cuenta Activada
+  urllogin: http://localhost:5173/login
+
+app:
+  jwtSecret: 95a59bb848e94d00842bb39ecf6f8fcf
+  jwtExpirationMs: 86400000

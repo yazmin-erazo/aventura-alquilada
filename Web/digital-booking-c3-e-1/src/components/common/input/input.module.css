@@ -27,6 +27,10 @@
     font-size: 14px;
     margin-top: 8px;
   }
+
+  input:disabled {
+    background: var(--secondary-10);
+  }
   
   /* Media queries */
   @media (max-width: 768px) {

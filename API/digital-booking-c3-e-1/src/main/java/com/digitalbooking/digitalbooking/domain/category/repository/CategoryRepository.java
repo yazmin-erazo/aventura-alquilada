@@ -9,7 +9,13 @@ import java.util.Optional;
 
 public interface CategoryRepository {
 
-    Optional<Category> findById(Long id);
+    Long save(Category category, String imageURL);
+
+    String saveImage(String fileName, String image);
+
+    Optional<CategoryDTO> findById(Long id);
 
     List<CategoryDTO> getAll();
+
+    void deleteCategory(Long id);
 }

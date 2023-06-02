@@ -1,42 +1,40 @@
-@import "/src/styles/variables.css";
-@import "/src/styles/global.css";
-
-
-
 .header {
-  position:sticky;
+  position: sticky;
   width: 100vw;
   height: 80px;
   left: 0;
   top: 0;
   background-color: var(--bg-white-50);
-  z-index: 2;
+  z-index: 3;
 }
+
 .headerContainer {
+  max-width: 1320px;
+  margin: 0 auto;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  width: 100vw;
   height: 80px;
-  
+  padding: 0 20px;
 }
-
 .header img {
-  margin-left: 56px;
+  width: 200px;
 }
 
-.lemaHeader{
-  color: var(--secondary-600);
-  font: var(--body-16);
-  margin-left: 25%;
+.headerBtn a {
+  margin-left: 1rem;
+}
+
+.lemaHeader {
+  color: var(--secondary-300);
+  font: var(--body-14-normal);
   font-style: oblique;
 }
-.noUnderlined{
+.noUnderlined {
   text-decoration: none;
 }
-
-.outlet {
-  min-height: calc(100vh - 140px);
+.noUnderlined:hover {
+  color: red;
 }
 
 .cuentaBtn,
@@ -47,6 +45,7 @@
   left: 176px;
   top: 0px;
   border-radius: 4px;
+  cursor: pointer;
 }
 .cuentaBtn {
   color: var(--secondary-600);
@@ -61,18 +60,30 @@
   line-height: 19px;
   color: var(--white-100);
   background-color: var(--secondary-600);
-  margin-right: 56px;
   border: none;
   flex: none;
   order: 0;
   flex-grow: 0;
   padding: 0 10px;
 }
-nav {
-  margin-top: 100px;
-  display: none;
-  position: sticky;
+
+.copyright {
+  display: flex;
+  align-items: center;
+  color: var(--secondary-200);
+  gap: 10px;
+  font: var(--body-14-normal);
 }
+
+.copyright span {
+  color: var(--secondary-300);
+  padding: 0 10px;
+}
+
+nav {
+  display: none;
+}
+
 .footer {
   box-sizing: border-box;
   position: relative;
@@ -83,32 +94,53 @@ nav {
   background-color: var(--black);
 }
 .footerContainer {
+  max-width: 1320px;
+  margin: 0 auto;
   display: flex;
   justify-content: space-between;
   align-items: center;
   width: 100%;
   height: 60px;
+  color: var(--bg-white-50);
+  padding: 0 20px;
 }
+
 .isologotipo {
-  margin-left: 56px;
+  display: flex;
+  align-items: flex-end;
+  gap: 12px;
+  font: var(--body-12);
+  color: var(--secondary-200);
+  letter-spacing: 0.02rem;
+  font-style: oblique;
 }
+
 .logo {
-  width: 85px;
+  max-width: 85px;
 }
-.lema {
-  width: 95px;
-}
+
 .footerIcons {
   display: flex;
-  justify-content: space-between;
   align-items: flex-end;
-  width: 15%;
-  margin-right: 56px;
+  gap: 16px;
+  font-size: 24px;
 }
-.copyright {
-  padding-top: 7px;
-  padding-left: 45px;
+.footerIcons .icon {
+  display: inline-block;
+  margin-right: 10px;
+  cursor: pointer;
 }
+
+.footerIcons .icon:hover {
+  color: var(--primary-300);
+  transform: scale(1.2);
+}
+
+.icon-link {
+  text-decoration: none;
+  color: inherit;
+}
+
 .menuIcon {
   color: black;
   box-sizing: border-box;
@@ -167,12 +199,56 @@ li:hover {
   font-size: 18px;
 }
 
+.header ul.user-profile li {
+  border: none;
+  font: var(--body-12);
+  padding-left: 20px;
+}
+
+.header ul.user-profile li.logout {
+  color: var(--semantics-error);
+  font-weight: 600;
+}
+
+.header ul.user-profile hr {
+  margin: 0 10px;
+  border: 0 none var(--secondary-200);
+  border-top: 1px solid var(--secondary-200);
+  height: 1px;
+  display: block;
+  clear: both;
+}
+
+.header #userData:checked ~ label {
+  background-color: transparent;
+  border-color: transparent;
+}
+
+.header .userDataIcon {
+  display: block;
+  display: flex;
+  margin-right: 16px;
+  align-items: center;
+  font: var(--body-16);
+  color: var(--secondary-600);
+  border-color: transparent;
+  margin-right: 40px;
+}
+
+.header .userDataIcon .user-logo {
+  padding: 8px;
+  background-color: var(--primary-300);
+  border-radius: 50%;
+  margin-left: 10px;
+  height: 42px;
+  width: 42px;
+  color: white;
+  display: flex;
+  align-items: center;
+  letter-spacing: 0.08rem;
+}
+
 @media (max-width: 1024px) {
-   .header img {
-    margin-left: 40px;
-    width: 380px;
-    height: 30px;
-  }
   .cuentaBtn,
   .sesionBtn {
     font-size: var(--body-16);
@@ -183,77 +259,37 @@ li:hover {
     border-radius: 4px;
   }
   .sesionBtn {
-    margin-right: 40px;
-    line-height: 18.5px; 
-  }
-  .logo {
-    width: 70px;
-    height: 40px;
-  }
-  .lemaHeader {
-    font-size: var(--body-20);
-  }
-  .lema {
-    width: 90px;
-    height: 35px;
-  }
-  .isologotipo {
-    margin-left: 40px;
-  }
-  .footerIcons {
-    width: 18%;
-    margin-right: 40px;
+    line-height: 18.5px;
   }
 }
 
-  @media (max-width: 768px) {
-    .header img {
-      margin-left: 35px;
-      width: 178px;
-      height: 16px;
-    }
-    .lemaHeader{
-      font: var(--body-12);
-      margin-left: 20%;
-    }
-    .cuentaBtn,
-    .sesionBtn {
-      display: none;
-    }
-
-    nav {
-      display: block;
-      /* position: absolute; */
-      position: fixed;
-      margin-top: 0px;
-      margin-left: 88%;
-    }
-    .footerContainer {
-      display: flex;
-      justify-content: space-evenly;
-      align-items: center;
-      width: 100%;
-      height: 60px;
-    }
-    .logo {
-      width: 60px;
-      height: 30px;
-    }
-    .lema {
-      display: none;
-    }
-
+@media (max-width: 768px) {
+  .lemaHeader {
+    font: var(--body-12);
+  }
+  .cuentaBtn,
+  .sesionBtn {
+    display: none;
+  }
   .footerIcons {
     display: none;
+  }
+  nav {
+    display: block;
+  }
+  .outlet {
+    min-height: calc(100vh - 140px);
+    margin-left: 0;
+  }
+  .header .userDataIcon .user-name {
+    display: none;
+  }
+  .copyright {
+    font-size: var(--body-10);
   }
 }
 
 @media (max-width: 320px) {
-  .header img {
-    margin-left: 65px;
-    width: 150px;
-    height: 16px;
-  }
   .cuentaBtn,
   .sesionBtn {
     display: none;

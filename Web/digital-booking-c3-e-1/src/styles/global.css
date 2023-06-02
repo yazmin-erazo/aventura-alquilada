@@ -1,16 +1,16 @@
 #root {
-    /* max-width: 1280px; */
-    margin: 0 auto;
-  }
+  margin: 0 auto;
+}
 
 *{
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+    font-family: Roboto, 'arial', 'sain-serif';
 }
 
 body {
-  background-color: var(--bg-white-50);
+  background-color: #eef3f9;
   overflow-x: hidden;
 }
 
