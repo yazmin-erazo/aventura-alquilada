@@ -19,7 +19,7 @@ public interface RepositoryProduct {
 
     ProductDTO findById(Long id);
 
-    Optional<ProductDTO> findByName(String name);
+    Optional<ProductDTO> findByNameAndIsDelete(String name);
 
     void deleteProduct(Long id);
 }

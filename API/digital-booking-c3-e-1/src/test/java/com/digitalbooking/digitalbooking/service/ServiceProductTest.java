@@ -40,7 +40,7 @@ class ServiceProductTest {
         Product product = Product.create("Carpa", "Nemo Wagontop", "Nueva", BigDecimal.valueOf(150),"Descripción test", "8 personas", "No aplica", null, 1L, "Test Base64", "Carpa1", "Amarillo", "Poliéster", List.of());
         CategoryDTO category = new CategoryDTO(1L, "Camping", "", "");
         when(categoryRepository.findById(anyLong())).thenReturn(Optional.of(category));
-        when(repositoryProduct.findByName(anyString())).thenReturn(Optional.empty());
+        when(repositoryProduct.findByNameAndIsDelete(anyString())).thenReturn(Optional.empty());
         when(repositoryProduct.saveImage(anyString(), anyString())).thenReturn("Test URL");
         when(repositoryProduct.save(any(Product.class), anyString(), any())).thenReturn(1L);
 
@@ -48,7 +48,7 @@ class ServiceProductTest {
 
         assertEquals(1L, productId);
         verify(categoryRepository, times(1)).findById(anyLong());
-        verify(repositoryProduct, times(1)).findByName(anyString());
+        verify(repositoryProduct, times(1)).findByNameAndIsDelete(anyString());
         verify(repositoryProduct, times(1)).saveImage(anyString(), anyString());
         verify(repositoryProduct, times(1)).save(any(Product.class), anyString(),any());
     }
@@ -60,12 +60,12 @@ class ServiceProductTest {
         productDTO.setName("Carpa Nemo");
         CategoryDTO category = new CategoryDTO(1L, "Camping", "", "");
         when(categoryRepository.findById(anyLong())).thenReturn(Optional.of(category));
-        when(repositoryProduct.findByName(anyString())).thenReturn(Optional.of(productDTO));
+        when(repositoryProduct.findByNameAndIsDelete(anyString())).thenReturn(Optional.of(productDTO));
 
         assertThrows(ExceptionInvalidValue.class, () -> serviceProduct.createProduct(product));
 
         verify(categoryRepository, times(1)).findById(anyLong());
-        verify(repositoryProduct, times(1)).findByName(anyString());
+        verify(repositoryProduct, times(1)).findByNameAndIsDelete(anyString());
         verify(repositoryProduct, times(0)).saveImage(anyString(), anyString());
         verify(repositoryProduct, times(0)).save(any(Product.class), anyString(),any());
     }
@@ -79,7 +79,7 @@ class ServiceProductTest {
         assertThrows(ExceptionInvalidValue.class, () -> serviceProduct.createProduct(product));
 
         verify(categoryRepository, times(1)).findById(anyLong());
-        verify(repositoryProduct, times(0)).findByName(anyString());
+        verify(repositoryProduct, times(0)).findByNameAndIsDelete(anyString());
         verify(repositoryProduct, times(0)).saveImage(anyString(), anyString());
         verify(repositoryProduct, times(0)).save(any(Product.class), anyString(),any());
     }

@@ -59,8 +59,8 @@ public class RepositoryProductImpl implements RepositoryProduct {
     }
 
     @Override
-    public Optional<ProductDTO> findByName(String name) {
-        return repositoryProductMySql.findByName(name).map(MapToProduct::mapToProduct);
+    public Optional<ProductDTO> findByNameAndIsDelete(String name) {
+        return repositoryProductMySql.findByNameAndIsDelete(name, false).map(MapToProduct::mapToProduct);
     }
 
     @Override

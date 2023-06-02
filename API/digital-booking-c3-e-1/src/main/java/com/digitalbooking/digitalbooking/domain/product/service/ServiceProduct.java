@@ -25,7 +25,7 @@ public class ServiceProduct {
     public Long createProduct(Product product){
         Optional<CategoryDTO> category = categoryRepository.findById(product.getCategory().getId());
         category.orElseThrow(() -> new ExceptionInvalidValue("category not found"));
-        repositoryProduct.findByName(product.getName()).ifPresent(productDTO -> {throw new ExceptionInvalidValue("El nombre del producto: "+productDTO.getName()+", ya existe");});
+        repositoryProduct.findByNameAndIsDelete(product.getName()).ifPresent(productDTO -> {throw new ExceptionInvalidValue("El nombre del producto: "+productDTO.getName()+", ya existe");});
         String mainImageURL = repositoryProduct.saveImage(String.format("%s%s%s",product.getName().trim().replace(" ",""),product.getBrand().replace(" ",""),product.getFileName().trim().replace(" ","")), product.getImage());
         List<String> secondaryImages = product.getImageProducts().stream().map(imageProduct -> repositoryProduct.saveImage(String.format("%s%s%s",product.getName().trim().replace(" ",""),product.getBrand().replace(" ",""),imageProduct.getFileName().trim().replace(" ","")), imageProduct.getImage())).collect(Collectors.toList());
         return repositoryProduct.save(product,mainImageURL,secondaryImages);
