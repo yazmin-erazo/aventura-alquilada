@@ -1,9 +1,11 @@
 import React, { useState } from "react";
 import styles from "./Qualification.module.css";
-import RatingStats from "../rating/RatingStats";
+import Swal from "sweetalert2";
 
 const Qualification = () => {
   const [rating, setRating] = useState(0);
+  const [averageRating, setAverageRating] = useState(0);
+  const [totalRatings, setTotalRatings] = useState(0);
 
   const handleMouseEnter = (starCount) => {
     setRating(starCount);
@@ -14,14 +16,26 @@ const Qualification = () => {
   };
 
   const handleClick = (starCount) => {
-    // Enviar la reseña con la calificación seleccionada
-    console.log(`Calificación seleccionada: ${starCount}`);
+    // Actualizar la calificación promedio y el total de calificaciones ficticiamente
+    const newTotalRatings = totalRatings + 1;
+    const newAverageRating =
+      (averageRating * totalRatings + starCount) / newTotalRatings;
+
+    setTotalRatings(newTotalRatings);
+    setAverageRating(newAverageRating);
+
+    // Mostrar la SweetAlert de calificación enviada
+    Swal.fire({
+      title: "¡Calificación enviada!",
+      text: `Has calificado el producto con ${starCount} estrellas.`,
+      icon: "success",
+    });
   };
 
   const renderStars = () => {
     const stars = [];
     for (let i = 1; i <= 5; i++) {
-      const starClassName = i <= rating ? styles.filled : "";
+      const starClassName = i <= averageRating ? styles.filled : "";
       stars.push(
         <button
           key={i}
@@ -39,13 +53,13 @@ const Qualification = () => {
 
   return (
     <div className={styles.reviewComponent}>
-        <div>
       <h4>Valorar producto</h4>
-      </div>
       <div className={styles.starsContainer}>{renderStars()}</div>
-      <p className={styles.reviewText}>
-      Inicia sesión para agregar una reseña. Nos ayudará a verificar la autenticidad de tu correo electrónico.
-      </p>
+      <div className={styles.commentContainer}>
+        <p className={styles.commentText}>
+          ¡Este producto es simplemente increíble! Me encanta la calidad y el diseño. ¡Lo recomendaría sin dudarlo!
+        </p>
+      </div>
     </div>
   );
 };
