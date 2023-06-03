@@ -110,7 +110,7 @@ const RegisterProduct = () => {
       description: description,
       fileName: selectedImages[0].fileName,
       image: selectedImages[0].image,
-      secondaryImages: selectedImages,
+      secondaryImages: selectedImages.slice(1),
       color: color,
       material: material,
       size: size,
