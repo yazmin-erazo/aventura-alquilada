@@ -17,7 +17,7 @@ const Crud = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const [ reload, setReload ] = useState(false)
 
-  const pageLimit = 5;
+  const pageLimit = 6;
 
   useEffect(() => {
     const fetchProducts = async () => {
