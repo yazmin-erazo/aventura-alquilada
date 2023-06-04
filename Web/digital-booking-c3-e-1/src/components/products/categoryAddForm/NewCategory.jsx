@@ -16,6 +16,7 @@ const NewCategory = () => {
     description: "",
     selectedImage: null,
     fileName: "",
+    selectedImage: "",
   });
 
   const handleInputChange = (name, value) => {
@@ -61,15 +62,14 @@ const NewCategory = () => {
 
     try {
       let categoryExists = false;
-      categories.map((cat) =>
-        cat.name === categoryData.name ? (categoryExists = true) : null
-      );
+            categories.map( cat => cat.name === categoryData.name ? categoryExists = true : null);
       if (
         categoryData.name === "" ||
         categoryData.description === "" ||
         categoryData.image === null
-      )
+      ) {
         categoryExists = true;
+      }
       if (categoryExists) {
         Swal.fire({
           icon: "error",
@@ -90,7 +90,7 @@ const NewCategory = () => {
           selectedImage: null,
           fileName: "",
         });
-        // setSelectedIcon("");
+        setSelectedIcon("");
       }
     } catch (error) {
       console.log(error.response);
@@ -114,8 +114,6 @@ const NewCategory = () => {
   const handleIconSelect = (iconName) => {
     setSelectedIcon(iconName);
   };
-
-  console.log(selectedIcon);
 
   return (
     <div className={styles.containerNewCategory}>
@@ -142,6 +140,7 @@ const NewCategory = () => {
               Icono
             </IconSelect>
             <ImageUpload onImageUpload={handleImageUpload} />
+
             <textarea
               className={styles.textareaField}
               value={formData.description}

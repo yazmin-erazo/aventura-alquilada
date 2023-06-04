@@ -1,15 +1,15 @@
-
+import React from "react";
 import styles from "./RecommendedProducts.module.css";
-import ButtonPrimary from "../../../common/Buttons/ButtonPrimary"
-import { TbTent } from "react-icons/tb";
-import { MdOutlineSurfing, MdDownhillSkiing, MdDirectionsBike, MdOutlineSnowboarding } from "react-icons/md";
-import { FaMountain, FaSwimmer } from "react-icons/fa";
+import ButtonPrimary from "../../../common/Buttons/ButtonPrimary";
+// import { TbTent } from "react-icons/tb";
+// import { MdOutlineSurfing, MdDownhillSkiing, MdDirectionsBike, MdOutlineSnowboarding } from "react-icons/md";
+// import { FaMountain, FaSwimmer } from "react-icons/fa";
 import { BsClock } from "react-icons/bs";
 import { FaStar } from "react-icons/fa";
 import RatingStats from "../../rating/RatingStats";
+import { IconContext } from "react-icons";
 
-const RecommendedProducts = ({ product, rentalType }) => {
-  
+const RecommendedProducts = ({ product, rentalType, category , categoryIcon }) => {
   const calculateAverageRating = (ratings) => {
     if (Array.isArray(ratings) && ratings.length > 0) {
       const sum = ratings.reduce((total, rating) => total + rating);
@@ -17,6 +17,9 @@ const RecommendedProducts = ({ product, rentalType }) => {
     }
     return 0;
   };
+
+  console.log(category);
+  console.log(categoryIcon);
 
   const averageRating = calculateAverageRating(product.ratings);
   const numRatings = product.ratings ? product.ratings.length : 0;
@@ -36,17 +39,6 @@ const RecommendedProducts = ({ product, rentalType }) => {
     return stars;
   };
 
-  const categoryIcons = {
-    "Camping": TbTent,
-    "Snowboard": MdOutlineSnowboarding,
-    "Surf": MdOutlineSurfing,
-    "Esquí": MdDownhillSkiing,
-    "Bicicletas": MdDirectionsBike,
-    "Escalada": FaMountain,
-    "Deportes acuáticos": FaSwimmer,
-  };
-
-  const CategoryIcon = categoryIcons[product.category];
   const iconColor = "rgb(255 129 0)";
 
   return (
@@ -56,17 +48,20 @@ const RecommendedProducts = ({ product, rentalType }) => {
         <div className={styles.ratingAndCategory}>
           {" "}
           <div className={styles.rating}>
-            <div className={styles.ratingStars}><RatingStats/></div>
+            <div className={styles.ratingStars}>
+              <RatingStats />
+            </div>
             {/* <div className={styles.ratingStars}>{renderRatingStars()}</div> */}
             {/* <p className={styles.numRatings}>{numRatings}</p> */}
           </div>
-          {CategoryIcon && (
+          {categoryIcon && (
             <div className={styles.categoryIconContainer}>
-              <CategoryIcon
-                size={20}
-                className={styles.icon}
-                color={iconColor}
-              />
+              <IconContext.Provider value={{ color: iconColor }}>
+                {React.createElement(categoryIcon, {
+                  size: 20,
+                  className: styles.icon,
+                })}
+              </IconContext.Provider>
             </div>
           )}
         </div>
@@ -83,7 +78,6 @@ const RecommendedProducts = ({ product, rentalType }) => {
           </div>
         </div>
 
-        {/* <button className={styles.button}>Ver detalles</button> */}
         <ButtonPrimary>Ver detalles</ButtonPrimary>
       </div>
     </div>
@@ -91,4 +85,3 @@ const RecommendedProducts = ({ product, rentalType }) => {
 };
 
 export default RecommendedProducts;
-

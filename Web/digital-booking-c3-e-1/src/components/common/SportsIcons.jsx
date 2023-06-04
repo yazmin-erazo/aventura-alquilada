@@ -22,5 +22,5 @@ export const sportsIcons = [
     "MdSportsBaseball",
     "MdSportsFootball",
     "MdSportsSoccer",
-    "MdSportsSoccer",
+    "FaSwimmer"
   ]; 
