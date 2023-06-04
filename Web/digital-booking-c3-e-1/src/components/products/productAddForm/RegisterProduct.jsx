@@ -100,7 +100,7 @@ const RegisterProduct = () => {
       size,
       fileName,
     } = formData;
-
+  
     const productData = {
       name: productName,
       brand: brand,
@@ -115,19 +115,16 @@ const RegisterProduct = () => {
       material: material,
       size: size,
     };
-    console.log("Datos del producto:", productData);
-
+  
     try {
       await ProductsService.create(productData);
-      
-      // Mostrar un mensaje de éxito al usuario con sweetalert2
+  
       Swal.fire(
         '¡Registrado!',
         'El producto ha sido registrado exitosamente.',
         'success'
       );
-
-      // Reiniciar los campos del formulario después de enviar los datos
+  
       setFormData({
         selectedCategory: "",
         selectedCondition: "",
@@ -141,14 +138,21 @@ const RegisterProduct = () => {
         size: "",
         fileName: "",
       });
-      setErrorMessage(""); //Limpiar el mensaje de error
+      setErrorMessage("");
     } catch (error) {
-      // En caso de error al registrar el producto
-      Swal.fire(
-        'Error',
-        'Ha ocurrido un error al registrar el producto.',
-        'error'
-      );
+      if (error.response && error.response.data.nombreExcepcion === 'ExceptionInvalidValue') {
+        Swal.fire(
+          'Error',
+          'El nombre del producto ya existe, por favor ingrese otro valor',
+          'error'
+        );
+      } else {
+        Swal.fire(
+          'Error',
+          'Ha ocurrido un error al registrar el producto.',
+          'error'
+        );
+      }
     }
   };
 
