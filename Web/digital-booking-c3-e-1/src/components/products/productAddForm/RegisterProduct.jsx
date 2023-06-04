@@ -69,7 +69,7 @@ const RegisterProduct = () => {
         );
 
         updatedImages.push({
-          fileName: fileName,
+          fileName: fileName+".jpg",
           image: base64ImageWithoutPrefix,
         });
       };
