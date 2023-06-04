@@ -1,6 +1,7 @@
 .ratingStatsItem {
   display: flex;
   align-items: baseline;
+  flex-direction: row;
 }
 
 .ratingStatsAverage {
@@ -25,3 +26,16 @@
   font-size: 14px;
   color: #777;
 }
+
+@media (max-width: 768px) {
+  .ratingStatsItem {
+    flex-direction: column;
+  }
+}
+
+@media (max-width: 480px) {
+  .ratingStatsItem {
+    flex-direction: row;
+  }
+}
+

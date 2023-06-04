@@ -1,27 +1,28 @@
 .imageUploadContainer {
   max-width: 506px;
   margin-bottom: 16px;
-  border: 2px dashed #ccc;
+  border: 2px dashed var(--secondary-100);
   padding: 16px;
   text-align: center;
   cursor: pointer;
   margin-top: 32px;
+  border-radius: 4px;
 }
 
 .imageUploadContainer p {
   font-size: 14px;
-  color: #888;
+  color: var(--secondary-300);
   margin: 8px 0;
 }
 
 .imageUploadContainer p:hover {
-  color: #555;
+  color: var(--secondary-600);
 }
 
 .imageUploadContainer p:hover::before {
-  color: #777;
+  color: var(--secondary-600);
 }
 
 .imageUploadContainer:hover {
-  border-color: #555;
+  border-color:var(--secondary-600);
 }

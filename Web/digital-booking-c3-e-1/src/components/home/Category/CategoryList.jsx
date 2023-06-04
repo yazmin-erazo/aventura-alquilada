@@ -4,6 +4,7 @@ import styles from "./CategoryList.module.css";
 import { IoIosArrowForward } from "react-icons/io";
 import { IoIosArrowBack } from "react-icons/io";
 import CategoryService from "../../../shared/services/CategoryService";
+import { MdDirectionsBike, MdOutlineDirectionsBike } from "react-icons/md";
 
 const CategoryList = ({ onCategoryClick }) => {
   const listRef = useRef(null);
@@ -70,6 +71,8 @@ const CategoryList = ({ onCategoryClick }) => {
               key={category.id}
               category={category}
               onCategoryClick={handleCategoryClick}
+              selectedIcon={MdOutlineDirectionsBike}
+              //        selectedIcon={category.icon}
             />
           ))}
         </div>

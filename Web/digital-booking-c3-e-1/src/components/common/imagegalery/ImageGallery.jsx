@@ -10,17 +10,17 @@ const ImageGallery = ({ product }) => {
     id: 0,
     title: "Imagen principal",
     url: product?.imageURL,
-  }
+  };
 
   const secondaryImages = product?.secondaryImages.map((image, index) => ({
-    id: index ,
+    id: index,
     title: "Imagen ${index+1}",
-    url: image.imageURL
+    url: image.imageURL,
   }));
 
   const images = [mainImage].concat(secondaryImages);
 
-  const gridImages = secondaryImages.slice(0, 4)
+  const gridImages = secondaryImages.slice(0, 4);
 
   const [isPopupOpen, setIsPopupOpen] = useState(false);
 
@@ -32,12 +32,16 @@ const ImageGallery = ({ product }) => {
     <>
       <div className={styles.container}>
         <div className={styles.mainImage}>
-          <img src={mainImage.url} alt={mainImage.title} />
+          <div className={styles.imageContainer}>
+            <img src={mainImage.url} alt={mainImage.title} />
+          </div>
         </div>
         <div className={styles.gridContainer}>
           {gridImages.map((image) => (
             <div className={styles.gridItem} key={image.id}>
-              <img src={image.url} alt={image.title} />
+              <div className={styles.imageContainer}>
+                <img src={image.url} alt={image.title} />
+              </div>
             </div>
           ))}
         </div>

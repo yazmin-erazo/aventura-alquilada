@@ -61,9 +61,9 @@
   -webkit-box-orient: vertical;
 }
 .priceAndRentalContainer {
+  margin-top: 16px;
   display: flex;
   justify-content: space-between;
-  align-items: center;
 }
 
 .ratingAndCategory {
@@ -145,14 +145,15 @@
 
 /* Desktop y Tablet */
 @media (min-width: 768px) {
+
   .card {
     display: flex;
     align-items: center;
   }
 
   .image {
-    width: 250px;
-    height: 250px;
+    max-width: 200px;
+    max-height: 200px;
     border-radius: 8px;
     object-fit: cover;
     margin-right: 14px;
