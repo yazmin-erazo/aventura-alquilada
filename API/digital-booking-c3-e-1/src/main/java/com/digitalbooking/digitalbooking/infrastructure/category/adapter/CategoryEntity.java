@@ -15,5 +15,6 @@ public class CategoryEntity {
     private String imageURL;
     private String description;
     private Boolean isDelete;
+    private String icon;
 
 }

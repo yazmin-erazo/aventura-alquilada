@@ -21,7 +21,8 @@ public class CategoryHandler {
                 createCategory.getName(),
                 createCategory.getImage(),
                 createCategory.getDescription(),
-                createCategory.getFileName()
+                createCategory.getFileName(),
+                createCategory.getIcon()
 
         ));
     }
