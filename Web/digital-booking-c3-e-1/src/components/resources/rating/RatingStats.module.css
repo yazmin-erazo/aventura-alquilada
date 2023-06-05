@@ -1,6 +1,11 @@
 .ratingStatsItem {
+  width: 100%;
   display: flex;
   align-items: baseline;
+}
+
+.flexColumn {
+  flex-direction: column;
 }
 
 .ratingStatsAverage {
@@ -25,3 +30,5 @@
   font-size: 14px;
   color: #777;
 }
+
+

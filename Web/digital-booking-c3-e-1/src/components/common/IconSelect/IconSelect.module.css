@@ -1,0 +1,46 @@
+/* --------- START Icons */
+
+.selectContainer {
+  margin-bottom: 1rem;
+}
+
+.iconSelect {
+  max-width: 508px;
+  display: flex;
+  gap: 1rem;
+  padding: 1rem;
+  border: 1px solid var(--secondary-100);
+  background-color: var(--white-100);
+  border-radius: 4px;
+  flex-wrap: wrap;
+  margin-top: 8px;
+}
+
+.iconOption {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  padding: 8px;
+  border-radius: 4px;
+  transition: background-color 0.2s ease;
+  transition: background-color 0.2s ease, transform 0.2s ease;
+}
+
+.iconOption:hover:not(.selectedIcon) {
+  transform: scale(2);
+}
+
+.selectedIcon {
+  background-color: var(--secondary-50);
+  transform: scale(1.4);
+}
+
+.iconName {
+  display: block;
+  text-align: center;
+  margin-top: 5px;
+  font-size: 12px;
+}
+
+/* --------- END Icons */

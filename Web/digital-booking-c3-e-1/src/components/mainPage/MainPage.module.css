@@ -1,17 +1,21 @@
 .outlet {
-    min-height: calc(100vh - 140px);
-  }
-  
-  .withPanel {
-    display: flex;
-  }
+  min-height: calc(100vh - 140px);
+}
 
+.withPanel {
+  display: flex;
+}
+
+.withPanel .main {
+  max-width: calc(100vw - 250px);
+}
+
+.main {
+  width: 100%;
+}
+
+@media (max-width: 767px) {
   .withPanel .main {
-    max-width: calc(100vw - 250px);
-  }
-
-  @media (max-width: 767px) { 
-    .withPanel .main {
       max-width: 100vw;
     }
-  }
+}

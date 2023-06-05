@@ -1,6 +1,6 @@
 import { Modal, Carousel } from "react-bootstrap";
 import styles from "./ImageGallery.module.css";
-import 'bootstrap/dist/css/bootstrap.min.css';
+// import 'bootstrap/dist/css/bootstrap.min.css';
 
 const ImagePopup = ({ images, onClose }) => {
   return (

@@ -2,6 +2,11 @@
 @import "/src/styles/global.css";
 
 
+.homeContainer{
+  max-width: 1280px;
+  margin: 0 auto;
+}
+
 .searchContainer {
   background-color: var(--secondary-600);
   height: 10vh;

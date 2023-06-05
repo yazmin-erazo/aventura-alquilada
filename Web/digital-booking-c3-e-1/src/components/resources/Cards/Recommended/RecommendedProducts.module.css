@@ -4,7 +4,6 @@
   background-color: var(--white-100);
   border-radius: 8px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  margin-bottom: 10px;
   padding: 8px;
   font-family: "Roboto", sans-serif;
   color: var(--secondary-600);
@@ -21,7 +20,6 @@
 .content {
   flex-grow: 1;
   padding: 10px;
-  height: 250px;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -61,16 +59,17 @@
   -webkit-box-orient: vertical;
 }
 .priceAndRentalContainer {
+  margin-top: 16px;
   display: flex;
   justify-content: space-between;
-  align-items: center;
+  align-items: baseline;
 }
 
 .ratingAndCategory {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 0.75rem;
+  margin-bottom: 1rem;
 }
 
 .price {
@@ -151,8 +150,7 @@
   }
 
   .image {
-    width: 250px;
-    height: 250px;
+    max-width: 40%;
     border-radius: 8px;
     object-fit: cover;
     margin-right: 14px;
