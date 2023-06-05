@@ -266,7 +266,6 @@ const RegisterProduct = () => {
               <Select
                 options={genderOptions}
                 value={selectedGender}
-                onChange={(id) => handleInputChange("gender", id)}
                 onChange={(id) => handleInputChange("selectedGender", id)}
               >
                 Género
