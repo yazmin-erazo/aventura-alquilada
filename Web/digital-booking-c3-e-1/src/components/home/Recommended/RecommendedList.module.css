@@ -22,6 +22,10 @@
   all: initial;
 }
 
+.linkCard{
+cursor: pointer;
+}
+
 
 /* ------------ Transition */
 
@@ -54,7 +58,6 @@
 .fade-exit-active {
   animation: fade-in 300ms ease-out reverse forwards;
 }
-
 
 
 /* -------- CON PANEL DE ADMINISTRACIÓN --------- */

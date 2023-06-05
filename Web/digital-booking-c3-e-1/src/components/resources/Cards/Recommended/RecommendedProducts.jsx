@@ -1,15 +1,17 @@
 import React from "react";
 import styles from "./RecommendedProducts.module.css";
 import ButtonPrimary from "../../../common/Buttons/ButtonPrimary";
-// import { TbTent } from "react-icons/tb";
-// import { MdOutlineSurfing, MdDownhillSkiing, MdDirectionsBike, MdOutlineSnowboarding } from "react-icons/md";
-// import { FaMountain, FaSwimmer } from "react-icons/fa";
 import { BsClock } from "react-icons/bs";
 import { FaStar } from "react-icons/fa";
 import RatingStats from "../../rating/RatingStats";
 import { IconContext } from "react-icons";
 
-const RecommendedProducts = ({ product, rentalType, category , categoryIcon }) => {
+const RecommendedProducts = ({
+  product,
+  rentalType,
+  category,
+  categoryIcon,
+}) => {
   const calculateAverageRating = (ratings) => {
     if (Array.isArray(ratings) && ratings.length > 0) {
       const sum = ratings.reduce((total, rating) => total + rating);
@@ -44,6 +46,7 @@ const RecommendedProducts = ({ product, rentalType, category , categoryIcon }) =
   return (
     <div className={styles.card}>
       <img src={product.image} alt={product.name} className={styles.image} />
+
       <div className={styles.content}>
         <div className={styles.ratingAndCategory}>
           {" "}

@@ -25,8 +25,6 @@ const RecommendedList = ({ selectedCategory }) => {
     ...FaIcons,
   };
 
-  console.log(categories);
-
   useEffect(() => {
     CategoryService.getAll()
       .then((response) => {
@@ -74,6 +72,7 @@ const RecommendedList = ({ selectedCategory }) => {
             <div
               key={product.id}
               onClick={() => navigate(`/products/${product.id}`)}
+              className={styles.linkCard}
             >
               <RecommendedProducts
                 rentalType="Alquiler por hora"
