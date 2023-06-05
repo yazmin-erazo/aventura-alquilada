@@ -1,34 +1,25 @@
 @import "/src/styles/variables.css";
 @import "/src/styles/global.css";
 
-.containerForm{
-    width: 90%;
-    max-width: 1280px;
-    margin: 0 auto;
+.containerNewRol {
+  margin: 0 4%;
+  margin-top: 40px;
 }
 
-.header{
-    color: var(--white-100);
-    text-align: center;
-    margin-bottom: 36px;
-    width: calc(100vw - 250px);
-    height: 80px;
-    background-color: var(--secondary-600);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
-    letter-spacing: 0.08rem;
+.containerForm {
+  display: flex;
+  justify-content: center;
 }
 
-.header h2{
-  font: var(--h2);
+.header {
+  width: 100%;
+  border-bottom: 1px solid var(--secondary-100);
+  margin-bottom: 4rem;
 }
 
-.header p {
-  font: var(--body-16);
-  margin-top: 8px;
-  
+.addRolTitle {
+  margin: 16px 0;
+  color: var(--secondary-600);
 }
 
 .registerRoleContainer {
@@ -41,22 +32,29 @@
 }
 
 .registerRoleForm {
-  width: 50%;
+  width: 100%;
 }
 
 .selectAllContainer {
-  margin: 1rem; 
+  margin-bottom: 3rem;
+  margin-top: 0.75rem;
 }
-
+.titleSelectAll{
+  margin-top: 2rem;
+}
 .permissionsContainer {
+  max-width: 506px;
   display: flex;
   flex-direction: column;
 }
 
 .category {
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   margin-bottom: 20px;
+  justify-content: space-between;
+  align-items: baseline;
+  border-bottom: 1px solid var(--secondary-100);
 }
 
 .category h4 {
@@ -66,7 +64,7 @@
 .categoryPermissions {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
-  grid-gap: 10px;
+  grid-gap: 1.2rem;
   align-items: center;
 }
 
@@ -81,7 +79,7 @@
 }
 
 .previewContainer {
-    width: 100%;
+  width: 100%;
   margin-top: 8px;
 }
 
@@ -96,8 +94,8 @@
   width: 100%;
   max-width: 508px;
   height: 120px;
-  background: #ffffff; /* white-100 */
-  border: 0.5px solid #c3d4e4; /* secondary-100 */
+  background: var(--white-100);
+  border: 0.5px solid var(--secondary-100);
   border-radius: 5px;
   font-size: 14px;
   margin-top: 8px;
@@ -105,24 +103,26 @@
   font: var(--body-14-normal);
   resize: vertical;
   box-sizing: border-box;
-  margin:16px 0;
+  margin: 16px 0;
 }
 
 .submitBtn {
   margin: 16px;
 }
 
-@media (max-width: 768px) {
+@media (max-width: 600px) {
   .textareaField {
     height: 80px;
   }
   .registerCategoryContainer {
     flex-direction: column;
-
   }
+  .category {
 
-  .registerCategoryForm {
+    flex-direction: column;
+  }
+  .categoryPermissions{
     width: 100%;
   }
-}
 
+}

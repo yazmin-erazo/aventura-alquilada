@@ -6,10 +6,7 @@
   background: var(--sencondary-900);
   color: var(--bg-white-50);
   padding: 24px;
-  overflow: scroll;
 }
-
-
 
 .title {
   display: flex;

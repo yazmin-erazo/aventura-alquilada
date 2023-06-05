@@ -22,5 +22,15 @@ export const sportsIcons = [
     "MdSportsBaseball",
     "MdSportsFootball",
     "MdSportsSoccer",
-    "FaSwimmer"
+    "FaSwimmer",
+    "MdSportsGolf",
+    "MdSportsGymnastics",
+    "MdSportsMartialArts",
+    "MdOutlineSportsBaseball",
+    "MdOutlineSportsCricket",
+    "MdOutlineSportsFootball",
+    "MdSports",
+    "TbBallTennis",
+    "TbChessKnight",
+    "TbMotorbike",
   ]; 

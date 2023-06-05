@@ -20,9 +20,6 @@ const RecommendedProducts = ({
     return 0;
   };
 
-  console.log(category);
-  console.log(categoryIcon);
-
   const averageRating = calculateAverageRating(product.ratings);
   const numRatings = product.ratings ? product.ratings.length : 0;
 

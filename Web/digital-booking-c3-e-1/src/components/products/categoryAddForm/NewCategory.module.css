@@ -1,5 +1,6 @@
-.containerNewCategory{
-  margin: 4%;
+.containerNewCategory {
+  margin: 0 4%;
+  margin-top: 40px;
 }
 .containerForm {
   /* max-width: 1280px;
@@ -42,7 +43,7 @@
   width: 100%;
   max-width: 508px;
   height: 120px;
-  background: var(--white-100); 
+  background: var(--white-100);
   border: 0.5px solid var(--secondary-100);
   border-radius: 5px;
   font-size: 14px;

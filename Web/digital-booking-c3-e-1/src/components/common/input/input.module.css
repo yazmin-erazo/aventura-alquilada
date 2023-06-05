@@ -3,9 +3,6 @@
 
 
 .inputContainer {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
     max-width: 506px;
     height: 64px;
     font: var(--body-16);

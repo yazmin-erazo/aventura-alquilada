@@ -163,12 +163,11 @@ nav {
 .header input {
   display: none;
 }
-label:hover {
-  border: 1.5px solid var(--primary-300);
-}
+
 .header input:checked ~ label {
   background: var(--primary-300);
 }
+
 .header ul {
   margin-top: 0;
   padding: 0;

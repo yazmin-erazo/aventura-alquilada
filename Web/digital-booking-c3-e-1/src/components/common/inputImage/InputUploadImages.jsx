@@ -7,7 +7,9 @@ const InputUploadImages = ({ onImageUpload }) => {
   const [uploadedImages, setUploadedImages] = useState([]);
 
   const { getRootProps, getInputProps, isDragActive } = useDropzone({
-    accept: "image/*",
+    accept: {
+      'image/*': ['.jpeg', '.jpg', '.png'],
+     },
     multiple: true,
     onDrop: (acceptedFiles) => {
       onImageUpload(acceptedFiles);
