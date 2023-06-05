@@ -57,7 +57,7 @@ public final class Product {
         Validator.validateMandatory(price, "El precio es requerido para crear un producto");
         Validator.validateMandatory(description, "La descripción es requerida para crear un producto");
         Validator.validateMandatory(size, "La talla es requerida para crear un producto");
-        //Validator.validateMandatory(gender, "El género es requerido para crear un producto");
+        Validator.validateMandatory(gender, "El género es requerido para crear un producto");
         Validator.validateMandatory(color, "El color es requerido para crear un producto");
         Validator.validateMandatory(material, "El material es requerido para crear un producto");
         //Validator.validateMandatory(deposit, "El depósito es requerido para crear un producto");

@@ -28,6 +28,7 @@ const RegisterProduct = () => {
     material: "",
     size: "",
     fileName: "",
+    selectedGender: "",
   });
 
   useEffect(() => {
@@ -266,6 +267,7 @@ const RegisterProduct = () => {
                 options={genderOptions}
                 value={selectedGender}
                 onChange={(id) => handleInputChange("gender", id)}
+                onChange={(id) => handleInputChange("selectedGender", id)}
               >
                 Género
               </Select>
