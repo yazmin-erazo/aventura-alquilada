@@ -61,35 +61,37 @@ const RecommendedList = ({ selectedCategory }) => {
   return (
     <div className={styles.container}>
       <div className={styles.recommendedList}>
-        {currentProducts.map((product) => {
-          const category = categories.find(
-            (category) => category.name === product.category
-          );
-          const categoryIcon = category ? category.icon : null;
-          const isIconInSportsIcons = sportsIcons.includes(category.icon);
-          const IconComponent = iconComponents[category.icon] || null;
-          return (
-            <div
-              key={product.id}
-              onClick={() => navigate(`/products/${product.id}`)}
-              className={styles.linkCard}
-            >
-              <RecommendedProducts
-                rentalType="Alquiler por hora"
-                product={{
-                  ...product,
-                  name: product.name,
-                  price: product.price,
-                  ratings: product.ratings,
-                  image: product.imageURL,
-                }}
-                categoryIcon={
-                  isIconInSportsIcons ? IconComponent : categoryIcon
-                }
-              />
-            </div>
-          );
-        })}
+        {categories.length === 0
+          ? null
+          : currentProducts.map((product) => {
+              const category = categories.find(
+                (category) => category.name === product.category
+              );
+              const categoryIcon = category ? category.icon : null;
+              const isIconInSportsIcons = sportsIcons.includes(category.icon);
+              const IconComponent = iconComponents[category.icon] || null;
+              return (
+                <div
+                  key={product.id}
+                  onClick={() => navigate(`/products/${product.id}`)}
+                  className={styles.linkCard}
+                >
+                  <RecommendedProducts
+                    rentalType="Alquiler por hora"
+                    product={{
+                      ...product,
+                      name: product.name,
+                      price: product.price,
+                      ratings: product.ratings,
+                      image: product.imageURL,
+                    }}
+                    categoryIcon={
+                      isIconInSportsIcons ? IconComponent : categoryIcon
+                    }
+                  />
+                </div>
+              );
+            })}
       </div>
       <Pagination
         onPageChanged={onPageChanged}
