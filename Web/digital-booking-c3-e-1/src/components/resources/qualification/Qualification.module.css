@@ -22,6 +22,13 @@
   color: var(--primary-300);
   background-color: var(--black);
 }
+
+/* .star:hover,
+.star:hover ~ .star {
+  color: var(--primary-300);
+  background-color: var(--black);
+} */
+
 .reviewText {
   line-height: 1.3rem;
   color: var(--secondary-300);

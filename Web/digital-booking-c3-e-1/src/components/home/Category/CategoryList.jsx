@@ -62,7 +62,7 @@ const CategoryList = ({ onCategoryClick }) => {
         className={styles.overlay}
         style={{
           background: showLeftArrow
-            ? "transparent"
+            ? "none"
             : "linear-gradient(to right, rgba(195, 212, 228, 0), #DEE7F0)",
           color: showLeftArrow ? "white" : "transparent",
         }}

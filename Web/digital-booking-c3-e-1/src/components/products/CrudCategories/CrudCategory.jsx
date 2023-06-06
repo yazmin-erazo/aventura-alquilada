@@ -4,8 +4,8 @@ import styles from "./CrudCategory.module.css";
 import ButtonPrimary from "../../common/Buttons/ButtonPrimary";
 import Pagination from "../../resources/pagination/Pagination";
 import { Link } from "react-router-dom";
-import Swal from 'sweetalert2';
-import { useNavigate } from 'react-router-dom';
+import Swal from "sweetalert2";
+import { useNavigate } from "react-router-dom";
 import { CategoriesContext } from "../../../context/CategoriesContext";
 import CategoryService from "../../../shared/services/CategoryService";
 import TableCategoryRow from "../../common/TableCategory/TableCategoryRow";
@@ -13,24 +13,23 @@ import TableCategoryRow from "../../common/TableCategory/TableCategoryRow";
 const CrudCategory = () => {
   const navigate = useNavigate();
   const [categories, setCategories] = useState([]);
-  const data = useContext(CategoriesContext)
+  const data = useContext(CategoriesContext);
   const [currentCategories, setCurrentCategories] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
-  const [ reload, setReload ] = useState(false)
+  const [reload, setReload] = useState(false);
 
   const pageLimit = 5;
 
   useEffect(() => {
     const fetchCategories = async () => {
       try {
-        const catsActual = await CategoryService.getAll()
-        setCategories(catsActual)
-      }
-      catch {
+        const catsActual = await CategoryService.getAll();
+        setCategories(catsActual);
+      } catch {
         setCategories(data.categories);
       }
-    }
-    fetchCategories()
+    };
+    fetchCategories();
   }, [reload]);
 
   useEffect(() => {
@@ -45,51 +44,53 @@ const CrudCategory = () => {
   // usecallback para memorizar y asegurarnos de que no se creara una nueva instancia en cada renderizado
   const handleDelete = (categoryId) => {
     Swal.fire({
-      title: '¿Estás seguro?',
+      title: "¿Estás seguro?",
       text: "¡No podrás revertir esta acción!",
-      icon: 'warning',
+      icon: "warning",
       showCancelButton: true,
-      confirmButtonColor: '#a6cf7e',
-      cancelButtonColor: '#fd7053',
-      cancelButtonText: 'No',
-      confirmButtonText: 'Sí, ¡Eliminar!'
-    }).then( async(result) => {
+      confirmButtonColor: "#a6cf7e",
+      cancelButtonColor: "#fd7053",
+      cancelButtonText: "No",
+      confirmButtonText: "Sí, ¡Eliminar!",
+    }).then(async (result) => {
       if (result.isConfirmed) {
         try {
-          const res = await CategoriesService.deleteByID(categoryId)
+          const res = await CategoriesService.deleteByID(categoryId);
           if (res.status === 200) {
             const updatedCategories = categories.filter(
               (category) => category.id !== categoryId
             );
             setCategories(updatedCategories);
-            setReload(!reload)
+            setReload(!reload);
             Swal.fire(
-              '¡Eliminado!',
-              'La categoría ha sido eliminada.',
-              'success'
-            )
+              "¡Eliminado!",
+              "La categoría ha sido eliminada.",
+              "success"
+            );
           }
         } catch (error) {
           Swal.fire(
-            'Error',
-            'Ha ocurrido un error al eliminar la categoría.',
-            'error'
-          )
+            "Error",
+            "Ha ocurrido un error al eliminar la categoría.",
+            "error"
+          );
         }
-      }
-      else {
+      } else {
         Swal.close();
       }
     });
-  }
+  };
 
-  const handleEdit = useCallback((category) => {
-    navigate('category/edit', { state: { category: category } });
-  }, [navigate]);
+  const handleEdit = useCallback(
+    (category) => {
+      navigate("category/edit", { state: { category: category } });
+    },
+    [navigate]
+  );
 
   return (
     <>
-      <section className={styles["container"]} >
+      <section className={styles["container"]}>
         <div className={styles["button-container"]}>
           <Link to="category/add">
             <ButtonPrimary>Agregar categoría</ButtonPrimary>

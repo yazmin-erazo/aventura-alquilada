@@ -1,10 +1,11 @@
-import React from "react";
+import React, { useState } from "react";
 import styles from "./RecommendedProducts.module.css";
 import ButtonPrimary from "../../../common/Buttons/ButtonPrimary";
 import { BsClock } from "react-icons/bs";
 import { FaStar } from "react-icons/fa";
 import RatingStats from "../../rating/RatingStats";
 import { IconContext } from "react-icons";
+import { FaHeart } from "react-icons/fa";
 
 const RecommendedProducts = ({
   product,
@@ -12,6 +13,13 @@ const RecommendedProducts = ({
   category,
   categoryIcon,
 }) => {
+  const [isFavorite, setIsFavorite] = useState(false);
+
+  const handleFavoriteClick = (event) => {
+    event.stopPropagation(); // Detiene la propagación del evento para que se pueda hacer lcic en el corazon y no navegue directamente a la vista de detalle
+    setIsFavorite(!isFavorite);
+    console.log(isFavorite);
+  };
   const calculateAverageRating = (ratings) => {
     if (Array.isArray(ratings) && ratings.length > 0) {
       const sum = ratings.reduce((total, rating) => total + rating);
@@ -42,7 +50,19 @@ const RecommendedProducts = ({
 
   return (
     <div className={styles.card}>
-      <img src={product.image} alt={product.name} className={styles.image} />
+      <div className={styles.imageContainer}>
+        <img src={product.image} alt={product.name} className={styles.image} />
+        <div className={styles.favoriteButton}>
+          <div
+            className={`${styles.favoriteButton} ${
+              isFavorite ? styles.favoriteActive : styles.heartIcon
+            }`}
+            onClick={(event) => handleFavoriteClick(event)} 
+          >
+            <FaHeart />
+          </div>
+        </div>
+      </div>
 
       <div className={styles.content}>
         <div className={styles.ratingAndCategory}>
