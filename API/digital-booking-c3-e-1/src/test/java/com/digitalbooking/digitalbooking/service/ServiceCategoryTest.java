@@ -71,8 +71,8 @@ class ServiceCategoryTest {
 
     @Test
     void testGetCategoriesSuccess() {
-        CategoryDTO category1 = new CategoryDTO(1L, "Camping", "Imagen test", "Descripción test");
-        CategoryDTO category2 = new CategoryDTO(2L, "Pesca", "Imagen test", "Descripción test");
+        CategoryDTO category1 = new CategoryDTO(1L, "Camping", "Imagen test", "Descripción test","Icono");
+        CategoryDTO category2 = new CategoryDTO(2L, "Pesca", "Imagen test", "Descripción test", "Icono");
         List<CategoryDTO> expectedCategories = List.of(category1, category2);
         when(categoryRepository.getAll()).thenReturn(expectedCategories);
 
@@ -85,7 +85,7 @@ class ServiceCategoryTest {
     @Test
     void testGetCategorySuccess() {
         Long categoryId = 1L;
-        CategoryDTO expectedCategory = new CategoryDTO(1L, "Camping", "Imagen test", "Descripción test");
+        CategoryDTO expectedCategory = new CategoryDTO(1L, "Camping", "Imagen test", "Descripción test", "Icono");
         when(categoryRepository.findById(categoryId)).thenReturn(Optional.of(expectedCategory));
 
         Optional<CategoryDTO> actualCategory = serviceCategory.getCategory(categoryId);

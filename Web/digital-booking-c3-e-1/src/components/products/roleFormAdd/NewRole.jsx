@@ -4,6 +4,7 @@ import ButtonPrimary from "../../common/Buttons/ButtonPrimary";
 import styles from "./NewRole.module.css";
 import RolesService from "../../../shared/services/RolesService";
 import { useParams } from "react-router-dom";
+import Swal from 'sweetalert2';
 
 const NewRole = () => {
   const [formData, setFormData] = useState({
@@ -109,139 +110,154 @@ const NewRole = () => {
       rentUpdate: formData.permissions.rent.edit,
       rentDelete: formData.permissions.rent.delete,
     };
-    RolesService.create(payload);
+
+    try {
+      await RolesService.create(payload);
+      Swal.fire(
+        '¡Registrado!',
+        'El rol ha sido agregado con éxito.',
+        'success'
+      );
+    } catch (error) {
+      Swal.fire(
+        'Error',
+        'Ha ocurrido un error al agregar el rol',
+        'error'
+      );
+    }
+
     console.log("Datos del nuevo rol:", formData);
   };
 
-  const CheckItem = ({ category, action, name, children }) => (
+  const CheckItem = ({ category, action, name,  children }) => (
     <label>
-      <span style={{ marginRight: "8px" }}>{name}</span>
-      <input
-        type="checkbox"
-        checked={formData.permissions[category][action]}
-        onChange={(event) =>
-          handlePermissionChange(category, action, event.target.checked)
-        }
-      />
-      {children}
+    <span style={{ marginRight: "8px" }}>{name}</span>
+    <input
+    type="checkbox"
+    checked={formData.permissions[category][action]}
+    onChange={(event) =>
+    handlePermissionChange(category, action, event.target.checked)
+    }
+    />
+    {children}
     </label>
-  );
-
-  return (
+    );
+    
+    return (
     <div className={styles.containerNewRol}>
-      <header className={styles.header}>
-        <h4 className={styles.addRolTitle}>Agregar rol</h4>
-      </header>
+    <header className={styles.header}>
+    <h4 className={styles.addRolTitle}>Agregar rol</h4>
+    </header>
+    <div className={styles.containerForm}>
+    <div className={styles.registerRoleContainer}>
+      <div className={styles.registerRoleForm}>
+        <InputWithLabel
+          type="text"
+          value={formData.roleName}
+          onChange={(event) =>
+            handleInputChange("roleName", event.target.value)
+          }
+        >
+          Nombre del rol:
+        </InputWithLabel>
 
-      <div className={styles.containerForm}>
-        <div className={styles.registerRoleContainer}>
-          <div className={styles.registerRoleForm}>
-            <InputWithLabel
-              type="text"
-              value={formData.roleName}
+        <h4 className={styles.titleSelectAll}>Permisos:</h4>
+
+        <div className={styles.selectAllContainer}>
+          <label>
+            <input
+              style={{ marginRight: "8px" }}
+              type="checkbox"
+              checked={formData.selectAll}
               onChange={(event) =>
-                handleInputChange("roleName", event.target.value)
+                handleSelectAllChange(event.target.checked)
               }
-            >
-              Nombre del rol:
-            </InputWithLabel>
+            />
+            Seleccionar todo
+          </label>
+        </div>
 
-            <h4 className={styles.titleSelectAll}>Permisos:</h4>
-
-            <div className={styles.selectAllContainer}>
-              <label>
-                <input
-                  style={{ marginRight: "8px" }}
-                  type="checkbox"
-                  checked={formData.selectAll}
-                  onChange={(event) =>
-                    handleSelectAllChange(event.target.checked)
-                  }
-                />
-                Seleccionar todo
-              </label>
+        <div className={styles.permissionsContainer}>
+          <div className={styles.category}>
+            <div className={styles.categoryName}>
+              <h4>Categorías</h4>
             </div>
-
-            <div className={styles.permissionsContainer}>
-              <div className={styles.category}>
-                <div className={styles.categoryName}>
-                  <h4>Categorías</h4>
-                </div>
-                <div className={styles.categoryPermissions}>
-                  <CheckItem
-                    category="categories"
-                    action="list"
-                    name="Listar"
-                  />
-                  <CheckItem
-                    category="categories"
-                    action="add"
-                    name="Agregar"
-                  />
-                  <CheckItem
-                    category="categories"
-                    action="edit"
-                    name="Editar"
-                  />
-                  <CheckItem
-                    category="categories"
-                    action="delete"
-                    name="Eliminar"
-                  />
-                </div>
-              </div>
-
-              <div className={styles.category}>
-                <div className={styles.categoryName}>
-                  <h4>Productos</h4>
-                </div>
-                <div className={styles.categoryPermissions}>
-                  <CheckItem category="products" action="list" name="Listar" />
-                  <CheckItem category="products" action="add" name="Agregar" />
-                  <CheckItem category="products" action="edit" name="Editar" />
-                  <CheckItem
-                    category="products"
-                    action="delete"
-                    name="Eliminar"
-                  />
-                </div>
-              </div>
-
-              <div className={styles.category}>
-                <div className={styles.categoryName}>
-                  <h4>Usuarios</h4>
-                </div>
-                <div className={styles.categoryPermissions}>
-                  <CheckItem category="users" action="list" name="Listar" />
-                  <CheckItem category="users" action="add" name="Agregar" />
-                  <CheckItem category="users" action="edit" name="Editar" />
-                  <CheckItem category="users" action="delete" name="Eliminar" />
-                </div>
-              </div>
-
-              <div className={styles.category}>
-                <div className={styles.categoryName}>
-                  <h4>Roles</h4>
-                </div>
-                <div className={styles.categoryPermissions}>
-                  <CheckItem category="roles" action="list" name="Listar" />
-                  <CheckItem category="roles" action="add" name="Agregar" />
-                  <CheckItem category="roles" action="edit" name="Editar" />
-                  <CheckItem category="roles" action="delete" name="Eliminar" />
-                </div>
-              </div>
-              <ButtonPrimary
-                className={styles.submitBtn}
-                onClick={handleSubmit}
-              >
-                Agregar rol
-              </ButtonPrimary>
+            <div className={styles.categoryPermissions}>
+              <CheckItem
+                category="categories"
+                action="list"
+                name="Listar"
+              />
+              <CheckItem
+                category="categories"
+                action="add"
+                name="Agregar"
+              />
+              <CheckItem
+                category="categories"
+                action="edit"
+                name="Editar"
+              />
+              <CheckItem
+                category="categories"
+                action="delete"
+                name="Eliminar"
+              />
             </div>
           </div>
+
+          <div className={styles.category}>
+            <div className={styles.categoryName}>
+              <h4>Productos</h4>
+            </div>
+            <div className={styles.categoryPermissions}>
+              <CheckItem category="products" action="list" name="Listar" />
+              <CheckItem category="products" action="add" name="Agregar" />
+              <CheckItem category="products" action="edit" name="Editar" />
+              <CheckItem
+                category="products"
+                action="delete"
+                name="Eliminar"
+              />
+            </div>
+          </div>
+
+          <div className={styles.category}>
+            <div className={styles.categoryName}>
+              <h4>Usuarios</h4>
+            </div>
+            <div className={styles.categoryPermissions}>
+              <CheckItem category="users" action="list" name="Listar" />
+              <CheckItem category="users" action="add" name="Agregar" />
+              <CheckItem category="users" action="edit" name="Editar" />
+              <CheckItem category="users" action="delete" name="Eliminar" />
+            </div>
+          </div>
+
+          <div className={styles.category}>
+            <div className={styles.categoryName}>
+              <h4>Roles</h4>
+            </div>
+            <div className={styles.categoryPermissions}>
+              <CheckItem category="roles" action="list" name="Listar" />
+              <CheckItem category="roles" action="add" name="Agregar" />
+              <CheckItem category="roles" action="edit" name="Editar" />
+              <CheckItem category="roles" action="delete" name="Eliminar" />
+            </div>
+          </div>
+          <ButtonPrimary
+            className={styles.submitBtn}
+            onClick={handleSubmit}
+          >
+            Agregar rol
+          </ButtonPrimary>
         </div>
       </div>
     </div>
-  );
+  </div>
+</div>
+);
 };
 
 export default NewRole;
+

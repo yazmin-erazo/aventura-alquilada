@@ -16,7 +16,7 @@ const NewCategory = () => {
     description: "",
     selectedImage: null,
     fileName: "",
-    selectedImage: "",
+    selectedIcon: "",
   });
 
   const handleInputChange = (name, value) => {

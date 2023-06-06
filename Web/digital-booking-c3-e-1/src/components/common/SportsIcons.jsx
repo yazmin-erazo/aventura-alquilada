@@ -33,4 +33,5 @@ export const sportsIcons = [
     "TbBallTennis",
     "TbChessKnight",
     "TbMotorbike",
+    "TbFishHook",
   ]; 
