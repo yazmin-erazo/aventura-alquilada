@@ -35,7 +35,7 @@ const Qualification = () => {
   const renderStars = () => {
     const stars = [];
     for (let i = 1; i <= 5; i++) {
-      const starClassName = i <= averageRating ? styles.filled : "";
+      const starClassName = i <= rating ? styles.filled : "";
       stars.push(
         <button
           key={i}
@@ -57,7 +57,7 @@ const Qualification = () => {
       <div className={styles.starsContainer}>{renderStars()}</div>
       <div className={styles.commentContainer}>
         <p className={styles.commentText}>
-          ¡Este producto es simplemente increíble! Me encanta la calidad y el diseño. ¡Lo recomendaría sin dudarlo!
+        Inicia sesión para agregar una reseña. Nos ayudará a verificar la autenticidad de tu correo electrónico.
         </p>
       </div>
     </div>

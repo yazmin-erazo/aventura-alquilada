@@ -5,23 +5,22 @@ const TableCategoryRow = ({ category, onDelete, onEdit }) => {
   return (
     <tr className={styles["table-row"]}>
       <td>{category.id}</td>
-      {
-        (category.imageURL || category.imageURL === "") &&
+      {(category.imageURL || category.imageURL === "") && (
         <td>
-        <img 
-          src={category.imageURL}
-          alt={category.name}
-          className={styles["category-image"]}
+          <img
+            src={category.imageURL}
+            alt={category.name}
+            className={styles["category-image"]}
           />
-      </td>
-        }
+        </td>
+      )}
       <td>{category.name}</td>
       <td className={styles["description-cell"]}>
         <div className={styles["container-text-description"]}>
           {category.description}
         </div>
       </td>
-      <td>{category.state}</td>
+
       <td className={styles["actions"]}>
         <ActionButtons onDelete={onDelete} onEdit={onEdit} />
       </td>

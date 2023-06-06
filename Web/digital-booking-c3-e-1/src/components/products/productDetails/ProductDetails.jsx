@@ -22,11 +22,10 @@ const ProductDetails = () => {
   const [images, setImages] = useState([]);
   // const [product, setProduct] = useState()
 
-    const product = products.find((p) => {
-      return p.id === parseInt(params.id);
-    });
-  
-  
+  const product = products.find((p) => {
+    return p.id === parseInt(params.id);
+  });
+
   useEffect(() => {
     setProducts(data.products);
     // searchProduct();
@@ -74,7 +73,9 @@ const ProductDetails = () => {
                 </div>
                 <div className={styles.review}>
                   <Qualification />
-                  <RatingStats/>
+                  <div className={styles.ratingStats}>
+                    <RatingStats />
+                  </div>
                 </div>
               </div>
 

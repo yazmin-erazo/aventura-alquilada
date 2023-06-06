@@ -85,6 +85,9 @@ const Crud = () => {
           </tbody>
         </table>
       </section>
+
+
+      
     </>
   );
 };
