@@ -21,7 +21,7 @@ const Header = () => {
           <h5 className="lemaHeader">Sin equipo no hay aventura</h5>
         </Link>
         {isLogedIn ? (
-          <div>
+          <div className="userProfile">
             <input type="checkbox" id="userData" />
             <label className="userDataIcon" htmlFor="userData">
               <div className="user-name">{user.name + " " + user.lastname}</div>

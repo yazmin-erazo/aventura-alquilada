@@ -123,6 +123,7 @@ const Crud = () => {
             ))}
           </tbody>
         </table>
+      </section>
         <Pagination
           onPageChanged={onPageChanged}
           limit={pageLimit}
@@ -130,7 +131,6 @@ const Crud = () => {
           currentPage={currentPage}
           setCurrentPage={setCurrentPage}
         />
-      </section>
     </>
   );
 };
