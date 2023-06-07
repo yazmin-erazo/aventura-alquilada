@@ -70,7 +70,7 @@ test-api:
     paths:
       - API/digital-booking-c3-e-1/target/surefire-reports/
       - API/digital-booking-c3-e-1/target/site/jacoco/
-    only:
+  only:
     - main
       
 coverage-report:
