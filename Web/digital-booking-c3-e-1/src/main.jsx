@@ -5,16 +5,16 @@ import Home from "./components/home/HomePage.jsx"
 import Details from "./components/products/productDetails/ProductDetails.jsx"
 import AddProduct from './components/products/productAddForm/RegisterProduct.jsx';
 import EditProduct from './components/products/productEditForm/EditProduct.jsx';
-import NewCategory from "./components/products/categoryAddForm/NewCategory.jsx";
-import NewRole from "./components/products/roleFormAdd/NewRole.jsx";
-import EditRole from "./components/products/editRole/EditRole.jsx";
+import NewCategory from './components/categories/categoryAddForm/NewCategory.jsx';
+import CrudCategory from './components/categories/CrudCategories/CrudCategory.jsx';
+import NewRole from './components/roles/roleFormAdd/NewRole.jsx';
+import EditRole from './components/roles/editRole/EditRole.jsx'
 import Crud from "./components/products/Crud/Crud.jsx";
 import "./index.css";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import RegisterUser from "./components/user/userAddForm/RegisterUser.jsx";
 import Login from "./components/user/login/Login.jsx";
 import ActivateUser from "./components/user/activateUser/ActivateUser.jsx";
-import CrudCategory from "./components/products/CrudCategories/CrudCategory.jsx";
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <BrowserRouter>
