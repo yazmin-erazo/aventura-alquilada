@@ -37,10 +37,9 @@ build-web:
   artifacts:
     paths:
       - Web/digital-booking-c3-e-1/dist/
-  rules:
-    - changes:
-        - Web/digital-booking-c3-e-1/**/*
-      if: '$CI_COMMIT_REF_NAME == "main"'
+  only:
+    - main
+
 
 deploy_to_s3:
   stage: deploy
@@ -53,10 +52,9 @@ deploy_to_s3:
   script:
     - aws s3 rm s3://$S3_BUCKET_FRONTEND --recursive
     - aws s3 sync Web/digital-booking-c3-e-1/dist s3://$S3_BUCKET_FRONTEND --acl public-read
-  rules:
-    - changes:
-        - Web/digital-booking-c3-e-1/**/*
-      if: '$CI_COMMIT_REF_NAME == "main"'
+  only:
+    - main
+
 
 
 # -------------------------- API --------------------------
@@ -94,10 +92,9 @@ coverage-report:
       junit:
         - "**/target/surefire-reports/TEST-*.xml"
         #- "**/target/failsafe-reports/TEST-*.xml"
-    rules:
-    - changes:
-        - API/digital-booking-c3-e-1/**/*
-      if: '$CI_COMMIT_REF_NAME == "main"'
+    only:
+    - main
+
 
 build-api:
   stage: build
@@ -108,10 +105,9 @@ build-api:
   artifacts:
     paths:
       - API/digital-booking-c3-e-1/target/equipamiento-deportivo.jar
-  rules:
-    - changes:
-        - API/digital-booking-c3-e-1/**/*
-      if: '$CI_COMMIT_REF_NAME == "develop"'
+  only:
+    - main
+
 
 deploy_to_ec2:
   stage: deploy
@@ -128,7 +124,5 @@ deploy_to_ec2:
     - ssh ubuntu@$EC2_INSTANCE_IP "sudo systemctl stop equipamiento-deportivo.service"
     - scp API/digital-booking-c3-e-1/target/equipamiento-deportivo.jar ubuntu@$EC2_INSTANCE_IP:~/equipamiento-deportivo/
     - ssh ubuntu@$EC2_INSTANCE_IP "sudo systemctl start equipamiento-deportivo.service"
-  rules:
-    - changes:
-        - API/digital-booking-c3-e-1/**/*
-      if: '$CI_COMMIT_REF_NAME == "develop"'
+  only:
+    - main
