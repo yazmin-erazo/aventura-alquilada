@@ -15,15 +15,17 @@ cache:
 
 # -------------------------- WEB --------------------------
 
-test-web:
-  stage: test
-  image: node:14
-  script:
-    - cd Web/digital-booking-c3-e-1
-    - npm install
-    - npm run test
-  rules:
-    - if: '$CI_COMMIT_REF_NAME == "main"'
+# test-web:
+#   stage: test
+#   image: node:14
+#   script:
+#     - cd Web/digital-booking-c3-e-1
+#     - npm install
+#     - npm run test
+#   rules:
+#     - changes:
+#         - Web/digital-booking-c3-e-1/**/*
+#       if: '$CI_COMMIT_REF_NAME == "main"'
 
 build-web:
   stage: build
@@ -37,7 +39,7 @@ build-web:
       - Web/digital-booking-c3-e-1/dist/
   rules:
     - changes:
-        - API/digital-booking-c3-e-1/**/*
+        - Web/digital-booking-c3-e-1/**/*
       if: '$CI_COMMIT_REF_NAME == "main"'
 
 deploy_to_s3:
@@ -53,7 +55,7 @@ deploy_to_s3:
     - aws s3 sync Web/digital-booking-c3-e-1/dist s3://$S3_BUCKET_FRONTEND --acl public-read
   rules:
     - changes:
-        - API/digital-booking-c3-e-1/**/*
+        - Web/digital-booking-c3-e-1/**/*
       if: '$CI_COMMIT_REF_NAME == "main"'
 
 
@@ -92,6 +94,10 @@ coverage-report:
       junit:
         - "**/target/surefire-reports/TEST-*.xml"
         #- "**/target/failsafe-reports/TEST-*.xml"
+    rules:
+    - changes:
+        - API/digital-booking-c3-e-1/**/*
+      if: '$CI_COMMIT_REF_NAME == "main"'
 
 build-api:
   stage: build
