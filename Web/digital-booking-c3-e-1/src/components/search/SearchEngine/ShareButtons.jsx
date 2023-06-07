@@ -1,4 +1,4 @@
-import { FacebookShareButton, TwitterShareButton, WhatsappShareButton } from 'react-share';
+/*import { FacebookShareButton, TwitterShareButton, WhatsappShareButton } from 'react-share';
 import { FacebookIcon, TwitterIcon, WhatsappIcon } from 'react-share';
 
 const ShareButtons = () => {
@@ -26,4 +26,4 @@ const ShareButtons = () => {
   );
 };
 
-export default ShareButtons;
+export default ShareButtons;*/
