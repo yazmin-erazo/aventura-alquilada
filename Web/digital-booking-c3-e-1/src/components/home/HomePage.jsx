@@ -3,16 +3,22 @@ import SearchEngine from "../search/SearchEngine/SearchEngine";
 import CategoryList from "./Category/CategoryList";
 import styles from "./HomePage.module.css";
 import RecommendedList from "./Recommended/RecommendedList";
+import ShareButtons from "../search/SearchEngine/ShareButtons";
 import { useState } from "react";
 
 const HomePage = () => {
   const [selectedCategory, setSelectedCategory] = useState(null);
-
+  const url = 'URL de tu aplicación';
+  const title = '¡Descarga y usa nuestra increíble aplicación!';
+  
   return (
     <>
       <div className={styles.searchContainer}>
         <div className={styles.searchBox}>
           <SearchEngine />
+        </div>
+        <div style={{ paddingLeft: "30px"}}>
+          <ShareButtons url={url} title={title} />
         </div>
       </div>
       <div className={styles.homeContainer}>
