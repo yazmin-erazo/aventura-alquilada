@@ -117,6 +117,7 @@ const CrudCategory = () => {
             ))}
           </tbody>
         </table>
+      </section>
         <Pagination
           onPageChanged={onPageChanged}
           limit={pageLimit}
@@ -124,7 +125,6 @@ const CrudCategory = () => {
           currentPage={currentPage}
           setCurrentPage={setCurrentPage}
         />
-      </section>
     </>
   );
 };
