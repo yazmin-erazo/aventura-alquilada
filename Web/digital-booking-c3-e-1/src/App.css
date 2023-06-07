@@ -267,7 +267,7 @@ li:hover {
   }
 }
 
-/* @media (max-width: 768px) {
+ /* @media (max-width: 768px) {
   .lemaHeader {
     font: var(--body-12);
   }
@@ -291,7 +291,8 @@ li:hover {
   .copyright {
     font-size: var(--body-10);
   }
-}
+} */
+/*
 
 @media (max-width: 320px) {
   .cuentaBtn,
@@ -299,3 +300,10 @@ li:hover {
     display: none;
   }
 } */
+
+@media (max-width: 768px) {
+
+    .headerContainer {
+      margin-left: 0;
+    }
+  }
