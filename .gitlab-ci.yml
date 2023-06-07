@@ -70,10 +70,8 @@ test-api:
     paths:
       - API/digital-booking-c3-e-1/target/surefire-reports/
       - API/digital-booking-c3-e-1/target/site/jacoco/
-  rules:
-    - changes:
-        - API/digital-booking-c3-e-1/**/*
-      if: '$CI_COMMIT_REF_NAME == "main"'
+    only:
+    - main
       
 coverage-report:
   stage: coverage report
@@ -92,8 +90,6 @@ coverage-report:
       junit:
         - "**/target/surefire-reports/TEST-*.xml"
         #- "**/target/failsafe-reports/TEST-*.xml"
-    only:
-    - main
 
 
 build-api:
