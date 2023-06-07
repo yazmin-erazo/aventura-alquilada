@@ -36,7 +36,9 @@ build-web:
     paths:
       - Web/digital-booking-c3-e-1/dist/
   rules:
-    - if: '$CI_COMMIT_REF_NAME == "main"'
+    - changes:
+        - API/digital-booking-c3-e-1/**/*
+      if: '$CI_COMMIT_REF_NAME == "main"'
 
 deploy_to_s3:
   stage: deploy
@@ -50,7 +52,9 @@ deploy_to_s3:
     - aws s3 rm s3://$S3_BUCKET_FRONTEND --recursive
     - aws s3 sync Web/digital-booking-c3-e-1/dist s3://$S3_BUCKET_FRONTEND --acl public-read
   rules:
-    - if: '$CI_COMMIT_REF_NAME == "main"'
+    - changes:
+        - API/digital-booking-c3-e-1/**/*
+      if: '$CI_COMMIT_REF_NAME == "main"'
 
 
 # -------------------------- API --------------------------
@@ -67,8 +71,10 @@ test-api:
       - API/digital-booking-c3-e-1/target/surefire-reports/
       - API/digital-booking-c3-e-1/target/site/jacoco/
   rules:
-    - if: '$CI_COMMIT_REF_NAME == "main"'
-
+    - changes:
+        - API/digital-booking-c3-e-1/**/*
+      if: '$CI_COMMIT_REF_NAME == "main"'
+      
 coverage-report:
   stage: coverage report
   image: maven:3.6-jdk-11
@@ -97,7 +103,9 @@ build-api:
     paths:
       - API/digital-booking-c3-e-1/target/equipamiento-deportivo.jar
   rules:
-    - if: '$CI_COMMIT_REF_NAME == "develop" && changes().paths == ["API/digital-booking-c3-e-1/**"]'
+    - changes:
+        - API/digital-booking-c3-e-1/**/*
+      if: '$CI_COMMIT_REF_NAME == "develop"'
 
 deploy_to_ec2:
   stage: deploy
@@ -115,4 +123,6 @@ deploy_to_ec2:
     - scp API/digital-booking-c3-e-1/target/equipamiento-deportivo.jar ubuntu@$EC2_INSTANCE_IP:~/equipamiento-deportivo/
     - ssh ubuntu@$EC2_INSTANCE_IP "sudo systemctl start equipamiento-deportivo.service"
   rules:
-    - if: '$CI_COMMIT_REF_NAME == "develop" && changes().paths == ["API/digital-booking-c3-e-1/**"]'
+    - changes:
+        - API/digital-booking-c3-e-1/**/*
+      if: '$CI_COMMIT_REF_NAME == "develop"'
