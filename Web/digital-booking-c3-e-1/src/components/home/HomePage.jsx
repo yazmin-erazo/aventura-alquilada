@@ -10,12 +10,16 @@ const HomePage = () => {
   const [selectedCategory, setSelectedCategory] = useState(null);
   const url = 'URL de tu aplicación';
   const title = '¡Descarga y usa nuestra increíble aplicación!';
+  const [searchParams, setSearchParams] = useState(null)
+  const handleSearch = (params) => {
+    setSearchParams(params);
+  }
   
   return (
     <>
       <div className={styles.searchContainer}>
         <div className={styles.searchBox}>
-          <SearchEngine />
+          <SearchEngine handleSearch={handleSearch} />
         </div>
         <div style={{ paddingLeft: "30px"}}>
           <ShareButtons url={url} title={title} />
@@ -42,7 +46,7 @@ const HomePage = () => {
           <section className={styles.recommendedContainer}>
             <h3 className={styles.subtitle}>Recomendados</h3>
             <div className={styles.productGrid}>
-              <RecommendedList selectedCategory={selectedCategory} />
+              <RecommendedList selectedCategory={selectedCategory} searchParams={searchParams} />
             </div>
           </section>
         </div>

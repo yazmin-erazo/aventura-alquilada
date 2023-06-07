@@ -30,7 +30,7 @@ ReactDOM.createRoot(document.getElementById("root")).render(
         <Route path='admin/category/list' element={<CrudCategory />} />
         <Route path='admin/role/add' element={<NewRole />} />
         <Route path='admin/role/edit/:id' element={<NewRole />} />
-        <Route path='admin/role/edit' element={<EditRole />} />
+        <Route path='admin/role' element={<EditRole />} />
         <Route path='login' element={<Login />} />
         <Route path='auth/register' element={<RegisterUser />} />
         <Route path='user/activate' element={<ActivateUser />} />
