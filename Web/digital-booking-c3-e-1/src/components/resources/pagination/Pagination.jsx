@@ -4,8 +4,6 @@ import { FaChevronLeft, FaChevronRight } from 'react-icons/fa';
 
 const Pagination = (props) => {
 
-
-
     const totalPages = Math.ceil(props.total / props.limit);
 
     const LEFT_PAGE = 'LEFT';
@@ -30,20 +28,17 @@ const Pagination = (props) => {
 
             const hasLeftSpill = startPage > 2;
             const hasRightSpill = (totalPages - endPage) > 1;
-            const spillOffset = 5 - (totalPages.length + 1);
 
             // Caso en el que no tenga flechita a la izq
             // 1 2 3 > 10
             if (!hasLeftSpill && hasRightSpill) {
-                const extraPages = range(endPage + 1, endPage + spillOffset);
-                pages = [...pages, ...extraPages, RIGHT_PAGE];
+                pages = [2, 3, RIGHT_PAGE];
             }
 
             // Caso en el que no tenga flechita derecha
             // 1 < 8 9 10
             if (hasLeftSpill && !hasRightSpill) {
-                const extraPages = range(startPage - spillOffset, startPage - 1);
-                pages = [LEFT_PAGE, ...extraPages, ...pages];
+                pages = [LEFT_PAGE, totalPages -2, totalPages -1];
             }
 
             // Caso en el que tiene ambas flechitas

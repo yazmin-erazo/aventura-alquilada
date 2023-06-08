@@ -8,13 +8,14 @@ import CategoryService from "../../../shared/services/CategoryService";
 import ProductsService from "../../../shared/services/ProductsService";
 import InputUploadImages from "../../common/inputImage/InputUploadImages";
 import Swal from "sweetalert2";
+import { useNavigate } from "react-router-dom";
 
 const RegisterProduct = () => {
   const [categories, setCategories] = useState([]);
   const [selectedCategoryId, setSelectedCategoryId] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
   const [selectedGender, setSelectedGender] = useState("");
-
+  const navigate = useNavigate();
   const [formData, setFormData] = useState({
     selectedCategory: "",
     selectedCondition: "",
@@ -144,6 +145,7 @@ const RegisterProduct = () => {
         gender: "",
       });
       setErrorMessage("");
+      navigate('admin')
     } catch (error) {
 
       // En caso de error al registrar el producto

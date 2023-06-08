@@ -10,7 +10,7 @@ import * as TbIcons from "react-icons/tb";
 import * as FaIcons from "react-icons/fa";
 import { sportsIcons } from "../../common/SportsIcons";
 
-const RecommendedList = ({ selectedCategory }) => {
+const RecommendedList = ({ selectedCategory, searchParams }) => {
   const data = useContext(ProductsContext);
   const pageLimit = 10;
   const [products, setProducts] = useState([]);
@@ -57,6 +57,8 @@ const RecommendedList = ({ selectedCategory }) => {
     const offset = (currentPage - 1) * pageLimit;
     setCurrentProducts(filteredProducts.slice(offset, offset + pageLimit));
   };
+
+  console.log(searchParams);
 
   return (
     <div className={styles.container}>

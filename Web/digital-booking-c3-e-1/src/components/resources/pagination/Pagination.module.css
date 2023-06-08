@@ -53,6 +53,11 @@ ul {
   list-style: none;
 }
 
+li a {
+  padding: 0 20px;
+  text-align: center;
+}
+
 .active {
   font-weight: bold;
 }
