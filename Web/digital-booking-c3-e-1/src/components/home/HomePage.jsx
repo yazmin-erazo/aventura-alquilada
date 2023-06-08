@@ -3,7 +3,7 @@ import SearchEngine from "../search/SearchEngine/SearchEngine";
 import CategoryList from "./Category/CategoryList";
 import styles from "./HomePage.module.css";
 import RecommendedList from "./Recommended/RecommendedList";
-import ShareButtons from "../search/SearchEngine/ShareButtons";
+//import ShareButtons from "../search/SearchEngine/ShareButtons";
 import { useState } from "react";
 
 const HomePage = () => {
@@ -20,9 +20,6 @@ const HomePage = () => {
       <div className={styles.searchContainer}>
         <div className={styles.searchBox}>
           <SearchEngine handleSearch={handleSearch} />
-        </div>
-        <div style={{ paddingLeft: "30px"}}>
-          <ShareButtons url={url} title={title} />
         </div>
       </div>
       <div className={styles.homeContainer}>

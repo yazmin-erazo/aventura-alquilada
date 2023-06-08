@@ -6,6 +6,7 @@
   top: 0;
   background-color: var(--bg-white-50);
   z-index: 3;
+  box-shadow: 0 0 10px rgba(40, 66, 88, 0.2);
 }
 
 .headerContainer {
@@ -16,7 +17,6 @@
   align-items: center;
   height: 80px;
   padding: 0 20px;
-  margin-left: 250px;
 }
 .header img {
   width: 200px;
@@ -267,7 +267,7 @@ li:hover {
   }
 }
 
- /* @media (max-width: 768px) {
+@media (max-width: 768px) {
   .lemaHeader {
     font: var(--body-12);
   }
@@ -291,19 +291,18 @@ li:hover {
   .copyright {
     font-size: var(--body-10);
   }
-} */
-/*
+}
+
 
 @media (max-width: 320px) {
   .cuentaBtn,
   .sesionBtn {
     display: none;
   }
-} */
+}
 
 @media (max-width: 768px) {
-
-    .headerContainer {
-      margin-left: 0;
-    }
+  .headerContainer {
+    margin-left: 0;
   }
+}
