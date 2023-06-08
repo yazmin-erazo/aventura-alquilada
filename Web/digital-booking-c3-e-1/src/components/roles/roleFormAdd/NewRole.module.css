@@ -2,8 +2,10 @@
 @import "/src/styles/global.css";
 
 .containerNewRol {
-  margin: 0 4%;
-  margin-top: 40px;
+  width: 90%;
+  max-width: 1280px;
+  margin: 0 auto;
+  margin-top: 3rem;
 }
 
 .containerForm {
@@ -39,7 +41,7 @@
   margin-bottom: 3rem;
   margin-top: 0.75rem;
 }
-.titleSelectAll{
+.titleSelectAll {
   margin-top: 2rem;
 }
 .permissionsContainer {
@@ -110,6 +112,12 @@
   margin: 16px;
 }
 
+.containerButton {
+  display: flex;
+  margin-top: 24px;
+  gap: 1rem;
+}
+
 @media (max-width: 600px) {
   .textareaField {
     height: 80px;
@@ -118,11 +126,9 @@
     flex-direction: column;
   }
   .category {
-
     flex-direction: column;
   }
-  .categoryPermissions{
+  .categoryPermissions {
     width: 100%;
   }
-
 }

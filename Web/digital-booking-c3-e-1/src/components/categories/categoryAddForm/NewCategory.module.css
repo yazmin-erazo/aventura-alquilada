@@ -1,11 +1,9 @@
 .containerNewCategory {
-  margin: 0 4%;
-  margin-top: 40px;
-}
-/* .containerForm {
+  width: 90%;
   max-width: 1280px;
   margin: 0 auto;
-} */
+  margin-top: 3rem;
+}
 
 .header {
   width: 100%;
@@ -58,7 +56,11 @@
 .submitBtn {
   margin: 16px;
 }
-
+.containerButton {
+  display: flex;
+  margin-top: 24px;
+  gap: 1rem;
+}
 @media (max-width: 768px) {
   .textareaField {
     height: 80px;
@@ -71,5 +73,3 @@
     width: 100%;
   }
 }
-
-

@@ -1,6 +1,8 @@
 .containerNewProduct {
-  margin: 0 4%;
-  margin-top:40px;
+  width: 90%;
+  max-width: 1280px;
+  margin: 0 auto;
+  margin-top: 3rem;
 }
 
 .header {
@@ -28,17 +30,20 @@
 }
 
 .containerButton {
+  display: flex;
   margin-top: 24px;
+  gap: 1rem;
 }
 
 .registerProductForm {
   display: flex;
   flex-direction: row;
-  gap: 20px;
+  gap: 3rem;
 }
 
 .formColumn {
-  flex: 1;
+  width: 506px;
+  max-width: 50%;
 }
 
 .previewContainer {
@@ -75,14 +80,28 @@
   justify-content: center;
 }
 
-@media (max-width: 768px) {
+@media (max-width: 1024px) {
   .textareaField {
     height: 80px;
   }
+
   .registerProductContainer {
     flex-direction: column;
   }
 
+  .registerProductForm {
+    flex-direction: column;
+    max-width: 506px;
+    margin: 0 auto;
+    gap: 0;
+  }
+
+  .formColumn {
+    width: 506px;
+    max-width: 100%;
+  }
+}
+@media (max-width: 768px) {
   .registerProductForm {
     width: 100%;
   }

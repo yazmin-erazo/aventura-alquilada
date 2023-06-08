@@ -2,6 +2,10 @@
   min-height: calc(100vh - 140px);
 }
 
+.header{
+  width: 100%;
+}
+
 .withPanel {
   display: flex;
 }

@@ -9,6 +9,7 @@ import ProductsService from "../../../shared/services/ProductsService";
 import InputUploadImages from "../../common/inputImage/InputUploadImages";
 import Swal from "sweetalert2";
 import { useNavigate } from "react-router-dom";
+import ButtonInactive from "../../common/Buttons/ButtonInactive";
 
 const RegisterProduct = () => {
   const [categories, setCategories] = useState([]);
@@ -74,7 +75,7 @@ const RegisterProduct = () => {
         );
 
         updatedImages.push({
-          fileName: fileName+".jpg",
+          fileName: fileName + ".jpg",
           image: base64ImageWithoutPrefix,
         });
       };
@@ -102,7 +103,7 @@ const RegisterProduct = () => {
       size,
       selectedGender,
     } = formData;
-  
+
     const productData = {
       name: productName,
       brand: brand,
@@ -118,7 +119,7 @@ const RegisterProduct = () => {
       size: size,
       gender: selectedGender,
     };
-  
+
     try {
       await ProductsService.create(productData);
 
@@ -129,7 +130,7 @@ const RegisterProduct = () => {
         "El producto ha sido registrado exitosamente.",
         "success"
       );
-  
+
       setFormData({
         selectedCategory: "",
         selectedCondition: "",
@@ -145,9 +146,8 @@ const RegisterProduct = () => {
         gender: "",
       });
       setErrorMessage("");
-      navigate('admin')
+      navigate("admin");
     } catch (error) {
-
       // En caso de error al registrar el producto
       Swal.fire(
         "Error",
@@ -155,21 +155,27 @@ const RegisterProduct = () => {
         "error"
       );
 
-      if (error.response && error.response.data.nombreExcepcion === 'ExceptionInvalidValue') {
+      if (
+        error.response &&
+        error.response.data.nombreExcepcion === "ExceptionInvalidValue"
+      ) {
         Swal.fire(
-          'Error',
-          'El nombre del producto ya existe, por favor ingrese otro valor',
-          'error'
+          "Error",
+          "El nombre del producto ya existe, por favor ingrese otro valor",
+          "error"
         );
       } else {
         Swal.fire(
-          'Error',
-          'Ha ocurrido un error al registrar el producto.',
-          'error'
+          "Error",
+          "Ha ocurrido un error al registrar el producto.",
+          "error"
         );
       }
-
     }
+  };
+
+  const handleCancel = () => {
+    navigate("/admin");
   };
 
   const genderOptions = [
@@ -283,11 +289,15 @@ const RegisterProduct = () => {
                 }
                 placeholder="Descripción"
               />
-      <div className={styles.containerButton}>
-        <ButtonPrimary className={styles.submitBtn} onClick={handleSubmit}>
-          Registrar producto
-        </ButtonPrimary>
-      </div>
+              <div className={styles.containerButton}>
+                <ButtonInactive to="/admin/">Cancelar</ButtonInactive>
+                <ButtonPrimary
+                  className={styles.submitBtn}
+                  onClick={handleSubmit}
+                >
+                  Registrar producto{" "}
+                </ButtonPrimary>
+              </div>
             </div>
           </div>
           <div className={styles.registerInfo}></div>
