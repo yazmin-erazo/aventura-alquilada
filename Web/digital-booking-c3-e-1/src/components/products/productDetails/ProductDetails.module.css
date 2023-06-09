@@ -172,7 +172,7 @@
 .feature {
   display: flex;
   flex-wrap: wrap;
-  border-top: 1px solid var(--secondary-200);
+  border-top: 1px solid var(--secondary-100);
 }
 
 .titleFeature {
@@ -185,10 +185,11 @@
   display: flex;
   align-items: center;
   flex-basis: 25%;
-  margin-top: 20px;
+  margin-top: 1rem;
   gap: 16px;
-  font: var(--body-16);
+  font-size: 0.94rem;
   color: var(--primary-600);
+  padding: 0.5rem;
 }
 
 .textFeature .textFeatureDetails {
@@ -210,6 +211,10 @@
   background-color: none;
   font: var(--body-12);
   color: var(--state-available);
+}
+
+.politics{
+  margin-top: 3rem;
 }
 
 @media (max-width: 768px) {

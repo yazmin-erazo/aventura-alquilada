@@ -146,11 +146,10 @@ const ProductDetails = () => {
                   </div>
                 </div>
               </div>
+              <div className={styles.politics}>
+                <Politics />
+              </div>
             </div>
-          </div>
-
-          <div className={styles.politics}>
-            <Politics />
           </div>
         </>
       )}
