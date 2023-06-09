@@ -59,7 +59,7 @@
   align-items: center;
   position: absolute; 
   margin-bottom: 20px; 
-  z-index: 2;
+  z-index: 1;
   top: 50%;
   transform: translateY(-50%);
 }
@@ -93,5 +93,5 @@
 
 .buttonRightB {
   right: 0;
-  z-index: 2
+  z-index: 1;
 }

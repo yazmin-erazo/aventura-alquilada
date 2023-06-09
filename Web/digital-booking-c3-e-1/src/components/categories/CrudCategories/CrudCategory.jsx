@@ -92,7 +92,7 @@ const CrudCategory = () => {
     <>
       <section className={styles["container"]}>
         <div className={styles["button-container"]}>
-          <Link to="category/add">
+          <Link to="/admin/category/add">
             <ButtonPrimary>Agregar categoría</ButtonPrimary>
           </Link>
         </div>
