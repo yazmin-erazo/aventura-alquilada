@@ -242,14 +242,15 @@ const NewRole = () => {
                   <CheckItem category="roles" action="delete" name="Eliminar" />
                 </div>
               </div>
-
-              <div className={styles.containerButton}>
+            </div>
+            <div className={styles.containerButton}>
+              <div className={styles.buttonsItem}>
                 <ButtonInactive to="/admin/role">Cancelar</ButtonInactive>
                 <ButtonPrimary
                   className={styles.submitBtn}
                   onClick={handleSubmit}
                 >
-                  Agregar rol
+                  Registrar producto{" "}
                 </ButtonPrimary>
               </div>
             </div>

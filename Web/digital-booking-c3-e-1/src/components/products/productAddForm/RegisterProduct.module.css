@@ -8,12 +8,15 @@
 .header {
   width: 100%;
   border-bottom: 1px solid var(--secondary-100);
-  margin-bottom: 4rem;
+  margin-bottom: 2rem;
 }
 
 .addProductTitle {
   margin: 16px 0;
   color: var(--secondary-600);
+  display: flex;
+  gap: 0.5rem;
+  align-items: center;
 }
 
 .registerProductContainer {
@@ -21,17 +24,30 @@
   width: 100%;
   flex-direction: row;
   font: var(--body-14-normal);
-  margin-bottom: 2rem;
 }
 
 .containerForm {
   display: flex;
   justify-content: center;
+  background-color: var(--white-100);
+  padding: 1.5rem;
+  border-radius: 4px;
+  margin-bottom: 1rem;
 }
 
 .containerButton {
+  margin-top: 1rem;
   display: flex;
-  margin-top: 24px;
+  gap: 1rem;
+  justify-content: center;
+  border-top: 1px solid var(--secondary-50);
+  padding-top: 1rem;
+}
+
+.buttonItem {
+  width: 100%;
+  max-width: 506px;
+  display: flex;
   gap: 1rem;
 }
 
@@ -39,6 +55,7 @@
   display: flex;
   flex-direction: row;
   gap: 3rem;
+  justify-content: center;
 }
 
 .formColumn {

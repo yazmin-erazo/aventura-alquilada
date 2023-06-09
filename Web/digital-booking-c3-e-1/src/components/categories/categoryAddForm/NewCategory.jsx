@@ -152,17 +152,21 @@ const NewCategory = () => {
               }
               placeholder="Descripción"
             />
-            <div className={styles.containerButton}>
-              <ButtonInactive to="/admin/category/list">Cancelar</ButtonInactive>
-              <ButtonPrimary
-                className={styles.submitBtn}
-                onClick={handleSubmit}
-              >
-                Agregar categoría
-              </ButtonPrimary>
-            </div>
           </div>
           <div className={styles.registerInfo}></div>
+            <div className={styles.containerButton}>
+              <div className={styles.buttonsItem}>
+                <ButtonInactive to="/admin/category/list">
+                  Cancelar
+                </ButtonInactive>
+                <ButtonPrimary
+                  className={styles.submitBtn}
+                  onClick={handleSubmit}
+                >
+                  Registrar producto{" "}
+                </ButtonPrimary>
+              </div>
+            </div>
         </div>
       </div>
     </div>

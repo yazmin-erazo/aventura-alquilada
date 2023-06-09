@@ -10,6 +10,7 @@ import InputUploadImages from "../../common/inputImage/InputUploadImages";
 import Swal from "sweetalert2";
 import { useNavigate } from "react-router-dom";
 import ButtonInactive from "../../common/Buttons/ButtonInactive";
+import { BiPlusCircle } from "react-icons/bi";
 
 const RegisterProduct = () => {
   const [categories, setCategories] = useState([]);
@@ -146,7 +147,7 @@ const RegisterProduct = () => {
         gender: "",
       });
       setErrorMessage("");
-      navigate("admin");
+      navigate("/admin");
     } catch (error) {
       // En caso de error al registrar el producto
       Swal.fire(
@@ -187,7 +188,7 @@ const RegisterProduct = () => {
   return (
     <div className={styles.containerNewProduct}>
       <header className={styles.header}>
-        <h4 className={styles.addProductTitle}>Agregar producto</h4>
+        <h4 className={styles.addProductTitle}><BiPlusCircle size={20}/>Agregar producto</h4>
       </header>
 
       <div className={styles.containerForm}>
@@ -289,18 +290,20 @@ const RegisterProduct = () => {
                 }
                 placeholder="Descripción"
               />
-              <div className={styles.containerButton}>
-                <ButtonInactive to="/admin/">Cancelar</ButtonInactive>
-                <ButtonPrimary
-                  className={styles.submitBtn}
-                  onClick={handleSubmit}
-                >
-                  Registrar producto{" "}
-                </ButtonPrimary>
-              </div>
             </div>
           </div>
           <div className={styles.registerInfo}></div>
+          <div className={styles.containerButton}>
+            <div className={styles.buttonItem}>
+              <ButtonInactive to="/admin">Cancelar</ButtonInactive>
+              <ButtonPrimary
+                className={styles.submitBtn}
+                onClick={handleSubmit}
+              >
+                Registrar producto{" "}
+              </ButtonPrimary>
+            </div>
+          </div>
         </div>
       </div>
     </div>

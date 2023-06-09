@@ -41,7 +41,7 @@ const Panel = () => {
         {/* ------------------ ROLES ------------------  */}
         <DashboardSection icon={FiBriefcase} size={24} text="Roles" />
 
-        <MenuItem to="admin/role" isActive={location.pathname === "/roles/"}>
+        <MenuItem to="admin/role/edit" isActive={location.pathname === "/roles/"}>
           <Button text="Listar todos" />
         </MenuItem>
         <MenuItem
@@ -56,7 +56,7 @@ const Panel = () => {
 
         <MenuItem
           to="admin/category/list"
-          isActive={location.pathname === "admin/category/list"}
+          isActive={location.pathname === "/categorias/"}
         >
           <Button text="Listar todos" />
         </MenuItem>

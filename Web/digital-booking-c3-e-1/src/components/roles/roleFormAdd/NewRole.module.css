@@ -11,12 +11,16 @@
 .containerForm {
   display: flex;
   justify-content: center;
+  background-color: var(--white-100);
+  padding: 1.5rem;
+  border-radius: 4px;
+  margin-bottom: 1rem;
 }
 
 .header {
   width: 100%;
   border-bottom: 1px solid var(--secondary-100);
-  margin-bottom: 4rem;
+  margin-bottom: 2rem;
 }
 
 .addRolTitle {
@@ -48,6 +52,7 @@
   max-width: 506px;
   display: flex;
   flex-direction: column;
+  padding-bottom: 2rem;
 }
 
 .category {
@@ -113,8 +118,18 @@
 }
 
 .containerButton {
+  margin-top: 1rem;
   display: flex;
-  margin-top: 24px;
+  gap: 1rem;
+  justify-content: center;
+  border-top: 1px solid var(--secondary-50);
+  padding-top: 1rem;
+}
+
+.buttonsItem {
+  width: 100%;
+  max-width: 506px;
+  display: flex;
   gap: 1rem;
 }
 
@@ -130,5 +145,6 @@
   }
   .categoryPermissions {
     width: 100%;
+    display: flex;
   }
 }
