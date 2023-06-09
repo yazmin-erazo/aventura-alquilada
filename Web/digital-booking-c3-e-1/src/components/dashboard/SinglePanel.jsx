@@ -75,7 +75,7 @@ const SinglePanel = () => {
 
       {/* Menú hamburguesa */}
       
-      <div className={styles["burger-menu"]} style={{ display: isMenuOpen ? "block" : "none" }}>
+      {/* <div className={styles["burger-menu"]} style={{ display: isMenuOpen ? "block" : "none" }}>
         <div className={styles.title}>
           <FiMenu size={24}className={styles.icon} />
           Dashboard
@@ -97,12 +97,12 @@ const SinglePanel = () => {
         <div className={styles["dashboard-section"]}>
           <a href="admin/">Productos</a>
         </div>
-      </div>
+      </div> */}
 
       {/* Icono del menú hamburguesa */}
-      <div className={styles["menu-icon"]} onClick={toggleMenu}>
+      {/* <div className={styles["menu-icon"]} onClick={toggleMenu}>
         <FiMenu size={24} />
-      </div>
+      </div> */}
     </>
   );
 };

@@ -55,29 +55,34 @@ const ProductDetails = () => {
               <h2 className={styles.nameProduct}>{product.name}</h2>
               <div onClick={() => navigate(-1)}>
                 <div className={styles.button}>
-                  <FaArrowLeft/> <p> Volver </p>
+                  <FaArrowLeft /> <p> Volver </p>
                 </div>
               </div>
             </div>
           </div>
 
-          <div classname={styles.locationIcon}>     
-                 
-           </div>
+          <div className={styles.locationContainer}>
+            <div className={styles.location}>
+              <div className={styles.locationText}>
+                <div classname={styles.locationIcon}>
+                  <MdLocationOn size={24} />
+                </div>
+                {/*product.ciudad.nombre}, {product.ciudad.pais*/}
 
-          <div className={styles.location}>
-            <div className={styles.locationText}>
-              {/*product.ciudad.nombre}, {product.ciudad.pais*/}
-            <p className={styles.city}> <MdLocationOn size={20} /> Buenos Aires, Ciudad Autónoma de Buenos Aires, Argentina </p>
-            <p className={styles.proximity}> A 940 m del centro</p>
-            </div>
-            
-            <div className={styles.ratingStats}>
-                    <RatingStats />
+                <div>
+                  <p className={styles.city}>
+                    {" "}
+                    Buenos Aires, Ciudad Autónoma de Buenos Aires, Argentina{" "}
+                  </p>
+                  <p className={styles.proximity}> A 940 m del centro</p>
+                </div>
+              </div>
+
+              <div className={styles.ratingStats}>
+                <RatingStats />
+              </div>
             </div>
           </div>
-          
-
           <div className={styles.detailsContainer}>
             <ImageGallery product={product} />
             <div className={styles.productDetails}>
@@ -91,7 +96,7 @@ const ProductDetails = () => {
 
                   {/* <p className={styles.price}>${product.price}</p> */}
                 </div>
-                
+
                 <div className={styles.review}>
                   <Qualification />
                 </div>
@@ -145,7 +150,7 @@ const ProductDetails = () => {
           </div>
 
           <div className={styles.politics}>
-                    <Politics/>
+            <Politics />
           </div>
         </>
       )}
