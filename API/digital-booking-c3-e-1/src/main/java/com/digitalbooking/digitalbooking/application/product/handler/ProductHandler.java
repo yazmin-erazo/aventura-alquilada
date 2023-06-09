@@ -9,6 +9,7 @@ import com.digitalbooking.digitalbooking.domain.product.service.ServiceProduct;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import java.math.BigDecimal;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -41,8 +42,8 @@ public class ProductHandler {
         ));
     }
 
-    public List<ProductDTO> getProduct() {
-        return serviceProduct.getProducts();
+    public List<ProductDTO> getProduct(String brandFilter, String genderFilter, String nameFilter, BigDecimal priceLessThan, BigDecimal priceGreaterThan, String sizeFilter, String stateFilter, String colorFilter, String materialFilter) {
+        return serviceProduct.getProducts(brandFilter, genderFilter, nameFilter, priceLessThan, priceGreaterThan, sizeFilter, stateFilter, colorFilter, materialFilter);
     }
 
     public ProductDTO findById(Long id) {
