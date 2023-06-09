@@ -2,6 +2,8 @@ package com.digitalbooking.digitalbooking.infrastructure.product.adapter;
 
 import com.digitalbooking.digitalbooking.infrastructure.category.adapter.CategoryEntity;
 import lombok.Data;
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
@@ -26,8 +28,9 @@ public class ProductEntity {
     private Boolean isDelete;
     private String color;
     private String material;
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     private CategoryEntity category;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "productEntity")
+    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL, mappedBy = "productEntity")
+    @Fetch(value = FetchMode.SUBSELECT)
     private List<ImageProductEntity> imageProductEntity;
 }
