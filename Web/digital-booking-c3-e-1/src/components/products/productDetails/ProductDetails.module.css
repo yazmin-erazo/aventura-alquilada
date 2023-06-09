@@ -9,17 +9,17 @@
 }
 
 .detailsHeader {
-  max-width: 1120px;
-  margin: 0 auto;
+  margin: 0;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 1rem;
+  padding: 10px;
 }
 
 .detailsHeader .nameProduct {
   font: var(--h5);
   color: var(--sencondary-900);
+  margin: 0px 40px;
 }
 
 .detailsHeader .button {
@@ -32,6 +32,7 @@
   color: var(--secondary-600);
   border-radius: 4px;
   cursor: pointer;
+  margin-right: 30px;
 }
 
 .detailsHeader .button:hover {
@@ -40,6 +41,35 @@
 
 .detailsHeader button svg {
   vertical-align: middle;
+}
+
+.location {
+  font: var(--body-14-normal);
+  display: flex;
+  justify-content: space-between;
+  background-color: var(--secondary-600);
+  color: white;
+  display: flex;
+}
+
+.locationText {
+  margin: 10px 60px;
+  width: 50%;
+  margin-left: 40px;
+  /*background-color: yellow;*/
+}
+
+.proximity{
+  margin-left: 25px;
+  margin-top: 5px;
+  font-size: 12px;
+}
+
+.ratingStats{
+  margin-right: 0px;
+  margin-top: 12px;
+  margin: 10px;
+  /*background-color: yellow;*/
 }
 
 .productDetails {
@@ -65,9 +95,7 @@
   width: 48%;
 }
 
-.ratingStats{
-  margin-top: 20px;
-}
+
 .productFeature {
   margin-bottom: 40px;
 }
@@ -179,6 +207,10 @@
 }
 
 @media (max-width: 768px) {
+  .location {
+    font: var(--body-12);
+  }
+
   .productDetails {
     flex-direction: column;
   }
@@ -210,6 +242,32 @@
 }
 
 @media (max-width: 450px) {
+  .detailsHeader .nameProduct {
+    margin: 0px 10px;
+  }
+
+  .detailsHeader .button {
+    margin-right: 0px;
+  }
+  
+  .locationText {
+    margin-left: 3px;
+    font: var(--body-12);
+    font-size: 10px;
+    width: 100%;
+  }
+
+  .proximity{
+    margin-left: 25px;
+    margin-top: 5px;
+    font-size: 8px;
+    
+  }
+  .ratingStats{
+    font-size: 5px;
+    margin-left: 0px;
+  }
+
   .feature {
     display: flex;
     flex-direction: column;
@@ -218,4 +276,14 @@
   .textFeature {
     margin-top: 10px;
   }
+}
+@media (max-width: 380px) {
+  .city{
+    text-align: center;
+  }
+  
+    .proximity{
+      text-align: center;
+    }
+  
 }
