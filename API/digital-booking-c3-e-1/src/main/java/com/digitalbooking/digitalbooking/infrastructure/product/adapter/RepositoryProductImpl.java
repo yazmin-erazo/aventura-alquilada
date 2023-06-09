@@ -98,6 +98,11 @@ public class RepositoryProductImpl implements RepositoryProduct {
     }
 
     @Override
+    public Optional<ProductDTO> findByIdAndIsDelete(Long id) {
+        return repositoryProductMySql.findByIdAndIsDelete(id, Boolean.FALSE).map(MapToProduct::mapToProduct);
+    }
+
+    @Override
     public void deleteProduct(Long id) {
         ProductEntity productEntity = repositoryProductMySql.findByIdAndIsDelete(id, Boolean.FALSE).orElseThrow(()->new ExceptionNullValue("Producto no encontrado"));
         productEntity.setIsDelete(Boolean.TRUE);

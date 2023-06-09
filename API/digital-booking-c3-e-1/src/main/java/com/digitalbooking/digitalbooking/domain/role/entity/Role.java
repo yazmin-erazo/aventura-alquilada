@@ -137,7 +137,7 @@ public class Role {
     }
 
     public static Role createById(Long id) {
-        Validator.validateMandatory(id, "El Id es requerido para eliminar un rol");
+        Validator.validateMandatory(id, "El Id del rol es requerido");
         return new Role(id);
     }
 }

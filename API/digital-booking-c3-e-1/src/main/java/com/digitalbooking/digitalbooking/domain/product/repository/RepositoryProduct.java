@@ -22,5 +22,7 @@ public interface RepositoryProduct {
 
     Optional<ProductDTO> findByNameAndIsDelete(String name);
 
+    Optional<ProductDTO> findByIdAndIsDelete(Long id);
+
     void deleteProduct(Long id);
 }
