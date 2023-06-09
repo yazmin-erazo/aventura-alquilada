@@ -278,9 +278,9 @@ li:hover {
   .footerIcons {
     display: none;
   }
-  /* nav {
+  nav {
     display: block;
-  } */
+  }
   .outlet {
     min-height: calc(100vh - 140px);
     margin-left: 0;
