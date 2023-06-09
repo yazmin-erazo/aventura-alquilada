@@ -84,6 +84,7 @@ const ProductDetails = () => {
                 <RatingStats
                   color="var(--semantics-success)"
                   totalColor="var(--secondary-50)"
+                  className={styles.ratingStatsItem}
                 />
               </div>
             </div>

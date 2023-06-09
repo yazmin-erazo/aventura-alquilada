@@ -32,11 +32,7 @@
 }
 
 @media (max-width: 900px) {
-  .ratingStatsItem {
-    flex-direction: column;
-    width: 100%;
-    align-items: end;
-  }
+  
 
   .ratingStatsAverage{
     margin-right: 0;

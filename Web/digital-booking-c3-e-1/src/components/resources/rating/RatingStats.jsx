@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import styles from "./RatingStats.module.css";
 
-const RatingStats = ({ color, totalColor }) => {
+const RatingStats = ({ color, totalColor, className }) => {
   const [averageRating, setAverageRating] = useState(0);
   const [totalRatings, setTotalRatings] = useState(0);
 
@@ -10,7 +10,6 @@ const RatingStats = ({ color, totalColor }) => {
   }, []);
 
   const generateRandomStats = () => {
-    // const randomAverage = Math.random() * 5;
     const randomAverage = Math.random() * (5 - 4) + 4;
     const randomTotal = Math.floor(Math.random() * 100);
     setAverageRating(randomAverage.toFixed(1));
@@ -18,19 +17,17 @@ const RatingStats = ({ color, totalColor }) => {
   };
 
   return (
-    <div className={styles.ratingStats}>
-      <div className={styles.ratingStatsItem}>
-        <div className={styles.ratingStatsAverage}>
-          <span className={styles.ratingStatsIcon} style={{ color }}>
-            &#9733;
-          </span>
-          <span className={styles.ratingStatsRating} style={{ color }}>
-            {averageRating}
-          </span>
-        </div>
-        <div className={styles.ratingStatsTotal} style={{ color: totalColor }}>
-          {totalRatings} valoraciones
-        </div>
+    <div className={`${styles.ratingStats} ${className}`}>
+      <div className={styles.ratingStatsAverage}>
+        <span className={styles.ratingStatsIcon} style={{ color }}>
+          &#9733;
+        </span>
+        <span className={styles.ratingStatsRating} style={{ color }}>
+          {averageRating}
+        </span>
+      </div>
+      <div className={styles.ratingStatsTotal} style={{ color: totalColor }}>
+        {totalRatings} valoraciones
       </div>
     </div>
   );
