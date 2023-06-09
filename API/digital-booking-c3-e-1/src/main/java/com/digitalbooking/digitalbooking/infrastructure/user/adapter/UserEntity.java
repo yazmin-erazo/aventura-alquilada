@@ -20,6 +20,7 @@ public class UserEntity {
     private String token;
     private Boolean isActive;
     private LocalDateTime GeneratingDate;
+    private String initialsColor;
     @ManyToOne
     private RoleEntity roleEntity;
 }
