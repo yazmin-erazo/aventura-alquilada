@@ -64,8 +64,10 @@ const ProductDetails = () => {
           <div className={styles.locationContainer}>
             <div className={styles.location}>
               <div className={styles.locationText}>
-                <div classname={styles.locationIcon}>
-                  <MdLocationOn size={24} />
+                <div className={styles.locationIcon}>
+                  <div className={styles.circleIcon}>
+                    <MdLocationOn size={24} />
+                  </div>
                 </div>
                 {/*product.ciudad.nombre}, {product.ciudad.pais*/}
 
@@ -79,7 +81,10 @@ const ProductDetails = () => {
               </div>
 
               <div className={styles.ratingStats}>
-                <RatingStats />
+                <RatingStats
+                  color="var(--semantics-success)"
+                  totalColor="var(--secondary-50)"
+                />
               </div>
             </div>
           </div>
@@ -146,11 +151,10 @@ const ProductDetails = () => {
                   </div>
                 </div>
               </div>
+              <div className={styles.politics}>
+                <Politics />
+              </div>
             </div>
-          </div>
-
-          <div className={styles.politics}>
-            <Politics />
           </div>
         </>
       )}
