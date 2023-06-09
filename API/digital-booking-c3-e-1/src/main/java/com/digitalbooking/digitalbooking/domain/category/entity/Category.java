@@ -47,7 +47,7 @@ public final class Category {
     }
 
     public static Category createById(Long id) {
-        Validator.validateMandatory(id, "El Id es requerido para eliminar una categoría.");
+        Validator.validateMandatory(id, "El Id de la categoría es requerido");
         return new Category(id);
     }
 }
