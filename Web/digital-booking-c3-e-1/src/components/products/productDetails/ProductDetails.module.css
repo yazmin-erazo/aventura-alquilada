@@ -10,15 +10,23 @@
 }
 
 .locationContainer {
-  width: 100vw;
   background-color: var(--secondary-600);
 }
 
+.circleIcon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  background-color: var(--secondary-300);
+}
 .detailsHeader {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 10px;
+  padding: 1rem;
   max-width: 1120px;
   margin: 0 auto;
 }
@@ -38,10 +46,11 @@
   color: var(--secondary-600);
   border-radius: 4px;
   cursor: pointer;
+  background-color: var(--secondary-200);
 }
 
 .detailsHeader .button:hover {
-  background-color: var(--secondary-200);
+  background-color: var(--secondary-50);
 }
 
 .detailsHeader button svg {
@@ -55,11 +64,11 @@
   display: flex;
   justify-content: space-between;
   color: white;
-  padding: 1.3rem 10px;
+  padding: 1.3rem 1rem;
 }
 
 .locationText {
-
+  width: 70%;
   display: flex;
   align-items: center;
   gap: 1rem;
@@ -68,15 +77,8 @@
 
 .proximity {
   margin-top: 5px;
-  font-size: 12px;
+  font-size: 0.8rem;
   color: var(--secondary-200);
-}
-
-.ratingStats {
-  display: flex;
-  justify-content: flex-end;
-  align-items: center;
-  padding-right: 16px;
 }
 
 .productDetails {

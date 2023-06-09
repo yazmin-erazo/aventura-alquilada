@@ -23,18 +23,23 @@
 .ratingStatsRating {
   font-size: 24px;
   font-weight: bold;
-  color: var(--semantics-success);
+  /* color: var(--semantics-success); */
 }
 
 .ratingStatsTotal {
-  font-size: 12px;
-  color: white;
+  font-size: 0.8rem;
+  color: var(--secondary-50);
 }
 
-@media (max-width: 450px) {
+@media (max-width: 900px) {
   .ratingStatsItem {
+    flex-direction: column;
     width: 100%;
-    display: block;
+    align-items: end;
+  }
+
+  .ratingStatsAverage{
+    margin-right: 0;
   }
 
   .ratingStatsIcon {
@@ -42,10 +47,10 @@
   }
 
   .ratingStatsRating {
-    font-size: 20px;}
+    font-size: 20px;
+  }
 
-    .ratingStatsTotal {
-      font-size: 8px;}
+  .ratingStatsTotal {
+    font-size:0.80rem;
+  }
 }
-
-
