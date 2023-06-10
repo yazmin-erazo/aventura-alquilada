@@ -55,7 +55,9 @@ const Header = () => {
             <ul className="user-profile">
               <li>Perfil</li>
               <hr />
-              <li>Mis favoritos</li>
+              <Link to="favorites">
+              <li> Mis favoritos</li>
+              </Link>
               <hr />
               <li>Configuración</li>
               <li className="logout" onClick={logoutHandler}>
