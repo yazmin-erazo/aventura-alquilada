@@ -34,8 +34,8 @@ const SinglePanel = () => {
               icon={FiUsers}
               size={24}
               text="Usuarios"
-              to="user/"
-              isActive={location.pathname === "/user/"}
+              to="admin/user/"
+              isActive={location.pathname === "/admin/user/"}
             ></DashboardSection>
 
             {/* ------------------ ROLES ------------------ */}

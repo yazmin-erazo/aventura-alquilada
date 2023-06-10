@@ -15,8 +15,9 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import RegisterUser from "./components/user/userAddForm/RegisterUser.jsx";
 import Login from "./components/user/login/Login.jsx";
 import ActivateUser from "./components/user/activateUser/ActivateUser.jsx";
-import UserCrud from "./components/user/userCrud/userCrud.jsx";
-import CrudRoles from "./components/roles/CrudRoles/CrudRoles.jsx";
+import UsersCrud from "./components/user/userCrud/UsersCrud.jsx";
+import CrudRoles from "./components/roles/CrudRoles/CrudRoles.jsx"
+
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <BrowserRouter>
@@ -36,7 +37,7 @@ ReactDOM.createRoot(document.getElementById("root")).render(
         <Route path='login' element={<Login />} />
         <Route path='auth/register' element={<RegisterUser />} />
         <Route path='user/activate' element={<ActivateUser />} />
-        <Route path='user/' element={<UserCrud />} />
+        <Route path='admin/user' element={<UsersCrud />} />
       </Route>
     </Routes>
     {/* </React.StrictMode> */}

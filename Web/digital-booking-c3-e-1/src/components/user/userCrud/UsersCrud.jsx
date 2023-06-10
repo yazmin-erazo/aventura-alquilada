@@ -7,8 +7,7 @@ import UsersService from "../../../shared/services/UserService";
 import Swal from "sweetalert2";
 import { Link, useNavigate } from "react-router-dom";
 
-
-const UserCrud = () => {
+const UsersCrud = () => {
   const navigate = useNavigate();
   const [users, setUsers] = useState([]);
   const [currentUsers, setCurrentUsers] = useState([]);
@@ -130,4 +129,4 @@ const UserCrud = () => {
   );
 };
 
-export default UserCrud;
+export default UsersCrud;
