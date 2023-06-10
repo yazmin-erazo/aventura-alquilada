@@ -3,10 +3,9 @@ import TableUser from "../../common/TableUser/TableUser";
 import styles from "../../../components/products/Crud/Crud.module.css";
 import ButtonPrimary from "../../common/Buttons/ButtonPrimary";
 import Pagination from "../../resources/pagination/Pagination";
-import { Link } from "react-router-dom";
 import UsersService from "../../../shared/services/UserService";
 import Swal from "sweetalert2";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 
 const UserCrud = () => {
@@ -88,9 +87,9 @@ const UserCrud = () => {
     <>
       <div className={styles["button-container"]}>
         <div className={styles["button"]}>
-          {/* <Link to="user/add">
-            <ButtonPrimary>Agregar usuario</ButtonPrimary>
-          </Link> */}
+          <Link to="user/add">
+            <ButtonPrimary disabled>Agregar usuario</ButtonPrimary>
+          </Link>
         </div>
       </div>
       <section className={styles["container"]}>
@@ -98,7 +97,7 @@ const UserCrud = () => {
           <thead>
             <tr>
               <th>ID</th>
-              <th>Iniciales</th>
+              <th>Avatar</th>
               <th>Email</th>
               <th>Apellido</th>
               <th>Nombre</th>
