@@ -1,5 +1,6 @@
 package com.digitalbooking.digitalbooking.infrastructure.rent.adapter;
 
+import com.digitalbooking.digitalbooking.common.exception.ExceptionNullValue;
 import com.digitalbooking.digitalbooking.domain.rent.dto.RentDTO;
 import com.digitalbooking.digitalbooking.domain.rent.entity.Rent;
 import com.digitalbooking.digitalbooking.domain.rent.repository.RentRepository;
@@ -13,6 +14,7 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 import java.util.Optional;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 @Repository
 public class RentRepositoryImpl implements RentRepository {
@@ -27,12 +29,19 @@ public class RentRepositoryImpl implements RentRepository {
 
     @Override
     public void updateRent(Rent rent) {
-
+        RentEntity rentEntity =repositoryRentMySql.findById(rent.getId()).orElseThrow(() -> new ExceptionNullValue("No se encontró el alquiler"));
+        rentEntity.setComment(rent.getComment());
+        rentEntity.setStarDate(rent.getStarDate());
+        rentEntity.setEndDate(rent.getEndDate());
+        rentEntity.setState("ACTUALIZADO");
+        repositoryRentMySql.save(rentEntity);
     }
 
     @Override
     public void deleteRent(Long id) {
-
+        RentEntity rentEntity =repositoryRentMySql.findById(id).orElseThrow(() -> new ExceptionNullValue("No se encontró el alquiler"));
+        rentEntity.setState("CANCELADO");
+        repositoryRentMySql.save(rentEntity);
     }
 
     @Override
@@ -49,7 +58,9 @@ public class RentRepositoryImpl implements RentRepository {
     }
 
     @Override
-    public List<RentDTO> getAll() {
-        return null;
+    public List<RentDTO> getAll(Long userId) {
+        UserEntity user = new UserEntity();
+        user.setId(userId);
+        return repositoryRentMySql.findAllByUserEntity(user).stream().map(MapToRent::mapToRent).collect(Collectors.toList());
     }
 }

@@ -29,19 +29,19 @@ public class RentHandler {
         ), userEmail);
     }
 
-    public String updateRent(CommandUpdateRent updateRent) throws Exception {
-        return rentService.updateRent(Rent.update(updateRent.getRentId(), updateRent.getProductId(), updateRent.getUserId(), updateRent.getStarDate(), updateRent.getEndDate(), updateRent.getComment()));
+    public String updateRent(CommandUpdateRent updateRent, String userEmail) throws Exception {
+        return rentService.updateRent(Rent.update(updateRent.getRentId(), updateRent.getProductId(), updateRent.getUserId(), updateRent.getStarDate(), updateRent.getEndDate(), updateRent.getComment()), userEmail);
     }
 
-    public List<RentDTO> getRents() {
-        return rentService.getRents();
+    public List<RentDTO> getRents(String userEmail) {
+        return rentService.getRents(userEmail);
     }
 
-    public RentDTO findById(Long id) {
-        return rentService.getRent(id);
+    public RentDTO findById(Long id, String userEmail) {
+        return rentService.getRent(id,userEmail);
     }
 
-    public String deleteRent(Long id) {
-        return rentService.deleteRent(Rent.createById(id));
+    public String deleteRent(Long id, String userEmail) {
+        return rentService.deleteRent(Rent.createById(id),userEmail);
     }
 }
