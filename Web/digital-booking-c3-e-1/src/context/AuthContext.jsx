@@ -2,13 +2,13 @@ import React, { createContext, useReducer } from "react";
 
 const UserContext = createContext();
 
-
 const initialState = {
         user: JSON.parse(sessionStorage.getItem('user')) || {
             name: "",
             lastname: "",
             role: ""
         },
+        favoritos: [32,48,132],
         token: sessionStorage.getItem('token') || "",
         isLogedIn: sessionStorage.getItem('token') ? true : false
     }
@@ -20,7 +20,8 @@ const initialState = {
                 sessionStorage.setItem('user', JSON.stringify(action.payload.user));
                 return {
                     ...state,
-                    user: action.payload.user, 
+                    user: action.payload.user,
+                    favoritos: [32,48,132],
                     isLogedIn: true,
                     token: action.payload.token
                 }
@@ -30,7 +31,8 @@ const initialState = {
                     ...state,
                     user: { name: "",
                     lastname: "",
-                    role: "" },
+                    role: "",
+                    favoritos: [32,48,132] },
                     token: "",
                     isLogedIn: false
                 }
@@ -47,7 +49,8 @@ const initialState = {
     const data = {
         dispatch,
         user: state.user,
-        isLogedIn: state.isLogedIn
+        isLogedIn: state.isLogedIn,
+        favs: state.favoritos
     }
     
     return (
