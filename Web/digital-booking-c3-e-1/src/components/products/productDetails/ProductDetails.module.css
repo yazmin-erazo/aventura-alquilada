@@ -215,12 +215,26 @@
   color: var(--state-available);
 }
 
-.politics{
+.politics {
   margin-top: 3rem;
 }
 
-@media (max-width: 768px) {
+.ratingStatsItem {
+  display: flex;
+  align-items: baseline;
+  flex-direction: row;
+}
 
+@media (max-width: 900px) {
+  .ratingStatsItem {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    align-items: flex-end;
+  }
+}
+
+@media (max-width: 768px) {
   .productDetails {
     flex-direction: column;
   }
@@ -252,7 +266,6 @@
 }
 
 @media (max-width: 450px) {
-
   .feature {
     display: flex;
     flex-direction: column;

@@ -19,6 +19,11 @@
   color: var(--secondary-600);
   font-weight: 500;
 }
+.button.disabled{
+  background-color: var(--secondary-100);
+  color: white;
+  cursor:default;
+}
 
 /* BUTTON CANCEL */
 .buttonInactive{

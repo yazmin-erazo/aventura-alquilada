@@ -16,6 +16,10 @@ const SinglePanel = () => {
     setMenuOpen(!isMenuOpen);
   };
 
+  const toggleSection = (section) => {
+    setActiveSection(section === activeSection ? "" : section);
+  };
+
   return (
     <>
       {user.role === "Admin" && (
@@ -30,8 +34,8 @@ const SinglePanel = () => {
               icon={FiUsers}
               size={24}
               text="Usuarios"
-              to="#"
-              isActive={location.pathname === "/#"}
+              to="admin/user/"
+              isActive={location.pathname === "/admin/user/"}
             ></DashboardSection>
 
             {/* ------------------ ROLES ------------------ */}

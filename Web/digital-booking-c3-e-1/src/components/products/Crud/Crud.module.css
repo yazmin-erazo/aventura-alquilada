@@ -17,6 +17,8 @@
   overflow-x: auto;
   border-collapse: collapse;
   color: var(--sencondary-600);
+  border-radius: 8px;
+  overflow: hidden;
 }
 
 .table thead {
@@ -34,6 +36,8 @@
   text-align: left;
   font: var(--body-14-normal);
 }
+
+
 
 .actions-th {
   width: 120px;
