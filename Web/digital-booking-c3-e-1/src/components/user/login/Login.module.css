@@ -13,6 +13,7 @@
 }
 
 .imgContainer {
+  width: 50%;
   height: calc(100vh - 140px);
 }
 

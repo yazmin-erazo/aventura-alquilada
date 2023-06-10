@@ -121,7 +121,7 @@ class AuthServiceTest {
         String role = "ROLE_USER";
         LocalDateTime currentDate = LocalDateTime.now();
 
-        UserDTO userDTO = new UserDTO(id, name, lastName, email, password,currentDate,true,role,"");
+        UserDTO userDTO = new UserDTO(id, name, lastName, email, password,currentDate,true,role,"", "#525252");
         UserDetailsImpl userDetails = UserDetailsImpl.build(userDTO);
 
         assertEquals(id, userDetails.getId());
@@ -150,8 +150,8 @@ class AuthServiceTest {
         String role = "ROLE_USER";
         LocalDateTime currentDate = LocalDateTime.now();
 
-        UserDTO userDTO1 = new UserDTO(id1, name, lastName, email, password,currentDate,true,role,"");
-        UserDTO userDTO2 = new UserDTO(id2, name, lastName, email, password,currentDate,true,role,"");
+        UserDTO userDTO1 = new UserDTO(id1, name, lastName, email, password,currentDate,true,role,"", "#525252");
+        UserDTO userDTO2 = new UserDTO(id2, name, lastName, email, password,currentDate,true,role,"", "#525252");
 
         UserDetailsImpl userDetails1 = UserDetailsImpl.build(userDTO1);
         UserDetailsImpl userDetails2 = UserDetailsImpl.build(userDTO2);

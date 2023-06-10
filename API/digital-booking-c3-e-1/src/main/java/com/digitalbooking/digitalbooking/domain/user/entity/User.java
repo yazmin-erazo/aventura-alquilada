@@ -1,12 +1,17 @@
 package com.digitalbooking.digitalbooking.domain.user.entity;
 
 import com.digitalbooking.digitalbooking.common.validations.Validator;
+import com.digitalbooking.digitalbooking.domain.product.entity.Product;
 import com.digitalbooking.digitalbooking.domain.role.entity.Role;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
+
+import static lombok.AccessLevel.PRIVATE;
 
 @Getter
-@AllArgsConstructor
+@AllArgsConstructor(access = PRIVATE)
+@NoArgsConstructor(access = PRIVATE)
 public final class User {
     private Long id;
     private String name;
@@ -37,6 +42,11 @@ public final class User {
 
         Role role1 = Role.createById(21L);
         return new User(0L,name,lastName,email,password,false,role1);
+    }
+
+    public static User createById(Long id){
+        Validator.validateMandatory(id, "El Id del usuario es requerido");
+        return new User(id);
     }
 
 }

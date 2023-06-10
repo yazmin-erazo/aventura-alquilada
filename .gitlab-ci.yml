@@ -24,6 +24,7 @@ test-api:
       - develop
       
 
+
 build-api:
   stage: build
   image: maven:3.6-jdk-11
@@ -37,6 +38,7 @@ build-api:
     changes:
       - API/digital-booking-c3-e-1/**/*
       - develop
+
 
 
 deploy_to_ec2:

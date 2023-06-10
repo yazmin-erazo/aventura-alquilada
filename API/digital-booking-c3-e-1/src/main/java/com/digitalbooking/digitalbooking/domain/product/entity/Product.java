@@ -80,7 +80,7 @@ public final class Product {
     }
 
     public static Product createById(Long id){
-        Validator.validateMandatory(id, "El Id es requerido para eliminar un producto");
+        Validator.validateMandatory(id, "El Id del producto es requerido");
         return new Product(id);
     }
 }

@@ -77,7 +77,7 @@ const RecommendedProducts = ({
           {" "}
           <div className={styles.rating}>
             <div className={styles.ratingStars}>
-              <RatingStats />
+              <RatingStats color="var(--primary-300)" totalColor="var(--secondary-300)"/>
             </div>
             {/* <div className={styles.ratingStars}>{renderRatingStars()}</div> */}
             {/* <p className={styles.numRatings}>{numRatings}</p> */}

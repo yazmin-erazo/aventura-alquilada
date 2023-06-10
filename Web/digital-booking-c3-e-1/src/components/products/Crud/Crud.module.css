@@ -1,9 +1,13 @@
 @import "/src/styles/variables.css";
 @import "/src/styles/global.css";
 
+.button-container{
+  width: 90%;
+  max-width: 1280px;
+  margin: 0 auto;
+}
 
-
-.button-container {
+.button {
   width: 200px;
   margin: 48px 0 32px 0;
 }
@@ -23,7 +27,7 @@
 
 .table th {
   padding: 10px;
-  display: table-cell; /* para que las celdas se muestren en horizontal */
+  display: table-cell;
   flex: none;
   order: 0;
   flex-grow: 0;
@@ -39,10 +43,8 @@
   background-color: var(--state-available);
 }
 
-
 @media (max-width: 768px) {
   .container {
     overflow: scroll overlay;
   }
-
 }

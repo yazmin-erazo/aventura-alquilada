@@ -13,6 +13,9 @@ import { AiOutlineClockCircle } from "react-icons/ai";
 import ImageGallery from "../../common/imagegalery/ImageGallery";
 import Qualification from "../../resources/qualification/Qualification";
 import RatingStats from "../../resources/rating/RatingStats";
+import Politics from "../../resources/Politics/Politics";
+import { MdLocationOn } from "react-icons/md";
+//import CalendarProducts from "../../resources/Calendar/CalendarProducts";
 
 const ProductDetails = () => {
   const data = useContext(ProductsContext);
@@ -52,12 +55,39 @@ const ProductDetails = () => {
               <h2 className={styles.nameProduct}>{product.name}</h2>
               <div onClick={() => navigate(-1)}>
                 <div className={styles.button}>
-                  <FaArrowLeft /> <p>Volver</p>
+                  <FaArrowLeft /> <p> Volver </p>
                 </div>
               </div>
             </div>
           </div>
 
+          <div className={styles.locationContainer}>
+            <div className={styles.location}>
+              <div className={styles.locationText}>
+                <div className={styles.locationIcon}>
+                  <div className={styles.circleIcon}>
+                    <MdLocationOn size={24} />
+                  </div>
+                </div>
+                {/*product.ciudad.nombre}, {product.ciudad.pais*/}
+
+                <div>
+                  <p className={styles.city}>
+                    {" "}
+                    Buenos Aires, Ciudad Autónoma de Buenos Aires, Argentina{" "}
+                  </p>
+                  <p className={styles.proximity}> A 940 m del centro</p>
+                </div>
+              </div>
+
+              <div className={styles.ratingStats}>
+                <RatingStats
+                  color="var(--semantics-success)"
+                  totalColor="var(--secondary-50)"
+                />
+              </div>
+            </div>
+          </div>
           <div className={styles.detailsContainer}>
             <ImageGallery product={product} />
             <div className={styles.productDetails}>
@@ -71,11 +101,9 @@ const ProductDetails = () => {
 
                   {/* <p className={styles.price}>${product.price}</p> */}
                 </div>
+
                 <div className={styles.review}>
                   <Qualification />
-                  <div className={styles.ratingStats}>
-                    <RatingStats />
-                  </div>
                 </div>
               </div>
 
@@ -122,6 +150,9 @@ const ProductDetails = () => {
                     </p>
                   </div>
                 </div>
+              </div>
+              <div className={styles.politics}>
+                <Politics />
               </div>
             </div>
           </div>

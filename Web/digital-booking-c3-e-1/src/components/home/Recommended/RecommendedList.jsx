@@ -87,7 +87,7 @@ const RecommendedList = ({ selectedCategory, searchParams }) => {
                   className={styles.linkCard}
                 >
                   <RecommendedProducts
-                    rentalType="Alquiler por hora"
+                    rentalType="Alquiler por día"
                     product={{
                       ...product,
                       name: product.name,

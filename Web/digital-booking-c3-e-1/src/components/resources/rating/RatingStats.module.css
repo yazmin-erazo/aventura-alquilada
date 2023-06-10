@@ -11,24 +11,46 @@
 .ratingStatsAverage {
   display: flex;
   align-items: baseline;
-  margin-right: 16px;
+  margin-right: 15px;
 }
 
 .ratingStatsIcon {
   font-size: 24px;
-  margin-right: 4px;
-  color: #ffc107;
+  margin-right: 3px;
+  color: var(--semantics-success);
 }
 
 .ratingStatsRating {
   font-size: 24px;
   font-weight: bold;
-  color: #ffc107;
+  /* color: var(--semantics-success); */
 }
 
 .ratingStatsTotal {
-  font-size: 14px;
-  color: #777;
+  font-size: 0.8rem;
+  color: var(--secondary-50);
 }
 
+@media (max-width: 900px) {
+  .ratingStatsItem {
+    flex-direction: column;
+    width: 100%;
+    align-items: end;
+  }
 
+  .ratingStatsAverage{
+    margin-right: 0;
+  }
+
+  .ratingStatsIcon {
+    font-size: 20px;
+  }
+
+  .ratingStatsRating {
+    font-size: 20px;
+  }
+
+  .ratingStatsTotal {
+    font-size:0.80rem;
+  }
+}
