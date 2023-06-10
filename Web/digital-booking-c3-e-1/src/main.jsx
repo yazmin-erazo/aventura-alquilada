@@ -18,6 +18,7 @@ import ActivateUser from "./components/user/activateUser/ActivateUser.jsx";
 import UsersCrud from "./components/user/userCrud/UsersCrud.jsx";
 import CrudRoles from "./components/roles/CrudRoles/CrudRoles.jsx"
 
+import FavList from "./components/products/favs/FavList.jsx";
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <BrowserRouter>
@@ -38,6 +39,7 @@ ReactDOM.createRoot(document.getElementById("root")).render(
         <Route path='auth/register' element={<RegisterUser />} />
         <Route path='user/activate' element={<ActivateUser />} />
         <Route path='admin/user' element={<UsersCrud />} />
+        <Route path='favorites' element={<FavList />} />
       </Route>
     </Routes>
     {/* </React.StrictMode> */}
