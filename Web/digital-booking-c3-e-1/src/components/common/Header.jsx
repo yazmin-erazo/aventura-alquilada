@@ -50,13 +50,13 @@ const Header = () => {
             </Link>
           </div>
         )}
-        <nav>
+        <nav className={isLogedIn ? "hideNav" : "showNav"}>
           {isLogedIn ? (
             <ul className="user-profile">
               <li>Perfil</li>
               <hr />
               <Link to="favorites">
-              <li> Mis favoritos</li>
+                <li> Mis favoritos</li>
               </Link>
               <hr />
               <li>Configuración</li>

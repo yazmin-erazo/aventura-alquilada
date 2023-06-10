@@ -278,7 +278,11 @@ li:hover {
   .footerIcons {
     display: none;
   }
-  nav {
+  .hideNav {
+    display: none;
+  }
+
+  .showNav {
     display: block;
   }
   .outlet {
@@ -297,11 +301,5 @@ li:hover {
   .cuentaBtn,
   .sesionBtn {
     display: none;
-  }
-}
-
-@media (max-width: 768px) {
-  .headerContainer {
-    margin-left: 0;
   }
 }
