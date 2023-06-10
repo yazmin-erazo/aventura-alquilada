@@ -51,22 +51,22 @@ const TableUser = ({ user, onDelete, onEdit }) => {
   const initialsStyle = {
     backgroundColor: user.initialsColor || getRandomColor(),
   };
-  console.log(user);
+  console.log(user.initialsColor );
 
   return (
     <tr className={styles["table-row"]}>
       <td>{user.id}</td>
-      <td>{user.email}</td>
-      <td>{user.lastName}</td>
-      <td>{user.name}</td>
-      <td>{user.isActive}</td>
-      <td>{user.generationDate}</td>
-      <td>{user.role}</td>
       <td>
         <div className={style["initials-circle"]} style={initialsStyle}>
           {getInitials(user.firstName + " " + user.lastName)}
         </div>
       </td>
+      <td>{user.name}</td>
+      <td>{user.lastName}</td>
+      <td>{user.email}</td>
+      <td>{user.isActive}</td>
+      <td>{user.generationDate}</td>
+      <td>{user.role}</td>
       <td className={styles["actions"]}>
         <ActionButtons onDelete={onDelete} onEdit={onEdit} />
       </td>

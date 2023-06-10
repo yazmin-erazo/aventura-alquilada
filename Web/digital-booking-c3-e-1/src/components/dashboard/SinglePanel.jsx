@@ -16,6 +16,10 @@ const SinglePanel = () => {
     setMenuOpen(!isMenuOpen);
   };
 
+  const toggleSection = (section) => {
+    setActiveSection(section === activeSection ? "" : section);
+  };
+
   return (
     <>
       {user.role === "Admin" && (

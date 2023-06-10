@@ -88,9 +88,9 @@ const UserCrud = () => {
     <>
       <div className={styles["button-container"]}>
         <div className={styles["button"]}>
-          <Link to="user/add">
+          {/* <Link to="user/add">
             <ButtonPrimary>Agregar usuario</ButtonPrimary>
-          </Link>
+          </Link> */}
         </div>
       </div>
       <section className={styles["container"]}>
@@ -98,13 +98,13 @@ const UserCrud = () => {
           <thead>
             <tr>
               <th>ID</th>
+              <th>Iniciales</th>
               <th>Email</th>
               <th>Apellido</th>
               <th>Nombre</th>
               <th>Activo</th>
               <th>Fecha de generación</th>
-              <th>ID de rol</th>
-              <th>Iniciales</th>
+              <th>Rol</th>
               <th className={styles["actions-th"]}>Acciones</th>
             </tr>
           </thead>
