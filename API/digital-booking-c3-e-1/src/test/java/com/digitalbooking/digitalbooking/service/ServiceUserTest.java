@@ -46,10 +46,10 @@ class ServiceUserTest {
     private ServiceUser serviceUser;
 
     @Test
-    void testCreateUserSuccess() {
+    void testCreateUserSuccess() throws Exception {
         RoleDTO role = new RoleDTO();
         role.setId(19L);
-        User user = new User(1L, "Lore", "Sanchez", "Test URL Validation", "123", false, Role.createById(19L));
+        User user =  User.create( "Lore", "Sanchez", "test@test.com", "123");
 
         when(roleRepository.findByIdAndIsDelete(anyLong())).thenReturn(Optional.of(role));
         when(repositoryUser.findByEmail(anyString())).thenReturn(Optional.empty());
@@ -125,7 +125,7 @@ class ServiceUserTest {
         String token = "testToken";
         LocalDateTime currentDate = LocalDateTime.now();
         LocalDateTime expirationDate = currentDate.plusHours(48L);
-        UserDTO user = new UserDTO(1L, "Lore", "Sanchez", "lorena@l.com", token, currentDate, false, token,token);
+        UserDTO user = new UserDTO(1L, "Lore", "Sanchez", "lorena@l.com", token, currentDate, false, token,token, "#525252");
 
         when(repositoryUser.findByToken(token)).thenReturn(Optional.of(user));
 
@@ -145,7 +145,7 @@ class ServiceUserTest {
         String token = "expiredToken";
         LocalDateTime currentDate = LocalDateTime.now();
         LocalDateTime expirationDate = currentDate.minusHours(48L);
-        UserDTO user = new UserDTO(1L, "Lore", "Sanchez", "lorena@l.com", token, expirationDate, false, token,token);
+        UserDTO user = new UserDTO(1L, "Lore", "Sanchez", "lorena@l.com", token, expirationDate, false, token,token, "#525252");
 
         when(repositoryUser.findByToken(token)).thenReturn(Optional.of(user));
 
@@ -162,7 +162,7 @@ class ServiceUserTest {
         String token = "activatedToken";
         LocalDateTime currentDate = LocalDateTime.now();
         LocalDateTime expirationDate = currentDate.plusHours(48L);
-        UserDTO user = new UserDTO(1L, "Lore", "Sanchez", "lorena@l.com", token, expirationDate, true, token,token);
+        UserDTO user = new UserDTO(1L, "Lore", "Sanchez", "lorena@l.com", token, expirationDate, true, token,token,  "#525252");
 
         when(repositoryUser.findByToken(token)).thenReturn(Optional.of(user));
 
