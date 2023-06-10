@@ -16,6 +16,7 @@ import RegisterUser from "./components/user/userAddForm/RegisterUser.jsx";
 import Login from "./components/user/login/Login.jsx";
 import ActivateUser from "./components/user/activateUser/ActivateUser.jsx";
 import UserCrud from "./components/user/userCrud/userCrud.jsx";
+import CrudRoles from "./components/roles/CrudRoles/CrudRoles.jsx";
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <BrowserRouter>
@@ -31,7 +32,7 @@ ReactDOM.createRoot(document.getElementById("root")).render(
         <Route path='admin/category/list' element={<CrudCategory />} />
         <Route path='admin/role/add' element={<NewRole />} />
         <Route path='admin/role/edit/:id' element={<NewRole />} />
-        <Route path='admin/role' element={<EditRole />} />
+        <Route path='admin/role' element={<CrudRoles />} />
         <Route path='login' element={<Login />} />
         <Route path='auth/register' element={<RegisterUser />} />
         <Route path='user/activate' element={<ActivateUser />} />

@@ -49,9 +49,9 @@ const TableUser = ({ user, onDelete, onEdit }) => {
   };
 
   const initialsStyle = {
-    backgroundColor: user.initialColor || getRandomColor(),
+    backgroundColor: user.initialsColor || getRandomColor(),
   };
-  console.log(user.initialColor);
+  console.log(user);
 
   return (
     <tr className={styles["table-row"]}>
