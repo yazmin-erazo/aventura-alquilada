@@ -33,14 +33,14 @@ public class CommandControllerRent {
     @PutMapping
     @PreAuthorize("@authorizationFilter.hasPermission('rentUpdate')")
     @Operation(summary = "Update Rent", description = "Method to update a rent")
-    public ResponseEntity<CommandResponse<String>> updateRent(@RequestBody CommandUpdateRent commandUpdateRent) throws Exception {
-        return new ResponseEntity<>(new CommandResponse<>(rentHandler.updateRent(commandUpdateRent)), HttpStatus.OK);
+    public ResponseEntity<CommandResponse<String>> updateRent(@RequestBody CommandUpdateRent commandUpdateRent, Authentication authentication) throws Exception {
+        return new ResponseEntity<>(new CommandResponse<>(rentHandler.updateRent(commandUpdateRent, ((UserDetailsImpl)authentication.getPrincipal()).getEmail())), HttpStatus.OK);
     }
 
     @DeleteMapping("{id-rent}")
     @PreAuthorize("@authorizationFilter.hasPermission('rentDelete')")
     @Operation(summary = "Delete rent", description = "Method to delete a rent")
-    public ResponseEntity<CommandResponse<String>> deleteRent(@PathVariable("id-rent") Long id) {
-        return new ResponseEntity<>(new CommandResponse<>(rentHandler.deleteRent(id)), HttpStatus.OK);
+    public ResponseEntity<CommandResponse<String>> deleteRent(@PathVariable("id-rent") Long id, Authentication authentication) {
+        return new ResponseEntity<>(new CommandResponse<>(rentHandler.deleteRent(id, ((UserDetailsImpl)authentication.getPrincipal()).getEmail())), HttpStatus.OK);
     }
 }

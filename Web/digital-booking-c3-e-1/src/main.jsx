@@ -15,6 +15,9 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import RegisterUser from "./components/user/userAddForm/RegisterUser.jsx";
 import Login from "./components/user/login/Login.jsx";
 import ActivateUser from "./components/user/activateUser/ActivateUser.jsx";
+import UsersCrud from "./components/user/userCrud/UsersCrud.jsx";
+import CrudRoles from "./components/roles/CrudRoles/CrudRoles.jsx"
+
 import FavList from "./components/products/favs/FavList.jsx";
 
 ReactDOM.createRoot(document.getElementById("root")).render(
@@ -31,10 +34,11 @@ ReactDOM.createRoot(document.getElementById("root")).render(
         <Route path='admin/category/list' element={<CrudCategory />} />
         <Route path='admin/role/add' element={<NewRole />} />
         <Route path='admin/role/edit/:id' element={<NewRole />} />
-        <Route path='admin/role' element={<EditRole />} />
+        <Route path='admin/role' element={<CrudRoles />} />
         <Route path='login' element={<Login />} />
         <Route path='auth/register' element={<RegisterUser />} />
         <Route path='user/activate' element={<ActivateUser />} />
+        <Route path='admin/user' element={<UsersCrud />} />
         <Route path='favorites' element={<FavList />} />
       </Route>
     </Routes>

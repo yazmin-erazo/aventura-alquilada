@@ -225,3 +225,10 @@
 .heartAnimation {
   animation: heartBeat 0.5s;
 }
+
+.ratingStatsItem{
+  display: flex;
+  justify-content: center;
+  align-items: baseline;
+  gap: 8px;
+}

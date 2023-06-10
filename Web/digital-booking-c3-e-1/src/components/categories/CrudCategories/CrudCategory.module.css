@@ -12,7 +12,9 @@
     width: 100%;
     overflow-x: auto; 
     border-collapse: collapse;
-    color:var(--sencondary-600)
+    color:var(--sencondary-600);
+    border-radius: 8px;
+    overflow: hidden;
   }
 
   .table thead {

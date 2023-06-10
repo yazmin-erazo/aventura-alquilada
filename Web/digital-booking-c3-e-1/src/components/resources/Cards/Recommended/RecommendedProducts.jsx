@@ -65,7 +65,7 @@ const RecommendedProducts = ({
             className={`${styles.favoriteButton} ${
               isFavorite ? styles.favoriteActive : styles.heartIcon
             }`}
-            onClick={(event) => handleFavoriteClick(event)} 
+            onClick={(event) => handleFavoriteClick(event)}
           >
             <FaHeart />
           </div>
@@ -76,8 +76,12 @@ const RecommendedProducts = ({
         <div className={styles.ratingAndCategory}>
           {" "}
           <div className={styles.rating}>
-            <div className={styles.ratingStars}>
-              <RatingStats color="var(--primary-300)" totalColor="var(--secondary-300)"/>
+            <div className={styles.ratingStats}>
+              <RatingStats
+                color="var(--primary-300)"
+                totalColor="var(--secondary-300)"
+                className={styles.ratingStatsItem}
+              />
             </div>
             {/* <div className={styles.ratingStars}>{renderRatingStars()}</div> */}
             {/* <p className={styles.numRatings}>{numRatings}</p> */}

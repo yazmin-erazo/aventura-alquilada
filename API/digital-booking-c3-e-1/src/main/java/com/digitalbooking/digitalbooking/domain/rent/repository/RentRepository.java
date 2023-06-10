@@ -17,6 +17,6 @@ public interface RentRepository {
 
     Long createRent(Rent rent);
 
-    List<RentDTO> getAll();
+    List<RentDTO> getAll(Long userId);
 
 }
