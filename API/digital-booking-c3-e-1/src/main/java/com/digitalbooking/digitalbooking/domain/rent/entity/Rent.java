@@ -2,7 +2,6 @@ package com.digitalbooking.digitalbooking.domain.rent.entity;
 
 import com.digitalbooking.digitalbooking.common.validations.Validator;
 import com.digitalbooking.digitalbooking.domain.product.entity.Product;
-import com.digitalbooking.digitalbooking.domain.role.entity.Role;
 import com.digitalbooking.digitalbooking.domain.user.entity.User;
 import lombok.AllArgsConstructor;
 import lombok.Getter;

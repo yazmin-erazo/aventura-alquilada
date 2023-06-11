@@ -4,7 +4,6 @@ import com.digitalbooking.digitalbooking.DigitalConfigurationTest;
 import com.digitalbooking.digitalbooking.common.exception.ExceptionInvalidValue;
 import com.digitalbooking.digitalbooking.domain.mail.MailRepository;
 import com.digitalbooking.digitalbooking.domain.role.dto.RoleDTO;
-import com.digitalbooking.digitalbooking.domain.role.entity.Role;
 import com.digitalbooking.digitalbooking.domain.role.repository.RoleRepository;
 import com.digitalbooking.digitalbooking.domain.user.dto.UserDTO;
 import com.digitalbooking.digitalbooking.domain.user.entity.User;
@@ -26,7 +25,6 @@ import java.util.Optional;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.*;
 import static org.mockito.Mockito.*;
-import static org.mockito.Mockito.when;
 
 @ContextConfiguration(classes = {DigitalConfigurationTest.class}, loader = AnnotationConfigContextLoader.class)
 @ExtendWith(SpringExtension.class)

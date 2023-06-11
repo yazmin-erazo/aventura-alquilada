@@ -1,9 +1,7 @@
 package com.digitalbooking.digitalbooking.domain.rent.dto;
 
 import com.digitalbooking.digitalbooking.domain.product.dto.ProductDTO;
-import com.digitalbooking.digitalbooking.domain.product.entity.Product;
 import com.digitalbooking.digitalbooking.domain.user.dto.UserDTO;
-import com.digitalbooking.digitalbooking.domain.user.entity.User;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
