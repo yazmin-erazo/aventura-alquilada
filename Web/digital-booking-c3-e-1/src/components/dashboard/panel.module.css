@@ -78,6 +78,7 @@
     align-items: center;
     gap:24px;
     font-size: 16px;
+    cursor: pointer;
   }
   .breadcrumbs{
     color: var(--secondary-200);

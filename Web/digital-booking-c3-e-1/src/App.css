@@ -295,6 +295,9 @@ li:hover {
   .copyright {
     font-size: var(--body-10);
   }
+  .header .userDataIcon {
+    margin-right: 0;
+  }
 }
 
 @media (max-width: 600px) {
