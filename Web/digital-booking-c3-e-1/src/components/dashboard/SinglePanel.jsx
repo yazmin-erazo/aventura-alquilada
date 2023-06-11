@@ -87,18 +87,20 @@ const SinglePanel = () => {
         </div>
       )}
 
-      {/* ... menu hamburguesa ... */}
-      <div className={styles.menuContainer}>
-        <div className={styles.iconContainer}>
-          <div className={styles.menuIcon} onClick={toggleMenu}>
-            <FiMenu size={24} />
-            {currentSection && location.pathname.includes("admin") && (
-              <div className={styles.breadcrumbs}>{currentSection}</div>
-            )}
+      {user.role === "admin" && ( // ... menú hamburguesa ...
+        <div className={styles.menuContainer}>
+          <div className={styles.iconContainer}>
+            <div className={styles.menuIcon} onClick={toggleMenu}>
+              <FiMenu size={24} />
+              {currentSection && location.pathname.includes("admin") && (
+                <div className={styles.breadcrumbs}>{currentSection}</div>
+              )}
+            </div>
           </div>
         </div>
-      </div>
-      {/* En dispositivos de max 768px */}
+      )}
+
+      {/* ...... EN DISPOSITIVOS DE MAX 768PX ...... */}
       {isMenuOpen && (
         <div className={`${styles.burgerMenuContainer} ${styles.mobileMenu}`}>
           <div className={styles.burgerMenu}>
@@ -106,8 +108,9 @@ const SinglePanel = () => {
 
             <hr className={styles.divider} />
 
-            {/* ... menú desplegable ... */}
+            {/* ...... MENU DESPLEGABLE ...... */}
             <div className={styles["sectionsContainer"]}>
+              {/* ------------------ USERS ------------------ */}
               <div className={styles["dashboard-section"]}>
                 <Link
                   to="admin/user/"
@@ -122,7 +125,7 @@ const SinglePanel = () => {
                   </div>
                 </Link>
               </div>
-
+              {/* ------------------ ROLES ------------------ */}
               <div className={styles["dashboard-section"]}>
                 <Link
                   to="admin/role"
@@ -137,7 +140,7 @@ const SinglePanel = () => {
                   </div>
                 </Link>
               </div>
-
+              {/* ------------------ CATEGORY ------------------ */}
               <div className={styles["dashboard-section"]}>
                 <Link
                   to="admin/category/list"
@@ -152,7 +155,7 @@ const SinglePanel = () => {
                   </div>
                 </Link>
               </div>
-
+              {/* ------------------ PRODUCTS ------------------ */}
               <div className={styles["dashboard-section"]}>
                 <Link
                   to="admin/"
