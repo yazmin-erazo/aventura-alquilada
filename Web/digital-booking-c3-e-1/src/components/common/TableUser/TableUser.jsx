@@ -51,7 +51,6 @@ const TableUser = ({ user, onDelete, onEdit }) => {
   const initialsStyle = {
     backgroundColor: user.initialsColor || getRandomColor(),
   };
-  console.log(user);
 
   return (
     <tr className={styles["table-row"]}>

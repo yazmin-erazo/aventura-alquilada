@@ -87,7 +87,7 @@ const SinglePanel = () => {
         </div>
       )}
 
-      {user.role === "admin" && ( // ... menú hamburguesa ...
+      {user.role === "Admin" && ( // ... menú hamburguesa ...
         <div className={styles.menuContainer}>
           <div className={styles.iconContainer}>
             <div className={styles.menuIcon} onClick={toggleMenu}>
