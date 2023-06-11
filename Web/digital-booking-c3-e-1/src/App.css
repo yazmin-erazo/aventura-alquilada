@@ -250,6 +250,8 @@ li:hover {
   display: flex;
   align-items: center;
   letter-spacing: 0.08rem;
+  justify-content: center;
+  font-weight: 700;
 }
 
 @media (max-width: 1024px) {
@@ -278,18 +280,26 @@ li:hover {
   .footerIcons {
     display: none;
   }
-  nav {
+  .hideNav {
+    display: none;
+  }
+
+  .showNav {
     display: block;
   }
   .outlet {
     min-height: calc(100vh - 140px);
     margin-left: 0;
   }
-  .header .userDataIcon .user-name {
-    display: none;
-  }
+
   .copyright {
     font-size: var(--body-10);
+  }
+}
+
+@media (max-width: 600px) {
+  .header .userDataIcon .user-name {
+    display: none;
   }
 }
 
@@ -297,11 +307,5 @@ li:hover {
   .cuentaBtn,
   .sesionBtn {
     display: none;
-  }
-}
-
-@media (max-width: 768px) {
-  .headerContainer {
-    margin-left: 0;
   }
 }
