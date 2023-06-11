@@ -1,14 +1,37 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect, useRef, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { UserContext } from "../../context/AuthContext";
 
 const Header = () => {
+  const [isProfileOpen, setProfileOpen] = useState(false);
   const { isLogedIn, user, dispatch } = useContext(UserContext);
+  const profileRef = useRef(null);
   const navigate = useNavigate();
+
+
+  console.log(isProfileOpen);
+
+  const toggleProfile = () => {
+    setProfileOpen(!isProfileOpen);
+  };
+
   const logoutHandler = () => {
     dispatch({ type: "LOGOUT" });
     navigate("/");
   };
+
+  useEffect(() => {
+    const handleOutsideClick = (event) => {
+      if (profileRef.current && !profileRef.current.contains(event.target)) {
+        setProfileOpen(false);
+      }
+    };
+
+    document.addEventListener("click", handleOutsideClick);
+    return () => {
+      document.removeEventListener("click", handleOutsideClick);
+    };
+  }, []);
 
   return (
     <div className="header">
@@ -21,15 +44,22 @@ const Header = () => {
           <h5 className="lemaHeader">Sin equipo no hay aventura</h5>
         </Link>
         {isLogedIn ? (
-          <div className="userProfile">
-            <input type="checkbox" id="userData" />
+          <div className="userProfile" ref={profileRef}>
+            <input
+              type="checkbox"
+              id="userData"
+              checked={isProfileOpen}
+              onChange={toggleProfile}
+            />
             <label className="userDataIcon" htmlFor="userData">
               <div className="user-name">{user.name + " " + user.lastname}</div>
               <div className="user-logo">
                 <div>{user.name.slice(0, 1) + user.lastname.slice(0, 1)}</div>
               </div>
             </label>
-            <ul className="user-profile">
+            <ul
+              className={isProfileOpen ? "user-profile open" : "user-profile"}
+            >
               <li>Perfil</li>
               <hr />
               <li>Mis favoritos</li>

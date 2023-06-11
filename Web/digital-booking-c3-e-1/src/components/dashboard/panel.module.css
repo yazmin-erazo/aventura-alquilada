@@ -9,6 +9,10 @@
   position: fixed;
 }
 
+.menuContainer {
+  display: none;
+}
+
 .title {
   display: flex;
   flex-direction: column;
@@ -38,75 +42,70 @@
   display: none;
 }
 
-
+.burgerMenu {
+  display: none;
+}
 
 @media (max-width: 767px) {
   .dashboard {
     display: none;
   }
+  .menuContainer {
+    width: 100vw;
+    display: block;
+    background: var(--sencondary-900);
+  }
 
-  .menu-icon {
-    width: 2rem;
-    height: 2rem;
-    background-color: var(--secondary-50);
+  .iconContainer {
+    width: 90%;
+    margin: 0 auto;
+  }
+  .burgerMenu {
+    width: 90%;
+    margin: 0 auto;
+    display: block;
+    padding: 1rem 0;
+  }
+  .burgerMenuContainer {
+    width: 100vw;
+    background: var(--sencondary-900);
+  }
+  .menuIcon {
+    padding: 1rem 0;
+    background: var(--sencondary-900);
+    color: var(--bg-white-50);
     display: flex;
-    position: fixed;
-    justify-content: center;
-    top: 90px;
-    left: 1.4rem;
-    cursor: pointer;
-    color: var(--sencondary-900);
-    z-index: 2;
     align-items: center;
-    border-radius: 4px;
+    gap:24px;
+    font-size: 16px;
+  }
+  .breadcrumbs{
+    color: var(--secondary-200);
   }
 
-  .burger-menu {
+  .burgerMenu a {
     display: block;
-    position: fixed;
-    top: 80px;
-    left: 0;
-    width: 100%;
-    height: 100vh;
-    background-color: var(--bg-general);
-    z-index: 2;
-    padding: 24px;
-  }
-
-  .burger-menu .title {
-    font-size: 24px;
-    font-weight: bold;
-    margin-bottom: 16px;
-    color: var(--secondary-600);
-    margin-top: 32px;
-  }
-
-  .burger-menu hr.divider {
-    margin-bottom: 16px;
-    border: none;
-    border-top: 1px solid var(--secondary-100);
-  }
-
-  .burger-menu .dashboard-section {
-    margin-bottom: 16px;
-  }
-
-  .burger-menu .dashboard-section a {
-    display: block;
-    color: var(--secondary-600);
+    padding: 0.8rem 0;
+    color: var(--bg-white-50);
+    font-size: 1rem;
     text-decoration: none;
-    font-size: 18px;
-    line-height: 1.5;
-    padding: 8px 0;
-    transition: color 0.3s ease;
+    transition: background-color 0.3s ease;
+  }
+  
+  .burgerMenu a:hover {
+    background-color: var(--secondary-200);
+    padding: 0.8rem;
+    border-radius: 4px;
+    color: var(--sencondary-900);
+  }
+  .section{
+    display: flex;
+    align-items: center;
+    gap: 8px;
   }
 
-  .burger-menu .dashboard-section a:hover {
-    color: var(--primary-600);
+  .sectionsContainer{
+    margin-top: 16px;
   }
-
-  .burger-menu .dashboard-section a.active {
-    color: var(--primary-600);
-    font-weight: bold;
-  }
+  
 }
