@@ -6,17 +6,16 @@
   height: 64px;
   font: var(--body-16);
   margin-bottom: 16px;
-
 }
 
-.error{
+.error {
   margin-bottom: 2rem;
 }
-
 
 .label {
   font: var(--body-14-normal);
   color: var(--secondary-600);
+  margin-left: 0.8rem;
 }
 
 .input {
@@ -43,7 +42,6 @@ input:disabled {
   font-size: 12px;
   margin: 4px 0;
 }
-
 
 /* Media queries */
 @media (max-width: 768px) {
