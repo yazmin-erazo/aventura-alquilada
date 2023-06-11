@@ -70,6 +70,15 @@ button.react-calendar__navigation__arrow.react-calendar__navigation__prev2-butto
  font-weight: bold;
 }
 
+.unavailable-date {
+  background-color: #ccc; /* Estilo para fechas no disponibles */
+}
+
+.available-date {
+  background-color: var(--sencondary-900); /* Estilo para fechas disponibles */
+}
+
+
    
    @media (max-width: 1025px) {
    

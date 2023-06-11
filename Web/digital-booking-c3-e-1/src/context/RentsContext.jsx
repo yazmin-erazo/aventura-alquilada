@@ -4,7 +4,7 @@ import RentsService from '../shared/services/RentsService';
 const RentsContext = createContext();
 
 const RentsDataContext = ({children}) => {
-    
+  
   const [rents, setRents] = useState([]);
 
   useEffect(() => {

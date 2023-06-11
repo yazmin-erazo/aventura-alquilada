@@ -12,7 +12,7 @@ const RentsService = {
     getAll: () => API.get(RENTS_ENDPOINTS.ALL_RENTS).then(
         res => res.data
     ),
-
+    
     getById: id => API.get(RENTS_ENDPOINTS.RENT_DETAILS + id)
         .then(
             res => res.data
