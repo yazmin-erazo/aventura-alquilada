@@ -157,13 +157,13 @@ const ProductDetails = () => {
                     <CalendarProducts/>
               </div>
 
-              <div className="Mapa">
-                <p className="Heading-1">¿Dónde vas a estar?</p>
+              <div className={styles.map}>
+                <p >¿Dónde estamos?</p>
         
-                <div className="MapContainer">
+                <div className={styles.mapContainer}>
                   <h3 className=""> {/*ciudad.nombre}, {ciudad.pais*/}</h3>
-                  <div class="mapouter">
-                      <div class="gmap_canvas">
+                  <div >
+                      <div>
                           <iframe width="100%" height="500" id="gmap_canvas" src="https://maps.google.com/maps?q=charcas%20y%20Thames%20buenos%20aires&t=&z=17&ie=UTF8&iwloc=&output=embed" frameborder="0" scrolling="no" marginheight="0" marginwidth="0">
                             </iframe>
                             <br/>
