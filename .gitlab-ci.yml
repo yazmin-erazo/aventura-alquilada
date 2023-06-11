@@ -18,10 +18,9 @@ stages:
 #     paths:
 #       - API/digital-booking-c3-e-1/target/surefire-reports/
 #       - API/digital-booking-c3-e-1/target/site/jacoco/
-#   only:
-#     changes:
-#       - API/digital-booking-c3-e-1/**/*
-#       - develop
+  # only:
+  #   changes:
+  #     - API/digital-booking-c3-e-1/**/*
       
 
 
@@ -37,7 +36,6 @@ build-api:
   only:
     changes:
       - API/digital-booking-c3-e-1/**/*
-      - develop
 
 
 
@@ -59,4 +57,3 @@ deploy_to_ec2:
   only:
     changes:
       - API/digital-booking-c3-e-1/**/*
-      - develop
