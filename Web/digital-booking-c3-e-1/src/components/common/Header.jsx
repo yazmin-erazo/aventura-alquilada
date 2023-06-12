@@ -2,6 +2,7 @@ import React, { useContext, useEffect, useRef, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { UserContext } from "../../context/AuthContext";
 import { FiMenu } from "react-icons/fi";
+import UsersService from "../../shared/services/UserService";
 
 const Header = () => {
   const [isProfileOpen, setProfileOpen] = useState(false);
@@ -10,6 +11,7 @@ const Header = () => {
   const navigate = useNavigate();
   const [isMenuOpen, setMenuOpen] = useState(false);
   const menuRef = useRef(null);
+  const [users, setUsers] = useState([]);
 
   const toggleProfile = () => {
     setProfileOpen(!isProfileOpen);
@@ -51,7 +53,24 @@ const Header = () => {
       document.removeEventListener("click", handleOutsideClick);
     };
   }, []);
-  
+
+  const findUserColor = (email) => {
+    const foundUser = users.find((user) => user.email === email);
+    return foundUser && user.sub === email ? foundUser.initialsColor : "";
+  };
+
+  useEffect(() => {
+    const fetchUsers = async () => {
+      try {
+        const users = await UsersService.getAll();
+        setUsers(users);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+
+    fetchUsers();
+  }, []);
 
   return (
     <div className="header">
@@ -73,8 +92,15 @@ const Header = () => {
             />
             <label className="userDataIcon" htmlFor="userData">
               <div className="user-name">{user.name + " " + user.lastname}</div>
-              <div className="user-logo">
-                <div>{user.name.slice(0, 1) + user.lastname.slice(0, 1)}</div>
+              <div
+                className="user-logo"
+                style={{ backgroundColor: findUserColor(user.sub) }}
+              >
+                <div>
+                  {`${
+                    user.name.slice(0, 1) + user.lastname.slice(0, 1)
+                  }`.toUpperCase()}
+                </div>
               </div>
             </label>
             <ul
@@ -126,7 +152,10 @@ const Header = () => {
                 checked={isMenuOpen}
                 onChange={toggleMenu}
               />
-              <label className={`menuDataIcon ${isMenuOpen ? 'active' : ''}`} htmlFor="menuData">
+              <label
+                className={`menuDataIcon ${isMenuOpen ? "active" : ""}`}
+                htmlFor="menuData"
+              >
                 <div className="menuContainerIcon">
                   <FiMenu size={24} />
                 </div>

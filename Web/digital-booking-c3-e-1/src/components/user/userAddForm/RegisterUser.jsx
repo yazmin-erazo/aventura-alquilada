@@ -29,6 +29,15 @@ const RegisterUser = () => {
   const [showResendMessage, setShowResendMessage] = useState(false);
   const [isEmailSent, setIsEmailSent] = useState(false);
 
+  const generateRandomColor = () => {
+    const letters = "0123456789ABCDEF";
+    let initialsColor = "#";
+    for (let i = 0; i < 6; i++) {
+      initialsColor += letters[Math.floor(Math.random() * 16)];
+    }
+    return initialsColor;
+  };
+
   const handleSubmit = (event) => {
     event.preventDefault();
 
@@ -64,12 +73,12 @@ const RegisterUser = () => {
         errors.lastName = "Por favor, completa tu apellido";
         isValid = false;
       } else {
-        const trimmedLastName = user.lastName.trim(); 
+        const trimmedLastName = user.lastName.trim();
         if (!nameRegex.test(trimmedLastName)) {
           errors.lastName = "El apellido tiene caracteres no válidos";
           isValid = false;
         } else {
-          setUser({ ...user, lastName: trimmedLastName }); 
+          setUser({ ...user, lastName: trimmedLastName });
         }
       }
 
@@ -121,6 +130,7 @@ const RegisterUser = () => {
       lastName: user.lastName,
       email: user.email,
       password: user.password,
+      initialsColor: generateRandomColor(),
     };
 
     const sendUser = async () => {
