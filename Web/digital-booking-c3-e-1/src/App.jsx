@@ -8,7 +8,6 @@ import FavsList from "./components/favs/FavsList";
 
 function App() {
   return (
-    // Linea 40 y 254 estilos del panel de administración
     <>
     <UserDataContext>
       {/* <FavsList/> */}
