@@ -27,6 +27,8 @@ public class ProductDTO {
     private String material;
     private List<ImageProductDTO> secondaryImages;
     private List<RentDatesProductDTO> rents;
+    private String latitude;
+    private String longitude;
 
 
     /*public Product parseToProduct(){

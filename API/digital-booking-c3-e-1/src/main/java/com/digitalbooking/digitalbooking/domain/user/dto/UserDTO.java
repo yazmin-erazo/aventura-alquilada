@@ -18,7 +18,6 @@ public class UserDTO {
     private String email;
     @JsonIgnore
     private String password;
-    @JsonIgnore
     private LocalDateTime GeneratingDate;
     @JsonIgnore
     private Boolean isActive;
