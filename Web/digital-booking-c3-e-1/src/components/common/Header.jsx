@@ -15,9 +15,9 @@ const Header = () => {
 
   const toggleProfile = () => {
     setProfileOpen(!isProfileOpen);
-    setMenuOpen(false); // Agregar esta línea para cerrar el menú al abrir el perfil
+    setMenuOpen(false);
   };
-
+  console.log(user);
   const toggleMenu = () => {
     setMenuOpen(!isMenuOpen);
   };
@@ -25,7 +25,7 @@ const Header = () => {
   const logoutHandler = () => {
     dispatch({ type: "LOGOUT" });
     navigate("/");
-    setMenuOpen(false); // Agregar esta línea para cerrar el menú al hacer clic en cerrar sesión
+    setMenuOpen(false);
   };
 
   useEffect(() => {
