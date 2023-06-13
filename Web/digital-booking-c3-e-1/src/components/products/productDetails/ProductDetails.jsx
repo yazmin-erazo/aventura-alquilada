@@ -186,7 +186,7 @@ const ProductDetails = () => {
                   <h3 className=""> {/*ciudad.nombre}, {ciudad.pais*/}</h3>
                   <div >
                       <div>
-                          <iframe width="100%" height="500" id="gmap_canvas" src="https://maps.google.com/maps?q=charcas%20y%20Thames%20buenos%20aires&t=&z=17&ie=UTF8&iwloc=&output=embed" frameborder="0" scrolling="no" marginheight="0" marginwidth="0">
+                          <iframe width="100%" height="500" id="gmap_canvas" src="https://maps.google.com/maps?q=charcas%20y%20Thames%20buenos%20aires&t=&z=17&ie=UTF8&iwloc=&output=embed" frameBorder="0" scrolling="no" marginHeight="0" marginWidth="0">
                             </iframe>
                             <br/>
                       </div>
