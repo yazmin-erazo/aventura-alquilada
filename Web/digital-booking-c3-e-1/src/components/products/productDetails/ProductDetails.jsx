@@ -17,6 +17,7 @@ import Politics from "../../resources/Politics/Politics";
 import { MdLocationOn } from "react-icons/md";
 import CalendarProducts from "../../resources/Calendar/CalendarProducts";
 import ProductMap from "../../resources/productMap/ProductMap";
+import mapboxgl from "mapbox-gl";
 //import CalendarProducts from "../../resources/Calendar/CalendarProducts";
 
 const ProductDetails = () => {
@@ -27,7 +28,12 @@ const ProductDetails = () => {
   const [userLocation, setUserLocation] = useState(null);
   const [isUserLocationLoaded, setIsUserLocationLoaded] = useState(false);
   const [images, setImages] = useState([]);
+  const [cityA, setCityA] = useState("");
+  const [country, setCountry] = useState("");
+  const [region, setRegion] = useState("");
+  const [address, setAddress] = useState("");
   console.log(userLocation, isUserLocationLoaded);
+
   // const [product, setProduct] = useState()
 
   const product = products.find((p) => {
@@ -36,36 +42,67 @@ const ProductDetails = () => {
 
   useEffect(() => {
     setProducts(data.products);
-
-    if (navigator.geolocation) {
+    if (product && navigator.geolocation) {
+      console.log(product);
       navigator.geolocation.getCurrentPosition(
-        (position) => {
+        async (position) => {
           const { latitude, longitude } = position.coords;
           setUserLocation({ latitude, longitude });
           setIsUserLocationLoaded(true);
+
+          const locationDetails = await getReverseGeocode(
+            product.latitude,
+            product.longitude
+          );
+          if (locationDetails) {
+            setCityA(locationDetails.cityA);
+            setCountry(locationDetails.country);
+            setRegion(locationDetails.region);
+            setAddress(locationDetails.address);
+          }
         },
         (error) => {
-          console.error("Error getting user location:", error);
+          console.error("Error al obtener la ubicación del usuario:", error);
           setIsUserLocationLoaded(true);
         }
       );
     } else {
-      console.error("Geolocation is not supported by this browser.");
+      console.error("La geolocalización no es compatible con este navegador.");
       setIsUserLocationLoaded(true);
     }
-    // searchProduct();
-  }, [data]);
+  }, [data, product]);
 
-  console.log(product);
+  async function getReverseGeocode(latitude, longitude) {
+    try {
+      const response = await fetch(
+        `https://api.mapbox.com/geocoding/v5/mapbox.places/${longitude},${latitude}.json?access_token=${mapboxgl.accessToken}`
+      );
 
-  const city = {
-    name: "Buenos Aires",
-    country: "Argentina",
-    latitude: -34.6037,
-    longitude: -58.3816,
-    // latitude: 4.720391051238156,
-    // longitude: -74.11880514789254,
-  };
+      const data = await response.json();
+      const place = data.features[0];
+      const cityA = place.context.find((context) =>
+        context.id.startsWith("place")
+      );
+      const country = place.context.find((context) =>
+        context.id.startsWith("country")
+      );
+
+      const region = place.context.find((context) =>
+        context.id.startsWith("region")
+      );
+      const address = place.place_name.split(",")[0].trim();
+
+      return {
+        cityA: cityA ? cityA.text : "",
+        country: country ? country.text : "",
+        region: region ? region.text : "",
+        address: address ? address : "",
+      };
+    } catch (error) {
+      console.error("Error al obtener el geocódigo inverso:", error);
+      return null;
+    }
+  }
 
   return (
     <>
@@ -94,10 +131,12 @@ const ProductDetails = () => {
 
                 <div>
                   <p className={styles.city}>
-                    {" "}
-                    Buenos Aires, Ciudad Autónoma de Buenos Aires, Argentina{" "}
+                    {cityA}, {country}
                   </p>
-                  <p className={styles.proximity}> A 940 m del centro</p>
+                  <p className={styles.proximity}>
+                    {" "}
+                    {region}, {address}
+                  </p>
                 </div>
               </div>
 
@@ -199,21 +238,15 @@ const ProductDetails = () => {
                 <Politics />
               </div>
             </div>
-            {/* <div className={styles.map}>
-              <ProductMap
-                latitude={product.city.latitude}
-                longitude={product.city.longitude}
-                city={product.city}
-              />
-            </div> */}
           </div>
           <div className={styles.mapContainer}>
             <ProductMap
-              latitude={city.latitude}
-              longitude={city.longitude}
-              city={city}
+              latitude={product.latitude}
+              longitude={product.longitude}
               product={product}
               userLocation={userLocation}
+              cityA={cityA}
+              country={country}
             />
           </div>
         </>
