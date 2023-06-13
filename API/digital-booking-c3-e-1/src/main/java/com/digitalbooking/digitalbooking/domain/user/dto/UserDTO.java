@@ -19,7 +19,6 @@ public class UserDTO {
     @JsonIgnore
     private String password;
     private LocalDateTime GeneratingDate;
-    @JsonIgnore
     private Boolean isActive;
     private String role;
     @JsonIgnore
