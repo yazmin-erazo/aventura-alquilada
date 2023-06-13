@@ -289,4 +289,39 @@ public class RentServiceTest {
 
         assertThrows(ExceptionMandatoryValue.class, () -> Rent.update(id, productId, userId, startDate, endDate, comment));
     }
+
+    @Test
+    void testGetRentSuccess() {
+
+        Long rentId = 1L;
+        String userEmail = "user@example.com";
+
+        RentDTO rentDTO = new RentDTO();
+        rentDTO.setUser(new UserDTO());
+        rentDTO.getUser().setId(1L);
+
+        when(rentRepository.findByIdAndState(rentId)).thenReturn(Optional.of(rentDTO));
+        when(repositoryUser.findByEmail(userEmail)).thenReturn(Optional.of(rentDTO.getUser()));
+
+        RentDTO result = rentService.getRent(rentId, userEmail);
+
+        assertNotNull(result);
+        assertEquals(rentDTO, result);
+
+        verify(rentRepository, times(1)).findByIdAndState(rentId);
+        verify(repositoryUser, times(1)).findByEmail(userEmail);
+    }
+
+    @Test
+    void testGetRentErrorWithNotFoundRent() {
+        Long rentId = 1L;
+        String userEmail = "user@example.com";
+
+        when(rentRepository.findByIdAndState(rentId)).thenReturn(Optional.empty());
+
+        assertThrows(ExceptionNullValue.class, () -> rentService.getRent(rentId, userEmail));
+
+        verify(rentRepository, times(1)).findByIdAndState(rentId);
+        verify(repositoryUser, times(0)).findByEmail(userEmail);
+    }
 }
