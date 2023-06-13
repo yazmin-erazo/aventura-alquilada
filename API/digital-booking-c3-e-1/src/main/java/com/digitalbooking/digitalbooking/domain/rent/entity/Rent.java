@@ -7,6 +7,7 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
+import java.util.Calendar;
 import java.util.Date;
 
 import static lombok.AccessLevel.PRIVATE;
@@ -36,7 +37,7 @@ public class Rent {
         User user = User.createById(userId);
         Validator.validateMandatory(starDate, "La fecha de inicio es requerida para crear una reserva");
         Validator.validateMandatory(endDate, "La fecha de finalización es requerida para crear una reserva");
-        return new Rent(0L, product, user, "CREADO", starDate, endDate, null,null);
+        return new Rent(0L, product, user, "CREADO", dateWithoutHour(starDate), dateWithoutHour(endDate), null,null);
     }
 
     public static Rent update(Long id,
@@ -51,11 +52,22 @@ public class Rent {
         Validator.validateMandatory(starDate, "La fecha de inicio es requerida para actualizar una reserva");
         Validator.validateMandatory(endDate, "La fecha de finalización es requerida para actualizar una reserva");
         Validator.validateMandatory(comment, "El comentario es requerido para actualizar una reserva");
-        return new Rent(id, product, user, "ACTUALIZADO", starDate, endDate, comment, null);
+        return new Rent(id, product, user, "ACTUALIZADO", dateWithoutHour(starDate), dateWithoutHour(endDate), comment, null);
     }
 
     public static Rent createById(Long id) {
         Validator.validateMandatory(id, "El Id de la reserva es requerido");
         return new Rent(id);
+    }
+
+    private static Date dateWithoutHour(Date date){
+        Calendar cal = Calendar.getInstance();
+        cal.setTime(date);
+        cal.set(Calendar.HOUR_OF_DAY, 0);
+        cal.set(Calendar.MINUTE, 0);
+        cal.set(Calendar.SECOND, 0);
+        cal.set(Calendar.MILLISECOND, 0);
+        cal.add(Calendar.DATE, 1);
+        return cal.getTime();
     }
 }

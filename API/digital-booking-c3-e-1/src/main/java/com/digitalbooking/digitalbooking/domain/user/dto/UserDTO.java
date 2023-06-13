@@ -6,6 +6,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Data
 @AllArgsConstructor
@@ -25,4 +26,5 @@ public class UserDTO {
     @JsonIgnore
     private String token;
     private String initialsColor;
+    private List<Long> favoriteProducts;
 }
