@@ -97,9 +97,9 @@ const UsersCrud = () => {
             <tr>
               <th>ID</th>
               <th>Avatar</th>
-              <th>Email</th>
-              <th>Apellido</th>
               <th>Nombre</th>
+              <th>Apellido</th>
+              <th>Email</th>
               <th>Activo</th>
               <th>Fecha de generación</th>
               <th>Rol</th>
