@@ -3,39 +3,41 @@ import selectStyles from './select.module.css';
 
 const Select = ({ options, onChange, children, placeholder }) => {
   const [isOpen, setIsOpen] = useState(false);
-  const [selectedOption, setSelectedOption] = useState('');
+  //const [selectedOption, setSelectedOption] = useState('');
 
   const handleSelectClick = () => {
     setIsOpen(!isOpen);
   };
 
-  const handleOptionClick = (id, name) => {
-    setSelectedOption(name);
-    setIsOpen(false);
-    onChange(id);
+  const handleOptionClick = (e) => {
+    const value = e.target.value;
+    console.log(value);
+    onChange(value);
   };
 
   return (
     <div>
     <label className={selectStyles.label}>{children}</label>
     
-    <select className={selectStyles.selectContainer} placeholder={placeholder}>
+    <select className={selectStyles.select} placeholder={placeholder}
+    onChange={handleOptionClick}>
       {/* <div className={selectStyles.select} onClick={handleSelectClick}>
         <div className={selectStyles.selectedOption}>{selectedOption}</div>
         <div className={selectStyles.arrow}></div>
       </div> */}
       {/* {isOpen && ( */}
-        <div className={selectStyles.optionsList}>
+        {/* <div className={selectStyles.optionsList}> */}
+        <option selected className={selectStyles.option} disabled>{placeholder}</option>
           {options.map((option) => (
-            <options
+            <option
               key={option.id}
               className={selectStyles.option}
-              onClick={() => handleOptionClick(option.id, option.name)}
+              value={option.id}
             >
               {option.name}
-            </options>
+            </option>
           ))}
-        </div>
+        {/* </div> */}
       {/* )} */}
     </select>
     </div>

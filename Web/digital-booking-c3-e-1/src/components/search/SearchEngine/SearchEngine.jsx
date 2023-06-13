@@ -34,7 +34,7 @@ const SearchEngine = ({handleSearch}) => {
   return (
     <div className={styles["search-engine"]}>
       <form className={styles.form}>
-        <Select options={cityOptions}/>
+        <Select options={cityOptions} placeholder={'Seleccione...'}></Select>
         <CalendarProducts/>
         <div className={styles.inputWrapper}>
         <input
