@@ -2,8 +2,12 @@ import React from "react";
 import styles from "../Table/TableRow.module.css";
 import style from "./TableUser.module.css";
 import ActionButtons from "../Buttons/ActionButtons";
+import { BsCheckCircleFill } from "react-icons/bs";
+import { RiCloseCircleFill } from "react-icons/ri";
 
 const TableUser = ({ user, onDelete, onEdit }) => {
+
+
   const getInitials = (name) => {
     const names = name.split(" ");
     const firstNameInitial = user.name[0][0].toUpperCase();
@@ -13,59 +17,37 @@ const TableUser = ({ user, onDelete, onEdit }) => {
     return firstNameInitial + lastNameInitial;
   };
 
-  const getRandomColor = () => {
-    const colors = [
-      "#FF7F00",
-      "#FFA500",
-      "#FFC300",
-      "#FFD700",
-      "#F9DC5C",
-      "#4CAF50",
-      "#8BC34A",
-      "#CDDC39",
-      "#9C27B0",
-      "#AA00FF",
-      "#E040FB",
-      "#D500F9",
-      "#2196F3",
-      "#00BFFF",
-      "#0080FF",
-      "#0066CC",
-      "#F94144",
-      "#F3722C",
-      "#F8961E",
-      "#F9844A",
-      "#F9C74F",
-      "#90BE6D",
-      "#577590",
-      "#7F78D2",
-      "#9A7AA0",
-      "#F94144",
-      "#F3722C",
-      "#F8961E",
-    ];
-    const randomIndex = Math.floor(Math.random() * colors.length);
-    return colors[randomIndex];
-  };
+  // ---------------- Fin Conversion User Date ---------------
+  const generatingDate = new Date(user.generatingDate);
+  const formattedDate = `${generatingDate.getDate()}
+  /${generatingDate.getMonth() + 1}
+  /${generatingDate.getFullYear()} 
+  ${generatingDate.getHours()}:${generatingDate.getMinutes()}:${generatingDate.getSeconds()}`;
+  // ---------------- Fin Conversion User Date ---------------
 
-  const initialsStyle = {
-    backgroundColor: user.initialsColor || getRandomColor(),
-  };
-  console.log(user);
+  user.isActive = user.isActive ? "Activo" : "Inactivo";
+  const statusIcon = user.isActive ? (
+    <BsCheckCircleFill size={20} color="var(--primary-50)" />
+  ) : (
+    <RiCloseCircleFill size={20} color="#fd7053" />
+  );
 
   return (
     <tr className={styles["table-row"]}>
       <td>{user.id}</td>
       <td>
-        <div className={style["initials-circle"]} style={initialsStyle}>
+        <div
+          className={style["initials-circle"]}
+          style={{ backgroundColor: user.initialsColor }}
+        >
           {getInitials(user.firstName + " " + user.lastName)}
         </div>
       </td>
       <td>{user.name}</td>
       <td>{user.lastName}</td>
       <td>{user.email}</td>
-      <td>{user.isActive}</td>
-      <td>{user.generationDate}</td>
+      <td>{statusIcon}</td>
+      <td>{formattedDate}</td>
       <td>{user.role}</td>
       <td className={styles["actions"]}>
         <ActionButtons onDelete={onDelete} onEdit={onEdit} />

@@ -22,4 +22,8 @@ public interface RepositoryUser {
     void activateUser(Long id);
 
     void deleteUserByTokenExp(Long id);
+
+    void addProductToFavorite(Long userId, Long productId);
+
+    void deleteProductFromFavorite(Long userId, Long productId);
 }
