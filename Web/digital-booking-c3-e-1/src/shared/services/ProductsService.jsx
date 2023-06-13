@@ -9,7 +9,7 @@ const PRODUCTS_ENDPOINTS = {
 }
 
 const ProductsService = {
-    getAll: () => API.get(PRODUCTS_ENDPOINTS.ALL_PRODUCTS).then(
+    getAll: (params = {name:"", city: "", dates: ""}) => API.get(`${PRODUCTS_ENDPOINTS.ALL_PRODUCTS}?nameFilter=${params.name}&city=${params.city}&dates=${params.dates}`).then(
         res => res.data
     ),
 

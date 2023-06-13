@@ -32,7 +32,9 @@ const Header = () => {
             <ul className="user-profile">
               <li>Perfil</li>
               <hr />
+              <Link to="favorites">
               <li>Mis favoritos</li>
+              </Link>
               <hr />
               <li>Configuración</li>
               <li className="logout" onClick={logoutHandler}>
@@ -56,7 +58,7 @@ const Header = () => {
               <li>Perfil</li>
               <hr />
               <Link to="favorites">
-              <li> Mis favoritos</li>
+                <li> Mis favoritos</li>
               </Link>
               <hr />
               <li>Configuración</li>

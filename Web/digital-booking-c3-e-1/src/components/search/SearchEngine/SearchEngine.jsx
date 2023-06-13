@@ -1,28 +1,52 @@
 import { FaSearch } from "react-icons/fa";
 import styles from "./SearchEngine.module.css";
 import { useState } from "react";
+import CalendarProducts from "../../resources/Calendar/CalendarProducts";
+import Select from "../../common/select/Select";
+import CityService from "../../../shared/services/CityService";
 
 const SearchEngine = ({handleSearch}) => {
 
   const [text, setText] = useState("");
+  const [city, setCity] = useState("");
+  const [dates,setDates] =useState("")
+  const [searchParams, setSearchParams] = useState({
+    name: text,
+    city: "",
+    dates: null
+  })
+  const [cityOptions, setCityOptions] = useState([])
   const handleInputChange = e => setText(e.target.value);
   const handleSearchClick = e => {
     e.preventDefault();
-    handleSearch(text);
+    if(text != "" && text != null)
+    {
+      setSearchParams({name: text, city: city, dates: dates})
+      handleSearch(searchParams);
+    }
+  }
+
+  const fetchCities = async () => {
+    const cities = await CityService.getAll();
+    setCityOptions(cities);
   }
 
   return (
     <div className={styles["search-engine"]}>
-      <form className={styles.inputWrapper}>
+      <form className={styles.form}>
+        <Select options={cityOptions}/>
+        <CalendarProducts/>
+        <div className={styles.inputWrapper}>
         <input
           type="text"
           className={styles.inputSearch}
           placeholder="Buscar por actividad, equipo..."
           onChange={handleInputChange}
-        />
+          />
         <button className={styles["search-icon-button"]} type="submit" onClick={handleSearchClick}>
           <FaSearch />
         </button>
+        </div>
       </form>
     </div>
   );

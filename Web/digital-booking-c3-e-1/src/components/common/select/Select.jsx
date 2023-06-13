@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import selectStyles from './select.module.css';
 
-const Select = ({ options, onChange, children }) => {
+const Select = ({ options, onChange, children, placeholder }) => {
   const [isOpen, setIsOpen] = useState(false);
   const [selectedOption, setSelectedOption] = useState('');
 
@@ -19,25 +19,25 @@ const Select = ({ options, onChange, children }) => {
     <div>
     <label className={selectStyles.label}>{children}</label>
     
-    <div className={selectStyles.selectContainer}>
-      <div className={selectStyles.select} onClick={handleSelectClick}>
+    <select className={selectStyles.selectContainer} placeholder={placeholder}>
+      {/* <div className={selectStyles.select} onClick={handleSelectClick}>
         <div className={selectStyles.selectedOption}>{selectedOption}</div>
         <div className={selectStyles.arrow}></div>
-      </div>
-      {isOpen && (
-        <ul className={selectStyles.optionsList}>
+      </div> */}
+      {/* {isOpen && ( */}
+        <div className={selectStyles.optionsList}>
           {options.map((option) => (
-            <li
+            <options
               key={option.id}
               className={selectStyles.option}
               onClick={() => handleOptionClick(option.id, option.name)}
             >
               {option.name}
-            </li>
+            </options>
           ))}
-        </ul>
-      )}
-    </div>
+        </div>
+      {/* )} */}
+    </select>
     </div>
   );
 };

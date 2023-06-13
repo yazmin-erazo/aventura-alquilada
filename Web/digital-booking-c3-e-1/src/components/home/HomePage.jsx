@@ -20,9 +20,7 @@ const HomePage = () => {
   return (
     <>
       <div className={styles.searchContainer}>
-        <div className={styles.searchBox}>
           <SearchEngine handleSearch={handleSearch} />
-        </div>
       </div>
       <div className={styles.homeContainer}>
         <div className={styles.colorBoxContainer}></div>
