@@ -2,6 +2,7 @@ package com.digitalbooking.digitalbooking.service;
 
 import com.digitalbooking.digitalbooking.common.exception.ExceptionInvalidValue;
 import com.digitalbooking.digitalbooking.common.exception.ExceptionMandatoryValue;
+import com.digitalbooking.digitalbooking.common.exception.ExceptionNullValue;
 import com.digitalbooking.digitalbooking.domain.category.dto.CategoryDTO;
 import com.digitalbooking.digitalbooking.domain.category.repository.CategoryRepository;
 import com.digitalbooking.digitalbooking.domain.product.dto.ProductDTO;
@@ -365,5 +366,63 @@ class ServiceProductTest {
     @Test
     void testCreateImageProductShouldThrowExceptionWhenFileNameIsNull() {
         assertThrows(ExceptionMandatoryValue.class, () -> ImageProduct.create("image", null));
+    }
+
+    @Test
+    void testAddProductToFavoriteSuccess() {
+        Long productId = 1L;
+        Product product = Product.createById(productId);
+        ProductDTO productDTO = new ProductDTO();
+        productDTO.setId(productId);
+
+        UserDTO userDTO = new UserDTO();
+        userDTO.setId(1L);
+        userDTO.setFavoriteProducts(new ArrayList<>());
+
+        when(repositoryProduct.findByIdAndIsDelete(anyLong())).thenReturn(Optional.of(productDTO));
+        when(repositoryUser.findByEmail(anyString())).thenReturn(Optional.of(userDTO));
+
+        String result = serviceProduct.addProductToFavorite(product, "user@example.com");
+
+        assertEquals("Producto Agregado Correctamente a favoritos", result);
+    }
+
+    @Test
+    void testAddProductToFavoriteProductNotFound() {
+        Product product = Product.createById(1L);
+
+        when(repositoryProduct.findByIdAndIsDelete(anyLong())).thenReturn(Optional.empty());
+
+        assertThrows(ExceptionInvalidValue.class, () -> serviceProduct.addProductToFavorite(product, "user@example.com"));
+    }
+
+    @Test
+    void testAddProductToFavoriteUserNotFound() {
+        Long productId = 1L;
+        Product product = Product.createById(productId);
+        ProductDTO productDTO = new ProductDTO();
+        productDTO.setId(productId);
+
+        when(repositoryProduct.findByIdAndIsDelete(anyLong())).thenReturn(Optional.of(productDTO));
+        when(repositoryUser.findByEmail(anyString())).thenReturn(Optional.empty());
+
+        assertThrows(ExceptionNullValue.class, () -> serviceProduct.addProductToFavorite(product, "user@example.com"));
+    }
+
+    @Test
+    void testAddProductToFavoriteProductAlreadyInFavorites() {
+        Long productId = 1L;
+        Product product = Product.createById(productId);
+        ProductDTO productDTO = new ProductDTO();
+        productDTO.setId(productId);
+
+        UserDTO userDTO = new UserDTO();
+        userDTO.setId(1L);
+        userDTO.setFavoriteProducts(Arrays.asList(productId));
+
+        when(repositoryProduct.findByIdAndIsDelete(anyLong())).thenReturn(Optional.of(productDTO));
+        when(repositoryUser.findByEmail(anyString())).thenReturn(Optional.of(userDTO));
+
+        assertThrows(ExceptionInvalidValue.class, () -> serviceProduct.addProductToFavorite(product, "user@example.com"));
     }
 }

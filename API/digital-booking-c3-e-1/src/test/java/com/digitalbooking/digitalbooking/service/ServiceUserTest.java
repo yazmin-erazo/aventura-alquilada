@@ -2,6 +2,7 @@ package com.digitalbooking.digitalbooking.service;
 
 import com.digitalbooking.digitalbooking.DigitalConfigurationTest;
 import com.digitalbooking.digitalbooking.common.exception.ExceptionInvalidValue;
+import com.digitalbooking.digitalbooking.domain.auth.entity.UserDetailsImpl;
 import com.digitalbooking.digitalbooking.domain.mail.MailRepository;
 import com.digitalbooking.digitalbooking.domain.role.dto.RoleDTO;
 import com.digitalbooking.digitalbooking.domain.role.repository.RoleRepository;
