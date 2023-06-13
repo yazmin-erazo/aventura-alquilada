@@ -17,8 +17,10 @@ import Login from "./components/user/login/Login.jsx";
 import ActivateUser from "./components/user/activateUser/ActivateUser.jsx";
 import UsersCrud from "./components/user/userCrud/UsersCrud.jsx";
 import CrudRoles from "./components/roles/CrudRoles/CrudRoles.jsx"
-
 import FavList from "./components/products/favs/FavList.jsx";
+import mapboxgl from 'mapbox-gl'; // or "const mapboxgl = require('mapbox-gl');"
+ 
+mapboxgl.accessToken = 'pk.eyJ1IjoieWxlcmF6b20iLCJhIjoiY2xpdDBmczFvMDR6MTNlbXM1bWluMmk1ZyJ9.bf1qXJ0ew0ZuXH1ZLtfHuA';
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <BrowserRouter>

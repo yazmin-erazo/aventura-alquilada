@@ -15,6 +15,7 @@ import Qualification from "../../resources/qualification/Qualification";
 import RatingStats from "../../resources/rating/RatingStats";
 import Politics from "../../resources/Politics/Politics";
 import { MdLocationOn } from "react-icons/md";
+import ProductMap from "../../resources/productMap/ProductMap";
 //import CalendarProducts from "../../resources/Calendar/CalendarProducts";
 
 const ProductDetails = () => {
@@ -22,7 +23,10 @@ const ProductDetails = () => {
   const [products, setProducts] = useState([]);
   const params = useParams();
   const navigate = useNavigate();
+  const [userLocation, setUserLocation] = useState(null);
+  const [isUserLocationLoaded, setIsUserLocationLoaded] = useState(false);
   const [images, setImages] = useState([]);
+  console.log(userLocation, isUserLocationLoaded);
   // const [product, setProduct] = useState()
 
   const product = products.find((p) => {
@@ -31,20 +35,36 @@ const ProductDetails = () => {
 
   useEffect(() => {
     setProducts(data.products);
+
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition(
+        (position) => {
+          const { latitude, longitude } = position.coords;
+          setUserLocation({ latitude, longitude });
+          setIsUserLocationLoaded(true);
+        },
+        (error) => {
+          console.error("Error getting user location:", error);
+          setIsUserLocationLoaded(true);
+        }
+      );
+    } else {
+      console.error("Geolocation is not supported by this browser.");
+      setIsUserLocationLoaded(true);
+    }
     // searchProduct();
   }, [data]);
 
-  // const categoryIcons = {
-  //   Camping: TbTent,
-  //   Snowboard: MdOutlineSnowboarding,
-  //   Surf: MdOutlineSurfing,
-  //   Esquí: MdDownhillSkiing,
-  //   Bicicletas: MdDirectionsBike,
-  //   Escalada: FaMountain,
-  //   "Deportes acuáticos": FaSwimmer,
-  // };
+  console.log(product);
 
-  // const CategoryIcon = categoryIcons[product.category] || null;
+  const city = {
+    name: "Buenos Aires",
+    country: "Argentina",
+    latitude: -34.6037,
+    longitude: -58.3816,
+    // latitude: 4.720391051238156,
+    // longitude: -74.11880514789254,
+  };
 
   return (
     <>
@@ -156,6 +176,22 @@ const ProductDetails = () => {
                 <Politics />
               </div>
             </div>
+            {/* <div className={styles.map}>
+              <ProductMap
+                latitude={product.city.latitude}
+                longitude={product.city.longitude}
+                city={product.city}
+              />
+            </div> */}
+          </div>
+          <div className={styles.mapContainer}>
+            <ProductMap
+              latitude={city.latitude}
+              longitude={city.longitude}
+              city={city}
+              product={product}
+              userLocation={userLocation}
+            />
           </div>
         </>
       )}
