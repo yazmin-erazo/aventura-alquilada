@@ -9,7 +9,6 @@ import com.digitalbooking.digitalbooking.domain.rent.dto.RentDTO;
 import com.digitalbooking.digitalbooking.domain.rent.entity.Rent;
 import com.digitalbooking.digitalbooking.domain.rent.repository.RentRepository;
 import com.digitalbooking.digitalbooking.domain.rent.service.RentService;
-import com.digitalbooking.digitalbooking.domain.role.entity.Role;
 import com.digitalbooking.digitalbooking.domain.user.dto.UserDTO;
 import com.digitalbooking.digitalbooking.domain.user.entity.User;
 import com.digitalbooking.digitalbooking.domain.user.repository.RepositoryUser;
@@ -51,11 +50,12 @@ public class RentServiceTest {
 
     @Test
     void testCreateRentSuccess() throws Exception {
-        Product product = Product.create("Carpa", "Nemo Wagontop", "Nueva", BigDecimal.valueOf(150),"Descripción test", "8 personas", "No aplica", null, 1L, "Test Base64", "Carpa1", "Amarillo", "Poliéster", List.of());
+        Product product = Product.create("Carpa", "Nemo Wagontop", "Nueva", BigDecimal.valueOf(150),"Descripción test", "8 personas", "No aplica", null, 1L, "Test Base64", "Carpa1", "Amarillo", "Poliéster", List.of(), "36.1430638", "-115.1617901");
         ProductDTO productDTO = new ProductDTO();
 
         User user =  User.create( "Lore", "Sanchez", "test@test.com", "123");
-        UserDTO userDTO = new UserDTO(1L, "Lore", "Sanchez", "lorena@l.com", "", LocalDateTime.now(), false, "token","token", "#525252");
+        List<Long> favorites = new ArrayList<>();
+        UserDTO userDTO = new UserDTO(1L, "Lore", "Sanchez", "lorena@l.com", "", LocalDateTime.now(), false, "token","token", "#525252", favorites);
 
         Rent rent = Rent.create(product.getId(), 1L, Date.from(Instant.now()), Date.from(Instant.now()));
         String userEmail = user.getEmail();
@@ -212,5 +212,14 @@ public class RentServiceTest {
 
             verify(repositoryUser, times(1)).findByEmail(anyString());
         }
+    }
+
+    @Test
+    void testCreateById() {
+        Long id = 1L;
+
+        Rent rent = Rent.createById(id);
+
+        assertEquals(id, rent.getId());
     }
 }

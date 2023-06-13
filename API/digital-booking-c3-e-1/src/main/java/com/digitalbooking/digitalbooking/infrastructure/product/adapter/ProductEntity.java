@@ -2,7 +2,6 @@ package com.digitalbooking.digitalbooking.infrastructure.product.adapter;
 
 import com.digitalbooking.digitalbooking.infrastructure.category.adapter.CategoryEntity;
 import com.digitalbooking.digitalbooking.infrastructure.rent.adapter.RentEntity;
-import com.digitalbooking.digitalbooking.infrastructure.user.adapter.UserEntity;
 import lombok.Data;
 import org.hibernate.annotations.Fetch;
 import org.hibernate.annotations.FetchMode;

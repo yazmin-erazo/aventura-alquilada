@@ -10,7 +10,6 @@ import com.digitalbooking.digitalbooking.domain.product.repository.RepositoryPro
 import com.digitalbooking.digitalbooking.domain.user.dto.UserDTO;
 import com.digitalbooking.digitalbooking.domain.user.repository.RepositoryUser;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;

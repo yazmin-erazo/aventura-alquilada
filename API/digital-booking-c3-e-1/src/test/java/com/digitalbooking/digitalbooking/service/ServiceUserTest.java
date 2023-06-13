@@ -12,6 +12,8 @@ import com.digitalbooking.digitalbooking.domain.user.service.ServiceUser;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.TestPropertySource;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
@@ -57,9 +59,7 @@ class ServiceUserTest {
 
         assertNotNull(userId);
         verify(roleRepository, times(1)).findByIdAndIsDelete(anyLong());
-        verify(repositoryUser, times(3)).findByEmail(anyString());
         verify(repositoryUser, times(1)).save(any(), anyString(), any(LocalDateTime.class));
-        verify(mailRepository, times(1)).sendEmailValidateAccount(anyString(), anyString(), anyString(), anyString());
     }
 
     @Test
@@ -87,7 +87,6 @@ class ServiceUserTest {
         UserDTO result = serviceUser.getUser(email);
 
         assertEquals(expectedUser, result);
-        verify(repositoryUser, times(1)).findByEmail(email);
     }
 
     @Test
@@ -122,8 +121,9 @@ class ServiceUserTest {
     void testValidateUserSuccess() {
         String token = "testToken";
         LocalDateTime currentDate = LocalDateTime.now();
-        LocalDateTime expirationDate = currentDate.plusHours(48L);
-        UserDTO user = new UserDTO(1L, "Lore", "Sanchez", "lorena@l.com", token, currentDate, false, token,token, "#525252");
+        List<Long> favorites = new ArrayList<>();
+
+        UserDTO user = new UserDTO(1L, "Lore", "Sanchez", "lorena@l.com", token, currentDate, false, token,token, "#525252", favorites);
 
         when(repositoryUser.findByToken(token)).thenReturn(Optional.of(user));
 
@@ -143,7 +143,9 @@ class ServiceUserTest {
         String token = "expiredToken";
         LocalDateTime currentDate = LocalDateTime.now();
         LocalDateTime expirationDate = currentDate.minusHours(48L);
-        UserDTO user = new UserDTO(1L, "Lore", "Sanchez", "lorena@l.com", token, expirationDate, false, token,token, "#525252");
+        List<Long> favorites = new ArrayList<>();
+
+        UserDTO user = new UserDTO(1L, "Lore", "Sanchez", "lorena@l.com", token, expirationDate, false, token,token, "#525252", favorites);
 
         when(repositoryUser.findByToken(token)).thenReturn(Optional.of(user));
 
@@ -160,16 +162,15 @@ class ServiceUserTest {
         String token = "activatedToken";
         LocalDateTime currentDate = LocalDateTime.now();
         LocalDateTime expirationDate = currentDate.plusHours(48L);
-        UserDTO user = new UserDTO(1L, "Lore", "Sanchez", "lorena@l.com", token, expirationDate, true, token,token,  "#525252");
+        List<Long> favorites = new ArrayList<>();
+
+        UserDTO user = new UserDTO(1L, "Lore", "Sanchez", "lorena@l.com", token, expirationDate, true, token,token,  "#525252", favorites);
 
         when(repositoryUser.findByToken(token)).thenReturn(Optional.of(user));
 
-        Exception exception = assertThrows(ExceptionInvalidValue.class, () -> {
-            serviceUser.validateUser(token);
-        });
+        Exception exception = assertThrows(ExceptionInvalidValue.class, () -> serviceUser.validateUser(token));
 
         assertEquals("Su cuenta ya ha sido activada", exception.getMessage());
-        verifyNoInteractions(mailRepository);
     }
 
     @Test
@@ -226,5 +227,55 @@ class ServiceUserTest {
         assertThrows(Exception.class, () -> {
             User.create(name, lastName, email, password);
         });
+    }
+
+    @Test
+    void testLoadUserByUsername_UserIsActive() {
+        UserDTO user = new UserDTO();
+        user.setIsActive(true);
+
+        when(repositoryUser.findByEmail(anyString())).thenReturn(Optional.of(user));
+
+        UserDetails userDetails = serviceUser.loadUserByUsername("test@example.com");
+
+        assertNotNull(userDetails);
+    }
+
+    @Test
+    void testLoadUserByUsername_UserIsNotActive() {
+        UserDTO user = new UserDTO();
+        user.setIsActive(false);
+
+        when(repositoryUser.findByEmail(anyString())).thenReturn(Optional.of(user));
+
+        assertThrows(UsernameNotFoundException.class, () -> serviceUser.loadUserByUsername("test@example.com"));
+    }
+
+    @Test
+    void testLoadUserByUsername_UserNotFound() {
+        when(repositoryUser.findByEmail(anyString())).thenReturn(Optional.empty());
+
+        assertThrows(ExceptionInvalidValue.class, () -> serviceUser.loadUserByUsername("test@example.com"));
+    }
+
+    @Test
+    void testSendEmail_UserExists() {
+        UserDTO user = new UserDTO();
+        user.setEmail("test@example.com");
+        user.setName("Test User");
+        user.setToken("random-token");
+
+        when(repositoryUser.findByEmail(anyString())).thenReturn(Optional.of(user));
+
+        assertDoesNotThrow(() -> serviceUser.sendEmail("test@example.com"));
+
+        verify(mailRepository, times(1)).sendEmailValidateAccount(anyString(), anyString(), anyString(), anyString());
+    }
+
+    @Test
+    void testSendEmail_UserNotFound() {
+        when(repositoryUser.findByEmail(anyString())).thenReturn(Optional.empty());
+
+        assertThrows(ExceptionInvalidValue.class, () -> serviceUser.sendEmail("test@example.com"));
     }
 }

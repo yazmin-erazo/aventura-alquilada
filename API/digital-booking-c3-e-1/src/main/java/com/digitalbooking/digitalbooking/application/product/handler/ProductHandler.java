@@ -8,7 +8,6 @@ import com.digitalbooking.digitalbooking.domain.product.entity.ImageProduct;
 import com.digitalbooking.digitalbooking.domain.product.entity.Product;
 import com.digitalbooking.digitalbooking.domain.product.service.ServiceProduct;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Component;
 
 import java.math.BigDecimal;

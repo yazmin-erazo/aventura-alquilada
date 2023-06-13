@@ -10,7 +10,6 @@ import com.digitalbooking.digitalbooking.infrastructure.product.adapter.Reposito
 import com.digitalbooking.digitalbooking.infrastructure.role.adapter.RepositoryRoleMySql;
 import com.digitalbooking.digitalbooking.infrastructure.role.adapter.RoleEntity;
 import com.digitalbooking.digitalbooking.infrastructure.user.MapToUser;
-import org.apache.commons.lang3.ObjectUtils;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
