@@ -4,17 +4,16 @@ import { UserDataContext } from "./context/AuthContext";
 import Header from "./components/common/Header";
 import Footer from "./components/common/Footer";
 import MainPage from "./components/mainPage/MainPage";
-import FavsList from "./components/favs/FavsList";
+import FavsList from "./components/products/favs/FavsList";
 
 function App() {
   return (
     <>
-    <UserDataContext>
-      {/* <FavsList/> */}
-      <Header />
-      <MainPage />
-      <Footer />
-    </UserDataContext>
+      <UserDataContext>
+        <Header />
+        <MainPage />
+        <Footer />
+      </UserDataContext>
     </>
   );
 }

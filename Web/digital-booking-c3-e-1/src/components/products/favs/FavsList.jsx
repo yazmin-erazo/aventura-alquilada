@@ -1,9 +1,9 @@
 import React, { useState, useEffect, useContext } from "react";
-import FavCard from "../resources/Cards/Fav/FavCard";
-import ProductService from "../../shared/services/ProductsService";
-import { UserContext } from "../../context/AuthContext";
+import FavCard from "../../resources/Cards/Fav/FavCard";
+import ProductService from "../../../shared/services/ProductsService";
+import { UserContext } from "../../../context/AuthContext";
 import axios from "axios";
-import favoritesData from "../../../src/assets/favorites.json";
+import favoritesData from "../../../assets/favorites.json";
 import styles from "./FavsList.module.css";
 
 const FavsList = () => {
@@ -47,6 +47,9 @@ const FavsList = () => {
   return (
     <>
       <div className={styles.containerFavs}>
+        <header className={styles.header}>
+          <h4 className={styles.addFavsTitle}>Mis Favoritos</h4>
+        </header>
         <div className={styles.section}>
           {products.map((product) => (
             <FavCard
