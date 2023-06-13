@@ -18,9 +18,6 @@
 
 .detailItem {
   width: calc(100% - 0.75rem);
-}
-
-.detailItem {
   color: var(--secondary-900);
   font-size: 0.9rem;
   margin-top: 1.5rem;

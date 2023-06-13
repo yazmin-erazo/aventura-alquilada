@@ -99,30 +99,30 @@ const Login = () => {
           <form>
             <InputWithLabel
               type={"text"}
+              placeholder={"Ingrese su email"}
               name="email"
               onChange={(event) =>
                 setUserData({ ...userData, email: event.target.value })
               }
+              error={errors.email}
             >
               Email
             </InputWithLabel>
-            {errors.email && (
-              <span className={styles["form-error"]}>{errors.email}</span>
-            )}
+            
             <PasswordInput
               value={userData.password}
+              placeholder={"Ingrese su contraseña"}
               onChange={(event) =>
                 setUserData({ ...userData, password: event.target.value })
               }
               isVisible={isPasswordVisible}
               setIsVisible={setIsPasswordVisible}
               right="180px"
+              error={errors.password}
             >
               Contraseña
             </PasswordInput>
-            {errors.password && (
-              <span className={styles["form-error"]}>{errors.password}</span>
-            )}
+            
             <div className={styles.containerButton}>
               <ButtonPrimary onClick={onSubmitHandler}>
                 Iniciar Sesión

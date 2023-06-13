@@ -15,6 +15,12 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import RegisterUser from "./components/user/userAddForm/RegisterUser.jsx";
 import Login from "./components/user/login/Login.jsx";
 import ActivateUser from "./components/user/activateUser/ActivateUser.jsx";
+import UsersCrud from "./components/user/userCrud/UsersCrud.jsx";
+import CrudRoles from "./components/roles/CrudRoles/CrudRoles.jsx"
+import FavsList from "./components/products/favs/FavsList.jsx";
+import mapboxgl from 'mapbox-gl'; // or "const mapboxgl = require('mapbox-gl');"
+ 
+mapboxgl.accessToken = 'pk.eyJ1IjoieWxlcmF6b20iLCJhIjoiY2xpdDBmczFvMDR6MTNlbXM1bWluMmk1ZyJ9.bf1qXJ0ew0ZuXH1ZLtfHuA';
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <BrowserRouter>
@@ -30,10 +36,12 @@ ReactDOM.createRoot(document.getElementById("root")).render(
         <Route path='admin/category/list' element={<CrudCategory />} />
         <Route path='admin/role/add' element={<NewRole />} />
         <Route path='admin/role/edit/:id' element={<NewRole />} />
-        <Route path='admin/role' element={<EditRole />} />
+        <Route path='admin/role' element={<CrudRoles />} />
         <Route path='login' element={<Login />} />
         <Route path='auth/register' element={<RegisterUser />} />
         <Route path='user/activate' element={<ActivateUser />} />
+        <Route path='admin/user' element={<UsersCrud />} />
+        <Route path='favs' element={<FavsList />} />
       </Route>
     </Routes>
     {/* </React.StrictMode> */}

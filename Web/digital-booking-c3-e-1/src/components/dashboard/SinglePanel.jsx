@@ -1,20 +1,31 @@
-import { useState, useContext } from "react";
+import { useState, useContext, useEffect } from "react";
 import { UserContext } from "../../context/AuthContext";
 import DashboardSection from "../resources/dashboard/DashboardSection";
 import styles from "./panel.module.css";
 import { FiLayers, FiBriefcase, FiUsers, FiMenu } from "react-icons/fi";
 import { BiGridAlt } from "react-icons/bi";
-import { useLocation } from "react-router-dom";
-import Button from "../resources/dashboard/Button";
+import { Link, useLocation } from "react-router-dom";
 
 const SinglePanel = () => {
   const { user } = useContext(UserContext);
   const location = useLocation();
   const [isMenuOpen, setMenuOpen] = useState(false);
+  const [currentSection, setCurrentSection] = useState("");
 
   const toggleMenu = () => {
     setMenuOpen(!isMenuOpen);
   };
+
+  useEffect(() => {
+    const storedSection = localStorage.getItem("currentSection");
+    if (storedSection) {
+      setCurrentSection(storedSection);
+    }
+  }, []);
+
+  useEffect(() => {
+    localStorage.setItem("currentSection", currentSection);
+  }, [currentSection]);
 
   return (
     <>
@@ -25,14 +36,14 @@ const SinglePanel = () => {
             <hr className={styles.divider} />
 
             {/* ------------------ USERS ------------------ */}
-
             <DashboardSection
               icon={FiUsers}
               size={24}
               text="Usuarios"
-              to="#"
-              isActive={location.pathname === "/#"}
-            ></DashboardSection>
+              to="admin/user/"
+              isActive={location.pathname === "/admin/user/"}
+              onClick={() => setCurrentSection("Usuarios")}
+            />
 
             {/* ------------------ ROLES ------------------ */}
             <DashboardSection
@@ -44,7 +55,8 @@ const SinglePanel = () => {
                 location.pathname === "/admin/role" ||
                 location.pathname === "/admin/role/add"
               }
-            ></DashboardSection>
+              onClick={() => setCurrentSection("Roles")}
+            />
 
             {/* ------------------ CATEGORY ------------------ */}
             <DashboardSection
@@ -56,7 +68,8 @@ const SinglePanel = () => {
                 location.pathname === "/admin/category/list" ||
                 location.pathname === "/admin/category/add"
               }
-            ></DashboardSection>
+              onClick={() => setCurrentSection("Categorías")}
+            />
 
             {/* ------------------ PRODUCTS ------------------ */}
             <DashboardSection
@@ -68,41 +81,98 @@ const SinglePanel = () => {
                 location.pathname === "/admin/" ||
                 location.pathname === "/admin/product/add"
               }
-            ></DashboardSection>
+              onClick={() => setCurrentSection("Productos")}
+            />
           </div>
         </div>
       )}
 
-      {/* Menú hamburguesa */}
-      
-      {/* <div className={styles["burger-menu"]} style={{ display: isMenuOpen ? "block" : "none" }}>
-        <div className={styles.title}>
-          <FiMenu size={24}className={styles.icon} />
-          Dashboard
+      {user.role === "Admin" && ( // ... menú hamburguesa ...
+        <div className={styles.menuContainer}>
+          <div className={styles.iconContainer}>
+            <div className={styles.menuIcon} onClick={toggleMenu}>
+              <FiMenu size={24} />
+              {currentSection && location.pathname.includes("admin") && (
+                <div className={styles.breadcrumbs}>{currentSection}</div>
+              )}
+            </div>
+          </div>
         </div>
-        <hr className={styles.divider} />
+      )}
 
-        <div className={styles["dashboard-section"]}>
-          <a href="#">Usuarios</a>
+      {/* ...... EN DISPOSITIVOS DE MAX 768PX ...... */}
+      {isMenuOpen && (
+        <div className={`${styles.burgerMenuContainer} ${styles.mobileMenu}`}>
+          <div className={styles.burgerMenu}>
+            <div className={styles.title}>Dashboard</div>
+
+            <hr className={styles.divider} />
+
+            {/* ...... MENU DESPLEGABLE ...... */}
+            <div className={styles["sectionsContainer"]}>
+              {/* ------------------ USERS ------------------ */}
+              <div className={styles["dashboard-section"]}>
+                <Link
+                  to="admin/user/"
+                  onClick={() => {
+                    setCurrentSection("Usuarios");
+                    toggleMenu();
+                  }}
+                >
+                  <div className={styles.section}>
+                    <FiUsers />
+                    <div> Usuarios</div>
+                  </div>
+                </Link>
+              </div>
+              {/* ------------------ ROLES ------------------ */}
+              <div className={styles["dashboard-section"]}>
+                <Link
+                  to="admin/role"
+                  onClick={() => {
+                    setCurrentSection("Roles");
+                    toggleMenu();
+                  }}
+                >
+                  <div className={styles.section}>
+                    <FiBriefcase />
+                    <div> Roles</div>
+                  </div>
+                </Link>
+              </div>
+              {/* ------------------ CATEGORY ------------------ */}
+              <div className={styles["dashboard-section"]}>
+                <Link
+                  to="admin/category/list"
+                  onClick={() => {
+                    setCurrentSection("Categorías");
+                    toggleMenu();
+                  }}
+                >
+                  <div className={styles.section}>
+                    <BiGridAlt />
+                    <div>Categorías</div>
+                  </div>
+                </Link>
+              </div>
+              {/* ------------------ PRODUCTS ------------------ */}
+              <div className={styles["dashboard-section"]}>
+                <Link
+                  to="admin/"
+                  onClick={() => {
+                    setCurrentSection("Productos");
+                    toggleMenu();
+                  }}
+                >
+                  <div className={styles.section}>
+                    <FiLayers /> <div>Productos</div>
+                  </div>
+                </Link>
+              </div>
+            </div>
+          </div>
         </div>
-
-        <div className={styles["dashboard-section"]}>
-          <a href="admin/role">Roles</a>
-        </div>
-
-        <div className={styles["dashboard-section"]}>
-          <a href="admin/category/list">Categorías</a>
-        </div>
-
-        <div className={styles["dashboard-section"]}>
-          <a href="admin/">Productos</a>
-        </div>
-      </div> */}
-
-      {/* Icono del menú hamburguesa */}
-      {/* <div className={styles["menu-icon"]} onClick={toggleMenu}>
-        <FiMenu size={24} />
-      </div> */}
+      )}
     </>
   );
 };

@@ -19,6 +19,8 @@ import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.context.SecurityContextHolder;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.any;
@@ -120,8 +122,9 @@ class AuthServiceTest {
         String password = "password";
         String role = "ROLE_USER";
         LocalDateTime currentDate = LocalDateTime.now();
+        List<Long> favorites = new ArrayList<>();
 
-        UserDTO userDTO = new UserDTO(id, name, lastName, email, password,currentDate,true,role,"");
+        UserDTO userDTO = new UserDTO(id, name, lastName, email, password,currentDate,true,role,"", "#525252", favorites);
         UserDetailsImpl userDetails = UserDetailsImpl.build(userDTO);
 
         assertEquals(id, userDetails.getId());
@@ -149,9 +152,10 @@ class AuthServiceTest {
         String password = "password";
         String role = "ROLE_USER";
         LocalDateTime currentDate = LocalDateTime.now();
+        List<Long> favorites = new ArrayList<>();
 
-        UserDTO userDTO1 = new UserDTO(id1, name, lastName, email, password,currentDate,true,role,"");
-        UserDTO userDTO2 = new UserDTO(id2, name, lastName, email, password,currentDate,true,role,"");
+        UserDTO userDTO1 = new UserDTO(id1, name, lastName, email, password,currentDate,true,role,"", "#525252", favorites);
+        UserDTO userDTO2 = new UserDTO(id2, name, lastName, email, password,currentDate,true,role,"", "#525252", favorites);
 
         UserDetailsImpl userDetails1 = UserDetailsImpl.build(userDTO1);
         UserDetailsImpl userDetails2 = UserDetailsImpl.build(userDTO2);

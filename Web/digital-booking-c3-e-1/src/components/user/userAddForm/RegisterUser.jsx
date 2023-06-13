@@ -29,6 +29,15 @@ const RegisterUser = () => {
   const [showResendMessage, setShowResendMessage] = useState(false);
   const [isEmailSent, setIsEmailSent] = useState(false);
 
+  const generateRandomColor = () => {
+    const letters = "0123456789ABCDEF";
+    let initialsColor = "#";
+    for (let i = 0; i < 6; i++) {
+      initialsColor += letters[Math.floor(Math.random() * 16)];
+    }
+    return initialsColor;
+  };
+
   const handleSubmit = (event) => {
     event.preventDefault();
 
@@ -48,25 +57,29 @@ const RegisterUser = () => {
       const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
 
       if (!user.name) {
-        errors.name = "El nombre es obligatorio";
+        errors.name = "Por favor, ingresa un nombre de al menos 3 caracteres";
         isValid = false;
-      } else if (user.name.trim() !== user.name) {
-        errors.name = "El nombre no debe contener espacios al principio";
-        isValid = false;
-      } else if (!nameRegex.test(user.name)) {
-        errors.name = "El nombre contiene caracteres no válidos";
-        isValid = false;
+      } else {
+        const trimmedName = user.name.trim(); // Elimina los espacios al principio y al final
+        if (!nameRegex.test(trimmedName)) {
+          errors.name = "El nombre contiene caracteres no válidos";
+          isValid = false;
+        } else {
+          setUser({ ...user, name: trimmedName }); // Luego con esto Actualizamos el estado con el valor sin espacios
+        }
       }
 
       if (!user.lastName) {
-        errors.lastName = "El apellido es obligatorio";
+        errors.lastName = "Por favor, completa tu apellido";
         isValid = false;
-      } else if (user.lastName.trim() !== user.lastName) {
-        errors.lastName = "El apellido no debe tener espacios al principio";
-        isValid = false;
-      } else if (!nameRegex.test(user.lastName)) {
-        errors.lastName = "El apellido tiene caracteres no válidos";
-        isValid = false;
+      } else {
+        const trimmedLastName = user.lastName.trim();
+        if (!nameRegex.test(trimmedLastName)) {
+          errors.lastName = "El apellido tiene caracteres no válidos";
+          isValid = false;
+        } else {
+          setUser({ ...user, lastName: trimmedLastName });
+        }
       }
 
       if (!user.email) {
@@ -117,6 +130,7 @@ const RegisterUser = () => {
       lastName: user.lastName,
       email: user.email,
       password: user.password,
+      initialsColor: generateRandomColor(),
     };
 
     const sendUser = async () => {
@@ -184,77 +198,66 @@ const RegisterUser = () => {
           <form className={styles["form-container"]} onSubmit={handleSubmit}>
             <InputWithLabel
               type={"text"}
+              placeholder={"Ingresa nombre"}
               value={user.name}
               onChange={(event) =>
                 setUser({ ...user, name: event.target.value })
               }
+              error={formErrors.name}
             >
               Nombre
             </InputWithLabel>
 
-            {formErrors.name && (
-              <span className={styles["form-error"]}>{formErrors.name}</span>
-            )}
-
             <InputWithLabel
               type={"text"}
+              placeholder={"Ingresa apellido"}
               value={user.lastName}
               onChange={(event) =>
                 setUser({ ...user, lastName: event.target.value })
               }
+              error={formErrors.lastName}
             >
               Apellido
             </InputWithLabel>
 
-            {formErrors.lastName && (
-              <span className={styles["form-error"]}>
-                {formErrors.lastName}
-              </span>
-            )}
-
             <InputWithLabel
               type={"email"}
+              placeholder={"Ingrese su email"}
               value={user.email}
               onChange={(event) =>
                 setUser({ ...user, email: event.target.value })
               }
+              error={formErrors.email}
             >
               Email
             </InputWithLabel>
 
-            {formErrors.email && (
-              <span className={styles["form-error"]}>{formErrors.email}</span>
-            )}
-
             <PasswordInput
               value={user.password}
+              placeholder={"Ingrese una contraseña segura"}
               onChange={(event) =>
                 setUser({ ...user, password: event.target.value })
               }
               isVisible={isPasswordVisible}
               setIsVisible={setIsPasswordVisible}
+              error={formErrors.password}
             >
               Contraseña
             </PasswordInput>
 
-            {formErrors.password && (
-              <span className={styles["form-error"]}>
-                {formErrors.password}
-              </span>
-            )}
             <PasswordInput
               value={user.checkPassword}
+              placeholder={"Confirme su contraseña"}
               onChange={(event) =>
                 setUser({ ...user, checkPassword: event.target.value })
               }
               isVisible={isCheckPasswordVisible}
               setIsVisible={setIsCheckPasswordVisible}
+              error={formErrors.checkPassword}
             >
               Confirmación de contraseña
             </PasswordInput>
-            {formErrors.checkPassword && (
-              <span>{formErrors.checkPassword}</span>
-            )}
+
             <br />
             <div className={styles.termsConditions}>
               <label>
@@ -265,25 +268,30 @@ const RegisterUser = () => {
                 />
                 He leído y acepto los términos y condiciones
               </label>
+              <div>
+                {formErrors.terms && (
+                  <span className={styles["form-error"]}>
+                    {formErrors.terms}
+                  </span>
+                )}
+              </div>
             </div>
-            <br />
-            {formErrors.terms && (
-              <span className={styles["form-error"]}>{formErrors.terms}</span>
-            )}
 
             <ButtonPrimary onClick={handleSubmit}>Enviar</ButtonPrimary>
           </form>
           {isEmailSent && !showResendMessage && (
-            <p>
-              Si no recibiste el correo de activación, por favor, haz clic{" "}
-              <button
-                className={styles["button-register"]}
-                onClick={handleResendEmail}
-              >
-                aquí
-              </button>{" "}
-              para reenviarlo.
-            </p>
+            <div className={styles["button-register-container"]}>
+              <p>
+                Si no recibiste el correo de activación, por favor, haz clic{" "}
+                <button
+                  className={styles["button-register"]}
+                  onClick={handleResendEmail}
+                >
+                  aquí
+                </button>{" "}
+                para reenviarlo.
+              </p>
+            </div>
           )}
         </div>
       </div>

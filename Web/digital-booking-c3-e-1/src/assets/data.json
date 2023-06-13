@@ -1,0 +1,30 @@
+{
+  "products": [
+    {
+      "id": 1,
+      "name": "Producto 1",
+      "description": "Descripción del producto 1",
+      "cityId": 1
+    },
+    {
+      "id": 2,
+      "name": "Producto 2",
+      "description": "Descripción del producto 2",
+      "cityId": 2
+    }
+  ],
+  "cities": [
+    {
+      "id": 1,
+      "name": "Ciudad 1",
+      "latitude": 123.456,
+      "longitude": 789.012
+    },
+    {
+      "id": 2,
+      "name": "Ciudad 2",
+      "latitude": 345.678,
+      "longitude": 901.234
+    }
+  ]
+}

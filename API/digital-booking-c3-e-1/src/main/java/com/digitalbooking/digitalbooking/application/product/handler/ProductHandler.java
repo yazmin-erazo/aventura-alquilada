@@ -2,6 +2,7 @@ package com.digitalbooking.digitalbooking.application.product.handler;
 
 import com.digitalbooking.digitalbooking.application.product.request.CommandCreateProduct;
 import com.digitalbooking.digitalbooking.application.product.request.CommandUpdateProduct;
+import com.digitalbooking.digitalbooking.application.user.request.CommandAddToFavoritesProductsRequest;
 import com.digitalbooking.digitalbooking.domain.product.dto.ProductDTO;
 import com.digitalbooking.digitalbooking.domain.product.entity.ImageProduct;
 import com.digitalbooking.digitalbooking.domain.product.entity.Product;
@@ -33,7 +34,9 @@ public class ProductHandler {
                 createProduct.getFileName(),
                 createProduct.getColor(),
                 createProduct.getMaterial(),
-                createProduct.getSecondaryImages().stream().map(p -> ImageProduct.create(p.getImage(),p.getFileName())).collect(Collectors.toList())
+                createProduct.getSecondaryImages().stream().map(p -> ImageProduct.create(p.getImage(),p.getFileName())).collect(Collectors.toList()),
+                createProduct.getLatitude(),
+                createProduct.getLongitude()
         ));
     }
 
@@ -52,5 +55,13 @@ public class ProductHandler {
 
     public String deleteProduct(Long id) {
         return serviceProduct.deleteProduct(Product.createById(id));
+    }
+
+    public String addProductToFavorite(CommandAddToFavoritesProductsRequest commandAddToFavoritesProductsRequest, String email) {
+        return serviceProduct.addProductToFavorite(Product.createById(commandAddToFavoritesProductsRequest.getProductId()), email);
+    }
+
+    public String deleteProductFromFavorite(Long productId, String email) {
+        return serviceProduct.deleteProductTFromFavorite(Product.createById(productId), email);
     }
 }

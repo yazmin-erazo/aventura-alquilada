@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import styles from "./RecommendedProducts.module.css";
 import ButtonPrimary from "../../../common/Buttons/ButtonPrimary";
 import { BsClock } from "react-icons/bs";
@@ -6,6 +6,8 @@ import { FaStar } from "react-icons/fa";
 import RatingStats from "../../rating/RatingStats";
 import { IconContext } from "react-icons";
 import { FaHeart } from "react-icons/fa";
+import { UserContext } from "../../../../context/AuthContext";
+import Swal from "sweetalert2";
 
 const RecommendedProducts = ({
   product,
@@ -14,11 +16,17 @@ const RecommendedProducts = ({
   categoryIcon,
 }) => {
   const [isFavorite, setIsFavorite] = useState(false);
+  const user = useContext(UserContext)
 
   const handleFavoriteClick = (event) => {
     event.stopPropagation(); // Detiene la propagación del evento para que se pueda hacer lcic en el corazon y no navegue directamente a la vista de detalle
-    setIsFavorite(!isFavorite);
-    console.log(isFavorite);
+    if(user.user.name){
+      setIsFavorite(!isFavorite);
+      console.log(isFavorite);
+    }
+    else {
+      Swal.fire('Atención!', 'Debés estar registrado para elegir tus favoritos', 'info')
+    }
   };
   const calculateAverageRating = (ratings) => {
     if (Array.isArray(ratings) && ratings.length > 0) {
@@ -57,7 +65,7 @@ const RecommendedProducts = ({
             className={`${styles.favoriteButton} ${
               isFavorite ? styles.favoriteActive : styles.heartIcon
             }`}
-            onClick={(event) => handleFavoriteClick(event)} 
+            onClick={(event) => handleFavoriteClick(event)}
           >
             <FaHeart />
           </div>
@@ -68,8 +76,12 @@ const RecommendedProducts = ({
         <div className={styles.ratingAndCategory}>
           {" "}
           <div className={styles.rating}>
-            <div className={styles.ratingStars}>
-              <RatingStats color="var(--primary-300)" totalColor="var(--secondary-300)"/>
+            <div className={styles.ratingStats}>
+              <RatingStats
+                color="var(--primary-300)"
+                totalColor="var(--secondary-300)"
+                className={styles.ratingStatsItem}
+              />
             </div>
             {/* <div className={styles.ratingStars}>{renderRatingStars()}</div> */}
             {/* <p className={styles.numRatings}>{numRatings}</p> */}

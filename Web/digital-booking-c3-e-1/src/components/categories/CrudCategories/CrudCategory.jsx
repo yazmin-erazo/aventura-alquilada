@@ -90,12 +90,14 @@ const CrudCategory = () => {
 
   return (
     <>
-      <section className={styles["container"]}>
-        <div className={styles["button-container"]}>
+      <div className={styles["button-container"]}>
+        <div className={styles["button"]}>
           <Link to="/admin/category/add">
             <ButtonPrimary>Agregar categoría</ButtonPrimary>
           </Link>
         </div>
+      </div>
+      <section className={styles["container"]}>
         <table className={styles["table"]}>
           <thead>
             <tr>
@@ -118,13 +120,13 @@ const CrudCategory = () => {
           </tbody>
         </table>
       </section>
-        <Pagination
-          onPageChanged={onPageChanged}
-          limit={pageLimit}
-          total={categories.length}
-          currentPage={currentPage}
-          setCurrentPage={setCurrentPage}
-        />
+      <Pagination
+        onPageChanged={onPageChanged}
+        limit={pageLimit}
+        total={categories.length}
+        currentPage={currentPage}
+        setCurrentPage={setCurrentPage}
+      />
     </>
   );
 };

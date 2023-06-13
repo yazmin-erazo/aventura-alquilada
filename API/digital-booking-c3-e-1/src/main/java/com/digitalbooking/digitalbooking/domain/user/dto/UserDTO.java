@@ -6,6 +6,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Data
 @AllArgsConstructor
@@ -17,11 +18,11 @@ public class UserDTO {
     private String email;
     @JsonIgnore
     private String password;
-    @JsonIgnore
     private LocalDateTime GeneratingDate;
-    @JsonIgnore
     private Boolean isActive;
     private String role;
     @JsonIgnore
     private String token;
+    private String initialsColor;
+    private List<Long> favoriteProducts;
 }
