@@ -2,7 +2,7 @@ import React, { useEffect, useRef, useState } from "react";
 import mapboxgl from "mapbox-gl";
 import "mapbox-gl/dist/mapbox-gl.css";
 import styles from "./ProductMap.module.css";
-import customStyles from "./mapbox-gl-custom.css";
+import customStyles from "./mapbox-gl-custom.css?inline";
 import CategoryService from "../../../shared/services/CategoryService";
 import * as ReactIcons from "react-icons/md";
 import * as TbIcons from "react-icons/tb";
@@ -79,6 +79,7 @@ const ProductMap = ({ latitude, longitude, city, product, userLocation }) => {
     // -------------------- End MARKER --------------------
 
     // -------------------- Start POP UP --------------------
+    
     const popupContent = `
     <div class="${styles.popup}">
       <h3 class="${styles.popupTitle}">Información del lugar</h3>

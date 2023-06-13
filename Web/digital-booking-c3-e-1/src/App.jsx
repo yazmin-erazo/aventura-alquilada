@@ -10,7 +10,7 @@ function App() {
   return (
     <>
     <UserDataContext>
-      {/* <FavsList/> */}
+      <FavsList/>
       <Header />
       <MainPage />
       <Footer />
