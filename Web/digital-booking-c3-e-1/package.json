@@ -13,11 +13,8 @@
     "axios": "^1.4.0",
     "bootstrap": "^5.3.0",
     "jwt-decode": "^3.1.2",
-<<<<<<< HEAD
     "moment": "^2.29.4",
-=======
     "mapbox-gl": "^2.15.0",
->>>>>>> 921f268accfa609d3829ec578bb7f7fdf73e50f5
     "react": "^18.2.0",
     "react-bootstrap": "^2.7.4",
     "react-calendar": "^4.2.1",
