@@ -83,6 +83,19 @@ const SinglePanel = () => {
               }
               onClick={() => setCurrentSection("Productos")}
             />
+
+            {/* ------------------ CITIES ------------------ */}
+            <DashboardSection
+              icon={FiLayers}
+              size={24}
+              text="Ciudades"
+              to="admin/city/list"
+              isActive={
+                location.pathname === "/admin/city/list" ||
+                location.pathname === "/admin/city/add"
+              }
+              onClick={() => setCurrentSection("Ciudades")}
+            />
           </div>
         </div>
       )}
@@ -167,7 +180,21 @@ const SinglePanel = () => {
                   <div className={styles.section}>
                     <FiLayers /> <div>Productos</div>
                   </div>
-                </Link>
+                </Link>                
+              </div>
+              {/* ------------------ CIUDADES ------------------ */}
+              <div className={styles["dashboard-section"]}>
+                <Link
+                  to="admin/city/list"
+                  onClick={() => {
+                    setCurrentSection("Ciudades");
+                    toggleMenu();
+                  }}
+                >
+                  <div className={styles.section}>
+                    <FiLayers /> <div>Ciudades</div>
+                  </div>
+                </Link>                
               </div>
             </div>
           </div>

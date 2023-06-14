@@ -5,7 +5,8 @@ const PRODUCTS_ENDPOINTS = {
     PRODUCT_DETAILS: 'product/',
     CREATE_PRODUCT: 'product',
     DELETE_PRODUCT: 'product/',
-    UPDATE_PRODUCT: 'product/'
+    UPDATE_PRODUCT: 'product/',
+    COMMENT_PRODUCT: 'product/comment'
 }
 
 const ProductsService = {
@@ -31,7 +32,11 @@ const ProductsService = {
     updateByID: (id, product) => API.put(PRODUCTS_ENDPOINTS.UPDATE_PRODUCT + id, product)
         .then(
             res => res.data
-        )
+        ),
+    
+    comment: payload => API.post(PRODUCTS_ENDPOINTS.COMMENT_PRODUCT, payload).then(
+        res => res
+    )    
 
 }
 

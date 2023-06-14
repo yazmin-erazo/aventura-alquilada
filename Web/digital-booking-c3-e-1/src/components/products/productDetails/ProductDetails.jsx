@@ -12,86 +12,127 @@ import { MdOutlineTexture } from "react-icons/md";
 import { AiOutlineClockCircle } from "react-icons/ai";
 import ImageGallery from "../../common/imagegalery/ImageGallery";
 import Qualification from "../../resources/qualification/Qualification";
+import { UserContext } from "../../../context/AuthContext";
 import RatingStats from "../../resources/rating/RatingStats";
 import Politics from "../../resources/Politics/Politics";
 import { MdLocationOn } from "react-icons/md";
+import CalendarProducts from "../../resources/Calendar/CalendarProducts";
 import ProductMap from "../../resources/productMap/ProductMap";
-import {
-  FacebookShareButton,
-  TwitterShareButton,
-  WhatsappShareButton,
-  FacebookIcon,
-  TwitterIcon,
-  WhatsappIcon,
-} from "react-share";
+import mapboxgl from "mapbox-gl";
+import SelectedDates from "../../resources/Calendar/SelectedDates";
+import moment from "moment";
 
 const ProductDetails = () => {
   const data = useContext(ProductsContext);
+  const auth = useContext(UserContext);
   const [products, setProducts] = useState([]);
   const params = useParams();
   const navigate = useNavigate();
   const [userLocation, setUserLocation] = useState(null);
   const [isUserLocationLoaded, setIsUserLocationLoaded] = useState(false);
   const [images, setImages] = useState([]);
-  const [productImage, setProductImage] = useState("");
+  const [cityA, setCityA] = useState("");
+  const [country, setCountry] = useState("");
+  const [region, setRegion] = useState("");
+  const [address, setAddress] = useState("");
+  console.log(userLocation, isUserLocationLoaded);
+  const [selectedStartDate, setSelectedStartDate] = useState(null);
+  const [selectedEndDate, setSelectedEndDate] = useState(null);
+  const [totalRentalDays, setTotalRentalDays] = useState(0);
+
+  const handleSelectDates = (startDate, endDate) => {
+    setSelectedStartDate(startDate);
+    setSelectedEndDate(endDate);
+  };
+
+  // const [product, setProduct] = useState()
 
   const product = products.find((p) => {
     return p.id === parseInt(params.id);
   });
 
+  console.log(product);
+
   useEffect(() => {
     setProducts(data.products);
-
-    if (navigator.geolocation) {
+    if (product && navigator.geolocation) {
+      console.log(product);
       navigator.geolocation.getCurrentPosition(
-        (position) => {
+        async (position) => {
           const { latitude, longitude } = position.coords;
           setUserLocation({ latitude, longitude });
           setIsUserLocationLoaded(true);
+
+          const locationDetails = await getReverseGeocode(
+            product.latitude,
+            product.longitude
+          );
+          if (locationDetails) {
+            setCityA(locationDetails.cityA);
+            setCountry(locationDetails.country);
+            setRegion(locationDetails.region);
+            setAddress(locationDetails.address);
+          }
         },
         (error) => {
-          console.error("Error getting user location:", error);
+          console.error("Error al obtener la ubicación del usuario:", error);
           setIsUserLocationLoaded(true);
         }
       );
     } else {
-      console.error("Geolocation is not supported by this browser.");
+      console.error("La geolocalización no es compatible con este navegador.");
       setIsUserLocationLoaded(true);
     }
+  }, [data, product]);
 
-    const foundProduct = data.products.find((p) => p.id === parseInt(params.id));
-    if (foundProduct) {
-      setProductImage(foundProduct.imageURL);
+  async function getReverseGeocode(latitude, longitude) {
+    try {
+      const response = await fetch(
+        `https://api.mapbox.com/geocoding/v5/mapbox.places/${longitude},${latitude}.json?access_token=${mapboxgl.accessToken}`
+      );
+
+      const data = await response.json();
+      const place = data.features[0];
+      const cityA = place.context.find((context) =>
+        context.id.startsWith("place")
+      );
+      const country = place.context.find((context) =>
+        context.id.startsWith("country")
+      );
+
+      const region = place.context.find((context) =>
+        context.id.startsWith("region")
+      );
+      const address = place.place_name.split(",")[0].trim();
+
+      return {
+        cityA: cityA ? cityA.text : "",
+        country: country ? country.text : "",
+        region: region ? region.text : "",
+        address: address ? address : "",
+      };
+    } catch (error) {
+      console.error("Error al obtener el geocódigo inverso:", error);
+      return null;
     }
-  }, [data]);
+  }
 
-  const handleShareButtonClick = (shareUrl, quote, imageUrl, socialMedia) => {
-    switch (socialMedia) {
-      case "facebook":
-        openShareDialogOnClick({ url: shareUrl, quote: quote, hashtag: `#${product.name}` }, "facebook");
-        break;
-      case "twitter":
-        openShareDialogOnClick({ url: shareUrl, title: quote, hashtags: [product.name] }, "twitter");
-        break;
-      case "whatsapp":
-        openShareDialogOnClick({ url: shareUrl, title: quote }, "whatsapp");
-        break;
-      default:
-        break;
+  useEffect(() => {
+    if (selectedStartDate && selectedEndDate) {
+      const diffDays = Math.abs(
+        moment(selectedEndDate).diff(selectedStartDate, "days") + 1
+      );
+      setTotalRentalDays(diffDays);
+    } else {
+      setTotalRentalDays(0);
     }
-  };
+  }, [selectedStartDate, selectedEndDate]);
 
-  const city = {
-    name: "Buenos Aires",
-    country: "Argentina",
-    latitude: -34.6037,
-    longitude: -58.3816,
-  };
+  const showButton = selectedStartDate && selectedEndDate;
 
-  const productPageUrl = product
-    ? `http://equipamiento-deportivo-static.s3-website.us-east-2.amazonaws.com/products/${product.id}`
-    : "";
+  const productId = product ? product.id : null;
 
+  console.log(showButton);
   return (
     <>
       {product && (
@@ -115,12 +156,16 @@ const ProductDetails = () => {
                     <MdLocationOn size={24} />
                   </div>
                 </div>
+                {/*product.ciudad.nombre}, {product.ciudad.pais*/}
 
                 <div>
                   <p className={styles.city}>
-                    Buenos Aires, Ciudad Autónoma de Buenos Aires, Argentina
+                    {cityA}, {country}
                   </p>
-                  <p className={styles.proximity}> A 940 m del centro</p>
+                  <p className={styles.proximity}>
+                    {" "}
+                    {region}, {address}
+                  </p>
                 </div>
               </div>
 
@@ -133,56 +178,26 @@ const ProductDetails = () => {
               </div>
             </div>
           </div>
-
           <div className={styles.detailsContainer}>
             <ImageGallery product={product} />
-
             <div className={styles.productDetails}>
               <div className={styles.description}>
+                {/* <div className={styles.category}>{product.category}</div> */}
                 <div className={styles.descriptionContainer}>
                   <h2 className={styles.descriptionTitle}>{product.name}</h2>
-                  <p className={styles.productDescription}>{product.description}</p>
+                  <p className={styles.productDescription}>
+                    {product.description}
+                  </p>
+
+                  {/* <p className={styles.price}>${product.price}</p> */}
                 </div>
 
                 <div className={styles.review}>
-                  <Qualification />
+                  <Qualification
+                    isLoggedIn={auth.isLogedIn}
+                    productId={productId}
+                  />
                 </div>
-              </div>
-
-              <div className={styles.shareButtons} style={{ justifyContent: "flex-end", marginBottom: "10px" }}>
-                <FacebookShareButton
-                  url={productPageUrl}
-                  quote={product.description}
-                  hashtag={`#${product.name}`}
-                  style={{ marginRight: "10px" }}
-                  onClick={() =>
-                    handleShareButtonClick(productPageUrl, product.description, productImage, "facebook")
-                  }
-                >
-                  <FacebookIcon size={32} round />
-                </FacebookShareButton>
-
-                <TwitterShareButton
-                  url={productPageUrl}
-                  title={product.description}
-                  hashtags={[product.name]}
-                  style={{ marginRight: "10px" }}
-                  onClick={() =>
-                    handleShareButtonClick(productPageUrl, product.description, productImage, "twitter")
-                  }
-                >
-                  <TwitterIcon size={32} round />
-                </TwitterShareButton>
-
-                <WhatsappShareButton
-                  url={productPageUrl}
-                  title={product.description}
-                  onClick={() =>
-                    handleShareButtonClick(productPageUrl, product.description, productImage, "whatsapp")
-                  }
-                >
-                  <WhatsappIcon size={32} round />
-                </WhatsappShareButton>
               </div>
 
               <div className={styles.productFeature}>
@@ -209,34 +224,65 @@ const ProductDetails = () => {
                   <div className={styles.textFeature}>
                     <BsGenderAmbiguous size={24} />{" "}
                     <p className={styles.textFeatureDetails}>
+                      {" "}
                       {product.gender}
                     </p>
                   </div>
                   <div className={styles.textFeature}>
                     <FiInfo size={24} />
-                    <p className={styles.textFeatureDetails}>{product.state}</p>
+                    <p className={styles.textFeatureDetails}>
+                      {" "}
+                      {product.state}
+                    </p>
                   </div>
                   <div className={styles.textFeature}>
                     <AiOutlineClockCircle size={24} />{" "}
                     <p className={styles.textFeatureDetails}>
+                      {" "}
                       Alquiler por día
                     </p>
                   </div>
                 </div>
               </div>
+
+              <div className={styles.calendar}>
+                <h3 className={styles.calendarTitle}> Fechas disponibles </h3>
+                <div className={styles.calendarRent}>
+                  <section className={styles.calendarRentSection}>
+                    <CalendarProducts
+                      onSelectDates={handleSelectDates}
+                      rents={product.rents}
+                    />
+                  </section>
+                  <section className={styles.calendarRentSection}>
+                    {showButton ? (
+                      <SelectedDates
+                        selectedStartDate={selectedStartDate}
+                        selectedEndDate={selectedEndDate}
+                        totalRentalDays={totalRentalDays}
+                      />
+                    ) : (
+                      <p>Selecciona las fechas de tu reserva</p>
+                    )}
+                  </section>
+                </div>
+              </div>
+
               <div className={styles.politics}>
                 <Politics />
               </div>
+              <h3 className={styles.locationProduct}>Unicación del producto</h3>
             </div>
           </div>
 
           <div className={styles.mapContainer}>
             <ProductMap
-              latitude={city.latitude}
-              longitude={city.longitude}
-              city={city}
+              latitude={product.latitude}
+              longitude={product.longitude}
               product={product}
               userLocation={userLocation}
+              cityA={cityA}
+              country={country}
             />
           </div>
         </>

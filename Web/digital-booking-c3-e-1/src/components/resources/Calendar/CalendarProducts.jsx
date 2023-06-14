@@ -1,49 +1,32 @@
-import ButtonPrimary from "../../common/Buttons/ButtonPrimary";
-import styles from "./CalendarProducts.module.css";
-import "react-calendar/dist/Calendar.css";
 import React, { useEffect, useState } from "react";
-import Calendar from "react-calendar";
-import RentsService from "../../../shared/services/RentsService";
 import moment from "moment";
+import Calendar from "react-calendar";
 import { registerLocale, setDefaultLocale } from "react-datepicker";
 import es from "date-fns/locale/es";
+
+import "react-calendar/dist/Calendar.css";
+import styles from "./CalendarProducts.module.css";
+import { useMediaQuery } from "react-responsive";
 
 registerLocale("es", es);
 setDefaultLocale("es");
 
-const CalendarProducts = ({ onSelectDates }) => {
-  const [rents, setRents] = useState([]);
+const CalendarProducts = ({ onSelectDates, rents }) => {
   const [selectedStartDate, setSelectedStartDate] = useState(null);
   const [selectedEndDate, setSelectedEndDate] = useState(null);
   const [totalRentalDays, setTotalRentalDays] = useState(0);
-
-
-
-  const fetchRents = async () => {
-      try {
-          const data = await RentsService.getAll();
-          console.log("Rentas obtenidas:", data);
-          setRents(data);
-        } catch (err) {
-            console.log(`Error al obtener las rentas: ${err}`);
-        }
-    };
-    
-    useEffect(() => {
-        fetchRents();
-    }, []);
-    console.log(rents);
-
-  console.log(rents);
+  const isMobile = useMediaQuery({ maxWidth: 850 });
+  
 
   const isDateUnavailable = (date) => {
     return rents.some((rent) => {
       const startDate = moment(rent.starDate, "YYYY-MM-DD").startOf("day");
       const endDate = moment(rent.endDate, "YYYY-MM-DD").startOf("day");
-      return date >= startDate && date <= endDate;
+      const isUnavailable =
+        date >= startDate && date <= endDate && !rent.disabled;
+      return isUnavailable;
     });
   };
-
 
   const getTileClassName = (date) => {
     if (
@@ -62,7 +45,7 @@ const CalendarProducts = ({ onSelectDates }) => {
 
   const handleDateSelect = (date) => {
     const selectedDate = moment(date).startOf("day");
-  
+
     if (selectedEndDate) {
       if (selectedDate > selectedEndDate) {
         setSelectedStartDate(selectedEndDate);
@@ -74,7 +57,8 @@ const CalendarProducts = ({ onSelectDates }) => {
       setSelectedStartDate(selectedDate);
     } else {
       setSelectedEndDate(selectedDate);
-      const diffDays = Math.abs(selectedDate.diff(selectedStartDate, 'days')) + 1;
+      const diffDays =
+        Math.abs(selectedDate.diff(selectedStartDate, "days")) + 1;
       setTotalRentalDays(diffDays);
     }
   };
@@ -83,17 +67,24 @@ const CalendarProducts = ({ onSelectDates }) => {
     return moment(date).format("DD/MM/YYYY");
   };
 
-
   useEffect(() => {
     if (selectedStartDate && selectedEndDate) {
-      const diffDays = Math.abs(selectedEndDate.diff(selectedStartDate, "days")) + 1;
+      let diffDays = 0;
+      let currentDate = moment(selectedStartDate);
+
+      while (currentDate <= selectedEndDate) {
+        if (!isDateUnavailable(currentDate)) {
+          diffDays++;
+        }
+        currentDate.add(1, "day");
+      }
+
       setTotalRentalDays(diffDays);
     } else {
       setTotalRentalDays(0);
     }
   }, [selectedStartDate, selectedEndDate]);
 
-  const showButton = selectedStartDate && selectedEndDate;
 
   useEffect(() => {
     if (onSelectDates) {
@@ -107,39 +98,13 @@ const CalendarProducts = ({ onSelectDates }) => {
         <div className={styles.section}>
           <Calendar
             locale="es"
-            showDoubleView
+            select="range"
+            showDoubleView={!isMobile}
             minDate={new Date()}
             tileClassName={({ date }) => getTileClassName(date)}
             tileDisabled={({ date }) => isDateUnavailable(date)}
             onClickDay={handleDateSelect}
           />
-        </div>
-
-        <div className={styles.section}>
-          <div className={styles.selectedDates}>
-            {showButton && (
-              <div>
-                <p className={styles.selectedDatesTitle}>
-                  Estas son las fechas seleccionadas
-                </p>
-                <div className={styles.textDates}>
-                  <div>
-                    <span>Fecha de inicio:</span>{" "}
-                    {formatDate(selectedStartDate)}
-                  </div>
-                  <div>
-                    <span>Fecha de fin:</span> {formatDate(selectedEndDate)}
-                  </div>
-                  <div>
-    <span>Días totales de renta:</span> {totalRentalDays}
-  </div>
-                </div>
-                <div className={styles.buttonTextDates}>
-                  <ButtonPrimary>Iniciar reserva</ButtonPrimary>
-                </div>
-              </div>
-            )}
-          </div>
         </div>
       </div>
     </div>

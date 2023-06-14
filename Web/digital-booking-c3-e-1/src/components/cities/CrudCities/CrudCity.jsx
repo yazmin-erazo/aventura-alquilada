@@ -1,5 +1,5 @@
 import { useCallback, useEffect, useState, useContext } from "react";
-import TableRow from "../../common/Table/TableRow";
+import TableCityRow from "../../common/TableCity/TableCityRow";
 import styles from "./CrudCity.module.css";
 import ButtonPrimary from "../../common/Buttons/ButtonPrimary";
 import Pagination from "../../resources/pagination/Pagination";
@@ -93,7 +93,7 @@ const CrudCity = () => {
     <>
       <section className={styles["container"]} >
         <div className={styles["button-container"]}>
-          <Link to="city/add">
+          <Link to="/admin/city/add/">
             <ButtonPrimary>Agregar ciudad</ButtonPrimary>
           </Link>
         </div>
@@ -101,20 +101,19 @@ const CrudCity = () => {
           <thead>
             <tr>
               <th>ID</th>
-              <th>Imagen</th>
               <th>Nombre</th>
-              <th>Precio</th>
-              <th>Marca</th>
-              <th>Descripción</th>
-              <th>Categoría</th>
-              <th>Estado</th>
+              <th>Codigo</th>
+              <th>Codigo de pais</th>
+              <th>Latitud</th>
+              <th>Longitud</th>
+              <th>Nombre Genérico</th>
               <th className={styles["actions-th"]}>Acciones</th>
             </tr>
           </thead>
           <tbody>
 
             {currentCities.map((city) => (
-              <TableRow
+              <TableCityRow
                 key={city.id}
                 city={city}
                 onDelete={() => handleDelete(city.id)}
