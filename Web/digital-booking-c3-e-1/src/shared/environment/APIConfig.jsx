@@ -16,7 +16,6 @@ API.interceptors.request.use(
             config.headers['Authorization'] = 'Bearer ' + token;
             config.headers['Access-Control-Allow-Origin'] = '*';
             config.headers['Access-Control-Allow-Credentials'] = 'true'
-            config.headers['Access-Control-Request-Method'] = 'POST'
         }
         return config
     },

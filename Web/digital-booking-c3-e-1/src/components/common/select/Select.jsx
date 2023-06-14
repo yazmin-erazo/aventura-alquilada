@@ -11,7 +11,6 @@ const Select = ({ options, onChange, children, placeholder }) => {
 
   const handleOptionClick = (e) => {
     const value = e.target.value;
-    console.log(value);
     onChange(value);
   };
 
@@ -27,7 +26,7 @@ const Select = ({ options, onChange, children, placeholder }) => {
       </div> */}
       {/* {isOpen && ( */}
         {/* <div className={selectStyles.optionsList}> */}
-        <option selected className={selectStyles.option} disabled>{placeholder}</option>
+        <option defaultValue={"Seleccione"} className={selectStyles.option} disabled>{placeholder}</option>
           {options.map((option) => (
             <option
               key={option.id}

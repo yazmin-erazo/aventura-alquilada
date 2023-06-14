@@ -17,7 +17,6 @@ const Header = () => {
     setProfileOpen(!isProfileOpen);
     setMenuOpen(false);
   };
-  console.log(user);
   const toggleMenu = () => {
     setMenuOpen(!isMenuOpen);
   };
@@ -108,7 +107,7 @@ const Header = () => {
             >
               <li>Perfil</li>
               <hr />
-              <Link to="favorites">
+              <Link to= "favs">
               <li>Mis favoritos</li>
               </Link>
               <hr />
