@@ -26,7 +26,7 @@ const Select = ({ options, onChange, children, placeholder }) => {
       </div> */}
       {/* {isOpen && ( */}
         {/* <div className={selectStyles.optionsList}> */}
-        <option defaultValue={"Seleccione"} className={selectStyles.option} disabled>{placeholder}</option>
+        <option defaultValue={0} className={selectStyles.option} selected>{placeholder}</option>
           {options.map((option) => (
             <option
               key={option.id}

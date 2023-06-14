@@ -196,7 +196,7 @@ const ProductMap = ({
 
     // Elimine el mapa cuando el componente se desmonte
   }, [latitude, longitude, cityA, country, productCategory]);
-  console.log(showingRoute);
+
   return (
     <>
       <div ref={mapContainerRef} className={styles.mapContainer}></div>

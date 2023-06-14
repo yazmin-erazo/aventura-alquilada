@@ -54,7 +54,7 @@ const RecommendedList = ({ selectedCategory, searchParams }) => {
       onPageChanged();
     }, [currentPage, filteredProducts]);
     
-    useEffect(() => {
+  useEffect(() => {
     fetchData();
   },[searchParams])
 

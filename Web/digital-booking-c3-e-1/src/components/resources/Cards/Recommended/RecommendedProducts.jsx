@@ -36,7 +36,7 @@ const RecommendedProducts = ({
         ProductsService.addFav({productId:product.id})
 
       }else{
-        resultado=resultado.filter(id=>id!==buscarFav.id)
+        resultado=resultado.filter(id => id !== buscarFav.id)
         ProductsService.deleteFav(product.id)
       }
 
