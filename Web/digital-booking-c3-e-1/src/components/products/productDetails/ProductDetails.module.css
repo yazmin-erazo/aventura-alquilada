@@ -30,8 +30,28 @@
   max-width: 1120px;
   margin: 0 auto;
 }
+.calendarRent {
+  display: flex;
+  gap: 1rem;
+}
 
-.calendarTitle{
+.calendarRentSection:nth-child(1) {
+  display: flex;
+  width: 100%;
+}
+
+.calendarRentSection:nth-child(2) {
+  display: flex;
+  flex-basis: 100%;
+  width: 100%;
+  border: 1px solid var(--secondary-100);
+  border-radius: 8px;
+  justify-content: center;
+  align-items: center;
+  background-color: var(--white-100);
+}
+
+.calendarTitle {
   margin: 1.5rem 0;
   /* border-bottom: 1px solid var(--secondary-100); */
   /* padding-bottom: 0.6rem; */
@@ -43,10 +63,10 @@
   color: var(--sencondary-900);
 }
 
-.locationProduct{
+.locationProduct {
   margin-top: 36px;
-  font: var(--h5);
-  color: var(--sencondary-900);
+  font: var(--h4);
+  color: var(--sencondary-600);
 }
 
 .detailsHeader .button {
@@ -297,5 +317,13 @@
   }
   .textFeature {
     margin-top: 1rem;
+  }
+}
+
+@media screen and (max-width: 1000px) {
+  .calendarRent {
+    flex-direction: column;
+    flex-wrap: wrap;
+    gap: 1rem;
   }
 }

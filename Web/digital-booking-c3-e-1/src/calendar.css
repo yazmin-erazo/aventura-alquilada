@@ -172,7 +172,6 @@
 .react-calendar__month-view__days {
   display: grid;
   grid-template-columns: repeat(7, 1fr);
-  
 }
 
 .react-calendar__month-view__days__day {
@@ -234,9 +233,8 @@
 @media screen and (max-width: 600px) {
   .react-calendar {
     box-shadow: none;
-    border: none;
-    padding: 0;
     font-size: 14px;
+    overflow: hidden;
   }
 
   .react-calendar__navigation button {
@@ -245,10 +243,6 @@
 
   .react-calendar__tile {
     padding: 6px;
-  }
-
-  .react-calendar__navigation {
-    border-radius: 0;
   }
 
   .react-calendar__month-view__weekdays {
@@ -267,6 +261,10 @@
   .react-calendar__decade-view .react-calendar__tile,
   .react-calendar__century-view .react-calendar__tile {
     padding: 3px;
+  }
+
+  .react-calendar {
+    width: 100%;
   }
 }
 
@@ -336,6 +334,6 @@
 }
 
 .react-calendar__tile--hasActive {
-    background: #76baff;
-    border-radius: 8px;
+  background: #76baff;
+  border-radius: 8px;
 }
