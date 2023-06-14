@@ -243,6 +243,11 @@
   height: 400px;
 }
 
+.shareButtons {
+  display: flex;
+  justify-content: flex-end;
+  margin: 10px;
+}
 
 @media (max-width: 900px) {
   .ratingStatsItem {

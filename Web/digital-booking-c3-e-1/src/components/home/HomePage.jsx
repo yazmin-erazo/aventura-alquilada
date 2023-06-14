@@ -3,7 +3,6 @@ import SearchEngine from "../search/SearchEngine/SearchEngine";
 import CategoryList from "./Category/CategoryList";
 import styles from "./HomePage.module.css";
 import RecommendedList from "./Recommended/RecommendedList";
-//import ShareButtons from "../search/SearchEngine/ShareButtons";
 import { useEffect, useState } from "react";
 
 const HomePage = () => {
