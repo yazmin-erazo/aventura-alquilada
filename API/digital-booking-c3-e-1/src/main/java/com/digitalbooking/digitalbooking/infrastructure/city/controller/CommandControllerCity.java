@@ -31,7 +31,7 @@ public class CommandControllerCity {
     @PutMapping("{id-city}")
     @PreAuthorize("@authorizationFilter.hasPermission('cityUpdate')")
     @Operation(summary = "Update City", description = "Method to update a city")
-    public ResponseEntity<CommandResponse<String>> updateCity(@PathVariable("id-product") Long id, @RequestBody CommandUpdateCity commandUpdateCity) throws Exception {
+    public ResponseEntity<CommandResponse<String>> updateCity(@PathVariable("id-city") Long id, @RequestBody CommandUpdateCity commandUpdateCity) throws Exception {
         return new ResponseEntity<>(new CommandResponse<>(cityHandler.updateCity(id, commandUpdateCity)), HttpStatus.OK);
     }
 
