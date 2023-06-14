@@ -213,32 +213,17 @@ const ProductDetails = () => {
                 </div>
               </div>
 
-              
               <div className={styles.calendar}>
-                    <CalendarProducts/>
+                <CalendarProducts />
               </div>
-
-              <div className={styles.map}>
-                <p >¿Dónde estamos?</p>
-        
-                <div className={styles.mapContainer}>
-                  <h3 className=""> {/*ciudad.nombre}, {ciudad.pais*/}</h3>
-                  <div >
-                      <div>
-                          <iframe width="100%" height="500" id="gmap_canvas" src="https://maps.google.com/maps?q=charcas%20y%20Thames%20buenos%20aires&t=&z=17&ie=UTF8&iwloc=&output=embed" frameBorder="0" scrolling="no" marginHeight="0" marginWidth="0">
-                            </iframe>
-                            <br/>
-                      </div>
-                    </div>
-                </div>
-              </div>
-
 
               <div className={styles.politics}>
                 <Politics />
               </div>
+              <h3 className={styles.nameProduct}>Unicación del prod</h3>
             </div>
           </div>
+
           <div className={styles.mapContainer}>
             <ProductMap
               latitude={product.latitude}

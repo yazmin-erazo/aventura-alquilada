@@ -1,92 +1,113 @@
-
 import ButtonPrimary from "../../common/Buttons/ButtonPrimary";
-import styles from "./CalendarProducts.module.css";
-import 'react-calendar/dist/Calendar.css';
-import React from "react";
+import "react-calendar/dist/Calendar.css";
+import React, { useEffect, useState } from "react";
 import Calendar from "react-calendar";
-import { useEffect, useState, useContext } from "react";
-import {useParams, useNavigate } from "react-router-dom";
-import { RentsContext } from "../../../context/RentsContext";
+import { useParams, useNavigate } from "react-router-dom";
+import RentsService from "../../../shared/services/RentsService";
 import moment from "moment";
+import { registerLocale, setDefaultLocale } from "react-datepicker";
+import es from "date-fns/locale/es";
 
+registerLocale("es", es);
+setDefaultLocale("es");
 
 const CalendarProducts = () => {
-  const data = useContext(RentsContext);
   const [rents, setRents] = useState([]);
+  const [selectedStartDate, setSelectedStartDate] = useState(null);
+  const [selectedEndDate, setSelectedEndDate] = useState(null);
 
- useEffect(() => {
-    setRents(data);
-  }, [data]);
+  const fetchRents = async () => {
+    try {
+      const data = await RentsService.getAll();
+      console.log("Rentas obtenidas:", data);
+      setRents(data);
+    } catch (err) {
+      console.log(`Error al obtener las rentas: ${err}`);
+    }
+  };
 
-  //por el momento se usa este array porque no hay reservas aun luego toca modificar 
-  const unavailableDates = [
-    {
-        start: '2023-06-12',
-        end: '2023-06-18',
-    },
-    {
-        start: '2023-07-04',
-        end: '2023-07-07',
-    },
-    {
-        start: '2023-08-20',
-        end: '2023-08-25',
-    }]
+  useEffect(() => {
+    fetchRents();
+  }, []);
 
-    const isDateUnavailable = (date) => {
-      return unavailableDates.some((range) => {
-        const { startDate, endDate } = range;
-        return date >= startDate && date <= endDate;
-      });
-    };
-//esto para poder diferenciar disponible de no y darle estilo
+  console.log(rents);
 
-    const getTileClassName = (date) => {
-      if (isDateUnavailable(date)) {
-        return 'unavailable-date';
-      }
-      return 'available-date';
-    };
+  const isDateUnavailable = (date) => {
+    return rents.some((rent) => {
+      const startDate = moment(rent.starDate, "YYYY-MM-DD").startOf("day");
+      const endDate = moment(rent.endDate, "YYYY-MM-DD").startOf("day");
+      return date >= startDate && date <= endDate;
+    });
+  };
 
-  /*const box = []; // contiene objetos Date
 
-  rents.forEach((rent) => {
-    const checkout = moment(rent.checkOut);
-    let fecha = moment(rent.checkIn);
 
-    do {
-      box.push(fecha.clone());
-      fecha.add(1, "days");
-    } while (fecha.isSameOrBefore(checkout));
   
-  });*/
 
-    return (
-         <div className={styles.calendar}>
-           <p> Fechas disponibles </p>
-            <div className= {styles.container}>
-              <div className= {styles.group}>
-                <Calendar className={styles.custom}
-                 calendarType='US'
-                 showDoubleView 
-                 minDate= {new Date()}
-                 tileClassName={({ date }) => getTileClassName(date)}
-                 tileDisabled={({ date }) => isDateUnavailable(date)}
-                // tileDisabled={({ date }) =>rents.some(rent => isSameDay(rent, date))}
-                />
+  const getTileClassName = (date) => {
+    if (
+      selectedStartDate &&
+      selectedEndDate &&
+      date >= selectedStartDate &&
+      date <= selectedEndDate
+    ) {
+      return "selected-date";
+    }
+    if (isDateUnavailable(date)) {
+      return "unavailable-date";
+    }
+    return "available-date";
+  };
+
+  const handleDateSelect = (date) => {
+    if (selectedEndDate) {
+      setSelectedStartDate(moment(date).startOf("day"));
+      setSelectedEndDate(null);
+    } else if (!selectedStartDate) {
+      setSelectedStartDate(moment(date).startOf("day"));
+    } else {
+      setSelectedEndDate(moment(date).startOf("day"));
+    }
+  };
+
+  const formatDate = (date) => {
+    return moment(date).format("DD/MM/YYYY");
+  };
+
+  const showButton = selectedStartDate && selectedEndDate;
+
+  return (
+    <div>
+      <p> Fechas disponibles </p>
+      <div>
+        <div>
+          <Calendar
+            locale="es"
+            showDoubleView
+            minDate={new Date()}
+            tileClassName={({ date }) => getTileClassName(date)}
+            tileDisabled={({ date }) => isDateUnavailable(date)}
+            onClickDay={handleDateSelect}
+          />
+        </div>
+
+        <div>
+          <div>
+            {showButton && (
+              <div>
+                <p>
+                  Fecha de inicio: {formatDate(selectedStartDate)}
+                  <br />
+                  Fecha de fin: {formatDate(selectedEndDate)}
+                </p>
+                <ButtonPrimary>Iniciar reserva</ButtonPrimary>
               </div>
-              
-              <div className={styles.buttonCalendar}>
-                <div>
-                  <p> Agregá tus fechas de alquiler </p>
-                  <ButtonPrimary>
-                    Iniciar reserva
-                  </ButtonPrimary>  
-                </div>
-             </div>
-            </div>
+            )}
           </div>
-      );
-    };
-    
-      export default CalendarProducts; 
+        </div>
+      </div>
+    </div>
+  );
+};
+
+export default CalendarProducts;
