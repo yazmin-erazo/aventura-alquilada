@@ -12,6 +12,7 @@ import { MdOutlineTexture } from "react-icons/md";
 import { AiOutlineClockCircle } from "react-icons/ai";
 import ImageGallery from "../../common/imagegalery/ImageGallery";
 import Qualification from "../../resources/qualification/Qualification";
+import { UserContext } from "../../../context/AuthContext";
 import RatingStats from "../../resources/rating/RatingStats";
 import Politics from "../../resources/Politics/Politics";
 import { MdLocationOn } from "react-icons/md";
@@ -27,6 +28,7 @@ import {
 
 const ProductDetails = () => {
   const data = useContext(ProductsContext);
+  const auth = useContext(UserContext);
   const [products, setProducts] = useState([]);
   const params = useParams();
   const navigate = useNavigate();
@@ -92,6 +94,8 @@ const ProductDetails = () => {
     ? `http://equipamiento-deportivo-static.s3-website.us-east-2.amazonaws.com/products/${product.id}`
     : "";
 
+  const productId = product ? product.id : null;
+
   return (
     <>
       {product && (
@@ -145,7 +149,10 @@ const ProductDetails = () => {
                 </div>
 
                 <div className={styles.review}>
-                  <Qualification />
+                  <Qualification
+                    isLoggedIn={auth.isLogedIn}
+                    productId={productId}
+                  />
                 </div>
               </div>
 

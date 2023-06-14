@@ -1,9 +1,13 @@
 import React, { useState } from "react";
 import styles from "./Qualification.module.css";
 import Swal from "sweetalert2";
+import ProductsService from "../../../shared/services/ProductsService";
+import InputWithLabel from "../../common/input/InputWithLabel";
 
-const Qualification = () => {
+
+const Qualification = ({ isLoggedIn, productId }) => {
   const [rating, setRating] = useState(0);
+  const [comment, setComment] = useState("");
   const [averageRating, setAverageRating] = useState(0);
   const [totalRatings, setTotalRatings] = useState(0);
 
@@ -15,21 +19,51 @@ const Qualification = () => {
     setRating(0);
   };
 
-  const handleClick = (starCount) => {
-    // Actualizar la calificación promedio y el total de calificaciones ficticiamente
-    const newTotalRatings = totalRatings + 1;
-    const newAverageRating =
-      (averageRating * totalRatings + starCount) / newTotalRatings;
+  const handleCommentChange = (event) => {
+    setComment(event.target.value);
+  };
 
-    setTotalRatings(newTotalRatings);
-    setAverageRating(newAverageRating);
-
-    // Mostrar la SweetAlert de calificación enviada
-    Swal.fire({
-      title: "¡Calificación enviada!",
-      text: `Has calificado el producto con ${starCount} estrellas.`,
-      icon: "success",
-    });
+  const handleClick = async (starCount) => {
+    if (!isLoggedIn) {
+      Swal.fire({
+        title: "Debes iniciar sesión",
+        text: "¡Comparte tu opinión! Inicia sesión para calificar y dejar un comentario sobre este producto. Tu experiencia es valiosa para nosotros y para otros usuarios.",
+        icon: "info",
+      });
+      return;
+    }
+    if(!comment){
+      Swal.fire({
+        title: "Error",
+        text: "El comentario es requerido para enviar la calificación",
+        icon: "error",
+      });
+    }else{
+      const commentRequest = {
+        productId,
+        comment: comment,
+        score: starCount
+      };
+  
+      try {
+        await ProductsService.comment(commentRequest);
+  
+        Swal.fire({
+          title: "¡Calificación enviada!",
+          text: `Has calificado el producto con ${starCount} estrellas y dejado el comentario: ${comment}`,
+          icon: "success",
+        });
+  
+        setComment("")
+  
+      } catch (error) {
+        Swal.fire({
+          title: "Error",
+          text: "Hubo un problema enviando tu calificación. Por favor, inténtalo de nuevo más tarde",
+          icon: "error",
+        });
+      }
+    }
   };
 
   const renderStars = () => {
@@ -56,9 +90,15 @@ const Qualification = () => {
       <h4>Valorar producto</h4>
       <div className={styles.starsContainer}>{renderStars()}</div>
       <div className={styles.commentContainer}>
-        <p className={styles.commentText}>
-        Inicia sesión para agregar una reseña. Nos ayudará a verificar la autenticidad de tu correo electrónico.
-        </p>
+        <InputWithLabel
+          type="text"
+          value={comment}
+          placeholder = "Escribe tu comentario..."
+          onChange={(event) =>
+            handleCommentChange(event)
+          }
+        >
+        </InputWithLabel>
       </div>
     </div>
   );
