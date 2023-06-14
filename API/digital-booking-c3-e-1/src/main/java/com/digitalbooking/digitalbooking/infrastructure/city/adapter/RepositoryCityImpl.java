@@ -28,6 +28,7 @@ public class RepositoryCityImpl implements RepositoryCity {
     @Override
     public void updateCity(City city){
         CityEntity cityEntity = repositoryCityMySql.findById(city.getId()).orElseThrow(()->new ExceptionNullValue("Ciudad no encontrada"));
+        cityEntity.setName(city.getName());
         repositoryCityMySql.save(cityEntity);
     }
 
