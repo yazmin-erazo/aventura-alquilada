@@ -31,10 +31,11 @@ public class RepositoryProductImpl implements RepositoryProduct {
     RepositoryProductMySql repositoryProductMySql;
     @Autowired
     RepositoryCommentProductMySql repositoryCommentProductMySql;
+
     @Override
     public Long save(Product product, String imageURL, List<String> secondaryImages) {
         ProductEntity productEntity = new ProductEntity();
-        BeanUtils.copyProperties(product,productEntity);
+        BeanUtils.copyProperties(product, productEntity);
         CategoryEntity category = new CategoryEntity();
         category.setId(product.getCategory().getId());
         productEntity.setCategory(category);
@@ -45,8 +46,8 @@ public class RepositoryProductImpl implements RepositoryProduct {
     }
 
     @Override
-    public void updateProduct(Product product){
-        ProductEntity productEntity = repositoryProductMySql.findById(product.getId()).orElseThrow(()->new ExceptionNullValue("Producto no encontrado"));
+    public void updateProduct(Product product) {
+        ProductEntity productEntity = repositoryProductMySql.findById(product.getId()).orElseThrow(() -> new ExceptionNullValue("Producto no encontrado"));
         CategoryEntity category = new CategoryEntity();
         category.setId(product.getCategory().getId());
         productEntity.setCategory(category);
@@ -59,41 +60,52 @@ public class RepositoryProductImpl implements RepositoryProduct {
     }
 
     @Override
-    public List<ProductDTO> getAll(String brandFilter, String nameFilter, String genderFilter, BigDecimal priceLessThan, BigDecimal priceGreaterThan, String sizeFilter, String stateFilter, String colorFilter, String materialFilter) {
+    public List<ProductDTO> getAll(String brandFilter, String nameFilter, String genderFilter, BigDecimal priceLessThan, BigDecimal priceGreaterThan, String sizeFilter, String stateFilter, String colorFilter, String materialFilter, String search) {
         var query = where(byDelete((byte) 0));
-        if(StringUtils.isNotEmpty(brandFilter)){
-            query = query.and(byBrand(brandFilter));
-        }
-        if(StringUtils.isNotEmpty(nameFilter)){
-            query = query.and(byNameContains(nameFilter));
-        }
-        if(StringUtils.isNotEmpty(genderFilter)){
-            query = query.and(byGender(genderFilter));
-        }
-        if(ObjectUtils.isNotEmpty(priceLessThan)){
-            query = query.and(byPriceLessThan(priceLessThan));
-        }
-        if(ObjectUtils.isNotEmpty(priceGreaterThan)){
-            query = query.and(byPriceGreaterThan(priceGreaterThan));
-        }
-        if(StringUtils.isNotEmpty(sizeFilter)){
-            query = query.and(bySize(sizeFilter));
-        }
-        if(StringUtils.isNotEmpty(stateFilter)){
-            query = query.and(byState(stateFilter));
-        }
-        if(StringUtils.isNotEmpty(colorFilter)){
-            query = query.and(byColor(colorFilter));
-        }
-        if(StringUtils.isNotEmpty(materialFilter)){
-            query = query.and(byMaterial(materialFilter));
+        if (StringUtils.isNotEmpty(search)) {
+            query = where(byNameContains(search)
+                    .or(byBrandContains(search))
+                    .or(byGenderContains(search))
+                    .or(bySizeContains(search))
+                    .or(byColorContains(search))
+                    .or(byMaterialContains(search))
+                    .or(byDescriptionContains(search)))
+                    .and(byDelete((byte) 0));
+        } else {
+            if (StringUtils.isNotEmpty(brandFilter)) {
+                query = query.and(byBrand(brandFilter));
+            }
+            if (StringUtils.isNotEmpty(nameFilter)) {
+                query = query.and(byNameContains(nameFilter));
+            }
+            if (StringUtils.isNotEmpty(genderFilter)) {
+                query = query.and(byGender(genderFilter));
+            }
+            if (ObjectUtils.isNotEmpty(priceLessThan)) {
+                query = query.and(byPriceLessThan(priceLessThan));
+            }
+            if (ObjectUtils.isNotEmpty(priceGreaterThan)) {
+                query = query.and(byPriceGreaterThan(priceGreaterThan));
+            }
+            if (StringUtils.isNotEmpty(sizeFilter)) {
+                query = query.and(bySize(sizeFilter));
+            }
+            if (StringUtils.isNotEmpty(stateFilter)) {
+                query = query.and(byState(stateFilter));
+            }
+            if (StringUtils.isNotEmpty(colorFilter)) {
+                query = query.and(byColor(colorFilter));
+            }
+            if (StringUtils.isNotEmpty(materialFilter)) {
+                query = query.and(byMaterial(materialFilter));
+            }
         }
         return repositoryProductMySql.findAll(query).stream().map(MapToProduct::mapToProduct).collect(Collectors.toList());
     }
 
     @Override
     public ProductDTO findById(Long id) {
-        return repositoryProductMySql.findByIdAndIsDelete(id,Boolean.FALSE).map(MapToProduct::mapToProduct).orElseThrow(()->new ExceptionNullValue("Producto no encontrado"));
+        return repositoryProductMySql.findByIdAndIsDelete(id, Boolean.FALSE).map(MapToProduct::mapToProduct).orElseThrow(() -> new ExceptionNullValue("Producto no encontrado"));
     }
 
     @Override
@@ -108,7 +120,7 @@ public class RepositoryProductImpl implements RepositoryProduct {
 
     @Override
     public void deleteProduct(Long id) {
-        ProductEntity productEntity = repositoryProductMySql.findByIdAndIsDelete(id, Boolean.FALSE).orElseThrow(()->new ExceptionNullValue("Producto no encontrado"));
+        ProductEntity productEntity = repositoryProductMySql.findByIdAndIsDelete(id, Boolean.FALSE).orElseThrow(() -> new ExceptionNullValue("Producto no encontrado"));
         productEntity.setIsDelete(Boolean.TRUE);
         repositoryProductMySql.save(productEntity);
     }
