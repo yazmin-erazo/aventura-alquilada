@@ -121,16 +121,14 @@ const ProductDetails = () => {
         moment(selectedEndDate).diff(selectedStartDate, "days") + 1
       );
       setTotalRentalDays(diffDays);
-
-
-     
-
     } else {
       setTotalRentalDays(0);
     }
   }, [selectedStartDate, selectedEndDate]);
 
-  
+  const showButton = selectedStartDate && selectedEndDate;
+
+  console.log(showButton);
   return (
     <>
       {product && (
@@ -250,11 +248,15 @@ const ProductDetails = () => {
                     />
                   </section>
                   <section className={styles.calendarRentSection}>
-                    <SelectedDates
-                      selectedStartDate={selectedStartDate}
-                      selectedEndDate={selectedEndDate}
-                      totalRentalDays={totalRentalDays}
-                    />
+                    {showButton ? (
+                      <SelectedDates
+                        selectedStartDate={selectedStartDate}
+                        selectedEndDate={selectedEndDate}
+                        totalRentalDays={totalRentalDays}
+                      />
+                    ) : (
+                      <p>Selecciona las fechas de tu reserva</p>
+                    )}
                   </section>
                 </div>
               </div>

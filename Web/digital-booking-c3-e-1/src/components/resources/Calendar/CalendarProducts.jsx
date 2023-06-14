@@ -3,7 +3,6 @@ import moment from "moment";
 import Calendar from "react-calendar";
 import { registerLocale, setDefaultLocale } from "react-datepicker";
 import es from "date-fns/locale/es";
-import SelectedDates from "./SelectedDates";
 
 import "react-calendar/dist/Calendar.css";
 import styles from "./CalendarProducts.module.css";
