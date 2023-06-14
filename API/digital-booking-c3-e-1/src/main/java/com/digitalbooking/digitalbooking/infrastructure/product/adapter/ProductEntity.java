@@ -39,4 +39,7 @@ public class ProductEntity {
     @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL, mappedBy = "productEntity")
     @Fetch(value = FetchMode.SUBSELECT)
     private List<RentEntity> rentEntityList;
+    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL, mappedBy = "productEntity")
+    @Fetch(value = FetchMode.SUBSELECT)
+    private List<CommentsEntity> commentsEntities;
 }

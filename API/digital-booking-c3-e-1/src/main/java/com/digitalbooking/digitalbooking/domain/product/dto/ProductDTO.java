@@ -29,7 +29,8 @@ public class ProductDTO {
     private List<RentDatesProductDTO> rents;
     private String latitude;
     private String longitude;
-
+    private List<CommentProductDTO> commentProducts;
+    private Double score;
 
     /*public Product parseToProduct(){
         return Product.reconstruir()

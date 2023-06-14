@@ -1,5 +1,6 @@
 package com.digitalbooking.digitalbooking.domain.user.dto;
 
+import com.digitalbooking.digitalbooking.domain.role.dto.RoleDTO;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -25,4 +26,6 @@ public class UserDTO {
     private String token;
     private String initialsColor;
     private List<Long> favoriteProducts;
+    @JsonIgnore
+    private RoleDTO roleDTO;
 }

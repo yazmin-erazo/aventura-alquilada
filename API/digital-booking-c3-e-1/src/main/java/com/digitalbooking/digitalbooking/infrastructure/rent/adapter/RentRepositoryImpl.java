@@ -58,9 +58,14 @@ public class RentRepositoryImpl implements RentRepository {
     }
 
     @Override
-    public List<RentDTO> getAll(Long userId) {
+    public List<RentDTO> getAllByUserId(Long userId) {
         UserEntity user = new UserEntity();
         user.setId(userId);
         return repositoryRentMySql.findAllByUserEntity(user).stream().map(MapToRent::mapToRent).collect(Collectors.toList());
+    }
+
+    @Override
+    public List<RentDTO> getAll() {
+        return repositoryRentMySql.findAll().stream().map(MapToRent::mapToRent).collect(Collectors.toList());
     }
 }

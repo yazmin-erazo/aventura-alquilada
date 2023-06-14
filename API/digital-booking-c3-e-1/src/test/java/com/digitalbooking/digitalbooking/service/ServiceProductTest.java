@@ -286,6 +286,8 @@ class ServiceProductTest {
         ProductDTO product2 = new ProductDTO();
         product1.setRents(List.of());
         product2.setRents(List.of());
+        product1.setCommentProducts(List.of());
+        product2.setCommentProducts(List.of());
         List<ProductDTO> mockedList = Arrays.asList(product1, product2);
 
         when(repositoryProduct.getAll(any(), any(), any(), any(), any(), any(), any(), any(), any()))
@@ -302,6 +304,7 @@ class ServiceProductTest {
 
         ProductDTO product = new ProductDTO();
         product.setRents(List.of());
+        product.setCommentProducts(List.of());
 
         when(repositoryProduct.findById(1L)).thenReturn(product);
 

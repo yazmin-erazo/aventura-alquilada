@@ -33,11 +33,11 @@ public class RentHandler {
         return rentService.getRents(userEmail);
     }
 
-    public RentDTO findById(Long id, String userEmail) {
+    public RentDTO findById(Long id, String userEmail) throws NoSuchFieldException, IllegalAccessException {
         return rentService.getRent(id,userEmail);
     }
 
-    public String deleteRent(Long id, String userEmail) {
+    public String deleteRent(Long id, String userEmail) throws NoSuchFieldException, IllegalAccessException {
         return rentService.deleteRent(Rent.createById(id),userEmail);
     }
 }

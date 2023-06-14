@@ -2,6 +2,7 @@ package com.digitalbooking.digitalbooking.domain.product.repository;
 
 
 import com.digitalbooking.digitalbooking.domain.product.dto.ProductDTO;
+import com.digitalbooking.digitalbooking.domain.product.entity.CommentProduct;
 import com.digitalbooking.digitalbooking.domain.product.entity.Product;
 
 import java.math.BigDecimal;
@@ -25,4 +26,6 @@ public interface RepositoryProduct {
     Optional<ProductDTO> findByIdAndIsDelete(Long id);
 
     void deleteProduct(Long id);
+
+    void createComment(CommentProduct commentProduct, Long userId);
 }
