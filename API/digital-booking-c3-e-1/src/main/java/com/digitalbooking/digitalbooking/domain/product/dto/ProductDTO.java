@@ -1,5 +1,6 @@
 package com.digitalbooking.digitalbooking.domain.product.dto;
 
+import com.digitalbooking.digitalbooking.domain.city.dto.CityDTO;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -27,8 +28,7 @@ public class ProductDTO {
     private String material;
     private List<ImageProductDTO> secondaryImages;
     private List<RentDatesProductDTO> rents;
-    private String latitude;
-    private String longitude;
+    private CityDTO city;
     private List<CommentProductDTO> commentProducts;
     private Double score;
 

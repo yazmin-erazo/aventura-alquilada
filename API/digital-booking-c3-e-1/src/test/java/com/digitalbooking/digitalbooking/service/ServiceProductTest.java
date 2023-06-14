@@ -45,7 +45,7 @@ class ServiceProductTest {
 
     @Test
     void testCreateProductSuccess() throws Exception {
-        Product product = Product.create("Carpa", "Nemo Wagontop", "Nueva", BigDecimal.valueOf(150),"Descripción test", "8 personas", "No aplica", null, 1L, "Test Base64", "Carpa1", "Amarillo", "Poliéster", List.of(), "36.1430638", "-115.1617901");
+        Product product = Product.create("Carpa", "Nemo Wagontop", "Nueva", BigDecimal.valueOf(150),"Descripción test", "8 personas", "No aplica", null, 1L, "Test Base64", "Carpa1", "Amarillo", "Poliéster", List.of(), 129L);
         CategoryDTO category = new CategoryDTO(1L, "Camping", "", "","");
         when(categoryRepository.findById(anyLong())).thenReturn(Optional.of(category));
         when(repositoryProduct.findByNameAndIsDelete(anyString())).thenReturn(Optional.empty());
@@ -63,7 +63,7 @@ class ServiceProductTest {
 
     @Test
     void testCreateProductErrorWhenDuplicateName() throws Exception {
-        Product product = Product.create("Carpa Nemo", "Nemo Wagontop", "Nueva", BigDecimal.valueOf(150),"Descripción test", "8 personas", "No aplica", null, 1L, "Test Base64", "Carpa1", "Amarillo", "Poliéster", List.of(), "36.1430638", "-115.1617901");
+        Product product = Product.create("Carpa Nemo", "Nemo Wagontop", "Nueva", BigDecimal.valueOf(150),"Descripción test", "8 personas", "No aplica", null, 1L, "Test Base64", "Carpa1", "Amarillo", "Poliéster", List.of(), 129L);
         ProductDTO productDTO = new ProductDTO();
         productDTO.setName("Carpa Nemo");
         CategoryDTO category = new CategoryDTO(1L, "Camping", "", "", "");
@@ -80,7 +80,7 @@ class ServiceProductTest {
 
     @Test
     void testCreateProductErrorWhenCategoryDoesntExist() throws Exception {
-        Product product = Product.create("Carpa Nemo", "Nemo Wagontop", "Nueva", BigDecimal.valueOf(150),"Descripción test", "8 personas", "No aplica", null, 1L, "Test Base64", "Carpa1", "Amarillo", "Poliéster" ,List.of(), "36.1430638", "-115.1617901");
+        Product product = Product.create("Carpa Nemo", "Nemo Wagontop", "Nueva", BigDecimal.valueOf(150),"Descripción test", "8 personas", "No aplica", null, 1L, "Test Base64", "Carpa1", "Amarillo", "Poliéster" ,List.of(), 129L);
 
         when(categoryRepository.findById(anyLong())).thenReturn(Optional.empty());
 
@@ -94,73 +94,73 @@ class ServiceProductTest {
 
     @Test
     void testCreateProductErrorWhenNameIsNull() throws Exception {
-        Exception exception = assertThrows(ExceptionMandatoryValue.class, () -> Product.create("", "Nemo Wagontop", "Nueva", BigDecimal.valueOf(150),"Descripción test", "8 personas", "No aplica", null, 1L, "Test Base64", "Carpa1", "Amarillo", "Poliéster", List.of(), "36.1430638", "-115.1617901"));
+        Exception exception = assertThrows(ExceptionMandatoryValue.class, () -> Product.create("", "Nemo Wagontop", "Nueva", BigDecimal.valueOf(150),"Descripción test", "8 personas", "No aplica", null, 1L, "Test Base64", "Carpa1", "Amarillo", "Poliéster", List.of(), 129L));
         assertEquals("El nombre es requerido para crear un producto", exception.getMessage());
     }
 
     @Test
     void testCreateProductErrorWhenBrandIsNull() throws Exception {
-        Exception exception = assertThrows(ExceptionMandatoryValue.class, () -> Product.create("Carpa", "", "Nueva", BigDecimal.valueOf(150),"Descripción test", "8 personas", "No aplica", null, 1L, "Test Base64", "Carpa1", "Amarillo", "Poliéster", List.of(), "36.1430638", "-115.1617901"));
+        Exception exception = assertThrows(ExceptionMandatoryValue.class, () -> Product.create("Carpa", "", "Nueva", BigDecimal.valueOf(150),"Descripción test", "8 personas", "No aplica", null, 1L, "Test Base64", "Carpa1", "Amarillo", "Poliéster", List.of(), 129L));
         assertEquals("La marca es requerida para crear un producto", exception.getMessage());
     }
 
     @Test
     void testCreateProductErrorWhenStateIsNull() throws Exception {
-        Exception exception = assertThrows(ExceptionMandatoryValue.class, () -> Product.create("Carpa", "Nemo Wagontop", "", BigDecimal.valueOf(150),"Descripción test", "8 personas", "No aplica", null, 1L, "Test Base64", "Carpa1", "Amarillo", "Poliéster", List.of(), "36.1430638", "-115.1617901"));
+        Exception exception = assertThrows(ExceptionMandatoryValue.class, () -> Product.create("Carpa", "Nemo Wagontop", "", BigDecimal.valueOf(150),"Descripción test", "8 personas", "No aplica", null, 1L, "Test Base64", "Carpa1", "Amarillo", "Poliéster", List.of(), 129L));
         assertEquals("El estado es requerido para crear un producto", exception.getMessage());
     }
 
     @Test
     void testCreateProductErrorWhenPriceIsNull() throws Exception {
-        Exception exception = assertThrows(ExceptionMandatoryValue.class, () -> Product.create("Carpa", "Nemo Wagontop", "Nueva", null,"Descripción test", "8 personas", "No aplica", null, 1L, "Test Base64", "Carpa1", "Amarillo", "Poliéster", List.of(), "36.1430638", "-115.1617901"));
+        Exception exception = assertThrows(ExceptionMandatoryValue.class, () -> Product.create("Carpa", "Nemo Wagontop", "Nueva", null,"Descripción test", "8 personas", "No aplica", null, 1L, "Test Base64", "Carpa1", "Amarillo", "Poliéster", List.of(), 129L));
         assertEquals("El precio es requerido para crear un producto", exception.getMessage());
     }
 
     @Test
     void testCreateProductErrorWhenPriceIsZero() throws Exception {
-        Exception exception = assertThrows(ExceptionInvalidValue.class, () -> Product.create("Carpa", "Nemo Wagontop", "Nueva", BigDecimal.valueOf(0),"Descripción test", "8 personas", "No aplica", null, 1L, "Test Base64", "Carpa1", "Amarillo", "Poliéster", List.of(), "36.1430638", "-115.1617901"));
+        Exception exception = assertThrows(ExceptionInvalidValue.class, () -> Product.create("Carpa", "Nemo Wagontop", "Nueva", BigDecimal.valueOf(0),"Descripción test", "8 personas", "No aplica", null, 1L, "Test Base64", "Carpa1", "Amarillo", "Poliéster", List.of(), 129L));
         assertEquals("El precio debe ser mayor que cero", exception.getMessage());
     }
 
     @Test
     void testCreateProductErrorWhenDescriptionIsNull() throws Exception {
-        Exception exception = assertThrows(ExceptionMandatoryValue.class, () -> Product.create("Carpa", "Nemo Wagontop", "Nueva", BigDecimal.valueOf(0),"", "8 personas", "No aplica", null, 1L, "Test Base64", "Carpa1", "Amarillo", "Poliéster", List.of(), "36.1430638", "-115.1617901"));
+        Exception exception = assertThrows(ExceptionMandatoryValue.class, () -> Product.create("Carpa", "Nemo Wagontop", "Nueva", BigDecimal.valueOf(0),"", "8 personas", "No aplica", null, 1L, "Test Base64", "Carpa1", "Amarillo", "Poliéster", List.of(), 129L));
         assertEquals("La descripción es requerida para crear un producto", exception.getMessage());
     }
 
     @Test
     void testCreateProductErrorWhenSizeIsNull() throws Exception {
-        Exception exception = assertThrows(ExceptionMandatoryValue.class, () -> Product.create("Carpa", "Nemo Wagontop", "Nueva", BigDecimal.valueOf(0),"Descripción test", "", "No aplica", null, 1L, "Test Base64", "Carpa1", "Amarillo", "Poliéster", List.of(), "36.1430638", "-115.1617901"));
+        Exception exception = assertThrows(ExceptionMandatoryValue.class, () -> Product.create("Carpa", "Nemo Wagontop", "Nueva", BigDecimal.valueOf(0),"Descripción test", "", "No aplica", null, 1L, "Test Base64", "Carpa1", "Amarillo", "Poliéster", List.of(), 129L));
         assertEquals("La talla es requerida para crear un producto", exception.getMessage());
     }
 
     @Test
     void testCreateProductErrorWhenImageIsNull() throws Exception {
-        Exception exception = assertThrows(ExceptionMandatoryValue.class, () -> Product.create("Carpa", "Nemo Wagontop", "Nueva", BigDecimal.valueOf(150),"Descripción test", "8 personas", "No aplica", null, 1L, "", "Carpa1", "Amarillo", "Poliéster", List.of(), "36.1430638", "-115.1617901"));
+        Exception exception = assertThrows(ExceptionMandatoryValue.class, () -> Product.create("Carpa", "Nemo Wagontop", "Nueva", BigDecimal.valueOf(150),"Descripción test", "8 personas", "No aplica", null, 1L, "", "Carpa1", "Amarillo", "Poliéster", List.of(), 129L));
         assertEquals("La imagen es requerida para crear un producto", exception.getMessage());
     }
 
     @Test
     void testCreateProductErrorWhenFileNameIsNull() throws Exception {
-        Exception exception = assertThrows(ExceptionMandatoryValue.class, () -> Product.create("Carpa", "Nemo Wagontop", "Nueva", BigDecimal.valueOf(150),"Descripción test", "8 personas", "No aplica", null, 1L, "Test Base64", "", "Amarillo", "Poliéster", List.of(), "36.1430638", "-115.1617901"));
+        Exception exception = assertThrows(ExceptionMandatoryValue.class, () -> Product.create("Carpa", "Nemo Wagontop", "Nueva", BigDecimal.valueOf(150),"Descripción test", "8 personas", "No aplica", null, 1L, "Test Base64", "", "Amarillo", "Poliéster", List.of(), 129L));
         assertEquals("El nombre del archivo es requerido para crear un producto", exception.getMessage());
     }
 
     @Test
     void testCreateProductErrorWhenColorIsNull() throws Exception {
-        Exception exception = assertThrows(ExceptionMandatoryValue.class, () -> Product.create("Carpa", "Nemo Wagontop", "Nueva", BigDecimal.valueOf(150),"Descripción test", "8 personas", "No aplica", null, 1L, "Test Base64", "Carpa1", "", "Poliéster", List.of(), "36.1430638", "-115.1617901"));
+        Exception exception = assertThrows(ExceptionMandatoryValue.class, () -> Product.create("Carpa", "Nemo Wagontop", "Nueva", BigDecimal.valueOf(150),"Descripción test", "8 personas", "No aplica", null, 1L, "Test Base64", "Carpa1", "", "Poliéster", List.of(), 129L));
         assertEquals("El color es requerido para crear un producto", exception.getMessage());
     }
 
     @Test
     void testCreateProductErrorWhenMaterialIsNull() throws Exception {
-        Exception exception = assertThrows(ExceptionMandatoryValue.class, () -> Product.create("Carpa", "Nemo Wagontop", "Nueva", BigDecimal.valueOf(150),"Descripción test", "8 personas", "No aplica", null, 1L, "Test Base64", "Carpa1", "Amarillo", "", List.of(), "36.1430638", "-115.1617901"));
+        Exception exception = assertThrows(ExceptionMandatoryValue.class, () -> Product.create("Carpa", "Nemo Wagontop", "Nueva", BigDecimal.valueOf(150),"Descripción test", "8 personas", "No aplica", null, 1L, "Test Base64", "Carpa1", "Amarillo", "", List.of(), 129L));
         assertEquals("El material es requerido para crear un producto", exception.getMessage());
     }
 
     @Test
     void testUpdateProductSuccess() throws Exception {
-        Product product = Product.create("Carpa Nemo", "Nemo Wagontop", "Nueva", BigDecimal.valueOf(150),"Descripción test", "8 personas", "No aplica", null, 1L, "Test Base64", "Carpa1", "Amarillo", "Poliéster", List.of(), "36.1430638", "-115.1617901");
+        Product product = Product.create("Carpa Nemo", "Nemo Wagontop", "Nueva", BigDecimal.valueOf(150),"Descripción test", "8 personas", "No aplica", null, 1L, "Test Base64", "Carpa1", "Amarillo", "Poliéster", List.of(), 129L);
         CategoryDTO category = new CategoryDTO(1L, "Camping", "", "", "");
         when(categoryRepository.findById(anyLong())).thenReturn(Optional.of(category));
 
@@ -173,7 +173,7 @@ class ServiceProductTest {
 
     @Test
     void testUpdateProductErrorWhenCategoryDoesntExist() throws Exception {
-        Product product = Product.create("Carpa Nemo", "Nemo Wagontop", "Nueva", BigDecimal.valueOf(150),"Descripción test", "8 personas", "No aplica", null, 1L, "Test Base64", "Carpa1", "Amarillo", "Poliéster" ,List.of(), "36.1430638", "-115.1617901");
+        Product product = Product.create("Carpa Nemo", "Nemo Wagontop", "Nueva", BigDecimal.valueOf(150),"Descripción test", "8 personas", "No aplica", null, 1L, "Test Base64", "Carpa1", "Amarillo", "Poliéster" ,List.of(), 129L);
 
         when(categoryRepository.findById(anyLong())).thenReturn(Optional.empty());
 
@@ -185,7 +185,7 @@ class ServiceProductTest {
 
     @Test
     void testDeleteProductSuccess() throws Exception {
-        Product product = Product.create("Carpa Nemo", "Nemo Wagontop", "Nueva", BigDecimal.valueOf(150),"Descripción test", "8 personas", "No aplica", null, 1L, "Test Base64", "Carpa1", "Amarillo", "Poliéster", List.of(), "36.1430638", "-115.1617901");
+        Product product = Product.create("Carpa Nemo", "Nemo Wagontop", "Nueva", BigDecimal.valueOf(150),"Descripción test", "8 personas", "No aplica", null, 1L, "Test Base64", "Carpa1", "Amarillo", "Poliéster", List.of(), 129L);
 
         String message = serviceProduct.deleteProduct(product);
 
@@ -212,7 +212,7 @@ class ServiceProductTest {
         List<ImageProduct> imageProducts = new ArrayList<>();
 
         Product product = Product.create(name, brand, state, price, description, size, gender,
-                deposit, idCategory, image, fileName, color, material, imageProducts, "36.1430638", "-115.1617901");
+                deposit, idCategory, image, fileName, color, material, imageProducts, 129L);
 
         assertNotNull(product);
         assertEquals(id, product.getId());
@@ -291,13 +291,13 @@ class ServiceProductTest {
         product2.setCommentProducts(List.of());
         List<ProductDTO> mockedList = Arrays.asList(product1, product2);
 
-        when(repositoryProduct.getAll(any(), any(), any(), any(), any(), any(), any(), any(), any(), any()))
+        when(repositoryProduct.getAll(any(), any(), any(), any(), any(), any(), any(), any(), any(), any(), any()))
                 .thenReturn(mockedList);
 
-        List<ProductDTO> result = serviceProduct.getProducts("Nike", "Shoes", "Male", new BigDecimal(100), new BigDecimal(50), "XL", "New", "Red", "Leather",null);
+        List<ProductDTO> result = serviceProduct.getProducts("Nike", "Shoes", "Male", new BigDecimal(100), new BigDecimal(50), "XL", "New", "Red", "Leather",129L, "");
 
         assertEquals(2, result.size());
-        verify(repositoryProduct, times(1)).getAll(any(), any(), any(), any(), any(), any(), any(), any(), any(),any());
+        verify(repositoryProduct, times(1)).getAll(any(), any(), any(), any(), any(), any(), any(), any(), any(),any(), any());
     }
 
     @Test
@@ -319,7 +319,7 @@ class ServiceProductTest {
     void testAddProductToFavorite() throws Exception {
 
         String email = "user@example.com";
-        Product product = Product.create("Carpa Nemo", "Nemo Wagontop", "Nueva", BigDecimal.valueOf(150),"Descripción test", "8 personas", "No aplica", null, 1L, "Test Base64", "Carpa1", "Amarillo", "Poliéster", List.of(), "36.1430638", "-115.1617901");
+        Product product = Product.create("Carpa Nemo", "Nemo Wagontop", "Nueva", BigDecimal.valueOf(150),"Descripción test", "8 personas", "No aplica", null, 1L, "Test Base64", "Carpa1", "Amarillo", "Poliéster", List.of(), 129L);
         ProductDTO productDTO = new ProductDTO();
         UserDTO user = new UserDTO();
         user.setEmail(email);
@@ -338,7 +338,7 @@ class ServiceProductTest {
     void testDeleteProductFromFavorite() throws Exception {
 
         String email = "user@example.com";
-        Product product = Product.create("Carpa Nemo", "Nemo Wagontop", "Nueva", BigDecimal.valueOf(150),"Descripción test", "8 personas", "No aplica", null, 1L, "Test Base64", "Carpa1", "Amarillo", "Poliéster", List.of(), "36.1430638", "-115.1617901");
+        Product product = Product.create("Carpa Nemo", "Nemo Wagontop", "Nueva", BigDecimal.valueOf(150),"Descripción test", "8 personas", "No aplica", null, 1L, "Test Base64", "Carpa1", "Amarillo", "Poliéster", List.of(), 129L);
         ProductDTO productDTO = new ProductDTO();
         UserDTO user = new UserDTO();
 
