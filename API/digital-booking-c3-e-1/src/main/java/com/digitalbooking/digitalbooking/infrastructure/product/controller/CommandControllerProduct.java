@@ -1,6 +1,7 @@
 package com.digitalbooking.digitalbooking.infrastructure.product.controller;
 
 import com.digitalbooking.digitalbooking.application.product.handler.ProductHandler;
+import com.digitalbooking.digitalbooking.application.product.request.CommandCommentProduct;
 import com.digitalbooking.digitalbooking.application.product.request.CommandCreateProduct;
 import com.digitalbooking.digitalbooking.application.product.request.CommandUpdateProduct;
 import com.digitalbooking.digitalbooking.application.user.request.CommandAddToFavoritesProductsRequest;
@@ -55,5 +56,11 @@ public class CommandControllerProduct {
     @Operation(summary = "Add Product to favorite list ", description = "Method to add a product to favorite list")
     public ResponseEntity<CommandResponse<String>> addProductToFavorite(@RequestBody CommandAddToFavoritesProductsRequest commandAddToFavoritesProductsRequest, Authentication authentication) {
         return new ResponseEntity<>(new CommandResponse<>(productHandler.addProductToFavorite(commandAddToFavoritesProductsRequest,((UserDetailsImpl)authentication.getPrincipal()).getEmail())), HttpStatus.OK);
+    }
+
+    @PostMapping("comment")
+    @Operation(summary = "Comment Product", description = "Method to comment a product")
+    public ResponseEntity<CommandResponse<String>> commentProduct(@RequestBody CommandCommentProduct commandCommentProduct, Authentication authentication) throws Exception {
+        return new ResponseEntity<>(new CommandResponse<>(productHandler.commentProduct(commandCommentProduct,((UserDetailsImpl)authentication.getPrincipal()).getEmail())), HttpStatus.OK);
     }
 }

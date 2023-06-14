@@ -1,0 +1,93 @@
+.containerNewProduct {
+  margin: 0 4%;
+  margin-top:40px;
+}
+
+.header {
+  width: 100%;
+  border-bottom: 1px solid var(--secondary-100);
+  margin-bottom: 4rem;
+}
+
+.addProductTitle {
+  margin: 16px 0;
+  color: var(--secondary-600);
+}
+
+.registerProductContainer {
+  color: var(--secondary-600);
+  width: 100%;
+  flex-direction: row;
+  font: var(--body-14-normal);
+  margin-bottom: 2rem;
+}
+
+.containerForm {
+  display: flex;
+  justify-content: center;
+}
+
+.containerButton {
+  margin-top: 24px;
+}
+
+.registerProductForm {
+  display: flex;
+  flex-direction: row;
+  gap: 20px;
+}
+
+.formColumn {
+  flex: 1;
+}
+
+.previewContainer {
+  width: 100%;
+  margin-top: 8px;
+}
+
+.previewImage {
+  max-width: 360px;
+  height: auto;
+  border-radius: 4px;
+  box-shadow: 0 2px 4px var(--secondary-100);
+}
+
+.textareaField {
+  width: 100%;
+  max-width: 508px;
+  height: 120px;
+  background: var(--white-100);
+  border: 0.5px solid var(--secondary-100);
+  border-radius: 5px;
+  font-size: 14px;
+  margin-top: 8px;
+  padding: 10px;
+  font: var(--body-14-normal);
+  resize: vertical;
+  box-sizing: border-box;
+  margin: 16px 0;
+}
+
+.submitBtn {
+  margin: 16px;
+  display: flex;
+  justify-content: center;
+}
+
+@media (max-width: 768px) {
+  .textareaField {
+    height: 80px;
+  }
+  .registerProductContainer {
+    flex-direction: column;
+  }
+
+  .registerProductForm {
+    width: 100%;
+  }
+
+  .registerProductForm {
+    flex-direction: column;
+  }
+}

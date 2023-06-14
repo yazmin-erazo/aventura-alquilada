@@ -24,23 +24,20 @@ public class CommandControllerRent {
     RentHandler rentHandler;
 
     @PostMapping
-    @PreAuthorize("@authorizationFilter.hasPermission('rentCreate')")
     @Operation(summary = "Create Rent", description = "Method to create a new rent")
     public ResponseEntity<CommandResponse<Long>> createRent(@RequestBody CommandCreateRent commandCreateRent, Authentication authentication) throws Exception {
         return new ResponseEntity<>(new CommandResponse<>(rentHandler.createRent(commandCreateRent, ((UserDetailsImpl)authentication.getPrincipal()).getEmail())), HttpStatus.CREATED);
     }
 
     @PutMapping
-    @PreAuthorize("@authorizationFilter.hasPermission('rentUpdate')")
     @Operation(summary = "Update Rent", description = "Method to update a rent")
     public ResponseEntity<CommandResponse<String>> updateRent(@RequestBody CommandUpdateRent commandUpdateRent, Authentication authentication) throws Exception {
         return new ResponseEntity<>(new CommandResponse<>(rentHandler.updateRent(commandUpdateRent, ((UserDetailsImpl)authentication.getPrincipal()).getEmail())), HttpStatus.OK);
     }
 
     @DeleteMapping("{id-rent}")
-    @PreAuthorize("@authorizationFilter.hasPermission('rentDelete')")
     @Operation(summary = "Delete rent", description = "Method to delete a rent")
-    public ResponseEntity<CommandResponse<String>> deleteRent(@PathVariable("id-rent") Long id, Authentication authentication) {
+    public ResponseEntity<CommandResponse<String>> deleteRent(@PathVariable("id-rent") Long id, Authentication authentication) throws NoSuchFieldException, IllegalAccessException {
         return new ResponseEntity<>(new CommandResponse<>(rentHandler.deleteRent(id, ((UserDetailsImpl)authentication.getPrincipal()).getEmail())), HttpStatus.OK);
     }
 }

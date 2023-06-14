@@ -28,7 +28,7 @@ const RentsService = {
             res => res
         ),
 
-    updateByID: (id, product) => API.put(RENTS_ENDPOINTS.UPDATE_RENT + id, rent)
+    updateByID: (id, rent) => API.put(RENTS_ENDPOINTS.UPDATE_RENT + id, rent)
         .then(
             res => res.data
         )

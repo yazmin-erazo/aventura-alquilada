@@ -6,6 +6,7 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import java.util.Collection;
+import java.util.List;
 import java.util.Objects;
 
 public class UserDetailsImpl implements UserDetails {
@@ -16,8 +17,8 @@ public class UserDetailsImpl implements UserDetails {
     private final String name;
     private final String email;
     private final String lastName;
-
     private final String role;
+    private final List<Long> favorites;
     @JsonIgnore
     private final String password;
 
@@ -27,13 +28,15 @@ public class UserDetailsImpl implements UserDetails {
             String lastName,
             String email,
             String password,
-            String role) {
+            String role,
+            List<Long> favorites) {
         this.id = id;
         this.name = name;
         this.lastName = lastName;
         this.email = email;
         this.password = password;
         this.role = role;
+        this.favorites = favorites;
     }
 
     public static UserDetailsImpl build(UserDTO user) {
@@ -44,7 +47,8 @@ public class UserDetailsImpl implements UserDetails {
                 user.getLastName(),
                 user.getEmail(),
                 user.getPassword(),
-                user.getRole());
+                user.getRole(),
+                user.getFavoriteProducts());
     }
 
 
@@ -66,6 +70,10 @@ public class UserDetailsImpl implements UserDetails {
 
     public String getRole() {
         return role;
+    }
+
+    public List<Long> getFavorites() {
+        return favorites;
     }
 
     @Override

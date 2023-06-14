@@ -7,6 +7,8 @@ import org.springframework.beans.BeanUtils;
 
 import java.util.stream.Collectors;
 
+import static com.digitalbooking.digitalbooking.infrastructure.role.MapToRole.mapToRole;
+
 public class MapToUser {
 
     public static UserDTO mapToUser(UserEntity userEntity){
@@ -14,6 +16,7 @@ public class MapToUser {
         BeanUtils.copyProperties(userEntity,user);
         user.setRole(userEntity.getRoleEntity().getName());
         user.setFavoriteProducts(userEntity.getFavoriteProducts().stream().map(ProductEntity::getId).collect(Collectors.toList()));
+        user.setRoleDTO(mapToRole(userEntity.getRoleEntity()));
         return user;
     }
 
