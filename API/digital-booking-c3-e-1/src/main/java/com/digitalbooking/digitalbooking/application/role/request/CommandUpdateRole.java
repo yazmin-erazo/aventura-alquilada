@@ -77,4 +77,15 @@ public class CommandUpdateRole {
     @JsonProperty
     @Schema(allowableValues = {"true"})
     private Boolean rentDelete;
-}
+    @JsonProperty
+    @Schema(allowableValues = {"true"})
+    private Boolean cityList;
+    @JsonProperty
+    @Schema(allowableValues = {"true"})
+    private Boolean cityCreate;
+    @JsonProperty
+    @Schema(allowableValues = {"true"})
+    private Boolean cityUpdate;
+    @JsonProperty
+    @Schema(allowableValues = {"true"})
+    private Boolean cityDelete;}

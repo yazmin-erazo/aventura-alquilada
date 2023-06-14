@@ -32,5 +32,9 @@ public class RoleEntity {
     private Boolean rentCreate;
     private Boolean rentUpdate;
     private Boolean rentDelete;
+    private Boolean cityList;
+    private Boolean cityCreate;
+    private Boolean cityUpdate;
+    private Boolean cityDelete;
     private Boolean isDelete;
 }
