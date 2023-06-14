@@ -8,6 +8,7 @@ import { IconContext } from "react-icons";
 import { FaHeart } from "react-icons/fa";
 import { UserContext } from "../../../../context/AuthContext";
 import Swal from "sweetalert2";
+import ProductsService from "../../../../shared/services/ProductsService";
 
 const RecommendedProducts = ({
   product,
@@ -17,12 +18,29 @@ const RecommendedProducts = ({
 }) => {
   const [isFavorite, setIsFavorite] = useState(false);
   const user = useContext(UserContext)
+  const { dispatch } = useContext(UserContext);
 
   const handleFavoriteClick = (event) => {
     event.stopPropagation(); // Detiene la propagación del evento para que se pueda hacer lcic en el corazon y no navegue directamente a la vista de detalle
     if(user.user.name){
       setIsFavorite(!isFavorite);
       console.log(isFavorite);
+
+     const buscarFav= user.user.favoritos.find(p=>p.id===product.id)
+     let resultado= user.user.favoritos
+     if(!buscarFav){
+      resultado.push(buscarFav.id)
+      ProductsService.addFav({productId:buscarFav.id})
+
+     }else{
+      resultado=resultado.filter(id=>id!==buscarFav.id)
+      ProductsService.deleteFav(buscarFav.id)
+     }
+dispatch({
+          type: "FAVS",
+          payload: { favoritos:resultado },
+        });
+
     }
     else {
       Swal.fire('Atención!', 'Debés estar registrado para elegir tus favoritos', 'info')

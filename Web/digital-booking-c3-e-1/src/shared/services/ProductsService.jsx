@@ -5,7 +5,9 @@ const PRODUCTS_ENDPOINTS = {
     PRODUCT_DETAILS: 'product/',
     CREATE_PRODUCT: 'product',
     DELETE_PRODUCT: 'product/',
-    UPDATE_PRODUCT: 'product/'
+    UPDATE_PRODUCT: 'product/',
+    ADD_FAV:'product/favorite',
+    DELETE_FAV:'product/favorite/'
 }
 
 const ProductsService = {
@@ -31,7 +33,17 @@ const ProductsService = {
     updateByID: (id, product) => API.put(PRODUCTS_ENDPOINTS.UPDATE_PRODUCT + id, product)
         .then(
             res => res.data
-        )
+        ),
+
+    addFav:(payload) => API.post(PRODUCTS_ENDPOINTS.ADD_FAV).then(
+        res=>res.data
+    ),
+    deleteFav:(id) => API.delete(PRODUCTS_ENDPOINTS.DELETE_FAV).then(
+        res=>res.data
+    )
+
+
+    
 
 }
 

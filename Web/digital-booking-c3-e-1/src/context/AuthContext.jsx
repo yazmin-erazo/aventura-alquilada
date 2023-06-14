@@ -39,7 +39,13 @@ const authReducer = (state, action) => {
         token: "",
         isLogedIn: false,
       };
-
+    case "FAVS":
+      return{
+        ...state,
+        user:{
+          ...user,favoritos:action.payload.favoritos
+        }
+      } 
     default:
       return state;
   }
