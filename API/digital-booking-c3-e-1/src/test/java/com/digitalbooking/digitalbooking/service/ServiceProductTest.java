@@ -291,13 +291,13 @@ class ServiceProductTest {
         product2.setCommentProducts(List.of());
         List<ProductDTO> mockedList = Arrays.asList(product1, product2);
 
-        when(repositoryProduct.getAll(any(), any(), any(), any(), any(), any(), any(), any(), any()))
+        when(repositoryProduct.getAll(any(), any(), any(), any(), any(), any(), any(), any(), any(), any()))
                 .thenReturn(mockedList);
 
-        List<ProductDTO> result = serviceProduct.getProducts("Nike", "Shoes", "Male", new BigDecimal(100), new BigDecimal(50), "XL", "New", "Red", "Leather");
+        List<ProductDTO> result = serviceProduct.getProducts("Nike", "Shoes", "Male", new BigDecimal(100), new BigDecimal(50), "XL", "New", "Red", "Leather",null);
 
         assertEquals(2, result.size());
-        verify(repositoryProduct, times(1)).getAll(any(), any(), any(), any(), any(), any(), any(), any(), any());
+        verify(repositoryProduct, times(1)).getAll(any(), any(), any(), any(), any(), any(), any(), any(), any(),any());
     }
 
     @Test

@@ -56,6 +56,25 @@ public interface RepositoryProductMySql extends JpaRepository< ProductEntity, Lo
             return (root, query, builder) ->
                     builder.equal(builder.lower(root.get("material")), material);
         }
+        static Specification<ProductEntity> byBrandContains(String brand) {
+            return (root, query, builder) -> builder.like(builder.lower(root.get("brand")), "%" + brand.toLowerCase() + "%");
+        }
+        static Specification<ProductEntity> byGenderContains(String gender) {
+            return (root, query, builder) -> builder.like(builder.lower(root.get("gender")), "%" + gender.toLowerCase() + "%");
+        }
+        static Specification<ProductEntity> bySizeContains(String size) {
+            return (root, query, builder) -> builder.like(builder.lower(root.get("size")), "%" + size.toLowerCase() + "%");
+        }
+        static Specification<ProductEntity> byColorContains(String color) {
+            return (root, query, builder) -> builder.like(builder.lower(root.get("color")), "%" + color.toLowerCase() + "%");
+        }
+        static Specification<ProductEntity> byMaterialContains(String material) {
+            return (root, query, builder) -> builder.like(builder.lower(root.get("material")), "%" + material.toLowerCase() + "%");
+        }
+        static Specification<ProductEntity> byDescriptionContains(String description) {
+            return (root, query, builder) -> builder.like(builder.lower(root.get("description")), "%" + description.toLowerCase() + "%");
+        }
+
     }
 
 }

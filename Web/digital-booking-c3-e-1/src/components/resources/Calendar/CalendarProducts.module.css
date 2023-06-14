@@ -1,0 +1,30 @@
+.containerCalendar {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+.selectedDates {
+  display: flex;
+  flex-direction: column;
+  margin: 24px 0;
+}
+
+.textDates {
+  display: flex;
+  flex-direction: column;
+  font-size: 14px;
+  margin: 16px 0;
+}
+
+.selectedDates span {
+  font-weight: 800;
+}
+
+.selectedDatesTitle {
+  padding: 1rem 0;
+}
+
+.buttonTextDates{
+  max-width: 150px;
+}

@@ -16,7 +16,14 @@ import RatingStats from "../../resources/rating/RatingStats";
 import Politics from "../../resources/Politics/Politics";
 import { MdLocationOn } from "react-icons/md";
 import ProductMap from "../../resources/productMap/ProductMap";
-//import CalendarProducts from "../../resources/Calendar/CalendarProducts";
+import {
+  FacebookShareButton,
+  TwitterShareButton,
+  WhatsappShareButton,
+  FacebookIcon,
+  TwitterIcon,
+  WhatsappIcon,
+} from "react-share";
 
 const ProductDetails = () => {
   const data = useContext(ProductsContext);
@@ -26,8 +33,7 @@ const ProductDetails = () => {
   const [userLocation, setUserLocation] = useState(null);
   const [isUserLocationLoaded, setIsUserLocationLoaded] = useState(false);
   const [images, setImages] = useState([]);
-  console.log(userLocation, isUserLocationLoaded);
-  // const [product, setProduct] = useState()
+  const [productImage, setProductImage] = useState("");
 
   const product = products.find((p) => {
     return p.id === parseInt(params.id);
@@ -52,19 +58,39 @@ const ProductDetails = () => {
       console.error("Geolocation is not supported by this browser.");
       setIsUserLocationLoaded(true);
     }
-    // searchProduct();
+
+    const foundProduct = data.products.find((p) => p.id === parseInt(params.id));
+    if (foundProduct) {
+      setProductImage(foundProduct.imageURL);
+    }
   }, [data]);
 
-  console.log(product);
+  const handleShareButtonClick = (shareUrl, quote, imageUrl, socialMedia) => {
+    switch (socialMedia) {
+      case "facebook":
+        openShareDialogOnClick({ url: shareUrl, quote: quote, hashtag: `#${product.name}` }, "facebook");
+        break;
+      case "twitter":
+        openShareDialogOnClick({ url: shareUrl, title: quote, hashtags: [product.name] }, "twitter");
+        break;
+      case "whatsapp":
+        openShareDialogOnClick({ url: shareUrl, title: quote }, "whatsapp");
+        break;
+      default:
+        break;
+    }
+  };
 
   const city = {
     name: "Buenos Aires",
     country: "Argentina",
     latitude: -34.6037,
     longitude: -58.3816,
-    // latitude: 4.720391051238156,
-    // longitude: -74.11880514789254,
   };
+
+  const productPageUrl = product
+    ? `http://equipamiento-deportivo-static.s3-website.us-east-2.amazonaws.com/products/${product.id}`
+    : "";
 
   return (
     <>
@@ -89,12 +115,10 @@ const ProductDetails = () => {
                     <MdLocationOn size={24} />
                   </div>
                 </div>
-                {/*product.ciudad.nombre}, {product.ciudad.pais*/}
 
                 <div>
                   <p className={styles.city}>
-                    {" "}
-                    Buenos Aires, Ciudad Autónoma de Buenos Aires, Argentina{" "}
+                    Buenos Aires, Ciudad Autónoma de Buenos Aires, Argentina
                   </p>
                   <p className={styles.proximity}> A 940 m del centro</p>
                 </div>
@@ -109,23 +133,56 @@ const ProductDetails = () => {
               </div>
             </div>
           </div>
+
           <div className={styles.detailsContainer}>
             <ImageGallery product={product} />
+
             <div className={styles.productDetails}>
               <div className={styles.description}>
-                {/* <div className={styles.category}>{product.category}</div> */}
                 <div className={styles.descriptionContainer}>
                   <h2 className={styles.descriptionTitle}>{product.name}</h2>
-                  <p className={styles.productDescription}>
-                    {product.description}
-                  </p>
-
-                  {/* <p className={styles.price}>${product.price}</p> */}
+                  <p className={styles.productDescription}>{product.description}</p>
                 </div>
 
                 <div className={styles.review}>
                   <Qualification />
                 </div>
+              </div>
+
+              <div className={styles.shareButtons} style={{ justifyContent: "flex-end", marginBottom: "10px" }}>
+                <FacebookShareButton
+                  url={productPageUrl}
+                  quote={product.description}
+                  hashtag={`#${product.name}`}
+                  style={{ marginRight: "10px" }}
+                  onClick={() =>
+                    handleShareButtonClick(productPageUrl, product.description, productImage, "facebook")
+                  }
+                >
+                  <FacebookIcon size={32} round />
+                </FacebookShareButton>
+
+                <TwitterShareButton
+                  url={productPageUrl}
+                  title={product.description}
+                  hashtags={[product.name]}
+                  style={{ marginRight: "10px" }}
+                  onClick={() =>
+                    handleShareButtonClick(productPageUrl, product.description, productImage, "twitter")
+                  }
+                >
+                  <TwitterIcon size={32} round />
+                </TwitterShareButton>
+
+                <WhatsappShareButton
+                  url={productPageUrl}
+                  title={product.description}
+                  onClick={() =>
+                    handleShareButtonClick(productPageUrl, product.description, productImage, "whatsapp")
+                  }
+                >
+                  <WhatsappIcon size={32} round />
+                </WhatsappShareButton>
               </div>
 
               <div className={styles.productFeature}>
@@ -152,21 +209,16 @@ const ProductDetails = () => {
                   <div className={styles.textFeature}>
                     <BsGenderAmbiguous size={24} />{" "}
                     <p className={styles.textFeatureDetails}>
-                      {" "}
                       {product.gender}
                     </p>
                   </div>
                   <div className={styles.textFeature}>
                     <FiInfo size={24} />
-                    <p className={styles.textFeatureDetails}>
-                      {" "}
-                      {product.state}
-                    </p>
+                    <p className={styles.textFeatureDetails}>{product.state}</p>
                   </div>
                   <div className={styles.textFeature}>
                     <AiOutlineClockCircle size={24} />{" "}
                     <p className={styles.textFeatureDetails}>
-                      {" "}
                       Alquiler por día
                     </p>
                   </div>
@@ -176,14 +228,8 @@ const ProductDetails = () => {
                 <Politics />
               </div>
             </div>
-            {/* <div className={styles.map}>
-              <ProductMap
-                latitude={product.city.latitude}
-                longitude={product.city.longitude}
-                city={product.city}
-              />
-            </div> */}
           </div>
+
           <div className={styles.mapContainer}>
             <ProductMap
               latitude={city.latitude}

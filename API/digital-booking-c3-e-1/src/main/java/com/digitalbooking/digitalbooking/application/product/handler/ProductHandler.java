@@ -47,8 +47,8 @@ public class ProductHandler {
         ));
     }
 
-    public List<ProductDTO> getProduct(String brandFilter, String genderFilter, String nameFilter, BigDecimal priceLessThan, BigDecimal priceGreaterThan, String sizeFilter, String stateFilter, String colorFilter, String materialFilter) {
-        return serviceProduct.getProducts(brandFilter, genderFilter, nameFilter, priceLessThan, priceGreaterThan, sizeFilter, stateFilter, colorFilter, materialFilter);
+    public List<ProductDTO> getProduct(String brandFilter, String genderFilter, String nameFilter, BigDecimal priceLessThan, BigDecimal priceGreaterThan, String sizeFilter, String stateFilter, String colorFilter, String materialFilter, String search) {
+        return serviceProduct.getProducts(brandFilter, genderFilter, nameFilter, priceLessThan, priceGreaterThan, sizeFilter, stateFilter, colorFilter, materialFilter, search);
     }
 
     public ProductDTO findById(Long id) {

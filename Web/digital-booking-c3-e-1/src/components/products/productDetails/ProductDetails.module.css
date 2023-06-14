@@ -31,7 +31,20 @@
   margin: 0 auto;
 }
 
+.calendarTitle{
+  margin: 1.5rem 0;
+  /* border-bottom: 1px solid var(--secondary-100); */
+  /* padding-bottom: 0.6rem; */
+  font: var(--h4);
+}
+
 .detailsHeader .nameProduct {
+  font: var(--h5);
+  color: var(--sencondary-900);
+}
+
+.locationProduct{
+  margin-top: 36px;
   font: var(--h5);
   color: var(--sencondary-900);
 }
@@ -230,6 +243,11 @@
   height: 400px;
 }
 
+.shareButtons {
+  display: flex;
+  justify-content: flex-end;
+  margin: 10px;
+}
 
 @media (max-width: 900px) {
   .ratingStatsItem {
