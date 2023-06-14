@@ -15,6 +15,7 @@ import Qualification from "../../resources/qualification/Qualification";
 import RatingStats from "../../resources/rating/RatingStats";
 import Politics from "../../resources/Politics/Politics";
 import { MdLocationOn } from "react-icons/md";
+import CalendarProducts from "../../resources/Calendar/CalendarProducts";
 import ProductMap from "../../resources/productMap/ProductMap";
 //import CalendarProducts from "../../resources/Calendar/CalendarProducts";
 
@@ -172,6 +173,28 @@ const ProductDetails = () => {
                   </div>
                 </div>
               </div>
+
+              
+              <div className={styles.calendar}>
+                    <CalendarProducts/>
+              </div>
+
+              <div className={styles.map}>
+                <p >¿Dónde estamos?</p>
+        
+                <div className={styles.mapContainer}>
+                  <h3 className=""> {/*ciudad.nombre}, {ciudad.pais*/}</h3>
+                  <div >
+                      <div>
+                          <iframe width="100%" height="500" id="gmap_canvas" src="https://maps.google.com/maps?q=charcas%20y%20Thames%20buenos%20aires&t=&z=17&ie=UTF8&iwloc=&output=embed" frameBorder="0" scrolling="no" marginHeight="0" marginWidth="0">
+                            </iframe>
+                            <br/>
+                      </div>
+                    </div>
+                </div>
+              </div>
+
+
               <div className={styles.politics}>
                 <Politics />
               </div>

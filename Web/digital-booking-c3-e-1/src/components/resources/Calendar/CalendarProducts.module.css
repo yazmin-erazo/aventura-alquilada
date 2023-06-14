@@ -1,0 +1,133 @@
+.calendar{
+  /* background-color: gold;*/
+   padding: 0px;
+ }
+
+ .calendar > p {
+   color: var(--sencondary-900);
+   font: var(--h5);
+   /*background-color: green;*/
+   padding: 5px;
+   
+ }
+
+ .container {
+   display: flex;
+   flex-wrap: wrap;
+   align-items: center;
+   /*background-color: #000000;*/
+   padding: 0px 0px 20px 20px;
+ }
+
+ .group {
+   /*background-color: pink;*/
+   width: 75%;
+   padding: 10px;
+ }
+
+ .buttonCalendar{
+  /* background-color: violet;*/
+   align-items: center;
+   display: flex;
+   height: 100px;
+   font: var( --sencondary-900,--tag);
+ }
+
+ button.react-calendar__navigation__arrow.react-calendar__navigation__next2-button {
+   font-size: 20px;
+   font-weight: bold;
+}
+button.react-calendar__navigation__arrow.react-calendar__navigation__next-button {
+ font-size: 20px;
+ font-weight: bold;
+
+}
+
+button.react-calendar__navigation__label {
+ color: blue;
+ font-weight: bold;
+}
+
+.calendar .react-calendar--doubleView {
+ width: 700px;
+ background-color: coral;
+}
+.react-calendar--doubleView .react-calendar__viewContainer {
+ /* text-align: center; */
+ display: flex;
+ margin: 0;
+ border-block: inherit;
+ align-items: center;
+}
+
+button.react-calendar__navigation__arrow.react-calendar__navigation__prev-button {
+ font-size: 20px;
+ font-weight: bold;
+}
+
+button.react-calendar__navigation__arrow.react-calendar__navigation__prev2-button {
+ font-size: 20px;
+ font-weight: bold;
+}
+
+.unavailable-date {
+  background-color: #ccc; /* Estilo para fechas no disponibles */
+}
+
+.available-date {
+  background-color: var(--sencondary-900); /* Estilo para fechas disponibles */
+}
+
+
+   
+   @media (max-width: 1025px) {
+   
+     .calendar {
+   
+       padding: 0px;
+     }
+     .calendar .Heading-1{
+       margin-top: 5%;
+       margin-left: 12%;
+     }
+     
+     .calendar .calendar-group {
+       align-items: center;
+       flex-direction: column;
+     }
+   
+     .calendar-group .section-button {
+       width: 100%;
+     }
+   
+     .calendar-group .section-button p {
+       width: 100%;
+     }
+   
+     .calendar-group .section-button > div {
+       display: flex;
+       background-color: transparent;
+       flex-direction: row;
+       box-shadow: none;
+       flex-basis: 100%;
+       width: 100%;
+       box-sizing: border-box;
+     }
+   }
+   
+   @media (max-width: 420px) {
+     .react-calendar.react-calendar--doubleView.calendar-custom {
+       display: none;
+     }
+   
+     .calendar .calendar-single-custom {
+       display: block;
+     }
+   
+     .calendar .group .section-button > div {
+       display: flex;
+       flex-direction: column;
+     }
+   }
+
+
