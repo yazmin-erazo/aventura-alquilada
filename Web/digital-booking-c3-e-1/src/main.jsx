@@ -15,6 +15,8 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import RegisterUser from "./components/user/userAddForm/RegisterUser.jsx";
 import Login from "./components/user/login/Login.jsx";
 import ActivateUser from "./components/user/activateUser/ActivateUser.jsx";
+import NewCity from './components/cities/cityAddForm/RegisterCity.jsx';
+import CrudCity from './components/cities/CrudCities/CrudCity.jsx';
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <BrowserRouter>
@@ -34,6 +36,8 @@ ReactDOM.createRoot(document.getElementById("root")).render(
         <Route path='login' element={<Login />} />
         <Route path='auth/register' element={<RegisterUser />} />
         <Route path='user/activate' element={<ActivateUser />} />
+        <Route path='admin/city/add' element={<NewCity />} />
+        <Route path='admin/city/list' element={<CrudCity />} />
       </Route>
     </Routes>
     {/* </React.StrictMode> */}
