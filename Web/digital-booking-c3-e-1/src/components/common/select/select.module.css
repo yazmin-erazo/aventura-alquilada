@@ -23,7 +23,6 @@
     padding: 12px;
     width: 100%;
     min-width: 200px;
-    height: 100%;
     background: var(--white-100); /* white-100 */
     border: 0.5px solid #C3D4E4; /* secondary-100 */
     border-radius: 4px;

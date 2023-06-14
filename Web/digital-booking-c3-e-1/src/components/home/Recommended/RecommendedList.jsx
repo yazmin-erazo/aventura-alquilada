@@ -20,7 +20,6 @@ const RecommendedList = ({ selectedCategory, searchParams }) => {
   const [currentPage, setCurrentPage] = useState(1);
   const [filteredProducts, setFilteredProducts] = useState([]);
   const [categories, setCategories] = useState([]);
-  const [paramsSearch, setParams] = useState(null)
   const iconComponents = {
     ...ReactIcons,
     ...TbIcons,
@@ -56,7 +55,6 @@ const RecommendedList = ({ selectedCategory, searchParams }) => {
     }, [currentPage, filteredProducts]);
     
     useEffect(() => {
-    setParams(searchParams)
     fetchData();
   },[searchParams])
 
@@ -67,9 +65,8 @@ const RecommendedList = ({ selectedCategory, searchParams }) => {
 
   const fetchData = async () => {
     try {  
-      const productosBuscados = await ProductsService.getAll(paramsSearch)
+      const productosBuscados = await ProductsService.getAll(searchParams)
       setFilteredProducts(productosBuscados);
-      console.log(productosBuscados);
     }
     catch{
       e => console.log(e);

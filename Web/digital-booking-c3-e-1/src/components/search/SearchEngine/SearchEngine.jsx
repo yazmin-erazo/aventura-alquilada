@@ -4,6 +4,7 @@ import { useState } from "react";
 import CalendarProducts from "../../resources/Calendar/CalendarProducts";
 import Select from "../../common/select/Select";
 import CityService from "../../../shared/services/CityService";
+import Calendar from "../../resources/Calendar/Calendar";
 
 const SearchEngine = ({handleSearch}) => {
 
@@ -16,13 +17,14 @@ const SearchEngine = ({handleSearch}) => {
     dates: null
   })
   const [cityOptions, setCityOptions] = useState([])
-  const handleInputChange = e => setText(e.target.value);
+  const handleInputChange = e =>{
+    setText(e.target.value);
+  } 
   const handleSearchClick = e => {
     e.preventDefault();
     if(text != "" && text != null)
     {
-      setSearchParams({name: text, city: city, dates: dates})
-      handleSearch(searchParams);
+      handleSearch({...searchParams, name: text, city: city, dates: dates});
     }
   }
 
@@ -35,7 +37,7 @@ const SearchEngine = ({handleSearch}) => {
     <div className={styles["search-engine"]}>
       <form className={styles.form}>
         <Select options={cityOptions} placeholder={'Seleccione...'}></Select>
-        <CalendarProducts/>
+        <Calendar/>
         <div className={styles.inputWrapper}>
         <input
           type="text"
