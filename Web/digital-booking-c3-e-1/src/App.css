@@ -38,6 +38,17 @@
   color: red;
 }
 
+.menuOption a{
+  text-decoration: none;
+  color: inherit;
+  padding: 0;
+}
+
+.menuOption a:hover {
+  color: inherit;
+  padding: 0;
+}
+
 .cuentaBtn,
 .sesionBtn {
   font-size: var(--body-16);
@@ -211,7 +222,9 @@ nav {
   font-size: 14px;
 }
 
+
 li:hover {
+  background-color: #eff6fc;
   color: var(--secondary-600);
   cursor: pointer;
   font-weight: 900;
