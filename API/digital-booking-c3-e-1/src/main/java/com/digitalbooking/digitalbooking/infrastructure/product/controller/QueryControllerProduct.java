@@ -24,24 +24,26 @@ public class QueryControllerProduct {
     @GetMapping("products")
     @Operation(summary = "list products", description = "Method to fetch the products")
     public ResponseEntity<List<ProductDTO>> listProducts(@Parameter(description = "Filter products by brand")
-                                                             @RequestParam(required = false) String brandFilter,
+                                                         @RequestParam(required = false) String brandFilter,
                                                          @Parameter(description = "Filter products by gender")
-                                                            @RequestParam(required = false) String genderFilter,
+                                                         @RequestParam(required = false) String genderFilter,
                                                          @Parameter(description = "Filter products by name")
-                                                             @RequestParam(required = false) String nameFilter,
+                                                         @RequestParam(required = false) String nameFilter,
                                                          @Parameter(description = "Filter products by price less than")
-                                                             @RequestParam(required = false) BigDecimal priceLessThan,
+                                                         @RequestParam(required = false) BigDecimal priceLessThan,
                                                          @Parameter(description = "Filter products by price greater than")
-                                                             @RequestParam(required = false) BigDecimal priceGreaterThan,
+                                                         @RequestParam(required = false) BigDecimal priceGreaterThan,
                                                          @Parameter(description = "Filter products by size")
-                                                             @RequestParam(required = false) String sizeFilter,
+                                                         @RequestParam(required = false) String sizeFilter,
                                                          @Parameter(description = "Filter products by state")
-                                                             @RequestParam(required = false) String stateFilter,
+                                                         @RequestParam(required = false) String stateFilter,
                                                          @Parameter(description = "Filter products by color")
-                                                             @RequestParam(required = false) String colorFilter,
+                                                         @RequestParam(required = false) String colorFilter,
                                                          @Parameter(description = "Filter products by material")
-                                                             @RequestParam(required = false) String materialFilter){
-        return ResponseEntity.ok(productHandler.getProduct(brandFilter, genderFilter, nameFilter, priceLessThan, priceGreaterThan, sizeFilter, stateFilter, colorFilter, materialFilter));
+                                                         @RequestParam(required = false) String materialFilter,
+                                                         @Parameter(description = "search a product by diferent columns")
+                                                         @RequestParam(required = false) String search) {
+        return ResponseEntity.ok(productHandler.getProduct(brandFilter, genderFilter, nameFilter, priceLessThan, priceGreaterThan, sizeFilter, stateFilter, colorFilter, materialFilter,search));
     }
 
     @GetMapping("{id-product}")

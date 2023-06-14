@@ -2,6 +2,7 @@ package com.digitalbooking.digitalbooking.domain.product.repository;
 
 
 import com.digitalbooking.digitalbooking.domain.product.dto.ProductDTO;
+import com.digitalbooking.digitalbooking.domain.product.entity.CommentProduct;
 import com.digitalbooking.digitalbooking.domain.product.entity.Product;
 
 import java.math.BigDecimal;
@@ -16,7 +17,7 @@ public interface RepositoryProduct {
 
     String saveImage(String fileName, String image);
 
-    List<ProductDTO> getAll(String brandFilter, String nameFilter, String genderFilter, BigDecimal priceLessThan, BigDecimal priceGreaterThan, String sizeFilter, String stateFilter, String colorFilter, String materialFilter);
+    List<ProductDTO> getAll(String brandFilter, String nameFilter, String genderFilter, BigDecimal priceLessThan, BigDecimal priceGreaterThan, String sizeFilter, String stateFilter, String colorFilter, String materialFilter, String search);
 
     ProductDTO findById(Long id);
 
@@ -25,4 +26,6 @@ public interface RepositoryProduct {
     Optional<ProductDTO> findByIdAndIsDelete(Long id);
 
     void deleteProduct(Long id);
+
+    void createComment(CommentProduct commentProduct, Long userId);
 }

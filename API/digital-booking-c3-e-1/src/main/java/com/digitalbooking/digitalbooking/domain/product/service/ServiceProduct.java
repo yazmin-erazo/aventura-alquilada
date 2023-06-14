@@ -4,7 +4,9 @@ import com.digitalbooking.digitalbooking.common.exception.ExceptionInvalidValue;
 import com.digitalbooking.digitalbooking.common.exception.ExceptionNullValue;
 import com.digitalbooking.digitalbooking.domain.category.dto.CategoryDTO;
 import com.digitalbooking.digitalbooking.domain.category.repository.CategoryRepository;
+import com.digitalbooking.digitalbooking.domain.product.dto.CommentProductDTO;
 import com.digitalbooking.digitalbooking.domain.product.dto.ProductDTO;
+import com.digitalbooking.digitalbooking.domain.product.entity.CommentProduct;
 import com.digitalbooking.digitalbooking.domain.product.entity.Product;
 import com.digitalbooking.digitalbooking.domain.product.repository.RepositoryProduct;
 import com.digitalbooking.digitalbooking.domain.user.dto.UserDTO;
@@ -47,13 +49,14 @@ public class ServiceProduct {
         return "Producto actualizado correctamente";
     }
 
-    public List<ProductDTO> getProducts(String brandFilter, String nameFilter, String genderFilter, BigDecimal priceLessThan, BigDecimal priceGreaterThan, String sizeFilter, String stateFilter, String colorFilter, String materialFilter){
-        var products = repositoryProduct.getAll(brandFilter, genderFilter, nameFilter, priceLessThan, priceGreaterThan, sizeFilter, stateFilter, colorFilter, materialFilter);
-        return products.stream().map(this::filterRentByYesterday).collect(Collectors.toList());
+    public List<ProductDTO> getProducts(String brandFilter, String nameFilter, String genderFilter, BigDecimal priceLessThan, BigDecimal priceGreaterThan, String sizeFilter, String stateFilter, String colorFilter, String materialFilter, String search){
+        var products = repositoryProduct.getAll(brandFilter, genderFilter, nameFilter, priceLessThan, priceGreaterThan, sizeFilter, stateFilter, colorFilter, materialFilter, search);
+        return products.stream().map(this::filterRentByYesterday).map(this::calculateScore).collect(Collectors.toList());
     }
 
     public ProductDTO getProduct(Long id) {
         ProductDTO productDTO = repositoryProduct.findById(id);
+        calculateScore(productDTO);
         return filterRentByYesterday(productDTO);
     }
 
@@ -80,6 +83,11 @@ public class ServiceProduct {
         return productDTO;
     }
 
+    private ProductDTO calculateScore(ProductDTO productDTO){
+        productDTO.setScore(productDTO.getCommentProducts().stream().mapToDouble(CommentProductDTO::getScore).average().orElse(5.0));
+        return productDTO;
+    }
+
     public String addProductToFavorite(Product product, String email) {
         ProductDTO productDTO = repositoryProduct.findByIdAndIsDelete(product.getId()).orElseThrow(() -> new ExceptionInvalidValue("Producto no encontrado"));
         UserDTO user = repositoryUser.findByEmail(email).orElseThrow(()->new ExceptionNullValue("Usuario no encontrado"));
@@ -96,5 +104,12 @@ public class ServiceProduct {
         UserDTO user = repositoryUser.findByEmail(email).orElseThrow(()->new ExceptionNullValue("Usuario no encontrado"));
         repositoryUser.deleteProductFromFavorite(user.getId(), productDTO.getId());
         return "Producto Eliminado Correctamente de favoritos";
+    }
+
+    public String commentProduct(CommentProduct commentProduct, String email) {
+        repositoryProduct.findByIdAndIsDelete(commentProduct.getProductId()).orElseThrow(() -> new ExceptionInvalidValue("Producto no encontrado"));
+        UserDTO user = repositoryUser.findByEmail(email).orElseThrow(()->new ExceptionNullValue("Usuario no encontrado"));
+        repositoryProduct.createComment(commentProduct,user.getId());
+        return "Comentario guardado exitosamente";
     }
 }
