@@ -2,10 +2,12 @@ package com.digitalbooking.digitalbooking.infrastructure.product.adapter;
 
 import com.digitalbooking.digitalbooking.common.exception.ExceptionNullValue;
 import com.digitalbooking.digitalbooking.domain.product.dto.ProductDTO;
+import com.digitalbooking.digitalbooking.domain.product.entity.CommentProduct;
 import com.digitalbooking.digitalbooking.domain.product.entity.Product;
 import com.digitalbooking.digitalbooking.domain.product.repository.RepositoryProduct;
 import com.digitalbooking.digitalbooking.infrastructure.category.adapter.CategoryEntity;
 import com.digitalbooking.digitalbooking.infrastructure.product.MapToProduct;
+import com.digitalbooking.digitalbooking.infrastructure.user.adapter.UserEntity;
 import org.apache.commons.lang3.ObjectUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.BeanUtils;
@@ -27,6 +29,8 @@ public class RepositoryProductImpl implements RepositoryProduct {
     ProductS3 productS3;
     @Autowired
     RepositoryProductMySql repositoryProductMySql;
+    @Autowired
+    RepositoryCommentProductMySql repositoryCommentProductMySql;
     @Override
     public Long save(Product product, String imageURL, List<String> secondaryImages) {
         ProductEntity productEntity = new ProductEntity();
@@ -107,5 +111,19 @@ public class RepositoryProductImpl implements RepositoryProduct {
         ProductEntity productEntity = repositoryProductMySql.findByIdAndIsDelete(id, Boolean.FALSE).orElseThrow(()->new ExceptionNullValue("Producto no encontrado"));
         productEntity.setIsDelete(Boolean.TRUE);
         repositoryProductMySql.save(productEntity);
+    }
+
+    @Override
+    public void createComment(CommentProduct commentProduct, Long userId) {
+        CommentsEntity commentsEntity = new CommentsEntity();
+        UserEntity userEntity = new UserEntity();
+        userEntity.setId(userId);
+        ProductEntity productEntity = new ProductEntity();
+        productEntity.setId(commentProduct.getProductId());
+        commentsEntity.setComment(commentProduct.getComment());
+        commentsEntity.setScore(commentProduct.getScore());
+        commentsEntity.setUserEntity(userEntity);
+        commentsEntity.setProductEntity(productEntity);
+        repositoryCommentProductMySql.save(commentsEntity);
     }
 }

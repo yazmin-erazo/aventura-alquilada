@@ -157,14 +157,14 @@ public class RentServiceTest {
         rentDTOs.add(rentDTO2);
 
         when(repositoryUser.findByEmail(anyString())).thenReturn(Optional.of(userDTO));
-        when(rentRepository.getAll(anyLong())).thenReturn(rentDTOs);
+        when(rentRepository.getAllByUserId(anyLong())).thenReturn(rentDTOs);
 
         List<RentDTO> result = rentService.getRents("user@example.com");
 
         assertEquals(2, result.size());
 
         verify(repositoryUser, times(1)).findByEmail(anyString());
-        verify(rentRepository, times(1)).getAll(anyLong());
+        verify(rentRepository, times(1)).getAllByUserId(anyLong());
     }
 
     @Test
