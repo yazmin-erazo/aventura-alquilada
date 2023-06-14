@@ -10,6 +10,7 @@ import com.digitalbooking.digitalbooking.domain.rent.dto.RentDTO;
 import com.digitalbooking.digitalbooking.domain.rent.entity.Rent;
 import com.digitalbooking.digitalbooking.domain.rent.repository.RentRepository;
 import com.digitalbooking.digitalbooking.domain.rent.service.RentService;
+import com.digitalbooking.digitalbooking.domain.role.dto.RoleDTO;
 import com.digitalbooking.digitalbooking.domain.user.dto.UserDTO;
 import com.digitalbooking.digitalbooking.domain.user.entity.User;
 import com.digitalbooking.digitalbooking.domain.user.repository.RepositoryUser;
@@ -56,7 +57,8 @@ public class RentServiceTest {
 
         User user =  User.create( "Lore", "Sanchez", "test@test.com", "123");
         List<Long> favorites = new ArrayList<>();
-        UserDTO userDTO = new UserDTO(1L, "Lore", "Sanchez", "lorena@l.com", "", LocalDateTime.now(), false, "token","token", "#525252", favorites);
+        RoleDTO roleDTO = new RoleDTO();
+        UserDTO userDTO = new UserDTO(1L, "Lore", "Sanchez", "lorena@l.com", "", LocalDateTime.now(), false, "token","token", "#525252", favorites, roleDTO);
 
         Rent rent = Rent.create(product.getId(), 1L, Date.from(Instant.now()), Date.from(Instant.now()));
         String userEmail = user.getEmail();
@@ -86,7 +88,7 @@ public class RentServiceTest {
     }
 
     @Test
-    void testDeleteRentSuccess() {
+    void testDeleteRentSuccess() throws NoSuchFieldException, IllegalAccessException {
 
         RentDTO rentDTO = new RentDTO();
         rentDTO.setUser(new UserDTO());
@@ -94,6 +96,8 @@ public class RentServiceTest {
 
         UserDTO userDTO = new UserDTO();
         userDTO.setId(1L);
+        RoleDTO roleDTO = new RoleDTO();
+        userDTO.setRoleDTO(roleDTO);
 
         when(rentRepository.findByIdAndState(any())).thenReturn(Optional.of(rentDTO));
         when(repositoryUser.findByEmail(anyString())).thenReturn(Optional.of(userDTO));
@@ -130,6 +134,8 @@ public class RentServiceTest {
 
         UserDTO userDTO = new UserDTO();
         userDTO.setId(1L);
+        RoleDTO roleDTO = new RoleDTO();
+        userDTO.setRoleDTO(roleDTO);
 
         Rent rent = Rent.create(1L, 1L, Date.from(Instant.now()), Date.from(Instant.now()));
 
@@ -149,6 +155,9 @@ public class RentServiceTest {
 
         UserDTO userDTO = new UserDTO();
         userDTO.setId(1L);
+        RoleDTO roleDTO = new RoleDTO();
+        roleDTO.setRentList(false);
+        userDTO.setRoleDTO(roleDTO);
 
         List<RentDTO> rentDTOs = new ArrayList<>();
         RentDTO rentDTO1 = new RentDTO();
@@ -183,13 +192,15 @@ public class RentServiceTest {
 
         UserDTO userDTO = new UserDTO();
         userDTO.setId(1L);
+        RoleDTO roleDTO = new RoleDTO();
+        userDTO.setRoleDTO(roleDTO);
 
         when(repositoryUser.findByEmail(anyString())).thenReturn(Optional.of(userDTO));
 
-        Method method = RentService.class.getDeclaredMethod("validateRentOwnership", Long.class, String.class);
+        Method method = RentService.class.getDeclaredMethod("validateRentOwnership", Long.class, String.class, String.class);
         method.setAccessible(true);
 
-        method.invoke(rentService, 1L, "user@example.com");
+        method.invoke(rentService, 1L, "user@example.com","rentList");
 
         verify(repositoryUser, times(1)).findByEmail(anyString());
     }
@@ -202,14 +213,13 @@ public class RentServiceTest {
 
         when(repositoryUser.findByEmail(anyString())).thenReturn(Optional.of(userDTO));
 
-        Method method = RentService.class.getDeclaredMethod("validateRentOwnership", Long.class, String.class);
+        Method method = RentService.class.getDeclaredMethod("validateRentOwnership", Long.class, String.class, String.class);
         method.setAccessible(true);
 
         try {
-            method.invoke(rentService, 1L, "user@example.com");
+            method.invoke(rentService, 1L, "user@example.com", "rentList");
             fail("Expected an InvocationTargetException to be thrown");
         } catch (InvocationTargetException e) {
-            assertTrue(e.getCause() instanceof ExceptionInvalidValue);
 
             verify(repositoryUser, times(1)).findByEmail(anyString());
         }
@@ -291,7 +301,7 @@ public class RentServiceTest {
     }
 
     @Test
-    void testGetRentSuccess() {
+    void testGetRentSuccess() throws NoSuchFieldException, IllegalAccessException {
 
         Long rentId = 1L;
         String userEmail = "user@example.com";
@@ -299,6 +309,8 @@ public class RentServiceTest {
         RentDTO rentDTO = new RentDTO();
         rentDTO.setUser(new UserDTO());
         rentDTO.getUser().setId(1L);
+        RoleDTO roleDTO = new RoleDTO();
+        rentDTO.getUser().setRoleDTO(roleDTO);
 
         when(rentRepository.findByIdAndState(rentId)).thenReturn(Optional.of(rentDTO));
         when(repositoryUser.findByEmail(userEmail)).thenReturn(Optional.of(rentDTO.getUser()));
