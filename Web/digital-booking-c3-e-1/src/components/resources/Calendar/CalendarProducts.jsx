@@ -1,8 +1,8 @@
 import ButtonPrimary from "../../common/Buttons/ButtonPrimary";
+import styles from "./CalendarProducts.module.css";
 import "react-calendar/dist/Calendar.css";
 import React, { useEffect, useState } from "react";
 import Calendar from "react-calendar";
-import { useParams, useNavigate } from "react-router-dom";
 import RentsService from "../../../shared/services/RentsService";
 import moment from "moment";
 import { registerLocale, setDefaultLocale } from "react-datepicker";
@@ -11,24 +11,28 @@ import es from "date-fns/locale/es";
 registerLocale("es", es);
 setDefaultLocale("es");
 
-const CalendarProducts = () => {
+const CalendarProducts = ({ onSelectDates }) => {
   const [rents, setRents] = useState([]);
   const [selectedStartDate, setSelectedStartDate] = useState(null);
   const [selectedEndDate, setSelectedEndDate] = useState(null);
+  const [totalRentalDays, setTotalRentalDays] = useState(0);
+
+
 
   const fetchRents = async () => {
-    try {
-      const data = await RentsService.getAll();
-      console.log("Rentas obtenidas:", data);
-      setRents(data);
-    } catch (err) {
-      console.log(`Error al obtener las rentas: ${err}`);
-    }
-  };
-
-  useEffect(() => {
-    fetchRents();
-  }, []);
+      try {
+          const data = await RentsService.getAll();
+          console.log("Rentas obtenidas:", data);
+          setRents(data);
+        } catch (err) {
+            console.log(`Error al obtener las rentas: ${err}`);
+        }
+    };
+    
+    useEffect(() => {
+        fetchRents();
+    }, []);
+    console.log(rents);
 
   console.log(rents);
 
@@ -40,9 +44,6 @@ const CalendarProducts = () => {
     });
   };
 
-
-
-  
 
   const getTileClassName = (date) => {
     if (
@@ -60,13 +61,21 @@ const CalendarProducts = () => {
   };
 
   const handleDateSelect = (date) => {
+    const selectedDate = moment(date).startOf("day");
+  
     if (selectedEndDate) {
-      setSelectedStartDate(moment(date).startOf("day"));
-      setSelectedEndDate(null);
+      if (selectedDate > selectedEndDate) {
+        setSelectedStartDate(selectedEndDate);
+        setSelectedEndDate(selectedDate);
+      } else {
+        setSelectedStartDate(selectedDate);
+      }
     } else if (!selectedStartDate) {
-      setSelectedStartDate(moment(date).startOf("day"));
+      setSelectedStartDate(selectedDate);
     } else {
-      setSelectedEndDate(moment(date).startOf("day"));
+      setSelectedEndDate(selectedDate);
+      const diffDays = Math.abs(selectedDate.diff(selectedStartDate, 'days')) + 1;
+      setTotalRentalDays(diffDays);
     }
   };
 
@@ -74,13 +83,28 @@ const CalendarProducts = () => {
     return moment(date).format("DD/MM/YYYY");
   };
 
+
+  useEffect(() => {
+    if (selectedStartDate && selectedEndDate) {
+      const diffDays = Math.abs(selectedEndDate.diff(selectedStartDate, "days")) + 1;
+      setTotalRentalDays(diffDays);
+    } else {
+      setTotalRentalDays(0);
+    }
+  }, [selectedStartDate, selectedEndDate]);
+
   const showButton = selectedStartDate && selectedEndDate;
+
+  useEffect(() => {
+    if (onSelectDates) {
+      onSelectDates(selectedStartDate, selectedEndDate);
+    }
+  }, [selectedStartDate, selectedEndDate]);
 
   return (
     <div>
-      <p> Fechas disponibles </p>
-      <div>
-        <div>
+      <div className={styles.containerCalendar}>
+        <div className={styles.section}>
           <Calendar
             locale="es"
             showDoubleView
@@ -91,16 +115,28 @@ const CalendarProducts = () => {
           />
         </div>
 
-        <div>
-          <div>
+        <div className={styles.section}>
+          <div className={styles.selectedDates}>
             {showButton && (
               <div>
-                <p>
-                  Fecha de inicio: {formatDate(selectedStartDate)}
-                  <br />
-                  Fecha de fin: {formatDate(selectedEndDate)}
+                <p className={styles.selectedDatesTitle}>
+                  Estas son las fechas seleccionadas
                 </p>
-                <ButtonPrimary>Iniciar reserva</ButtonPrimary>
+                <div className={styles.textDates}>
+                  <div>
+                    <span>Fecha de inicio:</span>{" "}
+                    {formatDate(selectedStartDate)}
+                  </div>
+                  <div>
+                    <span>Fecha de fin:</span> {formatDate(selectedEndDate)}
+                  </div>
+                  <div>
+    <span>Días totales de renta:</span> {totalRentalDays}
+  </div>
+                </div>
+                <div className={styles.buttonTextDates}>
+                  <ButtonPrimary>Iniciar reserva</ButtonPrimary>
+                </div>
               </div>
             )}
           </div>

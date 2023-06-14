@@ -33,6 +33,13 @@ const ProductDetails = () => {
   const [region, setRegion] = useState("");
   const [address, setAddress] = useState("");
   console.log(userLocation, isUserLocationLoaded);
+  const [selectedStartDate, setSelectedStartDate] = useState(null);
+  const [selectedEndDate, setSelectedEndDate] = useState(null);
+
+  const handleSelectDates = (startDate, endDate) => {
+    setSelectedStartDate(startDate);
+    setSelectedEndDate(endDate);
+  };
 
   // const [product, setProduct] = useState()
 
@@ -214,13 +221,14 @@ const ProductDetails = () => {
               </div>
 
               <div className={styles.calendar}>
-                <CalendarProducts />
+                <h3 className={styles.calendarTitle}> Fechas disponibles </h3>
+                <CalendarProducts onSelectDates={handleSelectDates} />
               </div>
 
               <div className={styles.politics}>
                 <Politics />
               </div>
-              <h3 className={styles.nameProduct}>Unicación del prod</h3>
+              <h3 className={styles.locationProduct}>Unicación del producto</h3>
             </div>
           </div>
 
