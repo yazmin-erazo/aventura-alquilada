@@ -93,7 +93,7 @@ const CrudCity = () => {
     <>
       <section className={styles["container"]} >
         <div className={styles["button-container"]}>
-          <Link to="city/add">
+          <Link to="/admin/city/add/">
             <ButtonPrimary>Agregar ciudad</ButtonPrimary>
           </Link>
         </div>
