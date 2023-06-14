@@ -4,7 +4,7 @@ const Politics= () => {
 
     return (
         <div className={styles.politics}>
-          <h2 className={styles.titlePolitics}> ¿Qué tenés que saber? </h2>
+          <h2 className={styles.titlePolitics}>Políticas de uso</h2>
           
           <div className={styles.detail}>
             <section className={styles.detailItem}>
