@@ -38,7 +38,12 @@ public class RoleHandler {
                 roleRequest.getRentList(),
                 roleRequest.getRentCreate(),
                 roleRequest.getRentUpdate(),
-                roleRequest.getRentDelete()));
+                roleRequest.getRentDelete(),
+                roleRequest.getCityList(),
+                roleRequest.getCityCreate(),
+                roleRequest.getCityUpdate(),
+                roleRequest.getCityDelete()
+                ));
     }
 
 
@@ -64,7 +69,12 @@ public class RoleHandler {
                 updateRole.getRentList(),
                 updateRole.getRentCreate(),
                 updateRole.getRentUpdate(),
-                updateRole.getRentDelete()));
+                updateRole.getRentDelete(),
+                updateRole.getCityList(),
+                updateRole.getCityCreate(),
+                updateRole.getCityUpdate(),
+                updateRole.getCityDelete()
+                ));
     }
     public String deleteRole(Long id) {
         return roleService.deleteRole(Role.createById(id));
