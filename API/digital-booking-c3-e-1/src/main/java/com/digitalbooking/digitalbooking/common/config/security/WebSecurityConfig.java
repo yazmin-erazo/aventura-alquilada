@@ -70,11 +70,11 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .permitAll()
                 .antMatchers(HttpMethod.GET, "/user/**","/role/**")
                 .authenticated()
-                .antMatchers(HttpMethod.POST, "/product/**", "/category/**","/role/**")
+                .antMatchers(HttpMethod.POST, "/product/**", "/category/**","/role/**", "/city/**")
                 .authenticated()
-                .antMatchers(HttpMethod.PUT, "/product/**","/role/**")
+                .antMatchers(HttpMethod.PUT, "/product/**","/role/**","/city/**")
                 .authenticated()
-                .antMatchers(HttpMethod.DELETE, "/product/**","/role/**","/category/**")
+                .antMatchers(HttpMethod.DELETE, "/product/**","/role/**","/category/**","/city/**")
                 .authenticated();
 
         http.addFilterBefore(

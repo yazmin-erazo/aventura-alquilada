@@ -41,9 +41,11 @@ public class QueryControllerProduct {
                                                          @RequestParam(required = false) String colorFilter,
                                                          @Parameter(description = "Filter products by material")
                                                          @RequestParam(required = false) String materialFilter,
+                                                         @Parameter(description = "Filter products by cityId")
+                                                         @RequestParam(required = false) Long cityId,
                                                          @Parameter(description = "search a product by diferent columns")
                                                          @RequestParam(required = false) String search) {
-        return ResponseEntity.ok(productHandler.getProduct(brandFilter, genderFilter, nameFilter, priceLessThan, priceGreaterThan, sizeFilter, stateFilter, colorFilter, materialFilter,search));
+        return ResponseEntity.ok(productHandler.getProduct(brandFilter, genderFilter, nameFilter, priceLessThan, priceGreaterThan, sizeFilter, stateFilter, colorFilter, materialFilter, cityId,search));
     }
 
     @GetMapping("{id-product}")

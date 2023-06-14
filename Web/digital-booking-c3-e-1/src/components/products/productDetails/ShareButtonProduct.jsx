@@ -1,13 +1,13 @@
 import React, { useState } from 'react';
 import { FacebookShareButton, TwitterShareButton, WhatsappShareButton } from 'react-share';
 import { FacebookIcon, TwitterIcon, WhatsappIcon } from 'react-share';
-import './ShareButtons.css';
+import './ShareButtonProduct.css';
 
-const ShareButtons = () => {
+const ShareButtonProduct = ({ product }) => {
   const [showModal, setShowModal] = useState(false);
-
+  
   const baseUrl = 'http://equipamiento-deportivo-static.s3-website.us-east-2.amazonaws.com/';
-  const message = `¡Desata tu lado aventurero con nuestro alquiler de equipo deportivo! 🌊🧗 De la escalada a los deportes acuáticos, lo tenemos TODO. ¡No sueñes, vive la aventura! 🔥 Equípate con lo mejor y sumérgete en la acción. 🚀 Tu próxima aventura te espera: `;
+  const productUrl = `${baseUrl}product/${product.id}`;
 
   const openModal = () => {
     setShowModal(true);
@@ -19,21 +19,35 @@ const ShareButtons = () => {
 
   return (
     <div>
+      <h4>Compartir producto</h4>
       <button onClick={openModal}>
         Compartir
       </button>
       {showModal && (
         <div className="modal">
           <div className="modal-content">
-            <h2 className="modal-heading">¡Comparte la emoción! Elige tu red social favorita para difundir la aventura.</h2>
+            <h2>{product.name}</h2>
+            <img src={product.imageURL} alt={product.name} />
+            <p>{product.description}</p>
             <div>
-              <FacebookShareButton url={baseUrl} quote={message}>
+              <FacebookShareButton
+                url={productUrl}
+                quote=""
+                hashtag="#equipamientoDeportivo"
+              >
                 <FacebookIcon size={32} round={true} />
               </FacebookShareButton>
-              <TwitterShareButton url={baseUrl} title={message}>
+              <TwitterShareButton
+                url={productUrl}
+                title=""
+                hashtags={['equipamientoDeportivo', 'aventura']}
+              >
                 <TwitterIcon size={32} round={true} />
               </TwitterShareButton>
-              <WhatsappShareButton url={baseUrl} title={message} separator=": ">
+              <WhatsappShareButton
+                url={productUrl}
+                title=""
+              >
                 <WhatsappIcon size={32} round={true} />
               </WhatsappShareButton>
             </div>
@@ -45,4 +59,4 @@ const ShareButtons = () => {
   );
 };
 
-export default ShareButtons;
+export default ShareButtonProduct;
