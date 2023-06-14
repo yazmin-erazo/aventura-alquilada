@@ -52,7 +52,7 @@ public class RentServiceTest {
 
     @Test
     void testCreateRentSuccess() throws Exception {
-        Product product = Product.create("Carpa", "Nemo Wagontop", "Nueva", BigDecimal.valueOf(150),"Descripción test", "8 personas", "No aplica", null, 1L, "Test Base64", "Carpa1", "Amarillo", "Poliéster", List.of(), "36.1430638", "-115.1617901");
+        Product product = Product.create("Carpa", "Nemo Wagontop", "Nueva", BigDecimal.valueOf(150),"Descripción test", "8 personas", "No aplica", null, 1L, "Test Base64", "Carpa1", "Amarillo", "Poliéster", List.of(), 129L);
         ProductDTO productDTO = new ProductDTO();
 
         User user =  User.create( "Lore", "Sanchez", "test@test.com", "123");
