@@ -35,10 +35,10 @@ const ProductsService = {
             res => res.data
         ),
 
-    addFav:(payload) => API.post(PRODUCTS_ENDPOINTS.ADD_FAV).then(
+    addFav:(payload) => API.post(PRODUCTS_ENDPOINTS.ADD_FAV, payload).then(
         res=>res.data
     ),
-    deleteFav:(id) => API.delete(PRODUCTS_ENDPOINTS.DELETE_FAV).then(
+    deleteFav:(id) => API.delete(PRODUCTS_ENDPOINTS.DELETE_FAV+id).then(
         res=>res.data
     )
 

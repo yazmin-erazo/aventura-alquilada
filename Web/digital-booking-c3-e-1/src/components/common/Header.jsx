@@ -108,7 +108,9 @@ const Header = () => {
             >
               <li>Perfil</li>
               <hr />
+              <Link to= "favs">
               <li>Mis favoritos</li>
+              </Link>
               <hr />
               <li>Configuración</li>
               <li className="logout" onClick={logoutHandler}>

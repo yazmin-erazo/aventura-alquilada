@@ -7,7 +7,7 @@ const initialState = {
     name: "",
     lastname: "",
     role: "",
-    favoritos: [32, 48, 132],
+    favorites: [],
     initialsColor: "",
   },
   token: sessionStorage.getItem("token") || "",
@@ -33,19 +33,18 @@ const authReducer = (state, action) => {
           name: "",
           lastname: "",
           role: "",
-          favoritos: [32, 48, 132],
+          favorites:[],
           initialsColor: "",
         },
         token: "",
         isLogedIn: false,
       };
     case "FAVS":
+      sessionStorage.setItem("user", JSON.stringify(action.payload));
       return{
         ...state,
-        user:{
-          ...user,favoritos:action.payload.favoritos
-        }
-      } 
+      user:action.payload,
+      };
     default:
       return state;
   }

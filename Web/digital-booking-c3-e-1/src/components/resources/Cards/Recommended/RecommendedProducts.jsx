@@ -25,12 +25,16 @@ const RecommendedProducts = ({
     if(user.user.name){
       setIsFavorite(!isFavorite);
       console.log(isFavorite);
+      let buscarFav
+      const favoriteProducts= JSON.parse(sessionStorage.getItem("user")).favorites
+      if(user.user.favorites.length > 0){
+         buscarFav= favoriteProducts.find(p=>p.id===product.id)
+      }
+     let resultado= favoriteProducts
 
-     const buscarFav= user.user.favoritos.find(p=>p.id===product.id)
-     let resultado= user.user.favoritos
      if(!buscarFav){
-      resultado.push(buscarFav.id)
-      ProductsService.addFav({productId:buscarFav.id})
+      resultado.push(product.id)
+      ProductsService.addFav({productId:product.id})
 
      }else{
       resultado=resultado.filter(id=>id!==buscarFav.id)
@@ -38,7 +42,7 @@ const RecommendedProducts = ({
      }
 dispatch({
           type: "FAVS",
-          payload: { favoritos:resultado },
+          payload: { ...user.user, favorites:resultado },
         });
 
     }
