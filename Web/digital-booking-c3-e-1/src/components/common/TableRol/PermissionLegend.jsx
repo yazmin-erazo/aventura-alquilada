@@ -61,6 +61,16 @@ const PermissionLegend = () => {
             <span className={styles.colorName}>#e0e0e0</span>
           </td>
         </tr>
+        <tr>
+          <td>Ciudades</td>
+          <td>
+            <span
+              className={styles.colorBlock}
+              style={{ backgroundColor: "#F0946C" }}
+            ></span>
+            <span className={styles.colorName}>#ffe4da</span>
+          </td>
+        </tr>
       </tbody>
     </table>
   );

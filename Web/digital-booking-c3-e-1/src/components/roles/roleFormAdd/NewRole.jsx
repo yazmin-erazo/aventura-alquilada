@@ -41,6 +41,12 @@ const NewRole = () => {
         edit: false,
         delete: false,
       },
+      cities: {
+        list: false,
+        add: false,
+        edit: false,
+        delete: false,
+      },
     },
     selectAll: false,
   });
@@ -110,6 +116,10 @@ const NewRole = () => {
       rentCreate: formData.permissions.rent.add,
       rentUpdate: formData.permissions.rent.edit,
       rentDelete: formData.permissions.rent.delete,
+      cityList: formData.permissions.cities.list,
+      cityCreate: formData.permissions.cities.add,
+      cityUpdate: formData.permissions.cities.edit,
+      cityDelete: formData.permissions.recitiesnt.delete,
     };
 
     try {
@@ -240,6 +250,18 @@ const NewRole = () => {
                   <CheckItem category="roles" action="add" name="Agregar" />
                   <CheckItem category="roles" action="edit" name="Editar" />
                   <CheckItem category="roles" action="delete" name="Eliminar" />
+                </div>
+              </div>
+
+              <div className={styles.category}>
+                <div className={styles.categoryName}>
+                  <h4>Ciudades</h4>
+                </div>
+                <div className={styles.categoryPermissions}>
+                  <CheckItem category="cities" action="list" name="Listar" />
+                  <CheckItem category="cities" action="add" name="Agregar" />
+                  <CheckItem category="cities" action="edit" name="Editar" />
+                  <CheckItem category="cities" action="delete" name="Eliminar" />
                 </div>
               </div>
             </div>
