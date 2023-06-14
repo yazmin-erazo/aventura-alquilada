@@ -89,8 +89,8 @@ class RoleServiceTest {
     @Test
     void testGetRolesSuccess() {
         List<RoleDTO> expectedRoles = Arrays.asList(
-                new RoleDTO(1L, "Admin",true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true),
-                new RoleDTO(2L, "User",true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true)
+                new RoleDTO(1L, "Admin",true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true),
+                new RoleDTO(2L, "User",true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true)
         );
 
         when(roleRepository.getAll()).thenReturn(expectedRoles);
@@ -115,7 +115,7 @@ class RoleServiceTest {
     @Test
     void testGetRoleSuccess() throws Exception {
         Long roleId = 1L;
-        RoleDTO expectedRole = new RoleDTO(1L, "Admin",true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true);
+        RoleDTO expectedRole = new RoleDTO(1L, "Admin",true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true);
 
         when(roleRepository.findByIdAndIsDelete(roleId)).thenReturn(Optional.of(expectedRole));
 
@@ -142,7 +142,7 @@ class RoleServiceTest {
     @Test
     void testGetRoleByNameSuccess() throws Exception {
         String roleName = "Admin";
-        RoleDTO expectedRole = new RoleDTO(1L, "Admin",true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true);
+        RoleDTO expectedRole = new RoleDTO(1L, "Admin",true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true);
 
 
         when(roleRepository.findByNameAndIsDelete(roleName)).thenReturn(Optional.of(expectedRole));
@@ -192,13 +192,18 @@ class RoleServiceTest {
         Boolean rentCreate = true;
         Boolean rentUpdate = true;
         Boolean rentDelete = true;
+        Boolean cityList = true;
+        Boolean cityCreate = true;
+        Boolean cityUpdate = true;
+        Boolean cityDelete = true;
         Boolean isDelete = false;
 
         Role role = Role.create(name, categoryList, categoryCreate, categoryUpdate, categoryDelete,
                 productList, productCreate, productUpdate, productDelete,
                 userList, userCreate, userUpdate, userDelete,
                 roleList, roleCreate, roleUpdate, roleDelete,
-                rentList, rentCreate, rentUpdate, rentDelete);
+                rentList, rentCreate, rentUpdate, rentDelete,
+                cityList, cityCreate, cityUpdate, cityDelete);
 
         assertNotNull(role);
         assertEquals(id, role.getId());
@@ -223,6 +228,10 @@ class RoleServiceTest {
         assertEquals(rentCreate, role.getRentCreate());
         assertEquals(rentUpdate, role.getRentUpdate());
         assertEquals(rentDelete, role.getRentDelete());
+        assertEquals(cityList, role.getCityList());
+        assertEquals(cityCreate, role.getCityCreate());
+        assertEquals(cityUpdate, role.getCityUpdate());
+        assertEquals(cityDelete, role.getCityDelete());
         assertEquals(isDelete, role.getIsDelete());
     }
 
@@ -250,13 +259,18 @@ class RoleServiceTest {
         Boolean rentCreate = true;
         Boolean rentUpdate = true;
         Boolean rentDelete = true;
+        Boolean cityList = true;
+        Boolean cityCreate = true;
+        Boolean cityUpdate = true;
+        Boolean cityDelete = true;
         Boolean isDelete = false;
 
         Role role = Role.update(id, name, categoryList, categoryCreate, categoryUpdate, categoryDelete,
                 productList, productCreate, productUpdate, productDelete,
                 userList, userCreate, userUpdate, userDelete,
                 roleList, roleCreate, roleUpdate, roleDelete,
-                rentList, rentCreate, rentUpdate, rentDelete);
+                rentList, rentCreate, rentUpdate, rentDelete,
+                cityList, cityCreate, cityUpdate, cityDelete);
 
         assertNotNull(role);
         assertEquals(id, role.getId());
@@ -281,6 +295,10 @@ class RoleServiceTest {
         assertEquals(rentCreate, role.getRentCreate());
         assertEquals(rentUpdate, role.getRentUpdate());
         assertEquals(rentDelete, role.getRentDelete());
+        assertEquals(cityList, role.getCityList());
+        assertEquals(cityCreate, role.getCityCreate());
+        assertEquals(cityUpdate, role.getCityUpdate());
+        assertEquals(cityDelete, role.getCityDelete());
         assertEquals(isDelete, role.getIsDelete());
     }
 
@@ -313,5 +331,9 @@ class RoleServiceTest {
         assertNull(role.getRentCreate());
         assertNull(role.getRentUpdate());
         assertNull(role.getRentDelete());
+        assertNull(role.getCityList());
+        assertNull(role.getCityCreate());
+        assertNull(role.getCityUpdate());
+        assertNull(role.getCityDelete());
     }
 }
