@@ -21,6 +21,7 @@ import ProductMap from "../../resources/productMap/ProductMap";
 import mapboxgl from "mapbox-gl";
 import SelectedDates from "../../resources/Calendar/SelectedDates";
 import moment from "moment";
+import ShareButtonProduct from "./ShareButtonProduct";
 
 const ProductDetails = () => {
   const data = useContext(ProductsContext);
@@ -183,8 +184,10 @@ const ProductDetails = () => {
                   <p className={styles.productDescription}>
                     {product.description}
                   </p>
+                </div>
 
-                  {/* <p className={styles.price}>${product.price}</p> */}
+                <div className={styles.shareButton}>
+                  <ShareButtonProduct product={product} />
                 </div>
 
                 <div className={styles.review}>

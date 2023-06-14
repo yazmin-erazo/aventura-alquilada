@@ -28,8 +28,7 @@ public final class Product {
     private String color;
     private String material;
     private List<ImageProduct> imageProducts;
-    private String latitude;
-    private String longitude;
+    private Long cityId;
 
     private Product(Long id) {
         this.id = id;
@@ -54,8 +53,7 @@ public final class Product {
                                  String color,
                                  String material,
                                  List<ImageProduct> imageProducts,
-                                 String latitude,
-                                 String longitude) throws Exception {
+                                 Long cityId) throws Exception {
         Validator.validateMandatory(name, "El nombre es requerido para crear un producto");
         Validator.validateMandatory(brand, "La marca es requerida para crear un producto");
         Validator.validateMandatory(state, "El estado es requerido para crear un producto");
@@ -70,12 +68,10 @@ public final class Product {
         Validator.validateMandatory(fileName, "El nombre del archivo es requerido para crear un producto");
         Validator.validateGreater(price, BigDecimal.valueOf(0), "El precio debe ser mayor que cero");
         //Validator.validateGreater(deposit, BigDecimal.valueOf(0), "El deposito debe ser mayor que cero");
-        Validator.validateMandatory(latitude, "La Latitud es requerida para crear un producto");
-        Validator.validateMandatory(longitude, "La Longitud es requerida para crear un producto");
-
+        Validator.validateMandatory(cityId, "La ciudad es requerida para crear un producto");
 
         Category category = Category.create(idCategory);
-        return new Product(0L, name, brand, state, price, description, size, gender, deposit, category, image, fileName, color, material, imageProducts,latitude,longitude);
+        return new Product(0L, name, brand, state, price, description, size, gender, deposit, category, image, fileName, color, material, imageProducts,cityId);
     }
 
     public static Product update(Long id,

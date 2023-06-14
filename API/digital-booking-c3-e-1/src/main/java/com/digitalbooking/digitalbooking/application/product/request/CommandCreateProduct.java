@@ -56,9 +56,6 @@ public class CommandCreateProduct {
     @JsonProperty
     private List<SecondaryImages> secondaryImages;
     @JsonProperty
-    @Schema(allowableValues = {"36.1430638"})
-    private String latitude;
-    @JsonProperty
-    @Schema(allowableValues = {"-115.1617901"})
-    private String longitude;
+    @Schema(allowableValues = {"4"})
+    private Long cityId;
 }
