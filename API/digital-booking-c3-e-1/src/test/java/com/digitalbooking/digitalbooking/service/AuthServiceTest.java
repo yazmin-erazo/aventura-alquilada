@@ -5,6 +5,8 @@ import com.digitalbooking.digitalbooking.common.exception.ExceptionMandatoryValu
 import com.digitalbooking.digitalbooking.domain.auth.entity.Auth;
 import com.digitalbooking.digitalbooking.domain.auth.entity.UserDetailsImpl;
 import com.digitalbooking.digitalbooking.domain.auth.service.AuthService;
+import com.digitalbooking.digitalbooking.domain.rent.dto.RentDTO;
+import com.digitalbooking.digitalbooking.domain.role.dto.RoleDTO;
 import com.digitalbooking.digitalbooking.domain.user.dto.UserDTO;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -123,8 +125,9 @@ class AuthServiceTest {
         String role = "ROLE_USER";
         LocalDateTime currentDate = LocalDateTime.now();
         List<Long> favorites = new ArrayList<>();
+        RoleDTO roleDTO = new RoleDTO();
 
-        UserDTO userDTO = new UserDTO(id, name, lastName, email, password,currentDate,true,role,"", "#525252", favorites);
+        UserDTO userDTO = new UserDTO(id, name, lastName, email, password,currentDate,true,role,"", "#525252", favorites, roleDTO);
         UserDetailsImpl userDetails = UserDetailsImpl.build(userDTO);
 
         assertEquals(id, userDetails.getId());
@@ -153,9 +156,10 @@ class AuthServiceTest {
         String role = "ROLE_USER";
         LocalDateTime currentDate = LocalDateTime.now();
         List<Long> favorites = new ArrayList<>();
+        RoleDTO roleDTO = new RoleDTO();
 
-        UserDTO userDTO1 = new UserDTO(id1, name, lastName, email, password,currentDate,true,role,"", "#525252", favorites);
-        UserDTO userDTO2 = new UserDTO(id2, name, lastName, email, password,currentDate,true,role,"", "#525252", favorites);
+        UserDTO userDTO1 = new UserDTO(id1, name, lastName, email, password,currentDate,true,role,"", "#525252", favorites, roleDTO);
+        UserDTO userDTO2 = new UserDTO(id2, name, lastName, email, password,currentDate,true,role,"", "#525252", favorites, roleDTO);
 
         UserDetailsImpl userDetails1 = UserDetailsImpl.build(userDTO1);
         UserDetailsImpl userDetails2 = UserDetailsImpl.build(userDTO2);

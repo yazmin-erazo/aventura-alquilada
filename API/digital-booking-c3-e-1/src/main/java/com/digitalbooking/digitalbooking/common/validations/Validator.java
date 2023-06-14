@@ -40,7 +40,13 @@ public class Validator {
     }
 
     public static void validatePositive(Double value, String message) {
-        if (value <= 0) {
+        if (value < 0) {
+            throw new ExceptionInvalidValue(message);
+        }
+    }
+
+    public static void validateGreaterThan(Double value,Double greater, String message) {
+        if (value > greater) {
             throw new ExceptionInvalidValue(message);
         }
     }

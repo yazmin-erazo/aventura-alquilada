@@ -23,14 +23,12 @@ public class QueryControllerRent {
     private RentHandler rentHandler;
 
     @GetMapping("{id-rent}")
-    @PreAuthorize("@authorizationFilter.hasPermission('rentList')")
     @Operation(summary = "find rent", description = "Method to find rent by Id")
-    public ResponseEntity<RentDTO> getRent(@PathVariable("id-rent") Long id, Authentication authentication) {
+    public ResponseEntity<RentDTO> getRent(@PathVariable("id-rent") Long id, Authentication authentication) throws NoSuchFieldException, IllegalAccessException {
         return ResponseEntity.ok(rentHandler.findById(id, ((UserDetailsImpl)authentication.getPrincipal()).getEmail()));
     }
 
     @GetMapping("rents")
-    @PreAuthorize("@authorizationFilter.hasPermission('rentList')")
     @Operation(summary = "list rents", description = "Method to fetch the rents")
     public ResponseEntity<List<RentDTO>> listRents(Authentication authentication){
         return ResponseEntity.ok(rentHandler.getRents( ((UserDetailsImpl)authentication.getPrincipal()).getEmail()));

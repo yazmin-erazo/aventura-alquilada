@@ -2,8 +2,8 @@ package com.digitalbooking.digitalbooking.service;
 
 import com.digitalbooking.digitalbooking.DigitalConfigurationTest;
 import com.digitalbooking.digitalbooking.common.exception.ExceptionInvalidValue;
-import com.digitalbooking.digitalbooking.domain.auth.entity.UserDetailsImpl;
 import com.digitalbooking.digitalbooking.domain.mail.MailRepository;
+import com.digitalbooking.digitalbooking.domain.rent.dto.RentDTO;
 import com.digitalbooking.digitalbooking.domain.role.dto.RoleDTO;
 import com.digitalbooking.digitalbooking.domain.role.repository.RoleRepository;
 import com.digitalbooking.digitalbooking.domain.user.dto.UserDTO;
@@ -123,8 +123,9 @@ class ServiceUserTest {
         String token = "testToken";
         LocalDateTime currentDate = LocalDateTime.now();
         List<Long> favorites = new ArrayList<>();
+        RoleDTO roleDTO = new RoleDTO();
 
-        UserDTO user = new UserDTO(1L, "Lore", "Sanchez", "lorena@l.com", token, currentDate, false, token,token, "#525252", favorites);
+        UserDTO user = new UserDTO(1L, "Lore", "Sanchez", "lorena@l.com", token, currentDate, false, token,token, "#525252", favorites, roleDTO);
 
         when(repositoryUser.findByToken(token)).thenReturn(Optional.of(user));
 
@@ -145,8 +146,9 @@ class ServiceUserTest {
         LocalDateTime currentDate = LocalDateTime.now();
         LocalDateTime expirationDate = currentDate.minusHours(48L);
         List<Long> favorites = new ArrayList<>();
+        RoleDTO roleDTO = new RoleDTO();
 
-        UserDTO user = new UserDTO(1L, "Lore", "Sanchez", "lorena@l.com", token, expirationDate, false, token,token, "#525252", favorites);
+        UserDTO user = new UserDTO(1L, "Lore", "Sanchez", "lorena@l.com", token, expirationDate, false, token,token, "#525252", favorites, roleDTO);
 
         when(repositoryUser.findByToken(token)).thenReturn(Optional.of(user));
 
@@ -164,8 +166,9 @@ class ServiceUserTest {
         LocalDateTime currentDate = LocalDateTime.now();
         LocalDateTime expirationDate = currentDate.plusHours(48L);
         List<Long> favorites = new ArrayList<>();
+        RoleDTO roleDTO = new RoleDTO();
 
-        UserDTO user = new UserDTO(1L, "Lore", "Sanchez", "lorena@l.com", token, expirationDate, true, token,token,  "#525252", favorites);
+        UserDTO user = new UserDTO(1L, "Lore", "Sanchez", "lorena@l.com", token, expirationDate, true, token,token,  "#525252", favorites, roleDTO);
 
         when(repositoryUser.findByToken(token)).thenReturn(Optional.of(user));
 

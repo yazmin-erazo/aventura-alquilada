@@ -1,9 +1,11 @@
 package com.digitalbooking.digitalbooking.application.product.handler;
 
+import com.digitalbooking.digitalbooking.application.product.request.CommandCommentProduct;
 import com.digitalbooking.digitalbooking.application.product.request.CommandCreateProduct;
 import com.digitalbooking.digitalbooking.application.product.request.CommandUpdateProduct;
 import com.digitalbooking.digitalbooking.application.user.request.CommandAddToFavoritesProductsRequest;
 import com.digitalbooking.digitalbooking.domain.product.dto.ProductDTO;
+import com.digitalbooking.digitalbooking.domain.product.entity.CommentProduct;
 import com.digitalbooking.digitalbooking.domain.product.entity.ImageProduct;
 import com.digitalbooking.digitalbooking.domain.product.entity.Product;
 import com.digitalbooking.digitalbooking.domain.product.service.ServiceProduct;
@@ -63,5 +65,9 @@ public class ProductHandler {
 
     public String deleteProductFromFavorite(Long productId, String email) {
         return serviceProduct.deleteProductTFromFavorite(Product.createById(productId), email);
+    }
+
+    public String commentProduct(CommandCommentProduct commandCommentProduct, String email) throws Exception {
+        return serviceProduct.commentProduct(CommentProduct.create(commandCommentProduct.getProductId(),commandCommentProduct.getComment(),commandCommentProduct.getScore()), email);
     }
 }

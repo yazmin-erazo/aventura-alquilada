@@ -6,11 +6,10 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
-import static lombok.AccessLevel.PRIVATE;
-
 import java.util.Random;
 
 import static com.digitalbooking.digitalbooking.common.Constants.colors;
+import static lombok.AccessLevel.PRIVATE;
 
 
 @Getter

@@ -6,6 +6,7 @@ import com.digitalbooking.digitalbooking.common.exception.ExceptionNullValue;
 import com.digitalbooking.digitalbooking.domain.category.dto.CategoryDTO;
 import com.digitalbooking.digitalbooking.domain.category.repository.CategoryRepository;
 import com.digitalbooking.digitalbooking.domain.product.dto.ProductDTO;
+import com.digitalbooking.digitalbooking.domain.product.entity.CommentProduct;
 import com.digitalbooking.digitalbooking.domain.product.entity.ImageProduct;
 import com.digitalbooking.digitalbooking.domain.product.entity.Product;
 import com.digitalbooking.digitalbooking.domain.product.repository.RepositoryProduct;
@@ -286,6 +287,8 @@ class ServiceProductTest {
         ProductDTO product2 = new ProductDTO();
         product1.setRents(List.of());
         product2.setRents(List.of());
+        product1.setCommentProducts(List.of());
+        product2.setCommentProducts(List.of());
         List<ProductDTO> mockedList = Arrays.asList(product1, product2);
 
         when(repositoryProduct.getAll(any(), any(), any(), any(), any(), any(), any(), any(), any()))
@@ -302,6 +305,7 @@ class ServiceProductTest {
 
         ProductDTO product = new ProductDTO();
         product.setRents(List.of());
+        product.setCommentProducts(List.of());
 
         when(repositoryProduct.findById(1L)).thenReturn(product);
 
@@ -424,5 +428,20 @@ class ServiceProductTest {
         when(repositoryUser.findByEmail(anyString())).thenReturn(Optional.of(userDTO));
 
         assertThrows(ExceptionInvalidValue.class, () -> serviceProduct.addProductToFavorite(product, "user@example.com"));
+    }
+
+    @Test
+    void testCommentProductSuccessfully() throws Exception {
+        Long productId = 1L;
+        ProductDTO productDTO = new ProductDTO();
+        productDTO.setId(productId);
+        CommentProduct commentProduct = CommentProduct.create(1L, "Comment test", 5.0);
+
+        when(repositoryProduct.findByIdAndIsDelete(anyLong())).thenReturn(Optional.of(new ProductDTO()));
+        when(repositoryUser.findByEmail(any())).thenReturn(Optional.of(new UserDTO()));
+
+        String result = serviceProduct.commentProduct(commentProduct, "user@example.com");
+
+        assertEquals("Comentario guardado exitosamente", result);
     }
 }
