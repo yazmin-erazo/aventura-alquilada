@@ -2,19 +2,33 @@
   max-width: 1120px;
   margin: 0 auto;
   color: var(--secondary-600);
+  margin-top: 2rem;
 }
 .detailsHeaderContainer {
   align-items: center;
-  background-color: var(--secondary-50);
+  background-color: var(--secondary-100);
 }
 
+.locationContainer {
+  background-color: var(--secondary-600);
+}
+
+.circleIcon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  background-color: var(--secondary-300);
+}
 .detailsHeader {
-  max-width: 1120px;
-  margin: 0 auto;
   display: flex;
   justify-content: space-between;
   align-items: center;
   padding: 1rem;
+  max-width: 1120px;
+  margin: 0 auto;
 }
 
 .detailsHeader .nameProduct {
@@ -32,14 +46,39 @@
   color: var(--secondary-600);
   border-radius: 4px;
   cursor: pointer;
+  background-color: var(--secondary-200);
 }
 
 .detailsHeader .button:hover {
-  background-color: var(--secondary-100);
+  background-color: var(--secondary-50);
 }
 
 .detailsHeader button svg {
   vertical-align: middle;
+}
+
+.location {
+  max-width: 1120px;
+  margin: 0 auto;
+  font: var(--body-14-normal);
+  display: flex;
+  justify-content: space-between;
+  color: white;
+  padding: 1.3rem 1rem;
+}
+
+.locationText {
+  width: 70%;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding-right: 16px;
+}
+
+.proximity {
+  margin-top: 5px;
+  font-size: 0.8rem;
+  color: var(--secondary-200);
 }
 
 .productDetails {
@@ -65,9 +104,6 @@
   width: 48%;
 }
 
-.ratingStats{
-  margin-top: 20px;
-}
 .productFeature {
   margin-bottom: 40px;
 }
@@ -138,7 +174,7 @@
 .feature {
   display: flex;
   flex-wrap: wrap;
-  border-top: 1px solid var(--secondary-200);
+  border-top: 1px solid var(--secondary-100);
 }
 
 .titleFeature {
@@ -151,10 +187,11 @@
   display: flex;
   align-items: center;
   flex-basis: 25%;
-  margin-top: 20px;
+  margin-top: 1rem;
   gap: 16px;
-  font: var(--body-16);
+  font-size: 0.94rem;
   color: var(--primary-600);
+  padding: 0.5rem;
 }
 
 .textFeature .textFeatureDetails {
@@ -176,6 +213,31 @@
   background-color: none;
   font: var(--body-12);
   color: var(--state-available);
+}
+
+.politics {
+  margin-top: 3rem;
+}
+
+.ratingStatsItem {
+  display: flex;
+  align-items: baseline;
+  flex-direction: row;
+}
+
+.mapContainer {
+  width: 100%;
+  height: 400px;
+}
+
+
+@media (max-width: 900px) {
+  .ratingStatsItem {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    align-items: flex-end;
+  }
 }
 
 @media (max-width: 768px) {
@@ -213,9 +275,9 @@
   .feature {
     display: flex;
     flex-direction: column;
-    padding-top: 10px;
+    padding-top: 1rem;
   }
   .textFeature {
-    margin-top: 10px;
+    margin-top: 1rem;
   }
 }

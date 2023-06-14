@@ -1,6 +1,6 @@
 .item {
     display: flex;
-    align-items: flex-start;
+    align-items: center;
     padding: 9px 10px;
     gap: 10px;
     width: 202px;
@@ -8,7 +8,16 @@
     left: 24px;
     background: #12334F;
     border-radius: 6px;
-    color: white;
+    color: var(--bg-white-50);
     font: var(--body-14-normal);
     margin-top: 32px;
+    text-decoration: none;
   }
+
+.active {
+    /* background: #ffb224 ; */
+    /* background: #ceff9d ; */
+    background: #c0daf1 ;
+    color: var(--sencondary-900);
+  }
+

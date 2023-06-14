@@ -28,6 +28,9 @@ public final class Product {
     private String color;
     private String material;
     private List<ImageProduct> imageProducts;
+    private String latitude;
+    private String longitude;
+
     private Product(Long id) {
         this.id = id;
     }
@@ -50,7 +53,9 @@ public final class Product {
                                  String fileName,
                                  String color,
                                  String material,
-                                 List<ImageProduct> imageProducts) throws Exception {
+                                 List<ImageProduct> imageProducts,
+                                 String latitude,
+                                 String longitude) throws Exception {
         Validator.validateMandatory(name, "El nombre es requerido para crear un producto");
         Validator.validateMandatory(brand, "La marca es requerida para crear un producto");
         Validator.validateMandatory(state, "El estado es requerido para crear un producto");
@@ -65,9 +70,12 @@ public final class Product {
         Validator.validateMandatory(fileName, "El nombre del archivo es requerido para crear un producto");
         Validator.validateGreater(price, BigDecimal.valueOf(0), "El precio debe ser mayor que cero");
         //Validator.validateGreater(deposit, BigDecimal.valueOf(0), "El deposito debe ser mayor que cero");
+        Validator.validateMandatory(latitude, "La Latitud es requerida para crear un producto");
+        Validator.validateMandatory(longitude, "La Longitud es requerida para crear un producto");
+
 
         Category category = Category.create(idCategory);
-        return new Product(0L,name,brand,state,price,description,size,gender, deposit, category, image, fileName, color, material, imageProducts);
+        return new Product(0L, name, brand, state, price, description, size, gender, deposit, category, image, fileName, color, material, imageProducts,latitude,longitude);
     }
 
     public static Product update(Long id,
@@ -79,8 +87,8 @@ public final class Product {
         return new Product(id, category);
     }
 
-    public static Product createById(Long id){
-        Validator.validateMandatory(id, "El Id es requerido para eliminar un producto");
+    public static Product createById(Long id) {
+        Validator.validateMandatory(id, "El Id del producto es requerido");
         return new Product(id);
     }
 }

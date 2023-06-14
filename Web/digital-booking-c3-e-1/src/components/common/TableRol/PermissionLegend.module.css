@@ -1,0 +1,27 @@
+.legendTable {
+    width: 100%;
+    border-collapse: collapse;
+  }
+  
+  .legendTable th,
+  .legendTable td {
+    padding: 10px;
+    text-align: left;
+    border-bottom: 1px solid var(--secondary-100);
+  }
+  
+  .legendTable th {
+    font-weight: bold;
+  }
+  
+  .colorBlock {
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    vertical-align: middle;
+    margin-right: 5px;
+  }
+  
+  .colorName {
+    vertical-align: middle;
+  }

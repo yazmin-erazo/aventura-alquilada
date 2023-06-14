@@ -55,4 +55,10 @@ public class CommandCreateProduct {
     private String material;
     @JsonProperty
     private List<SecondaryImages> secondaryImages;
+    @JsonProperty
+    @Schema(allowableValues = {"36.1430638"})
+    private String latitude;
+    @JsonProperty
+    @Schema(allowableValues = {"-115.1617901"})
+    private String longitude;
 }

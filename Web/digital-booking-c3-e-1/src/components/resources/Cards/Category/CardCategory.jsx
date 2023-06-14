@@ -8,14 +8,14 @@ const CardCategory = ({ category, onCategoryClick, selectedIcon }) => {
   };
 
   const IconComponent = selectedIcon;
-  const iconColor = "rgb(255 129 0)";
+  const iconColorCategory = "var(--accent)";
 
   return (
     <div className={styles.card} onClick={handleClick}>
       <div className={styles.header}>
         {IconComponent && (
-          <div className={`${styles.icon} icon`}>
-            <IconContext.Provider value={{ color: iconColor }}>
+          <div className={`${styles.iconContainer} icon`}>
+            <IconContext.Provider value={{ color: iconColorCategory }}>
               {React.createElement(IconComponent, { size: 24 })}
             </IconContext.Provider>
           </div>

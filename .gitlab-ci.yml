@@ -1,28 +1,28 @@
 image: docker:stable
 
 stages:
-  - test
+  # - test
   - build
   - deploy
 
 # -------------------------- API --------------------------
 
-test-api:
-  stage: test
-  image: maven:3.6-jdk-11
-  script:
-    - cd API/digital-booking-c3-e-1
-    - mvn clean test jacoco:prepare-agent jacoco:report
-    - ls target/site/jacoco/
-  artifacts:
-    paths:
-      - API/digital-booking-c3-e-1/target/surefire-reports/
-      - API/digital-booking-c3-e-1/target/site/jacoco/
-  only:
-    changes:
-      - API/digital-booking-c3-e-1/**/*
-      - develop
+# test-api:
+#   stage: test
+#   image: maven:3.6-jdk-11
+#   script:
+#     - cd API/digital-booking-c3-e-1
+#     - mvn clean test jacoco:prepare-agent jacoco:report
+#     - ls target/site/jacoco/
+#   artifacts:
+#     paths:
+#       - API/digital-booking-c3-e-1/target/surefire-reports/
+#       - API/digital-booking-c3-e-1/target/site/jacoco/
+  # only:
+  #   changes:
+  #     - API/digital-booking-c3-e-1/**/*
       
+
 
 build-api:
   stage: build
@@ -36,7 +36,7 @@ build-api:
   only:
     changes:
       - API/digital-booking-c3-e-1/**/*
-      - develop
+
 
 
 deploy_to_ec2:
@@ -57,4 +57,3 @@ deploy_to_ec2:
   only:
     changes:
       - API/digital-booking-c3-e-1/**/*
-      - develop

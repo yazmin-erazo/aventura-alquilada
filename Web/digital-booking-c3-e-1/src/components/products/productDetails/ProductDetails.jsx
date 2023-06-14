@@ -13,13 +13,20 @@ import { AiOutlineClockCircle } from "react-icons/ai";
 import ImageGallery from "../../common/imagegalery/ImageGallery";
 import Qualification from "../../resources/qualification/Qualification";
 import RatingStats from "../../resources/rating/RatingStats";
+import Politics from "../../resources/Politics/Politics";
+import { MdLocationOn } from "react-icons/md";
+import ProductMap from "../../resources/productMap/ProductMap";
+//import CalendarProducts from "../../resources/Calendar/CalendarProducts";
 
 const ProductDetails = () => {
   const data = useContext(ProductsContext);
   const [products, setProducts] = useState([]);
   const params = useParams();
   const navigate = useNavigate();
+  const [userLocation, setUserLocation] = useState(null);
+  const [isUserLocationLoaded, setIsUserLocationLoaded] = useState(false);
   const [images, setImages] = useState([]);
+  console.log(userLocation, isUserLocationLoaded);
   // const [product, setProduct] = useState()
 
   const product = products.find((p) => {
@@ -28,20 +35,36 @@ const ProductDetails = () => {
 
   useEffect(() => {
     setProducts(data.products);
+
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition(
+        (position) => {
+          const { latitude, longitude } = position.coords;
+          setUserLocation({ latitude, longitude });
+          setIsUserLocationLoaded(true);
+        },
+        (error) => {
+          console.error("Error getting user location:", error);
+          setIsUserLocationLoaded(true);
+        }
+      );
+    } else {
+      console.error("Geolocation is not supported by this browser.");
+      setIsUserLocationLoaded(true);
+    }
     // searchProduct();
   }, [data]);
 
-  // const categoryIcons = {
-  //   Camping: TbTent,
-  //   Snowboard: MdOutlineSnowboarding,
-  //   Surf: MdOutlineSurfing,
-  //   Esquí: MdDownhillSkiing,
-  //   Bicicletas: MdDirectionsBike,
-  //   Escalada: FaMountain,
-  //   "Deportes acuáticos": FaSwimmer,
-  // };
+  console.log(product);
 
-  // const CategoryIcon = categoryIcons[product.category] || null;
+  const city = {
+    name: "Buenos Aires",
+    country: "Argentina",
+    latitude: -34.6037,
+    longitude: -58.3816,
+    // latitude: 4.720391051238156,
+    // longitude: -74.11880514789254,
+  };
 
   return (
     <>
@@ -52,12 +75,40 @@ const ProductDetails = () => {
               <h2 className={styles.nameProduct}>{product.name}</h2>
               <div onClick={() => navigate(-1)}>
                 <div className={styles.button}>
-                  <FaArrowLeft /> <p>Volver</p>
+                  <FaArrowLeft /> <p> Volver </p>
                 </div>
               </div>
             </div>
           </div>
 
+          <div className={styles.locationContainer}>
+            <div className={styles.location}>
+              <div className={styles.locationText}>
+                <div className={styles.locationIcon}>
+                  <div className={styles.circleIcon}>
+                    <MdLocationOn size={24} />
+                  </div>
+                </div>
+                {/*product.ciudad.nombre}, {product.ciudad.pais*/}
+
+                <div>
+                  <p className={styles.city}>
+                    {" "}
+                    Buenos Aires, Ciudad Autónoma de Buenos Aires, Argentina{" "}
+                  </p>
+                  <p className={styles.proximity}> A 940 m del centro</p>
+                </div>
+              </div>
+
+              <div className={styles.ratingStats}>
+                <RatingStats
+                  color="var(--semantics-success)"
+                  totalColor="var(--secondary-50)"
+                  className={styles.ratingStatsItem}
+                />
+              </div>
+            </div>
+          </div>
           <div className={styles.detailsContainer}>
             <ImageGallery product={product} />
             <div className={styles.productDetails}>
@@ -71,11 +122,9 @@ const ProductDetails = () => {
 
                   {/* <p className={styles.price}>${product.price}</p> */}
                 </div>
+
                 <div className={styles.review}>
                   <Qualification />
-                  <div className={styles.ratingStats}>
-                    <RatingStats />
-                  </div>
                 </div>
               </div>
 
@@ -123,7 +172,26 @@ const ProductDetails = () => {
                   </div>
                 </div>
               </div>
+              <div className={styles.politics}>
+                <Politics />
+              </div>
             </div>
+            {/* <div className={styles.map}>
+              <ProductMap
+                latitude={product.city.latitude}
+                longitude={product.city.longitude}
+                city={product.city}
+              />
+            </div> */}
+          </div>
+          <div className={styles.mapContainer}>
+            <ProductMap
+              latitude={city.latitude}
+              longitude={city.longitude}
+              city={city}
+              product={product}
+              userLocation={userLocation}
+            />
           </div>
         </>
       )}

@@ -5,16 +5,12 @@ import com.digitalbooking.digitalbooking.domain.category.dto.CategoryDTO;
 import com.digitalbooking.digitalbooking.domain.category.entity.Category;
 import com.digitalbooking.digitalbooking.domain.category.repository.CategoryRepository;
 import com.digitalbooking.digitalbooking.domain.category.service.ServiceCategory;
-import com.digitalbooking.digitalbooking.domain.product.entity.Product;
-import com.digitalbooking.digitalbooking.domain.product.repository.RepositoryProduct;
-import com.digitalbooking.digitalbooking.domain.product.service.ServiceProduct;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
-import java.math.BigDecimal;
 import java.util.List;
 import java.util.Optional;
 

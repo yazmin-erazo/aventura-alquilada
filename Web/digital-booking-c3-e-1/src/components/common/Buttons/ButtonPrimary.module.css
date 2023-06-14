@@ -19,3 +19,28 @@
   color: var(--secondary-600);
   font-weight: 500;
 }
+.button.disabled{
+  background-color: var(--secondary-100);
+  color: white;
+  cursor:default;
+}
+
+/* BUTTON CANCEL */
+.buttonInactive{
+  width: 100%;
+  height: 40px;
+  background: var(--white-100);
+  border: 1px solid var(--semantics-error);
+  border-radius: 4px;
+  color: var(--semantics-error);
+  font: var(--body-14-normal);
+  max-width: 506px;
+  cursor: pointer;
+  margin-top: 8px;
+}
+
+.buttonInactive:hover{
+  background: var(--semantics-error);
+  border: none;
+  color: var(--white-100);
+}

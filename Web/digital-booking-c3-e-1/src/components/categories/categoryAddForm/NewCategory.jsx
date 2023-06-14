@@ -6,6 +6,7 @@ import ImageUpload from "../../common/inputImage/ImageUpload";
 import CategoryService from "../../../shared/services/CategoryService";
 import Swal from "sweetalert2";
 import IconSelect from "../../common/IconSelect/IconSelect";
+import ButtonInactive from "../../common/Buttons/ButtonInactive";
 
 const NewCategory = () => {
   const [categories, setCategories] = useState("");
@@ -62,7 +63,9 @@ const NewCategory = () => {
 
     try {
       let categoryExists = false;
-            categories.map( cat => cat.name === categoryData.name ? categoryExists = true : null);
+      categories.map((cat) =>
+        cat.name === categoryData.name ? (categoryExists = true) : null
+      );
       if (
         categoryData.name === "" ||
         categoryData.description === "" ||
@@ -149,12 +152,21 @@ const NewCategory = () => {
               }
               placeholder="Descripción"
             />
-
-            <ButtonPrimary className={styles.submitBtn} onClick={handleSubmit}>
-              Agregar categoría
-            </ButtonPrimary>
           </div>
           <div className={styles.registerInfo}></div>
+            <div className={styles.containerButton}>
+              <div className={styles.buttonsItem}>
+                <ButtonInactive to="/admin/category/list">
+                  Cancelar
+                </ButtonInactive>
+                <ButtonPrimary
+                  className={styles.submitBtn}
+                  onClick={handleSubmit}
+                >
+                  Registrar producto{" "}
+                </ButtonPrimary>
+              </div>
+            </div>
         </div>
       </div>
     </div>
