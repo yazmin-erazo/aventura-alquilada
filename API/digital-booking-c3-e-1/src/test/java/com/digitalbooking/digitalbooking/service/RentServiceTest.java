@@ -1,6 +1,7 @@
 package com.digitalbooking.digitalbooking.service;
 
 import com.digitalbooking.digitalbooking.common.exception.ExceptionInvalidValue;
+import com.digitalbooking.digitalbooking.common.exception.ExceptionMandatoryValue;
 import com.digitalbooking.digitalbooking.common.exception.ExceptionNullValue;
 import com.digitalbooking.digitalbooking.domain.product.dto.ProductDTO;
 import com.digitalbooking.digitalbooking.domain.product.entity.Product;
@@ -221,5 +222,106 @@ public class RentServiceTest {
         Rent rent = Rent.createById(id);
 
         assertEquals(id, rent.getId());
+    }
+
+
+    @Test
+    void testUpdateSuccess() {
+
+        Long id = 1L;
+        Long productId = 1L;
+        Long userId = 1L;
+        java.util.Date utilStartDate = Date.from(Instant.now());
+        java.sql.Date startDate = new java.sql.Date(utilStartDate.getTime());
+        java.util.Date utilEndDate = Date.from(Instant.now().plusSeconds(86400));
+        java.sql.Date endDate = new java.sql.Date(utilEndDate.getTime());
+        String comment = "Test comment";
+
+        Rent result = Rent.update(id, productId, userId, startDate, endDate, comment);
+
+        assertNotNull(result);
+        assertEquals(id, result.getId());
+        assertEquals(productId, result.getProduct().getId());
+        assertEquals(userId, result.getUser().getId());
+        assertEquals("ACTUALIZADO", result.getState());
+        assertEquals(comment, result.getComment());
+    }
+
+    @Test
+    void testUpdateWithNullStartDate() {
+
+        Long id = 1L;
+        Long productId = 1L;
+        Long userId = 1L;
+        java.sql.Date startDate = null;
+        java.util.Date utilEndDate = Date.from(Instant.now().plusSeconds(86400));
+        java.sql.Date endDate = new java.sql.Date(utilEndDate.getTime());
+        String comment = "Test comment";
+
+        assertThrows(ExceptionMandatoryValue.class, () -> Rent.update(id, productId, userId, startDate, endDate, comment));
+    }
+
+    @Test
+    void testUpdateWithNullEndDate() {
+
+        Long id = 1L;
+        Long productId = 1L;
+        Long userId = 1L;
+        java.util.Date utilStartDate = Date.from(Instant.now());
+        java.sql.Date startDate = new java.sql.Date(utilStartDate.getTime());
+        java.sql.Date endDate = null;
+        String comment = "Test comment";
+
+        assertThrows(ExceptionMandatoryValue.class, () -> Rent.update(id, productId, userId, startDate, endDate, comment));
+    }
+
+    @Test
+    void testUpdateWithNullComment() {
+
+        Long id = 1L;
+        Long productId = 1L;
+        Long userId = 1L;
+        java.util.Date utilStartDate = Date.from(Instant.now());
+        java.sql.Date startDate = new java.sql.Date(utilStartDate.getTime());
+        java.util.Date utilEndDate = Date.from(Instant.now().plusSeconds(86400));
+        java.sql.Date endDate = new java.sql.Date(utilEndDate.getTime());
+        String comment = "";
+
+        assertThrows(ExceptionMandatoryValue.class, () -> Rent.update(id, productId, userId, startDate, endDate, comment));
+    }
+
+    @Test
+    void testGetRentSuccess() {
+
+        Long rentId = 1L;
+        String userEmail = "user@example.com";
+
+        RentDTO rentDTO = new RentDTO();
+        rentDTO.setUser(new UserDTO());
+        rentDTO.getUser().setId(1L);
+
+        when(rentRepository.findByIdAndState(rentId)).thenReturn(Optional.of(rentDTO));
+        when(repositoryUser.findByEmail(userEmail)).thenReturn(Optional.of(rentDTO.getUser()));
+
+        RentDTO result = rentService.getRent(rentId, userEmail);
+
+        assertNotNull(result);
+        assertEquals(rentDTO, result);
+
+        verify(rentRepository, times(1)).findByIdAndState(rentId);
+        verify(repositoryUser, times(1)).findByEmail(userEmail);
+    }
+
+    @Test
+    void testGetRentErrorWithNotFoundRent() {
+        Long rentId = 1L;
+        String userEmail = "user@example.com";
+
+        when(rentRepository.findByIdAndState(rentId)).thenReturn(Optional.empty());
+
+        assertThrows(ExceptionNullValue.class, () -> rentService.getRent(rentId, userEmail));
+
+        verify(rentRepository, times(1)).findByIdAndState(rentId);
+        verify(repositoryUser, times(0)).findByEmail(userEmail);
     }
 }
