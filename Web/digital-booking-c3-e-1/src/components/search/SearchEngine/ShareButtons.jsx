@@ -17,27 +17,33 @@ const ShareButtons = () => {
     setShowModal(false);
   };
 
+  const handleOutsideClick = (event) => {
+    if (event.target.className === 'modal') {
+      closeModal();
+    }
+  };
+
   return (
     <div>
-      <button onClick={openModal}>
+      <button className="open-modal-button" onClick={openModal}>
         Compartir
       </button>
       {showModal && (
-        <div className="modal">
+        <div className="modal" onClick={handleOutsideClick}>
           <div className="modal-content">
+            <button className="close-button" onClick={closeModal}>&times;</button>
             <h2 className="modal-heading">¡Comparte la emoción! Elige tu red social favorita para difundir la aventura.</h2>
             <div>
-              <FacebookShareButton url={baseUrl} quote={message}>
-                <FacebookIcon size={32} round={true} />
+              <FacebookShareButton className="share-button" url={baseUrl} quote={message}>
+                <FacebookIcon size={36} round={true} />
               </FacebookShareButton>
-              <TwitterShareButton url={baseUrl} title={message}>
-                <TwitterIcon size={32} round={true} />
+              <TwitterShareButton className="share-button" url={baseUrl} title={message}>
+                <TwitterIcon size={36} round={true} />
               </TwitterShareButton>
-              <WhatsappShareButton url={baseUrl} title={message} separator=": ">
-                <WhatsappIcon size={32} round={true} />
+              <WhatsappShareButton className="share-button" url={baseUrl} title={message} separator=": ">
+                <WhatsappIcon size={36} round={true} />
               </WhatsappShareButton>
             </div>
-            <button onClick={closeModal}>Cerrar</button>
           </div>
         </div>
       )}

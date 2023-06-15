@@ -5,7 +5,7 @@ import './ShareButtonProduct.css';
 
 const ShareButtonProduct = ({ product }) => {
   const [showModal, setShowModal] = useState(false);
-  
+
   const baseUrl = 'http://equipamiento-deportivo-static.s3-website.us-east-2.amazonaws.com/';
   const productUrl = `${baseUrl}product/${product.id}`;
 
@@ -17,41 +17,36 @@ const ShareButtonProduct = ({ product }) => {
     setShowModal(false);
   };
 
+  const handleOutsideClick = (event) => {
+    if (event.target.className === 'modal') {
+      closeModal();
+    }
+  };
+
   return (
     <div>
       <h4>Compartir producto</h4>
-      <button onClick={openModal}>
+      <button className="open-modal-button" onClick={openModal}>
         Compartir
       </button>
       {showModal && (
-        <div className="modal">
+        <div className="modal" onClick={handleOutsideClick}>
           <div className="modal-content">
-            <h2>{product.name}</h2>
+            <button className="close-button" onClick={closeModal}>&times;</button>
+            <h2 className="modal-heading">{product.name}</h2>
             <img src={product.imageURL} alt={product.name} />
             <p>{product.description}</p>
             <div>
-              <FacebookShareButton
-                url={productUrl}
-                quote=""
-                hashtag="#equipamientoDeportivo"
-              >
-                <FacebookIcon size={32} round={true} />
+              <FacebookShareButton className="share-button" url={productUrl} quote="" hashtag="#equipamientoDeportivo">
+                <FacebookIcon size={36} round={true} />
               </FacebookShareButton>
-              <TwitterShareButton
-                url={productUrl}
-                title=""
-                hashtags={['equipamientoDeportivo', 'aventura']}
-              >
-                <TwitterIcon size={32} round={true} />
+              <TwitterShareButton className="share-button" url={productUrl} title="" hashtags={['equipamientoDeportivo', 'aventura']}>
+                <TwitterIcon size={36} round={true} />
               </TwitterShareButton>
-              <WhatsappShareButton
-                url={productUrl}
-                title=""
-              >
-                <WhatsappIcon size={32} round={true} />
+              <WhatsappShareButton className="share-button" url={productUrl} title="">
+                <WhatsappIcon size={36} round={true} />
               </WhatsappShareButton>
             </div>
-            <button onClick={closeModal}>Cerrar</button>
           </div>
         </div>
       )}

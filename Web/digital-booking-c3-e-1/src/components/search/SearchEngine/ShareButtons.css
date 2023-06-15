@@ -9,6 +9,7 @@
     height: 100%;
     background-color: rgba(0, 0, 0, 0.5);
     z-index: 1000;
+    transition: opacity 0.3s ease;
 }
 
 .modal-content {
@@ -17,8 +18,42 @@
     border-radius: 8px;
     max-width: 500px;
     width: 90%;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
 
 .modal-heading {
     color: #4CAF50;
+    font-size: 24px;
+    margin-bottom: 20px;
+}
+
+/* Botón Principal */
+.open-modal-button {
+    font-size: 20px;
+    padding: 10px 20px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.open-modal-button:hover {
+    background-color: #45a049;
+}
+
+/* Botones de compartir */
+.share-button {
+    margin: 0 10px;
+}
+
+/* Botón de cerrar en la esquina */
+.close-button {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background: none;
+    border: none;
+    font-size: 24px;
+    cursor: pointer;
 }
