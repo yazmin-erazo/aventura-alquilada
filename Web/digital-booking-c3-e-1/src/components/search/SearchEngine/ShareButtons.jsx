@@ -1,29 +1,48 @@
-/*import { FacebookShareButton, TwitterShareButton, WhatsappShareButton } from 'react-share';
+import React, { useState } from 'react';
+import { FacebookShareButton, TwitterShareButton, WhatsappShareButton } from 'react-share';
 import { FacebookIcon, TwitterIcon, WhatsappIcon } from 'react-share';
+import './ShareButtons.css';
 
 const ShareButtons = () => {
-  const url = 'http://localhost:5173/';
-  const title = `¡Eleva tu espíritu aventurero al siguiente nivel con nuestra aplicación de alquiler de equipo deportivo! Desde la escalada hasta los deportes acuáticos, el senderismo y más allá, cubrimos todas tus pasiones al aire libre. No te limites a soñar con la aventura, ¡vívela! Con nuestro extenso catálogo de equipos de alta calidad, estás a un clic de la acción. ¿Listo para la emoción? Da el primer paso hacia tu próxima gran aventura`;
+  const [showModal, setShowModal] = useState(false);
 
-  const styles = {
-    display: "flex",
-    justifyContent: "flex-end",
-    gap: "10px",
+  const baseUrl = 'http://equipamiento-deportivo-static.s3-website.us-east-2.amazonaws.com/';
+  const message = `¡Desata tu lado aventurero con nuestro alquiler de equipo deportivo! 🌊🧗 De la escalada a los deportes acuáticos, lo tenemos TODO. ¡No sueñes, vive la aventura! 🔥 Equípate con lo mejor y sumérgete en la acción. 🚀 Tu próxima aventura te espera: `;
+
+  const openModal = () => {
+    setShowModal(true);
+  };
+
+  const closeModal = () => {
+    setShowModal(false);
   };
 
   return (
-    <div style={styles}>
-      <FacebookShareButton url={url} quote={title}>
-        <FacebookIcon size={32} round={true} />
-      </FacebookShareButton>
-      <TwitterShareButton url={url} title={title}>
-        <TwitterIcon size={32} round={true} />
-      </TwitterShareButton>
-      <WhatsappShareButton url={url} title={title} separator=": ">
-        <WhatsappIcon size={32} round={true} />
-      </WhatsappShareButton>
+    <div>
+      <button onClick={openModal}>
+        Compartir
+      </button>
+      {showModal && (
+        <div className="modal">
+          <div className="modal-content">
+            <h2 className="modal-heading">¡Comparte la emoción! Elige tu red social favorita para difundir la aventura.</h2>
+            <div>
+              <FacebookShareButton url={baseUrl} quote={message}>
+                <FacebookIcon size={32} round={true} />
+              </FacebookShareButton>
+              <TwitterShareButton url={baseUrl} title={message}>
+                <TwitterIcon size={32} round={true} />
+              </TwitterShareButton>
+              <WhatsappShareButton url={baseUrl} title={message} separator=": ">
+                <WhatsappIcon size={32} round={true} />
+              </WhatsappShareButton>
+            </div>
+            <button onClick={closeModal}>Cerrar</button>
+          </div>
+        </div>
+      )}
     </div>
   );
 };
 
-export default ShareButtons;*/
+export default ShareButtons;

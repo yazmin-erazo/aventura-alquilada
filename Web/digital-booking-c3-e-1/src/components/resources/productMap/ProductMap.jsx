@@ -16,7 +16,14 @@ const iconComponents = {
   ...FaIcons,
 };
 
-const ProductMap = ({ latitude, longitude, city, product, userLocation }) => {
+const ProductMap = ({
+  latitude,
+  longitude,
+  cityA,
+  country,
+  product,
+  userLocation,
+}) => {
   const mapContainerRef = useRef(null);
   const [categories, setCategories] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
@@ -79,14 +86,14 @@ const ProductMap = ({ latitude, longitude, city, product, userLocation }) => {
     // -------------------- End MARKER --------------------
 
     // -------------------- Start POP UP --------------------
-    
+
     const popupContent = `
     <div class="${styles.popup}">
       <h3 class="${styles.popupTitle}">Información del lugar</h3>
-      <p class="${styles.popupText}">Ciudad: ${city.name}</p>
-      <p class="${styles.popupText}">País: ${city.country}</p>
-      <p class="${styles.popupText}">Latitud: ${city.latitude}</p>
-      <p class="${styles.popupText}">Longitud: ${city.longitude}</p>
+      <p class="${styles.popupText}">Ciudad: ${cityA}</p>
+      <p class="${styles.popupText}">País: ${country}</p>
+      <p class="${styles.popupText}">Latitud: ${latitude}</p>
+      <p class="${styles.popupText}">Longitud: ${longitude}</p>
     </div>
     `;
 
@@ -188,21 +195,26 @@ const ProductMap = ({ latitude, longitude, city, product, userLocation }) => {
     };
 
     // Elimine el mapa cuando el componente se desmonte
-  }, [latitude, longitude, city, productCategory]);
+  }, [latitude, longitude, cityA, country, productCategory]);
   console.log(showingRoute);
   return (
     <>
       <div ref={mapContainerRef} className={styles.mapContainer}></div>
       <div className={styles.ContainerButtons}>
         <button id="locationButton" className={styles.itemButton}>
-          <BiPin size={22} /> Ubicación producto
+          <div className={styles.iconContainer}>
+            <BiPin size={22} />
+          </div>
+          Ubicación producto
         </button>
         <button
           id="routeButton"
           className={styles.itemButton}
           onClick={() => setShowingRoute(!showingRoute)}
         >
-          {showingRoute ? <FaIcons.FaEyeSlash /> : <FaIcons.FaRoute />}{" "}
+          <div className={styles.iconContainer}>
+            {showingRoute ? <FaIcons.FaEyeSlash /> : <FaIcons.FaRoute />}{" "}
+          </div>
           {showingRoute ? "Ocultar ruta" : "Mostrar ruta"}
         </button>
       </div>

@@ -6,6 +6,7 @@ import com.digitalbooking.digitalbooking.domain.product.entity.CommentProduct;
 import com.digitalbooking.digitalbooking.domain.product.entity.Product;
 import com.digitalbooking.digitalbooking.domain.product.repository.RepositoryProduct;
 import com.digitalbooking.digitalbooking.infrastructure.category.adapter.CategoryEntity;
+import com.digitalbooking.digitalbooking.infrastructure.city.adapter.CityEntity;
 import com.digitalbooking.digitalbooking.infrastructure.product.MapToProduct;
 import com.digitalbooking.digitalbooking.infrastructure.user.adapter.UserEntity;
 import org.apache.commons.lang3.ObjectUtils;
@@ -38,6 +39,9 @@ public class RepositoryProductImpl implements RepositoryProduct {
         BeanUtils.copyProperties(product, productEntity);
         CategoryEntity category = new CategoryEntity();
         category.setId(product.getCategory().getId());
+        CityEntity city = new CityEntity();
+        city.setId(product.getCityId());
+        productEntity.setCity(city);
         productEntity.setCategory(category);
         productEntity.setImageURL(imageURL);
         productEntity.setIsDelete(Boolean.FALSE);
@@ -60,7 +64,7 @@ public class RepositoryProductImpl implements RepositoryProduct {
     }
 
     @Override
-    public List<ProductDTO> getAll(String brandFilter, String nameFilter, String genderFilter, BigDecimal priceLessThan, BigDecimal priceGreaterThan, String sizeFilter, String stateFilter, String colorFilter, String materialFilter, String search) {
+    public List<ProductDTO> getAll(String brandFilter, String nameFilter, String genderFilter, BigDecimal priceLessThan, BigDecimal priceGreaterThan, String sizeFilter, String stateFilter, String colorFilter, String materialFilter,Long cityId, String search) {
         var query = where(byDelete((byte) 0));
         if (StringUtils.isNotEmpty(search)) {
             query = where(byNameContains(search)
@@ -69,37 +73,40 @@ public class RepositoryProductImpl implements RepositoryProduct {
                     .or(bySizeContains(search))
                     .or(byColorContains(search))
                     .or(byMaterialContains(search))
-                    .or(byDescriptionContains(search)))
+                    .or(byDescriptionContains(search))
+                    .or(byCityContains(search)))
                     .and(byDelete((byte) 0));
-        } else {
-            if (StringUtils.isNotEmpty(brandFilter)) {
-                query = query.and(byBrand(brandFilter));
-            }
-            if (StringUtils.isNotEmpty(nameFilter)) {
-                query = query.and(byNameContains(nameFilter));
-            }
-            if (StringUtils.isNotEmpty(genderFilter)) {
-                query = query.and(byGender(genderFilter));
-            }
-            if (ObjectUtils.isNotEmpty(priceLessThan)) {
-                query = query.and(byPriceLessThan(priceLessThan));
-            }
-            if (ObjectUtils.isNotEmpty(priceGreaterThan)) {
-                query = query.and(byPriceGreaterThan(priceGreaterThan));
-            }
-            if (StringUtils.isNotEmpty(sizeFilter)) {
-                query = query.and(bySize(sizeFilter));
-            }
-            if (StringUtils.isNotEmpty(stateFilter)) {
-                query = query.and(byState(stateFilter));
-            }
-            if (StringUtils.isNotEmpty(colorFilter)) {
-                query = query.and(byColor(colorFilter));
-            }
-            if (StringUtils.isNotEmpty(materialFilter)) {
-                query = query.and(byMaterial(materialFilter));
-            }
         }
+        if (StringUtils.isNotEmpty(brandFilter)) {
+            query = query.and(byBrand(brandFilter));
+        }
+        if (StringUtils.isNotEmpty(nameFilter)) {
+            query = query.and(byNameContains(nameFilter));
+        }
+        if (StringUtils.isNotEmpty(genderFilter)) {
+            query = query.and(byGender(genderFilter));
+        }
+        if (ObjectUtils.isNotEmpty(priceLessThan)) {
+            query = query.and(byPriceLessThan(priceLessThan));
+        }
+        if (ObjectUtils.isNotEmpty(priceGreaterThan)) {
+            query = query.and(byPriceGreaterThan(priceGreaterThan));
+        }
+        if (StringUtils.isNotEmpty(sizeFilter)) {
+            query = query.and(bySize(sizeFilter));
+        }
+        if (StringUtils.isNotEmpty(stateFilter)) {
+            query = query.and(byState(stateFilter));
+        }
+        if (StringUtils.isNotEmpty(colorFilter)) {
+            query = query.and(byColor(colorFilter));
+        }
+        if (StringUtils.isNotEmpty(materialFilter)) {
+            query = query.and(byMaterial(materialFilter));
+        }if(ObjectUtils.isNotEmpty(cityId)){
+            query = query.and(byCityId(cityId));
+        }
+
         return repositoryProductMySql.findAll(query).stream().map(MapToProduct::mapToProduct).collect(Collectors.toList());
     }
 

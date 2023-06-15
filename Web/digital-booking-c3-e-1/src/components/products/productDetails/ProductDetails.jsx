@@ -12,60 +12,128 @@ import { MdOutlineTexture } from "react-icons/md";
 import { AiOutlineClockCircle } from "react-icons/ai";
 import ImageGallery from "../../common/imagegalery/ImageGallery";
 import Qualification from "../../resources/qualification/Qualification";
+import { UserContext } from "../../../context/AuthContext";
 import RatingStats from "../../resources/rating/RatingStats";
 import Politics from "../../resources/Politics/Politics";
 import { MdLocationOn } from "react-icons/md";
+import CalendarProducts from "../../resources/Calendar/CalendarProducts";
 import ProductMap from "../../resources/productMap/ProductMap";
-//import CalendarProducts from "../../resources/Calendar/CalendarProducts";
+import mapboxgl from "mapbox-gl";
+import SelectedDates from "../../resources/Calendar/SelectedDates";
+import moment from "moment";
+import ShareButtonProduct from "./ShareButtonProduct";
 
 const ProductDetails = () => {
   const data = useContext(ProductsContext);
+  const auth = useContext(UserContext);
   const [products, setProducts] = useState([]);
   const params = useParams();
   const navigate = useNavigate();
   const [userLocation, setUserLocation] = useState(null);
   const [isUserLocationLoaded, setIsUserLocationLoaded] = useState(false);
   const [images, setImages] = useState([]);
+  const [cityA, setCityA] = useState("");
+  const [country, setCountry] = useState("");
+  const [region, setRegion] = useState("");
+  const [address, setAddress] = useState("");
   console.log(userLocation, isUserLocationLoaded);
+  const [selectedStartDate, setSelectedStartDate] = useState(null);
+  const [selectedEndDate, setSelectedEndDate] = useState(null);
+  const [totalRentalDays, setTotalRentalDays] = useState(0);
+
+  const handleSelectDates = (startDate, endDate) => {
+    setSelectedStartDate(startDate);
+    setSelectedEndDate(endDate);
+  };
+
   // const [product, setProduct] = useState()
 
   const product = products.find((p) => {
     return p.id === parseInt(params.id);
   });
 
+  console.log(product);
+
   useEffect(() => {
     setProducts(data.products);
-
-    if (navigator.geolocation) {
+    if (product && navigator.geolocation) {
+      console.log(product);
       navigator.geolocation.getCurrentPosition(
-        (position) => {
+        async (position) => {
           const { latitude, longitude } = position.coords;
           setUserLocation({ latitude, longitude });
           setIsUserLocationLoaded(true);
+
+          const locationDetails = await getReverseGeocode(
+            product.latitude,
+            product.longitude
+          );
+          if (locationDetails) {
+            setCityA(locationDetails.cityA);
+            setCountry(locationDetails.country);
+            setRegion(locationDetails.region);
+            setAddress(locationDetails.address);
+          }
         },
         (error) => {
-          console.error("Error getting user location:", error);
+          console.error("Error al obtener la ubicación del usuario:", error);
           setIsUserLocationLoaded(true);
         }
       );
     } else {
-      console.error("Geolocation is not supported by this browser.");
+      console.error("La geolocalización no es compatible con este navegador.");
       setIsUserLocationLoaded(true);
     }
-    // searchProduct();
-  }, [data]);
+  }, [data, product]);
 
-  console.log(product);
+  async function getReverseGeocode(latitude, longitude) {
+    try {
+      const response = await fetch(
+        `https://api.mapbox.com/geocoding/v5/mapbox.places/${longitude},${latitude}.json?access_token=${mapboxgl.accessToken}`
+      );
 
-  const city = {
-    name: "Buenos Aires",
-    country: "Argentina",
-    latitude: -34.6037,
-    longitude: -58.3816,
-    // latitude: 4.720391051238156,
-    // longitude: -74.11880514789254,
-  };
+      const data = await response.json();
+      const place = data.features[0];
+      const cityA = place.context.find((context) =>
+        context.id.startsWith("place")
+      );
+      const country = place.context.find((context) =>
+        context.id.startsWith("country")
+      );
 
+      const region = place.context.find((context) =>
+        context.id.startsWith("region")
+      );
+      const address = place.place_name.split(",")[0].trim();
+
+      return {
+        cityA: cityA ? cityA.text : "",
+        country: country ? country.text : "",
+        region: region ? region.text : "",
+        address: address ? address : "",
+      };
+    } catch (error) {
+      console.error("Error al obtener el geocódigo inverso:", error);
+      return null;
+    }
+  }
+
+  useEffect(() => {
+    if (selectedStartDate && selectedEndDate) {
+      const diffDays = Math.abs(
+        moment(selectedEndDate).diff(selectedStartDate, "days") + 1
+      );
+      setTotalRentalDays(diffDays);
+    } else {
+      setTotalRentalDays(0);
+    }
+  }, [selectedStartDate, selectedEndDate]);
+
+  const showButton = selectedStartDate && selectedEndDate;
+
+  const productId = product ? product.id : null;
+
+  console.log(showButton);
   return (
     <>
       {product && (
@@ -93,10 +161,12 @@ const ProductDetails = () => {
 
                 <div>
                   <p className={styles.city}>
-                    {" "}
-                    Buenos Aires, Ciudad Autónoma de Buenos Aires, Argentina{" "}
+                    {cityA}, {country}
                   </p>
-                  <p className={styles.proximity}> A 940 m del centro</p>
+                  <p className={styles.proximity}>
+                    {" "}
+                    {region}, {address}
+                  </p>
                 </div>
               </div>
 
@@ -119,12 +189,17 @@ const ProductDetails = () => {
                   <p className={styles.productDescription}>
                     {product.description}
                   </p>
+                </div>
 
-                  {/* <p className={styles.price}>${product.price}</p> */}
+                <div className={styles.shareButton}>
+                  <ShareButtonProduct product={product} />
                 </div>
 
                 <div className={styles.review}>
-                  <Qualification />
+                  <Qualification
+                    isLoggedIn={auth.isLogedIn}
+                    productId={productId}
+                  />
                 </div>
               </div>
 
@@ -172,25 +247,45 @@ const ProductDetails = () => {
                   </div>
                 </div>
               </div>
+
+              <div className={styles.calendar}>
+                <h3 className={styles.calendarTitle}> Fechas disponibles </h3>
+                <div className={styles.calendarRent}>
+                  <section className={styles.calendarRentSection}>
+                    <CalendarProducts
+                      onSelectDates={handleSelectDates}
+                      rents={product.rents}
+                    />
+                  </section>
+                  <section className={styles.calendarRentSection}>
+                    {showButton ? (
+                      <SelectedDates
+                        selectedStartDate={selectedStartDate}
+                        selectedEndDate={selectedEndDate}
+                        totalRentalDays={totalRentalDays}
+                      />
+                    ) : (
+                      <p>Selecciona las fechas de tu reserva</p>
+                    )}
+                  </section>
+                </div>
+              </div>
+
               <div className={styles.politics}>
                 <Politics />
               </div>
+              <h3 className={styles.locationProduct}>Unicación del producto</h3>
             </div>
-            {/* <div className={styles.map}>
-              <ProductMap
-                latitude={product.city.latitude}
-                longitude={product.city.longitude}
-                city={product.city}
-              />
-            </div> */}
           </div>
+
           <div className={styles.mapContainer}>
             <ProductMap
-              latitude={city.latitude}
-              longitude={city.longitude}
-              city={city}
+              latitude={product.latitude}
+              longitude={product.longitude}
               product={product}
               userLocation={userLocation}
+              cityA={cityA}
+              country={country}
             />
           </div>
         </>
