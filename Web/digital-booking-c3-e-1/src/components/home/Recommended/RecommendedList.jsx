@@ -54,24 +54,24 @@ const RecommendedList = ({ selectedCategory, searchParams }) => {
     onPageChanged();
   }, [currentPage, filteredProducts]);
 
-  const dateFiltered = () => {
-    const dateFilteredProds = filteredProducts.filter( p => {
-        let rented 
-        p.rents.forEach(element => {
-          ((element.starDate > searchParams.startDate && element.starDate < searchParams.endDate) ||
-          (element.endDate > searchParams.startDate && element.endDate < searchParams.endDate)) &&
-          (rented = p)
-        });
-        p !== rented
-        console.log(rented);
-    })
-    console.log(dateFilteredProds);
-    setFilteredProducts(dateFilteredProds);
-  }
+  // const dateFiltered = () => {
+  //   const dateFilteredProds = filteredProducts.filter( p => {
+  //       let rented 
+  //       p.rents.forEach(element => {
+  //         ((element.starDate > searchParams.startDate && element.starDate < searchParams.endDate) ||
+  //         (element.endDate > searchParams.startDate && element.endDate < searchParams.endDate)) &&
+  //         (rented = p)
+  //       });
+  //       p !== rented
+  //       console.log(rented);
+  //   })
+  //   console.log(dateFilteredProds);
+  //   setFilteredProducts(dateFilteredProds);
+  // }
     
   useEffect(() => {
     fetchData();
-    dateFiltered();
+   // dateFiltered();
   },[searchParams])
 
   const onPageChanged = () => {
@@ -99,7 +99,7 @@ const RecommendedList = ({ selectedCategory, searchParams }) => {
       <div className={styles.recommendedList}>
         {categories.length === 0
           ? null
-          : currentProducts.map((product) => {
+          : (currentProducts.length > 0 ? currentProducts.map((product) => {
               const category = categories.find(
                 (category) => category.name === product.category
               );
@@ -124,10 +124,10 @@ const RecommendedList = ({ selectedCategory, searchParams }) => {
                     categoryIcon={
                       isIconInSportsIcons ? IconComponent : categoryIcon
                     }
-                  />
+                  /> 
                 </div>
               );
-            })}
+            }): <div className={styles.resultado}>No se han encontrado productos</div>)}
       </div>
       <Pagination
         onPageChanged={onPageChanged}
