@@ -1,66 +1,67 @@
 import React, { useState, useEffect, useContext } from "react";
 import FavCard from "../../resources/Cards/Fav/FavCard";
-import ProductService from "../../../shared/services/ProductsService";
 import { UserContext } from "../../../context/AuthContext";
-import axios from "axios";
-import favoritesData from "../../../assets/favorites.json";
 import styles from "./FavsList.module.css";
+import { ProductsContext } from "../../../context/ProductsContext";
+import ProductsService from "../../../shared/services/ProductsService";
 
 const FavsList = () => {
-  const [products, setProducts] = useState([]);
+  const data = useContext(ProductsContext);
   const { user } = useContext(UserContext);
-  console.log(user, products);
-
-  // Aqui estoy asumiendo que vamos a trabajar con el correo del usuario
-  // por eso coloque user.sub
-
-  //   useEffect(() => {
-  //     const fetchData = async () => {
-  //       try {
-  //         const response = await axios.get(`/favorites/${user.sub}`);
-  //         setProducts(response.data);
-  //       } catch (error) {
-  //         console.log(error);
-  //       }
-  //     };
-
-  //     fetchData();
-  //   }, [user]);
+  const [products, setProducts] = useState([]); // Estado para almacenar los productos (Aqui vienen como objeto todos los productos)
+  const [favs, setFavs] = useState([]); // Estado para almacenar los productos favoritos (estos vienen en un array de numeros o sea los id del product)
+  const [productDetails, setProductDetails] = useState([]); // Estado para almacenar productos favoritos del usuaru
 
   useEffect(() => {
-    // Trabaje con el favorites.json que coloque en la carpeta public
-    // hasta que los datos reales estén disponibles en la base de datos
-    const fetchData = async () => {
-      try {
-        const filteredFavorites = favoritesData.favorites.filter(
-          (favorite) => favorite.userId === user.id
-        );
-        setProducts(filteredFavorites);
-      } catch (error) {
-        console.log(error);
-      }
-    };
+    if (data.products.length > 0 && user.favorites.length > 0) {
+      setProducts(data.products); // Actualiza el estado de los productos guardando los productos que vienen del context
+      const filteredFavorites = user.favorites.filter((favorite) =>
+        data.products.some((product) => product.id === favorite)
+      );
+      setFavs(filteredFavorites); // Actualizar el estado de los productos favoritos que vienen del user.favorites
+    }
+  }, [data, user]);
 
-    fetchData();
-  }, [user]);
+  useEffect(() => {
+    const productMap = {}; // Objeto para mapear los productos por ID
+    products.forEach((product) => {
+      productMap[product.id] = product; // Mapea los productos por ID
+    });
+
+    const favoriteProductDetails = favs.map((favorite) => productMap[favorite]); // Obtene los detalles de los productos favoritos usando el mapeo
+    setProductDetails(favoriteProductDetails);
+  }, [favs, products]);
+
+  const handleRemoveFavorite = async (productId) => {
+    try {
+      await ProductsService.deleteByID(user.favorite); // Llama a la función para eliminar el favorito de la base de datos
+
+      const updatedFavorites = favs.filter(
+        (favorite) => favorite !== productId
+      );
+      setFavs(updatedFavorites);
+    } catch (error) {
+      console.error("Error al eliminar el favorito:", error);
+      // Manejo de errores o muestra de mensajes de error
+    }
+  };
 
   return (
-    <>
-      <div className={styles.containerFavs}>
-        <header className={styles.header}>
-          <h4 className={styles.addFavsTitle}>Mis Favoritos</h4>
-        </header>
-        <div className={styles.section}>
-          {products.map((product) => (
-            <FavCard
-              key={product.id}
-              product={product}
-              rentalType="Alquiler por día"
-            />
-          ))}
-        </div>
+    <div className={styles.containerFavs}>
+      <header className={styles.header}>
+        <h4 className={styles.addFavsTitle}>Mis Favoritos</h4>
+      </header>
+      <div className={styles.section}>
+        {productDetails.map((product) => (
+          <FavCard
+            key={product.id}
+            product={product}
+            rentalType="Alquiler por día"
+            onRemoveFavorite={handleRemoveFavorite}
+          />
+        ))}
       </div>
-    </>
+    </div>
   );
 };
 

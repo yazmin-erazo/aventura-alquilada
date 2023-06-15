@@ -20,6 +20,11 @@
   width: 50%;
 }
 
+.linkCard{
+  text-decoration: none;
+}
+
+
 @media (max-width: 1000px) {
   .section {
     width: 100%;

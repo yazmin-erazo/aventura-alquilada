@@ -22,7 +22,7 @@ const RecommendedProducts = ({
 
   const handleFavoriteClick = (event) => {
     event.stopPropagation(); // Detiene la propagación del evento para que se pueda hacer lcic en el corazon y no navegue directamente a la vista de detalle
-    if(user.user.name){
+    if (user.user.name) {
       setIsFavorite(!isFavorite);
       let buscarFav
       const favoriteProducts= JSON.parse(sessionStorage.getItem("user")).favorites
@@ -50,6 +50,7 @@ const RecommendedProducts = ({
       Swal.fire('Atención!', 'Debés estar registrado para elegir tus favoritos', 'info')
     }
   };
+
   const calculateAverageRating = (ratings) => {
     if (Array.isArray(ratings) && ratings.length > 0) {
       const sum = ratings.reduce((total, rating) => total + rating);

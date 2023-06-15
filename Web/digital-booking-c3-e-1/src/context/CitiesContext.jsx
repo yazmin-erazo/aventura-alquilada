@@ -1,10 +1,9 @@
-import React, { createContext, useState, useEffect } from 'react'
-import CitiesService from '../shared/services/CitiesService';
+import React, { createContext, useState, useEffect } from "react";
+import CitiesService from "../shared/services/CitiesService";
 
 const CitiesContext = createContext();
 
-const CitiesDataContext = ({children}) => {
-    
+const CitiesDataContext = ({ children }) => {
   const [cities, setCities] = useState([]);
 
   useEffect(() => {
@@ -12,21 +11,20 @@ const CitiesDataContext = ({children}) => {
       try {
         const data = await CitiesService.getAll();
         setCities(data);
-      }
-      catch (err) {
+      } catch (err) {
         console.log(`Error al cargar ciudades: ${err}`);
       }
     };
-     fetchData();
+    fetchData();
   }, []);
-  
+
   return (
     <>
-        <CitiesContext.Provider value = {{cities}}>
-            {children}
-        </CitiesContext.Provider>
+      <CitiesContext.Provider value={{ cities }}>
+        {children}
+      </CitiesContext.Provider>
     </>
-  )
-}
+  );
+};
 
 export { CitiesContext, CitiesDataContext };

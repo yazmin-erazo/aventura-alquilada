@@ -16,37 +16,16 @@ const ProductsService = {
         res => res.data
     ),
 
-    getById: id => API.get(PRODUCTS_ENDPOINTS.PRODUCT_DETAILS + id)
-        .then(
-            res => res.data
-        ),
+  deleteByID: (id) =>
+    API.delete(PRODUCTS_ENDPOINTS.DELETE_PRODUCT + id).then((res) => res),
 
-    create: payload => API.post(PRODUCTS_ENDPOINTS.CREATE_PRODUCT, payload).then(
-        res => res.data
+  updateByID: (id, product) =>
+    API.put(PRODUCTS_ENDPOINTS.UPDATE_PRODUCT + id, product).then(
+      (res) => res.data
     ),
 
-    deleteByID: id => 
-        API.delete(PRODUCTS_ENDPOINTS.DELETE_PRODUCT + id)
-        .then(
-            res => res
-        ),
-
-    updateByID: (id, product) => API.put(PRODUCTS_ENDPOINTS.UPDATE_PRODUCT + id, product)
-        .then(
-            res => res.data
-        ),
-
-    addFav:(payload) => API.post(PRODUCTS_ENDPOINTS.ADD_FAV, payload).then(
-        res=>res.data
-    ),
-    deleteFav:(id) => API.delete(PRODUCTS_ENDPOINTS.DELETE_FAV+id).then(
-        res=>res.data
-    ),
-
-    comment: payload => API.post(PRODUCTS_ENDPOINTS.COMMENT_PRODUCT, payload).then(
-        res => res
-    )    
-
-}
+  comment: (payload) =>
+    API.post(PRODUCTS_ENDPOINTS.COMMENT_PRODUCT, payload).then((res) => res),
+};
 
 export default ProductsService;
