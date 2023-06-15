@@ -12,6 +12,10 @@
   gap: 0.5rem;
 }
 
+.container-button:hover {
+  background-color: #0073d8;
+}
+
 .container-button p {
   font-size: 14px;
 }
@@ -88,7 +92,7 @@
 .description {
   font-size: 14px;
   padding: 1rem;
-  padding-bottom:0 ;
+  padding-bottom: 0;
   margin-bottom: 1rem;
   display: -webkit-box;
   -webkit-line-clamp: 3;

@@ -1,14 +1,15 @@
 /* Estilos personalizados para los popups */
 
-.mapboxgl-popup-content {
+.popup-content {
   width: 250px;
   border-radius: 8px;
   padding: 10px;
-  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
+  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.3);
   color: var(--secondary-600);
+  background-color: var(--white-100);
 }
 
-.mapboxgl-popup-close-button {
+.popup-close-button {
   width: 32px;
   height: 32px;
   background-color: var(--secondary-50);
@@ -19,8 +20,7 @@
   font-weight: bold;
 }
 
-.mapboxgl-popup-close-button:hover {
-  background-color: var(--sencondary-900);
+.popup-close-button:hover {
+  background-color: var(--secondary-900);
   color: var(--secondary-50);
 }
-

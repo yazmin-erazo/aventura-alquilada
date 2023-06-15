@@ -1,12 +1,10 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import InputWithLabel from "../../common/input/InputWithLabel";
 import ButtonPrimary from "../../common/Buttons/ButtonPrimary";
-import Select from "../../common/select/Select";
 import styles from "./RegisterCity.module.css";
 import CitiesService from "../../../shared/services/CitiesService";
 import Swal from "sweetalert2";
 import { useNavigate } from "react-router-dom";
-import MapComponent from "../../resources/map/MapComponent";
 
 const RegisterCity = () => {
   const [errorMessage, setErrorMessage] = useState("");
@@ -18,10 +16,10 @@ const RegisterCity = () => {
     cityNameAPI: "",
     cityCodeAPI: "",
     countryNameAPI: "",
-    countryCodeAPI: "",    
+    countryCodeAPI: "",
   });
 
-  const handleInputChange = (name, value) => {    
+  const handleInputChange = (name, value) => {
     setFormData((prevFormData) => ({
       ...prevFormData,
       [name]: value,
@@ -38,7 +36,7 @@ const RegisterCity = () => {
       countryNameAPI,
       countryCodeAPI,
     } = formData;
-  
+
     const cityData = {
       name: cityName,
       latitude: latitude,
@@ -48,7 +46,7 @@ const RegisterCity = () => {
       countryAPI: countryNameAPI,
       countryCodeAPI: countryCodeAPI,
     };
-  
+
     try {
       await CitiesService.create(cityData);
 
@@ -59,7 +57,7 @@ const RegisterCity = () => {
         "La ciudad ha sido registrada exitosamente.",
         "success"
       );
-  
+
       setFormData({
         cityName: "",
         latitude: "",
@@ -70,9 +68,8 @@ const RegisterCity = () => {
         countryCodeAPI: "",
       });
       setErrorMessage("");
-      navigate('admin')
+      navigate("admin");
     } catch (error) {
-
       // En caso de error al registrar la ciudad
       Swal.fire(
         "Error",
@@ -80,20 +77,22 @@ const RegisterCity = () => {
         "error"
       );
 
-      if (error.response && error.response.data.nombreExcepcion === 'ExceptionInvalidValue') {
+      if (
+        error.response &&
+        error.response.data.nombreExcepcion === "ExceptionInvalidValue"
+      ) {
         Swal.fire(
-          'Error',
-          'El nombre de la ciudad ya existe, por favor ingrese otro valor',
-          'error'
+          "Error",
+          "El nombre de la ciudad ya existe, por favor ingrese otro valor",
+          "error"
         );
       } else {
         Swal.fire(
-          'Error',
-          'Ha ocurrido un error al registrar la ciudad.',
-          'error'
+          "Error",
+          "Ha ocurrido un error al registrar la ciudad.",
+          "error"
         );
       }
-
     }
   };
 
@@ -115,7 +114,7 @@ const RegisterCity = () => {
                 }
               >
                 Nombre:
-              </InputWithLabel>              
+              </InputWithLabel>
               <InputWithLabel
                 type="number"
                 value={formData.latitude}
@@ -148,13 +147,14 @@ const RegisterCity = () => {
               </InputWithLabel>
             </div>
             <div className={styles.formColumn}>
-            <MapComponent></MapComponent>
-             
-      <div className={styles.containerButton}>
-        <ButtonPrimary className={styles.submitBtn} onClick={handleSubmit}>
-          Registrar ciudad
-        </ButtonPrimary>
-      </div>
+              <div className={styles.containerButton}>
+                <ButtonPrimary
+                  className={styles.submitBtn}
+                  onClick={handleSubmit}
+                >
+                  Registrar ciudad
+                </ButtonPrimary>
+              </div>
             </div>
           </div>
           <div className={styles.registerInfo}></div>
