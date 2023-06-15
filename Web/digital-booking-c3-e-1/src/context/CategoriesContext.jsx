@@ -1,10 +1,9 @@
-import React, { createContext, useState, useEffect } from 'react'
-import CategoryService from '../shared/services/CategoryService';
+import React, { createContext, useState, useEffect } from "react";
+import CategoryService from "../shared/services/CategoryService";
 
 const CategoriesContext = createContext();
 
-const CategoriesDataContext = ({children}) => {
-    
+const CategoriesDataContext = ({ children }) => {
   const [Category, setCategories] = useState([]);
 
   useEffect(() => {
@@ -12,21 +11,20 @@ const CategoriesDataContext = ({children}) => {
       try {
         const data = await CategoryService.getAll();
         setCategories(data);
-      }
-      catch (err) {
+      } catch (err) {
         console.log(`Error al cargar productos: ${err}`);
       }
     };
-     fetchData();
+    fetchData();
   }, []);
-  
+
   return (
     <>
-        <CategoriesContext.Provider value = {{Category}}>
-            {children}
-        </CategoriesContext.Provider>
+      <CategoriesContext.Provider value={{ Category }}>
+        {children}
+      </CategoriesContext.Provider>
     </>
-  )
-}
+  );
+};
 
 export { CategoriesContext, CategoriesDataContext };

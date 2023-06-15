@@ -16,18 +16,22 @@ const RecommendedProducts = ({
   categoryIcon,
 }) => {
   const [isFavorite, setIsFavorite] = useState(false);
-  const user = useContext(UserContext)
+  const user = useContext(UserContext);
 
   const handleFavoriteClick = (event) => {
     event.stopPropagation(); // Detiene la propagación del evento para que se pueda hacer lcic en el corazon y no navegue directamente a la vista de detalle
-    if(user.user.name){
+    if (user.user.name) {
       setIsFavorite(!isFavorite);
       console.log(isFavorite);
-    }
-    else {
-      Swal.fire('Atención!', 'Debés estar registrado para elegir tus favoritos', 'info')
+    } else {
+      Swal.fire(
+        "Atención!",
+        "Debés estar registrado para elegir tus favoritos",
+        "info"
+      );
     }
   };
+
   const calculateAverageRating = (ratings) => {
     if (Array.isArray(ratings) && ratings.length > 0) {
       const sum = ratings.reduce((total, rating) => total + rating);

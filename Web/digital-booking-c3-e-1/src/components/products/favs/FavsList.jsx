@@ -3,7 +3,7 @@ import FavCard from "../../resources/Cards/Fav/FavCard";
 import { UserContext } from "../../../context/AuthContext";
 import styles from "./FavsList.module.css";
 import { ProductsContext } from "../../../context/ProductsContext";
-import { Link } from "react-router-dom";
+import ProductsService from "../../../shared/services/ProductsService";
 
 const FavsList = () => {
   const data = useContext(ProductsContext);
@@ -32,9 +32,18 @@ const FavsList = () => {
     setProductDetails(favoriteProductDetails);
   }, [favs, products]);
 
-  const handleRemoveFavorite = (productId) => {
-    const updatedFavorites = favs.filter((favorite) => favorite !== productId); // Filtrar los productos favoritos para eliminar el producto seleccionado
-    setFavs(updatedFavorites);
+  const handleRemoveFavorite = async (productId) => {
+    try {
+      await ProductsService.deleteByID(user.favorite); // Llama a la función para eliminar el favorito de la base de datos
+
+      const updatedFavorites = favs.filter(
+        (favorite) => favorite !== productId
+      );
+      setFavs(updatedFavorites);
+    } catch (error) {
+      console.error("Error al eliminar el favorito:", error);
+      // Manejo de errores o muestra de mensajes de error
+    }
   };
 
   return (
@@ -45,6 +54,7 @@ const FavsList = () => {
       <div className={styles.section}>
         {productDetails.map((product) => (
           <FavCard
+            key={product.id}
             product={product}
             rentalType="Alquiler por día"
             onRemoveFavorite={handleRemoveFavorite}

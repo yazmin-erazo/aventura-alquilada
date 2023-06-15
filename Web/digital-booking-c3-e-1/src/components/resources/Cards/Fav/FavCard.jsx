@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import styles from "./FavCard.module.css";
 import { BsClock, BsThreeDotsVertical } from "react-icons/bs";
 import { FaHeartBroken } from "react-icons/fa";
@@ -14,6 +14,20 @@ const FavCard = ({ product, rentalType, onRemoveFavorite }) => {
   const handleDeleteFromFavorites = () => {
     onRemoveFavorite(product.id);
   };
+
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (showMenu && !event.target.closest(`.${styles.menu}`)) {
+        setShowMenu(false);
+      }
+    };
+
+    document.addEventListener("click", handleClickOutside);
+
+    return () => {
+      document.removeEventListener("click", handleClickOutside);
+    };
+  }, [showMenu]);
 
   return (
     <div className={styles.card}>
