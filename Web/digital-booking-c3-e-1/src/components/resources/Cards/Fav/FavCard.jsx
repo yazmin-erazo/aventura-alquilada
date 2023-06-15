@@ -3,17 +3,18 @@ import styles from "./FavCard.module.css";
 import { BsClock, BsThreeDotsVertical } from "react-icons/bs";
 import { FaHeartBroken } from "react-icons/fa";
 
-const FavCard = ({ product, rentalType }) => {
+const FavCard = ({ product, rentalType, onRemoveFavorite }) => {
   const [showMenu, setShowMenu] = useState(false);
 
-  const handleMenuToggle = () => {
+  const handleMenuToggle = (event) => {
+    event.stopPropagation();
     setShowMenu(!showMenu);
   };
 
   const handleDeleteFromFavorites = () => {
-    // Eliminar el producto de favoritos
-    console.log("Eliminar de favoritos");
+    onRemoveFavorite(product.id);
   };
+
   return (
     <div className={styles.card}>
       <div className={styles.generalContainer}>

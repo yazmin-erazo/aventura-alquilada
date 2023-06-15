@@ -82,6 +82,7 @@
   width: fit-content;
   padding: 4px 8px;
   border-radius: 4px;
+  color: var(--secondary-600);
 }
 
 .containerContent {
@@ -117,7 +118,8 @@
   background-color: var(--white-100);
   padding: 1rem;
   border-radius: 8px;
-  box-shadow: 0 2px 4px rgba(34, 50, 68, 0.4);
+  box-shadow: 0 2px 4px hsla(213, 21%, 37%, 0.102);
+  border: 1px solid #e7eff7;
   position: absolute;
   z-index: 1;
   right: 1rem;

@@ -53,7 +53,9 @@ const RecommendedList = ({ selectedCategory, searchParams }) => {
     onPageChanged();
   }, [currentPage, filteredProducts]);
 
-  useEffect(() => {search()},[searchParams])
+  useEffect(() => {
+    search();
+  }, [searchParams]);
 
   const onPageChanged = () => {
     const offset = (currentPage - 1) * pageLimit;
@@ -61,12 +63,13 @@ const RecommendedList = ({ selectedCategory, searchParams }) => {
   };
 
   const search = (searchParams) => {
-    const productosBuscados = products.filter( p => p.name == searchParams)
-    if(searchParams)
-    setCurrentProducts(productosBuscados);
-  }
+    const productosBuscados = products.filter((p) => p.name == searchParams);
+    if (searchParams) setCurrentProducts(productosBuscados);
+  };
 
-  console.log(`${searchParams} desde el buscador pero renderizado desde el recomended`);
+  console.log(
+    `${searchParams} desde el buscador pero renderizado desde el recomended`
+  );
 
   return (
     <div className={styles.container}>
