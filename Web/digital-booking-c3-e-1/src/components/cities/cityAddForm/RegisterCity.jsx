@@ -10,9 +10,11 @@ import MapComponent from "../../resources/map/MapComponent";
 import ButtonInactive from "../../common/Buttons/ButtonInactive";
 import { BiPlusCircle } from "react-icons/bi";
 import mapboxgl from "mapbox-gl";
+import axios from 'axios'
 
 const RegisterCity = () => {
   const [errorMessage, setErrorMessage] = useState("");
+  const [nameSelected, setName] = useState("");
   const [latitudeSelected, setLatitude] = useState("");
   const [longitudeSelected, setLongitude] = useState("");
   const navigate = useNavigate();
@@ -26,33 +28,23 @@ const RegisterCity = () => {
   });
 
   const handleInputChange = (name, value) => { 
-    if (name === "latitude") {
-      console.log("handleInputChangeLatitude")
-      setLatitude(value);
+    if (name === "cityName") {      
+      setName(value);
     }
 
-    if (name === "longitude") {
-      console.log("handleInputChangeLongitude")
-      setLongitude(value);
-    }
+    if (name === "latitude" || name === 'longitude'){
+      if (name === "latitude") {      
+        setLatitude(value);
+      }
+  
+      if (name === "longitude") {      
+        setLongitude(value);
+      }
 
-    if (latitudeSelected ==! ""){
-      console.log("Latitude" + latitudeSelected);
-    }
-    else
-    {
-      console.log(" Vacio Latitude" + latitudeSelected);
-      console.log(typeof(latitudeSelected));
-    }
-
-    if (latitudeSelected ==! "" && longitudeSelected !== "")
-    {
-      getReverseGeocode(latitudeSelected, longitudeSelected)
-    }
-    else{
-      console.log(typeof(latitudeSelected));
-      console.log("Latitude" + latitudeSelected);
-      console.log("Longitude" + longitudeSelected);
+      if (latitudeSelected !== "" && longitudeSelected !== "")
+      {
+        getReverseGeocode(latitudeSelected, longitudeSelected)
+      }
     }
 
     setFormData((prevFormData) => ({
@@ -62,32 +54,42 @@ const RegisterCity = () => {
   };
 
   async function getReverseGeocode(latitude, longitude) {
-    try {
-      const response = await fetch(
-        `http://api.positionstack.com/v1/reverse?access_key=5802fbfcfcecda1c50e493bf66b80884&query=${latitude},${longitude}`
-        //`https://api.mapbox.com/geocoding/v5/mapbox.places/${longitude},${latitude}.json?access_token=${mapboxgl.accessToken}`
-      );
+    axios
+      .get(`http://api.positionstack.com/v1/reverse?access_key=5802fbfcfcecda1c50e493bf66b80884&query=${latitude},${longitude}`)
+      .then(response => {
+        console.log(response);
+        let data = response.data.data;
+        if (data !== 'undefined'){
+          if (data.length > 0){
+            console.log(data);
+            if (data){
+              const cityInfo = data[0];
+              const code = cityInfo.region_code;
+              const countryCode = cityInfo.country_code;
+              const county = cityInfo.county;
+              const region = cityInfo.region;
+              let genericName = "";
+              if (county == null || region == null){
+                genericName = nameSelected;
+              }
+              else {
+                genericName = cityInfo.county + ", " + cityInfo.region;
+              }
+               
+              console.log(code);
+              console.log(countryCode);
+              console.log(genericName);
+              handleInputChange("cityCodeAPI", code);
+              handleInputChange("countryCodeAPI", countryCode);
+              handleInputChange("cityNameAPI", genericName);
+            }
 
-      const data = await response.json();
-      //const place = data.features[0];
-      // const cityA = place.context.find((context) =>
-      //   context.id.startsWith("place")
-      // );
-      // const country = place.context.find((context) =>
-      //   context.id.startsWith("country")
-      // );
-
-      // const region = place.context.find((context) =>
-      //   context.id.startsWith("region")
-      // );
-
-      console.log(data);
-
-    }
-    catch(error){
-      console.error("Error al obtener el geocódigo inverso:", error);
-      return null;
-    }
+          }
+        }
+      })
+      .catch(error => {
+        console.error("Error al obtener el geocódigo inverso:" + error);
+      });   
   }
 
 
@@ -140,7 +142,7 @@ const RegisterCity = () => {
         countryCodeAPI: "",
       });
       setErrorMessage("");
-      navigate('admin/city')
+      navigate(-1)
     } catch (error) {
 
       // En caso de error al registrar la ciudad
@@ -216,7 +218,6 @@ const RegisterCity = () => {
                   onChange={(event) =>
                     handleInputChange("cityCodeAPI", event.target.value)
                   }
-                  isEditable={false}
                 >
                   Código:
               </InputWithLabel>
