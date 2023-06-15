@@ -57,6 +57,14 @@
   animation: fade-in 300ms ease-out reverse forwards;
 }
 
+.resultado {
+  width: 100%;
+  height: 70px;
+  color: var(--semantics-error);
+  font-size: large;
+  text-align: center;
+}
+
 /* -------- CON PANEL DE ADMINISTRACIÓN --------- */
 @media (max-width: 1024px) {
   .recommendedList > * {
