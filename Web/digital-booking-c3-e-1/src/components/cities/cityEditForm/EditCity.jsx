@@ -18,12 +18,11 @@ const EditCity = () => {
   const cityId = city.id;
 
   const [formData, setFormData] = useState({
-    cityName: city.name,
-    cityCode: city.code,
+    cityName: city.name,    
     latitude: city.latitude,
     longitude: city.longitude,
+    cityCodeAPI: city.code,
     cityNameAPI: city.genericName,
-    countryNameAPI: city.countryAPI,
     countryCodeAPI: city.countryCode,
   });
 
@@ -36,11 +35,21 @@ const EditCity = () => {
 
   const handleSubmit = async () => {
     const {
-      selectedCategoryId
+      cityName,      
+      latitude,
+      longitude,
+      cityCodeAPI,
+      cityNameAPI,      
+      countryCodeAPI,
     } = formData;
 
     const cityData = {      
-      idCategory: selectedCategoryId
+      name: cityName,      
+      latitude: latitude,
+      longitude: longitude,
+      code: cityCodeAPI,
+      genericName: cityNameAPI,
+      countryCode: countryCodeAPI,
     };
     console.log("Datos la ciudad:" + cityId, cityData);
 
@@ -57,12 +66,11 @@ const EditCity = () => {
 
       // Reiniciar los campos del formulario después de enviar los datos
       setFormData({
-        cityName: "",
-        cityCode: "",
+        cityName: "",        
         latitude: "",
         longitude: "",
+        cityCodeAPI: "",
         cityNameAPI: "",
-        countryNameAPI: "",
         countryCodeAPI: "",
       });
       setErrorMessage(""); //Limpiar el mensaje de error
@@ -78,7 +86,7 @@ const EditCity = () => {
   return (
     <div className={styles.containerEditCity}>
       <header className={styles.header}>
-        <h4 className={styles.addProductTitle}>
+        <h4 className={styles.addCityTitle}>
           <BiEdit size={20}/> Editar ciudad
         </h4>
       </header>
@@ -123,9 +131,9 @@ const EditCity = () => {
             <div className={styles.formColumn}>
               <InputWithLabel
                   type="text"
-                  value={formData.cityCode}
+                  value={formData.cityCodeAPI}
                   onChange={(event) =>
-                    handleInputChange("cityCode", event.target.value)
+                    handleInputChange("cityCodeAPI", event.target.value)
                   }
                   isEditable={false}
                 >
