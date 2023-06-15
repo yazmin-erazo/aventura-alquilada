@@ -49,6 +49,9 @@ const CalendarProducts = ({ onSelectDates, rents }) => {
     const selectedDate = moment(date).startOf("day");
 
     if (selectedEndDate) {
+      console.log("fecha final")
+      console.log(selectedDate)
+
       setSelectedStartDate(selectedDate);
       setSelectedEndDate(null)
       // if (selectedDate > selectedEndDate) {
@@ -58,8 +61,14 @@ const CalendarProducts = ({ onSelectDates, rents }) => {
       //   setSelectedStartDate(selectedDate);
       // }
     } else if (!selectedStartDate) {
+      console.log("fecha inicial")
+      console.log(selectedDate)
+
       setSelectedStartDate(selectedDate);
     } else {
+      console.log("fecha final 2")
+      console.log(selectedDate)
+      
       setSelectedEndDate(selectedDate);
       const diffDays =
         Math.abs(selectedDate.diff(selectedStartDate, "days")) + 1;
