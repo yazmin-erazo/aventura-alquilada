@@ -3,8 +3,6 @@ import styles from "./ImageGallery.module.css";
 import ImagePopup from "./ImagePopup";
 
 const ImageGallery = ({ product }) => {
-  //const mainImage = images[0];
-  //const gridImages = images.slice(1, 5);
 
   const mainImage = {
     id: 0,
@@ -14,7 +12,7 @@ const ImageGallery = ({ product }) => {
 
   const secondaryImages = product?.secondaryImages.map((image, index) => ({
     id: index,
-    title: "Imagen ${index+1}",
+    title: `Imagen ${index+1}`,
     url: image.imageURL,
   }));
 
@@ -23,10 +21,6 @@ const ImageGallery = ({ product }) => {
   const gridImages = secondaryImages.slice(0, 4);
 
   const [isPopupOpen, setIsPopupOpen] = useState(false);
-
-  const handleViewMore = () => {
-    setIsPopupOpen(true);
-  };
 
   return (
     <>
@@ -47,8 +41,8 @@ const ImageGallery = ({ product }) => {
         </div>
       </div>
       <div className={styles.button}>
-        <button className={styles.viewMore} onClick={handleViewMore}>
-          <i className="fa-solid fa-chevron-left">Ver más</i>
+        <button className={styles.viewMore} onClick={() => setIsPopupOpen(true)}>
+          Ver más
         </button>
       </div>
       {isPopupOpen && (
