@@ -5,10 +5,8 @@ import styles from "./RegisterCity.module.css";
 import CitiesService from "../../../shared/services/CitiesService";
 import Swal from "sweetalert2";
 import { useNavigate } from "react-router-dom";
-import MapComponent from "../../resources/map/MapComponent";
 import ButtonInactive from "../../common/Buttons/ButtonInactive";
 import { BiPlusCircle } from "react-icons/bi";
-import mapboxgl from "mapbox-gl";
 import axios from 'axios'
 
 const RegisterCity = () => {
