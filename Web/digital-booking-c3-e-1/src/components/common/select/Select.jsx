@@ -18,7 +18,7 @@ const Select = ({ options, onChange, children, placeholder }) => {
     <div>
     <label className={selectStyles.label}>{children}</label>
     
-    <select className={selectStyles.select} placeholder={placeholder}
+    <select defaultValue={0} className={selectStyles.select} placeholder={placeholder}
     onChange={handleOptionClick}>
       {/* <div className={selectStyles.select} onClick={handleSelectClick}>
         <div className={selectStyles.selectedOption}>{selectedOption}</div>
@@ -26,7 +26,7 @@ const Select = ({ options, onChange, children, placeholder }) => {
       </div> */}
       {/* {isOpen && ( */}
         {/* <div className={selectStyles.optionsList}> */}
-        <option defaultValue={0} className={selectStyles.option} selected>{placeholder}</option>
+        <option defaultValue={0} className={selectStyles.option} >{placeholder}</option>
           {options.map((option) => (
             <option
               key={option.id}

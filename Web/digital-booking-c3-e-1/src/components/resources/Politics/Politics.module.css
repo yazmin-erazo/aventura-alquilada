@@ -14,6 +14,7 @@
   padding: 1rem;
   border-radius: 4px;
   margin-bottom: 2rem;
+  padding-bottom: 2rem;
 }
 
 .detailItem {
@@ -30,7 +31,6 @@
   text-align: left;
   margin-bottom: 1rem;
 }
-
 
 @media (max-width: 768px) {
   .detail {
