@@ -34,28 +34,44 @@ const RecommendedList = ({ selectedCategory, searchParams }) => {
       .catch((error) => {
         console.log(error);
       });
-    }, []);
+  }, []);
+  
+  useEffect(() => {
+    if (data.products.length > 0) {
+      setProducts(data.products.sort(() => Math.random() - 0.5));
+    }
+  }, [data]);
+  
+  useEffect(() => {
+    const filtered = selectedCategory
+    ? products.filter((product) => product.category === selectedCategory.name)
+    : products;
     
-    useEffect(() => {
-      if (data.products.length > 0) {
-        setProducts(data.products.sort(() => Math.random() - 0.5));
-      }
-    }, [data]);
-    
-    useEffect(() => {
-      const filtered = selectedCategory
-      ? products.filter((product) => product.category === selectedCategory.name)
-      : products;
-      
-      setFilteredProducts(filtered);
-    }, [selectedCategory, products]);
-    
-    useEffect(() => {
-      onPageChanged();
-    }, [currentPage, filteredProducts]);
+    setFilteredProducts(filtered);
+  }, [selectedCategory, products]);
+  
+  useEffect(() => {
+    onPageChanged();
+  }, [currentPage, filteredProducts]);
+
+  const dateFiltered = () => {
+    const dateFilteredProds = filteredProducts.filter( p => {
+        let rented 
+        p.rents.forEach(element => {
+          ((element.starDate > searchParams.startDate && element.starDate < searchParams.endDate) ||
+          (element.endDate > searchParams.startDate && element.endDate < searchParams.endDate)) &&
+          (rented = p)
+        });
+        p !== rented
+        console.log(rented);
+    })
+    console.log(dateFilteredProds);
+    setFilteredProducts(dateFilteredProds);
+  }
     
   useEffect(() => {
     fetchData();
+    dateFiltered();
   },[searchParams])
 
   const onPageChanged = () => {
@@ -65,8 +81,13 @@ const RecommendedList = ({ selectedCategory, searchParams }) => {
 
   const fetchData = async () => {
     try {  
-      const productosBuscados = await ProductsService.getAll(searchParams)
-      setFilteredProducts(productosBuscados);
+      if(searchParams.startDate && searchParams.startDate){
+        const productosBuscados = await ProductsService.getAll(searchParams)
+        setFilteredProducts(productosBuscados);
+      }else{
+        const productosBuscados = await ProductsService.getAllWithoutDates(searchParams)
+        setFilteredProducts(productosBuscados);
+      }
     }
     catch{
       e => console.log(e);

@@ -20,10 +20,8 @@ import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.math.BigDecimal;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Optional;
+import java.time.Instant;
+import java.util.*;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
@@ -291,13 +289,13 @@ class ServiceProductTest {
         product2.setCommentProducts(List.of());
         List<ProductDTO> mockedList = Arrays.asList(product1, product2);
 
-        when(repositoryProduct.getAll(any(), any(), any(), any(), any(), any(), any(), any(), any(), any(), any()))
+        when(repositoryProduct.getAll(any(), any(), any(), any(), any(), any(), any(), any(), any(), any(), any(), any(), any()))
                 .thenReturn(mockedList);
 
-        List<ProductDTO> result = serviceProduct.getProducts("Nike", "Shoes", "Male", new BigDecimal(100), new BigDecimal(50), "XL", "New", "Red", "Leather",129L, "");
+        List<ProductDTO> result = serviceProduct.getProducts("Nike", "Shoes", "Male", new BigDecimal(100), new BigDecimal(50), "XL", "New", "Red", "Leather",129L, Date.from(Instant.now()), Date.from(Instant.now()), "");
 
         assertEquals(2, result.size());
-        verify(repositoryProduct, times(1)).getAll(any(), any(), any(), any(), any(), any(), any(), any(), any(),any(), any());
+        verify(repositoryProduct, times(1)).getAll(any(), any(), any(), any(), any(), any(), any(), any(), any(),any(), any(), any(), any());
     }
 
     @Test
