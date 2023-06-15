@@ -21,6 +21,7 @@ import ProductMap from "../../resources/productMap/ProductMap";
 import mapboxgl from "mapbox-gl";
 import SelectedDates from "../../resources/Calendar/SelectedDates";
 import moment from "moment";
+import ShareButtonProduct from "./ShareButtonProduct";
 
 const ProductDetails = () => {
   const data = useContext(ProductsContext);
@@ -35,7 +36,6 @@ const ProductDetails = () => {
   const [country, setCountry] = useState("");
   const [region, setRegion] = useState("");
   const [address, setAddress] = useState("");
-  console.log(userLocation, isUserLocationLoaded);
   const [selectedStartDate, setSelectedStartDate] = useState(null);
   const [selectedEndDate, setSelectedEndDate] = useState(null);
   const [totalRentalDays, setTotalRentalDays] = useState(0);
@@ -51,12 +51,9 @@ const ProductDetails = () => {
     return p.id === parseInt(params.id);
   });
 
-  console.log(product);
-
   useEffect(() => {
     setProducts(data.products);
     if (product && navigator.geolocation) {
-      console.log(product);
       navigator.geolocation.getCurrentPosition(
         async (position) => {
           const { latitude, longitude } = position.coords;
@@ -132,7 +129,6 @@ const ProductDetails = () => {
 
   const productId = product ? product.id : null;
 
-  console.log(showButton);
   return (
     <>
       {product && (
@@ -188,8 +184,10 @@ const ProductDetails = () => {
                   <p className={styles.productDescription}>
                     {product.description}
                   </p>
+                </div>
 
-                  {/* <p className={styles.price}>${product.price}</p> */}
+                <div className={styles.shareButton}>
+                  <ShareButtonProduct product={product} />
                 </div>
 
                 <div className={styles.review}>

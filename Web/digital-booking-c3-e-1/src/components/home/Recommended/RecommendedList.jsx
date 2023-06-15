@@ -9,6 +9,7 @@ import * as ReactIcons from "react-icons/md";
 import * as TbIcons from "react-icons/tb";
 import * as FaIcons from "react-icons/fa";
 import { sportsIcons } from "../../common/SportsIcons";
+import ProductsService from "../../../shared/services/ProductsService";
 
 const RecommendedList = ({ selectedCategory, searchParams }) => {
   const data = useContext(ProductsContext);
@@ -33,43 +34,44 @@ const RecommendedList = ({ selectedCategory, searchParams }) => {
       .catch((error) => {
         console.log(error);
       });
-  }, []);
-
-  useEffect(() => {
-    if (data.products.length > 0) {
-      setProducts(data.products.sort(() => Math.random() - 0.5));
-    }
-  }, [data]);
-
-  useEffect(() => {
-    const filtered = selectedCategory
+    }, []);
+    
+    useEffect(() => {
+      if (data.products.length > 0) {
+        setProducts(data.products.sort(() => Math.random() - 0.5));
+      }
+    }, [data]);
+    
+    useEffect(() => {
+      const filtered = selectedCategory
       ? products.filter((product) => product.category === selectedCategory.name)
       : products;
-
-    setFilteredProducts(filtered);
-  }, [selectedCategory, products]);
-
+      
+      setFilteredProducts(filtered);
+    }, [selectedCategory, products]);
+    
+    useEffect(() => {
+      onPageChanged();
+    }, [currentPage, filteredProducts]);
+    
   useEffect(() => {
-    onPageChanged();
-  }, [currentPage, filteredProducts]);
-
-  useEffect(() => {
-    search();
-  }, [searchParams]);
+    fetchData();
+  },[searchParams])
 
   const onPageChanged = () => {
     const offset = (currentPage - 1) * pageLimit;
     setCurrentProducts(filteredProducts.slice(offset, offset + pageLimit));
   };
 
-  const search = (searchParams) => {
-    const productosBuscados = products.filter((p) => p.name == searchParams);
-    if (searchParams) setCurrentProducts(productosBuscados);
-  };
-
-  console.log(
-    `${searchParams} desde el buscador pero renderizado desde el recomended`
-  );
+  const fetchData = async () => {
+    try {  
+      const productosBuscados = await ProductsService.getAll(searchParams)
+      setFilteredProducts(productosBuscados);
+    }
+    catch{
+      e => console.log(e);
+    }
+  }
 
   return (
     <div className={styles.container}>

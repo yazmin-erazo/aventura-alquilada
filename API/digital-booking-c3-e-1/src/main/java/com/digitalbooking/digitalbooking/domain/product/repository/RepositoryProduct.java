@@ -17,7 +17,7 @@ public interface RepositoryProduct {
 
     String saveImage(String fileName, String image);
 
-    List<ProductDTO> getAll(String brandFilter, String nameFilter, String genderFilter, BigDecimal priceLessThan, BigDecimal priceGreaterThan, String sizeFilter, String stateFilter, String colorFilter, String materialFilter, String search);
+    List<ProductDTO> getAll(String brandFilter, String nameFilter, String genderFilter, BigDecimal priceLessThan, BigDecimal priceGreaterThan, String sizeFilter, String stateFilter, String colorFilter, String materialFilter,Long cityId, String search);
 
     ProductDTO findById(Long id);
 

@@ -56,6 +56,10 @@ public interface RepositoryProductMySql extends JpaRepository< ProductEntity, Lo
             return (root, query, builder) ->
                     builder.equal(builder.lower(root.get("material")), material);
         }
+        static Specification<ProductEntity> byCityId(Long cityId) {
+            return (root, query, builder) ->
+                    builder.equal(builder.lower(root.get("city").get("id")), cityId);
+        }
         static Specification<ProductEntity> byBrandContains(String brand) {
             return (root, query, builder) -> builder.like(builder.lower(root.get("brand")), "%" + brand.toLowerCase() + "%");
         }
@@ -73,6 +77,9 @@ public interface RepositoryProductMySql extends JpaRepository< ProductEntity, Lo
         }
         static Specification<ProductEntity> byDescriptionContains(String description) {
             return (root, query, builder) -> builder.like(builder.lower(root.get("description")), "%" + description.toLowerCase() + "%");
+        }
+        static Specification<ProductEntity> byCityContains(String cityName) {
+            return (root, query, builder) -> builder.like(builder.lower(root.get("city").get("name")), "%" + cityName.toLowerCase() + "%");
         }
 
     }

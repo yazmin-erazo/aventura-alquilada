@@ -37,8 +37,7 @@ public class ProductHandler {
                 createProduct.getColor(),
                 createProduct.getMaterial(),
                 createProduct.getSecondaryImages().stream().map(p -> ImageProduct.create(p.getImage(),p.getFileName())).collect(Collectors.toList()),
-                createProduct.getLatitude(),
-                createProduct.getLongitude()
+                createProduct.getCityId()
         ));
     }
 
@@ -47,8 +46,8 @@ public class ProductHandler {
         ));
     }
 
-    public List<ProductDTO> getProduct(String brandFilter, String genderFilter, String nameFilter, BigDecimal priceLessThan, BigDecimal priceGreaterThan, String sizeFilter, String stateFilter, String colorFilter, String materialFilter, String search) {
-        return serviceProduct.getProducts(brandFilter, genderFilter, nameFilter, priceLessThan, priceGreaterThan, sizeFilter, stateFilter, colorFilter, materialFilter, search);
+    public List<ProductDTO> getProduct(String brandFilter, String genderFilter, String nameFilter, BigDecimal priceLessThan, BigDecimal priceGreaterThan, String sizeFilter, String stateFilter, String colorFilter, String materialFilter,Long cityId, String search) {
+        return serviceProduct.getProducts(brandFilter, genderFilter, nameFilter, priceLessThan, priceGreaterThan, sizeFilter, stateFilter, colorFilter, materialFilter, cityId, search);
     }
 
     public ProductDTO findById(Long id) {

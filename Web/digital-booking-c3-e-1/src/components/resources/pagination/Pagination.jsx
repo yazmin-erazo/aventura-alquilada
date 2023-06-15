@@ -79,7 +79,6 @@ const Pagination = (props) => {
     const pages = fetchPageNumbers();
 
     useEffect(() => {
-        console.log(props);
         goToPage(props.currentPage);
     }, [])
 
