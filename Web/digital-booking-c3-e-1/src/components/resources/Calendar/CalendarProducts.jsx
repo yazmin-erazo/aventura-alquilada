@@ -19,13 +19,15 @@ const CalendarProducts = ({ onSelectDates, rents }) => {
   
 
   const isDateUnavailable = (date) => {
-    return rents.some((rent) => {
-      const startDate = moment(rent.starDate, "YYYY-MM-DD").startOf("day");
-      const endDate = moment(rent.endDate, "YYYY-MM-DD").startOf("day");
-      const isUnavailable =
-        date >= startDate && date <= endDate && !rent.disabled;
-      return isUnavailable;
-    });
+    if(rents){
+      return rents.some((rent) => {
+        const startDate = moment(rent.starDate, "YYYY-MM-DD").startOf("day");
+        const endDate = moment(rent.endDate, "YYYY-MM-DD").startOf("day");
+        const isUnavailable =
+          date >= startDate && date <= endDate && !rent.disabled;
+        return isUnavailable;
+      });
+    }
   };
 
   const getTileClassName = (date) => {
@@ -47,12 +49,14 @@ const CalendarProducts = ({ onSelectDates, rents }) => {
     const selectedDate = moment(date).startOf("day");
 
     if (selectedEndDate) {
-      if (selectedDate > selectedEndDate) {
-        setSelectedStartDate(selectedEndDate);
-        setSelectedEndDate(selectedDate);
-      } else {
-        setSelectedStartDate(selectedDate);
-      }
+      setSelectedStartDate(selectedDate);
+      setSelectedEndDate(null)
+      // if (selectedDate > selectedEndDate) {
+      //   setSelectedStartDate(selectedEndDate);
+      //   setSelectedEndDate(selectedDate);
+      // } else {
+      //   setSelectedStartDate(selectedDate);
+      // }
     } else if (!selectedStartDate) {
       setSelectedStartDate(selectedDate);
     } else {
@@ -98,8 +102,9 @@ const CalendarProducts = ({ onSelectDates, rents }) => {
         <div className={styles.section}>
           <Calendar
             locale="es"
-            select="range"
+            selectRange={true}
             showDoubleView={!isMobile}
+            showFixedNumberOfWeeks={true}
             minDate={new Date()}
             tileClassName={({ date }) => getTileClassName(date)}
             tileDisabled={({ date }) => isDateUnavailable(date)}

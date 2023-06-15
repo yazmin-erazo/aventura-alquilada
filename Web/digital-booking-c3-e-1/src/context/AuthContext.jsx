@@ -43,7 +43,7 @@ const authReducer = (state, action) => {
       sessionStorage.setItem("user", JSON.stringify(action.payload));
       return{
         ...state,
-      user:action.payload,
+        user:action.payload,
       };
     default:
       return state;

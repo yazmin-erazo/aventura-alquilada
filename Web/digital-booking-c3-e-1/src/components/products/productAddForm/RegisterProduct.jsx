@@ -227,6 +227,7 @@ const RegisterProduct = () => {
 
               <Select
                 options={categories}
+                placeholder={'Seleccione...'}
                 value={selectedCategoryId}
                 onChange={(id) => handleInputChange("selectedCategoryId", id)}
               >
@@ -235,6 +236,7 @@ const RegisterProduct = () => {
 
               <ProductConditionSelect
                 value={formData.selectedCondition}
+                placeholder={'selecione...'}
                 onChange={(state) =>
                   handleInputChange("selectedCondition", state)
                 }
@@ -274,6 +276,7 @@ const RegisterProduct = () => {
               </InputWithLabel>
               <Select
                 options={genderOptions}
+                placeholder={'Seleccione...'}
                 value={selectedGender}
                 onChange={(id) => handleInputChange("selectedGender", id)}
               >

@@ -17,7 +17,6 @@ const Header = () => {
     setProfileOpen(!isProfileOpen);
     setMenuOpen(false);
   };
-  console.log(user);
   const toggleMenu = () => {
     setMenuOpen(!isMenuOpen);
   };

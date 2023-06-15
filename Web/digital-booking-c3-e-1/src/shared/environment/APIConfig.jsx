@@ -14,6 +14,8 @@ API.interceptors.request.use(
         const token = sessionStorage.getItem('token');
         if (token) {
             config.headers['Authorization'] = 'Bearer ' + token;
+            config.headers['Access-Control-Allow-Origin'] = '*';
+            config.headers['Access-Control-Allow-Credentials'] = 'true'
         }
         return config
     },
