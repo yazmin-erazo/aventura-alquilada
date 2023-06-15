@@ -19,7 +19,6 @@ import Politics from "../../resources/Politics/Politics";
 import CalendarProducts from "../../resources/Calendar/CalendarProducts";
 import ProductMap from "../../resources/productMap/ProductMap";
 import SelectedDates from "../../resources/Calendar/SelectedDates";
-import ShareButtonProduct from "./ShareButtonProduct";
 import ShareIcon from "./ShareIcon";
 
 const ProductDetails = () => {
