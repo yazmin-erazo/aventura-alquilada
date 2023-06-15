@@ -1,10 +1,14 @@
 package com.digitalbooking.digitalbooking.infrastructure.product.adapter;
 
+import com.digitalbooking.digitalbooking.infrastructure.rent.adapter.RentEntity;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 
+import javax.persistence.criteria.Root;
+import javax.persistence.criteria.Subquery;
 import java.math.BigDecimal;
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -80,6 +84,31 @@ public interface RepositoryProductMySql extends JpaRepository< ProductEntity, Lo
         }
         static Specification<ProductEntity> byCityContains(String cityName) {
             return (root, query, builder) -> builder.like(builder.lower(root.get("city").get("name")), "%" + cityName.toLowerCase() + "%");
+        }
+        static Specification<ProductEntity> byRentsNotBetweenDates(Date startDate, Date endDate) {
+            return (root, query, builder) -> {
+                Subquery<RentEntity> rentSubquery = query.subquery(RentEntity.class);
+                Root<RentEntity> rentRoot = rentSubquery.from(RentEntity.class);
+                rentSubquery.select(rentRoot);
+                rentSubquery.where(
+                        builder.equal(rentRoot.get("productEntity"), root), // join with product
+                        builder.or(
+                                builder.and(
+                                        builder.greaterThanOrEqualTo(rentRoot.get("starDate"), startDate),
+                                        builder.lessThanOrEqualTo(rentRoot.get("starDate"), endDate)
+                                ),
+                                builder.and(
+                                        builder.greaterThanOrEqualTo(rentRoot.get("endDate"), startDate),
+                                        builder.lessThanOrEqualTo(rentRoot.get("endDate"), endDate)
+                                ),
+                                builder.and(
+                                        builder.lessThanOrEqualTo(rentRoot.get("starDate"), startDate),
+                                        builder.greaterThanOrEqualTo(rentRoot.get("endDate"), endDate))
+
+                        )
+                );
+                return builder.not(builder.exists(rentSubquery));
+            };
         }
 
     }

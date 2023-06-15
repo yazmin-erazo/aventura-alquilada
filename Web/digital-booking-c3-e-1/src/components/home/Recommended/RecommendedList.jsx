@@ -81,8 +81,13 @@ const RecommendedList = ({ selectedCategory, searchParams }) => {
 
   const fetchData = async () => {
     try {  
-      const productosBuscados = await ProductsService.getAll(searchParams)
-      setFilteredProducts(productosBuscados);
+      if(searchParams.startDate && searchParams.startDate){
+        const productosBuscados = await ProductsService.getAll(searchParams)
+        setFilteredProducts(productosBuscados);
+      }else{
+        const productosBuscados = await ProductsService.getAllWithoutDates(searchParams)
+        setFilteredProducts(productosBuscados);
+      }
     }
     catch{
       e => console.log(e);

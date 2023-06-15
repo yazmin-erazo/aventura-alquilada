@@ -16,6 +16,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import java.math.BigDecimal;
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -64,7 +65,7 @@ public class RepositoryProductImpl implements RepositoryProduct {
     }
 
     @Override
-    public List<ProductDTO> getAll(String brandFilter, String nameFilter, String genderFilter, BigDecimal priceLessThan, BigDecimal priceGreaterThan, String sizeFilter, String stateFilter, String colorFilter, String materialFilter,Long cityId, String search) {
+    public List<ProductDTO> getAll(String brandFilter, String nameFilter, String genderFilter, BigDecimal priceLessThan, BigDecimal priceGreaterThan, String sizeFilter, String stateFilter, String colorFilter, String materialFilter, Long cityId, Date startDate, Date endDate, String search) {
         var query = where(byDelete((byte) 0));
         if (StringUtils.isNotEmpty(search)) {
             query = where(byNameContains(search)
@@ -103,8 +104,12 @@ public class RepositoryProductImpl implements RepositoryProduct {
         }
         if (StringUtils.isNotEmpty(materialFilter)) {
             query = query.and(byMaterial(materialFilter));
-        }if(ObjectUtils.isNotEmpty(cityId)){
+        }
+        if(ObjectUtils.isNotEmpty(cityId)){
             query = query.and(byCityId(cityId));
+        }
+        if(ObjectUtils.isNotEmpty(startDate) && ObjectUtils.isNotEmpty(endDate)){
+            query = query.and(byRentsNotBetweenDates(startDate,endDate));
         }
 
         return repositoryProductMySql.findAll(query).stream().map(MapToProduct::mapToProduct).collect(Collectors.toList());

@@ -12,7 +12,11 @@ const PRODUCTS_ENDPOINTS = {
 }
 
 const ProductsService = {
-    getAll: (params = {search: "", cityId: ""}) => API.get(`${PRODUCTS_ENDPOINTS.ALL_PRODUCTS}?search=${params.search}&cityId=${params.cityId}`).then(
+    getAll: (params = {search: "", cityId: "", startDate:"", endDate:""}) => API.get(`${PRODUCTS_ENDPOINTS.ALL_PRODUCTS}?search=${params.search}&cityId=${params.cityId}&startDate=${params.startDate.format("YYYY-MM-DD")}&endDate=${params.endDate.format("YYYY-MM-DD")}`).then(
+        res => res.data
+    ),
+
+    getAllWithoutDates: (params = {search: "", cityId: ""}) => API.get(`${PRODUCTS_ENDPOINTS.ALL_PRODUCTS}?search=${params.search}&cityId=${params.cityId}`).then(
         res => res.data
     ),
 
