@@ -49,8 +49,8 @@ public class ServiceProduct {
         return "Producto actualizado correctamente";
     }
 
-    public List<ProductDTO> getProducts(String brandFilter, String nameFilter, String genderFilter, BigDecimal priceLessThan, BigDecimal priceGreaterThan, String sizeFilter, String stateFilter, String colorFilter, String materialFilter, String search){
-        var products = repositoryProduct.getAll(brandFilter, genderFilter, nameFilter, priceLessThan, priceGreaterThan, sizeFilter, stateFilter, colorFilter, materialFilter, search);
+    public List<ProductDTO> getProducts(String brandFilter, String nameFilter, String genderFilter, BigDecimal priceLessThan, BigDecimal priceGreaterThan, String sizeFilter, String stateFilter, String colorFilter, String materialFilter, Long cityId, Date startDate, Date endDate, String search){
+        var products = repositoryProduct.getAll(brandFilter, genderFilter, nameFilter, priceLessThan, priceGreaterThan, sizeFilter, stateFilter, colorFilter, materialFilter, cityId,startDate, endDate, search);
         return products.stream().map(this::filterRentByYesterday).map(this::calculateScore).collect(Collectors.toList());
     }
 

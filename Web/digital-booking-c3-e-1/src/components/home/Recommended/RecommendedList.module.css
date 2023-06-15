@@ -3,6 +3,7 @@
   flex-wrap: wrap;
   justify-content: space-between;
   gap: 20px;
+  margin-bottom: 2rem;
 }
 
 .recommendedList > * {
@@ -21,17 +22,15 @@
   all: initial;
 }
 
-.linkCard{
-cursor: pointer;
+.linkCard {
+  cursor: pointer;
 }
-
 
 /* ------------ Transition */
 
 .recommendedList .fade {
   animation: fade-in 300ms ease-in;
 }
-
 
 @keyframes fade-in {
   from {
@@ -58,6 +57,13 @@ cursor: pointer;
   animation: fade-in 300ms ease-out reverse forwards;
 }
 
+.resultado {
+  width: 100%;
+  height: 70px;
+  color: var(--semantics-error);
+  font-size: large;
+  text-align: center;
+}
 
 /* -------- CON PANEL DE ADMINISTRACIÓN --------- */
 @media (max-width: 1024px) {

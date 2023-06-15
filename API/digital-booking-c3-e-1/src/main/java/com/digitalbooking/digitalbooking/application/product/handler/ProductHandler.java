@@ -13,6 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.math.BigDecimal;
+import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -37,8 +38,7 @@ public class ProductHandler {
                 createProduct.getColor(),
                 createProduct.getMaterial(),
                 createProduct.getSecondaryImages().stream().map(p -> ImageProduct.create(p.getImage(),p.getFileName())).collect(Collectors.toList()),
-                createProduct.getLatitude(),
-                createProduct.getLongitude()
+                createProduct.getCityId()
         ));
     }
 
@@ -47,8 +47,8 @@ public class ProductHandler {
         ));
     }
 
-    public List<ProductDTO> getProduct(String brandFilter, String genderFilter, String nameFilter, BigDecimal priceLessThan, BigDecimal priceGreaterThan, String sizeFilter, String stateFilter, String colorFilter, String materialFilter, String search) {
-        return serviceProduct.getProducts(brandFilter, genderFilter, nameFilter, priceLessThan, priceGreaterThan, sizeFilter, stateFilter, colorFilter, materialFilter, search);
+    public List<ProductDTO> getProduct(String brandFilter, String genderFilter, String nameFilter, BigDecimal priceLessThan, BigDecimal priceGreaterThan, String sizeFilter, String stateFilter, String colorFilter, String materialFilter, Long cityId, Date startDate, Date endDate, String search) {
+        return serviceProduct.getProducts(brandFilter, genderFilter, nameFilter, priceLessThan, priceGreaterThan, sizeFilter, stateFilter, colorFilter, materialFilter, cityId, startDate, endDate, search);
     }
 
     public ProductDTO findById(Long id) {

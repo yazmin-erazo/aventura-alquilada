@@ -6,6 +6,7 @@ import ProductConditionSelect from "../../common/select/ProductConditionSelect";
 import styles from "./RegisterProduct.module.css";
 import CategoryService from "../../../shared/services/CategoryService";
 import ProductsService from "../../../shared/services/ProductsService";
+import CitiesService from "../../../shared/services/CitiesService";
 import InputUploadImages from "../../common/inputImage/InputUploadImages";
 import Swal from "sweetalert2";
 import { useNavigate } from "react-router-dom";
@@ -14,7 +15,9 @@ import { BiPlusCircle } from "react-icons/bi";
 
 const RegisterProduct = () => {
   const [categories, setCategories] = useState([]);
+  const [cities, setCities] = useState([]);
   const [selectedCategoryId, setSelectedCategoryId] = useState("");
+  const [selectedCityId, setSelectedCityId] = useState([]);
   const [errorMessage, setErrorMessage] = useState("");
   const [selectedGender, setSelectedGender] = useState("");
   const navigate = useNavigate();
@@ -32,10 +35,15 @@ const RegisterProduct = () => {
     size: "",
     fileName: "",
     selectedGender: "",
+    selectedCity: "",
   });
 
   useEffect(() => {
     fetchCategories();
+  }, []);
+
+  useEffect(() => {
+    fetchCities();
   }, []);
 
   const fetchCategories = async () => {
@@ -46,48 +54,96 @@ const RegisterProduct = () => {
       console.error("Error al obtener las categorías:", error);
     }
   };
+  const fetchCities = async () => {
+    try {
+      const citiesData = await CitiesService.getAll();
+      setCities(citiesData);
+    } catch (error) {
+      console.error("Error al obtener las ciudades:", error);
+    }
+  };
 
   const handleInputChange = (name, value) => {
     if (name === "selectedCategory") {
       setSelectedCategoryId(value);
     }
+    if (name === "selectedCity") {
+      setSelectedCityId(value);
+    }
     if (name === "selectedGender") {
       setSelectedGender(value);
     }
-
+    console.log(value);
     setFormData((prevFormData) => ({
       ...prevFormData,
       [name]: value,
     }));
   };
 
+
   const handleImageUpload = (files) => {
     const updatedImages = [];
-
-    Array.from(files).forEach((file) => {
-      const fileName = file.name.split(".")[0];
+    const firstImage = files[0];
+  
+    if (firstImage) {
       const reader = new FileReader();
-
+  
       reader.onload = () => {
         const base64Image = reader.result;
         const base64ImageWithoutPrefix = base64Image.replace(
           /^data:image\/[a-z]+;base64,/,
           ""
         );
-
+  
         updatedImages.push({
-          fileName: fileName + ".jpg",
+          fileName: firstImage.name,
           image: base64ImageWithoutPrefix,
         });
+  
+        Array.from(files).slice(1).forEach((file) => {
+          if (/^data:image\/[a-z]+;base64,/.test(file.image)) {
+            // La imagen ya está en formato base64
+            updatedImages.push({
+              fileName: file.name,
+              image: file.image,
+            });
+          } else {
+            const reader = new FileReader();
+  
+            reader.onload = () => {
+              const base64Image = reader.result;
+              const base64ImageWithoutPrefix = base64Image.replace(
+                /^data:image\/[a-z]+;base64,/,
+                ""
+              );
+  
+              updatedImages.push({
+                fileName: file.name,
+                image: base64ImageWithoutPrefix,
+              });
+            };
+  
+            reader.readAsDataURL(file);
+          }
+        });
+  
+        setFormData((prevFormData) => ({
+          ...prevFormData,
+          selectedImages: updatedImages,
+          image: updatedImages[0].image,
+          fileName: updatedImages[0].fileName,
+        }));
       };
-
-      reader.readAsDataURL(file);
-    });
-
-    setFormData((prevFormData) => ({
-      ...prevFormData,
-      selectedImages: updatedImages,
-    }));
+  
+      reader.readAsDataURL(firstImage);
+    } else {
+      setFormData((prevFormData) => ({
+        ...prevFormData,
+        selectedImages: [],
+        image: "",
+        fileName: "",
+      }));
+    }
   };
 
   const handleSubmit = async () => {
@@ -103,6 +159,7 @@ const RegisterProduct = () => {
       material,
       size,
       selectedGender,
+      selectedCityId,
     } = formData;
 
     const productData = {
@@ -112,18 +169,19 @@ const RegisterProduct = () => {
       idCategory: selectedCategoryId,
       state: selectedCondition,
       description: description,
+      secondaryImages: selectedImages.slice(1),
       fileName: selectedImages[0].fileName,
       image: selectedImages[0].image,
-      secondaryImages: selectedImages.slice(1),
       color: color,
       material: material,
       size: size,
       gender: selectedGender,
+      cityId: selectedCityId,
     };
 
     try {
       await ProductsService.create(productData);
-
+      console.log(productData);
       // Mostrar un mensaje de éxito al usuario con sweetalert2
 
       Swal.fire(
@@ -137,14 +195,16 @@ const RegisterProduct = () => {
         selectedCondition: "",
         productName: "",
         productPrice: "",
-        selectedImage: null,
+        selectedImages: [],
         description: "",
         brand: "",
         color: "",
         material: "",
         size: "",
         fileName: "",
+        image: "",
         gender: "",
+        selectedCity: "",
       });
       setErrorMessage("");
       navigate("/admin");
@@ -184,11 +244,14 @@ const RegisterProduct = () => {
     { id: "Masculino", name: "Masculino" },
     { id: "No aplica", name: "No aplica" },
   ];
-
+  console.log(formData);
   return (
     <div className={styles.containerNewProduct}>
       <header className={styles.header}>
-        <h4 className={styles.addProductTitle}><BiPlusCircle size={20}/>Agregar producto</h4>
+        <h4 className={styles.addProductTitle}>
+          <BiPlusCircle size={20} />
+          Agregar producto
+        </h4>
       </header>
 
       <div className={styles.containerForm}>
@@ -227,6 +290,7 @@ const RegisterProduct = () => {
 
               <Select
                 options={categories}
+                placeholder={"Seleccione..."}
                 value={selectedCategoryId}
                 onChange={(id) => handleInputChange("selectedCategoryId", id)}
               >
@@ -235,6 +299,7 @@ const RegisterProduct = () => {
 
               <ProductConditionSelect
                 value={formData.selectedCondition}
+                placeholder={"selecione..."}
                 onChange={(state) =>
                   handleInputChange("selectedCondition", state)
                 }
@@ -251,6 +316,14 @@ const RegisterProduct = () => {
               >
                 Color:
               </InputWithLabel>
+              <Select
+                options={cities}
+                placeholder={"Seleccione..."}
+                value={selectedCityId}
+                onChange={(id) => handleInputChange("selectedCityId", id)}
+              >
+                Ciudad:
+              </Select>
             </div>
             <div className={styles.formColumn}>
               <InputWithLabel
@@ -274,6 +347,7 @@ const RegisterProduct = () => {
               </InputWithLabel>
               <Select
                 options={genderOptions}
+                placeholder={"Seleccione..."}
                 value={selectedGender}
                 onChange={(id) => handleInputChange("selectedGender", id)}
               >

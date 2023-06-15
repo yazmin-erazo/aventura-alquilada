@@ -9,6 +9,7 @@ import * as ReactIcons from "react-icons/md";
 import * as TbIcons from "react-icons/tb";
 import * as FaIcons from "react-icons/fa";
 import { sportsIcons } from "../../common/SportsIcons";
+import ProductsService from "../../../shared/services/ProductsService";
 
 const RecommendedList = ({ selectedCategory, searchParams }) => {
   const data = useContext(ProductsContext);
@@ -34,46 +35,71 @@ const RecommendedList = ({ selectedCategory, searchParams }) => {
         console.log(error);
       });
   }, []);
-
+  
   useEffect(() => {
     if (data.products.length > 0) {
       setProducts(data.products.sort(() => Math.random() - 0.5));
     }
   }, [data]);
-
+  
   useEffect(() => {
     const filtered = selectedCategory
-      ? products.filter((product) => product.category === selectedCategory.name)
-      : products;
-
+    ? products.filter((product) => product.category === selectedCategory.name)
+    : products;
+    
     setFilteredProducts(filtered);
   }, [selectedCategory, products]);
-
+  
   useEffect(() => {
     onPageChanged();
   }, [currentPage, filteredProducts]);
 
-  useEffect(() => {search()},[searchParams])
+  // const dateFiltered = () => {
+  //   const dateFilteredProds = filteredProducts.filter( p => {
+  //       let rented 
+  //       p.rents.forEach(element => {
+  //         ((element.starDate > searchParams.startDate && element.starDate < searchParams.endDate) ||
+  //         (element.endDate > searchParams.startDate && element.endDate < searchParams.endDate)) &&
+  //         (rented = p)
+  //       });
+  //       p !== rented
+  //       console.log(rented);
+  //   })
+  //   console.log(dateFilteredProds);
+  //   setFilteredProducts(dateFilteredProds);
+  // }
+    
+  useEffect(() => {
+    fetchData();
+   // dateFiltered();
+  },[searchParams])
 
   const onPageChanged = () => {
     const offset = (currentPage - 1) * pageLimit;
     setCurrentProducts(filteredProducts.slice(offset, offset + pageLimit));
   };
 
-  const search = (searchParams) => {
-    const productosBuscados = products.filter( p => p.name == searchParams)
-    if(searchParams)
-    setCurrentProducts(productosBuscados);
+  const fetchData = async () => {
+    try {  
+      if(searchParams.startDate && searchParams.startDate){
+        const productosBuscados = await ProductsService.getAll(searchParams)
+        setFilteredProducts(productosBuscados);
+      }else{
+        const productosBuscados = await ProductsService.getAllWithoutDates(searchParams)
+        setFilteredProducts(productosBuscados);
+      }
+    }
+    catch{
+      e => console.log(e);
+    }
   }
-
-  console.log(`${searchParams} desde el buscador pero renderizado desde el recomended`);
 
   return (
     <div className={styles.container}>
       <div className={styles.recommendedList}>
         {categories.length === 0
           ? null
-          : currentProducts.map((product) => {
+          : (currentProducts.length > 0 ? currentProducts.map((product) => {
               const category = categories.find(
                 (category) => category.name === product.category
               );
@@ -98,10 +124,10 @@ const RecommendedList = ({ selectedCategory, searchParams }) => {
                     categoryIcon={
                       isIconInSportsIcons ? IconComponent : categoryIcon
                     }
-                  />
+                  /> 
                 </div>
               );
-            })}
+            }): <div className={styles.resultado}>No se han encontrado productos</div>)}
       </div>
       <Pagination
         onPageChanged={onPageChanged}

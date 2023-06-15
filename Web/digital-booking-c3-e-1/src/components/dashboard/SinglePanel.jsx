@@ -1,10 +1,12 @@
 import { useState, useContext, useEffect } from "react";
 import { UserContext } from "../../context/AuthContext";
-import DashboardSection from "../resources/dashboard/DashboardSection";
+import { Link, useLocation } from "react-router-dom";
+
 import styles from "./panel.module.css";
 import { FiLayers, FiBriefcase, FiUsers, FiMenu } from "react-icons/fi";
 import { BiGridAlt } from "react-icons/bi";
-import { Link, useLocation } from "react-router-dom";
+import { TfiLocationPin } from "react-icons/tfi";
+import DashboardSection from "../resources/dashboard/DashboardSection";
 
 const SinglePanel = () => {
   const { user } = useContext(UserContext);
@@ -86,7 +88,7 @@ const SinglePanel = () => {
 
             {/* ------------------ CITIES ------------------ */}
             <DashboardSection
-              icon={FiLayers}
+              icon={TfiLocationPin}
               size={24}
               text="Ciudades"
               to="admin/city/"
@@ -181,7 +183,7 @@ const SinglePanel = () => {
                   <div className={styles.section}>
                     <FiLayers /> <div>Productos</div>
                   </div>
-                </Link>                
+                </Link>
               </div>
               {/* ------------------ CIUDADES ------------------ */}
               <div className={styles["dashboard-section"]}>
@@ -193,9 +195,9 @@ const SinglePanel = () => {
                   }}
                 >
                   <div className={styles.section}>
-                    <FiLayers /> <div>Ciudades</div>
+                    <TfiLocationPin size={24} /> <div>Ciudades</div>
                   </div>
-                </Link>                
+                </Link>
               </div>
             </div>
           </div>

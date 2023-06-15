@@ -2,7 +2,7 @@ import React, { useEffect, useRef, useState } from "react";
 import mapboxgl from "mapbox-gl";
 import "mapbox-gl/dist/mapbox-gl.css";
 import styles from "./ProductMap.module.css";
-import customStyles from "./mapbox-gl-custom.css?inline";
+import customStyles from "./mapbox-gl-custom.css";
 import CategoryService from "../../../shared/services/CategoryService";
 import * as ReactIcons from "react-icons/md";
 import * as TbIcons from "react-icons/tb";
@@ -16,14 +16,7 @@ const iconComponents = {
   ...FaIcons,
 };
 
-const ProductMap = ({
-  latitude,
-  longitude,
-  cityA,
-  country,
-  product,
-  userLocation,
-}) => {
+const ProductMap = ({ latitude, longitude, product }) => {
   const mapContainerRef = useRef(null);
   const [categories, setCategories] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
@@ -90,10 +83,10 @@ const ProductMap = ({
     const popupContent = `
     <div class="${styles.popup}">
       <h3 class="${styles.popupTitle}">Información del lugar</h3>
-      <p class="${styles.popupText}">Ciudad: ${cityA}</p>
-      <p class="${styles.popupText}">País: ${country}</p>
-      <p class="${styles.popupText}">Latitud: ${latitude}</p>
-      <p class="${styles.popupText}">Longitud: ${longitude}</p>
+      <p class="${styles.popupText}">Ciudad: ${product.city.name}</p>
+      <p class="${styles.popupText}">País: ${product.city.genericName}</p>
+      <p class="${styles.popupText}">Latitud: ${product.city.latitude}</p>
+      <p class="${styles.popupText}">Longitud: ${product.city.longitude}</p>
     </div>
     `;
 
@@ -163,8 +156,6 @@ const ProductMap = ({
       }
     };
 
-    // Actualizar el estado de showingRoute
-
     // Función para ir a la ubicación del producto
     const goToProductLocation = () => {
       map.flyTo({
@@ -193,10 +184,9 @@ const ProductMap = ({
       }
       map.remove();
     };
-
     // Elimine el mapa cuando el componente se desmonte
-  }, [latitude, longitude, cityA, country, productCategory]);
-  console.log(showingRoute);
+  }, [latitude, longitude, productCategory]);
+
   return (
     <>
       <div ref={mapContainerRef} className={styles.mapContainer}></div>

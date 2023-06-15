@@ -1,6 +1,7 @@
 package com.digitalbooking.digitalbooking.infrastructure.product.adapter;
 
 import com.digitalbooking.digitalbooking.infrastructure.category.adapter.CategoryEntity;
+import com.digitalbooking.digitalbooking.infrastructure.city.adapter.CityEntity;
 import com.digitalbooking.digitalbooking.infrastructure.rent.adapter.RentEntity;
 import lombok.Data;
 import org.hibernate.annotations.Fetch;
@@ -29,10 +30,10 @@ public class ProductEntity {
     private Boolean isDelete;
     private String color;
     private String material;
-    private String latitude;
-    private String longitude;
     @ManyToOne(fetch = FetchType.LAZY)
     private CategoryEntity category;
+    @ManyToOne(fetch = FetchType.LAZY)
+    private CityEntity city;
     @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL, mappedBy = "productEntity")
     @Fetch(value = FetchMode.SUBSELECT)
     private List<ImageProductEntity> imageProductEntity;
