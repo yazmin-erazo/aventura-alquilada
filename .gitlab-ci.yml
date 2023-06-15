@@ -31,8 +31,10 @@ build-web:
   stage: build
   image: node:14
   script:
+    - npm install -g vite
     - cd Web/digital-booking-c3-e-1
-    - npm ci --cache $CACHE_DIR/node_modules --prefer-offline || npm install --cache $CACHE_DIR/node_modules
+    - export NODE_OPTIONS="--max-old-space-size=4096"
+    - npm install
     - npm run build
   artifacts:
     paths:
