@@ -36,9 +36,6 @@ const Footer = () => {
             <FiInstagram className="icon" />
           </a>
         </div>
-
-        {}<ShareButtons />
-        
       </div>
     </div>
   );

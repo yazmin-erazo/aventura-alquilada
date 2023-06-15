@@ -42,7 +42,6 @@
 .react-calendar__tile--now {
   background-color: #d8d8d8;
   color: #333;
-  border-radius: 50%;
 }
 
 .react-calendar__tile--active:hover {
@@ -59,7 +58,6 @@
   width: 8px;
   height: 8px;
   background-color: #fff;
-  border-radius: 50%;
 }
 
 .react-calendar__tile--rangeStart.react-calendar__tile--rangeEnd::before {
@@ -174,7 +172,6 @@
 .selected-date {
   background-color: rgb(72, 125, 240);
   color: white;
-  border-radius: 50%;
 }
 
 /* Estilos para pantallas móviles */
@@ -219,16 +216,14 @@
 /* Estilos generales */
 .react-calendar__tile:enabled:hover,
 .react-calendar__tile:enabled:focus {
-  background: #f5fcee;
-  color: var(--primary-600);
-  border-radius: 6px;
+  background: rgb(72, 125, 240);
+  color: var(--white-100);
   font-weight: 700;
 }
 
 .react-calendar__tile--now:enabled:hover,
 .react-calendar__tile--now:enabled:focus {
   background: var(--primary-50);
-  border-radius: 6px;
   font-weight: bold;
   color: var(--primary-900);
 }
@@ -278,7 +273,6 @@
 .selected-date {
   background-color: rgb(72, 125, 240);
   color: white;
-  border-radius: 50%;
 }
 
 .react-calendar__tile--hasActive {
