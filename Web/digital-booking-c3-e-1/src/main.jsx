@@ -16,6 +16,7 @@ import RegisterUser from "./components/user/userAddForm/RegisterUser.jsx";
 import Login from "./components/user/login/Login.jsx";
 import ActivateUser from "./components/user/activateUser/ActivateUser.jsx";
 import NewCity from './components/cities/cityAddForm/RegisterCity.jsx';
+import EditCity from './components/cities/cityEditForm/EditCity.jsx';
 import CrudCity from './components/cities/CrudCities/CrudCity.jsx';
 import UsersCrud from "./components/user/userCrud/UsersCrud.jsx";
 import CrudRoles from "./components/roles/CrudRoles/CrudRoles.jsx"
@@ -44,7 +45,8 @@ ReactDOM.createRoot(document.getElementById("root")).render(
         <Route path='auth/register' element={<RegisterUser />} />
         <Route path='user/activate' element={<ActivateUser />} />
         <Route path='admin/city/add' element={<NewCity />} />
-        <Route path='admin/city/list' element={<CrudCity />} />
+        <Route path='admin/city/edit' element={<EditCity />} />
+        <Route path='admin/city/' element={<CrudCity />} />
         <Route path='admin/user' element={<UsersCrud />} />
         <Route path='favs' element={<FavsList />} />
       </Route>

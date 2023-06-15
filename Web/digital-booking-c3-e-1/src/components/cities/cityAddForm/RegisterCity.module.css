@@ -1,44 +1,66 @@
-.containerNewProduct {
-  margin: 0 4%;
-  margin-top:40px;
+.containerNewCity {
+  width: 90%;
+  max-width: 1280px;
+  margin: 0 auto;
+  margin-top: 3rem;
 }
 
 .header {
   width: 100%;
   border-bottom: 1px solid var(--secondary-100);
-  margin-bottom: 4rem;
+  margin-bottom: 2rem;
 }
 
-.addProductTitle {
+.addCityTitle {
   margin: 16px 0;
   color: var(--secondary-600);
+  display: flex;
+  gap: 0.5rem;
+  align-items: center;
 }
 
-.registerProductContainer {
+.registerCityContainer {
   color: var(--secondary-600);
   width: 100%;
   flex-direction: row;
   font: var(--body-14-normal);
-  margin-bottom: 2rem;
 }
 
 .containerForm {
   display: flex;
   justify-content: center;
+  background-color: var(--white-100);
+  padding: 1.5rem;
+  border-radius: 4px;
+  margin-bottom: 1rem;
 }
 
 .containerButton {
-  margin-top: 24px;
+  margin-top: 1rem;
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+  border-top: 1px solid var(--secondary-50);
+  padding-top: 1rem;
 }
 
-.registerProductForm {
+.buttonItem {
+  width: 100%;
+  max-width: 506px;
+  display: flex;
+  gap: 1rem;
+}
+
+.registerCityForm {
   display: flex;
   flex-direction: row;
-  gap: 20px;
+  gap: 3rem;
+  justify-content: center;
 }
 
 .formColumn {
-  flex: 1;
+  width: 506px;
+  max-width: 50%;
 }
 
 .previewContainer {
@@ -75,19 +97,33 @@
   justify-content: center;
 }
 
-@media (max-width: 768px) {
+@media (max-width: 1024px) {
   .textareaField {
     height: 80px;
   }
-  .registerProductContainer {
+
+  .registerCityContainer {
     flex-direction: column;
   }
 
-  .registerProductForm {
+  .registerCityForm {
+    flex-direction: column;
+    max-width: 506px;
+    margin: 0 auto;
+    gap: 0;
+  }
+
+  .formColumn {
+    width: 506px;
+    max-width: 100%;
+  }
+}
+@media (max-width: 768px) {
+  .registerCityForm {
     width: 100%;
   }
 
-  .registerProductForm {
+  .registerCityForm {
     flex-direction: column;
   }
 }
