@@ -86,7 +86,7 @@ const CrudCity = () => {
     console.log("Editando ciudad:", city);
     console.log("Editando ciudad con ID:", city.id);
 
-    navigate('city/edit', { state: { city: city } });
+    navigate('edit', { replace: true, state: { city: city } });
   }, [navigate]);
 
   return (

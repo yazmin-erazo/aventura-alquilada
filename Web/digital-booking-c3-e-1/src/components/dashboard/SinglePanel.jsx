@@ -89,10 +89,11 @@ const SinglePanel = () => {
               icon={FiLayers}
               size={24}
               text="Ciudades"
-              to="admin/city/list"
+              to="admin/city/"
               isActive={
-                location.pathname === "/admin/city/list" ||
-                location.pathname === "/admin/city/add"
+                location.pathname === "/admin/city/" ||
+                location.pathname === "/admin/city/add" ||
+                location.pathname === "/admin/city/edit"
               }
               onClick={() => setCurrentSection("Ciudades")}
             />
@@ -185,7 +186,7 @@ const SinglePanel = () => {
               {/* ------------------ CIUDADES ------------------ */}
               <div className={styles["dashboard-section"]}>
                 <Link
-                  to="admin/city/list"
+                  to="admin/city/"
                   onClick={() => {
                     setCurrentSection("Ciudades");
                     toggleMenu();
