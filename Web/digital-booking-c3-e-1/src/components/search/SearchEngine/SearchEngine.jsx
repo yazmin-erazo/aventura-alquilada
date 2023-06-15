@@ -19,6 +19,7 @@ const SearchEngine = ({handleSearch}) => {
   } 
   const handleSearchClick = e => {
     e.preventDefault();
+    setCalendarShow(false)
     if(text != null)
     {
       handleSearch({ search: text, cityId: city, startDate: selectedStartDate, endDate: selectedEndDate });
@@ -31,7 +32,11 @@ const SearchEngine = ({handleSearch}) => {
   };
 
   const cityHandler = (value) => {
-    setCity(value);
+    console.log(value);
+    if(value !== "Seleccione...")
+      setCity(value);
+    else
+      setCity("")
   }
 
   const handleButtonCalendar = () => {
@@ -42,8 +47,6 @@ const SearchEngine = ({handleSearch}) => {
     const cities = await CitiesService.getAll();
     setCityOptions(cities);
   }
-
-  console.log(city, selectedStartDate, selectedEndDate);
 
   useEffect( () => {
     try{
