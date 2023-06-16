@@ -157,7 +157,7 @@ const RegisterCity = () => {
       } else {
         Swal.fire(
           "Error",
-          "Ha ocurrido un error al registrar la ciudad.",
+          "La ciudad ya existe o falta completar un campo.",
           "error"
         );
       }

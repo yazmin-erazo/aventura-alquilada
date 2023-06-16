@@ -146,7 +146,48 @@ const RegisterProduct = () => {
     }
   };
 
+  const validateForm = () => {
+    const {
+      productName,
+      brand,
+      productPrice,
+      selectedCategoryId,
+      selectedCondition,
+      description,
+      selectedImages,
+      color,
+      material,
+      size,
+      selectedGender,
+      selectedCityId,
+    } = formData;
+  
+    if (!productName) return { isValid: false, message: "El campo Nombre es obligatorio" };
+    if (!brand) return { isValid: false, message: "El campo Marca es obligatorio" };
+    if (!productPrice) return { isValid: false, message: "El campo Precio es obligatorio" };
+    if (!selectedCategoryId) return { isValid: false, message: "El campo Categoría es obligatorio" };
+    if (!selectedCondition) return { isValid: false, message: "El campo Condición es obligatorio" };
+    if (!description) return { isValid: false, message: "El campo Descripción es obligatorio" };
+    if (!selectedImages || selectedImages.length === 0) return { isValid: false, message: "Debe subir al menos una imagen" };
+    if (!color) return { isValid: false, message: "El campo Color es obligatorio" };
+    if (!material) return { isValid: false, message: "El campo Material es obligatorio" };
+    if (!size) return { isValid: false, message: "El campo Talla/Tamaño es obligatorio" };
+    if (!selectedGender) return { isValid: false, message: "El campo Género es obligatorio" };
+    if (!selectedCityId) return { isValid: false, message: "El campo Ciudad es obligatorio" };
+  
+    return { isValid: true, message: "" };
+  };
+
   const handleSubmit = async () => {
+
+    const validation = validateForm();
+
+  if (!validation.isValid) {
+    // Mostrar un mensaje de error al usuario indicando qué campo falta por completar
+    Swal.fire("Falta información", validation.message, "warning");
+    return;
+  }
+  
     const {
       productName,
       brand,
