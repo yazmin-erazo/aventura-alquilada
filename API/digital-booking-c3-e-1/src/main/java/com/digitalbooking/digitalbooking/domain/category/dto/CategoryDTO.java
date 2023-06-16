@@ -12,4 +12,5 @@ public class CategoryDTO {
     private String name;
     private String imageURL;
     private String description;
+    private String icon;
 }

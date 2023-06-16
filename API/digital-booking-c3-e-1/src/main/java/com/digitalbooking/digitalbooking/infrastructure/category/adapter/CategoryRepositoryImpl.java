@@ -43,7 +43,7 @@ public class CategoryRepositoryImpl implements CategoryRepository {
 
     @Override
     public List<CategoryDTO> getAll() {
-        return categoryRepositoryMySql.findAll().stream().map(MapToCategory::mapToCategory).collect(Collectors.toList());
+        return categoryRepositoryMySql.findAllByIsDelete(false).stream().map(MapToCategory::mapToCategory).collect(Collectors.toList());
     }
 
     @Override

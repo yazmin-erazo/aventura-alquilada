@@ -1,86 +1,65 @@
 import React, { useState, useEffect, useContext } from "react";
 import { useParams, useNavigate } from "react-router-dom";
-import { FaArrowLeft } from "react-icons/fa";
-import styles from "./ProductDetails.module.css";
+import { UserContext } from "../../../context/AuthContext";
 import { ProductsContext } from "../../../context/ProductsContext";
-import { AiOutlineTag } from "react-icons/ai";
-import { BsGenderAmbiguous } from "react-icons/bs";
-import { BsPalette } from "react-icons/bs";
-import { TfiRulerAlt } from "react-icons/tfi";
+import moment from "moment";
+
+import styles from "./ProductDetails.module.css";
+import { AiOutlineTag, AiOutlineClockCircle } from "react-icons/ai";
+import { BsGenderAmbiguous, BsPalette } from "react-icons/bs";
+import { FaArrowLeft } from "react-icons/fa";
 import { FiInfo } from "react-icons/fi";
-import { MdOutlineTexture } from "react-icons/md";
-import { AiOutlineClockCircle } from "react-icons/ai";
+import { MdOutlineTexture, MdLocationOn } from "react-icons/md";
+import { TfiRulerAlt } from "react-icons/tfi";
+
 import ImageGallery from "../../common/imagegalery/ImageGallery";
 import Qualification from "../../resources/qualification/Qualification";
 import RatingStats from "../../resources/rating/RatingStats";
+import Politics from "../../resources/Politics/Politics";
+import CalendarProducts from "../../resources/Calendar/CalendarProducts";
+import ProductMap from "../../resources/productMap/ProductMap";
+import SelectedDates from "../../resources/Calendar/SelectedDates";
+import ShareIcon from "./ShareIcon";
 
 const ProductDetails = () => {
   const data = useContext(ProductsContext);
+  const auth = useContext(UserContext);
   const [products, setProducts] = useState([]);
   const params = useParams();
   const navigate = useNavigate();
-  const [images, setImages] = useState([]);
-  // const [product, setProduct] = useState()
+  const [selectedStartDate, setSelectedStartDate] = useState(null);
+  const [selectedEndDate, setSelectedEndDate] = useState(null);
+  const [totalRentalDays, setTotalRentalDays] = useState(0);
 
-    const product = products.find((p) => {
-      return p.id === parseInt(params.id);
-    });
-  
+  const handleSelectDates = (startDate, endDate) => {
+    setSelectedStartDate(startDate);
+    setSelectedEndDate(endDate);
+  };
 
-  useEffect(() => {
-    const exampleImages = [
-      {
-        id: 1,
-        title: "Imagen principal",
-        url: "https://picsum.photos/500/500?random",
-      },
-      {
-        id: 2,
-        title: "Imagen 1",
-        url: "https://picsum.photos/500/500?random",
-      },
-      {
-        id: 3,
-        title: "Imagen 2",
-        url: "https://picsum.photos/500/500?random",
-      },
-      {
-        id: 4,
-        title: "Imagen 3",
-        url: "https://picsum.photos/500/500?random",
-      },
-      {
-        id: 5,
-        title: "Imagen 4",
-        url: "https://picsum.photos/500/500?random",
-      },
-    ];
+  const product = products.find((p) => {
+    return p.id === parseInt(params.id);
+  });
 
-    // const producImages = [
-    //   product.imageURL
-    // ]
-    //   product.secondaryImages.map( img => producImages.push(img))
-
-    setImages(exampleImages);
-  }, []);
-
-  
   useEffect(() => {
     setProducts(data.products);
-    // searchProduct();
-  }, [data]);
+  }, [data, product]);
 
-  // const categoryIcons = {
-  //   Camping: TbTent,
-  //   Snowboard: MdOutlineSnowboarding,
-  //   Surf: MdOutlineSurfing,
-  //   Esquí: MdDownhillSkiing,
-  //   Bicicletas: MdDirectionsBike,
-  //   Escalada: FaMountain,
-  //   "Deportes acuáticos": FaSwimmer,
-  // };
+  // --------------------START calcula la diferencia en días con la funcion diff de moment --------------
+  useEffect(() => {
+    if (selectedStartDate && selectedEndDate) {
+      const diffDays = Math.abs(
+        moment(selectedEndDate).diff(selectedStartDate, "days") + 1
+      );
+      setTotalRentalDays(diffDays);
+    } else {
+      setTotalRentalDays(0);
+    }
+  }, [selectedStartDate, selectedEndDate]);
+  // -------------------- FIN Total días --------------
 
-  // const CategoryIcon = categoryIcons[product.category] || null;
+  const showButton = selectedStartDate && selectedEndDate;
+  const productId = product ? product.id : null;
+
 
   return (
     <>
@@ -91,28 +70,58 @@ const ProductDetails = () => {
               <h2 className={styles.nameProduct}>{product.name}</h2>
               <div onClick={() => navigate(-1)}>
                 <div className={styles.button}>
-                  <FaArrowLeft /> <p>Volver</p>
+                  <FaArrowLeft /> <p> Volver </p>
                 </div>
               </div>
             </div>
           </div>
 
+          <div className={styles.locationContainer}>
+            <div className={styles.location}>
+              <div className={styles.locationText}>
+                <div className={styles.locationIcon}>
+                  <div className={styles.circleIcon}>
+                    <MdLocationOn size={24} />
+                  </div>
+                </div>
+
+                <div>
+                  <p className={styles.city}>{product.city.name}</p>
+                  <p className={styles.proximity}>
+                    {" "}
+                    {product.city.genericName}
+                  </p>
+                </div>
+              </div>
+
+              <div className={styles.ratingStats}>
+                <RatingStats
+                  color="var(--semantics-success)"
+                  totalColor="var(--secondary-50)"
+                  className={styles.ratingStatsItem}
+                />
+              </div>
+            </div>
+          </div>
           <div className={styles.detailsContainer}>
-            <ImageGallery images={images} />
+            <div className={styles.shareButton}>
+              <ShareIcon product={product} />
+            </div>
+            <ImageGallery product={product} />
             <div className={styles.productDetails}>
               <div className={styles.description}>
-                {/* <div className={styles.category}>{product.category}</div> */}
-                <div className={styles.descriptionContainer}>
+                <div className={`${styles.descriptionContainer}`}>
                   <h2 className={styles.descriptionTitle}>{product.name}</h2>
                   <p className={styles.productDescription}>
                     {product.description}
                   </p>
-
-                  {/* <p className={styles.price}>${product.price}</p> */}
                 </div>
-                <div className={styles.review}>
-                  <Qualification />
-                  <RatingStats/>
+
+                <div className={`${styles.review} ${styles.section}`}>
+                  <Qualification
+                    isLoggedIn={auth.isLogedIn}
+                    productId={productId}
+                  />
                 </div>
               </div>
 
@@ -160,7 +169,43 @@ const ProductDetails = () => {
                   </div>
                 </div>
               </div>
+
+              <div className={styles.calendar}>
+                <h3 className={styles.calendarTitle}> Fechas disponibles </h3>
+                <div className={styles.calendarRent}>
+                  <section className={styles.calendarRentSection}>
+                    <CalendarProducts
+                      onSelectDates={handleSelectDates}
+                      rents={product.rents}
+                    />
+                  </section>
+                  <section className={styles.calendarRentSection}>
+                    {showButton ? (
+                      <SelectedDates
+                        selectedStartDate={selectedStartDate}
+                        selectedEndDate={selectedEndDate}
+                        totalRentalDays={totalRentalDays}
+                      />
+                    ) : (
+                      <p>Selecciona las fechas de tu reserva</p>
+                    )}
+                  </section>
+                </div>
+              </div>
+
+              <div className={styles.politics}>
+                <Politics />
+              </div>
+              <h3 className={styles.locationProduct}>Unicación del producto</h3>
             </div>
+          </div>
+
+          <div className={styles.mapContainer}>
+            <ProductMap
+              latitude={product.city.latitude}
+              longitude={product.city.longitude}
+              product={product}
+            />
           </div>
         </>
       )}

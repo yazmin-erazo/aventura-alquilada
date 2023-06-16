@@ -30,6 +30,8 @@ public class JwtUtils {
         claims.put("name", userPrincipal.getName());
         claims.put("lastname", userPrincipal.getLastName());
         claims.put("role", userPrincipal.getRole());
+        claims.put("favorites", userPrincipal.getFavorites());
+
 
         return Jwts.builder()
                 .setSubject((userPrincipal.getUsername()))

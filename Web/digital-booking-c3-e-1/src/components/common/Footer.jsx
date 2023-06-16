@@ -1,3 +1,5 @@
+import React from "react";
+import ShareButtons from "../search/SearchEngine/ShareButtons";
 import { AiOutlineCopyright } from "react-icons/ai";
 import { FiGitlab, FiInstagram } from "react-icons/fi";
 

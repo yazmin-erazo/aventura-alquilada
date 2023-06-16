@@ -1,0 +1,129 @@
+.containerNewCity {
+  width: 90%;
+  max-width: 1280px;
+  margin: 0 auto;
+  margin-top: 3rem;
+}
+
+.header {
+  width: 100%;
+  border-bottom: 1px solid var(--secondary-100);
+  margin-bottom: 2rem;
+}
+
+.addCityTitle {
+  margin: 16px 0;
+  color: var(--secondary-600);
+  display: flex;
+  gap: 0.5rem;
+  align-items: center;
+}
+
+.registerCityContainer {
+  color: var(--secondary-600);
+  width: 100%;
+  flex-direction: row;
+  font: var(--body-14-normal);
+}
+
+.containerForm {
+  display: flex;
+  justify-content: center;
+  background-color: var(--white-100);
+  padding: 1.5rem;
+  border-radius: 4px;
+  margin-bottom: 1rem;
+}
+
+.containerButton {
+  margin-top: 1rem;
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+  border-top: 1px solid var(--secondary-50);
+  padding-top: 1rem;
+}
+
+.buttonItem {
+  width: 100%;
+  max-width: 506px;
+  display: flex;
+  gap: 1rem;
+}
+
+.registerCityForm {
+  display: flex;
+  flex-direction: row;
+  gap: 3rem;
+  justify-content: center;
+}
+
+.formColumn {
+  width: 506px;
+  max-width: 50%;
+}
+
+.previewContainer {
+  width: 100%;
+  margin-top: 8px;
+}
+
+.previewImage {
+  max-width: 360px;
+  height: auto;
+  border-radius: 4px;
+  box-shadow: 0 2px 4px var(--secondary-100);
+}
+
+.textareaField {
+  width: 100%;
+  max-width: 508px;
+  height: 120px;
+  background: var(--white-100);
+  border: 0.5px solid var(--secondary-100);
+  border-radius: 5px;
+  font-size: 14px;
+  margin-top: 8px;
+  padding: 10px;
+  font: var(--body-14-normal);
+  resize: vertical;
+  box-sizing: border-box;
+  margin: 16px 0;
+}
+
+.submitBtn {
+  margin: 16px;
+  display: flex;
+  justify-content: center;
+}
+
+@media (max-width: 1024px) {
+  .textareaField {
+    height: 80px;
+  }
+
+  .registerCityContainer {
+    flex-direction: column;
+  }
+
+  .registerCityForm {
+    flex-direction: column;
+    max-width: 506px;
+    margin: 0 auto;
+    gap: 0;
+  }
+
+  .formColumn {
+    width: 506px;
+    max-width: 100%;
+  }
+}
+@media (max-width: 768px) {
+  .registerCityForm {
+    width: 100%;
+  }
+
+  .registerCityForm {
+    flex-direction: column;
+  }
+}

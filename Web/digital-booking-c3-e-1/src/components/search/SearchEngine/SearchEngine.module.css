@@ -1,14 +1,58 @@
 @import "/src/styles/variables.css";
 @import "/src/styles/global.css";
 
-
 .search-engine {
   display: flex;
   flex-direction: row;
   align-items: flex-start;
+  justify-content: center;
+  width: 100%;
   height: 42px;
   left: 50.63px;
   top: 184.32px;
+}
+
+.hide {
+  display: none !important;
+}
+
+.show {
+  display: block;
+  position: relative;
+  z-index: 5;
+}
+
+.button-calendar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px;
+  min-width: 200px;
+  background: var(--bg-general);
+  border: 0.5px solid #c3d4e4; /* secondary-100 */
+  border-radius: 4px;
+  cursor: pointer;
+  margin: 0;
+  color: gray;
+  height: 42px;
+  font-size: 14px;
+}
+
+.search-engine select {
+  margin: 0;
+  background: var(--bg-general);
+  color: gray;
+  height: 42px;
+  font-size: 14px;
+}
+
+.form {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  gap: 1rem;
+  margin: 0 auto;
+  max-width: 1400px;
 }
 
 .inputWrapper {
@@ -60,5 +104,19 @@
 }
 
 .search-icon-button:focus-visible {
-  box-shadow: 0 0 0 2px #FEC03E;
+  box-shadow: 0 0 0 2px #fec03e;
+}
+
+@media (max-width: 992px) {
+  .form {
+    flex-direction: column-reverse;
+  }
+
+  .search-engine {
+    width: auto;
+    height: 42px;
+    left: 0px;
+    top: 0px;
+    padding: 1rem;
+  }
 }

@@ -4,12 +4,21 @@ import styles from "./CategoryList.module.css";
 import { IoIosArrowForward } from "react-icons/io";
 import { IoIosArrowBack } from "react-icons/io";
 import CategoryService from "../../../shared/services/CategoryService";
+import * as ReactIcons from "react-icons/md";
+import * as TbIcons from "react-icons/tb";
+import * as FaIcons from "react-icons/fa";
+import { sportsIcons } from "../../common/SportsIcons";
 
 const CategoryList = ({ onCategoryClick }) => {
   const listRef = useRef(null);
   const [showLeftArrow, setShowLeftArrow] = useState(false);
   const [showRightArrow, setShowRightArrow] = useState(true);
   const [categories, setCategories] = useState([]);
+  const iconComponents = {
+    ...ReactIcons,
+    ...TbIcons,
+    ...FaIcons,
+  };
 
   const handleScroll = (scrollOffset) => {
     listRef.current.scrollLeft += scrollOffset;
@@ -47,14 +56,13 @@ const CategoryList = ({ onCategoryClick }) => {
     onCategoryClick(category);
   };
 
-
   return (
     <div className={styles.container}>
       <div
         className={styles.overlay}
         style={{
           background: showLeftArrow
-            ? "transparent"
+            ? "none"
             : "linear-gradient(to right, rgba(195, 212, 228, 0), #DEE7F0)",
           color: showLeftArrow ? "white" : "transparent",
         }}
@@ -65,13 +73,18 @@ const CategoryList = ({ onCategoryClick }) => {
         onScroll={handleScrollEnd}
       >
         <div className={styles.categoryList}>
-          {categories.map((category) => (
-            <CardCategory
-              key={category.id}
-              category={category}
-              onCategoryClick={handleCategoryClick}
-            />
-          ))}
+          {categories.map((category) => {
+            const IconComponent = iconComponents[category.icon] || null;
+            const isIconInSportsIcons = sportsIcons.includes(category.icon);
+            return (
+              <CardCategory
+                key={category.id}
+                category={category}
+                onCategoryClick={handleCategoryClick}
+                selectedIcon={isIconInSportsIcons ? IconComponent : undefined} // Pasa el componente del icono
+              />
+            );
+          })}
         </div>
       </div>
 

@@ -4,6 +4,7 @@
 
 .starsContainer {
   margin: 20px 0;
+  display: flex;
 }
 
 .star {
@@ -17,11 +18,21 @@
   width: 50px;
   height: 50px;
 }
-
+.commentText{
+  font-size: 0.94rem;
+  width: 80%;
+}
 .filled {
   color: var(--primary-300);
   background-color: var(--black);
 }
+
+/* .star:hover,
+.star:hover ~ .star {
+  color: var(--primary-300);
+  background-color: var(--black);
+} */
+
 .reviewText {
   line-height: 1.3rem;
   color: var(--secondary-300);

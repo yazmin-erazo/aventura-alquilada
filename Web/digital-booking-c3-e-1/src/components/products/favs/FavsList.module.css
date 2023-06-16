@@ -1,0 +1,32 @@
+.containerFavs {
+  width: 90%;
+  max-width: 1280px;
+  margin: 0 auto;
+  margin-top: 3rem;
+}
+
+.header {
+  width: 100%;
+  border-bottom: 1px solid var(--secondary-100);
+  margin-bottom: 2rem;
+}
+
+.addFavsTitle {
+  margin: 16px 0;
+  color: var(--secondary-600);
+}
+
+.section {
+  width: 50%;
+}
+
+.linkCard{
+  text-decoration: none;
+}
+
+
+@media (max-width: 1000px) {
+  .section {
+    width: 100%;
+  }
+}

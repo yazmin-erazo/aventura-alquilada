@@ -1,17 +1,28 @@
 .outlet {
-    min-height: calc(100vh - 140px);
-  }
-  
-  .withPanel {
-    display: flex;
-  }
+  min-height: calc(100vh - 140px);
+}
 
+.header {
+  width: 100%;
+}
+
+.withPanel {
+  display: flex;
+}
+
+.withPanel .main {
+  max-width: calc(100vw - 250px);
+}
+
+.main {
+  width: 100%;
+}
+
+@media (max-width: 767px) {
   .withPanel .main {
-    max-width: calc(100vw - 250px);
+    max-width: 100vw;
   }
-
-  @media (max-width: 767px) { 
-    .withPanel .main {
-      max-width: 100vw;
-    }
+  .withPanel {
+    flex-direction: column;
   }
+}

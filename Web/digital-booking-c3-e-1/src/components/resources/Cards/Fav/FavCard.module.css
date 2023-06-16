@@ -1,0 +1,166 @@
+.card {
+  margin-bottom: 0.8rem;
+  display: flex;
+  align-items: center;
+  border: 1px solid var(--secondary-50);
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 2px 4px hsla(213, 21%, 37%, 0.102);
+  background-color: var(--white-100);
+  padding: 12px;
+  gap: 0.8rem;
+  justify-content: space-between;
+  position: relative;
+}
+.generalContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 12px;
+}
+
+.imageContainer {
+  max-width: 110px;
+  max-height: 110px;
+}
+
+.image {
+  width: 100%;
+  flex: 0 0 auto;
+}
+
+.image img {
+  width: 100%;
+  height: auto;
+  border-radius: 4px;
+}
+
+.content {
+  flex: 1;
+}
+
+.title {
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+}
+
+.title h3 {
+  font: var(--h5);
+  margin: 0;
+  color: var(--sencondary-900);
+}
+
+.rentalType {
+  display: flex;
+  align-items: center;
+  font-size: 14px;
+  margin-bottom: 12px;
+  color: var(--secondary-300);
+  gap: 8px;
+}
+
+.price {
+  display: block;
+  font-size: 16px;
+  font-weight: bold;
+  color: var(--secondary-600);
+}
+
+.priceAndRentalContainer {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 0.8rem;
+}
+
+.category {
+  display: block;
+  font-size: 14px;
+  background-color: var(--secondary-50);
+  width: fit-content;
+  padding: 4px 8px;
+  border-radius: 4px;
+  color: var(--secondary-600);
+}
+
+.containerContent {
+  display: flex;
+}
+
+.description {
+  color: var(--secondary-600);
+  font-size: 14px;
+  line-height: 1.4;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+}
+
+.menu {
+  flex: 0 0 auto;
+  align-self: flex-start;
+  color: var(--secondary-600);
+  display: flex;
+  gap: 0.2rem;
+  flex-direction: row-reverse;
+}
+
+.menuIcon {
+  font-size: 20px;
+  cursor: pointer;
+}
+
+.dropdownMenu {
+  background-color: var(--white-100);
+  padding: 1rem;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px hsla(213, 21%, 37%, 0.102);
+  border: 1px solid #e7eff7;
+  position: absolute;
+  z-index: 1;
+  right: 1rem;
+  cursor: pointer;
+  top: 3rem;
+}
+
+.menuItem {
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+  justify-content: center;
+}
+.iconHeart {
+  color: var(--semantics-error);
+  font-size: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.iconDots {
+  width: 36px;
+  height: 36px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  border-radius: 50%;
+}
+
+.activeMenuIcon {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 50%;
+  background-color: var(--secondary-50);
+}
+
+@media (max-width: 440px) {
+  .priceAndRentalContainer {
+    flex-direction: column;
+    gap: 0.6rem;
+  }
+}

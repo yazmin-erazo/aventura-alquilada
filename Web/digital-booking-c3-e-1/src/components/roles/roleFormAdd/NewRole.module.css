@@ -1,0 +1,150 @@
+@import "/src/styles/variables.css";
+@import "/src/styles/global.css";
+
+.containerNewRol {
+  width: 90%;
+  max-width: 1280px;
+  margin: 0 auto;
+  margin-top: 3rem;
+}
+
+.containerForm {
+  display: flex;
+  justify-content: center;
+  background-color: var(--white-100);
+  padding: 1.5rem;
+  border-radius: 4px;
+  margin-bottom: 1rem;
+}
+
+.header {
+  width: 100%;
+  border-bottom: 1px solid var(--secondary-100);
+  margin-bottom: 2rem;
+}
+
+.addRolTitle {
+  margin: 16px 0;
+  color: var(--secondary-600);
+}
+
+.registerRoleContainer {
+  color: var(--secondary-600);
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  font: var(--body-14-normal);
+  margin-bottom: 2rem;
+}
+
+.registerRoleForm {
+  width: 100%;
+}
+
+.selectAllContainer {
+  margin-bottom: 3rem;
+  margin-top: 0.75rem;
+}
+.titleSelectAll {
+  margin-top: 2rem;
+}
+.permissionsContainer {
+  max-width: 506px;
+  display: flex;
+  flex-direction: column;
+  padding-bottom: 2rem;
+}
+
+.category {
+  display: flex;
+  flex-direction: row;
+  margin-bottom: 20px;
+  justify-content: space-between;
+  align-items: baseline;
+  border-bottom: 1px solid var(--secondary-100);
+}
+
+.category h4 {
+  margin-bottom: 10px;
+}
+
+.categoryPermissions {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-gap: 1.2rem;
+  align-items: center;
+}
+
+.categoryPermissions h5 {
+  margin: 0;
+}
+
+.categoryName {
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.previewContainer {
+  width: 100%;
+  margin-top: 8px;
+}
+
+.previewImage {
+  max-width: 360px;
+  height: auto;
+  border-radius: 4px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.textareaField {
+  width: 100%;
+  max-width: 508px;
+  height: 120px;
+  background: var(--white-100);
+  border: 0.5px solid var(--secondary-100);
+  border-radius: 5px;
+  font-size: 14px;
+  margin-top: 8px;
+  padding: 10px;
+  font: var(--body-14-normal);
+  resize: vertical;
+  box-sizing: border-box;
+  margin: 16px 0;
+}
+
+.submitBtn {
+  margin: 16px;
+}
+
+.containerButton {
+  margin-top: 1rem;
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+  border-top: 1px solid var(--secondary-50);
+  padding-top: 1rem;
+}
+
+.buttonsItem {
+  width: 100%;
+  max-width: 506px;
+  display: flex;
+  gap: 1rem;
+}
+
+@media (max-width: 600px) {
+  .textareaField {
+    height: 80px;
+  }
+  .registerCategoryContainer {
+    flex-direction: column;
+  }
+  .category {
+    flex-direction: column;
+  }
+  .categoryPermissions {
+    width: 100%;
+    display: flex;
+  }
+}

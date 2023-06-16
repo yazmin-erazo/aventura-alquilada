@@ -1,10 +1,12 @@
 package com.digitalbooking.digitalbooking.infrastructure.user.adapter;
 
+import com.digitalbooking.digitalbooking.infrastructure.product.adapter.ProductEntity;
 import com.digitalbooking.digitalbooking.infrastructure.role.adapter.RoleEntity;
 import lombok.Data;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Data
 @Entity
@@ -20,6 +22,14 @@ public class UserEntity {
     private String token;
     private Boolean isActive;
     private LocalDateTime GeneratingDate;
+    private String initialsColor;
     @ManyToOne
     private RoleEntity roleEntity;
+    @ManyToMany
+    @JoinTable(
+            name = "user_favorite_products",
+            joinColumns = @JoinColumn(name = "user_id"),
+            inverseJoinColumns = @JoinColumn(name = "product_id")
+    )
+    private List<ProductEntity> favoriteProducts;
 }

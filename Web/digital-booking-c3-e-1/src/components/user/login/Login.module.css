@@ -1,49 +1,84 @@
-@import "/src/styles/variables.css";
-@import "/src/styles/global.css";
-
 .container {
-    display: flex;
-    align-items: center;
-    min-height: calc(100vh - 140px);
-    width: 100%;
-    background-color: var(--bg-general);
+  display: flex;
+  align-items: center;
+  min-height: calc(100vh - 140px);
+  width: 100%;
+  background-color: var(--bg-general);
+}
+
+.textLogin {
+  text-align: center;
+  padding-bottom: 3rem;
+  color: var(--secondary-600);
+}
+
+.imgContainer {
+  width: 50%;
+  height: calc(100vh - 140px);
 }
 
 .container img {
-    width: 97%;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
 }
 
 .container .form {
-    margin: 20px auto;
-    min-width: 35%;
-    color: var(--secondary-200);
+  margin: 20px 4rem;
+  width: 80%;
+  max-width: 500px;
+  color: var(--secondary-600);
 }
 
 .container .form h2 {
-    font: var(--h2);
-    color: var(--secondary-600);
+  font-size: 24px;
+  margin: 0 20px 10px;
+  text-align: center;
 }
 
-.container .form h2, .container .form p {
-    margin: 0 20px;
+.containerForm {
+  width: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .container .form form {
-    margin-top: 5%;
+  margin-top: 10px;
 }
 
 .form-error {
-    color: var(--semantics-error);
-    position: relative;
-    top: -10px;
-    font-size: 12px;
+  color: var(--semantics-error);
+  font-size: 12px;
+  margin-top: 5px;
 }
 
 .container hr {
-    margin: 20px 0;
-    border: 0 none var(--secondary-200);
-    border-top: 1px solid var(--secondary-200);
-    height: 1px;
-    display: block;
-    clear: both;
+  margin: 20px 0;
+  border: 0 none;
+  border-top: 1px solid var(--secondary-200);
+  height: 1px;
+  clear: both;
+}
+.containerButton {
+  margin-top: 4rem;
+}
+
+@media (max-width: 1024px) {
+  .container {
+    flex-direction: column;
+  }
+
+  .imgContainer {
+    width: 100%;
+    height: 200px;
+  }
+
+  .containerForm {
+    width: 100%;
+  }
+
+  .container .form {
+    margin: 4rem 0;
+  }
 }

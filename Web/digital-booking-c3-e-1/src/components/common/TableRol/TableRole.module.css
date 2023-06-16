@@ -1,0 +1,41 @@
+.permission {
+    margin-right: 5px;
+    padding: 2px 6px;
+    border-radius: 4px;
+    margin: 2px;
+  }
+  
+  .category {
+    background-color: #e2f3f5;
+    color: #006d75;
+  }
+  
+  .product {
+    background-color: #eaf0d9;
+    color: #679436;
+  }
+  
+  .user {
+    background-color: #f8e5e5;
+    color: #b71c1c;
+  }
+  
+  .role {
+    background-color: #f5e8fb;
+    color: #8e24aa;
+  }
+  
+  .rent {
+    background-color: #e0e0e0;
+    color: #424242;
+  }
+
+  .city {
+    background-color: #FFE4DA;
+    color: #D16500;
+  }
+
+  .permissionsContainer {
+    display: flex;
+    flex-wrap: wrap;
+  }

@@ -1,7 +1,6 @@
 @import "/src/styles/variables.css";
 @import "/src/styles/global.css";
 
-
 .searchContainer {
   background-color: var(--secondary-600);
   height: 10vh;
@@ -10,7 +9,7 @@
   align-items: center;
 }
 
-.categoriesContainer{
+.categoriesContainer {
   background-color: var(--secondary-50);
   margin-bottom: 52px;
 }
@@ -36,4 +35,9 @@
   letter-spacing: 1px;
 }
 
-
+@media (max-width: 992px) {
+  .searchContainer {
+    height: 20vh;
+    align-items: flex-start;
+  }
+}

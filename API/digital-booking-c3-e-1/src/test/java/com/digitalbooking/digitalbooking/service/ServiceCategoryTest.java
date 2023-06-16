@@ -5,16 +5,12 @@ import com.digitalbooking.digitalbooking.domain.category.dto.CategoryDTO;
 import com.digitalbooking.digitalbooking.domain.category.entity.Category;
 import com.digitalbooking.digitalbooking.domain.category.repository.CategoryRepository;
 import com.digitalbooking.digitalbooking.domain.category.service.ServiceCategory;
-import com.digitalbooking.digitalbooking.domain.product.entity.Product;
-import com.digitalbooking.digitalbooking.domain.product.repository.RepositoryProduct;
-import com.digitalbooking.digitalbooking.domain.product.service.ServiceProduct;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
-import java.math.BigDecimal;
 import java.util.List;
 import java.util.Optional;
 
@@ -34,7 +30,7 @@ class ServiceCategoryTest {
 
     @Test
     void testCreateCategorySuccess() throws Exception {
-        Category category = Category.create("Camping", "Imagen test", "Descripción test", "Archivo test");
+        Category category = Category.create("Camping", "Imagen test", "Descripción test", "Archivo test", "Icono");
         when(categoryRepository.saveImage(anyString(), anyString())).thenReturn("Test URL");
         when(categoryRepository.save(any(Category.class), anyString())).thenReturn(1L);
 
@@ -47,32 +43,32 @@ class ServiceCategoryTest {
 
     @Test
     void testCreateCategoryErrorWhenNameIsNull() throws Exception {
-        Exception exception = assertThrows(ExceptionMandatoryValue.class, () -> Category.create("", "Imagen test", "Descripción test", "Archivo test" ));
+        Exception exception = assertThrows(ExceptionMandatoryValue.class, () -> Category.create("", "Imagen test", "Descripción test", "Archivo test","Icono" ));
         assertEquals("El nombre es requerido para crear una categoría", exception.getMessage());
     }
 
     @Test
     void testCreateCategoryErrorWhenImageIsNull() throws Exception {
-        Exception exception = assertThrows(ExceptionMandatoryValue.class, () -> Category.create("Camping", "", "Descripción test", "Archivo test" ));
+        Exception exception = assertThrows(ExceptionMandatoryValue.class, () -> Category.create("Camping", "", "Descripción test", "Archivo test", "Icono" ));
         assertEquals("La imagen es requerida para crear una categoría", exception.getMessage());
     }
 
     @Test
     void testCreateCategoryErrorWhenDescriptionIsNull() throws Exception {
-        Exception exception = assertThrows(ExceptionMandatoryValue.class, () -> Category.create("Camping", "Imagen test", "", "Archivo test" ));
+        Exception exception = assertThrows(ExceptionMandatoryValue.class, () -> Category.create("Camping", "Imagen test", "", "Archivo test", "Icono" ));
         assertEquals("La descripción es requerida para crear una categoría", exception.getMessage());
     }
 
     @Test
     void testCreateCategoryErrorWhenFileNameIsNull() throws Exception {
-        Exception exception = assertThrows(ExceptionMandatoryValue.class, () -> Category.create("Camping", "Imagen test", "Descripción test", "" ));
+        Exception exception = assertThrows(ExceptionMandatoryValue.class, () -> Category.create("Camping", "Imagen test", "Descripción test", "", "Icono" ));
         assertEquals("El nombre del archivo es requerido para crear una categoría", exception.getMessage());
     }
 
     @Test
     void testGetCategoriesSuccess() {
-        CategoryDTO category1 = new CategoryDTO(1L, "Camping", "Imagen test", "Descripción test");
-        CategoryDTO category2 = new CategoryDTO(2L, "Pesca", "Imagen test", "Descripción test");
+        CategoryDTO category1 = new CategoryDTO(1L, "Camping", "Imagen test", "Descripción test","Icono");
+        CategoryDTO category2 = new CategoryDTO(2L, "Pesca", "Imagen test", "Descripción test", "Icono");
         List<CategoryDTO> expectedCategories = List.of(category1, category2);
         when(categoryRepository.getAll()).thenReturn(expectedCategories);
 
@@ -85,7 +81,7 @@ class ServiceCategoryTest {
     @Test
     void testGetCategorySuccess() {
         Long categoryId = 1L;
-        CategoryDTO expectedCategory = new CategoryDTO(1L, "Camping", "Imagen test", "Descripción test");
+        CategoryDTO expectedCategory = new CategoryDTO(1L, "Camping", "Imagen test", "Descripción test", "Icono");
         when(categoryRepository.findById(categoryId)).thenReturn(Optional.of(expectedCategory));
 
         Optional<CategoryDTO> actualCategory = serviceCategory.getCategory(categoryId);
@@ -134,8 +130,9 @@ class ServiceCategoryTest {
         String description = "Descripción de prueba";
         String image = "Imagen de prueba";
         String fileName = "Archivo de prueba";
+        String icon = "Icono";
 
-        Category category = Category.create(name, image, description, fileName);
+        Category category = Category.create(name, image, description, fileName, icon);
 
         assertNotNull(category);
         assertNull(category.getId());
@@ -151,8 +148,9 @@ class ServiceCategoryTest {
         String name = "Camping";
         String description = "Descripción de prueba";
         String image = "Imagen de prueba";
+        String icon = "Icono";
 
-        Category category = Category.reBuild(id, name, image, description);
+        Category category = Category.reBuild(id, name, image, description, icon);
 
         assertNotNull(category);
         assertEquals(id, category.getId());

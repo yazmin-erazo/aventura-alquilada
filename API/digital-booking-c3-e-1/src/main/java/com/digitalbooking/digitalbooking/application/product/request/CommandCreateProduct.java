@@ -55,4 +55,7 @@ public class CommandCreateProduct {
     private String material;
     @JsonProperty
     private List<SecondaryImages> secondaryImages;
+    @JsonProperty
+    @Schema(allowableValues = {"4"})
+    private Long cityId;
 }

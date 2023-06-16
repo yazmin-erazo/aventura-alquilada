@@ -55,7 +55,7 @@ const Panel = () => {
         <DashboardSection icon={BiGridAlt} size={24} text="Categorias" />
 
         <MenuItem
-          to="#"
+          to="admin/category/list"
           isActive={location.pathname === "/categorias/"}
         >
           <Button text="Listar todos" />
@@ -79,6 +79,21 @@ const Panel = () => {
           isActive={location.pathname === "/admin/product/add"}
         >
           <Button text="Agregar producto" />
+        </MenuItem>
+
+        {/* ------------------ CITIES ------------------  */}
+        <DashboardSection icon={FiLayers} size={24} text="Ciudades" />
+
+        <MenuItem to="admin/city/list" 
+        isActive={location.pathname === "/cities/"}>
+          <Button text="Listar todas" />
+        </MenuItem>
+
+        <MenuItem
+          to="admin/city/add/"
+          isActive={location.pathname === "/admin/city/add"}
+        >
+          <Button text="Agregar ciudad" />
         </MenuItem>
       </div>
     </div>

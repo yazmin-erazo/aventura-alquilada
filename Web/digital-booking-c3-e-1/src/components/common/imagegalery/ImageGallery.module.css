@@ -1,21 +1,30 @@
 .container {
-  width: 100%;
   display: flex;
   gap: 10px;
   padding: 16px;
 }
 
 .mainImage {
-  width: 50%;
+  position: relative;
+  flex-basis: 50%;
+}
+
+.mainImage .imageContainer {
+  padding-top: 100%;
 }
 
 .mainImage img {
+  position: absolute;
+  top: 0;
+  left: 0;
   width: 100%;
+  height: 100%;
+  object-fit: cover;
   border-radius: 4px;
 }
 
 .gridContainer {
-  width: 50%;
+  flex-basis: 50%;
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   grid-template-rows: repeat(2, 1fr);
@@ -23,15 +32,29 @@
 }
 
 .gridItem {
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  position: relative;
+  padding-top: 100%;
+}
+
+.gridItem .imageContainer {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
 }
 
 .gridItem img {
-  max-width: 100%;
-  max-height: 100%;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
   border-radius: 4px;
+}
+
+.button {
+  display: flex;
+  justify-content: flex-end;
+  margin: 0 16px;
 }
 
 .viewMore {
@@ -50,22 +73,17 @@
   color: #196ce9;
 }
 
-.button {
-  display: flex;
-  justify-content: flex-end;
-  margin: 0 16px;
-}
-
 @media (max-width: 450px) {
   .container {
     flex-direction: column;
   }
+
   .mainImage {
-    width: 100%;
+    flex-basis: 100%;
   }
 
   .gridContainer {
-    width: 100%;
+    flex-basis: 100%;
     grid-template-columns: repeat(4, 1fr);
     grid-template-rows: repeat(1, 1fr);
   }

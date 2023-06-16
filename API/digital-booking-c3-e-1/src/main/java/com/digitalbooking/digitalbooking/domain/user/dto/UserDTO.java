@@ -1,11 +1,13 @@
 package com.digitalbooking.digitalbooking.domain.user.dto;
 
+import com.digitalbooking.digitalbooking.domain.role.dto.RoleDTO;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Data
 @AllArgsConstructor
@@ -17,11 +19,13 @@ public class UserDTO {
     private String email;
     @JsonIgnore
     private String password;
-    @JsonIgnore
     private LocalDateTime GeneratingDate;
-    @JsonIgnore
     private Boolean isActive;
     private String role;
     @JsonIgnore
     private String token;
+    private String initialsColor;
+    private List<Long> favoriteProducts;
+    @JsonIgnore
+    private RoleDTO roleDTO;
 }

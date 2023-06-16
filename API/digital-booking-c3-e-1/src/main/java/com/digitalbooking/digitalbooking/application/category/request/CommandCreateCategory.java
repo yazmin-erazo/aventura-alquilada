@@ -26,4 +26,8 @@ public class CommandCreateCategory {
    @JsonProperty
    @Schema(allowableValues = {"Natacion.jpg"})
    private String fileName;
+
+   @JsonProperty
+   @Schema(allowableValues = {"Icono"})
+   private String icon;
 }
