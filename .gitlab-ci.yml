@@ -1,10 +1,10 @@
-image: docker:stable
+# image: docker:stable
 
-stages:
-  - test
-  - coverage report
-  - build
-  - deploy
+# stages:
+#   - test
+#   - coverage report
+#   - build
+#   - deploy
 
 # variables:
 #   CACHE_DIR: "$CI_PROJECT_DIR/.cache"
@@ -13,7 +13,7 @@ stages:
 #   paths:
 #     - $CACHE_DIR
 
-# -------------------------- WEB --------------------------
+# # -------------------------- WEB --------------------------
 
 # test-web:
 #   stage: test
@@ -59,66 +59,66 @@ stages:
 
 
 
-# -------------------------- API --------------------------
+# # -------------------------- API --------------------------
 
-test-api:
-  stage: test
-  image: maven:3.6-jdk-11
-  script:
-    - cd API/digital-booking-c3-e-1
-    - mvn clean test jacoco:prepare-agent jacoco:report
-    - ls target/site/jacoco/
-  artifacts:
-    paths:
-      - API/digital-booking-c3-e-1/target/surefire-reports/
-      - API/digital-booking-c3-e-1/target/site/jacoco/
-  only:
-    - main
+# test-api:
+#   stage: test
+#   image: maven:3.6-jdk-11
+#   script:
+#     - cd API/digital-booking-c3-e-1
+#     - mvn clean test jacoco:prepare-agent jacoco:report
+#     - ls target/site/jacoco/
+#   artifacts:
+#     paths:
+#       - API/digital-booking-c3-e-1/target/surefire-reports/
+#       - API/digital-booking-c3-e-1/target/site/jacoco/
+#   only:
+#     - main
       
-coverage-report:
-  stage: coverage report
-  image: maven:3.6-jdk-11
-  script:
-    - cd API/digital-booking-c3-e-1
-    - mvn verify
-    - cat target/site/jacoco/index.html | grep -o '<tfoot>.*</tfoot>'
-  dependencies:
-    - test-api
-  coverage: '/Total.*?([0-9]{1,3})%/'
-  artifacts:
-    paths:
-      - $CI_PROJECT_DIR/API/digital-booking-c3-e-1/target/site/jacoco/*
-    reports:
-      junit:
-        - "**/target/surefire-reports/TEST-*.xml"
-        #- "**/target/failsafe-reports/TEST-*.xml"
+# coverage-report:
+#   stage: coverage report
+#   image: maven:3.6-jdk-11
+#   script:
+#     - cd API/digital-booking-c3-e-1
+#     - mvn verify
+#     - cat target/site/jacoco/index.html | grep -o '<tfoot>.*</tfoot>'
+#   dependencies:
+#     - test-api
+#   coverage: '/Total.*?([0-9]{1,3})%/'
+#   artifacts:
+#     paths:
+#       - $CI_PROJECT_DIR/API/digital-booking-c3-e-1/target/site/jacoco/*
+#     reports:
+#       junit:
+#         - "**/target/surefire-reports/TEST-*.xml"
+#         #- "**/target/failsafe-reports/TEST-*.xml"
 
-build-api:
-  stage: build
-  image: maven:3.6-jdk-11
-  script:
-    - cd API/digital-booking-c3-e-1
-    - mvn clean package -DskipTests=true
-  artifacts:
-    paths:
-      - API/digital-booking-c3-e-1/target/equipamiento-deportivo.jar
-  only:
-    - main
+# build-api:
+#   stage: build
+#   image: maven:3.6-jdk-11
+#   script:
+#     - cd API/digital-booking-c3-e-1
+#     - mvn clean package -DskipTests=true
+#   artifacts:
+#     paths:
+#       - API/digital-booking-c3-e-1/target/equipamiento-deportivo.jar
+#   only:
+#     - main
 
-deploy_to_ec2:
-  stage: deploy
-  image: alpine:3.11
-  before_script:
-    - apk update && apk add openssh-client bash
-    - mkdir -p ~/.ssh
-    - eval $(ssh-agent -s)
-    - echo "$SSH_PRIVATE_KEY" | tr -d '\r' | ssh-add - > /dev/null
-    - touch ~/.ssh/config
-    - echo -e "Host *\n\tStrictHostKeyChecking no\n\n" > ~/.ssh/config
-    - ssh-keyscan -H $EC2_INSTANCE_IP >> ~/.ssh/known_hosts
-  script:
-    - ssh ubuntu@$EC2_INSTANCE_IP "sudo systemctl stop equipamiento-deportivo.service"
-    - scp API/digital-booking-c3-e-1/target/equipamiento-deportivo.jar ubuntu@$EC2_INSTANCE_IP:~/equipamiento-deportivo/
-    - ssh ubuntu@$EC2_INSTANCE_IP "sudo systemctl start equipamiento-deportivo.service"
-  only:
-    - main
+# deploy_to_ec2:
+#   stage: deploy
+#   image: alpine:3.11
+#   before_script:
+#     - apk update && apk add openssh-client bash
+#     - mkdir -p ~/.ssh
+#     - eval $(ssh-agent -s)
+#     - echo "$SSH_PRIVATE_KEY" | tr -d '\r' | ssh-add - > /dev/null
+#     - touch ~/.ssh/config
+#     - echo -e "Host *\n\tStrictHostKeyChecking no\n\n" > ~/.ssh/config
+#     - ssh-keyscan -H $EC2_INSTANCE_IP >> ~/.ssh/known_hosts
+#   script:
+#     - ssh ubuntu@$EC2_INSTANCE_IP "sudo systemctl stop equipamiento-deportivo.service"
+#     - scp API/digital-booking-c3-e-1/target/equipamiento-deportivo.jar ubuntu@$EC2_INSTANCE_IP:~/equipamiento-deportivo/
+#     - ssh ubuntu@$EC2_INSTANCE_IP "sudo systemctl start equipamiento-deportivo.service"
+#   only:
+#     - main
