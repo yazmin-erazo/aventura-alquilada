@@ -163,7 +163,7 @@ const NewCategory = () => {
                   className={styles.submitBtn}
                   onClick={handleSubmit}
                 >
-                  Registrar producto{" "}
+                  Registrar categoría{" "}
                 </ButtonPrimary>
               </div>
             </div>

@@ -272,7 +272,7 @@ const NewRole = () => {
                   className={styles.submitBtn}
                   onClick={handleSubmit}
                 >
-                  Registrar producto{" "}
+                  Registrar rol{" "}
                 </ButtonPrimary>
               </div>
             </div>
