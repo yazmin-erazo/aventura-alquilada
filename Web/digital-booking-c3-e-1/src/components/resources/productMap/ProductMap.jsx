@@ -1,15 +1,13 @@
 import React, { useEffect, useRef, useState } from "react";
 import mapboxgl from "mapbox-gl";
-import "mapbox-gl/dist/mapbox-gl.css";
 import styles from "./ProductMap.module.css";
-import customStyles from "./mapbox-gl-custom.css";
 import CategoryService from "../../../shared/services/CategoryService";
 import * as ReactIcons from "react-icons/md";
 import * as TbIcons from "react-icons/tb";
 import * as FaIcons from "react-icons/fa";
 import { createRoot } from "react-dom/client";
 import { BiPin } from "react-icons/bi";
-
+import "./mapbox-gl-custom.css";
 const iconComponents = {
   ...ReactIcons,
   ...TbIcons,
@@ -81,17 +79,26 @@ const ProductMap = ({ latitude, longitude, product }) => {
     // -------------------- Start POP UP --------------------
 
     const popupContent = `
-    <div class="${styles.popup}">
-      <h3 class="${styles.popupTitle}">Información del lugar</h3>
-      <p class="${styles.popupText}">Ciudad: ${product.city.name}</p>
-      <p class="${styles.popupText}">País: ${product.city.genericName}</p>
-      <p class="${styles.popupText}">Latitud: ${product.city.latitude}</p>
-      <p class="${styles.popupText}">Longitud: ${product.city.longitude}</p>
+    <div class="popup-content">
+      <h3 class="popup-title">Información del lugar</h3>
+      <p class="popup-text">Ciudad: ${product.city.name}</p>
+      <p class="popup-text">País: ${product.city.genericName}</p>
+      <p class="popup-text">Latitud: ${product.city.latitude}</p>
+      <p class="popup-text">Longitud: ${product.city.longitude}</p>
     </div>
-    `;
+  `;
 
-    const popup = new mapboxgl.Popup({ offset: 25 }).setHTML(popupContent);
+    const popup = new mapboxgl.Popup({ offset: 25, closeButton: false })
+      .setLngLat([longitude, latitude])
+      .setHTML(popupContent);
 
+    // Obtener el elemento HTML del popup
+    const popupElement = popup._content;
+
+    // Remover las clases de estilo por defecto de Mapbox GL (Nombre de mi css)
+    popupElement.className = "mapbox-gl-custom";
+
+    // Agregar el popup al marker
     marker.setPopup(popup);
     // -------------------- End POP UP --------------------
 
@@ -184,7 +191,6 @@ const ProductMap = ({ latitude, longitude, product }) => {
       }
       map.remove();
     };
-    // Elimine el mapa cuando el componente se desmonte
   }, [latitude, longitude, productCategory]);
 
   return (

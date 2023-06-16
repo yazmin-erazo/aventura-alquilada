@@ -1,15 +1,12 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import InputWithLabel from "../../common/input/InputWithLabel";
 import ButtonPrimary from "../../common/Buttons/ButtonPrimary";
-import Select from "../../common/select/Select";
 import styles from "./RegisterCity.module.css";
 import CitiesService from "../../../shared/services/CitiesService";
 import Swal from "sweetalert2";
 import { useNavigate } from "react-router-dom";
-import MapComponent from "../../resources/map/MapComponent";
 import ButtonInactive from "../../common/Buttons/ButtonInactive";
 import { BiPlusCircle } from "react-icons/bi";
-import mapboxgl from "mapbox-gl";
 import axios from 'axios'
 
 const RegisterCity = () => {
@@ -112,7 +109,7 @@ const RegisterCity = () => {
       cityNameAPI,      
       countryCodeAPI,
     } = formData;
-  
+
     const cityData = {
       name: cityName,      
       latitude: latitude,
@@ -121,7 +118,7 @@ const RegisterCity = () => {
       genericName: cityNameAPI,
       countryCode: countryCodeAPI,
     };
-  
+
     try {
       await CitiesService.create(cityData);
 
@@ -132,7 +129,7 @@ const RegisterCity = () => {
         "La ciudad ha sido registrada exitosamente.",
         "success"
       );
-  
+
       setFormData({
         cityName: "",
         latitude: "",
@@ -144,7 +141,6 @@ const RegisterCity = () => {
       setErrorMessage("");
       navigate(-1)
     } catch (error) {
-
       // En caso de error al registrar la ciudad
       Swal.fire(
         "Error",
@@ -152,20 +148,22 @@ const RegisterCity = () => {
         "error"
       );
 
-      if (error.response && error.response.data.nombreExcepcion === 'ExceptionInvalidValue') {
+      if (
+        error.response &&
+        error.response.data.nombreExcepcion === "ExceptionInvalidValue"
+      ) {
         Swal.fire(
-          'Error',
-          'El nombre de la ciudad ya existe, por favor ingrese otro valor',
-          'error'
+          "Error",
+          "El nombre de la ciudad ya existe, por favor ingrese otro valor",
+          "error"
         );
       } else {
         Swal.fire(
-          'Error',
-          'Ha ocurrido un error al registrar la ciudad.',
-          'error'
+          "Error",
+          "Ha ocurrido un error al registrar la ciudad.",
+          "error"
         );
       }
-
     }
   };
 

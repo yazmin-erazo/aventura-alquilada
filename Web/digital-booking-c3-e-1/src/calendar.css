@@ -1,4 +1,5 @@
 .react-calendar {
+  width: 100%;
   max-width: auto;
   background-color: #fff;
   color: var(--secondary-600);

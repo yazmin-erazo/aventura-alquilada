@@ -34,3 +34,10 @@
   margin-bottom: 32px;
   letter-spacing: 1px;
 }
+
+@media (max-width: 992px) {
+  .searchContainer {
+    height: 20vh;
+    align-items: flex-start;
+  }
+}

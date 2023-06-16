@@ -44,7 +44,7 @@
 
 .calendarRentSection:nth-child(2) {
   display: flex;
-  flex-basis: 100%;
+  flex-basis: 50%;
   width: 100%;
   border: 1px solid var(--secondary-100);
   border-radius: 8px;
