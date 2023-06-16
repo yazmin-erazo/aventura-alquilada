@@ -107,6 +107,11 @@ const RegisterCity = () => {
       countryCodeAPI,
     } = formData;
 
+    if (!cityCodeAPI) {
+      setErrorMessage("El código de la ciudad es obligatorio.");
+      return;
+    }
+
     const cityData = {
       name: cityName,
       latitude: latitude,
@@ -118,8 +123,6 @@ const RegisterCity = () => {
 
     try {
       await CitiesService.create(cityData);
-
-      // Mostrar un mensaje de éxito al usuario con sweetalert2
 
       Swal.fire(
         "¡Registrada!",
@@ -138,7 +141,6 @@ const RegisterCity = () => {
       setErrorMessage("");
       navigate(-1);
     } catch (error) {
-      // En caso de error al registrar la ciudad
       Swal.fire(
         "Error",
         "Ha ocurrido un error al registrar la ciudad.",
@@ -226,7 +228,7 @@ const RegisterCity = () => {
                 }
                 isEditable={false}
               >
-                Código Pais:
+                Código País:
               </InputWithLabel>
 
               <InputWithLabel
