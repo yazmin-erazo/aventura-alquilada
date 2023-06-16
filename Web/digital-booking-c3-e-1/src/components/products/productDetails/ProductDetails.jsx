@@ -27,7 +27,6 @@ const ProductDetails = () => {
   const [products, setProducts] = useState([]);
   const params = useParams();
   const navigate = useNavigate();
-  const [userLocation, setUserLocation] = useState(null);
   const [selectedStartDate, setSelectedStartDate] = useState(null);
   const [selectedEndDate, setSelectedEndDate] = useState(null);
   const [totalRentalDays, setTotalRentalDays] = useState(0);
@@ -61,7 +60,6 @@ const ProductDetails = () => {
   const showButton = selectedStartDate && selectedEndDate;
   const productId = product ? product.id : null;
 
-  console.log(product);
 
   return (
     <>

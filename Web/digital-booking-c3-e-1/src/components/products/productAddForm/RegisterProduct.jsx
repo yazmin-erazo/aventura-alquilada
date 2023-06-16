@@ -181,7 +181,6 @@ const RegisterProduct = () => {
 
     try {
       await ProductsService.create(productData);
-      console.log(productData);
       // Mostrar un mensaje de éxito al usuario con sweetalert2
 
       Swal.fire(
@@ -244,7 +243,7 @@ const RegisterProduct = () => {
     { id: "Masculino", name: "Masculino" },
     { id: "No aplica", name: "No aplica" },
   ];
-  console.log(formData);
+  
   return (
     <div className={styles.containerNewProduct}>
       <header className={styles.header}>
