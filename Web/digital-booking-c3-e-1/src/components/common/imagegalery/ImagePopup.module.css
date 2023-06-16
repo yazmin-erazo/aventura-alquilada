@@ -42,14 +42,14 @@
   .carouselButton {
     position: absolute;
     top: 50%;
-    background-color: rgba(0, 0, 0, 0.5); /* Agrega un fondo semitransparente */
+    background-color: rgba(0, 0, 0, 0.2); /* Agrega un fondo semitransparente */
     border: none;
-    font-size: 2rem;
+    font-size: 1rem;
     cursor: pointer;
     color: white;
     z-index: 10;
-    padding: 10px;
-    border-radius: 50%; /* Hace que el fondo sea circular */
+    padding: 5px;
+    border-radius: 30%; /* Hace que el fondo sea circular */
 }
 
 .prev {
