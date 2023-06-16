@@ -5,6 +5,15 @@
 stages:
   - cicd
 
+web_job:
+  stage: cicd
+  only:
+    refs:
+      - main
+  trigger:
+    include:
+      - local: 'web-ci.yml'
+
 api_job:
   stage: cicd
   only:
@@ -13,12 +22,3 @@ api_job:
   trigger:
     include:
       - local: 'api-ci.yml'
-
-front_job:
-  stage: cicd
-  only:
-    refs:
-      - main
-  trigger:
-    include:
-      - local: 'web-ci.yml'
