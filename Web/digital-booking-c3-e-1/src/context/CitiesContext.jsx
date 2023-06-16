@@ -10,6 +10,7 @@ const CitiesDataContext = ({ children }) => {
     const fetchData = async () => {
       try {
         const data = await CitiesService.getAll();
+        console.log(data);
         setCities(data);
       } catch (err) {
         console.log(`Error al cargar ciudades: ${err}`);
