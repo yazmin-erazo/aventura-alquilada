@@ -1,0 +1,54 @@
+image: docker:stable
+
+stages:
+  - test
+  - build
+  - deploy
+
+variables:
+  CACHE_DIR: "$CI_PROJECT_DIR/.cache"
+
+cache:
+  paths:
+    - $CACHE_DIR
+
+test-web:
+  stage: test
+  image: node:14
+  script:
+    - cd Web/digital-booking-c3-e-1
+    - npm install
+    - npm run test
+  rules:
+    - changes:
+        - Web/digital-booking-c3-e-1/**/*
+      if: '$CI_COMMIT_REF_NAME == "main"'
+
+build-web:
+  stage: build
+  image: node:14
+  script:
+    - npm install -g vite
+    - cd Web/digital-booking-c3-e-1
+    - export NODE_OPTIONS="--max-old-space-size=4096"
+    - npm install
+    - npm run build
+  artifacts:
+    paths:
+      - Web/digital-booking-c3-e-1/dist/
+  only:
+    - main
+
+deploy_to_s3:
+  stage: deploy
+  image: python:3
+  before_script:
+    - pip install awscli
+    - aws configure set aws_access_key_id $AWS_ACCESS_KEY_ID
+    - aws configure set aws_secret_access_key $AWS_SECRET_ACCESS_KEY
+    - aws configure set region $AWS_DEFAULT_REGION
+  script:
+    - aws s3 rm s3://$S3_BUCKET_FRONTEND --recursive
+    - aws s3 sync Web/digital-booking-c3-e-1/dist s3://$S3_BUCKET_FRONTEND --acl public-read
+  only:
+    - main
