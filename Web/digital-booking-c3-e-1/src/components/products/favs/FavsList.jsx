@@ -10,7 +10,7 @@ const FavsList = () => {
   const { user } = useContext(UserContext);
   const [products, setProducts] = useState([]); // Estado para almacenar los productos (Aqui vienen como objeto todos los productos)
   const [favs, setFavs] = useState([]); // Estado para almacenar los productos favoritos (estos vienen en un array de numeros o sea los id del product)
-  const [productDetails, setProductDetails] = useState([]); // Estado para almacenar productos favoritos del usuaru
+  const [productDetails, setProductDetails] = useState([]); // Estado para almacenar productos favoritos del usuario
 
   useEffect(() => {
     if (data.products.length > 0 && user.favorites.length > 0) {
@@ -28,13 +28,13 @@ const FavsList = () => {
       productMap[product.id] = product; // Mapea los productos por ID
     });
 
-    const favoriteProductDetails = favs.map((favorite) => productMap[favorite]); // Obtene los detalles de los productos favoritos usando el mapeo
+    const favoriteProductDetails = favs.map((favorite) => productMap[favorite]); // Obtener los detalles de los productos favoritos usando el mapeo
     setProductDetails(favoriteProductDetails);
   }, [favs, products]);
 
   const handleRemoveFavorite = async (productId) => {
     try {
-      await ProductsService.deleteByID(user.favorite); // Llama a la función para eliminar el favorito de la base de datos
+      await ProductsService.deleteFav(productId); // Llama a la función para eliminar el favorito de la base de datos
 
       const updatedFavorites = favs.filter(
         (favorite) => favorite !== productId
