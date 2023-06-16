@@ -34,8 +34,8 @@ const FavsList = () => {
 
   const handleRemoveFavorite = async (productId) => {
     try {
-      await ProductsService.deleteByID(productId); // Llama a la función para eliminar el favorito de la base de datos
-  
+      await ProductsService.deleteByID(user.favorite); // Llama a la función para eliminar el favorito de la base de datos
+
       const updatedFavorites = favs.filter(
         (favorite) => favorite !== productId
       );
@@ -45,7 +45,6 @@ const FavsList = () => {
       // Manejo de errores o muestra de mensajes de error
     }
   };
-  
 
   return (
     <div className={styles.containerFavs}>
