@@ -1,7 +1,7 @@
 import React from "react";
-import ShareButtons from "../search/SearchEngine/ShareButtons";
 import { AiOutlineCopyright } from "react-icons/ai";
 import { FiGitlab, FiInstagram } from "react-icons/fi";
+import ShareButtons from "../search/SearchEngine/ShareButtons";
 
 const Footer = () => {
   return (
@@ -35,6 +35,7 @@ const Footer = () => {
             {" "}
             <FiInstagram className="icon" />
           </a>
+          <ShareButtons/>
         </div>
       </div>
     </div>
