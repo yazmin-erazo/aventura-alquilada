@@ -7,44 +7,52 @@ import ProductsService from "../../../shared/services/ProductsService";
 
 const FavsList = () => {
   const data = useContext(ProductsContext);
-  const { user } = useContext(UserContext);
-  const [products, setProducts] = useState([]); // Estado para almacenar los productos (Aqui vienen como objeto todos los productos)
-  const [favs, setFavs] = useState([]); // Estado para almacenar los productos favoritos (estos vienen en un array de numeros o sea los id del product)
-  const [productDetails, setProductDetails] = useState([]); // Estado para almacenar productos favoritos del usuario
+  const { user, dispatch } = useContext(UserContext);
+  const [products, setProducts] = useState([]);
+  const [favs, setFavs] = useState(user.favorites);
+  const [productDetails, setProductDetails] = useState([]);
 
+  console.log(user.favorites);
   useEffect(() => {
     if (data.products.length > 0 && user.favorites.length > 0) {
-      setProducts(data.products); // Actualiza el estado de los productos guardando los productos que vienen del context
+      setProducts(data.products);
       const filteredFavorites = user.favorites.filter((favorite) =>
         data.products.some((product) => product.id === favorite)
       );
-      setFavs(filteredFavorites); // Actualizar el estado de los productos favoritos que vienen del user.favorites
+      setFavs(filteredFavorites);
     }
   }, [data, user]);
 
   useEffect(() => {
-    const productMap = {}; // Objeto para mapear los productos por ID
+    const productMap = {};
     products.forEach((product) => {
-      productMap[product.id] = product; // Mapea los productos por ID
+      productMap[product.id] = product;
     });
 
-    const favoriteProductDetails = favs.map((favorite) => productMap[favorite]); // Obtener los detalles de los productos favoritos usando el mapeo
+    const favoriteProductDetails = favs
+      .map((favorite) => productMap[favorite])
+      .filter((product) => product && product.id !== undefined);
     setProductDetails(favoriteProductDetails);
   }, [favs, products]);
 
   const handleRemoveFavorite = async (productId) => {
     try {
-      await ProductsService.deleteFav(productId); // Llama a la función para eliminar el favorito de la base de datos
+      await ProductsService.deleteFav(productId);
 
-      const updatedFavorites = favs.filter(
+      const updatedFavorites = user.favorites.filter(
         (favorite) => favorite !== productId
       );
+      dispatch({
+        type: "UPDATE_FAVORITES",
+        payload: { ...user, favorites: updatedFavorites },
+      });
       setFavs(updatedFavorites);
     } catch (error) {
       console.error("Error al eliminar el favorito:", error);
-      // Manejo de errores o muestra de mensajes de error
     }
   };
+
+  console.log(favs);
 
   return (
     <div className={styles.containerFavs}>
@@ -52,14 +60,18 @@ const FavsList = () => {
         <h4 className={styles.addFavsTitle}>Mis Favoritos</h4>
       </header>
       <div className={styles.section}>
-        {productDetails.map((product) => (
-          <FavCard
-            key={product.id}
-            product={product}
-            rentalType="Alquiler por día"
-            onRemoveFavorite={handleRemoveFavorite}
-          />
-        ))}
+        {productDetails.length > 0 ? (
+          productDetails.map((product) => (
+            <FavCard
+              key={product.id}
+              product={product}
+              rentalType="Alquiler por día"
+              onRemoveFavorite={handleRemoveFavorite}
+            />
+          ))
+        ) : (
+          <p className={styles.text}>No hay productos favoritos</p>
+        )}
       </div>
     </div>
   );
