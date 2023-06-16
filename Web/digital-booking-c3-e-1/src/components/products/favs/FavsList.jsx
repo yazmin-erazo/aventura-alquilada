@@ -4,6 +4,7 @@ import { UserContext } from "../../../context/AuthContext";
 import styles from "./FavsList.module.css";
 import { ProductsContext } from "../../../context/ProductsContext";
 import ProductsService from "../../../shared/services/ProductsService";
+import Swal from "sweetalert2";
 
 const FavsList = () => {
   const data = useContext(ProductsContext);
@@ -47,12 +48,11 @@ const FavsList = () => {
         payload: { ...user, favorites: updatedFavorites },
       });
       setFavs(updatedFavorites);
+      Swal.fire("Eliminado de favoritos", "El producto se ha eliminado de favoritos con éxito.", "success");
     } catch (error) {
       console.error("Error al eliminar el favorito:", error);
     }
   };
-
-  console.log(favs);
 
   return (
     <div className={styles.containerFavs}>

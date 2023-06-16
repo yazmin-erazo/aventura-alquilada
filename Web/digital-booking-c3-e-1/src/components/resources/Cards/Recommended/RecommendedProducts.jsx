@@ -21,35 +21,41 @@ const RecommendedProducts = ({
   const { dispatch } = useContext(UserContext);
 
   const handleFavoriteClick = (event) => {
-    event.stopPropagation(); // Detiene la propagación del evento para que se pueda hacer lcic en el corazon y no navegue directamente a la vista de detalle
+    event.stopPropagation();
+  
     if (user.user.name) {
       setIsFavorite(!isFavorite);
-      let buscarFav
-      const favoriteProducts= JSON.parse(sessionStorage.getItem("user")).favorites
-      if(user.user.favorites.length > 0){
-        buscarFav= favoriteProducts.find(p => p === product.id)
+      let buscarFav;
+      const favoriteProducts = JSON.parse(sessionStorage.getItem("user")).favorites;
+  
+      if (user.user.favorites.length > 0) {
+        buscarFav = favoriteProducts.find((p) => p === product.id);
       }
-      let resultado= favoriteProducts
-
-      if(!buscarFav){
-        resultado.push(product.id)
-        ProductsService.addFav({productId:product.id})
-
-      }else{
-        resultado=resultado.filter(id => id !== buscarFav.id)
-        ProductsService.deleteFav(product.id)
+  
+      let resultado = favoriteProducts;
+  
+      if (!buscarFav) {
+        resultado.push(product.id);
+        ProductsService.addFav({ productId: product.id });
+      } else {
+        resultado = resultado.filter((id) => id !== buscarFav.id);
+        ProductsService.deleteFav(product.id);
       }
-
+  
       dispatch({
         type: "FAVS",
-        payload: { ...user.user, favorites:resultado },
+        payload: { ...user.user, favorites: resultado },
       });
-
+  
+      if (!isFavorite) {
+        Swal.fire("Agregado a favoritos", "El producto se ha agregado a favoritos con éxito.", "success");
+      } else {
+        Swal.fire("Eliminado de favoritos", "El producto se ha eliminado de favoritos con éxito.", "success");
+      }
+    } else {
+      Swal.fire("Atención!", "Debés estar registrado para elegir tus favoritos", "info");
     }
-    else {
-      Swal.fire('Atención!', 'Debés estar registrado para elegir tus favoritos', 'info')
-    }
-  };
+  };  
 
   const calculateAverageRating = (ratings) => {
     if (Array.isArray(ratings) && ratings.length > 0) {
