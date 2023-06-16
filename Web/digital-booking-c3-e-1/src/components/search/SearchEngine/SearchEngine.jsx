@@ -46,16 +46,19 @@ const SearchEngine = ({ handleSearch }) => {
   };
 
   const fetchCities = async () => {
-    const cities = await CitiesService.getAll();
-    setCityOptions(cities);
+    try {
+      const cities = await CitiesService.getAll();
+      
+      cities.sort((a, b) => a.name.localeCompare(b.name));
+      
+      setCityOptions(cities);
+    } catch (err) {
+      console.log(err);
+    }
   };
 
   useEffect(() => {
-    try {
-      fetchCities();
-    } catch {
-      (err) => console.log(err);
-    }
+    fetchCities();
   }, []);
 
   return (
