@@ -1,3 +1,24 @@
-include:
-  - local: 'web-ci.yml'
-  - local: 'api-ci.yml'
+# include:
+#   - local: 'web-ci.yml'
+#   - local: 'api-ci.yml'
+
+stages:
+  - cicd
+
+api_job:
+  stage: cicd
+  only:
+    refs:
+      - main
+  trigger:
+    include:
+      - local: 'api-ci.yml'
+
+front_job:
+  stage: cicd
+  only:
+    refs:
+      - main
+  trigger:
+    include:
+      - local: 'web-ci.yml'
