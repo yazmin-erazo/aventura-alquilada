@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { FaShareAlt } from 'react-icons/fa';
 import { FacebookShareButton, TwitterShareButton, WhatsappShareButton } from 'react-share';
 import { FacebookIcon, TwitterIcon, WhatsappIcon } from 'react-share';
 import './ShareButtons.css';
@@ -24,8 +25,9 @@ const ShareButtons = () => {
   };
 
   return (
-    <div>
-      <button className="sharebutton" onClick={openModal}>
+    <div className="share-buttons-container">
+      <button className="open-modal-button" onClick={openModal}>
+        <FaShareAlt className="share-icon" />
         Compartir
       </button>
       {showModal && (
