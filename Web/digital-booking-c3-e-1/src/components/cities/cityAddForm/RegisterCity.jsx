@@ -7,7 +7,7 @@ import Swal from "sweetalert2";
 import { useNavigate } from "react-router-dom";
 import ButtonInactive from "../../common/Buttons/ButtonInactive";
 import { BiPlusCircle } from "react-icons/bi";
-import axios from 'axios'
+import axios from "axios";
 
 const RegisterCity = () => {
   const [errorMessage, setErrorMessage] = useState("");
@@ -16,31 +16,30 @@ const RegisterCity = () => {
   const [longitudeSelected, setLongitude] = useState("");
   const navigate = useNavigate();
   const [formData, setFormData] = useState({
-    cityName: "",    
+    cityName: "",
     latitude: "",
     longitude: "",
     cityCodeAPI: "",
     cityNameAPI: "",
-    countryCodeAPI: "",   
+    countryCodeAPI: "",
   });
 
-  const handleInputChange = (name, value) => { 
-    if (name === "cityName") {      
+  const handleInputChange = (name, value) => {
+    if (name === "cityName") {
       setName(value);
     }
 
-    if (name === "latitude" || name === 'longitude'){
-      if (name === "latitude") {      
+    if (name === "latitude" || name === "longitude") {
+      if (name === "latitude") {
         setLatitude(value);
       }
-  
-      if (name === "longitude") {      
+
+      if (name === "longitude") {
         setLongitude(value);
       }
 
-      if (latitudeSelected !== "" && longitudeSelected !== "")
-      {
-        getReverseGeocode(latitudeSelected, longitudeSelected)
+      if (latitudeSelected !== "" && longitudeSelected !== "") {
+        getReverseGeocode(latitudeSelected, longitudeSelected);
       }
     }
 
@@ -52,27 +51,28 @@ const RegisterCity = () => {
 
   async function getReverseGeocode(latitude, longitude) {
     axios
-      .get(`http://api.positionstack.com/v1/reverse?access_key=5802fbfcfcecda1c50e493bf66b80884&query=${latitude},${longitude}`)
-      .then(response => {
+      .get(
+        `http://api.positionstack.com/v1/reverse?access_key=5802fbfcfcecda1c50e493bf66b80884&query=${latitude},${longitude}`
+      )
+      .then((response) => {
         console.log(response);
         let data = response.data.data;
-        if (data !== 'undefined'){
-          if (data.length > 0){
+        if (data !== "undefined") {
+          if (data.length > 0) {
             console.log(data);
-            if (data){
+            if (data) {
               const cityInfo = data[0];
               const code = cityInfo.region_code;
               const countryCode = cityInfo.country_code;
               const county = cityInfo.county;
               const region = cityInfo.region;
               let genericName = "";
-              if (county == null || region == null){
+              if (county == null || region == null) {
                 genericName = nameSelected;
-              }
-              else {
+              } else {
                 genericName = cityInfo.county + ", " + cityInfo.region;
               }
-               
+
               console.log(code);
               console.log(countryCode);
               console.log(genericName);
@@ -80,38 +80,35 @@ const RegisterCity = () => {
               handleInputChange("countryCodeAPI", countryCode);
               handleInputChange("cityNameAPI", genericName);
             }
-
           }
         }
       })
-      .catch(error => {
+      .catch((error) => {
         console.error("Error al obtener el geocódigo inverso:" + error);
-      });   
+      });
   }
-
 
   const fetchInfo = async () => {
     try {
       const data = await CitiesService.getAll();
       setCities(data);
-    }
-    catch (err) {
+    } catch (err) {
       console.log(`Error al cargar ciudades: ${err}`);
     }
   };
 
   const handleSubmit = async () => {
     const {
-      cityName,      
+      cityName,
       latitude,
       longitude,
       cityCodeAPI,
-      cityNameAPI,      
+      cityNameAPI,
       countryCodeAPI,
     } = formData;
 
     const cityData = {
-      name: cityName,      
+      name: cityName,
       latitude: latitude,
       longitude: longitude,
       code: cityCodeAPI,
@@ -139,7 +136,7 @@ const RegisterCity = () => {
         countryCodeAPI: "",
       });
       setErrorMessage("");
-      navigate(-1)
+      navigate(-1);
     } catch (error) {
       // En caso de error al registrar la ciudad
       Swal.fire(
@@ -170,25 +167,28 @@ const RegisterCity = () => {
   return (
     <div className={styles.containerNewCity}>
       <header className={styles.header}>
-        <h4 className={styles.addCityTitle}><BiPlusCircle size={20}/>Agregar ciudad</h4>
+        <h4 className={styles.addCityTitle}>
+          <BiPlusCircle size={20} />
+          Agregar ciudad
+        </h4>
       </header>
 
       <div className={styles.containerForm}>
         <div className={styles.registerCityContainer}>
           <div className={styles.registerCityForm}>
-          <div className={styles.formColumn}>
-            {/* <MapComponent></MapComponent> */}
-          <InputWithLabel
-              type="text"
-              value={formData.cityName}
-              onChange={(event) =>
-                handleInputChange("cityName", event.target.value)
-              }             
-            >
-              Nombre:
-            </InputWithLabel>           
+            <div className={styles.formColumn}>
+              {/* <MapComponent></MapComponent> */}
+              <InputWithLabel
+                type="text"
+                value={formData.cityName}
+                onChange={(event) =>
+                  handleInputChange("cityName", event.target.value)
+                }
+              >
+                Nombre:
+              </InputWithLabel>
 
-            <InputWithLabel
+              <InputWithLabel
                 type="number"
                 value={formData.latitude}
                 onChange={(event) =>
@@ -207,17 +207,16 @@ const RegisterCity = () => {
               >
                 Longitude:
               </InputWithLabel>
-              
             </div>
             <div className={styles.formColumn}>
               <InputWithLabel
-                  type="text"
-                  value={formData.cityCodeAPI}
-                  onChange={(event) =>
-                    handleInputChange("cityCodeAPI", event.target.value)
-                  }
-                >
-                  Código:
+                type="text"
+                value={formData.cityCodeAPI}
+                onChange={(event) =>
+                  handleInputChange("cityCodeAPI", event.target.value)
+                }
+              >
+                Código:
               </InputWithLabel>
               <InputWithLabel
                 type="text"
@@ -231,16 +230,16 @@ const RegisterCity = () => {
               </InputWithLabel>
 
               <InputWithLabel
-              type="text"
-              value={formData.cityNameAPI}
-              onChange={(event) =>
-                handleInputChange("cityNameAPI", event.target.value)
-              }   
-              isEditable={false}          
-            >
-              Nombre genérico:
-            </InputWithLabel>            
-          </div>
+                type="text"
+                value={formData.cityNameAPI}
+                onChange={(event) =>
+                  handleInputChange("cityNameAPI", event.target.value)
+                }
+                isEditable={false}
+              >
+                Nombre genérico:
+              </InputWithLabel>
+            </div>
           </div>
           <div className={styles.registerInfo}></div>
           <div className={styles.containerButton}>
@@ -251,7 +250,7 @@ const RegisterCity = () => {
                 onClick={handleSubmit}
               >
                 Registrar ciudad{" "}
-              </ButtonPrimary>   
+              </ButtonPrimary>
             </div>
           </div>
         </div>

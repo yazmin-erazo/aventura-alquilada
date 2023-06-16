@@ -71,6 +71,7 @@ const Header = () => {
     fetchUsers();
   }, []);
 
+  
   return (
     <div className="header">
       <div className="headerContainer">

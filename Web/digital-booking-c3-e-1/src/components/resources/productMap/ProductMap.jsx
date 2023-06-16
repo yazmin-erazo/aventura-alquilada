@@ -1,5 +1,6 @@
 import React, { useEffect, useRef, useState } from "react";
 import mapboxgl from "mapbox-gl";
+const { Popup } = mapboxgl;
 import styles from "./ProductMap.module.css";
 import CategoryService from "../../../shared/services/CategoryService";
 import * as ReactIcons from "react-icons/md";
@@ -114,7 +115,7 @@ const ProductMap = ({ latitude, longitude, product }) => {
 
     map.addControl(new mapboxgl.NavigationControl());
     map.addControl(new mapboxgl.FullscreenControl());
-    map.addControl(new mapboxgl.GeolocateControl());
+    // map.addControl(new mapboxgl.GeolocateControl());
 
     // Mostrar ruta al hacer clic en el botón
     const showRoute = () => {
@@ -199,11 +200,11 @@ const ProductMap = ({ latitude, longitude, product }) => {
       <div className={styles.ContainerButtons}>
         <button id="locationButton" className={styles.itemButton}>
           <div className={styles.iconContainer}>
-            <BiPin size={22} />
+            <TbIcons.TbPinned size={22} />
           </div>
           Ubicación producto
         </button>
-        <button
+        {/* <button
           id="routeButton"
           className={styles.itemButton}
           onClick={() => setShowingRoute(!showingRoute)}
@@ -212,7 +213,7 @@ const ProductMap = ({ latitude, longitude, product }) => {
             {showingRoute ? <FaIcons.FaEyeSlash /> : <FaIcons.FaRoute />}{" "}
           </div>
           {showingRoute ? "Ocultar ruta" : "Mostrar ruta"}
-        </button>
+        </button> */}
       </div>
     </>
   );
