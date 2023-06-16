@@ -24,6 +24,11 @@
   text-decoration: none;
 }
 
+.text{
+  color: var(--secondary-600);
+  text-align: center;
+  width: 1280px;
+}
 
 @media (max-width: 1000px) {
   .section {

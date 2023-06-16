@@ -33,7 +33,7 @@ const authReducer = (state, action) => {
           name: "",
           lastname: "",
           role: "",
-          favorites:[],
+          favorites: [],
           initialsColor: "",
         },
         token: "",
@@ -41,12 +41,17 @@ const authReducer = (state, action) => {
       };
     case "FAVS":
       sessionStorage.setItem("user", JSON.stringify(action.payload));
-      return{
+      return {
         ...state,
-        user:action.payload,
+        user: action.payload,
+      };
+    case "UPDATE_FAVORITES":
+      sessionStorage.setItem("user", JSON.stringify(action.payload));
+      return {
+        ...state,
+        user: action.payload,
       };
     default:
-      console.log(state)
       return state;
   }
 };
