@@ -25,7 +25,7 @@ const ShareButtons = () => {
 
   return (
     <div>
-      <button className="open-modal-button" onClick={openModal}>
+      <button className="sharebutton" onClick={openModal}>
         Compartir
       </button>
       {showModal && (

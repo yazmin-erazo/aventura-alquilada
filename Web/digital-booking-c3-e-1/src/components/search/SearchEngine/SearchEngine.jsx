@@ -5,26 +5,30 @@ import CalendarProducts from "../../resources/Calendar/CalendarProducts";
 import Select from "../../common/select/Select";
 import CitiesService from "../../../shared/services/CitiesService";
 
-const SearchEngine = ({handleSearch}) => {
-
+const SearchEngine = ({ handleSearch }) => {
   const [text, setText] = useState("");
   const [city, setCity] = useState("");
   const [cityOptions, setCityOptions] = useState([]);
   const [selectedStartDate, setSelectedStartDate] = useState(null);
   const [selectedEndDate, setSelectedEndDate] = useState(null);
-  const [calendarShow, setCalendarShow] = useState(false)
+  const [calendarShow, setCalendarShow] = useState(false);
 
-  const handleInputChange = e =>{
+  const handleInputChange = (e) => {
     setText(e.target.value);
-  } 
-  const handleSearchClick = e => {
+  };
+
+  const handleSearchClick = (e) => {
     e.preventDefault();
-    setCalendarShow(false)
-    if(text != null)
-    {
-      handleSearch({ search: text, cityId: city, startDate: selectedStartDate, endDate: selectedEndDate });
+    setCalendarShow(false);
+    if (text != null) {
+      handleSearch({
+        search: text,
+        cityId: city,
+        startDate: selectedStartDate,
+        endDate: selectedEndDate,
+      });
     }
-  }
+  };
 
   const handleSelectDates = (startDate, endDate) => {
     setSelectedStartDate(startDate);
@@ -33,47 +37,60 @@ const SearchEngine = ({handleSearch}) => {
 
   const cityHandler = (value) => {
     console.log(value);
-    if(value !== "Seleccione...")
-      setCity(value);
-    else
-      setCity("")
-  }
+    if (value !== "Seleccione...") setCity(value);
+    else setCity("");
+  };
 
   const handleButtonCalendar = () => {
-    setCalendarShow(!calendarShow)
-  }
+    setCalendarShow(!calendarShow);
+  };
 
   const fetchCities = async () => {
     const cities = await CitiesService.getAll();
     setCityOptions(cities);
-  }
+  };
 
-  useEffect( () => {
-    try{
+  useEffect(() => {
+    try {
       fetchCities();
     } catch {
-      err => console.log(err);
+      (err) => console.log(err);
     }
-  }, [])
+  }, []);
 
   return (
     <div className={styles["search-engine"]}>
       <form className={styles.form}>
-        <Select options={cityOptions} placeholder={'Seleccione...'} onChange={cityHandler}></Select>
-        <div className={`${styles["button-calendar"]} ${!calendarShow ? styles.show : styles.hide}`} onClick={handleButtonCalendar} >Seleccione fechas</div>
-        <div className={calendarShow ? styles.show : styles.hide} >
+        <Select
+          options={cityOptions}
+          placeholder={"Seleccione..."}
+          onChange={cityHandler}
+        ></Select>
+        <div
+          className={`${styles["button-calendar"]} ${
+            !calendarShow ? styles.show : styles.hide
+          }`}
+          onClick={handleButtonCalendar}
+        >
+          Seleccione fechas
+        </div>
+        <div className={calendarShow ? styles.show : styles.hide}>
           <CalendarProducts onSelectDates={handleSelectDates} />
         </div>
         <div className={styles.inputWrapper}>
-        <input
-          type="text"
-          className={styles.inputSearch}
-          placeholder="Buscar por actividad, equipo..."
-          onChange={handleInputChange}
+          <input
+            type="text"
+            className={styles.inputSearch}
+            placeholder="Buscar por actividad, equipo..."
+            onChange={handleInputChange}
           />
-        <button className={styles["search-icon-button"]} type="submit" onClick={handleSearchClick}>
-          <FaSearch />
-        </button>
+          <button
+            className={styles["search-icon-button"]}
+            type="submit"
+            onClick={handleSearchClick}
+          >
+            <FaSearch />
+          </button>
         </div>
       </form>
     </div>

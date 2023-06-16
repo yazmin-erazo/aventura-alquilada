@@ -57,21 +57,32 @@ const Header = () => {
     const foundUser = users.find((user) => user.email === email);
     return foundUser && user.sub === email ? foundUser.initialsColor : "";
   };
-
   useEffect(() => {
     const fetchUsers = async () => {
       try {
         const users = await UsersService.getAll();
         setUsers(users);
       } catch (error) {
-        console.log(error);
+        if (error.response && error.response.status === 401) {
+          Swal.fire({
+            icon: 'error',
+            title: 'No autorizado',
+            text: 'Por favor, inicie sesión.',
+          });
+        } else {
+          Swal.fire({
+            icon: 'error',
+            title: 'Oops...',
+            text: 'Algo salió mal!',
+          });
+        }
       }
     };
+    if (isLogedIn) {
+      fetchUsers();
+    }
+  }, [isLogedIn]);
 
-    fetchUsers();
-  }, []);
-
-  
   return (
     <div className="header">
       <div className="headerContainer">
@@ -97,9 +108,8 @@ const Header = () => {
                 style={{ backgroundColor: findUserColor(user.sub) }}
               >
                 <div>
-                  {`${
-                    user.name.slice(0, 1) + user.lastname.slice(0, 1)
-                  }`.toUpperCase()}
+                  {`${user.name.slice(0, 1) + user.lastname.slice(0, 1)
+                    }`.toUpperCase()}
                 </div>
               </div>
             </label>
