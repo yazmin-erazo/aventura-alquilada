@@ -36,6 +36,7 @@
   color: gray;
   height: 42px;
   font-size: 14px;
+  z-index: 2;
 }
 
 .search-engine select {
