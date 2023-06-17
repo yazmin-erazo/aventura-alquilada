@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import styles from "./RecommendedProducts.module.css";
 import ButtonPrimary from "../../../common/Buttons/ButtonPrimary";
 import { BsClock } from "react-icons/bs";
@@ -19,6 +19,7 @@ const RecommendedProducts = ({
   const [isFavorite, setIsFavorite] = useState(false);
   const user = useContext(UserContext)
   const { dispatch } = useContext(UserContext);
+  
 
   const handleFavoriteClick = (event) => {
     event.stopPropagation();
@@ -82,6 +83,18 @@ const RecommendedProducts = ({
 
     return stars;
   };
+
+  const isUsersFav = () => {
+    if(user.user.name){
+      const favoriteProducts = JSON.parse(sessionStorage.getItem("user")).favorites;   
+      if(favoriteProducts.includes(product.id))
+        setIsFavorite(true)
+    }
+  }
+
+  useEffect(() => {
+    isUsersFav();
+  }, [])
 
   const iconColor = "rgb(255 129 0)";
 
