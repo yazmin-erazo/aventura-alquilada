@@ -105,7 +105,7 @@ const ProductDetails = () => {
                   <p className={styles.city}>{product.city.name}</p>
                   {distance && (
                     <p className={styles.distance}>
-                      A {distance.toFixed(2)} km de ti
+                      A {distance.toFixed(0)} km de ti
                     </p>
                   )}
                 </div>

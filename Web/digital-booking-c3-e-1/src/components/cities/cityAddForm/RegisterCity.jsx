@@ -8,11 +8,10 @@ import { useNavigate } from "react-router-dom";
 import ButtonInactive from "../../common/Buttons/ButtonInactive";
 import { BiPlusCircle } from "react-icons/bi";
 import axios from "axios";
-import { MapContainer, TileLayer, Marker, useMap } from 'react-leaflet';
-import { useMapEvents } from 'react-leaflet';
-import 'leaflet/dist/leaflet.css';
+import { MapContainer, TileLayer, Marker, useMap } from "react-leaflet";
+import { useMapEvents } from "react-leaflet";
+import "leaflet/dist/leaflet.css";
 import { FaSearch } from "react-icons/fa";
-
 
 const LocationMarker = ({ setPosition, fetchCityInfo }) => {
   const map = useMapEvents({
@@ -66,14 +65,14 @@ const RegisterCity = () => {
 
       if (response.data && response.data.length > 0) {
         const location = response.data[0];
-        console.log(location)
+        console.log(location);
         setLatitude(parseFloat(location.lat));
         setLongitude(parseFloat(location.lon));
       } else {
-        alert('No results found');
+        alert("No results found");
       }
     } catch (error) {
-      console.error('Failed to fetch city data:', error);
+      console.error("Failed to fetch city data:", error);
     }
   };
 
@@ -111,29 +110,38 @@ const RegisterCity = () => {
   };
 
   async function fetchCityInfo(latitude, longitude) {
-    axios.get(`https://nominatim.openstreetmap.org/reverse?format=json&lat=${latitude}&lon=${longitude}`)
-      .then(response => {
+    axios
+      .get(
+        `https://nominatim.openstreetmap.org/reverse?format=json&lat=${latitude}&lon=${longitude}`
+      )
+      .then((response) => {
         console.log(response.data);
-        let cityNameFromOpenstreetmap = response.data.address.county
+        let cityNameFromOpenstreetmap = response.data.address.county;
         if (response.data.address.city) {
-          cityNameFromOpenstreetmap = response.data.address.city
+          cityNameFromOpenstreetmap = response.data.address.city;
         } else if (response.data.address.town) {
-          cityNameFromOpenstreetmap = response.data.address.town
+          cityNameFromOpenstreetmap = response.data.address.town;
         }
-        const cityCodeFromOpenstreetmap = response.data.address['ISO3166-2-lvl4']
-        const countryCodeFromOpenstreetmap = response.data.address.country_code
-        const countryFromOpenstreetmap = response.data.address.country
+        const cityCodeFromOpenstreetmap =
+          response.data.address["ISO3166-2-lvl4"];
+        const countryCodeFromOpenstreetmap = response.data.address.country_code;
+        const countryFromOpenstreetmap = response.data.address.country;
 
-        if (cityNameFromOpenstreetmap && cityCodeFromOpenstreetmap && countryCodeFromOpenstreetmap && countryFromOpenstreetmap) {
-          setName(cityNameFromOpenstreetmap)
-          setCityCode(cityCodeFromOpenstreetmap.toUpperCase())
-          setCountryCode(countryCodeFromOpenstreetmap.toUpperCase())
-          setCountry(countryFromOpenstreetmap)
+        if (
+          cityNameFromOpenstreetmap &&
+          cityCodeFromOpenstreetmap &&
+          countryCodeFromOpenstreetmap &&
+          countryFromOpenstreetmap
+        ) {
+          setName(cityNameFromOpenstreetmap);
+          setCityCode(cityCodeFromOpenstreetmap.toUpperCase());
+          setCountryCode(countryCodeFromOpenstreetmap.toUpperCase());
+          setCountry(countryFromOpenstreetmap);
         } else {
-          throw new Error('Información incompleta');
+          throw new Error("Información incompleta");
         }
       })
-      .catch(error => console.error('Error:', error));
+      .catch((error) => console.error("Error:", error));
   }
 
   async function getReverseGeocode(latitude, longitude) {
@@ -184,14 +192,13 @@ const RegisterCity = () => {
   };
 
   const handleSubmit = async () => {
-
     const cityData = {
       name: nameSelected,
       code: cityCode,
       latitude: position[0],
       longitude: position[1],
       countryCode: countryCode,
-      genericName: country
+      genericName: country,
     };
 
     try {
@@ -248,7 +255,6 @@ const RegisterCity = () => {
         <div className={styles.registerCityContainer}>
           <div className={styles.registerCityForm}>
             <div className={styles.formColumn}>
-
               <div className={styles.inputWrapper}>
                 <input
                   type="text"
@@ -266,10 +272,17 @@ const RegisterCity = () => {
                   <FaSearch />
                 </button>
               </div>
-
-              <MapContainer center={[latitude, longitude]} zoom={12} style={{ height: '300px', width: '100%' }}>
+              <MapContainer
+                center={[latitude, longitude]}
+                zoom={12}
+                className={styles.map}
+                style={{ height: "300px", width: "100%" }}
+              >
                 <TileLayer url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" />
-                <LocationMarker setPosition={setPosition} fetchCityInfo={fetchCityInfo} />
+                <LocationMarker
+                  setPosition={setPosition}
+                  fetchCityInfo={fetchCityInfo}
+                />
                 {position && <Marker position={position} draggable={true} />}
                 <UpdateMapCenter latitude={latitude} longitude={longitude} />
               </MapContainer>
@@ -293,7 +306,6 @@ const RegisterCity = () => {
               >
                 Código:
               </InputWithLabel>
-
 
               <InputWithLabel
                 type="text"

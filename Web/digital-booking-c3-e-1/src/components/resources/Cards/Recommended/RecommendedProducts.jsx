@@ -155,7 +155,7 @@ console.log(product);
         </div>
         <div className={styles.nameDistance}>
           <h3 className={styles.name}>{product.name}</h3>
-          <p className={styles.distance}> {product.distance.toFixed(2)} Km de ti</p>
+          <p className={styles.distance}> {product.distance.toFixed(0)} Km de ti</p>
         </div>
 
         <p className={styles.description}>{product.description}</p>
