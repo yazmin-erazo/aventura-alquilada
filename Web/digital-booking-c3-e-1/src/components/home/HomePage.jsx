@@ -3,7 +3,7 @@ import SearchEngine from "../search/SearchEngine/SearchEngine";
 import CategoryList from "./Category/CategoryList";
 import styles from "./HomePage.module.css";
 import RecommendedList from "./Recommended/RecommendedList";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import FilterSidebar from "../search/SearchEngine/FilterSidebar";
 
 const HomePage = () => {
@@ -43,21 +43,22 @@ const HomePage = () => {
             </div>
           </section>
 
-          <section className={styles.recommendedContainer}>
-            <h3 className={styles.subtitle}>
-              {searchParams ? 'Resultados de su Búsqueda' : 'Recomendados'}
-            </h3>
-            <div className={styles.productGrid}>
-              <RecommendedList
-                selectedCategory={selectedCategory}
-                searchParams={searchParams}
-                filterParams={filterParams}
-              />
+          <div className={`${styles.containerWithSidebar}`}>
+            <div className={styles.filterSidebar}>
+              <FilterSidebar onFilterChange={handleFilterChange} />
             </div>
-          </section>
-
-          <div className={styles.filterSidebar}>
-            <FilterSidebar onFilterChange={handleFilterChange} />
+            <section className={styles.recommendedContainer}>
+              <h3 className={styles.subtitle}>
+                {searchParams ? 'Resultados de su Búsqueda' : 'Recomendados'}
+              </h3>
+              <div className={styles.productGrid}>
+                <RecommendedList
+                  selectedCategory={selectedCategory}
+                  searchParams={searchParams}
+                  filterParams={filterParams}
+                />
+              </div>
+            </section>
           </div>
         </div>
       </div>

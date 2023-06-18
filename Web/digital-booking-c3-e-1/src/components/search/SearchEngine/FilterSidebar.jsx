@@ -51,7 +51,7 @@ const FilterSidebar = ({ onFilterChange }) => {
 
     return (
         <div>
-            <h3>Filtros</h3>
+            <h3>Filtros Avanzados</h3>
 
             <div>
                 <label htmlFor="nameFilter">Nombre:</label>

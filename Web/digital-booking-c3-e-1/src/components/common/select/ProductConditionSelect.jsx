@@ -4,11 +4,11 @@ import Select from "./Select";
 
 const ProductConditionSelect = ({ onChange, children, placeholder }) => {
   const options = [
-    { id: "new", name: "Nuevo" },
-    { id: "used", name: "Seminuevo" },
-    { id: "refurbished", name: "Reacondicionado" },
-    { id: "good", name: "Buen estado" },
-    { id: "defective", name: "Defectuoso" },
+    { id: "Nuevo", name: "Nuevo" },
+    { id: "Seminuevo", name: "Seminuevo" },
+    { id: "Reacondicionado", name: "Reacondicionado" },
+    { id: "Buen estado", name: "Buen estado" },
+    { id: "Defectuoso", name: "Defectuoso" },
   ];
 
   // const [isOpen, setIsOpen] = useState(false);
