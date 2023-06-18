@@ -3,6 +3,7 @@ import { useParams, useNavigate } from "react-router-dom";
 import { UserContext } from "../../../context/AuthContext";
 import { ProductsContext } from "../../../context/ProductsContext";
 import moment from "moment";
+import { getDistance } from "geolib";
 
 import styles from "./ProductDetails.module.css";
 import { AiOutlineTag, AiOutlineClockCircle } from "react-icons/ai";
@@ -44,6 +45,22 @@ const ProductDetails = () => {
     setProducts(data.products);
   }, [data, product]);
 
+  // --------------------START calculo distancia usuario - producto --------------
+  let distance = null;
+  if (product) {
+    const userLocation = auth.userLocation;
+    const productLocation = {
+      latitude: product.city.latitude,
+      longitude: product.city.longitude,
+    };
+    distance = userLocation
+      ? getDistance(userLocation, productLocation) / 1000
+      : null;
+      console.log(userLocation);
+      console.log(productLocation);
+    }
+  // --------------------END calculo distancia usuario - producto --------------
+
   // --------------------START calcula la diferencia en días con la funcion diff de moment --------------
   useEffect(() => {
     if (selectedStartDate && selectedEndDate) {
@@ -55,11 +72,10 @@ const ProductDetails = () => {
       setTotalRentalDays(0);
     }
   }, [selectedStartDate, selectedEndDate]);
-  // -------------------- FIN Total días --------------
+  // -------------------- END Total días --------------
 
   const showButton = selectedStartDate && selectedEndDate;
   const productId = product ? product.id : null;
-
 
   return (
     <>
@@ -87,10 +103,11 @@ const ProductDetails = () => {
 
                 <div>
                   <p className={styles.city}>{product.city.name}</p>
-                  <p className={styles.proximity}>
-                    {" "}
-                    {product.city.genericName}
-                  </p>
+                  {distance && (
+                    <p className={styles.distance}>
+                      A {distance.toFixed(2)} km de ti
+                    </p>
+                  )}
                 </div>
               </div>
 

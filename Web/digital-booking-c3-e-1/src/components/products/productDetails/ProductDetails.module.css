@@ -116,6 +116,12 @@
 
 .proximity {
   margin-top: 5px;
+  font-size: 0.9rem;
+  color: var(--secondary-50);
+}
+
+.distance{
+  margin-top: 5px;
   font-size: 0.8rem;
   color: var(--secondary-200);
 }

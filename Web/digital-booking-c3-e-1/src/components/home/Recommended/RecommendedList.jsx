@@ -7,8 +7,14 @@ import { ProductsContext } from "../../../context/ProductsContext";
 import CategoryService from "../../../shared/services/CategoryService";
 import ReactIcons, { sportsIcons } from "../../common/SportsIcons";
 import ProductsService from "../../../shared/services/ProductsService";
+import { getDistance } from "geolib";
 
-const RecommendedList = ({ selectedCategory, searchParams, filterParams }) => {
+const RecommendedList = ({
+  selectedCategory,
+  searchParams,
+  filterParams,
+  userLocation,
+}) => {
   const data = useContext(ProductsContext);
   const pageLimit = 10;
   const [products, setProducts] = useState([]);
@@ -65,7 +71,7 @@ const RecommendedList = ({ selectedCategory, searchParams, filterParams }) => {
       const productosBuscados = await ProductsService.getAll(combinedParams);
       setFilteredProducts(productosBuscados);
     } catch {
-      e => console.log(e);
+      (e) => console.log(e);
     }
   };
 
@@ -79,8 +85,19 @@ const RecommendedList = ({ selectedCategory, searchParams, filterParams }) => {
             );
             const categoryIcon = category ? category.icon : null;
             const isIconInSportsIcons = sportsIcons.includes(category.icon);
-            const IconComponent =
-              ReactIcons[category.icon] || null;
+            const IconComponent = ReactIcons[category.icon] || null;
+            const distance =
+              getDistance(
+                {
+                  latitude: userLocation.latitude,
+                  longitude: userLocation.longitude,
+                },
+                {
+                  latitude: product.city.latitude,
+                  longitude: product.city.longitude,
+                }
+              ) / 1000;
+
             return (
               <div
                 key={product.id}
@@ -95,6 +112,7 @@ const RecommendedList = ({ selectedCategory, searchParams, filterParams }) => {
                     price: product.price,
                     ratings: product.ratings,
                     image: product.imageURL,
+                    distance,
                   }}
                   categoryIcon={
                     isIconInSportsIcons ? IconComponent : categoryIcon

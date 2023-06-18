@@ -1,4 +1,5 @@
-import React, { createContext, useReducer } from "react";
+import { latitudeKeys } from "geolib";
+import React, { createContext, useEffect, useReducer } from "react";
 
 const UserContext = createContext();
 
@@ -12,6 +13,7 @@ const initialState = {
   },
   token: sessionStorage.getItem("token") || "",
   isLogedIn: sessionStorage.getItem("token") ? true : false,
+  userLocation: null,
 };
 
 const authReducer = (state, action) => {
@@ -51,6 +53,11 @@ const authReducer = (state, action) => {
         ...state,
         user: action.payload,
       };
+    case "SET_USER_LOCATION":
+      return {
+        ...state,
+        userLocation: action.payload,
+      };
     default:
       return state;
   }
@@ -58,11 +65,46 @@ const authReducer = (state, action) => {
 
 const UserDataContext = ({ children }) => {
   const [state, dispatch] = useReducer(authReducer, initialState);
+  // -------------- START LOCATION USER ------------------
+  useEffect(() => {
+    const getUserLocation = async () => {
+      try {
+        if ("geolocation" in navigator) {
+          // Obtener la ubicación del usuario
+          navigator.geolocation.getCurrentPosition(
+            (position) => {
+              const userLocation = {
+                latitude: position.coords.latitude,
+                longitude: position.coords.longitude,
+              };
+              console.log(position.coords.latitude);
+              dispatch({ type: "SET_USER_LOCATION", payload: userLocation });
+            },
+            (error) => {
+              console.error(
+                "Error al obtener la ubicación del usuario:",
+                error
+              );
+            }
+          );
+        } else {
+          console.error("El navegador no soporta la geolocalización.");
+        }
+      } catch (error) {
+        console.error("Error al obtener la ubicación del usuario:", error);
+      }
+    };
+
+    getUserLocation();
+  }, []);
+
+  // -------------- END LOCATION USER ------------------
 
   const data = {
     dispatch,
     user: state.user,
     isLogedIn: state.isLogedIn,
+    userLocation: state.userLocation,
   };
 
   return (
