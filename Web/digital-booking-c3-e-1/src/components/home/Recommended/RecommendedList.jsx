@@ -11,7 +11,7 @@ import * as FaIcons from "react-icons/fa";
 import { sportsIcons } from "../../common/SportsIcons";
 import ProductsService from "../../../shared/services/ProductsService";
 
-const RecommendedList = ({ selectedCategory, searchParams }) => {
+const RecommendedList = ({ selectedCategory, searchParams, filterParams}) => {
   const data = useContext(ProductsContext);
   const pageLimit = 10;
   const [products, setProducts] = useState([]);
@@ -54,25 +54,11 @@ const RecommendedList = ({ selectedCategory, searchParams }) => {
     onPageChanged();
   }, [currentPage, filteredProducts]);
 
-  // const dateFiltered = () => {
-  //   const dateFilteredProds = filteredProducts.filter( p => {
-  //       let rented 
-  //       p.rents.forEach(element => {
-  //         ((element.starDate > searchParams.startDate && element.starDate < searchParams.endDate) ||
-  //         (element.endDate > searchParams.startDate && element.endDate < searchParams.endDate)) &&
-  //         (rented = p)
-  //       });
-  //       p !== rented
-  //       console.log(rented);
-  //   })
-  //   console.log(dateFilteredProds);
-  //   setFilteredProducts(dateFilteredProds);
-  // }
     
   useEffect(() => {
     fetchData();
    // dateFiltered();
-  },[searchParams])
+  },[searchParams, filterParams])
 
   const onPageChanged = () => {
     const offset = (currentPage - 1) * pageLimit;
@@ -81,13 +67,12 @@ const RecommendedList = ({ selectedCategory, searchParams }) => {
 
   const fetchData = async () => {
     try {  
-      if(searchParams.startDate && searchParams.startDate){
-        const productosBuscados = await ProductsService.getAll(searchParams)
-        setFilteredProducts(productosBuscados);
-      }else{
-        const productosBuscados = await ProductsService.getAllWithoutDates(searchParams)
-        setFilteredProducts(productosBuscados);
-      }
+      const combinedParams = {
+        ...searchParams,
+        ...filterParams,
+      };
+      const productosBuscados = await ProductsService.getAll(combinedParams)
+      setFilteredProducts(productosBuscados);
     }
     catch{
       e => console.log(e);

@@ -37,8 +37,8 @@ public final class City {
         Validator.validateMandatory(name, "El nombre es requerido para crear una ciudad");
         Validator.validateMandatory(code, "El codigo es requerido para crear una ciudad");
         //Validator.validateMandatory(countryCode, "El codigo de pais es requerido para crear una ciudad");
-        Validator.validateMandatory(latitude, "La latitud es requerida para crear una ciudad");
-        Validator.validateMandatory(longitude, "La longitud es requerida para crear una ciudad");
+        //Validator.validateMandatory(latitude, "La latitud es requerida para crear una ciudad");
+        //Validator.validateMandatory(longitude, "La longitud es requerida para crear una ciudad");
         //Validator.validateMandatory(genericName, "El nombre genérico para crear una ciudad");
 
         return new City(0L,name,code,countryCode,latitude,longitude, genericName);

@@ -3,20 +3,23 @@ import SearchEngine from "../search/SearchEngine/SearchEngine";
 import CategoryList from "./Category/CategoryList";
 import styles from "./HomePage.module.css";
 import RecommendedList from "./Recommended/RecommendedList";
-import { useEffect, useState } from "react";
-import ShareButtons from "../search/SearchEngine/ShareButtons";
+import { useState } from "react";
+import FilterSidebar from "../search/SearchEngine/FilterSidebar";
 
 const HomePage = () => {
   const [selectedCategory, setSelectedCategory] = useState(null);
-  const url = 'URL de tu aplicación';
-  const title = '¡Descarga y usa nuestra increíble aplicación!';
-  const [searchParams, setSearchParams] = useState(null)
+  const [searchParams, setSearchParams] = useState(null);
+  const [filterParams, setFilterParams] = useState({});
+
   const handleSearch = (params) => {
     setSearchParams(params);
+    setFilterParams({});
   }
 
-  useEffect( () => {},[searchParams])
-  
+  const handleFilterChange = (filters) => {
+    setFilterParams(filters);
+  };
+
   return (
     <>
       <div className={styles.searchContainer}>
@@ -40,14 +43,23 @@ const HomePage = () => {
             </div>
           </section>
 
-          <section className={styles.recommendedContainer}>
-            <h3 className={styles.subtitle}>
-              {searchParams ? 'Resultados de su Búsqueda' : 'Recomendados'}
-            </h3>
-            <div className={styles.productGrid}>
-              <RecommendedList selectedCategory={selectedCategory} searchParams={searchParams} />
+          <div className={`${styles.containerWithSidebar}`}>
+            <div className={styles.filterSidebar}>
+              <FilterSidebar onFilterChange={handleFilterChange} />
             </div>
-          </section>
+            <section className={styles.recommendedContainer}>
+              <h3 className={styles.subtitle}>
+                {searchParams ? 'Resultados de su Búsqueda' : 'Recomendados'}
+              </h3>
+              <div className={styles.productGrid}>
+                <RecommendedList
+                  selectedCategory={selectedCategory}
+                  searchParams={searchParams}
+                  filterParams={filterParams}
+                />
+              </div>
+            </section>
+          </div>
         </div>
       </div>
     </>
