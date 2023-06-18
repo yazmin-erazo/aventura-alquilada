@@ -190,7 +190,6 @@ const RegisterCity = () => {
       code: cityCode,
       latitude: position[0],
       longitude: position[1],
-      code: cityCode,
       countryCode: countryCode,
       genericName: country
     };
