@@ -9,7 +9,7 @@ const ProductsDataContext = ({ children }) => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const data = await ProductsService.getAllWithoutDates();
+        const data = await ProductsService.getAll();
         setProducts(data);
       } catch (err) {
         console.log(`Error al cargar productos: ${err}`);

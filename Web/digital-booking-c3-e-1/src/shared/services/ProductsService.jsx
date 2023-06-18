@@ -12,19 +12,15 @@ const PRODUCTS_ENDPOINTS = {
 };
 
 const ProductsService = {
-  getAll: (params = { search: "", cityId: "", startDate: "", endDate: "" }) =>
-    API.get(
-      `${PRODUCTS_ENDPOINTS.ALL_PRODUCTS}?search=${params.search}&cityId=${
-        params.cityId
-      }&startDate=${params.startDate.format(
-        "YYYY-MM-DD"
-      )}&endDate=${params.endDate.format("YYYY-MM-DD")}`
-    ).then((res) => res.data),
-
-  getAllWithoutDates: (params = { search: "", cityId: "" }) =>
-    API.get(
-      `${PRODUCTS_ENDPOINTS.ALL_PRODUCTS}?search=${params.search}&cityId=${params.cityId}`
-    ).then((res) => res.data),
+  getAll: (params = { search: "", cityId: "", startDate: "", endDate: "", brandFilter: "", genderFilter: "", priceLessThan: "", priceGreaterThan: "", sizeFilter: "", stateFilter: "", colorFilter: "", materialFilter: "", nameFilter:"" }) => {
+    if (params.startDate) {
+      params.startDate = params.startDate.format("YYYY-MM-DD");
+    }
+    if (params.endDate) {
+      params.endDate = params.endDate.format("YYYY-MM-DD");
+    }
+    return API.get(PRODUCTS_ENDPOINTS.ALL_PRODUCTS, { params }).then((res) => res.data);
+  },
 
   deleteByID: (id) =>
     API.delete(PRODUCTS_ENDPOINTS.DELETE_PRODUCT + id).then((res) => res),
