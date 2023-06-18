@@ -5,6 +5,7 @@ import styles from "./HomePage.module.css";
 import RecommendedList from "./Recommended/RecommendedList";
 import { useEffect, useState } from "react";
 import FilterSidebar from "../search/SearchEngine/FilterSidebar";
+import { useParams } from "react-router";
 
 const HomePage = () => {
   const [selectedCategory, setSelectedCategory] = useState(null);
@@ -15,14 +16,14 @@ const HomePage = () => {
   const handleSearch = (params) => {
     setSearchParams(params);
     setFilterParams({});
-
-    //-------- START Ubicación del usuario ------
-    params.userLocation = userLocation;
   };
 
   const handleFilterChange = (filters) => {
     setFilterParams(filters);
   };
+
+  //-------- START Ubicación del usuario ------
+  useParams.userLocation = userLocation;
 
   const getCurrentLocation = () => {
     if ("geolocation" in navigator) {
@@ -44,7 +45,6 @@ const HomePage = () => {
     getCurrentLocation();
   }, []);
   //--------  FIN Ubicación del usuario ------
-  console.log(userLocation);
 
   return (
     <>
