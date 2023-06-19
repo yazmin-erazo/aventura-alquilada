@@ -111,7 +111,7 @@ const RegisterCity = () => {
   };
 
   async function fetchCityInfo(latitude, longitude) {
-    axios.get(`https://nominatim.openstreetmap.org/reverse?format=json&lat=${latitude}&lon=${longitude}`)
+    axios.get(`https://nominatim.openstreetmap.org/reverse?format=json&lat=${latitude}&lon=${longitude}&zoom=10`)
       .then(response => {
         console.log(response.data);
         let cityNameFromOpenstreetmap = response.data.address.county
@@ -120,7 +120,10 @@ const RegisterCity = () => {
         } else if (response.data.address.town) {
           cityNameFromOpenstreetmap = response.data.address.town
         }
-        const cityCodeFromOpenstreetmap = response.data.address['ISO3166-2-lvl4']
+        let cityCodeFromOpenstreetmap = response.data.address['ISO3166-2-lvl4']
+        if(!cityCodeFromOpenstreetmap){
+          cityCodeFromOpenstreetmap = `${response.data.address.country_code}-${cityNameFromOpenstreetmap.toUpperCase().slice(0, 3)}`
+        }
         const countryCodeFromOpenstreetmap = response.data.address.country_code
         const countryFromOpenstreetmap = response.data.address.country
 
@@ -190,7 +193,6 @@ const RegisterCity = () => {
       code: cityCode,
       latitude: position[0],
       longitude: position[1],
-      code: cityCode,
       countryCode: countryCode,
       genericName: country
     };
