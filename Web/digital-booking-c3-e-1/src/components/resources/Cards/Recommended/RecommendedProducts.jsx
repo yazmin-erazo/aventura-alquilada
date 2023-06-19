@@ -109,7 +109,7 @@ const RecommendedProducts = ({
   useEffect(() => {
     isUsersFav();
   }, []);
-console.log(product);
+
   const iconColor = "rgb(255 129 0)";
 
   return (

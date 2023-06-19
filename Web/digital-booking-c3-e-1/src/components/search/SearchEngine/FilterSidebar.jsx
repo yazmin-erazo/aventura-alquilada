@@ -3,6 +3,13 @@ import CitiesService from "../../../shared/services/CitiesService";
 import Select from "../../common/select/Select";
 import styles from "./FilterSidebar.module.css";
 import Chip from "./Chip";
+import {
+  brandOptions,
+  genderOptions,
+  stateOptions,
+  materialOptions,
+  colorOptions,
+} from "./Lists";
 
 const FilterSidebar = ({ onFilterChange }) => {
   const [cityOptions, setCityOptions] = useState([]);
@@ -10,33 +17,110 @@ const FilterSidebar = ({ onFilterChange }) => {
     nameFilter: "",
     brandFilter: "",
     genderFilter: "",
-    priceLessThan: "",
-    priceGreaterThan: "",
+    priceLessThan: null,
+    priceGreaterThan: null,
     sizeFilter: "",
     stateFilter: "",
     colorFilter: "",
     materialFilter: "",
     cityId: "",
   });
-console.log(filters);
+
+  const [selectedBrand, setSelectedBrand] = useState("");
+  const [selectedGender, setSelectedGender] = useState("");
+  const [selectedState, setSelectedState] = useState("");
+  const [selectedMaterial, setSelectedMaterial] = useState("");
+  const [selectedColor, setSelectedColor] = useState("");
+
+  const handleFilterClear = () => {
+    setFilters({
+      nameFilter: "",
+      brandFilter: "",
+      genderFilter: "",
+      priceLessThan: null,
+      priceGreaterThan: null,
+      sizeFilter: "",
+      stateFilter: "",
+      colorFilter: "",
+      materialFilter: "",
+      cityId: "",
+    });
+
+    setSelectedBrand("");
+    setSelectedGender("");
+    setSelectedState("");
+    setSelectedMaterial("");
+    setSelectedColor("");
+  };
+
+  const handleBrandChipClick = (brand) => {
+    setSelectedBrand((prevBrand) => (prevBrand === brand ? "" : brand));
+    setFilters((prevFilters) => ({
+      ...prevFilters,
+      brandFilter: prevFilters.brandFilter === brand ? "" : brand,
+    }));
+  };
+
+  const handleGenderChipClick = (gender) => {
+    setSelectedGender((prevGender) => (prevGender === gender ? "" : gender));
+    setFilters((prevFilters) => ({
+      ...prevFilters,
+      genderFilter: prevFilters.genderFilter === gender ? "" : gender,
+    }));
+  };
+
+  const handleStateChipClick = (state) => {
+    setSelectedState((prevState) => (prevState === state ? "" : state));
+    setFilters((prevFilters) => ({
+      ...prevFilters,
+      stateFilter: prevFilters.stateFilter === state ? "" : state,
+    }));
+  };
+
+  const handleMaterialChipClick = (material) => {
+    setSelectedMaterial((prevMaterial) =>
+      prevMaterial === material ? "" : material
+    );
+    setFilters((prevFilters) => ({
+      ...prevFilters,
+      materialFilter: prevFilters.materialFilter === material ? "" : material,
+    }));
+  };
+
+  const handleColorChipClick = (color) => {
+    setSelectedColor((prevColor) => (prevColor === color ? "" : color));
+    setFilters((prevFilters) => ({
+      ...prevFilters,
+      colorFilter: prevFilters.colorFilter === color ? "" : color,
+    }));
+  };
+
   const handleFilterChange = (event) => {
     const { name, value } = event.target;
-  
-    // Si se selecciona un color diferente, reemplazar el valor anterior
-    if (name === "colorFilter" && value !== filters.colorFilter) {
-      setFilters({ ...filters, [name]: value });
+
+    let parsedValue = value;
+
+    if (name === "priceLessThan" || name === "priceGreaterThan") {
+      parsedValue = value ? parseFloat(value) : null;
     }
-    // Si se selecciona el mismo color, deseleccionarlo
-    else {
-      setFilters({ ...filters, [name]: "" });
+
+    if (name === "materialFilter") {
+      setSelectedMaterial(value);
     }
+
+    if (name === "colorFilter") {
+      setSelectedColor(value);
+    }
+
+    setFilters((prevFilters) => ({
+      ...prevFilters,
+      [name]: parsedValue,
+    }));
   };
 
   const handleFilterCityChange = (id) => {
     setFilters({ ...filters, cityId: id });
   };
-
-  handleFilterCityChange;
 
   const handleFilterSubmit = () => {
     onFilterChange(filters);
@@ -45,9 +129,7 @@ console.log(filters);
   const fetchCities = async () => {
     try {
       const cities = await CitiesService.getAll();
-
       cities.sort((a, b) => a.name.localeCompare(b.name));
-
       setCityOptions(cities);
     } catch (err) {
       console.log(err);
@@ -58,144 +140,139 @@ console.log(filters);
     fetchCities();
   }, []);
 
+  console.log(filters);
+
   return (
-    <div>
-      <h3>Filtros Avanzados</h3>
-
+    <div className={styles.filterSidebar}>
       <div>
-        <label htmlFor="nameFilter">Nombre:</label>
-        <input
-          type="text"
-          name="nameFilter"
-          value={filters.nameFilter}
-          onChange={handleFilterChange}
-        />
-      </div>
-
-      <div>
-        <label htmlFor="brandFilter">Marca:</label>
-        <input
-          type="text"
-          name="brandFilter"
-          value={filters.brandFilter}
-          onChange={handleFilterChange}
-        />
-      </div>
-
-      <div>
-        <label htmlFor="genderFilter">Género:</label>
-        <select
-          name="genderFilter"
-          value={filters.genderFilter}
-          onChange={handleFilterChange}
-        >
-          <option value="">Selecciona un género</option>
-          <option value="Unisex">Unisex</option>
-          <option value="No aplica">No aplica</option>
-          <option value="Masculino">Masculino</option>
-          <option value="Femenino">Femenino</option>
-        </select>
-      </div>
-
-      <div>
-        <label htmlFor="priceLessThan">Precio Menor Que:</label>
-        <input
-          type="number"
-          name="priceLessThan"
-          value={filters.priceLessThan}
-          onChange={handleFilterChange}
-        />
-      </div>
-
-      <div>
-        <label htmlFor="priceGreaterThan">Precio Mayor Que:</label>
-        <input
-          type="number"
-          name="priceGreaterThan"
-          value={filters.priceGreaterThan}
-          onChange={handleFilterChange}
-        />
-      </div>
-
-      <div>
-        <label htmlFor="sizeFilter">Talla:</label>
-        <input
-          type="text"
-          name="sizeFilter"
-          value={filters.sizeFilter}
-          onChange={handleFilterChange}
-        />
-      </div>
-
-      <div>
-        <label htmlFor="stateFilter">Estado:</label>
-        <select
-          name="stateFilter"
-          value={filters.stateFilter}
-          onChange={handleFilterChange}
-        >
-          <option value="">Selecciona un estado</option>
-          <option value="Buen estado">Buen estado</option>
-          <option value="Nuevo">Nuevo</option>
-          <option value="Seminuevo">Seminuevo</option>
-          <option value="Reacondicionado">Reacondicionado</option>
-        </select>
-      </div>
-
-      <div>
-        <label htmlFor="colorFilter">Color:</label>
-        <div className={styles.chipsContainer}>
-          <Chip
-            label="Amarillo"
-            selected={filters.colorFilter === "Amarillo"}
-            onClick={() =>
-              handleFilterChange({
-                target: { name: "colorFilter", value: "Amarillo" },
-              })
-            }
+        <div className={styles.filterSection}>
+          <label htmlFor="nameFilter">Nombre:</label>
+          <input
+            type="text"
+            name="nameFilter"
+            value={filters.nameFilter}
+            onChange={handleFilterChange}
           />
-          <Chip
-            label="Azul"
-            selected={filters.colorFilter === "Azul"}
-            onClick={() =>
-              handleFilterChange({
-                target: { name: "colorFilter", value: "Azul" },
-              })
-            }
+        </div>
+        <div className={styles.filterSection}>
+          <label htmlFor="sizeFilter">Talla:</label>
+          <input
+            type="text"
+            name="sizeFilter"
+            value={filters.sizeFilter}
+            onChange={handleFilterChange}
           />
-          <Chip
-            label="Verde"
-            selected={filters.colorFilter === "Verde"}
-            onClick={() =>
-              handleFilterChange({
-                target: { name: "colorFilter", value: "Verde" },
-              })
-            }
-          />
-          {/* Agrega más chips para otros colores según sea necesario */}
         </div>
       </div>
 
-      <div>
-        <label htmlFor="materialFilter">Material:</label>
-        <input
-          type="text"
-          name="materialFilter"
-          value={filters.materialFilter}
-          onChange={handleFilterChange}
-        />
+      <div className={styles.filterSection}>
+        <label htmlFor="brandFilter">Marca:</label>
+        <div className={styles.chipsContainer}>
+          {brandOptions.map((brand) => (
+            <Chip
+              key={brand.id}
+              label={brand.name}
+              selected={selectedBrand === brand.name}
+              onClick={() => handleBrandChipClick(brand.name)}
+            />
+          ))}
+        </div>
       </div>
 
-      <div>
+      <div className={styles.filterSection}>
+        <label htmlFor="genderFilter">Género:</label>
+        <div className={styles.chipsContainer}>
+          {genderOptions.map((gender) => (
+            <Chip
+              key={gender.id}
+              label={gender.name}
+              selected={selectedGender === gender.name}
+              onClick={() => handleGenderChipClick(gender.name)}
+            />
+          ))}
+        </div>
+      </div>
+
+      <div className={styles.filterSection}>
+        <label htmlFor="priceRange">Rango de Precios:</label>
+        <div className={styles.priceRangeContainer}>
+          <input
+            type="number"
+            name="priceGreaterThan"
+            placeholder="Desde"
+            value={filters.priceGreaterThan || ""}
+            onChange={handleFilterChange}
+          />
+          <span className={styles.priceRangeSeparator}>-</span>
+          <input
+            type="number"
+            name="priceLessThan"
+            placeholder="Hasta"
+            value={filters.priceLessThan || ""}
+            onChange={handleFilterChange}
+          />
+        </div>
+      </div>
+
+      <div className={styles.filterSection}>
+        <label htmlFor="stateFilter">Estado:</label>
+        <div className={styles.chipsContainer}>
+          {stateOptions.map((state) => (
+            <Chip
+              key={state.id}
+              label={state.name}
+              selected={selectedState === state.name}
+              onClick={() => handleStateChipClick(state.name)}
+            />
+          ))}
+        </div>
+      </div>
+
+      <div className={styles.filterSection}>
+        <label htmlFor="colorFilter">Color:</label>
+        <div className={styles.chipsContainer}>
+          {colorOptions.map((color) => (
+            <Chip
+              key={color.id}
+              label={color.name}
+              selected={selectedColor === color.name}
+              onClick={() => handleColorChipClick(color.name)}
+            />
+          ))}
+        </div>
+      </div>
+
+      <div className={styles.filterSection}>
+        <label htmlFor="materialFilter">Material:</label>
+        <div className={styles.chipsContainer}>
+          {materialOptions.map((material) => (
+            <Chip
+              key={material}
+              label={material}
+              selected={selectedMaterial === material}
+              onClick={() => handleMaterialChipClick(material)}
+            />
+          ))}
+        </div>
+      </div>
+
+      <div className={styles.filterSection}>
         <label htmlFor="cityId">Ciudad:</label>
         <Select
           options={cityOptions}
           placeholder={"Seleccione..."}
           onChange={handleFilterCityChange}
-        ></Select>
+        />
       </div>
 
-      <button onClick={handleFilterSubmit}>Aplicar filtros</button>
+      <div className={styles.filterButtons}>
+        <button className={styles.applyButton} onClick={handleFilterSubmit}>
+          Aplicar filtros
+        </button>
+        <button className={styles.clearButton} onClick={handleFilterClear}>
+          Limpiar filtros
+        </button>
+      </div>
     </div>
   );
 };

@@ -1,62 +1,94 @@
 .filterSidebar {
+  background-color: var(--white-100);
   padding: 20px;
-  background-color: var(--bg-white-50);
   border-radius: 4px;
+  font-size: 14px;
 }
 
-.filterTitle {
-  font-size: 18px;
-  margin-bottom: 10px;
+.filterSection {
+  margin-bottom: 15px;
 }
 
-.filterGroup {
-  margin-bottom: 10px;
+.filterSidebar
+label {
+  font-weight: bold;
+  margin-bottom: 5px;
+  display: block;
 }
 
-.filterInput {
+.filterSidebar
+input[type="text"],
+input[type="number"],
+.select {
   width: 100%;
   padding: 8px;
-  border: 1px solid var(--secondary-100);
+  border: 1px solid #ccc;
   border-radius: 4px;
+  outline: none;
 }
 
-
-
-
-
-.colorFilterContainer {
-  margin-top: 10px;
-}
-
-.colorChips {
+.chipsContainer {
   display: flex;
   flex-wrap: wrap;
+  margin-top: 5px;
 }
 
-.colorChip {
-  width: 20px;
-  height: 20px;
-  border-radius: 50%;
-  margin-right: 5px;
+.chip {
+  background-color: #f2f2f2;
+  border-radius: 16px;
+  padding: 8px 12px;
+  margin-right: 10px;
+  margin-bottom: 10px;
   cursor: pointer;
+  transition: background-color 0.3s;
 }
 
-.selected {
-  border: 2px solid white;
+.chip:hover {
+  background-color: #e0e0e0;
 }
 
+.chip.selected {
+  background-color: #4caf50;
+  color: #ffffff;
+}
 
+.priceRangeContainer {
+  display: flex;
+  align-items: center;
+  margin-top: 5px;
+}
 
+.priceRangeInput {
+  width: 100px;
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  outline: none;
+}
 
-.filterSubmitBtn {
+.priceRangeSeparator {
+  margin: 0 10px;
+}
+
+.filterButtons {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 20px;
+}
+
+.applyButton,
+.clearButton {
+  background-color: #4caf50;
+  color: #ffffff;
   padding: 8px 16px;
-  background-color: #007bff;
-  color: #fff;
   border: none;
   border-radius: 4px;
   cursor: pointer;
+  margin-left: 10px;
+  transition: background-color 0.3s;
 }
 
-.filterSubmitBtn:hover {
-  background-color: #0056b3;
+.applyButton:hover,
+.clearButton:hover {
+  background-color: #45a049;
 }
