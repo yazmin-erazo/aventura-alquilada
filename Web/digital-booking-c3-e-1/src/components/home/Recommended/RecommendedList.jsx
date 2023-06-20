@@ -4,6 +4,7 @@ import styles from "./RecommendedList.module.css";
 import { useNavigate } from "react-router-dom";
 import Pagination from "../../resources/pagination/Pagination";
 import { ProductsContext } from "../../../context/ProductsContext";
+import { ProductsContextFilter } from "../../../context/FilteredContext";
 import CategoryService from "../../../shared/services/CategoryService";
 import ReactIcons, { sportsIcons } from "../../common/SportsIcons";
 import ProductsService from "../../../shared/services/ProductsService";
@@ -16,6 +17,8 @@ const RecommendedList = ({
   userLocation,
 }) => {
   const data = useContext(ProductsContext);
+  const dataFiltered = useContext(ProductsContextFilter).filteredProducts;
+  const setDataFiltered = useContext(ProductsContextFilter).setFilteredProducts;
   const pageLimit = 10;
   const [products, setProducts] = useState([]);
   const navigate = useNavigate();
@@ -35,16 +38,18 @@ const RecommendedList = ({
   }, []);
 
   useEffect(() => {
-    if (data.products.length > 0) {
+    if (data.products.length > 0 && dataFiltered.length == 0){
       setProducts(data.products.sort(() => Math.random() - 0.5));
+    }else if(dataFiltered.length > 0){
+      setProducts(dataFiltered);
     }
   }, [data]);
 
   useEffect(() => {
     const filtered = selectedCategory
-      ? products.filter((product) => product.category === selectedCategory.name)
-      : products;
-
+    ? data.products.filter((product) => product.category === selectedCategory.name)
+    : products;
+    setDataFiltered(filtered)
     setFilteredProducts(filtered);
   }, [selectedCategory, products]);
 
@@ -63,15 +68,18 @@ const RecommendedList = ({
   };
 
   const fetchData = async () => {
-    try {
-      const combinedParams = {
-        ...searchParams,
-        ...filterParams,
-      };
-      const productosBuscados = await ProductsService.getAll(combinedParams);
-      setFilteredProducts(productosBuscados);
-    } catch {
-      (e) => console.log(e);
+    try {  
+      if (searchParams || filterParams) {
+        const combinedParams = {
+          ...searchParams,
+          ...filterParams,
+        };
+        const productosBuscados = await ProductsService.getAll(combinedParams);
+        setDataFiltered(productosBuscados);
+        setFilteredProducts(productosBuscados);
+      }
+    } catch (error) {
+      console.log(error);
     }
   };
 
