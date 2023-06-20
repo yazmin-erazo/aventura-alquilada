@@ -3,7 +3,6 @@ import { useParams, useNavigate } from "react-router-dom";
 import { UserContext } from "../../../context/AuthContext";
 import { ProductsContext } from "../../../context/ProductsContext";
 import moment from "moment";
-
 import styles from "./ProductDetails.module.css";
 import { AiOutlineTag, AiOutlineClockCircle } from "react-icons/ai";
 import { BsGenderAmbiguous, BsPalette } from "react-icons/bs";
@@ -11,7 +10,6 @@ import { FaArrowLeft } from "react-icons/fa";
 import { FiInfo } from "react-icons/fi";
 import { MdOutlineTexture, MdLocationOn } from "react-icons/md";
 import { TfiRulerAlt } from "react-icons/tfi";
-
 import ImageGallery from "../../common/imagegalery/ImageGallery";
 import Qualification from "../../resources/qualification/Qualification";
 import RatingStats from "../../resources/rating/RatingStats";
@@ -196,7 +194,7 @@ const ProductDetails = () => {
               <div className={styles.politics}>
                 <Politics />
               </div>
-              <h3 className={styles.locationProduct}>Unicación del producto</h3>
+              <h3 className={styles.locationProduct}>Ubicación del producto</h3>
             </div>
           </div>
 
