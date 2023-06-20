@@ -56,37 +56,40 @@ const HomePage = () => {
 
   return (
     <>
-      <div className={styles.searchContainer}>
-        <SearchEngine handleSearch={handleSearch} />
-      </div>
-      <div className={styles.filterSidebar}>
-        <FilterAccordion onFilterChange={handleFilterChange} />
-      </div>
-
       <div className={styles.homeContainer}>
-        <div className={styles.colorBoxContainer}></div>
-
-        <div className={styles.container}>
-          <section className={styles.bannerContainer}>
+        <section className={styles.bannerSearchContainer}>
+          <div>
             <Banner
               title="Equípate para la aventura"
               paragraph="Descubre nuestra amplia selección de equipos deportivos."
               subtitle="¡Alquila ya!"
               image="https://picsum.photos/1200/240"
             />
-          </section>
+          </div>
+          <div className={styles.searchContainer}>
+            <SearchEngine handleSearch={handleSearch} />
+          </div>
+        </section>
+        <div className={styles.colorBoxContainer}></div>
+        <section className={styles.categoriesContainer}>
+          <div className={styles.categoryListContainer}>
+            <CategoryList onCategoryClick={setSelectedCategory} />
+          </div>
+        </section>
 
-          <section className={styles.categoriesContainer}>
-            <div className={styles.categoryListContainer}>
-              <CategoryList onCategoryClick={setSelectedCategory} />
-            </div>
-          </section>
-
-          <div ref={recommendedSectionRef} className={`${styles.containerWithSidebar}`}>
+        <div className={styles.container}>
+          <div
+            ref={recommendedSectionRef}
+            className={`${styles.containerWithSidebar}`}
+          >
             <section className={styles.recommendedContainer}>
               <h3 className={styles.subtitle}>
                 {searchParams ? "Resultados de su Búsqueda" : "Recomendados"}
               </h3>
+              <div className={styles.filterSidebar}>
+                <FilterAccordion onFilterChange={handleFilterChange} />
+              </div>
+
               <div>
                 <div className={styles.productGrid}>
                   <RecommendedList

@@ -64,7 +64,8 @@ const RecommendedList = ({
 
   const onPageChanged = () => {
     const offset = (currentPage - 1) * pageLimit;
-    setCurrentProducts(filteredProducts.slice(offset, offset + pageLimit));
+    const slicedProducts = filteredProducts.slice(offset, offset + pageLimit);
+    setCurrentProducts(slicedProducts.sort(() => Math.random() - 0.5));
   };
 
   const fetchData = async () => {

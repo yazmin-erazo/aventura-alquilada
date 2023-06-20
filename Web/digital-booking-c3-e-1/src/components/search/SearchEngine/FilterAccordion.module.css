@@ -1,22 +1,51 @@
-.filterAccordion {
+
+.ContainerAccordion.active {
   background-color: var(--white-100);
+}
+
+.filterAccordion {
   width: 100%;
   max-width: 1280px;
   margin: 0 auto;
 }
 
+.chipsContainer{
+  gap: 0.5rem;
+}
+
 .accordionHeader {
-  background-color: #f2f2f2;
+  /* background-color: #c9e2b0; #c2f393 */
   color: #333;
   cursor: pointer;
   padding: 10px;
+  margin-bottom: 1rem;
+  border-radius: 8px 8px 0 0;
 }
 
 .accordionHeader.active {
   background-color: var(--secondary-200);
 }
 
-.accordionContent {
-  padding: 10px;
+.title{
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  font-size: 14px;
+  color: var(--secondary-600);
+}
+
+.title span:hover{
+  text-decoration: underline;
+}
+
+.icon{
+  font-size: 16px;
+  color: var(--secondary-900);
+}
+
+@media (max-width: 992px) {
+  .ContainerAccordion {
+    margin: 1rem;
+  }
 }
 

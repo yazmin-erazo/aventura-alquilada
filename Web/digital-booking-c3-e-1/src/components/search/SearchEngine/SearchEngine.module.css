@@ -7,9 +7,20 @@
   align-items: flex-start;
   justify-content: center;
   width: 100%;
-  height: 42px;
-  left: 50.63px;
-  top: 184.32px;
+  height: auto;
+}
+
+.containerButtonCalendar {
+  position: relative;
+}
+
+.selectedDates {
+  color: var(--secondary-600);
+}
+
+.calendarWrapper {
+  margin-top: 10px;
+  position: absolute;
 }
 
 .hide {
@@ -25,9 +36,8 @@
 .button-calendar {
   display: flex;
   align-items: center;
-  justify-content: space-between;
   padding: 12px;
-  min-width: 200px;
+  min-width: 300px;
   background: var(--bg-general);
   border: 0.5px solid #c3d4e4; /* secondary-100 */
   border-radius: 4px;
@@ -37,6 +47,7 @@
   height: 42px;
   font-size: 14px;
   z-index: 2;
+  gap: 0.6rem;
 }
 
 .search-engine select {
@@ -59,7 +70,7 @@
 .inputWrapper {
   display: flex;
   flex-direction: row;
-  width: 344px;
+  min-width: 300px;
   height: 42px;
   background: var(--bg-general);
   border: 1px solid var(--secondary-50);
@@ -108,14 +119,27 @@
   box-shadow: 0 0 0 2px #fec03e;
 }
 
+.filterButton {
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  padding: 0.5rem 1rem;
+  font-size: 1rem;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.filterButton:hover {
+  background-color: #0056b3;
+}
+
 @media (max-width: 992px) {
   .form {
-    flex-direction: column-reverse;
+    flex-direction: column;
   }
 
   .search-engine {
-    width: auto;
-    height: 42px;
     left: 0px;
     top: 0px;
     padding: 1rem;

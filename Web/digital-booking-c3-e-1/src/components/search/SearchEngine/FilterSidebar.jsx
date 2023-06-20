@@ -140,8 +140,6 @@ const FilterSidebar = ({ onFilterChange }) => {
     fetchCities();
   }, []);
 
-  console.log(filters);
-
   return (
     <div className={styles.filterSidebar}>
       <div>
