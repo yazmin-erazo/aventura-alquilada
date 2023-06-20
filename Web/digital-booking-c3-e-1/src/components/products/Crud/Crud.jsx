@@ -20,16 +20,8 @@ const Crud = () => {
   const pageLimit = 8;
 
   useEffect(() => {
-    const fetchProducts = async () => {
-      try {
-        const prodsActual = await ProductsService.getAll();
-        setProducts(prodsActual);
-      } catch {
-        setProducts(data.products);
-      }
-    };
-    fetchProducts();
-  }, [reload]);
+    setProducts(data.products);
+  }, [reload, data]);
 
   useEffect(() => {
     onPageChanged();

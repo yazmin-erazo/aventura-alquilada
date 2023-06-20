@@ -9,7 +9,7 @@ import FilterSidebar from "../search/SearchEngine/FilterSidebar";
 const HomePage = () => {
   const [selectedCategory, setSelectedCategory] = useState(null);
   const [searchParams, setSearchParams] = useState(null);
-  const [filterParams, setFilterParams] = useState({});
+  const [filterParams, setFilterParams] = useState(null);
 
   const handleSearch = (params) => {
     setSearchParams(params);
