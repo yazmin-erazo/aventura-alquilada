@@ -7,6 +7,7 @@
 
 .categoryList {
   display: flex;
+  justify-content: center;
   flex-wrap: nowrap;
   width: 100%;
   gap: 20px;
@@ -88,10 +89,10 @@
 }
 
 .buttonLeftA {
-  left: 0;
+  left: 1rem;
 }
 
 .buttonRightB {
-  right: 0;
+  right: 1rem;
   z-index: 1;
 }

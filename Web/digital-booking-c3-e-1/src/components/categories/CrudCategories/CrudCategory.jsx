@@ -1,5 +1,4 @@
 import { useCallback, useEffect, useState, useContext } from "react";
-import TableRow from "../../common/Table/TableRow";
 import styles from "./CrudCategory.module.css";
 import ButtonPrimary from "../../common/Buttons/ButtonPrimary";
 import Pagination from "../../resources/pagination/Pagination";

@@ -1,9 +1,11 @@
-import { FaSearch } from "react-icons/fa";
+import { FaSearch, FaCalendar } from "react-icons/fa";
 import styles from "./SearchEngine.module.css";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import CalendarProducts from "../../resources/Calendar/CalendarProducts";
 import Select from "../../common/select/Select";
 import CitiesService from "../../../shared/services/CitiesService";
+import moment from "moment";
+import "moment/locale/es";
 
 const SearchEngine = ({ handleSearch }) => {
   const [text, setText] = useState("");
@@ -12,6 +14,7 @@ const SearchEngine = ({ handleSearch }) => {
   const [selectedStartDate, setSelectedStartDate] = useState(null);
   const [selectedEndDate, setSelectedEndDate] = useState(null);
   const [calendarShow, setCalendarShow] = useState(false);
+  const calendarRef = useRef(null);
 
   const handleInputChange = (e) => {
     setText(e.target.value);
@@ -31,8 +34,15 @@ const SearchEngine = ({ handleSearch }) => {
   };
 
   const handleSelectDates = (startDate, endDate) => {
-    setSelectedStartDate(startDate);
-    setSelectedEndDate(endDate);
+    if (startDate && endDate) {
+      if (startDate.isBefore(endDate)) {
+        setSelectedStartDate(startDate);
+        setSelectedEndDate(endDate);
+      } else {
+        setSelectedStartDate(endDate);
+        setSelectedEndDate(startDate);
+      }
+    }
   };
 
   const cityHandler = (value) => {
@@ -45,12 +55,18 @@ const SearchEngine = ({ handleSearch }) => {
     setCalendarShow(!calendarShow);
   };
 
+  const handleDocumentClick = (e) => {
+    if (calendarRef.current && !calendarRef.current.contains(e.target)) {
+      setCalendarShow(false);
+    }
+  };
+
   const fetchCities = async () => {
     try {
       const cities = await CitiesService.getAll();
-      
+
       cities.sort((a, b) => a.name.localeCompare(b.name));
-      
+
       setCityOptions(cities);
     } catch (err) {
       console.log(err);
@@ -61,6 +77,18 @@ const SearchEngine = ({ handleSearch }) => {
     fetchCities();
   }, []);
 
+  useEffect(() => {
+    document.addEventListener("mousedown", handleDocumentClick);
+
+    return () => {
+      document.removeEventListener("mousedown", handleDocumentClick);
+    };
+  }, []);
+
+  const formatDate = (date) => {
+    return moment(date).format("DD/MM/YYYY");
+  };
+
   return (
     <div className={styles["search-engine"]}>
       <form className={styles.form}>
@@ -69,17 +97,34 @@ const SearchEngine = ({ handleSearch }) => {
           placeholder={"Seleccione..."}
           onChange={cityHandler}
         ></Select>
-        <div
-          className={`${styles["button-calendar"]} ${
-            !calendarShow ? styles.show : styles.hide
-          }`}
-          onClick={handleButtonCalendar}
-        >
-          Seleccione fechas
+
+        <div className={styles.containerButtonCalendar}>
+          <div
+            className={`${styles["button-calendar"]} ${
+              calendarShow ? styles.active : ""
+            }`}
+            onClick={handleButtonCalendar}
+          >
+            <FaCalendar className={styles.calendarIcon} />
+            <span
+              className={
+                selectedStartDate && selectedEndDate ? styles.selectedDates : ""
+              }
+            >
+              {selectedStartDate && selectedEndDate
+                ? `${formatDate(selectedStartDate)} - ${formatDate(
+                    selectedEndDate
+                  )}`
+                : "Seleccione fechas"}
+            </span>
+          </div>
+          {calendarShow && (
+            <div ref={calendarRef} className={styles.calendarWrapper}>
+              <CalendarProducts onSelectDates={handleSelectDates} />
+            </div>
+          )}
         </div>
-        <div className={calendarShow ? styles.show : styles.hide}>
-          <CalendarProducts onSelectDates={handleSelectDates} />
-        </div>
+
         <div className={styles.inputWrapper}>
           <input
             type="text"
@@ -95,6 +140,13 @@ const SearchEngine = ({ handleSearch }) => {
             <FaSearch />
           </button>
         </div>
+        <button
+          className={styles.filterButton}
+          type="button"
+          onClick={handleSearchClick}
+        >
+          Filtrar
+        </button>
       </form>
     </div>
   );

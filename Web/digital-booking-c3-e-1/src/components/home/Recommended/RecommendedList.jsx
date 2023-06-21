@@ -6,13 +6,16 @@ import Pagination from "../../resources/pagination/Pagination";
 import { ProductsContext } from "../../../context/ProductsContext";
 import { ProductsContextFilter } from "../../../context/FilteredContext";
 import CategoryService from "../../../shared/services/CategoryService";
-import * as ReactIcons from "react-icons/md";
-import * as TbIcons from "react-icons/tb";
-import * as FaIcons from "react-icons/fa";
-import { sportsIcons } from "../../common/SportsIcons";
+import ReactIcons, { sportsIcons } from "../../common/SportsIcons";
 import ProductsService from "../../../shared/services/ProductsService";
+import { getDistance } from "geolib";
 
-const RecommendedList = ({ selectedCategory, searchParams, filterParams}) => {
+const RecommendedList = ({
+  selectedCategory,
+  searchParams,
+  filterParams,
+  userLocation,
+}) => {
   const data = useContext(ProductsContext);
   const dataFiltered = useContext(ProductsContextFilter).filteredProducts;
   const setDataFiltered = useContext(ProductsContextFilter).setFilteredProducts;
@@ -23,11 +26,6 @@ const RecommendedList = ({ selectedCategory, searchParams, filterParams}) => {
   const [currentPage, setCurrentPage] = useState(1);
   const [filteredProducts, setFilteredProducts] = useState([]);
   const [categories, setCategories] = useState([]);
-  const iconComponents = {
-    ...ReactIcons,
-    ...TbIcons,
-    ...FaIcons,
-  };
 
   useEffect(() => {
     CategoryService.getAll()
@@ -38,7 +36,7 @@ const RecommendedList = ({ selectedCategory, searchParams, filterParams}) => {
         console.log(error);
       });
   }, []);
-  
+
   useEffect(() => {
     if (data.products.length > 0 && dataFiltered.length == 0){
       setProducts(data.products.sort(() => Math.random() - 0.5));
@@ -46,7 +44,7 @@ const RecommendedList = ({ selectedCategory, searchParams, filterParams}) => {
       setProducts(dataFiltered);
     }
   }, [data]);
-  
+
   useEffect(() => {
     const filtered = selectedCategory
     ? data.products.filter((product) => product.category === selectedCategory.name)
@@ -54,73 +52,87 @@ const RecommendedList = ({ selectedCategory, searchParams, filterParams}) => {
     setDataFiltered(filtered)
     setFilteredProducts(filtered);
   }, [selectedCategory, products]);
-  
+
   useEffect(() => {
     onPageChanged();
   }, [currentPage, filteredProducts]);
 
-    
   useEffect(() => {
     fetchData();
-   // dateFiltered();
-  },[searchParams, filterParams])
+    // dateFiltered();
+  }, [searchParams, filterParams]);
 
   const onPageChanged = () => {
     const offset = (currentPage - 1) * pageLimit;
-    setCurrentProducts(filteredProducts.slice(offset, offset + pageLimit));
+    const slicedProducts = filteredProducts.slice(offset, offset + pageLimit);
+    setCurrentProducts(slicedProducts.sort(() => Math.random() - 0.5));
   };
 
   const fetchData = async () => {
     try {  
-      if(searchParams || filterParams ){
+      if (searchParams || filterParams) {
         const combinedParams = {
           ...searchParams,
           ...filterParams,
         };
-        const productosBuscados = await ProductsService.getAll(combinedParams)
-        setDataFiltered(productosBuscados)
+        const productosBuscados = await ProductsService.getAll(combinedParams);
+        setDataFiltered(productosBuscados);
         setFilteredProducts(productosBuscados);
       }
+    } catch (error) {
+      console.log(error);
     }
-    catch{
-      e => console.log(e);
-    }
-  }
+  };
 
   return (
     <div className={styles.container}>
       <div className={styles.recommendedList}>
-        {categories.length === 0
-          ? null
-          : (currentProducts.length > 0 ? currentProducts.map((product) => {
-              const category = categories.find(
-                (category) => category.name === product.category
-              );
-              const categoryIcon = category ? category.icon : null;
-              const isIconInSportsIcons = sportsIcons.includes(category.icon);
-              const IconComponent = iconComponents[category.icon] || null;
-              return (
-                <div
-                  key={product.id}
-                  onClick={() => navigate(`/products/${product.id}`)}
-                  className={styles.linkCard}
-                >
-                  <RecommendedProducts
-                    rentalType="Alquiler por día"
-                    product={{
-                      ...product,
-                      name: product.name,
-                      price: product.price,
-                      ratings: product.ratings,
-                      image: product.imageURL,
-                    }}
-                    categoryIcon={
-                      isIconInSportsIcons ? IconComponent : categoryIcon
-                    }
-                  /> 
-                </div>
-              );
-            }): <div className={styles.resultado}>No se han encontrado productos</div>)}
+        {categories.length === 0 ? null : currentProducts.length > 0 ? (
+          currentProducts.map((product) => {
+            const category = categories.find(
+              (category) => category.name === product.category
+            );
+            const categoryIcon = category ? category.icon : null;
+            const isIconInSportsIcons = sportsIcons.includes(category.icon);
+            const IconComponent = ReactIcons[category.icon] || null;
+            const distance =
+              getDistance(
+                {
+                  latitude: userLocation.latitude,
+                  longitude: userLocation.longitude,
+                },
+                {
+                  latitude: product.city.latitude,
+                  longitude: product.city.longitude,
+                }
+              ) / 1000;
+
+            return (
+              <div
+                key={product.id}
+                onClick={() => navigate(`/products/${product.id}`)}
+                className={styles.linkCard}
+              >
+                <RecommendedProducts
+                  rentalType="Alquiler por día"
+                  product={{
+                    ...product,
+                    name: product.name,
+                    price: product.price,
+                    ratings: product.ratings,
+                    image: product.imageURL,
+                    distance,
+                  }}
+                  categoryIcon={
+                    isIconInSportsIcons ? IconComponent : categoryIcon
+                  }
+                />
+              </div>
+            );
+          })
+        ) : (
+          <div className={styles.resultado}>No se han encontrado productos</div>
+        )}
       </div>
       <Pagination
         onPageChanged={onPageChanged}
