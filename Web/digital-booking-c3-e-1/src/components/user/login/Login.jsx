@@ -7,7 +7,7 @@ import ValidationService from "../../../shared/services/ValidationService";
 import { UserContext } from "../../../context/AuthContext";
 import jwtDecode from "jwt-decode";
 import Swal from "sweetalert2";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import PasswordInput from "../../common/input/PasswordInput";
 
 const Login = () => {
@@ -129,6 +129,9 @@ const Login = () => {
               </ButtonPrimary>
             </div>
           </form>
+          <div className={styles.message}>
+            Si no tiene un usuario regístrese <Link to={"/auth/register"}>aquí</Link>
+          </div>
         </div>
       </div>
     </div>

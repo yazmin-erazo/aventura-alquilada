@@ -28,7 +28,8 @@ const authReducer = (state, action) => {
         token: action.payload.token,
       };
     case "LOGOUT":
-      sessionStorage.clear();
+      sessionStorage.removeItem("user");
+      sessionStorage.removeItem("token");
       return {
         ...state,
         user: {

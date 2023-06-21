@@ -23,14 +23,14 @@ const SearchEngine = ({ handleSearch }) => {
   const handleSearchClick = (e) => {
     e.preventDefault();
     setCalendarShow(false);
-    if (text != null) {
-      handleSearch({
-        search: text,
-        cityId: city,
-        startDate: selectedStartDate,
-        endDate: selectedEndDate,
-      });
-    }
+    handleSearch({
+      search: text,
+      cityId: city,
+      startDate: selectedStartDate,
+      endDate: selectedEndDate,
+    });
+    if(selectedStartDate)
+      sessionStorage.setItem("dates", JSON.stringify({startDate: selectedStartDate, endDate: selectedEndDate}))
   };
 
   const handleSelectDates = (startDate, endDate) => {
@@ -75,6 +75,7 @@ const SearchEngine = ({ handleSearch }) => {
 
   useEffect(() => {
     fetchCities();
+    sessionStorage.removeItem("dates");
   }, []);
 
   useEffect(() => {
