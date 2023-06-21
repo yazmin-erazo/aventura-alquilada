@@ -72,9 +72,9 @@ const HomePage = () => {
         </section>
         <div className={styles.colorBoxContainer}></div>
         <section className={styles.categoriesContainer}>
-          <div className={styles.categoryListContainer}>
-            <CategoryList onCategoryClick={setSelectedCategory} />
-          </div>
+            <div className={styles.categoryListContainer}>
+              <CategoryList onCategoryClick={setSelectedCategory} />
+            </div>
         </section>
 
         <div className={styles.container}>
