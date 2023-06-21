@@ -280,3 +280,13 @@
   background: #76baff;
   border-radius: 8px;
 }
+
+.react-calendar__month-view__days__day--weekend{
+  color: green;
+}
+
+.react-calendar__month-view__days__day--neighboringMonth {
+  color: gray !important;
+  visibility: hidden !important;
+  pointer-events: none !important;
+}
