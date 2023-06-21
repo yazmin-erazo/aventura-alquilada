@@ -96,7 +96,7 @@ const CalendarProducts = ({ onSelectDates, rents }) => {
   }, [selectedStartDate, selectedEndDate]);
 
   return (
-    <div>
+    <div className={styles.containerCalendarWidth}>
       <div className={styles.containerCalendar}>
         <div className={styles.section}>
           <Calendar
