@@ -38,18 +38,20 @@ const RecommendedList = ({
   }, []);
 
   useEffect(() => {
-    if (data.products.length > 0 && dataFiltered.length == 0){
+    if (data.products.length > 0 && dataFiltered.length == 0) {
       setProducts(data.products.sort(() => Math.random() - 0.5));
-    }else if(dataFiltered.length > 0){
+    } else if (dataFiltered.length > 0) {
       setProducts(dataFiltered);
     }
   }, [data]);
 
   useEffect(() => {
     const filtered = selectedCategory
-    ? data.products.filter((product) => product.category === selectedCategory.name)
-    : products;
-    setDataFiltered(filtered)
+      ? data.products.filter(
+          (product) => product.category === selectedCategory.name
+        )
+      : products;
+    setDataFiltered(filtered);
     setFilteredProducts(filtered);
   }, [selectedCategory, products]);
 
@@ -69,7 +71,7 @@ const RecommendedList = ({
   };
 
   const fetchData = async () => {
-    try {  
+    try {
       if (searchParams || filterParams) {
         const combinedParams = {
           ...searchParams,
@@ -96,16 +98,18 @@ const RecommendedList = ({
             const isIconInSportsIcons = sportsIcons.includes(category.icon);
             const IconComponent = ReactIcons[category.icon] || null;
             const distance =
-              getDistance(
-                {
-                  latitude: userLocation.latitude,
-                  longitude: userLocation.longitude,
-                },
-                {
-                  latitude: product.city.latitude,
-                  longitude: product.city.longitude,
-                }
-              ) / 1000;
+              userLocation && product.city
+                ? getDistance(
+                    {
+                      latitude: userLocation.latitude,
+                      longitude: userLocation.longitude,
+                    },
+                    {
+                      latitude: product.city.latitude,
+                      longitude: product.city.longitude,
+                    }
+                  ) / 1000
+                : 0;
 
             return (
               <div
