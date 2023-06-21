@@ -3,7 +3,6 @@ import moment from "moment";
 import Calendar from "react-calendar";
 import { registerLocale, setDefaultLocale } from "react-datepicker";
 import es from "date-fns/locale/es";
-
 import "react-calendar/dist/Calendar.css";
 import styles from "./CalendarProducts.module.css";
 import { useMediaQuery } from "react-responsive";
@@ -49,9 +48,6 @@ const CalendarProducts = ({ onSelectDates, rents }) => {
     const selectedDate = moment(date).startOf("day");
 
     if (selectedEndDate) {
-      console.log("fecha final")
-      console.log(selectedDate)
-
       setSelectedStartDate(selectedDate);
       setSelectedEndDate(null)
       // if (selectedDate > selectedEndDate) {
@@ -61,14 +57,8 @@ const CalendarProducts = ({ onSelectDates, rents }) => {
       //   setSelectedStartDate(selectedDate);
       // }
     } else if (!selectedStartDate) {
-      console.log("fecha inicial")
-      console.log(selectedDate)
-
       setSelectedStartDate(selectedDate);
     } else {
-      console.log("fecha final 2")
-      console.log(selectedDate)
-      
       setSelectedEndDate(selectedDate);
       const diffDays =
         Math.abs(selectedDate.diff(selectedStartDate, "days")) + 1;
