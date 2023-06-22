@@ -25,7 +25,7 @@ const ProductDetails = () => {
   const data = useContext(ProductsContext);
   const auth = useContext(UserContext);
   const [products, setProducts] = useState([]);
-  const params = useParams();
+  const params = useParams(); 
   const navigate = useNavigate();
   const [selectedStartDate, setSelectedStartDate] = useState(null);
   const [selectedEndDate, setSelectedEndDate] = useState(null);
