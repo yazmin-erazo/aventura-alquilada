@@ -5,7 +5,6 @@ import styles from "./HomePage.module.css";
 import RecommendedList from "./Recommended/RecommendedList";
 import { useEffect, useRef, useState } from "react";
 import { useParams } from "react-router";
-import FilterAccordion from "../search/SearchEngine/FilterAccordion";
 import FilterDropDown from "../search/SearchEngine/FilterDropDown";
 
 const HomePage = () => {
@@ -71,14 +70,14 @@ const HomePage = () => {
             <SearchEngine handleSearch={handleSearch} />
           </div>
         </section>
-        <div className={styles.colorBoxContainer}></div>
-        <section className={styles.categoriesContainer}>
+
+        {/* <div className={styles.colorBoxContainer}></div> */}
+        <div className={styles.container}>
+          <section className={styles.categoriesContainer}>
             <div className={styles.categoryListContainer}>
               <CategoryList onCategoryClick={setSelectedCategory} />
             </div>
-        </section>
-
-        <div className={styles.container}>
+          </section>
           <div
             ref={recommendedSectionRef}
             className={`${styles.containerWithSidebar}`}
@@ -87,10 +86,7 @@ const HomePage = () => {
               <h3 className={styles.subtitle}>
                 {searchParams ? "Resultados de su Búsqueda" : "Recomendados"}
               </h3>
-              <FilterDropDown onFilterChange={handleFilterChange}/>
-              <div className={styles.filterSidebar}>
-                {/* <FilterAccordion onFilterChange={handleFilterChange} /> */}
-              </div>
+              <FilterDropDown onFilterChange={handleFilterChange} />
 
               <div>
                 <div className={styles.productGrid}>

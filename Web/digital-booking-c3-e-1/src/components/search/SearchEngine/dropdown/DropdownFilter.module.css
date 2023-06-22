@@ -36,25 +36,93 @@
 }
 
 .dropdownContent.opened {
-    opacity: 1;
-    height: auto;
-    transition: opacity 0.5s, height 0.5s;
-    height: 212px;
-    overflow: auto;
-    scrollbar-width: thin; /* Ancho del scroll (solo para navegadores que admiten la propiedad scrollbar-width) */
-    scrollbar-color: var(--secondary-600) var(--secondary-50); /* Color del scroll (solo para navegadores que admiten la propiedad scrollbar-color) */
+  opacity: 1;
+  height: auto;
+  transition: opacity 0.5s, height 0.5s;
+  height: 230px;
+  overflow: auto;
+  scrollbar-width: thin;
+  scrollbar-color: var(--secondary-600) var(--secondary-50);
+  overflow: auto;
+  width: 200px;
+  border: 1px solid var(--secondary-50);
 }
+
+.dropdownContent.opened::-webkit-scrollbar {
+  width: 8px;
+}
+
+.dropdownContent.opened::-webkit-scrollbar-track {
+  background-color: var(--secondary-50);
+  border-radius: 4px;
+}
+
+.dropdownContent.opened::-webkit-scrollbar-thumb {
+  background-color: var(--secondary-600);
+  border-radius: 4px;
+}
+
+.dropdownFilter {
+  position: relative;
+  display: inline-block;
+}
+
+.dropdownLabel {
+  cursor: pointer;
+}
+
+.dropdownOptions {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  z-index: 1;
+  background-color: #fff;
+  border: 1px solid #ccc;
+  padding: 8px;
+  width: 200px;
+  max-height: 200px;
+  overflow-y: auto;
+}
+
+.dropdownOption {
+  display: flex;
+  align-items: center;
+  padding: 4px;
+  cursor: pointer;
+  color: var(--secondary-600);
+}
+.dropdownOption:hover {
+  text-decoration: underline;
+}
+.colorOption {
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  font-size: 12px;
+}
+
+.colorOptionContainer {
+  width: 22px;
+  height: 22px;
+  padding: 2px;
+  border: 1px solid var(--secondary-100);
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-right: 8px;
+}
+
+
+/* Estilos para dispositivos con un ancho máximo de 600px */
   
-  .dropdownContent.opened::-webkit-scrollbar {
-    width: 8px; /* Ancho del scroll (solo para navegadores WebKit como Chrome y Safari) */
+  @media (max-width: 600px) {
+    .dropdownHeader {
+      justify-content: space-between;
+      width: 90vw;
+    }
+  
+    .dropdownContent.opened {
+        width: 100%;
+      }
   }
-  
-  .dropdownContent.opened::-webkit-scrollbar-track {
-    background-color: var(--secondary-50); /* Color del fondo del scroll (solo para navegadores WebKit) */
-    border-radius: 4px;    
-}
-  
-  .dropdownContent.opened::-webkit-scrollbar-thumb {
-    background-color: var(--secondary-600); /* Color del scroll (solo para navegadores WebKit) */
-    border-radius: 4px;  
-}

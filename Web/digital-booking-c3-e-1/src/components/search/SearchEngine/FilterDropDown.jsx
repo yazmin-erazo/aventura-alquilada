@@ -1,7 +1,9 @@
 import React, { useState, useEffect } from "react";
+import { IoMdClose } from "react-icons/io";
+
 import CitiesService from "../../../shared/services/CitiesService";
 import Select from "../../common/select/Select";
-import styles from "./FilterDropDown.module.css";
+import DropdownFilter from "./dropdown/DropdownFilter";
 import {
   brandOptions,
   genderOptions,
@@ -10,7 +12,6 @@ import {
   colorOptions,
   sizeOptions,
 } from "./Lists";
-import DropdownFilter from "./dropdown/DropdownFilter";
 
 const initialState = {
   nameFilter: "",
@@ -24,6 +25,9 @@ const initialState = {
   materialFilter: "",
   cityId: "",
 };
+
+import styles from "./FilterDropDown.module.css";
+
 
 const FilterDropDown = ({ onFilterChange }) => {
   const [cityOptions, setCityOptions] = useState([]);
@@ -168,7 +172,7 @@ const FilterDropDown = ({ onFilterChange }) => {
               className={styles.removeFilterButton}
               onClick={() => handleRemoveFilter(`${filterName}Filter`)}
             >
-              X
+              <IoMdClose size={18} />
             </button>
           </div>
         );
@@ -183,7 +187,6 @@ const FilterDropDown = ({ onFilterChange }) => {
     return null;
   };
 
-  console.log(filters);
   return (
     <div>
       <div className={styles.filterSidebar}>
@@ -283,7 +286,25 @@ const FilterDropDown = ({ onFilterChange }) => {
           handleChipClick={(chip) => handleChipClick(chip, "color")}
           isOpen={dropdownStates.color}
           styles={styles}
-        />
+        >
+          {dropdownStates.color && (
+            <div className={styles.dropdownOptions}>
+              {colorOptions.map((option) => (
+                <div
+                  key={option.id}
+                  className={styles.dropdownOption}
+                  onClick={() => handleChipClick(option.name, "color")}
+                >
+                  <span
+                    className={styles.colorOption}
+                    style={{ backgroundColor: option.hex }}
+                  />
+                  {option.name}
+                </div>
+              ))}
+            </div>
+          )}
+        </DropdownFilter>
 
         <DropdownFilter
           label="Material"
@@ -294,25 +315,29 @@ const FilterDropDown = ({ onFilterChange }) => {
           isOpen={dropdownStates.material}
           styles={styles}
         />
-
-        {/* <div className={styles.filterSection}>
-        <label>Ciudad:</label>
-        <Select
-          options={cityOptions}
-          placeholder={"Seleccione..."}
-          onChange={handleFilterCityChange}
-          className={styles.inputField}
-        />
-      </div> */}
       </div>
       <div className={styles.filterButtons}>
         <div>{renderAppliedFilters()}</div>
-        <button className={styles.clearBtn} onClick={handleFilterClear}>
-          Limpiar filtros
-        </button>
+        {renderAppliedFilters() && (
+          <button className={styles.clearBtn} onClick={handleFilterClear}>
+            Limpiar filtros
+          </button>
+        )}
       </div>
     </div>
   );
 };
 
 export default FilterDropDown;
+
+{
+  /* <div className={styles.filterSection}>
+<label>Ciudad:</label>
+<Select
+  options={cityOptions}
+  placeholder={"Seleccione..."}
+  onChange={handleFilterCityChange}
+  className={styles.inputField}
+/>
+</div> */
+}
