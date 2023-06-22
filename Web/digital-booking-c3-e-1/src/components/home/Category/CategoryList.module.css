@@ -7,7 +7,6 @@
 
 .categoryList {
   display: flex;
-  justify-content: center;
   flex-wrap: nowrap;
   width: 100%;
   gap: 20px;
@@ -47,7 +46,7 @@
   right: 0;
   width: 157px;
   height: 100%;
-  background: linear-gradient(to right, rgba(222, 231, 240, 0), #DEE7F0);
+  /* background: linear-gradient(to right, rgba(222, 231, 240, 0), #eff2f5); */
   pointer-events: none;
   z-index: 1;
 }

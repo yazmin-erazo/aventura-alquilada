@@ -25,15 +25,20 @@ const ProductDetails = () => {
   const data = useContext(ProductsContext);
   const auth = useContext(UserContext);
   const [products, setProducts] = useState([]);
-  const params = useParams();
+  const params = useParams(); 
   const navigate = useNavigate();
   const [selectedStartDate, setSelectedStartDate] = useState(null);
   const [selectedEndDate, setSelectedEndDate] = useState(null);
   const [totalRentalDays, setTotalRentalDays] = useState(0);
 
   const handleSelectDates = (startDate, endDate) => {
-    setSelectedStartDate(startDate);
-    setSelectedEndDate(endDate);
+    if (startDate > endDate) {
+      setSelectedStartDate(endDate);
+      setSelectedEndDate(startDate);
+    } else {
+      setSelectedStartDate(startDate);
+      setSelectedEndDate(endDate);
+    }
   };
 
   const product = products.find((p) => {

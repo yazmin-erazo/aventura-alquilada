@@ -25,16 +25,19 @@ const SelectedDates = ({
     return moment(date).format("DD/MM/YYYY");
   };
 
+  const minDate = selectedStartDate < selectedEndDate ? selectedStartDate : selectedEndDate;
+  const maxDate = selectedStartDate > selectedEndDate ? selectedStartDate : selectedEndDate;
+
   return (
     <div className={styles.selectedDates}>
       <div className={styles.selectedDatesContainer}>
         <p className={styles.selectedDatesTitle}>Fechas seleccionadas</p>
         <div className={styles.textDates}>
           <div>
-            <span>Fecha de inicio:</span> {formatDate(selectedStartDate)}
+            <span>Fecha de inicio:</span> {formatDate(minDate)}
           </div>
           <div>
-            <span>Fecha de fin:</span> {formatDate(selectedEndDate)}
+            <span>Fecha de fin:</span> {formatDate(maxDate)}
           </div>
           <div>
             <span>Días totales de renta:</span> {totalRentalDays} días
