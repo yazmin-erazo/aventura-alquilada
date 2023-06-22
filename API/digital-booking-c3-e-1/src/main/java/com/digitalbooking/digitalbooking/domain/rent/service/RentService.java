@@ -2,6 +2,7 @@ package com.digitalbooking.digitalbooking.domain.rent.service;
 
 import com.digitalbooking.digitalbooking.common.exception.ExceptionInvalidValue;
 import com.digitalbooking.digitalbooking.common.exception.ExceptionNullValue;
+import com.digitalbooking.digitalbooking.domain.product.dto.ProductDTO;
 import com.digitalbooking.digitalbooking.domain.product.repository.RepositoryProduct;
 import com.digitalbooking.digitalbooking.domain.rent.dto.RentDTO;
 import com.digitalbooking.digitalbooking.domain.rent.entity.Rent;
@@ -37,6 +38,7 @@ public class RentService {
 
     public Long createRent(Rent rent, String userEmail) throws NoSuchFieldException, IllegalAccessException {
         repositoryProduct.findByIdAndIsDelete(rent.getProduct().getId()).orElseThrow(()->new ExceptionNullValue("Producto no encontrado"));
+        repositoryProduct.findByIdAndDatesRents(rent.getProduct().getId(), rent.getStarDate(), rent.getEndDate()).orElseThrow( () -> new ExceptionInvalidValue("No se puede realizar una reserva en la fecha indicada porque el producto ya tiene una reserva que se cruza"));
         validateRentOwnership(rent.getUser().getId(), userEmail, "rentCreate");
         return rentRepository.createRent(rent);
     }
@@ -67,7 +69,7 @@ public class RentService {
         Field field = RoleDTO.class.getDeclaredField(methodName);
         field.setAccessible(true);
         Boolean permission = (Boolean) field.get(user.getRoleDTO());
-        if(!(Objects.equals(user.getId(), idOwner) || permission)){
+        if(!(Objects.equals(user.getId(), idOwner) || !permission)){
             throw new ExceptionInvalidValue("El id del usuario no te pertenece, no puedes crear o acceder a alquileres de otros usuarios");
         }
     }
