@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import moment from "moment";
 import styles from "./CalendarProducts.module.css";
 import Swal from 'sweetalert2'
@@ -8,18 +8,25 @@ const SelectedDates = ({
   selectedStartDate,
   selectedEndDate,
   totalRentalDays,
+  id
 }) => {
 
   const navigate = useNavigate();
   const handleClick = () => {  
     if(JSON.parse(sessionStorage.getItem("user"))){
-      navigate("/reserva"); //link a la pag de reserva
+      const dates = {startDate: selectedStartDate, endDate: selectedEndDate};
+      sessionStorage.setItem("dates", JSON.stringify(dates))
+      navigate(`/reserva/${id}`); //link a la pag de reserva
     }else {
       navigate("/login");
       Swal.fire("Error", "Debe iniciar sesión para poder iniciar una reserva", "error");
     }
 
   }
+
+  useEffect(() => {
+    sessionStorage.removeItem("dates")
+  },[])
 
   const formatDate = (date) => {
     return moment(date).format("DD/MM/YYYY");

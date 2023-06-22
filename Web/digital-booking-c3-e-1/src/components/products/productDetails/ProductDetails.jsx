@@ -65,8 +65,6 @@ const ProductDetails = () => {
     distance = userLocation
     ? getDistance(userLocation, productLocation) / 1000
     : null;
-    console.log(userLocation);
-    console.log(productLocation);
   }
   // --------------------END calculo distancia usuario - producto --------------
   
@@ -211,6 +209,7 @@ const ProductDetails = () => {
                         selectedStartDate={selectedStartDate}
                         selectedEndDate={selectedEndDate}
                         totalRentalDays={totalRentalDays}
+                        id={productId}
                       />
                     ) : (
                       <p>Selecciona las fechas de tu reserva</p>
