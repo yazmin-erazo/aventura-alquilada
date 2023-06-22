@@ -22,6 +22,8 @@ public interface RepositoryProduct {
 
     ProductDTO findById(Long id);
 
+    Optional<ProductDTO> findByIdAndDatesRents( Long id, Date startDate, Date endDate);
+
     Optional<ProductDTO> findByNameAndIsDelete(String name);
 
     Optional<ProductDTO> findByIdAndIsDelete(Long id);
