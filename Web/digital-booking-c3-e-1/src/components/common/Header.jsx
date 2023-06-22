@@ -3,6 +3,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { UserContext } from "../../context/AuthContext";
 import { FiMenu } from "react-icons/fi";
 import UsersService from "../../shared/services/UserService";
+import Swal from 'sweetalert2'
 
 const Header = () => {
   const [isProfileOpen, setProfileOpen] = useState(false);
