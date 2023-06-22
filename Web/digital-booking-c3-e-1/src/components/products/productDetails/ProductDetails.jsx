@@ -32,8 +32,13 @@ const ProductDetails = () => {
   const [totalRentalDays, setTotalRentalDays] = useState(0);
 
   const handleSelectDates = (startDate, endDate) => {
-    setSelectedStartDate(startDate);
-    setSelectedEndDate(endDate);
+    if (startDate > endDate) {
+      setSelectedStartDate(endDate);
+      setSelectedEndDate(startDate);
+    } else {
+      setSelectedStartDate(startDate);
+      setSelectedEndDate(endDate);
+    }
   };
 
   const product = products.find((p) => {
