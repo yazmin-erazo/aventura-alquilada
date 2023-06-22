@@ -1,0 +1,124 @@
+.filterSidebar {
+  background-color: var(--bg-general);
+  padding: 10px 0;
+  display: flex;
+}
+
+.inputField {
+  width: 100%;
+  padding: 5px;
+  border: 1px solid var(--secondary-100);
+  border-radius: 4px;
+}
+
+.priceRangeContainer {
+  display: flex;
+  align-items: center;
+}
+
+.priceInput {
+  width: 100px;
+  margin-right: 5px;
+  padding: 5px;
+  border: 1px solid var(--secondary-100);
+  border-radius: 4px;
+}
+
+.priceRangeSeparator {
+  margin: 0 5px;
+}
+
+.buttonContainer {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.dropdownFilter {
+  margin-bottom: 10px;
+}
+
+.filterLabel {
+  cursor: pointer;
+  margin-bottom: 5px;
+}
+
+.filterButtons {
+  display: flex;
+  margin-bottom: 1rem;
+}
+.clearBtn {
+  background-color: var(--bg-general);
+  color: var(--secondary-600);
+  border: none;
+  border-radius: 4px;
+  font-size: 14px;
+  cursor: pointer;
+  text-decoration: underline;
+}
+
+.clearButton:hover {
+  text-decoration: var(--sencondary-300);
+}
+
+/* Estilos para el contenedor del rango de precios */
+.filterSection {
+  margin-bottom: 20px;
+}
+
+/* Estilos para el label "Rango de Precios" */
+.filterSection label {
+  color: var(--secondary-600);
+}
+
+/* Estilos para el contenedor de los campos de entrada de precios */
+.priceRangeContainer {
+  display: flex;
+  align-items: center;
+}
+
+/* Estilos para el campo de entrada "Desde" */
+.priceRangeContainer input[name="priceGreaterThan"],
+.priceRangeContainer input[name="priceLessThan"] {
+  width: 80px;
+  height: 32px;
+  padding: 0 10px;
+  font-size: 14px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  transition: border-color 0.3s ease;
+}
+
+.priceRangeContainer input[name="priceGreaterThan"]:focus,
+.priceRangeContainer input[name="priceLessThan"]:focus {
+  outline: none;
+  border-color: var(--primary-300);
+}
+
+.priceRangeSeparator {
+  margin: 0 10px;
+  font-size: 16px;
+  font-weight: bold;
+  color: #333;
+}
+
+.appliedFilter {
+  display: inline-flex;
+  align-items: center;
+  margin-right: 10px;
+  padding: 5px 1rem;
+  background-color: #ff4081;
+  border-radius: 1rem;
+  color: var(--white-100);
+}
+
+.filterValue {
+  margin-right: 5px;
+}
+
+.removeFilterButton {
+  margin-left: 5px;
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  color: var(--white-100);
+}

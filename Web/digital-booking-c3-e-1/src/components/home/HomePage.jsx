@@ -6,6 +6,7 @@ import RecommendedList from "./Recommended/RecommendedList";
 import { useEffect, useRef, useState } from "react";
 import { useParams } from "react-router";
 import FilterAccordion from "../search/SearchEngine/FilterAccordion";
+import FilterDropDown from "../search/SearchEngine/FilterDropDown";
 
 const HomePage = () => {
   const [selectedCategory, setSelectedCategory] = useState(null);
@@ -86,8 +87,9 @@ const HomePage = () => {
               <h3 className={styles.subtitle}>
                 {searchParams ? "Resultados de su Búsqueda" : "Recomendados"}
               </h3>
+              <FilterDropDown onFilterChange={handleFilterChange}/>
               <div className={styles.filterSidebar}>
-                <FilterAccordion onFilterChange={handleFilterChange} />
+                {/* <FilterAccordion onFilterChange={handleFilterChange} /> */}
               </div>
 
               <div>
