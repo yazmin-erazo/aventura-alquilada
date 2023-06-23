@@ -27,6 +27,7 @@ public class JwtUtils {
         UserDetailsImpl userPrincipal = (UserDetailsImpl) authentication.getPrincipal();
 
         HashMap<String, Object> claims = new HashMap<>();
+        claims.put("iduser", userPrincipal.getId());
         claims.put("name", userPrincipal.getName());
         claims.put("lastname", userPrincipal.getLastName());
         claims.put("role", userPrincipal.getRole());
