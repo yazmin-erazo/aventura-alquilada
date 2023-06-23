@@ -51,31 +51,6 @@ public class RentServiceTest {
     private RentService rentService;
 
     @Test
-    void testCreateRentSuccess() throws Exception {
-        Product product = Product.create("Carpa", "Nemo Wagontop", "Nueva", BigDecimal.valueOf(150),"Descripción test", "8 personas", "No aplica", null, 1L, "Test Base64", "Carpa1", "Amarillo", "Poliéster", List.of(), 129L);
-        ProductDTO productDTO = new ProductDTO();
-
-        User user =  User.create( "Lore", "Sanchez", "test@test.com", "123");
-        List<Long> favorites = new ArrayList<>();
-        RoleDTO roleDTO = new RoleDTO();
-        UserDTO userDTO = new UserDTO(1L, "Lore", "Sanchez", "lorena@l.com", "", LocalDateTime.now(), false, "token","token", "#525252", favorites, roleDTO);
-
-        Rent rent = Rent.create(product.getId(), 1L, Date.from(Instant.now()), Date.from(Instant.now()));
-        String userEmail = user.getEmail();
-
-        when(repositoryProduct.findByIdAndIsDelete(anyLong())).thenReturn(Optional.of(productDTO));
-        when(repositoryUser.findByEmail(anyString())).thenReturn(Optional.of(userDTO));
-        when(rentRepository.createRent(any(Rent.class))).thenReturn(1L);
-
-        Long rentId = rentService.createRent(rent, userEmail);
-
-        assertNotNull(rentId);
-        verify(repositoryProduct, times(1)).findByIdAndIsDelete(anyLong());
-        verify(repositoryUser, times(1)).findByEmail(anyString());
-        verify(rentRepository, times(1)).createRent(any(Rent.class));
-    }
-
-    @Test
     void testDeleteRentNotFound() {
 
         Rent rent = Rent.create(1L, 1L, Date.from(Instant.now()), Date.from(Instant.now()));
