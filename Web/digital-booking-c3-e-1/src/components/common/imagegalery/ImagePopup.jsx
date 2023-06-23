@@ -25,12 +25,15 @@ const ImagePopup = ({ images, onClose }) => {
             style={{ transform: `translateX(-${currentImage * 100}%)` }}
           >
             {images.map((image, index) => (
-              <img
-                key={index}
-                src={image.url}
-                alt={image.title}
-                className={styles.carouselImage}
-              />
+              <div className={styles.carouselContainerImage}>
+                <img
+                  key={index}
+                  src={image.url}
+                  alt={image.title}
+                  className={styles.carouselImage}
+                />
+              </div>
+
             ))}
           </div>
           <button className={`${styles.carouselButton} ${styles.prev}`} onClick={handlePrev}>

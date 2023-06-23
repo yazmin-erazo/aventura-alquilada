@@ -33,10 +33,15 @@
   transition: transform 0.3s ease-in-out;
 }
 
+.carouselContainerImage {
+  width: 400px;
+  height: 400px;
+}
+
 .carouselImage {
   width: 400px;
   height: 400px;
-  object-fit: cover;
+  object-fit: contain;
 }
 
 .carouselButton {
