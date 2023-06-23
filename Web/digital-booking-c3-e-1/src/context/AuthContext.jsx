@@ -79,7 +79,7 @@ const UserDataContext = ({ children }) => {
                 latitude: position.coords.latitude,
                 longitude: position.coords.longitude,
               };
-              console.log(position.coords.latitude);
+              
               dispatch({ type: "SET_USER_LOCATION", payload: userLocation });
             },
             (error) => {
