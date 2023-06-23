@@ -39,13 +39,13 @@ export const sizeOptions = [
   { id: 1, name: "xs" },
   { id: 2, name: "S" },
   { id: 3, name: "M" },
-  { id: 3, name: "L" },
-  { id: 3, name: "XL" },
-  { id: 4, name: "2 personas" },
-  { id: 5, name: "3 personas" },
-  { id: 5, name: "Individual" },
-  { id: 5, name: "26´´" },
-  { id: 5, name: "29´´" },
+  { id: 4, name: "L" },
+  { id: 5, name: "XL" },
+  { id: 6, name: "2 personas" },
+  { id: 7, name: "3 personas" },
+  { id: 8, name: "Individual" },
+  { id: 9, name: "26´´" },
+  { id: 10, name: "29´´" },
 ];
 
 export const colorOptions = [
