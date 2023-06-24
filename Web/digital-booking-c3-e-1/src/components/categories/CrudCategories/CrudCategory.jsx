@@ -55,7 +55,7 @@ const CrudCategory = () => {
     }).then(async (result) => {
       if (result.isConfirmed) {
         try {
-          const res = await CategoriesService.deleteByID(categoryId);
+          const res = await CategoryService.deleteByID(categoryId);
           if (res.status === 200) {
             const updatedCategories = categories.filter(
               (category) => category.id !== categoryId
@@ -64,14 +64,14 @@ const CrudCategory = () => {
             setReload(!reload);
             Swal.fire(
               "¡Eliminado!",
-              "La categoría ha sido eliminada.",
+              res.data.response,
               "success"
             );
           }
         } catch (error) {
           Swal.fire(
             "Error",
-            "Ha ocurrido un error al eliminar la categoría.",
+            res.data.response,
             "error"
           );
         }
