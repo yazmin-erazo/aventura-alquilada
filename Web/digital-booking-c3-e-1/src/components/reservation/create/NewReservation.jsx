@@ -16,7 +16,32 @@ const NewReservation = () => {
     step2: false,
     step3: false
   })
-  const [user, setUser] =useState(null)
+  const [step, setStep] = useState(1)
+  const [user, setUser] =useState(null);
+  const changeStep = param => {
+    switch (param) {
+      case 'NEXT':
+        console.log('entraste a siguiente');
+        setStep(step + 1);
+        if(active.step2)
+          setActive({step1:true, step2: true, step3: true});
+        else
+          setActive({step1:true, step2: true, step3: false});
+        break;
+      case 'PREV':
+        console.log('entraste a volver');
+        setStep(step - 1)
+        if(active.step3)
+          setActive({step1:true, step2: true, step3: false});
+        else
+          setActive({step1:true, step2: false, step3: false});
+        break;
+      default:
+        console.log('entraste a nada');
+        break;
+    }
+
+  }
 
 
   useEffect(() => {
@@ -27,6 +52,7 @@ const NewReservation = () => {
     setEndDate(dates.endDate);
     const u = JSON.parse(sessionStorage.getItem("user"));
     setUser(u);
+    console.log(params);
   },[])
 
   return (
@@ -36,7 +62,7 @@ const NewReservation = () => {
         <div className={`${styles.step} ${active.step2 && styles.stepActive}`}> 2 </div>
         <div className={`${styles.step} ${active.step3 && styles.stepActive}`}> 3 </div>
       </div>
-      <ReservationDetails product={product} startDate={startDate} endDate={endDate} user={user} />
+      <ReservationDetails product={product} startDate={startDate} endDate={endDate} user={user} changeStep={changeStep} step={step} />
     </>
   )
 }
