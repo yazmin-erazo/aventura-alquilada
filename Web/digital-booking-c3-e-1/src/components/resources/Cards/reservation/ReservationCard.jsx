@@ -2,67 +2,18 @@ import { useState, useCallback } from "react";
 import styles from "./ReservationCard.module.css";
 import { BsCalendar4 } from "react-icons/bs";
 
-const ReservationCard = () => {
-  const [rents, setReservations] = useState([
-    {
-      id: 1,
-      name: "Lafuma Active",
-      starDate: "20/06/2023",
-      endDate: "20/06/2023",
-      state: "Cancelado",
-      category: "Camping",
-      imageURL:
-        "https://img.freepik.com/fotos-premium/nina-leyendo-libro-frente-tienda-atmosfera-salvaje_482257-11531.jpg?w=1380",
-    },
-    {
-      id: 2,
-      name: "Boardworks Froth",
-      starDate: "18/06/2023",
-      endDate: "22/06/2023",
-      state: "En curso",
-      category: "Surf",
-      imageURL:
-        "https://mir-s3-cdn-cf.behance.net/project_modules/max_1200/42b86238301361.575c8e19284c7.png",
-    },
-    {
-      id: 3,
-      name: "Bestway",
-      starDate: "15/06/2023",
-      endDate: "18/06/2023",
-      state: "Reservado",
-      category: "Acuáticos",
-      imageURL:
-        "https://c3-e1-digital-booking.s3.us-east-2.amazonaws.com/img/Kayak inflableBestwayKayak.jpg",
-    },
-  ]);
-
-  const cancelReservation = useCallback((id) => {
-    setReservations((prevReservations) =>
-      prevReservations.map((reservation) =>
-        reservation.id === id
-          ? { ...reservation, state: "Cancelado" }
-          : reservation
-      )
-    );
-  }, []);
-
-  const rebookReservation = useCallback((id) => {
-    setReservations((prevReservations) =>
-      prevReservations.map((reservation) =>
-        reservation.id === id
-          ? { ...reservation, state: "Reservado" }
-          : reservation
-      )
-    );
-  }, []);
-
+const ReservationCard = ({
+  reservations,
+  cancelReservation,
+  rebookReservation,
+}) => {
   return (
     <div className={styles["rents-container"]}>
-      {rents.length === 0 ? (
+      {reservations.length === 0 ? (
         <p className={styles["no-rents"]}>No hay reservaciones.</p>
       ) : (
         <ul className={styles["rents-list"]}>
-          {rents.map((reservation) => (
+          {reservations.map((reservation) => (
             <ReservationItem
               key={reservation.id}
               reservation={reservation}
