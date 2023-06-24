@@ -53,7 +53,7 @@ public class RentServiceTest {
     @Test
     void testDeleteRentNotFound() {
 
-        Rent rent = Rent.create(1L, 1L, Date.from(Instant.now()), Date.from(Instant.now()));
+        Rent rent = Rent.create(1L, 1L, Date.from(Instant.now()), Date.from(Instant.now()),"","");
 
         String userEmail = "user@example.com";
 
@@ -112,7 +112,7 @@ public class RentServiceTest {
         RoleDTO roleDTO = new RoleDTO();
         userDTO.setRoleDTO(roleDTO);
 
-        Rent rent = Rent.create(1L, 1L, Date.from(Instant.now()), Date.from(Instant.now()));
+        Rent rent = Rent.create(1L, 1L, Date.from(Instant.now()), Date.from(Instant.now()),"","");
 
         when(rentRepository.findByIdAndState(any())).thenReturn(Optional.of(rentDTO));
         when(repositoryUser.findByEmail(anyString())).thenReturn(Optional.of(userDTO));
@@ -222,7 +222,7 @@ public class RentServiceTest {
         java.sql.Date endDate = new java.sql.Date(utilEndDate.getTime());
         String comment = "Test comment";
 
-        Rent result = Rent.update(id, productId, userId, startDate, endDate, comment);
+        Rent result = Rent.update(id, productId, userId, startDate, endDate, comment,"");
 
         assertNotNull(result);
         assertEquals(id, result.getId());
@@ -243,7 +243,7 @@ public class RentServiceTest {
         java.sql.Date endDate = new java.sql.Date(utilEndDate.getTime());
         String comment = "Test comment";
 
-        assertThrows(ExceptionMandatoryValue.class, () -> Rent.update(id, productId, userId, startDate, endDate, comment));
+        assertThrows(ExceptionMandatoryValue.class, () -> Rent.update(id, productId, userId, startDate, endDate, comment,""));
     }
 
     @Test
@@ -257,7 +257,7 @@ public class RentServiceTest {
         java.sql.Date endDate = null;
         String comment = "Test comment";
 
-        assertThrows(ExceptionMandatoryValue.class, () -> Rent.update(id, productId, userId, startDate, endDate, comment));
+        assertThrows(ExceptionMandatoryValue.class, () -> Rent.update(id, productId, userId, startDate, endDate, comment,""));
     }
 
     @Test
@@ -272,7 +272,7 @@ public class RentServiceTest {
         java.sql.Date endDate = new java.sql.Date(utilEndDate.getTime());
         String comment = "";
 
-        assertThrows(ExceptionMandatoryValue.class, () -> Rent.update(id, productId, userId, startDate, endDate, comment));
+        assertThrows(ExceptionMandatoryValue.class, () -> Rent.update(id, productId, userId, startDate, endDate, comment,""));
     }
 
     @Test

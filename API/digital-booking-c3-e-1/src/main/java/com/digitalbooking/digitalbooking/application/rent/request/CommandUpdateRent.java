@@ -30,4 +30,7 @@ public class CommandUpdateRent {
     @JsonProperty
     @Schema(allowableValues = {"Excelente servicio"})
     private String comment;
+    @JsonProperty
+    @Schema(allowableValues = {"At home"})
+    private String delivery;
 }

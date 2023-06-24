@@ -11,6 +11,8 @@ import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import java.sql.Date;
+import java.time.Instant;
 import java.util.List;
 import java.util.Optional;
 import java.util.Set;
@@ -54,6 +56,7 @@ public class RentRepositoryImpl implements RentRepository {
         userEntity.setId(rent.getUser().getId());
         rentEntity.setProductEntity(productEntity);
         rentEntity.setUserEntity(userEntity);
+        rentEntity.setCreationDate(Date.from(Instant.now()));
         return repositoryRentMySql.save(rentEntity).getId();
     }
 
