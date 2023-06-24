@@ -6,7 +6,6 @@ import RecommendedList from "./Recommended/RecommendedList";
 import { useEffect, useRef, useState } from "react";
 import { useParams } from "react-router";
 import FilterDropDown from "../search/SearchEngine/FilterDropDown";
-import History from "../resources/history/History";
 
 const HomePage = () => {
   const [selectedCategory, setSelectedCategory] = useState(null);
@@ -58,7 +57,6 @@ const HomePage = () => {
   return (
     <>
       <div className={styles.homeContainer}>
-        <History />
         <section className={styles.bannerSearchContainer}>
           <div>
             <Banner

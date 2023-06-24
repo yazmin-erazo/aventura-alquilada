@@ -3,7 +3,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { UserContext } from "../../context/AuthContext";
 import { FiMenu } from "react-icons/fi";
 import UsersService from "../../shared/services/UserService";
-import Swal from 'sweetalert2'
+import Swal from "sweetalert2";
 
 const Header = () => {
   const [isProfileOpen, setProfileOpen] = useState(false);
@@ -66,15 +66,15 @@ const Header = () => {
       } catch (error) {
         if (error.response && error.response.status === 401) {
           Swal.fire({
-            icon: 'error',
-            title: 'No autorizado',
-            text: 'Por favor, inicie sesión.',
+            icon: "error",
+            title: "No autorizado",
+            text: "Por favor, inicie sesión.",
           });
         } else {
           Swal.fire({
-            icon: 'error',
-            title: 'Oops...',
-            text: 'Algo salió mal!',
+            icon: "error",
+            title: "Oops...",
+            text: "Algo salió mal!",
           });
         }
       }
@@ -109,8 +109,9 @@ const Header = () => {
                 style={{ backgroundColor: findUserColor(user.sub) }}
               >
                 <div>
-                  {`${user.name.slice(0, 1) + user.lastname.slice(0, 1)
-                    }`.toUpperCase()}
+                  {`${
+                    user.name.slice(0, 1) + user.lastname.slice(0, 1)
+                  }`.toUpperCase()}
                 </div>
               </div>
             </label>
@@ -121,6 +122,10 @@ const Header = () => {
               <hr />
               <li className="menuOption">
                 <Link to="/favs">Mis favoritos</Link>
+              </li>
+              <hr />
+              <li className="menuOption">
+                <Link to="/reservas">Mis reservas</Link>
               </li>
               <hr />
               <li>Configuración</li>
