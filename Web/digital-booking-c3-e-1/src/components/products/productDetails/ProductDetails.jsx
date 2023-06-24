@@ -19,7 +19,7 @@ import Politics from "../../resources/Politics/Politics";
 import CalendarProducts from "../../resources/Calendar/CalendarProducts";
 import ProductMap from "../../resources/productMap/ProductMap";
 import SelectedDates from "../../resources/Calendar/SelectedDates";
-import ShareIcon from "./ShareIcon";
+import ButtonShare from "../../common/Buttons/ButtonShare";
 
 const ProductDetails = () => {
   const data = useContext(ProductsContext);
@@ -129,7 +129,7 @@ const ProductDetails = () => {
           </div>
           <div className={styles.detailsContainer}>
             <div className={styles.shareButton}>
-              <ShareIcon product={product} />
+              <ButtonShare product={product} />
             </div>
             <ImageGallery product={product} />
             <div className={styles.productDetails}>

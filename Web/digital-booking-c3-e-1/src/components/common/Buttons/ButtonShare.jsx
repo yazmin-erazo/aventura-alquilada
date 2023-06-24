@@ -6,10 +6,9 @@ import {
   WhatsappShareButton,
 } from "react-share";
 import { FacebookIcon, TwitterIcon, WhatsappIcon } from "react-share";
+import styles from "./ButtonShare.module.css";
 
-import "./ShareIcon.css";
-
-const ShareIcon = ({ product }) => {
+const ButtonShare = ({ product }) => {
   const [showModal, setShowModal] = useState(false);
 
   const baseUrl =
@@ -25,44 +24,44 @@ const ShareIcon = ({ product }) => {
   };
 
   const handleOutsideClick = (event) => {
-    if (event.target.className === "modal") {
+    if (event.target.className === styles.modal) {
       closeModal();
     }
   };
 
   return (
     <div>
-      <button className="container-button" onClick={openModal}>
+      <button className={styles.containerButton} onClick={openModal}>
         <BsShareFill size={16} />
         <p>Compartir</p>
       </button>
       {showModal && (
-        <div className="modal" onClick={handleOutsideClick}>
-          <div className="modal-content">
-            <button className="close-button" onClick={closeModal}>
+        <div className={styles.modal} onClick={handleOutsideClick}>
+          <div className={styles.modalContent}>
+            <button className={styles.closeButton} onClick={closeModal}>
               &times;
             </button>
-            <div className="modal-heading-container">
-              <h2 className="modal-heading">{product.name}</h2>
-              <div className="container-ubication">
+            <div className={styles.modalHeadingContainer}>
+              <h2 className={styles.modalHeading}>{product.name}</h2>
+              <div className={styles.containerUbication}>
                 <p>
                   {product.city.genericName} · {product.city.name}
                 </p>
-                <div className="category">{product.category}</div>
+                <div className={styles.category}>{product.category}</div>
               </div>
             </div>
-            <div className="container-header-product">
-              <div className="container-img">
+            <div className={styles.containerHeaderProduct}>
+              <div className={styles.containerImg}>
                 <img src={product.imageURL} alt={product.name} />
               </div>
-              <div className="description">
+              <div className={styles.description}>
                 <p>{product.description}</p>
               </div>
             </div>
 
-            <div className="social-media">
+            <div className={styles.socialMedia}>
               <FacebookShareButton
-                className="share-button"
+                className={styles.shareButton}
                 url={productUrl}
                 quote=""
                 hashtag="#equipamientoDeportivo"
@@ -70,7 +69,7 @@ const ShareIcon = ({ product }) => {
                 <FacebookIcon size={36} round={true} />
               </FacebookShareButton>
               <TwitterShareButton
-                className="share-button"
+                className={styles.shareButton}
                 url={productUrl}
                 title=""
                 hashtags={["equipamientoDeportivo", "aventura"]}
@@ -78,7 +77,7 @@ const ShareIcon = ({ product }) => {
                 <TwitterIcon size={36} round={true} />
               </TwitterShareButton>
               <WhatsappShareButton
-                className="share-button"
+                className={styles.shareButton}
                 url={productUrl}
                 title=""
               >
@@ -92,4 +91,4 @@ const ShareIcon = ({ product }) => {
   );
 };
 
-export default ShareIcon;
+export default ButtonShare;
