@@ -1,10 +1,10 @@
-import { latitudeKeys } from "geolib";
 import React, { createContext, useEffect, useReducer } from "react";
 
 const UserContext = createContext();
-
+const userFromStorage = sessionStorage.getItem("user");
+const parsedUser = userFromStorage ? JSON.parse(userFromStorage) : null;
 const initialState = {
-  user: JSON.parse(sessionStorage.getItem("user")) || {
+  user: parsedUser || {
     name: "",
     lastname: "",
     role: "",
@@ -78,7 +78,7 @@ const UserDataContext = ({ children }) => {
                 latitude: position.coords.latitude,
                 longitude: position.coords.longitude,
               };
-              console.log(position.coords.latitude);
+              
               dispatch({ type: "SET_USER_LOCATION", payload: userLocation });
             },
             (error) => {
