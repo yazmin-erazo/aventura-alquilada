@@ -54,7 +54,7 @@ const CategoryList = ({ onCategoryClick }) => {
         style={{
           background: showLeftArrow
             ? "none"
-            : "linear-gradient(to right, rgba(195, 212, 228, 0), #DEE7F0)",
+            : "linear-gradient(to right, rgba(195, 212, 228, 0), rgb(240 243 247))",
           color: showLeftArrow ? "white" : "transparent",
         }}
       ></div>

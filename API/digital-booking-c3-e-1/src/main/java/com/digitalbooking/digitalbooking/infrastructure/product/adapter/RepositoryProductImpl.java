@@ -121,6 +121,14 @@ public class RepositoryProductImpl implements RepositoryProduct {
     }
 
     @Override
+    public Optional<ProductDTO> findByIdAndDatesRents(Long id, Date startDate, Date endDate) {
+        var query = where(byDelete((byte) 0))
+                .and(byRentsNotBetweenDates(startDate,endDate))
+                .and(byId(id));
+        return repositoryProductMySql.findOne(query).map(MapToProduct::mapToProduct);
+    }
+
+    @Override
     public Optional<ProductDTO> findByNameAndIsDelete(String name) {
         return repositoryProductMySql.findByNameAndIsDelete(name, false).map(MapToProduct::mapToProduct);
     }
