@@ -3,7 +3,8 @@ import { render, fireEvent } from "@testing-library/react";
 import InputWithLabel from "../../../../components/common/input/InputWithLabel";
 
 describe("InputWithLabel", () => {
-  test("renders input with label and handles onChange event", () => {
+  // 🧪 =============================
+  test("renderiza la entrada con la etiqueta y maneja el evento onChange", () => {
     const handleChange = jest.fn();
     const placeholder = "Enter your name";
     const labelText = "Name:";
@@ -17,8 +18,6 @@ describe("InputWithLabel", () => {
         {labelText}
       </InputWithLabel>
     );
-
-    // Verificar que el elemento de entrada y el label existan en la pantalla
     const inputElement = getByLabelText(labelText);
     expect(inputElement).toBeInTheDocument();
     expect(inputElement.tagName).toBe("INPUT");
@@ -26,7 +25,8 @@ describe("InputWithLabel", () => {
     expect(inputElement).toHaveAttribute("placeholder", placeholder);
   });
 
-  test("renders input with error message", () => {
+  // 🧪 =============================
+  test("muestra el input con un mensaje de error", () => {
     const errorMessage = "Invalid input";
     const { getByText } = render(
       <InputWithLabel
@@ -40,12 +40,12 @@ describe("InputWithLabel", () => {
       </InputWithLabel>
     );
 
-    // Verificar que el mensaje de error se muestre en la pantalla
     const errorElement = getByText(errorMessage);
     expect(errorElement).toBeInTheDocument();
   });
 
-  test("disables input when isEditable is false", () => {
+  // 🧪 =============================
+  test("deshabilita el input cuando isEditable es falso", () => {
     const { getByLabelText } = render(
       <InputWithLabel
         type="text"
@@ -62,7 +62,8 @@ describe("InputWithLabel", () => {
     expect(inputElement).toBeDisabled();
   });
 
-  test("applies smooth scrolling on label click", () => {
+  // 🧪 =============================
+  test("aplica un desplazamiento suave al hacer clic en la etiqueta", () => {
     const { getByText } = render(
       <>
         <h1 id="section-header">Section Header</h1>
@@ -84,7 +85,8 @@ describe("InputWithLabel", () => {
     expect(headerElement).toBeVisible();
   });
 
-  test("does not apply error class when there is no error", () => {
+  // 🧪 =============================
+  test("no aplica clase de error cuando no hay error", () => {
     const { getByLabelText } = render(
       <InputWithLabel
         type="text"

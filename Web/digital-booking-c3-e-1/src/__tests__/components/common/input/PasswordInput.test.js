@@ -3,7 +3,8 @@ import { render, fireEvent } from "@testing-library/react";
 import PasswordInput from "../../../../components/common/input/PasswordInput";
 
 describe("PasswordInput", () => {
-  test("calls setIsVisible when toggle button is clicked", () => {
+  // 🧪 =============================
+  test("llama a setIsVisible cuando se hace clic en el botón de alternar", () => {
     const setIsVisible = jest.fn();
     const { getByRole } = render(
       <PasswordInput
@@ -20,17 +21,12 @@ describe("PasswordInput", () => {
     expect(setIsVisible).toHaveBeenCalledWith(true);
   });
 
-  test("renders with custom styles", () => {
+  // 🧪 =============================
+  test("renders con estilos personalizados", () => {
     const { container } = render(
-      <PasswordInput
-        isVisible={false}
-        setIsVisible={jest.fn()}
-        right="20px"
-        // Otros props necesarios
-      />
+      <PasswordInput isVisible={false} setIsVisible={jest.fn()} right="20px" />
     );
 
     expect(container.firstChild).toHaveStyle("right: '20px'");
-    // Verifica que los estilos personalizados se apliquen correctamente
   });
 });
