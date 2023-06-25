@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { IoMdClose } from "react-icons/io";
+import { IoMdClose, IoMdOptions } from "react-icons/io";
 
 import CitiesService from "../../../shared/services/CitiesService";
 import Select from "../../common/select/Select";
@@ -28,10 +28,10 @@ const initialState = {
 
 import styles from "./FilterDropDown.module.css";
 
-
 const FilterDropDown = ({ onFilterChange }) => {
   const [cityOptions, setCityOptions] = useState([]);
   const [filters, setFilters] = useState(initialState);
+  const [showFilters, setShowFilters] = useState(false);
   const [selectedChips, setSelectedChips] = useState({
     brand: "",
     gender: "",
@@ -48,6 +48,13 @@ const FilterDropDown = ({ onFilterChange }) => {
     color: false,
     material: false,
   });
+  const [showDropdown, setShowDropdown] = useState(false);
+  const toggleDropdown = () => {
+    setShowDropdown(!showDropdown);
+  };
+
+  console.log(showFilters);
+  console.log(showDropdown);
 
   const handleFilterClear = () => {
     setFilters(initialState);
@@ -60,7 +67,10 @@ const FilterDropDown = ({ onFilterChange }) => {
       size: "",
     });
   };
-
+  const toggleFilters = () => {
+    setShowFilters(!showFilters);
+    setShowDropdown(false);
+  };
   const handleChipClick = (chip, dropdownName) => {
     setSelectedChips((prevChips) => ({
       ...prevChips,
@@ -186,65 +196,97 @@ const FilterDropDown = ({ onFilterChange }) => {
 
     return null;
   };
+  useEffect(() => {
+    const mediaQuery = window.matchMedia("(min-width: 767px)");
+
+    const handleMediaQueryChange = (e) => {
+      setShowFilters(e.matches);
+    };
+
+    handleMediaQueryChange(mediaQuery);
+    mediaQuery.addEventListener("change", handleMediaQueryChange);
+
+    return () => {
+      mediaQuery.removeEventListener("change", handleMediaQueryChange);
+    };
+  }, []);
+
+  const [windowWidth, setWindowWidth] = useState(window.innerWidth);
+  const handleWindowResize = () => {
+    setWindowWidth(window.innerWidth);
+  };
+
+  useEffect(() => {
+    window.addEventListener("resize", handleWindowResize);
+
+    return () => {
+      window.removeEventListener("resize", handleWindowResize);
+    };
+  }, []);
+
+  useEffect(() => {
+    setShowDropdown(windowWidth > 768);
+  }, [windowWidth]);
 
   return (
     <div>
-      <div className={styles.filterSidebar}>
-        {/* <div className={styles.filterSection}>
-          <label htmlFor="nameFilter">Nombre:</label>
-          <input
-            type="text"
-            name="nameFilter"
-            value={filters.nameFilter}
-            onChange={handleFilterChange}
-            className={styles.inputField}
-          />
-        </div> */}
-
-        <DropdownFilter
-          label="Talla"
-          options={sizeOptions}
-          selectedValue={selectedChips.size}
-          handleToggle={() => handleDropdownToggle("size")}
-          handleChipClick={(chip) => handleChipClick(chip, "size")}
-          isOpen={dropdownStates.size}
-          styles={styles}
-        />
-
-        <DropdownFilter
-          label="Marca"
-          options={brandOptions}
-          selectedValue={selectedChips.brand}
-          handleToggle={() => handleDropdownToggle("brand")}
-          handleChipClick={(chip) => handleChipClick(chip, "brand")}
-          isOpen={dropdownStates.brand}
-          styles={styles}
-        >
-          {dropdownStates.brand && (
-            <div className={styles.dropdownOptions}>
-              {brandOptions.map((option) => (
-                <div
-                  key={option} // Aquí se asigna una clave única a cada elemento
-                  className={styles.dropdownOption}
-                  onClick={() => handleChipClick(option, "brand")}
-                >
-                  {option}
-                </div>
-              ))}
-            </div>
+      {!showFilters && (
+        <button className={styles.showFiltersButton} onClick={toggleDropdown}>
+          {showDropdown ? (
+            <IoMdClose className={styles.filterIcon} />
+          ) : (
+            <IoMdOptions className={styles.filterIcon} />
           )}
-        </DropdownFilter>
+          {showDropdown ? "Ocultar filtros" : "Mostrar filtros"}
+        </button>
+      )}
 
-        <DropdownFilter
-          label="Género"
-          options={genderOptions}
-          selectedValue={selectedChips.gender}
-          handleToggle={() => handleDropdownToggle("gender")}
-          handleChipClick={(chip) => handleChipClick(chip, "gender")}
-          isOpen={dropdownStates.gender}
-          styles={styles}
-        />
-        {/* 
+      {showDropdown && (
+        <div className={styles.filterSidebar}>
+          <DropdownFilter
+            label="Talla"
+            options={sizeOptions}
+            selectedValue={selectedChips.size}
+            handleToggle={() => handleDropdownToggle("size")}
+            handleChipClick={(chip) => handleChipClick(chip, "size")}
+            isOpen={dropdownStates.size}
+            styles={styles}
+          />
+
+          <DropdownFilter
+            label="Marca"
+            options={brandOptions}
+            selectedValue={selectedChips.brand}
+            handleToggle={() => handleDropdownToggle("brand")}
+            handleChipClick={(chip) => handleChipClick(chip, "brand")}
+            isOpen={dropdownStates.brand}
+            styles={styles}
+          >
+            {dropdownStates.brand && (
+              <div className={styles.dropdownOptions}>
+                {brandOptions.map((option) => (
+                  <div
+                    key={option}
+                    className={styles.dropdownOption}
+                    onClick={() => handleChipClick(option, "brand")}
+                  >
+                    {option}
+                  </div>
+                ))}
+              </div>
+            )}
+          </DropdownFilter>
+
+          <DropdownFilter
+            label="Género"
+            options={genderOptions}
+            selectedValue={selectedChips.gender}
+            handleToggle={() => handleDropdownToggle("gender")}
+            handleChipClick={(chip) => handleChipClick(chip, "gender")}
+            isOpen={dropdownStates.gender}
+            styles={styles}
+          />
+          {/* 
         <div className={styles.filterSection}>
           <label>Rango de Precios:</label>
           <div className={styles.priceRangeContainer}>
@@ -268,54 +310,55 @@ const FilterDropDown = ({ onFilterChange }) => {
           </div>
         </div> */}
 
-        <DropdownFilter
-          label="Estado"
-          options={stateOptions}
-          selectedValue={selectedChips.state}
-          handleToggle={() => handleDropdownToggle("state")}
-          handleChipClick={(chip) => handleChipClick(chip, "state")}
-          isOpen={dropdownStates.state}
-          styles={styles}
-        />
+          <DropdownFilter
+            label="Estado"
+            options={stateOptions}
+            selectedValue={selectedChips.state}
+            handleToggle={() => handleDropdownToggle("state")}
+            handleChipClick={(chip) => handleChipClick(chip, "state")}
+            isOpen={dropdownStates.state}
+            styles={styles}
+          />
 
-        <DropdownFilter
-          label="Color"
-          options={colorOptions}
-          selectedValue={selectedChips.color}
-          handleToggle={() => handleDropdownToggle("color")}
-          handleChipClick={(chip) => handleChipClick(chip, "color")}
-          isOpen={dropdownStates.color}
-          styles={styles}
-        >
-          {dropdownStates.color && (
-            <div className={styles.dropdownOptions}>
-              {colorOptions.map((option) => (
-                <div
-                  key={option.id}
-                  className={styles.dropdownOption}
-                  onClick={() => handleChipClick(option.name, "color")}
-                >
-                  <span
-                    className={styles.colorOption}
-                    style={{ backgroundColor: option.hex }}
-                  />
-                  {option.name}
-                </div>
-              ))}
-            </div>
-          )}
-        </DropdownFilter>
+          <DropdownFilter
+            label="Color"
+            options={colorOptions}
+            selectedValue={selectedChips.color}
+            handleToggle={() => handleDropdownToggle("color")}
+            handleChipClick={(chip) => handleChipClick(chip, "color")}
+            isOpen={dropdownStates.color}
+            styles={styles}
+          >
+            {dropdownStates.color && (
+              <div className={styles.dropdownOptions}>
+                {colorOptions.map((option) => (
+                  <div
+                    key={option.id}
+                    className={styles.dropdownOption}
+                    onClick={() => handleChipClick(option.name, "color")}
+                  >
+                    <span
+                      className={styles.colorOption}
+                      style={{ backgroundColor: option.hex }}
+                    />
+                    {option.name}
+                  </div>
+                ))}
+              </div>
+            )}
+          </DropdownFilter>
 
-        <DropdownFilter
-          label="Material"
-          options={materialOptions}
-          selectedValue={selectedChips.material}
-          handleToggle={() => handleDropdownToggle("material")}
-          handleChipClick={(chip) => handleChipClick(chip, "material")}
-          isOpen={dropdownStates.material}
-          styles={styles}
-        />
-      </div>
+          <DropdownFilter
+            label="Material"
+            options={materialOptions}
+            selectedValue={selectedChips.material}
+            handleToggle={() => handleDropdownToggle("material")}
+            handleChipClick={(chip) => handleChipClick(chip, "material")}
+            isOpen={dropdownStates.material}
+            styles={styles}
+          />
+        </div>
+      )}
       <div className={styles.filterButtons}>
         <div>{renderAppliedFilters()}</div>
         {renderAppliedFilters() && (

@@ -2,6 +2,8 @@
   background-color: var(--bg-general);
   padding: 10px 0;
   display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
 }
 
 .inputField {
@@ -44,7 +46,7 @@
 
 .filterButtons {
   display: flex;
-  margin-bottom: 1rem;
+  margin: 1rem;
 }
 .clearBtn {
   background-color: var(--bg-general);
@@ -126,41 +128,72 @@
   justify-content: center;
 }
 
+.showFiltersButton {
+  background-color: var(--white-100);
+  color: var(--secondary-600);
+  border: none;
+  padding: 10px 20px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  border-radius: 20px;
+  border: 1px solid var(--secondary-100);
+}
+
+.showFiltersButton:hover {
+  background-color: var(--secondary-50);
+}
+
+.filterIcon {
+  margin-right: 5px;
+  vertical-align: middle;
+}
+
+@media (max-width: 767px) {
+  .showFiltersButton {
+    display: block;
+  }
+
+  .filterSidebar {
+    display: flex;
+  }
+}
 
 @media (max-width: 600px) {
-    .filterSidebar {
-      flex-direction: column;
-      align-items: flex-start;
-    }
-  
-    .filterSection {
-      margin-bottom: 10px;
-    }
-  
-    .filterLabel {
-      margin-bottom: 0;
-    }
-  
-    .buttonContainer {
-      justify-content: center;
-    }
+  .filterSidebar {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 4px;
   }
-  
-  /* Estilos para dispositivos con un ancho máximo de 400px */
-  
-  @media (max-width: 400px) {
-    .priceRangeContainer {
-      flex-direction: column;
-      align-items: flex-start;
-    }
-  
-    .priceInput {
-      width: 100%;
-      margin-right: 0;
-      margin-bottom: 5px;
-    }
-  
-    .priceRangeSeparator {
-      margin: 5px 0;
-    }
+
+  .filterSection {
+    margin-bottom: 10px;
   }
+
+  .filterLabel {
+    margin-bottom: 0;
+  }
+
+  .buttonContainer {
+    justify-content: center;
+  }
+}
+
+/* Estilos para dispositivos con un ancho máximo de 400px */
+
+@media (max-width: 400px) {
+  .priceRangeContainer {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .priceInput {
+    width: 100%;
+    margin-right: 0;
+    margin-bottom: 5px;
+  }
+
+  .priceRangeSeparator {
+    margin: 5px 0;
+  }
+}
