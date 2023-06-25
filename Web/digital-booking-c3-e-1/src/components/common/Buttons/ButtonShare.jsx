@@ -13,7 +13,7 @@ const ButtonShare = ({ product }) => {
 
   const baseUrl =
     "http://equipamiento-deportivo-static.s3-website.us-east-2.amazonaws.com/";
-  const productUrl = `${baseUrl}product/${product.id}`;
+  const productUrl = product && `${baseUrl}product/${product.id}`;
 
   const openModal = () => {
     setShowModal(true);
@@ -42,20 +42,20 @@ const ButtonShare = ({ product }) => {
               &times;
             </button>
             <div className={styles.modalHeadingContainer}>
-              <h2 className={styles.modalHeading}>{product.name}</h2>
+              <h2 className={styles.modalHeading}>{product && product.name}</h2>
               <div className={styles.containerUbication}>
                 <p>
-                  {product.city.genericName} · {product.city.name}
+                  {product && product.city.genericName} · {product && product.city.name}
                 </p>
-                <div className={styles.category}>{product.category}</div>
+                <div className={styles.category}>{product && product.category}</div>
               </div>
             </div>
             <div className={styles.containerHeaderProduct}>
               <div className={styles.containerImg}>
-                <img src={product.imageURL} alt={product.name} />
+                <img src={product && product.imageURL} alt={product && product.name} />
               </div>
               <div className={styles.description}>
-                <p>{product.description}</p>
+                <p>{product && product.description}</p>
               </div>
             </div>
 

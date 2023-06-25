@@ -9,7 +9,7 @@ import IconSelect from "../../common/IconSelect/IconSelect";
 import ButtonInactive from "../../common/Buttons/ButtonInactive";
 
 const NewCategory = () => {
-  const [categories, setCategories] = useState("");
+  const [categories, setCategories] = useState([]);
   const [selectedIcon, setSelectedIcon] = useState("");
 
   const [formData, setFormData] = useState({
@@ -59,8 +59,6 @@ const NewCategory = () => {
       icon: selectedIcon,
     };
 
-    console.log("Datos de la categoría:", categoryData);
-
     try {
       let categoryExists = false;
       categories.map((cat) =>
@@ -82,7 +80,6 @@ const NewCategory = () => {
         });
       } else {
         await CategoryService.create(categoryData);
-        console.log("Categoría registrada con éxito: ", categoryData);
         const response = await CategoryService.getAll();
         setCategories(response);
 

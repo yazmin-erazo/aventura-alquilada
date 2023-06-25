@@ -1,4 +1,7 @@
 module.exports = {
+  transform: {
+    "^.+\\.jsx?$": "babel-jest",
+  },
   testEnvironment: "jsdom",
   moduleDirectories: ["node_modules", "src"],
   testMatch: ['**/__tests__/**/*.test.js'],
@@ -12,5 +15,16 @@ module.exports = {
   ],
   setupFilesAfterEnv: [
     "@testing-library/jest-dom/extend-expect"
-  ]
+  ],
+  transformIgnorePatterns: [
+    "node_modules/(?!(react-leaflet|@react-leaflet)/)",
+  ],
+  collectCoverage: false,
+  collectCoverageFrom: [
+    'src/**/*.jsx',
+    '!src/**/__tests__/**/*.js',
+    '!src/**/*.test.js',
+  ],
+  coverageReporters: ['lcov', 'text'],
+  coverageDirectory: 'coverage',
 };

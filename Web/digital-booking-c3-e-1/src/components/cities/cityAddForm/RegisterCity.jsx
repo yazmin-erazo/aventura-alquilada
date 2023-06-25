@@ -194,8 +194,8 @@ const RegisterCity = () => {
     const cityData = {
       name: nameSelected,
       code: cityCode,
-      latitude: position[0],
-      longitude: position[1],
+      latitude: position?.[0],
+      longitude: position?.[1],
       countryCode: countryCode,
       genericName: country,
     };
