@@ -54,7 +54,7 @@ const CrudCategory = () => {
     }).then(async (result) => {
       if (result.isConfirmed) {
         try {
-          const res = await CategoriesService.deleteByID(categoryId);
+          const res = await CategoryService.deleteByID(categoryId);
           if (res.status === 200) {
             const updatedCategories = categories.filter(
               (category) => category.id !== categoryId
