@@ -35,16 +35,16 @@ const ReservationItem = ({
   return (
     <li className={styles["reservation-card"]}>
       <div className={styles["reservation-image"]}>
-        <img src={reservation.imageURL} alt="Imagen de la reserva" />
+        <img src={reservation.product.imageURL} alt="Imagen de la reserva" />
       </div>
       <div className={styles["reservation-info"]}>
         <div
           className={`${styles["name-product"]} ${styles["reservation-name"]}`}
         >
-          {reservation.name}
+          {reservation.product.name}
         </div>
         <div className={styles["container-categoryDate"]}>
-          <div className={styles["category"]}>{reservation.category}</div>
+          <div className={styles["category"]}>{reservation.product.category}</div>
           <div className={styles["date"]}>
             <div className={styles["dates-container"]}>
               <div className={styles["date-start"]}>
@@ -69,7 +69,7 @@ const ReservationItem = ({
           {reservation.state}
         </div>
         <div className={styles["button-container"]}>
-          {reservation.state !== "Cancelado" ? (
+          {reservation.state !== "CANCELADO" ? (
             <button
               className={`${styles["cancel-button"]} ${styles["button"]}`}
               onClick={() => cancelReservation(reservation.id)}

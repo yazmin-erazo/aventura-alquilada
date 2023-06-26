@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import styles from './ReservationDetails.module.css'
 import InputWithLabel from '../../common/input/InputWithLabel';
 import RentsService from '../../../shared/services/RentsService';
+import Swal from 'sweetalert2';
 
 const ReservationDetails = ({product, startDate, endDate, user, disabled, changeStep, step}) => {
 
@@ -10,12 +11,15 @@ const ReservationDetails = ({product, startDate, endDate, user, disabled, change
         if(step !==3)
             changeStep('NEXT');
         else
-            reserve();
+            reserve();     
     }
 
-    const reserve = () => {
+    const reserve = async () => {
         const datos = {userId: user.iduser, productId: product.id, starDate: startDate, endDate: endDate}
-        RentsService.create(datos)
+        const res = await RentsService.create(datos)
+        console.log(res);
+        if(res.status === 201)
+            Swal.fire("¡Muchas gracias!", "La reserva se ha efectuado con éxito. Recibirá un mail con los datos", "success");
     }
 
     const back = () => {
