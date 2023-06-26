@@ -16,28 +16,27 @@ public class MailRepositoryImpl implements MailRepository {
 
     private final String templateHtmlValidateAccountMail = "<html>" +
             "<body style='background-color: #F5F5F5; text-align: center; padding:50px; font-family: Arial, sans-serif;'>" +
-            "<p>Hola %s,</p>" +
-            "<p>Gracias por registrarte. ¡Estamos emocionados de tenerte como parte de nuestra comunidad!</p>" +
-            "<p>Para activar tu cuenta, por favor haz clic en el botón a continuación:</p>" +
+            "<p>¡Hola %s!</p>" +
+            "<p>Estamos emocionados de que te hayas unido a nosotros. ¡Bienvenido a bordo!</p>" +
+            "<p>Para activar tu cuenta y poner en marcha la diversión, solo tienes que hacer clic en el botón de abajo:</p>" +
             "<p><a href='%s' style='padding:10px; background-color: #2f6304; color: #FFFFFF; text-align: center; text-decoration: none; display: inline-block; border-radius: 5px;'>Activar Cuenta</a></p>" +
-            "<p>Si no activas tu cuenta dentro de las próximas 48 horas, el sistema desactivará tu cuenta y necesitarás registrarte de nuevo para usar el sitio.</p>" +
-            "<p>Saludos,</p>" +
-            "<p>El equipo de <span style='color: #008000;'>Digital</span> <span style='color: #00008B;'>Booking</span></p>" +
+            "<p>Si no activas tu cuenta en las próximas 48 horas, el sistema desactivará tu cuenta y tendrás que registrarte de nuevo. Así que no te demores!</p>" +
+            "<p>Hasta pronto,</p>" +
+            "<p>Tu equipo de <span style='color: #008000;'>Digital</span> <span style='color: #00008B;'>Booking</span></p>" +
             "</body>" +
             "</html>";
 
     private final String templateHtmlAccountAvailableMail = "<html>" +
             "<body style='background-color: #F5F5F5; text-align: center; padding:50px; font-family: Arial, sans-serif;'>" +
-            "<p>Hola %s,</p>" +
-            "<p>¡Tu cuenta ahora está disponible! Esperamos que disfrutes de nuestra plataforma y descubras todos los beneficios que tenemos para ti.</p>" +
-            "<p>Para iniciar sesión, por favor haz clic en el botón a continuación:</p>" +
-            "<p>Utilizando el siguiente email: %s</p>" +
+            "<p>¡Hola %s!</p>" +
+            "<p>¡Tu cuenta está lista para ser usada! Estamos seguros de que vas a disfrutar nuestra plataforma y las ventajas que tenemos para ti.</p>" +
+            "<p>Para iniciar sesión, solo haz clic en el botón de abajo. Recuerda usar este email: %s</p>" +
             "<div style='margin: 20px 0;'>" +
             "    <a href='%s' style='padding:15px; background-color: #2f6304; color: #FFFFFF; text-align: center; text-decoration: none; display: inline-block; border-radius: 5px; font-size: 18px;'>Iniciar sesión</a>" +
             "</div>" +
-            "<p>Si tienes algún problema para acceder a tu cuenta, por favor, no dudes en ponerte en contacto con nosotros.</p>" +
-            "<p>Saludos,</p>" +
-            "<p>El equipo de <span style='color: #008000;'>Digital</span> <span style='color: #00008B;'>Booking</span></p>" +
+            "<p>Si encuentras algún problema al acceder a tu cuenta, no dudes en contactarnos. Estamos aquí para ayudarte.</p>" +
+            "<p>Nos vemos pronto,</p>" +
+            "<p>Tu equipo de <span style='color: #008000;'>Digital</span> <span style='color: #00008B;'>Booking</span></p>" +
             "</body>" +
             "</html>";
 
