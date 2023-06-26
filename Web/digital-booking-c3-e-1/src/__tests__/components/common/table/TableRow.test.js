@@ -17,7 +17,11 @@ describe("TableRow", () => {
   // 🧪 =============================
   test("renderiza el componente TableRow", () => {
     render(
-      <TableRow product={product} onDelete={jest.fn()} onEdit={jest.fn()} />
+      <table>
+        <tbody>
+          <TableRow product={product} onDelete={jest.fn()} onEdit={jest.fn()} />
+        </tbody>
+      </table>
     );
 
     const productId = screen.getByText("1");
@@ -48,7 +52,11 @@ describe("TableRow", () => {
   // 🧪 =============================
   test("muestra la imagen del producto si se proporciona imageURL", () => {
     render(
-      <TableRow product={product} onDelete={jest.fn()} onEdit={jest.fn()} />
+      <table>
+        <tbody>
+          <TableRow product={product} onDelete={jest.fn()} onEdit={jest.fn()} />
+        </tbody>
+      </table>
     );
     const productImage = screen.getByAltText("Product Name");
     expect(productImage).toBeInTheDocument();
@@ -63,11 +71,11 @@ describe("TableRow", () => {
     const productWithoutImage = { ...product, imageURL: null };
 
     render(
-      <TableRow
-        product={productWithoutImage}
-        onDelete={jest.fn()}
-        onEdit={jest.fn()}
-      />
+      <table>
+        <tbody>
+          <TableRow product={productWithoutImage} onDelete={jest.fn()} onEdit={jest.fn()} />
+        </tbody>
+      </table>
     );
 
     const productImage = screen.queryByAltText("Product Name");
