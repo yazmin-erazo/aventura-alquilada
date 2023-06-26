@@ -63,14 +63,14 @@ const CrudCategory = () => {
             setReload(!reload);
             Swal.fire(
               "¡Eliminado!",
-              "La categoría ha sido eliminada.",
+              res.data.response,
               "success"
             );
           }
         } catch (error) {
           Swal.fire(
             "Error",
-            "Ha ocurrido un error al eliminar la categoría.",
+            res.data.response,
             "error"
           );
         }
