@@ -5,6 +5,7 @@ import styles from "./RegisterUser.module.css";
 import AuthService from "../../../shared/services/AuthService";
 import Swal from "sweetalert2";
 import PasswordInput from "../../common/input/PasswordInput";
+import TermsAndConditions from "./TermsAndConditions";
 
 const RegisterUser = () => {
   const [user, setUser] = useState({
@@ -161,7 +162,7 @@ const RegisterUser = () => {
           icon: "success",
           title: "Correo de activación reenviado",
           text: "El correo de activación ha sido reenviado exitosamente.",
-        }).then((result) => {});
+        }).then((result) => { });
       } else {
         Swal.fire({
           icon: "error",
@@ -177,6 +178,8 @@ const RegisterUser = () => {
       });
     }
   };
+
+  const [showModal, setShowModal] = useState(false);
 
   return (
     <div className={styles.container}>
@@ -266,7 +269,13 @@ const RegisterUser = () => {
                   checked={isTermsChecked}
                   onChange={() => setIsTermsChecked(!isTermsChecked)}
                 />
-                He leído y acepto los términos y condiciones
+                <span>He leído y acepto &nbsp;</span>
+                <span
+                  style={{ cursor: 'pointer', color: 'blue' }}
+                  onClick={() => setShowModal(true)}
+                >
+                  los términos y condiciones
+                </span>
               </label>
               <div>
                 {formErrors.terms && (
@@ -277,7 +286,7 @@ const RegisterUser = () => {
               </div>
             </div>
 
-            <ButtonPrimary onClick={handleSubmit}>Enviar</ButtonPrimary>
+            <ButtonPrimary onClick={handleSubmit} disabled={!isTermsChecked}>Enviar</ButtonPrimary>
           </form>
           {isEmailSent && !showResendMessage && (
             <div className={styles["button-register-container"]}>
@@ -293,6 +302,11 @@ const RegisterUser = () => {
               </p>
             </div>
           )}
+          <div>
+            <TermsAndConditions
+              show={showModal}
+              handleClose={() => setShowModal(false)}
+            /></div>
         </div>
       </div>
     </div>
