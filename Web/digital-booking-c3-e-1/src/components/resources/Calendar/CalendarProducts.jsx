@@ -64,19 +64,7 @@ const CalendarProducts = ({ onSelectDates, rents }) => {
 
       const diffDays =
         Math.abs(selectedDate.diff(selectedStartDate, "days")) + 1;
-     
-      // Verificar si alguna fecha en el rango seleccionado es no disponible
-      let currentDate = moment(selectedStartDate);
-      while (currentDate <= selectedDate) {
-        if (isDateUnavailable(currentDate)) {
-          Swal.fire("Fechas no disponibles", "Seleccione otro rango de fechas para reservar ", "error");
-          setSelectedStartDate(null);
-          setSelectedEndDate(null);
-          setTotalRentalDays(0);
-         return; // Salir de la función para evitar que se actualicen los estados nuevamente
-         }
-      currentDate.add(1, "day");
-      }
+    
       setTotalRentalDays(diffDays);
   }
   };
@@ -84,7 +72,6 @@ const CalendarProducts = ({ onSelectDates, rents }) => {
   const formatDate = (date) => {
     return moment(date).format("DD/MM/YYYY");
   };
-
   useEffect(() => {
     if (selectedStartDate && selectedEndDate) {
       let diffDays = 0;
@@ -94,6 +81,13 @@ const CalendarProducts = ({ onSelectDates, rents }) => {
         if (!isDateUnavailable(currentDate)) {
           diffDays++;
         }
+          // Verificar si alguna fecha en el rango seleccionado es no disponible
+        else if (isDateUnavailable(currentDate)) {
+          Swal.fire("Fechas no disponibles", "Seleccione otro rango de fechas para reservar ", "error");
+          setSelectedStartDate(null);
+          setSelectedEndDate(null);
+          setTotalRentalDays(0);
+      }
         currentDate.add(1, "day");
       }
 
