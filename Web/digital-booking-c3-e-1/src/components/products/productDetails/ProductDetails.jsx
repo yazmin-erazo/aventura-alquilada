@@ -25,7 +25,7 @@ const ProductDetails = () => {
   const data = useContext(ProductsContext);
   const auth = useContext(UserContext);
   const [products, setProducts] = useState([]);
-  const params = useParams(); 
+  const params = useParams();
   const navigate = useNavigate();
   const [selectedStartDate, setSelectedStartDate] = useState(null);
   const [selectedEndDate, setSelectedEndDate] = useState(null);
@@ -44,16 +44,15 @@ const ProductDetails = () => {
   const product = products.find((p) => {
     return p.id === parseInt(params.id);
   });
-  
-  
+
   useEffect(() => {
     setProducts(data.products);
-    const dates = JSON.parse(sessionStorage.getItem("dates"))
-    if(dates){
+    const dates = JSON.parse(sessionStorage.getItem("dates"));
+    if (dates) {
       handleSelectDates(dates.startDate, dates.endDate);
     }
   }, [data, product]);
-  
+
   // --------------------START calculo distancia usuario - producto --------------
   let distance = null;
   if (product) {
@@ -63,11 +62,11 @@ const ProductDetails = () => {
       longitude: product.city.longitude,
     };
     distance = userLocation
-    ? getDistance(userLocation, productLocation) / 1000
-    : null;
+      ? getDistance(userLocation, productLocation) / 1000
+      : null;
   }
   // --------------------END calculo distancia usuario - producto --------------
-  
+
   // --------------------START calcula la diferencia en días con la funcion diff de moment --------------
   useEffect(() => {
     if (selectedStartDate && selectedEndDate) {

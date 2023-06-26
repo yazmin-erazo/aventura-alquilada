@@ -46,7 +46,7 @@
 
 .filterButtons {
   display: flex;
-  margin: 1rem;
+  margin: 1rem 0;
 }
 .clearBtn {
   background-color: var(--bg-general);
