@@ -2,6 +2,7 @@ package com.digitalbooking.digitalbooking.domain.rent.service;
 
 import com.digitalbooking.digitalbooking.common.exception.ExceptionInvalidValue;
 import com.digitalbooking.digitalbooking.common.exception.ExceptionNullValue;
+import com.digitalbooking.digitalbooking.domain.mail.MailRepository;
 import com.digitalbooking.digitalbooking.domain.product.dto.ProductDTO;
 import com.digitalbooking.digitalbooking.domain.product.repository.RepositoryProduct;
 import com.digitalbooking.digitalbooking.domain.rent.dto.RentDTO;
@@ -11,6 +12,7 @@ import com.digitalbooking.digitalbooking.domain.role.dto.RoleDTO;
 import com.digitalbooking.digitalbooking.domain.user.dto.UserDTO;
 import com.digitalbooking.digitalbooking.domain.user.repository.RepositoryUser;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import java.lang.reflect.Field;
@@ -29,6 +31,12 @@ public class RentService {
     @Autowired
     RepositoryUser repositoryUser;
 
+    @Autowired
+    MailRepository mailRepository;
+
+    @Value("http://localhost:5173/reservas")
+    private String urlrents;
+
     public String deleteRent(Rent rent, String userEmail) throws NoSuchFieldException, IllegalAccessException {
         RentDTO rentDTO = rentRepository.findByIdAndState(rent.getId()).orElseThrow(()->new ExceptionNullValue("El alquiler que intenta actualizar no se encontró"));
         validateRentOwnership(rentDTO.getUser().getId(), userEmail, "rentDelete");
@@ -37,9 +45,11 @@ public class RentService {
     }
 
     public Long createRent(Rent rent, String userEmail) throws NoSuchFieldException, IllegalAccessException {
-        repositoryProduct.findByIdAndIsDelete(rent.getProduct().getId()).orElseThrow(()->new ExceptionNullValue("Producto no encontrado"));
+        ProductDTO productDTO =repositoryProduct.findByIdAndIsDelete(rent.getProduct().getId()).orElseThrow(()->new ExceptionNullValue("Producto no encontrado"));
         repositoryProduct.findByIdAndDatesRents(rent.getProduct().getId(), rent.getStarDate(), rent.getEndDate()).orElseThrow( () -> new ExceptionInvalidValue("No se puede realizar una reserva en la fecha indicada porque el producto ya tiene una reserva que se cruza"));
         validateRentOwnership(rent.getUser().getId(), userEmail, "rentCreate");
+        UserDTO user = repositoryUser.findByEmail(userEmail).orElseThrow(()->new ExceptionNullValue("Usuario no encontrado"));
+        mailRepository.sendEmailRentConfirmation(userEmail, "Confirmación reserva", user.getName(), urlrents, rent.getStarDate(), rent.getEndDate(), productDTO.getName());
         return rentRepository.createRent(rent);
     }
 

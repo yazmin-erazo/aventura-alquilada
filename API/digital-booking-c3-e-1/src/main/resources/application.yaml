@@ -33,6 +33,7 @@ email:
   urlvalidation: http://localhost:5173/user/activate?token=%s
   subjectlogin: Cuenta Activada
   urllogin: http://localhost:5173/login
+  urlrents: http://localhost:5173/reservas
 
 app:
   jwtSecret: 95a59bb848e94d00842bb39ecf6f8fcf

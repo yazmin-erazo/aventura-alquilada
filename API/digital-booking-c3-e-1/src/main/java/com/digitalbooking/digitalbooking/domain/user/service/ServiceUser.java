@@ -50,7 +50,7 @@ public class ServiceUser implements UserDetailsService {
         LocalDateTime generatingDate = LocalDateTime.now();
         var userId = repositoryUser.save(user, token, generatingDate);
         String urlToken = String.format(urlValidation,token);
-        mailRepository.sendEmailValidateAccount(user.getEmail(), subject, user.getName(),urlToken);
+        mailRepository.sendEmailValidateAccount(user.getEmail(), subject, user.getName(), urlToken);
         return userId;
     }
 

@@ -8,6 +8,8 @@ import org.springframework.stereotype.Repository;
 
 import javax.mail.MessagingException;
 import javax.mail.internet.MimeMessage;
+import java.time.Instant;
+import java.util.Date;
 
 @Repository
 public class MailRepositoryImpl implements MailRepository {
@@ -40,6 +42,27 @@ public class MailRepositoryImpl implements MailRepository {
             "</body>" +
             "</html>";
 
+    private final String templateHtmlBookingConfirmationMail = "<html>" +
+            "<body style='background-color: #F5F5F5; text-align: center; padding:50px; font-family: Arial, sans-serif;'>" +
+            "<h2>Confirmación de Reserva</h2>" +
+            "<p>Hola %s,</p>" +
+            "<p>Tu reserva ha sido confirmada. ¡Estamos emocionados de que disfrutes de nuestros servicios!</p>" +
+            "<p>A continuación, te proporcionamos los detalles de tu reserva:</p>" +
+            "<h3>Detalles de la Reserva:</h3>" +
+            "<p><strong>Fecha:</strong> %s</p>" +
+            "<p><strong>Fecha de inicio:</strong> %s</p>" +
+            "<p><strong>Fecha de finalización:</strong> %s</p>" +
+            "<p><strong>Equipo reservado:</strong> %s</p>" +
+            "<p>Para ver todos los detalles de tus reservas, accede a tu cuenta en el siguiente enlace:</p>" +
+            "<p><a href='%s' style='padding:10px; background-color: #2f6304; color: #FFFFFF; text-align: center; text-decoration: none; display: inline-block; border-radius: 5px;'>Ver Reservas</a></p>" +
+            "<p>Si tienes alguna pregunta o necesitas realizar cambios en tu reserva, no dudes en ponerte en contacto con nosotros.</p>" +
+            "<p>¡Esperamos que tengas una experiencia increíble!</p>" +
+            "<p>Saludos,</p>" +
+            "<p>Tu equipo de <span style='color: #008000;'>Digital</span> <span style='color: #00008B;'>Booking</span></p>" +
+            "</body>" +
+            "</html>";
+
+
     @Override
     public void sendEmailValidateAccount(String to, String subject, String username, String activationUrl)  {
         MimeMessage msg = emailSender.createMimeMessage();
@@ -64,6 +87,23 @@ public class MailRepositoryImpl implements MailRepository {
         try {
             helper = new MimeMessageHelper(msg, false, "utf-8");
             String htmlMsg = String.format(templateHtmlAccountAvailableMail, name,email, urlValidation);
+            msg.setContent(htmlMsg, "text/html");
+            helper.setTo(email);
+            helper.setFrom("digitalhouse.dh123@gmail.com");
+            helper.setSubject(subject);
+        } catch (MessagingException e) {
+            //throw new RuntimeException(e);
+        }
+        emailSender.send(msg);
+    }
+
+    @Override
+    public void sendEmailRentConfirmation(String email, String subject, String name, String urlRents, Date starDate, Date endDate, String productDTOName) {
+        MimeMessage msg = emailSender.createMimeMessage();
+        MimeMessageHelper helper = null;
+        try {
+            helper = new MimeMessageHelper(msg, false, "utf-8");
+            String htmlMsg = String.format(templateHtmlBookingConfirmationMail, name,Date.from(Instant.now()), starDate.toString(), endDate.toString(), productDTOName, urlRents);
             msg.setContent(htmlMsg, "text/html");
             helper.setTo(email);
             helper.setFrom("digitalhouse.dh123@gmail.com");
