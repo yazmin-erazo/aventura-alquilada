@@ -30,10 +30,10 @@ aws:
     imagepath: img
 email:
   subject: Activar Cuenta
-  urlvalidation: http://localhost:5173/user/activate?token=%s
+  urlvalidation: http://equipamiento-deportivo-static.s3-website.us-east-2.amazonaws.com/user/activate?token=%s
   subjectlogin: Cuenta Activada
-  urllogin: http://localhost:5173/login
-  urlrents: http://localhost:5173/reservas
+  urllogin: http://equipamiento-deportivo-static.s3-website.us-east-2.amazonaws.com/login
+  urlrents: http://equipamiento-deportivo-static.s3-website.us-east-2.amazonaws.com/reservas
 
 app:
   jwtSecret: 95a59bb848e94d00842bb39ecf6f8fcf
