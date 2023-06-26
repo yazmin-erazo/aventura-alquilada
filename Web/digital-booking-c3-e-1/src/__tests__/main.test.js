@@ -5,6 +5,23 @@ import App from "../App";
 import ProductDetails from "../components/products/productDetails/ProductDetails";
 import HomePage from "../components/home/HomePage";
 
+// Crear un mock para window.matchMedia
+window.matchMedia = jest.fn().mockImplementation((query) => ({
+  matches: false,
+  media: query,
+  onchange: null,
+  addEventListener: jest.fn(),
+  removeEventListener: jest.fn(),
+  dispatchEvent: jest.fn(),
+}));
+
+// Crear un mock para navigator.geolocation
+window.navigator.geolocation = {
+  getCurrentPosition: jest.fn().mockImplementation((success, error) => {
+    error(new Error("Geolocalización no soportada por el navegador"));
+  }),
+};
+
 test("renderiza app con routes", () => {
   render(
     <BrowserRouter>
@@ -16,4 +33,5 @@ test("renderiza app con routes", () => {
       </Routes>
     </BrowserRouter>
   );
+
 });
