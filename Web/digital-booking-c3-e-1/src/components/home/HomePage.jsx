@@ -13,6 +13,7 @@ const HomePage = () => {
   const [filterParams, setFilterParams] = useState({});
   const [userLocation, setUserLocation] = useState(null);
   const recommendedSectionRef = useRef(null);
+  const titleRef = useRef(null);
 
   const handleSearch = (params) => {
     setSearchParams(params);
@@ -22,10 +23,9 @@ const HomePage = () => {
   const handleFilterChange = (filters) => {
     setFilterParams(filters);
     // Desplazarse al inicio de la sección de RecommendedList
-    const recommendedSection = recommendedSectionRef.current;
-    const title = recommendedSection?.querySelector("h3");
-
-    if (title) {
+    const title = titleRef.current;
+  
+    if (title && typeof title.scrollIntoView === 'function') {
       title.scrollIntoView({ behavior: "smooth", block: "start" });
     }
   };
@@ -83,7 +83,7 @@ const HomePage = () => {
             className={`${styles.containerWithSidebar}`}
           >
             <section className={styles.recommendedContainer}>
-              <h3 className={styles.subtitle}>
+              <h3 ref={titleRef} className={styles.subtitle}>
                 {searchParams ? "Resultados de su Búsqueda" : "Recomendados"}
               </h3>
               <FilterDropDown onFilterChange={handleFilterChange} />

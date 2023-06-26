@@ -22,16 +22,49 @@ window.navigator.geolocation = {
   }),
 };
 
-test("renderiza app con routes", () => {
-  render(
-    <BrowserRouter>
-      <Routes>
-        <Route path="/" element={<App />}>
-          <Route path="/" element={<HomePage />} />
-          <Route path="products/:id" element={<ProductDetails />} />
-        </Route>
-      </Routes>
-    </BrowserRouter>
-  );
+beforeAll(() => {
+  // Simulate geolocation at a specific location
+  const mockGeolocation = {
+    getCurrentPosition: jest.fn().mockImplementation((success) =>
+      success({
+        coords: {
+          latitude: 51.5074, // London
+          longitude: -0.1278, //London
+        },
+      })
+    ),
+  };
 
+  Object.defineProperty(window.navigator, "geolocation", {
+    value: mockGeolocation,
+    configurable: true,
+  });
+});
+
+describe("Pruebas de geolocalización", () => {
+  test("Debe simular la geolocalización en una ubicación específica", () => {
+    window.navigator.geolocation.getCurrentPosition.mockImplementation(
+      (success) =>
+        success({
+          coords: {
+            latitude: 51.5074, // London
+            longitude: -0.1278, // London
+          },
+        })
+    );
+    window.navigator.geolocation.getCurrentPosition.mockRestore();
+  });
+
+  test("renderiza app con routes", () => {
+    render(
+      <BrowserRouter>
+        <Routes>
+          <Route path="/" element={<App />}>
+            <Route path="/" element={<HomePage />} />
+            <Route path="products/:id" element={<ProductDetails />} />
+          </Route>
+        </Routes>
+      </BrowserRouter>
+    );
+  });
 });
