@@ -4,6 +4,7 @@ import Swal from "sweetalert2";
 const CATEGORY_ENDPOINTS = {
   ALL_CATEGORIES: "category/categories",
   CREATE_CATEGORY: "category",
+  DELETE_CATEGORY: "category/",
 };
 
 const CategoryService = {
@@ -19,6 +20,8 @@ const CategoryService = {
         Swal.fire("Error", "Ha ocurrido un error", "error");
         throw err;
       }),
+      deleteByID: id => 
+      API.delete(CATEGORY_ENDPOINTS.DELETE_CATEGORY+id)
 };
 
 export default CategoryService;

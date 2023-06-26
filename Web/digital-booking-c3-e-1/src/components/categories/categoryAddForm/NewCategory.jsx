@@ -7,6 +7,7 @@ import CategoryService from "../../../shared/services/CategoryService";
 import Swal from "sweetalert2";
 import IconSelect from "../../common/IconSelect/IconSelect";
 import ButtonInactive from "../../common/Buttons/ButtonInactive";
+import { useNavigate } from "react-router-dom";
 
 const NewCategory = () => {
   const [categories, setCategories] = useState([]);
@@ -19,6 +20,8 @@ const NewCategory = () => {
     fileName: "",
     selectedIcon: "",
   });
+
+  const navigate = useNavigate();
 
   const handleInputChange = (name, value) => {
     setFormData((prevFormData) => ({
@@ -90,7 +93,9 @@ const NewCategory = () => {
           selectedImage: null,
           fileName: "",
         });
-        setSelectedIcon("");
+      setSelectedIcon("");
+
+      navigate("/admin/category/list")
       }
     } catch (error) {
       console.log(error.response);
