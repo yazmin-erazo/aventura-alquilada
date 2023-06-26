@@ -20,7 +20,7 @@ body {
   margin: 0 auto;
 }
 
-@media (min-width: 769px) {
+/* @media (min-width: 769px) {
   .container {
     width: 98%;
   }
@@ -30,4 +30,4 @@ body {
   .container {
     width: 100%;
   }
-}
+} */

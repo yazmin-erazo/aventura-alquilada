@@ -15,7 +15,7 @@ describe("TableRow", () => {
   };
 
   // 🧪 =============================
-  test("renders the TableRow component", () => {
+  test("renderiza el componente TableRow", () => {
     render(
       <TableRow product={product} onDelete={jest.fn()} onEdit={jest.fn()} />
     );
@@ -46,7 +46,7 @@ describe("TableRow", () => {
   });
 
   // 🧪 =============================
-  test("displays product image if imageURL is provided", () => {
+  test("muestra la imagen del producto si se proporciona imageURL", () => {
     render(
       <TableRow product={product} onDelete={jest.fn()} onEdit={jest.fn()} />
     );
@@ -59,7 +59,7 @@ describe("TableRow", () => {
   });
 
   // 🧪 =============================
-  test("does not display product image if imageURL is not provided", () => {
+  test("no muestra la imagen del producto si no se proporciona imageURL", () => {
     const productWithoutImage = { ...product, imageURL: null };
 
     render(

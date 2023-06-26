@@ -53,9 +53,6 @@ const FilterDropDown = ({ onFilterChange }) => {
     setShowDropdown(!showDropdown);
   };
 
-  console.log(showFilters);
-  console.log(showDropdown);
-
   const handleFilterClear = () => {
     setFilters(initialState);
     setSelectedChips({

@@ -29,8 +29,14 @@ const SearchEngine = ({ handleSearch }) => {
       startDate: selectedStartDate,
       endDate: selectedEndDate,
     });
-    if(selectedStartDate)
-      sessionStorage.setItem("dates", JSON.stringify({startDate: selectedStartDate, endDate: selectedEndDate}))
+    if (selectedStartDate)
+      sessionStorage.setItem(
+        "dates",
+        JSON.stringify({
+          startDate: selectedStartDate,
+          endDate: selectedEndDate,
+        })
+      );
   };
 
   const handleSelectDates = (startDate, endDate) => {
@@ -46,7 +52,6 @@ const SearchEngine = ({ handleSearch }) => {
   };
 
   const cityHandler = (value) => {
-    console.log(value);
     if (value !== "Seleccione...") setCity(value);
     else setCity("");
   };

@@ -14,7 +14,6 @@ const FavsList = () => {
   const [favs, setFavs] = useState(user.favorites);
   const [productDetails, setProductDetails] = useState([]);
 
-  console.log(user.favorites);
   useEffect(() => {
     if (data.products.length > 0 && user.favorites.length > 0) {
       setProducts(data.products);
