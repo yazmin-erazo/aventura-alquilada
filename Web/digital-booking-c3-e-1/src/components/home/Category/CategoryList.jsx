@@ -1,24 +1,15 @@
 import { useEffect, useState, useRef } from "react";
 import CardCategory from "../../resources/Cards/Category/CardCategory";
 import styles from "./CategoryList.module.css";
-import { IoIosArrowForward } from "react-icons/io";
-import { IoIosArrowBack } from "react-icons/io";
+import { IoIosArrowForward, IoIosArrowBack } from "react-icons/io";
 import CategoryService from "../../../shared/services/CategoryService";
-import * as ReactIcons from "react-icons/md";
-import * as TbIcons from "react-icons/tb";
-import * as FaIcons from "react-icons/fa";
-import { sportsIcons } from "../../common/SportsIcons";
+import ReactIcons, { sportsIcons } from "../../common/SportsIcons";
 
 const CategoryList = ({ onCategoryClick }) => {
   const listRef = useRef(null);
   const [showLeftArrow, setShowLeftArrow] = useState(false);
   const [showRightArrow, setShowRightArrow] = useState(true);
   const [categories, setCategories] = useState([]);
-  const iconComponents = {
-    ...ReactIcons,
-    ...TbIcons,
-    ...FaIcons,
-  };
 
   const handleScroll = (scrollOffset) => {
     listRef.current.scrollLeft += scrollOffset;
@@ -63,7 +54,7 @@ const CategoryList = ({ onCategoryClick }) => {
         style={{
           background: showLeftArrow
             ? "none"
-            : "linear-gradient(to right, rgba(195, 212, 228, 0), #DEE7F0)",
+            : "linear-gradient(to right, rgba(195, 212, 228, 0), rgb(240 243 247))",
           color: showLeftArrow ? "white" : "transparent",
         }}
       ></div>
@@ -74,14 +65,14 @@ const CategoryList = ({ onCategoryClick }) => {
       >
         <div className={styles.categoryList}>
           {categories.map((category) => {
-            const IconComponent = iconComponents[category.icon] || null;
+            const IconComponent = ReactIcons[category.icon] || null;
             const isIconInSportsIcons = sportsIcons.includes(category.icon);
             return (
               <CardCategory
                 key={category.id}
                 category={category}
                 onCategoryClick={handleCategoryClick}
-                selectedIcon={isIconInSportsIcons ? IconComponent : undefined} // Pasa el componente del icono
+                selectedIcon={isIconInSportsIcons ? IconComponent : undefined}
               />
             );
           })}
@@ -107,7 +98,6 @@ const CategoryList = ({ onCategoryClick }) => {
         className={`${styles.buttonRightB} ${styles.button}`}
         onClick={() => {
           handleScroll(210);
-          // setShowRightArrow(true);
         }}
         style={{
           backgroundColor: showRightArrow

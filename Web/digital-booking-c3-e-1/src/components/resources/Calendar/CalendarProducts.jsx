@@ -3,10 +3,10 @@ import moment from "moment";
 import Calendar from "react-calendar";
 import { registerLocale, setDefaultLocale } from "react-datepicker";
 import es from "date-fns/locale/es";
-
 import "react-calendar/dist/Calendar.css";
 import styles from "./CalendarProducts.module.css";
 import { useMediaQuery } from "react-responsive";
+import Swal from "sweetalert2";
 
 registerLocale("es", es);
 setDefaultLocale("es");
@@ -49,9 +49,6 @@ const CalendarProducts = ({ onSelectDates, rents }) => {
     const selectedDate = moment(date).startOf("day");
 
     if (selectedEndDate) {
-      console.log("fecha final")
-      console.log(selectedDate)
-
       setSelectedStartDate(selectedDate);
       setSelectedEndDate(null)
       // if (selectedDate > selectedEndDate) {
@@ -61,19 +58,27 @@ const CalendarProducts = ({ onSelectDates, rents }) => {
       //   setSelectedStartDate(selectedDate);
       // }
     } else if (!selectedStartDate) {
-      console.log("fecha inicial")
-      console.log(selectedDate)
-
       setSelectedStartDate(selectedDate);
     } else {
-      console.log("fecha final 2")
-      console.log(selectedDate)
-      
       setSelectedEndDate(selectedDate);
+
       const diffDays =
         Math.abs(selectedDate.diff(selectedStartDate, "days")) + 1;
+     
+      // Verificar si alguna fecha en el rango seleccionado es no disponible
+      let currentDate = moment(selectedStartDate);
+      while (currentDate <= selectedDate) {
+        if (isDateUnavailable(currentDate)) {
+          Swal.fire("Fechas no disponibles", "Seleccione otro rango de fechas para reservar ", "error");
+          setSelectedStartDate(null);
+          setSelectedEndDate(null);
+          setTotalRentalDays(0);
+         return; // Salir de la función para evitar que se actualicen los estados nuevamente
+         }
+      currentDate.add(1, "day");
+      }
       setTotalRentalDays(diffDays);
-    }
+  }
   };
 
   const formatDate = (date) => {
@@ -106,7 +111,7 @@ const CalendarProducts = ({ onSelectDates, rents }) => {
   }, [selectedStartDate, selectedEndDate]);
 
   return (
-    <div>
+    <div className={styles.containerCalendarWidth}>
       <div className={styles.containerCalendar}>
         <div className={styles.section}>
           <Calendar

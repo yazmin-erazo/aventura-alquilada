@@ -1,7 +1,7 @@
 import React, { useContext, useEffect, useState } from "react";
 import styles from "./RecommendedProducts.module.css";
 import ButtonPrimary from "../../../common/Buttons/ButtonPrimary";
-import { BsClock } from "react-icons/bs";
+import { BsClock, BsPin, BsPinMap } from "react-icons/bs";
 import { FaStar } from "react-icons/fa";
 import RatingStats from "../../rating/RatingStats";
 import { IconContext } from "react-icons";
@@ -17,24 +17,25 @@ const RecommendedProducts = ({
   categoryIcon,
 }) => {
   const [isFavorite, setIsFavorite] = useState(false);
-  const user = useContext(UserContext)
+  const user = useContext(UserContext);
   const { dispatch } = useContext(UserContext);
-  
 
   const handleFavoriteClick = (event) => {
     event.stopPropagation();
-  
+
     if (user.user.name) {
       setIsFavorite(!isFavorite);
       let buscarFav;
-      const favoriteProducts = JSON.parse(sessionStorage.getItem("user")).favorites;
-  
+      const favoriteProducts = JSON.parse(
+        sessionStorage.getItem("user")
+      ).favorites;
+
       if (user.user.favorites.length > 0) {
         buscarFav = favoriteProducts.find((p) => p === product.id);
       }
-  
+
       let resultado = favoriteProducts;
-  
+
       if (!buscarFav) {
         resultado.push(product.id);
         ProductsService.addFav({ productId: product.id });
@@ -42,21 +43,33 @@ const RecommendedProducts = ({
         resultado = resultado.filter((id) => id !== buscarFav.id);
         ProductsService.deleteFav(product.id);
       }
-  
+
       dispatch({
         type: "FAVS",
         payload: { ...user.user, favorites: resultado },
       });
-  
+
       if (!isFavorite) {
-        Swal.fire("Agregado a favoritos", "El producto se ha agregado a favoritos con éxito.", "success");
+        Swal.fire(
+          "Agregado a favoritos",
+          "El producto se ha agregado a favoritos con éxito.",
+          "success"
+        );
       } else {
-        Swal.fire("Eliminado de favoritos", "El producto se ha eliminado de favoritos con éxito.", "success");
+        Swal.fire(
+          "Eliminado de favoritos",
+          "El producto se ha eliminado de favoritos con éxito.",
+          "success"
+        );
       }
     } else {
-      Swal.fire("Atención!", "Debés estar registrado para elegir tus favoritos", "info");
+      Swal.fire(
+        "Atención!",
+        "Debés estar registrado para elegir tus favoritos",
+        "info"
+      );
     }
-  };  
+  };
 
   const calculateAverageRating = (ratings) => {
     if (Array.isArray(ratings) && ratings.length > 0) {
@@ -85,16 +98,17 @@ const RecommendedProducts = ({
   };
 
   const isUsersFav = () => {
-    if(user.user.name){
-      const favoriteProducts = JSON.parse(sessionStorage.getItem("user")).favorites;   
-      if(favoriteProducts.includes(product.id))
-        setIsFavorite(true)
+    if (user.user.name) {
+      const favoriteProducts = JSON.parse(
+        sessionStorage.getItem("user")
+      ).favorites;
+      if (favoriteProducts.includes(product.id)) setIsFavorite(true);
     }
-  }
+  };
 
   useEffect(() => {
     isUsersFav();
-  }, [])
+  }, []);
 
   const iconColor = "rgb(255 129 0)";
 
@@ -139,8 +153,10 @@ const RecommendedProducts = ({
             </div>
           )}
         </div>
-
-        <h3 className={styles.name}>{product.name}</h3>
+        <div className={styles.nameDistance}>
+          <h3 className={styles.name}>{product.name}</h3>
+          <p className={styles.distance}> {product.distance.toFixed(0)} Km de ti</p>
+        </div>
 
         <p className={styles.description}>{product.description}</p>
 

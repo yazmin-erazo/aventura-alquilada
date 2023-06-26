@@ -60,9 +60,9 @@
 .resultado {
   width: 100%;
   height: 70px;
-  color: var(--semantics-error);
+  color: var(--secondary-300);
   font-size: large;
-  text-align: center;
+  margin-top: 2rem;
 }
 
 /* -------- CON PANEL DE ADMINISTRACIÓN --------- */

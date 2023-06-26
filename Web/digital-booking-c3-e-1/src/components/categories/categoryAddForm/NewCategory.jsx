@@ -10,7 +10,7 @@ import ButtonInactive from "../../common/Buttons/ButtonInactive";
 import { useNavigate } from "react-router-dom";
 
 const NewCategory = () => {
-  const [categories, setCategories] = useState("");
+  const [categories, setCategories] = useState([]);
   const [selectedIcon, setSelectedIcon] = useState("");
 
   const [formData, setFormData] = useState({
@@ -83,6 +83,8 @@ const NewCategory = () => {
         });
       } else {
         await CategoryService.create(categoryData);
+        const response = await CategoryService.getAll();
+        setCategories(response);
 
         // Reiniciar los campos del formulario después de enviar los datos
         setFormData({

@@ -195,7 +195,7 @@ const SinglePanel = () => {
                   }}
                 >
                   <div className={styles.section}>
-                    <TfiLocationPin size={24} /> <div>Ciudades</div>
+                    <TfiLocationPin /> <div>Ciudades</div>
                   </div>
                 </Link>
               </div>

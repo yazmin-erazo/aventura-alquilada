@@ -3,9 +3,10 @@
 
 .bannerContainer {
   position: relative;
-  height: 240px;
+  height: 290px;
   background-repeat: no-repeat;
   background-size: cover;
+  
 }
 
 .backgroundImage {

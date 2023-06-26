@@ -23,6 +23,8 @@ import CrudRoles from "./components/roles/CrudRoles/CrudRoles.jsx"
 import FavsList from "./components/products/favs/FavsList.jsx";
 import mapboxgl from 'mapbox-gl'; // or "const mapboxgl = require('mapbox-gl');"
 import "./calendar.css"
+import NewReservation from "./components/reservation/create/NewReservation.jsx";
+import ReservationList from "./components/reservation/list/ReservationList.jsx";
 mapboxgl.accessToken = 'pk.eyJ1IjoieWxlcmF6b20iLCJhIjoiY2xpdDBmczFvMDR6MTNlbXM1bWluMmk1ZyJ9.bf1qXJ0ew0ZuXH1ZLtfHuA';
 
 
@@ -49,6 +51,8 @@ ReactDOM.createRoot(document.getElementById("root")).render(
         <Route path='admin/city/' element={<CrudCity />} />
         <Route path='admin/user' element={<UsersCrud />} />
         <Route path='favs' element={<FavsList />} />
+        <Route path='reserva/:id' element={<NewReservation />} />
+        <Route path='reservas' element={<ReservationList />} />
       </Route>
     </Routes>
     {/* </React.StrictMode> */}

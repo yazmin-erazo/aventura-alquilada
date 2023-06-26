@@ -21,6 +21,10 @@ public interface RepositoryProductMySql extends JpaRepository< ProductEntity, Lo
     Optional<ProductEntity> findByNameAndIsDelete(String name, Boolean isDelete);
 
     interface Specs{
+        static Specification<ProductEntity> byId(Long id) {
+            return (root, query, builder) ->
+                    builder.equal(root.get("id"), id);
+        }
         static Specification<ProductEntity> byDelete(byte delete) {
             return (root, query, builder) ->
                     builder.equal(root.get("isDelete"), delete);

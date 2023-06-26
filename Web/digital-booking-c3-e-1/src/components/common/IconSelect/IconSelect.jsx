@@ -1,15 +1,8 @@
 import { IconContext } from "react-icons";
 import { sportsIcons } from "../../common/SportsIcons";
-import * as MdIcons from "react-icons/md";
-import * as FaIcons from "react-icons/fa";
-import * as TbIcons from "react-icons/tb";
 import styles from "./IconSelect.module.css";
+import ReactIcons from "../../common/SportsIcons";
 
-const ReactIcons = {
-  ...MdIcons,
-  ...FaIcons,
-  ...TbIcons,
-};
 
 const IconSelect = ({ selectedIcon, handleIconSelect, children }) => {
   const iconOptions = Object.keys(ReactIcons)

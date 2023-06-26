@@ -36,7 +36,7 @@ public class CommandControllerRent {
     }
 
     @DeleteMapping("{id-rent}")
-    @Operation(summary = "Delete rent", description = "Method to delete a rent")
+    @Operation(summary = "Delete rent", description = "Method to canceled a rent")
     public ResponseEntity<CommandResponse<String>> deleteRent(@PathVariable("id-rent") Long id, Authentication authentication) throws NoSuchFieldException, IllegalAccessException {
         return new ResponseEntity<>(new CommandResponse<>(rentHandler.deleteRent(id, ((UserDetailsImpl)authentication.getPrincipal()).getEmail())), HttpStatus.OK);
     }

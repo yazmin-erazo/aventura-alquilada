@@ -17,7 +17,7 @@ const ImagePopup = ({ images, onClose }) => {
   };
 
   return (
-    <div className={styles.popupBackground} onClick={onClose}>
+    <div className={styles.popupBackground} onClick={onClose} data-testid="popup-background">
       <div className={styles.modalContent} onClick={(e) => e.stopPropagation()}>
         <div className={styles.carouselContainer}>
           <div
@@ -25,25 +25,34 @@ const ImagePopup = ({ images, onClose }) => {
             style={{ transform: `translateX(-${currentImage * 100}%)` }}
           >
             {images.map((image, index) => (
-              <img
-                key={index}
-                src={image.url}
-                alt={image.title}
-                className={styles.carouselImage}
-              />
+              <div key={index} className={styles.carouselContainerImage}>
+                <img
+                  src={image.url}
+                  alt={image.title}
+                  className={styles.carouselImage}
+                />
+              </div>
             ))}
           </div>
-          <button className={`${styles.carouselButton} ${styles.prev}`} onClick={handlePrev}>
+          <button
+            className={`${styles.carouselButton} ${styles.prev}`}
+            onClick={handlePrev}
+          >
             &#10094;
           </button>
-          <button className={`${styles.carouselButton} ${styles.next}`} onClick={handleNext}>
+          <button
+            className={`${styles.carouselButton} ${styles.next}`}
+            onClick={handleNext}
+          >
             &#10095;
           </button>
           <div className={styles.paginator}>
             {images.map((_, index) => (
               <div
                 key={index}
-                className={`${styles.paginatorDot} ${index === currentImage ? styles.activeDot : ''}`}
+                className={`${styles.paginatorDot} ${
+                  index === currentImage ? styles.activeDot : ""
+                }`}
                 onClick={() => handleDotClick(index)}
               ></div>
             ))}
