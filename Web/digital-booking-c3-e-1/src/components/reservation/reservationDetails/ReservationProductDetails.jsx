@@ -1,10 +1,13 @@
-import React from "react";
+import React, { useState } from "react";
 import { BiCheckCircle } from "react-icons/bi";
 import { MdOutlineTexture } from "react-icons/md";
 import styles from "./ReservationProductDetails.module.css";
 import { TfiLocationPin } from "react-icons/tfi";
+import CancellationPolicyModal from "./CancellationPolicyModal";
 
 const ReservationProductDetails = ({ product }) => {
+  const [showModal, setShowModal] = useState(false);
+  
   return (
     <>
       {product && (
@@ -26,10 +29,10 @@ const ReservationProductDetails = ({ product }) => {
                 <h4 className={styles.productName}>
                   {product.name} • {product.brand}
                 </h4>
-              <div className={styles.locationContainer}>
-                <TfiLocationPin className={styles.locationIcon} />
-                <p className={styles.location}>{product.city.name}</p>
-              </div>
+                <div className={styles.locationContainer}>
+                  <TfiLocationPin className={styles.locationIcon} />
+                  <p className={styles.location}>{product.city.name}</p>
+                </div>
               </div>
             </div>
             <div className={styles.featuresContainer}>
@@ -43,9 +46,16 @@ const ReservationProductDetails = ({ product }) => {
               </div>
             </div>
             <p className={styles.description}>{product.description}</p>
-            <a href="/" className={styles.cancellationPolicy}>
+            <span
+              onClick={() => setShowModal(true)}
+              className={styles.cancellationPolicy}
+            >
               Política de cancelación
-            </a>
+            </span>
+            <CancellationPolicyModal
+              show={showModal}
+              handleClose={() => setShowModal(false)}
+            />
           </div>
         </div>
       )}

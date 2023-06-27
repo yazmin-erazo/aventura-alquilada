@@ -7,7 +7,7 @@ import { MdOutlineEmail, MdOutlineMail } from "react-icons/md";
 
 const ContactReservation = ({
   user,
-  subscribe,
+  isSubscribe,
   handleSubscribeChange,
   onNameChange,
   onLastNameChange,
@@ -169,7 +169,7 @@ const ContactReservation = ({
         <input
           type="checkbox"
           id="subscribeCheckbox"
-          checked={subscribe}
+          checked={isSubscribe}
           onChange={handleSubscribeChange}
           className={styles.checkbox}
         />

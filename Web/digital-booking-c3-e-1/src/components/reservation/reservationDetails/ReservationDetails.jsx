@@ -7,7 +7,7 @@ const ReservationDetails = ({
   product,
   startDate,
   endDate,
-  selectedPreference,
+  delivery,
   frequency,
   equipmentPreferences,
   comment,
@@ -69,7 +69,7 @@ const ReservationDetails = ({
           <div className={styles.preferenceOptions}>
             <div
               className={`${styles.preferenceOption} ${
-                selectedPreference === "recoger" ? styles.active : ""
+                delivery === "recoger" ? styles.active : ""
               }`}
               onClick={() => handlePreferenceChange("recoger")}
             >
@@ -77,14 +77,14 @@ const ReservationDetails = ({
             </div>
             <div
               className={`${styles.preferenceOption} ${
-                selectedPreference === "entrega" ? styles.active : ""
+                delivery === "entrega" ? styles.active : ""
               }`}
               onClick={() => handlePreferenceChange("entrega")}
             >
               Servicio de entrega
             </div>
           </div>
-          {selectedPreference === "entrega" && (
+          {delivery === "entrega" && (
             <div className={styles.addressContainer}>
               <InputWithLabel
                 value={address}
@@ -108,20 +108,22 @@ const ReservationDetails = ({
             <div className={styles.equipmentPreference}>
               <input
                 type="checkbox"
+                id="equipmentcasco"
                 checked={equipmentPreferences.includes("casco")}
                 onChange={() => handleEquipmentPreferenceToggle("casco")}
                 className={styles.equipmentCheckbox}
               />
-              <span className={styles.preferenceText}>Casco adicional</span>
+              <label htmlFor="equipmentcasco" className={styles.preferenceText}>Casco adicional</label>
             </div>
             <div className={styles.equipmentPreference}>
               <input
                 type="checkbox"
+                id="equipmentmapas"
                 checked={equipmentPreferences.includes("mapas")}
                 onChange={() => handleEquipmentPreferenceToggle("mapas")}
                 className={styles.equipmentCheckbox}
               />
-              <span className={styles.preferenceText}>Mapas de rutas</span>
+              <label htmlFor="equipmentmapas" className={styles.preferenceText}>Mapa de rutas</label>
             </div>
           </div>
           <div className={styles.transparencyNote}>

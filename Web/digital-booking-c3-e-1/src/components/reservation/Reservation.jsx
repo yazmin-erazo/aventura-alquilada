@@ -7,8 +7,9 @@ import ReservationDetails from "./reservationDetails/ReservationDetails";
 import moment from "moment";
 import { registerLocale, setDefaultLocale } from "react-datepicker";
 import es from "date-fns/locale/es";
-import ReservationProductDetails from "./ReservationProductDetails";
+import ReservationProductDetails from "./reservationDetails/ReservationProductDetails";
 import Swal from "sweetalert2";
+import PrivacyPolicyModal from "./confirm/PrivacyPolicies";
 
 registerLocale("es", es);
 setDefaultLocale("es");
@@ -22,25 +23,26 @@ const Reservation = ({
   changeStep,
   step,
 }) => {
-  const [subscribe, setSubscribe] = useState(false);
-  const [selectedPreference, setSelectedPreference] = useState("recoger");
+  const [isSubscribe, setIsSubscribe] = useState(false);
+  const [delivery, setDelivery] = useState("recoger");
   const [frequency, setFrequency] = useState("");
   const [equipmentPreferences, setEquipmentPreferences] = useState([]);
   const [comment, setComment] = useState("");
   const [additionalContact, setAdditionalContact] = useState(null);
   const [address, setAddress] = useState("");
   const [isAddressValid, setIsAddressValid] = useState(false);
+  const [isPrivacyAccepted, setIsPrivacyAccepted] = useState(false);
 
   const handleStartDateChange = (value) => {};
 
   const handleEndDateChange = (value) => {};
 
   const handleSubscribeChange = (e) => {
-    setSubscribe(e.target.checked);
+    setIsSubscribe(e.target.checked);
   };
 
   const handlePreferenceChange = (preference) => {
-    setSelectedPreference(preference);
+    setDelivery(preference);
 
     if (preference === "recoger") {
       setAddress("");
@@ -60,12 +62,12 @@ const Reservation = ({
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (step === 2 && selectedPreference === "entrega" && !isAddressValid) {
+    if (step === 2 && delivery === "entrega" && !isAddressValid) {
       return;
     }
-    if (step !== 3) {
+    if (step === 1 || step === 2) {
       changeStep("NEXT");
-    } else {
+    } else if (step === 3 && isPrivacyAccepted) {
       reserve();
     }
   };
@@ -77,10 +79,12 @@ const Reservation = ({
       starDate: startDate,
       endDate: endDate,
       comment: comment,
-      // subscribe: subscribe,
-      // preference: selectedPreference,
-      // equipmentPreferences: equipmentPreferences,
+      delivery: delivery,
+      // deliveryAddress : address
+      // subscribe: isSubscribe,
+      // equipment: equipmentPreferences,
       // additionalContact: additionalContact,
+      // policyPrivacy: isPrivacyAccepted
     };
 
     const res = await RentsService.create(datos);
@@ -113,11 +117,15 @@ const Reservation = ({
     setAdditionalContact(contact);
   };
 
+  const handlePrivacyAcceptanceChange = (e) => {
+    setIsPrivacyAccepted(e.target.checked);
+  };
+
   useEffect(() => {
     setIsAddressValid(
-      selectedPreference === "recoger" || address.trim() !== ""
+      delivery === "recoger" || address.trim() !== ""
     );
-  }, [selectedPreference, address]);
+  }, [delivery, address]);
 
   const formatDate = (date) => {
     return moment(date).locale("es").format("DD/MMMM/YYYY");
@@ -135,7 +143,7 @@ const Reservation = ({
             {step === 1 && (
               <ContactReservation
                 user={user}
-                subscribe={subscribe}
+                isSubscribe={isSubscribe}
                 handleSubscribeChange={handleSubscribeChange}
                 onAdditionalContactChange={handleAdditionalContactChange}
                 additionalContact={additionalContact}
@@ -146,7 +154,7 @@ const Reservation = ({
                 product={product}
                 startDate={formatDate(startDate)}
                 endDate={formatDate(endDate)}
-                selectedPreference={selectedPreference}
+                delivery={delivery}
                 handleStartDateChange={handleStartDateChange}
                 handleEndDateChange={handleEndDateChange}
                 handlePreferenceChange={handlePreferenceChange}
@@ -165,8 +173,8 @@ const Reservation = ({
             {step === 3 && (
               <ConfirmReservation
                 user={user}
-                subscribe={subscribe}
-                selectedPreference={selectedPreference}
+                isSubscribe={isSubscribe}
+                delivery={delivery}
                 frequency={frequency}
                 product={product}
                 equipmentPreferences={equipmentPreferences}
@@ -175,6 +183,8 @@ const Reservation = ({
                 startDate={formatDate(startDate)}
                 endDate={formatDate(endDate)}
                 address={address}
+                isPrivacyAccepted={isPrivacyAccepted}
+                handlePrivacyAcceptanceChange={handlePrivacyAcceptanceChange}
               />
             )}
             <div className={styles.buttonsContainer}>
@@ -193,14 +203,12 @@ const Reservation = ({
                   className={styles.submitButton}
                   disabled={
                     (step === 2 &&
-                      selectedPreference === "entrega" &&
+                      delivery === "entrega" &&
                       !isAddressValid) ||
-                    (step === 1 &&
-                      selectedPreference === "entrega" &&
-                      address.trim() === "")
+                    (step === 3 && !isPrivacyAccepted)
                   }
                 >
-                  {step !== 3 ? "Siguiente" : "Confirmar"}
+                  {step !== 3 ? "Siguiente" : "Reservar ahora"}
                 </button>
               </div>
             </div>
