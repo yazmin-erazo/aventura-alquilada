@@ -1,0 +1,144 @@
+.container {
+  background-color: #fff;
+  padding: 2rem;
+  border-radius: 8px;
+  box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.1);
+  color: var(--secondary-600);
+}
+
+.header {
+  display: flex;
+  gap: 0.5rem;
+  align-items: center;
+  margin-bottom: 20px;
+}
+.headerIcon {
+  font-size: 24px;
+  color: var(--secondary-100);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.title {
+  font-size: 20px;
+}
+
+.inputContainer {
+  width: 100%;
+}
+.inputsContainer {
+  display: flex;
+  gap: 1rem;
+}
+
+
+.description {
+  font-size: 14px;
+  color: var(--secondary-600);
+  margin-bottom: 20px;
+}
+
+.containerInputs {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 16px;
+}
+
+.preferenceContainer {
+  margin-bottom: 16px;
+}
+
+.preferenceLabel {
+  font-weight: bold;
+  font-size: 16px;
+  margin-bottom: 1rem;
+}
+
+.preferenceOptions {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 1rem 0;
+}
+
+.preferenceOption {
+  width: 100%;
+  flex-grow: 1;
+  padding: 10px;
+  border: 1px solid var(--secondary-100);
+  border-radius: 4px;
+  text-align: center;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.preferenceOption:hover {
+  background-color: var(--secondary-50);
+}
+
+.preferenceOption.active {
+  background-color: forestgreen;
+  color: #ffffff;
+}
+
+.equipmentPreferences {
+  display: flex;
+  flex-direction: column;
+  margin-top: 10px;
+}
+
+.equipmentPreference {
+  display: flex;
+  align-items: center;
+  margin-bottom: 5px;
+}
+
+.equipmentCheckbox {
+  margin-right: 10px;
+}
+
+.preferenceText {
+  font-size: 14px;
+}
+
+.transparencyNote {
+  font-size: 12px;
+  color: var(--secondary-600);
+  margin-top: 10px;
+}
+
+.commentContainer {
+  margin-bottom: 20px;
+}
+
+.commentLabel {
+  display: block;
+  font-weight: bold;
+  font-size: 16px;
+  margin-bottom: 10px;
+}
+
+.commentInput {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid var(--secondary-100);
+  border-radius: 4px;
+  font-size: 14px;
+  resize: vertical;
+}
+
+.addressContainer {
+  padding-bottom: 1rem;
+  border-width: 2px;
+  border-bottom: 1px dotted var(--secondary-50);
+}
+.addressContainer span {
+  font-size: 12px;
+  color: green;
+}
+@media (max-width: 768px) {
+  .containerInputs {
+    flex-direction: column;
+  }
+}

@@ -158,110 +158,136 @@ const NewRole = () => {
       <div className={styles.containerForm}>
         <div className={styles.registerRoleContainer}>
           <div className={styles.registerRoleForm}>
-            <InputWithLabel
-              type="text"
-              value={formData.roleName}
-              onChange={(event) =>
-                handleInputChange("roleName", event.target.value)
-              }
-            >
-              Nombre del rol:
-            </InputWithLabel>
+            <div className={styles.registerRoleFormContainer}>
+              <InputWithLabel
+                type="text"
+                value={formData.roleName}
+                onChange={(event) =>
+                  handleInputChange("roleName", event.target.value)
+                }
+              >
+                Nombre del rol:
+              </InputWithLabel>
 
-            <h4 className={styles.titleSelectAll}>Permisos:</h4>
+              <h4 className={styles.titleSelectAll}>Permisos:</h4>
 
-            <div className={styles.selectAllContainer}>
-              <label>
-                <input
-                  style={{ marginRight: "8px" }}
-                  type="checkbox"
-                  checked={formData.selectAll}
-                  onChange={(event) =>
-                    handleSelectAllChange(event.target.checked)
-                  }
-                />
-                Seleccionar todo
-              </label>
-            </div>
-
-            <div className={styles.permissionsContainer}>
-              <div className={styles.category}>
-                <div className={styles.categoryName}>
-                  <h4>Categorías</h4>
-                </div>
-                <div className={styles.categoryPermissions}>
-                  <CheckItem
-                    category="categories"
-                    action="list"
-                    name="Listar"
+              <div className={styles.selectAllContainer}>
+                <label>
+                  <input
+                    style={{ marginRight: "8px" }}
+                    type="checkbox"
+                    checked={formData.selectAll}
+                    onChange={(event) =>
+                      handleSelectAllChange(event.target.checked)
+                    }
                   />
-                  <CheckItem
-                    category="categories"
-                    action="add"
-                    name="Agregar"
-                  />
-                  <CheckItem
-                    category="categories"
-                    action="edit"
-                    name="Editar"
-                  />
-                  <CheckItem
-                    category="categories"
-                    action="delete"
-                    name="Eliminar"
-                  />
-                </div>
+                  Seleccionar todo
+                </label>
               </div>
 
-              <div className={styles.category}>
-                <div className={styles.categoryName}>
-                  <h4>Productos</h4>
+              <div className={styles.permissionsContainer}>
+                <div className={styles.category}>
+                  <div className={styles.categoryName}>
+                    <h4>Categorías</h4>
+                  </div>
+                  <div className={styles.categoryPermissions}>
+                    <CheckItem
+                      category="categories"
+                      action="list"
+                      name="Listar"
+                    />
+                    <CheckItem
+                      category="categories"
+                      action="add"
+                      name="Agregar"
+                    />
+                    <CheckItem
+                      category="categories"
+                      action="edit"
+                      name="Editar"
+                    />
+                    <CheckItem
+                      category="categories"
+                      action="delete"
+                      name="Eliminar"
+                    />
+                  </div>
                 </div>
-                <div className={styles.categoryPermissions}>
-                  <CheckItem category="products" action="list" name="Listar" />
-                  <CheckItem category="products" action="add" name="Agregar" />
-                  <CheckItem category="products" action="edit" name="Editar" />
-                  <CheckItem
-                    category="products"
-                    action="delete"
-                    name="Eliminar"
-                  />
-                </div>
-              </div>
 
-              <div className={styles.category}>
-                <div className={styles.categoryName}>
-                  <h4>Usuarios</h4>
+                <div className={styles.category}>
+                  <div className={styles.categoryName}>
+                    <h4>Productos</h4>
+                  </div>
+                  <div className={styles.categoryPermissions}>
+                    <CheckItem
+                      category="products"
+                      action="list"
+                      name="Listar"
+                    />
+                    <CheckItem
+                      category="products"
+                      action="add"
+                      name="Agregar"
+                    />
+                    <CheckItem
+                      category="products"
+                      action="edit"
+                      name="Editar"
+                    />
+                    <CheckItem
+                      category="products"
+                      action="delete"
+                      name="Eliminar"
+                    />
+                  </div>
                 </div>
-                <div className={styles.categoryPermissions}>
-                  <CheckItem category="users" action="list" name="Listar" />
-                  <CheckItem category="users" action="add" name="Agregar" />
-                  <CheckItem category="users" action="edit" name="Editar" />
-                  <CheckItem category="users" action="delete" name="Eliminar" />
-                </div>
-              </div>
 
-              <div className={styles.category}>
-                <div className={styles.categoryName}>
-                  <h4>Roles</h4>
+                <div className={styles.category}>
+                  <div className={styles.categoryName}>
+                    <h4>Usuarios</h4>
+                  </div>
+                  <div className={styles.categoryPermissions}>
+                    <CheckItem category="users" action="list" name="Listar" />
+                    <CheckItem category="users" action="add" name="Agregar" />
+                    <CheckItem category="users" action="edit" name="Editar" />
+                    <CheckItem
+                      category="users"
+                      action="delete"
+                      name="Eliminar"
+                    />
+                  </div>
                 </div>
-                <div className={styles.categoryPermissions}>
-                  <CheckItem category="roles" action="list" name="Listar" />
-                  <CheckItem category="roles" action="add" name="Agregar" />
-                  <CheckItem category="roles" action="edit" name="Editar" />
-                  <CheckItem category="roles" action="delete" name="Eliminar" />
-                </div>
-              </div>
 
-              <div className={styles.category}>
-                <div className={styles.categoryName}>
-                  <h4>Ciudades</h4>
+                <div className={styles.category}>
+                  <div className={styles.categoryName}>
+                    <h4>Roles</h4>
+                  </div>
+                  <div className={styles.categoryPermissions}>
+                    <CheckItem category="roles" action="list" name="Listar" />
+                    <CheckItem category="roles" action="add" name="Agregar" />
+                    <CheckItem category="roles" action="edit" name="Editar" />
+                    <CheckItem
+                      category="roles"
+                      action="delete"
+                      name="Eliminar"
+                    />
+                  </div>
                 </div>
-                <div className={styles.categoryPermissions}>
-                  <CheckItem category="cities" action="list" name="Listar" />
-                  <CheckItem category="cities" action="add" name="Agregar" />
-                  <CheckItem category="cities" action="edit" name="Editar" />
-                  <CheckItem category="cities" action="delete" name="Eliminar" />
+
+                <div className={styles.category}>
+                  <div className={styles.categoryName}>
+                    <h4>Ciudades</h4>
+                  </div>
+                  <div className={styles.categoryPermissions}>
+                    <CheckItem category="cities" action="list" name="Listar" />
+                    <CheckItem category="cities" action="add" name="Agregar" />
+                    <CheckItem category="cities" action="edit" name="Editar" />
+                    <CheckItem
+                      category="cities"
+                      action="delete"
+                      name="Eliminar"
+                    />
+                  </div>
                 </div>
               </div>
             </div>

@@ -16,6 +16,10 @@
   border-radius: 4px;
   margin-bottom: 1rem;
 }
+.registerRoleFormContainer{
+  width: 100%;
+  max-width: 506px;
+}
 
 .header {
   width: 100%;

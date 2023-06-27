@@ -1,0 +1,96 @@
+.container {
+  display: flex;
+  justify-content: center;
+  padding: 2rem;
+  gap: 1rem;
+  max-width: 1280px;
+  margin: 0 auto;
+  gap: 2rem;
+}
+
+.containerTitle {
+  width: 98%;
+  padding: 1.5rem;
+  max-width: 1280px;
+  margin: 0 auto;
+}
+
+.formContainer {
+  width: 60%;
+}
+
+.productDetailsContainer {
+  width: 36%;
+  background-color: #b8cadb;
+  padding: 1rem;
+  border-radius: 8px;
+}
+
+.title {
+  font-size: 24px;
+  color: var(--secondary-600);
+}
+
+.form {
+  margin-bottom: 20px;
+}
+
+.submitButton {
+  background-color: #007bff;
+  color: #fff;
+  padding: 12px 24px;
+  border: none;
+  border-radius: 4px;
+  font-size: 16px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.submitButton:hover {
+  background-color: #0062cc;
+}
+
+.submitButton:disabled {
+  border: 1px solid var(--secondary-50);
+  background: #f9fcff;
+  color: var(--secondary-100);
+  cursor: auto;
+}
+
+.backButton {
+  color: #0062cc;
+  border: 0px solid #0062cc;
+  padding: 12px 24px;
+  border-radius: 4px;
+  font-size: 16px;
+  font-weight: bold;
+  cursor: pointer;
+  background-color: var(--bg-general);
+  transition: background-color 0.3s ease;
+}
+
+.backButton:hover {
+  background-color: var(--secondary-50);
+}
+
+.buttonsContainer {
+  display: flex;
+  justify-content: flex-end;
+  margin: 1rem 0;
+}
+
+.submitButtonContainer {
+  margin-left: auto;
+}
+
+@media (max-width: 768px) {
+  .container {
+    flex-direction: column-reverse;
+  }
+
+  .formContainer,
+  .productDetailsContainer {
+    width: 100%;
+  }
+}
