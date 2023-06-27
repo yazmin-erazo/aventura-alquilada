@@ -1,5 +1,5 @@
-.modal {
-  background-color: rgba(0, 0, 0, 0.5);
+.open-modal-button {
+  background-color: #0089ff;
   color: white;
   border: none;
   cursor: pointer;
@@ -10,11 +10,31 @@
   align-items: center;
   padding: 8px 12px;
   gap: 0.5rem;
+}
+
+.open-modal-button:hover {
+  background-color: #0073d8;
+}
+
+.open-modal-button p {
+  font-size: 14px;
+}
+
+.modal {
+  display: flex;
+  justify-content: center;
+  align-items: center;
   position: fixed;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 1000;
+}
+
+.modal-heading {
+  padding: 0 1rem;
 }
 
 .modal-content {
@@ -28,30 +48,13 @@
   color: var(--secondary-300);
 }
 
-.modal-heading {
-  padding: 0 1rem;
-}
-
-/* Botón Principal */
-.open-modal-button {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  padding: 10px 10px;
-  background-color: #0089ff;
-  color: white;
-  border: none;
-  cursor: pointer;
-  transition: background-color 0.3s ease;
-  border-radius: 4px;
-}
-
-.open-modal-button:hover {
-  background-color: #0073d8;
-}
-
-.share-button {
-  margin: 0 10px;
+.modal-content img {
+  border: 1px solid var(--secondary-50);
+  width: -webkit-fill-available;
+  border-radius: 8px;
+  overflow: hidden;
+  margin: 1rem;
+  margin: 0 1rem;
 }
 
 .close-button {
@@ -66,6 +69,12 @@
   background: var(--secondary-50);
   font-size: 20px;
   cursor: pointer;
+}
+
+.modal-heading {
+  color: var(--secondary-300);
+  margin: 15px 0;
+  width: 88%;
 }
 
 @media (max-width: 320px) {

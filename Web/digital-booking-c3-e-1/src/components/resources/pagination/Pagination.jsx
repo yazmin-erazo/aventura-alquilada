@@ -1,8 +1,11 @@
 import React, { useEffect, useState } from 'react'
 import styles from './Pagination.module.css'
 import { FaChevronLeft, FaChevronRight } from 'react-icons/fa';
+import Select from '../../common/select/Select';
 
 const Pagination = (props) => {
+
+    // const [limit, setLimit] = useState(props.limit)
 
     const totalPages = Math.ceil(props.total / props.limit);
 
@@ -17,6 +20,9 @@ const Pagination = (props) => {
         }
         return range;
     }
+
+    const items = [{ id: 1, name: 5}, {id: 2, name: 10}, {id: 3, name: 25}]
+    const itemsSelect = [{ id: 1, name: 5}, {id: 3, name: 25}]
 
     //Función para armar los números que tendrá el paginador
     const fetchPageNumbers = () => {
@@ -78,6 +84,11 @@ const Pagination = (props) => {
 
     const pages = fetchPageNumbers();
 
+    const selectHandler = (id) => {
+        const value = items.find(item => item.id === parseInt(id))
+        props.setLimit(value.name)
+    }
+
     useEffect(() => {
         goToPage(props.currentPage);
     }, [])
@@ -85,37 +96,39 @@ const Pagination = (props) => {
     return (
         <>
             {(!props.total || totalPages === 1) ? null :
-
-                <div className={styles["pagination-container"]}>
-                    <ul className={styles.pagination}>
-                        {pages.map((page, index) => {
-                            if (page === LEFT_PAGE) {
-                                return (
-                                    <li key={index} className={styles["btn-back"]}>
-                                        <a className={styles.pageLink} onClick={handleMoveLeft}>
-                                            <span><FaChevronLeft /></span>
+                <div className={styles.container}>
+                    <div className={styles["pagination-container"]}>
+                        <ul className={styles.pagination}>
+                            {pages.map((page, index) => {
+                                if (page === LEFT_PAGE) {
+                                    return (
+                                        <li key={index} className={styles["btn-back"]}>
+                                            <a className={styles.pageLink} onClick={handleMoveLeft}>
+                                                <span><FaChevronLeft /></span>
+                                            </a>
+                                        </li>)
+                                } else if (page === RIGHT_PAGE) {
+                                    return (
+                                        <li key={index} className={styles["btn-forward"]}>
+                                            <a className={styles.pageLink} onClick={handleMoveRight}>
+                                                <span><FaChevronRight /></span>
+                                            </a>
+                                        </li>)
+                                } else {
+                                    return (<li key={index} className={styles.pageItem + (props.currentPage === page) ? styles.active : ''}>
+                                        <a
+                                            className={`${styles.pageLink} ${props.currentPage === page ? styles.active : ''}`}
+                                            onClick={() => handleClick(page)}
+                                        >
+                                            {page}
                                         </a>
-                                    </li>)
-                            } else if (page === RIGHT_PAGE) {
-                                return (
-                                    <li key={index} className={styles["btn-forward"]}>
-                                        <a className={styles.pageLink} onClick={handleMoveRight}>
-                                            <span><FaChevronRight /></span>
-                                        </a>
-                                    </li>)
-                            } else {
-                                return (<li key={index} className={styles.pageItem + (props.currentPage === page) ? styles.active : ''}>
-                                    <a
-                                        className={`${styles.pageLink} ${props.currentPage === page ? styles.active : ''}`}
-                                        onClick={() => handleClick(page)}
-                                    >
-                                        {page}
-                                    </a>
 
-                                </li>)
-                            }
-                        })}
-                    </ul>
+                                    </li>)
+                                }
+                            })}
+                        </ul>
+                    </div>
+                    { props.setLimit && <Select options={itemsSelect} placeholder={"Seleccione"} disabledOption={true} onChange={(id) => selectHandler(id)}>Items por página</Select>}
                 </div>
             }
         </>
