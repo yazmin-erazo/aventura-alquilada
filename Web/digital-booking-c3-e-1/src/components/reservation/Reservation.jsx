@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import styles from "./Reservation.module.css";
 import RentsService from "../../shared/services/RentsService";
 import ContactReservation from "./contact/ContactReservation";
@@ -7,6 +7,8 @@ import ReservationDetails from "./reservationDetails/ReservationDetails";
 import moment from "moment";
 import { registerLocale, setDefaultLocale } from "react-datepicker";
 import es from "date-fns/locale/es";
+import ReservationProductDetails from "./ReservationProductDetails";
+import Swal from "sweetalert2";
 
 registerLocale("es", es);
 setDefaultLocale("es");
@@ -21,12 +23,13 @@ const Reservation = ({
   step,
 }) => {
   const [subscribe, setSubscribe] = useState(false);
-  const [selectedPreference, setSelectedPreference] = useState("");
+  const [selectedPreference, setSelectedPreference] = useState("recoger");
   const [frequency, setFrequency] = useState("");
   const [equipmentPreferences, setEquipmentPreferences] = useState([]);
   const [comment, setComment] = useState("");
   const [additionalContact, setAdditionalContact] = useState(null);
-  const [address, setAddress] = React.useState("");
+  const [address, setAddress] = useState("");
+  const [isAddressValid, setIsAddressValid] = useState(false);
 
   const handleStartDateChange = (value) => {};
 
@@ -38,6 +41,11 @@ const Reservation = ({
 
   const handlePreferenceChange = (preference) => {
     setSelectedPreference(preference);
+
+    if (preference === "recoger") {
+      setAddress("");
+      setIsAddressValid(true);
+    }
   };
 
   const handleFrequencyOptionClick = (selectedFrequency) => {
@@ -45,28 +53,45 @@ const Reservation = ({
   };
 
   const handleAddressChange = (event) => {
-    setAddress(event.target.value);
+    const addressValue = event.target.value;
+    setAddress(addressValue);
+    setIsAddressValid(addressValue.trim() !== "");
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (step !== 3) changeStep("NEXT");
-    else reserve();
+    if (step === 2 && selectedPreference === "entrega" && !isAddressValid) {
+      return;
+    }
+    if (step !== 3) {
+      changeStep("NEXT");
+    } else {
+      reserve();
+    }
   };
 
-  const reserve = () => {
+  const reserve = async () => {
     const datos = {
       userId: user.iduser,
       productId: product.id,
       starDate: startDate,
       endDate: endDate,
-      subscribe: subscribe,
-      preference: selectedPreference,
-      equipmentPreferences: equipmentPreferences,
       comment: comment,
-      additionalContact: additionalContact,
+      // subscribe: subscribe,
+      // preference: selectedPreference,
+      // equipmentPreferences: equipmentPreferences,
+      // additionalContact: additionalContact,
     };
-    RentsService.create(datos);
+
+    const res = await RentsService.create(datos);
+    console.log(res);
+
+    if (res.status === 201)
+      Swal.fire(
+        "¡Muchas gracias!",
+        "La reserva se ha efectuado con éxito. Recibirá un mail con los datos",
+        "success"
+      );
   };
 
   const back = () => {
@@ -88,71 +113,104 @@ const Reservation = ({
     setAdditionalContact(contact);
   };
 
+  useEffect(() => {
+    setIsAddressValid(
+      selectedPreference === "recoger" || address.trim() !== ""
+    );
+  }, [selectedPreference, address]);
+
   const formatDate = (date) => {
-    return moment(date).format("DD/MMMM/YYYY");
+    return moment(date).locale("es").format("DD/MMMM/YYYY");
   };
 
   return (
-    <div className={styles.container}>
-      <h1 className={styles.title}>Datos de su reserva</h1>
-      <form onSubmit={handleSubmit} className={styles.form}>
-        {step === 1 && (
-          <ContactReservation
-            user={user}
-            subscribe={subscribe}
-            handleSubscribeChange={handleSubscribeChange}
-            onAdditionalContactChange={handleAdditionalContactChange}
-            additionalContact={additionalContact}
-          />
-        )}
-        {step === 2 && (
-          <ReservationDetails
-            product={product}
-            startDate={formatDate(startDate)}
-            endDate={formatDate(endDate)}
-            selectedPreference={selectedPreference}
-            handleStartDateChange={handleStartDateChange}
-            handleEndDateChange={handleEndDateChange}
-            handlePreferenceChange={handlePreferenceChange}
-            frequency={frequency}
-            handleFrequencyOptionClick={handleFrequencyOptionClick}
-            equipmentPreferences={equipmentPreferences}
-            handleEquipmentPreferenceToggle={handleEquipmentPreferenceToggle}
-            comment={comment}
-            handleCommentChange={handleCommentChange}
-            address={address}
-            handleAddressChange={handleAddressChange}
-          />
-        )}
-        {step === 3 && (
-          <ConfirmReservation
-            user={user}
-            subscribe={subscribe}
-            selectedPreference={selectedPreference}
-            frequency={frequency}
-            product={product}
-            equipmentPreferences={equipmentPreferences}
-            comment={comment}
-            additionalContact={additionalContact}
-            startDate={formatDate(startDate)}
-            endDate={formatDate(endDate)}
-            address={address}
-          />
-        )}
-        <div className={styles.buttonsContainer}>
-          {step !== 1 && (
-            <button type="button" onClick={back} className={styles.backButton}>
-              Volver
-            </button>
-          )}
-          <div className={styles.submitButtonContainer}>
-            <button type="submit" className={styles.submitButton}>
-              {step !== 3 ? "Siguiente" : "Confirmar"}
-            </button>
-          </div>
+    <>
+      {/* <div className={styles.containerTitle}>
+        <h1 className={styles.title}>Datos de su reserva</h1>
+      </div> */}
+
+      <div className={styles.container}>
+        <div className={styles.formContainer}>
+          <form onSubmit={handleSubmit} className={styles.form}>
+            {step === 1 && (
+              <ContactReservation
+                user={user}
+                subscribe={subscribe}
+                handleSubscribeChange={handleSubscribeChange}
+                onAdditionalContactChange={handleAdditionalContactChange}
+                additionalContact={additionalContact}
+              />
+            )}
+            {step === 2 && (
+              <ReservationDetails
+                product={product}
+                startDate={formatDate(startDate)}
+                endDate={formatDate(endDate)}
+                selectedPreference={selectedPreference}
+                handleStartDateChange={handleStartDateChange}
+                handleEndDateChange={handleEndDateChange}
+                handlePreferenceChange={handlePreferenceChange}
+                frequency={frequency}
+                handleFrequencyOptionClick={handleFrequencyOptionClick}
+                equipmentPreferences={equipmentPreferences}
+                handleEquipmentPreferenceToggle={
+                  handleEquipmentPreferenceToggle
+                }
+                comment={comment}
+                handleCommentChange={handleCommentChange}
+                address={address}
+                handleAddressChange={handleAddressChange}
+              />
+            )}
+            {step === 3 && (
+              <ConfirmReservation
+                user={user}
+                subscribe={subscribe}
+                selectedPreference={selectedPreference}
+                frequency={frequency}
+                product={product}
+                equipmentPreferences={equipmentPreferences}
+                comment={comment}
+                additionalContact={additionalContact}
+                startDate={formatDate(startDate)}
+                endDate={formatDate(endDate)}
+                address={address}
+              />
+            )}
+            <div className={styles.buttonsContainer}>
+              {step !== 1 && (
+                <button
+                  type="button"
+                  onClick={back}
+                  className={styles.backButton}
+                >
+                  Volver
+                </button>
+              )}
+              <div className={styles.submitButtonContainer}>
+                <button
+                  type="submit"
+                  className={styles.submitButton}
+                  disabled={
+                    (step === 2 &&
+                      selectedPreference === "entrega" &&
+                      !isAddressValid) ||
+                    (step === 1 &&
+                      selectedPreference === "entrega" &&
+                      address.trim() === "")
+                  }
+                >
+                  {step !== 3 ? "Siguiente" : "Confirmar"}
+                </button>
+              </div>
+            </div>
+          </form>
         </div>
-      </form>
-    </div>
+        <div className={styles.productDetailsContainer}>
+          <ReservationProductDetails product={product} />
+        </div>
+      </div>
+    </>
   );
 };
 

@@ -62,14 +62,6 @@ const NewReservation = () => {
           3{" "}
         </div>
       </div>
-      {/* <ReservationDetails
-        product={product}
-        startDate={startDate}
-        endDate={endDate}
-        user={user}
-        changeStep={changeStep}
-        step={step}
-      /> */}
       <Reservation
         product={product}
         startDate={startDate}

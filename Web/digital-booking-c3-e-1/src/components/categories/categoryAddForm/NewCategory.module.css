@@ -76,6 +76,11 @@
   gap: 1rem;
 }
 
+.registerCategoryForm {
+  max-width: 506px;
+  width: 100%;
+}
+
 @media (max-width: 768px) {
   .textareaField {
     height: 80px;

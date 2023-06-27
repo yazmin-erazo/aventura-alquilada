@@ -1,9 +1,7 @@
 import React from "react";
 import InputWithLabel from "../../common/input/InputWithLabel";
 import styles from "./ReservationDetails.module.css";
-import { BiCheckCircle } from "react-icons/bi";
-import { TfiLocationPin } from "react-icons/tfi";
-import { MdOutlineTexture } from "react-icons/md";
+import { BsTicketPerforated } from "react-icons/bs";
 
 const ReservationDetails = ({
   product,
@@ -28,61 +26,39 @@ const ReservationDetails = ({
       <div className={styles.container}>
         {product && (
           <>
-            <h3 className={styles.title}>Detalles de la reserva</h3>
-            <div className={styles.detailsContainer}>
-              <div>
-                <img
-                  src={product.imageURL}
-                  alt={product.name}
-                  className={styles.productImage}
-                />
+            <div className={styles.header}>
+              <div className={styles.headerIcon}>
+                <BsTicketPerforated />{" "}
               </div>
-              <div className={styles.productInfo}>
-                <p className={styles.category}>{product.category}</p>
-                <h4 className={styles.productName}>
-                  {product.name} • {product.brand}
-                </h4>
-                <p className={styles.location}>
-                  <TfiLocationPin className={styles.locationIcon} />{" "}
-                  {product.city.name}
-                </p>
-                <p className={styles.cancellation}>
-                  <BiCheckCircle className={styles.cancellationIcon} />{" "}
-                  Cancelación gratuita
-                </p>
-                <p className={styles.material}>
-                  <MdOutlineTexture className={styles.materialIcon} />{" "}
-                  {product.material}
-                </p>
-                <p className={styles.description}>{product.description}</p>
-                <a href="/" className={styles.cancellationPolicy}>
-                  Política de cancelación
-                </a>
-              </div>
+              <h3 className={styles.title}>Detalles de la reserva</h3>
             </div>
           </>
         )}
-
         <div className={styles.containerInputs}>
-          <div className={styles.inputContainer}>
-            <InputWithLabel
-              value={startDate}
-              onChange={handleStartDateChange}
-              label="Fecha de inicio"
-              className={styles.input}
-            >
-              Fecha de inicio
-            </InputWithLabel>
-          </div>
-          <div className={styles.inputContainer}>
-            <InputWithLabel
-              value={endDate}
-              onChange={handleEndDateChange}
-              label="Fecha de fin"
-              className={styles.input}
-            >
-              Fecha de fin
-            </InputWithLabel>
+          <span className={styles.preferenceLabel}>
+            Preferencias de entrega
+          </span>
+          <div className={styles.inputsContainer}>
+            <div className={styles.inputContainer}>
+              <InputWithLabel
+                value={startDate}
+                onChange={handleStartDateChange}
+                label="Fecha de inicio"
+                className={styles.input}
+              >
+                Fecha de inicio
+              </InputWithLabel>
+            </div>
+            <div className={styles.inputContainer}>
+              <InputWithLabel
+                value={endDate}
+                onChange={handleEndDateChange}
+                label="Fecha de fin"
+                className={styles.input}
+              >
+                Fecha de fin
+              </InputWithLabel>
+            </div>
           </div>
         </div>
 
@@ -118,42 +94,12 @@ const ReservationDetails = ({
               >
                 Dirección de envío
               </InputWithLabel>
+              <span>
+                * Debe seleccionar una direccion de envio para continuar
+              </span>
             </div>
           )}
         </div>
-
-        {/* <div className={styles.preferenceContainer}>
-          <span className={styles.preferenceLabel}>
-            Frecuencia de participación en la actividad:
-          </span>
-          <div className={styles.preferenceOptions}>
-            <div
-              className={`${styles.preferenceOption} ${
-                frequency === "primera" ? styles.active : ""
-              }`}
-              onClick={() => handleFrequencyOptionClick("primera")}
-            >
-              Primera vez
-            </div>
-            <div
-              className={`${styles.preferenceOption} ${
-                frequency === "ocasional" ? styles.active : ""
-              }`}
-              onClick={() => handleFrequencyOptionClick("ocasional")}
-            >
-              Ocasionalmente
-            </div>
-            <div
-              className={`${styles.preferenceOption} ${
-                frequency === "regular" ? styles.active : ""
-              }`}
-              onClick={() => handleFrequencyOptionClick("regular")}
-            >
-              Regularmente
-            </div>
-          </div>
-        </div> */}
-
         <div className={styles.preferenceContainer}>
           <span className={styles.preferenceLabel}>
             Preferencias de equipamiento adicional:
@@ -202,3 +148,37 @@ const ReservationDetails = ({
 };
 
 export default ReservationDetails;
+
+{
+  /* <div className={styles.preferenceContainer}>
+          <span className={styles.preferenceLabel}>
+            Frecuencia de participación en la actividad:
+          </span>
+          <div className={styles.preferenceOptions}>
+            <div
+              className={`${styles.preferenceOption} ${
+                frequency === "primera" ? styles.active : ""
+              }`}
+              onClick={() => handleFrequencyOptionClick("primera")}
+            >
+              Primera vez
+            </div>
+            <div
+              className={`${styles.preferenceOption} ${
+                frequency === "ocasional" ? styles.active : ""
+              }`}
+              onClick={() => handleFrequencyOptionClick("ocasional")}
+            >
+              Ocasionalmente
+            </div>
+            <div
+              className={`${styles.preferenceOption} ${
+                frequency === "regular" ? styles.active : ""
+              }`}
+              onClick={() => handleFrequencyOptionClick("regular")}
+            >
+              Regularmente
+            </div>
+          </div>
+        </div> */
+}

@@ -8,12 +8,23 @@
   color: var(--secondary-600);
 }
 
-.title {
-  font-size: 24px;
+.header {
+  display: flex;
+  gap: 0.5rem;
+  align-items: center;
   margin-bottom: 20px;
-  text-align: center;
+}
+.headerIcon {
+  font-size: 24px;
+  color: var(--secondary-100);
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
+.title {
+  font-size: 20px;
+}
 .productContainer {
   display: flex;
   align-items: center;
@@ -38,7 +49,7 @@
 
 .productName {
   font-size: 18px;
-  margin: 5px 0;
+  margin: 4px 0;
 }
 
 .location {
@@ -70,6 +81,8 @@
   border-top: 1px solid var(--secondary-50);
   padding-top: 20px;
   flex-wrap: wrap;
+  color: var(--secondary-600);
+  padding: 1rem 1rem 0 1rem;
 }
 
 .userInfo {
@@ -81,20 +94,32 @@
   font-size: 18px;
   font-weight: bold;
   margin-bottom: 10px;
+  display: flex;
+  gap: 0.6rem;
+  align-items: center;
 }
-
+.sectionTitleIcon {
+  color: var(--secondary-200);
+}
 .userInfoItem {
-  margin-bottom: 10px;
+  margin-bottom: 1rem;
 }
 
 .label {
-  font-weight: bold;
+  font-size: 12px;
+  color: var(--secondary-300);
+  padding-bottom: 4px;
 }
 
 .additionalContactContainer {
+  display: flex;
+  flex-direction: column;
   margin-top: 20px;
   border-top: 1px solid var(--secondary-50);
   padding-top: 20px;
+}
+.additionInfoContainer {
+  display: flex;
 }
 
 .additionalContactTitle {
@@ -105,12 +130,13 @@
 
 .additionalContactInfo {
   margin-bottom: 10px;
+  flex: 1;
 }
 
 .datesContainer {
   margin-top: 20px;
   border-top: 1px solid var(--secondary-50);
-  padding-top: 20px;
+  padding: 1rem;
 }
 
 .datesTitle {
@@ -141,13 +167,14 @@
   font-size: 18px;
   font-weight: bold;
   text-align: center;
-  margin-top: 20px;
-  padding-top: 20px;
+  margin-top: 16px;
   border-top: 1px solid var(--secondary-50);
   border-top-style: dotted;
   border-top-width: 2px;
   display: flex;
   justify-content: space-between;
+  padding: 2rem;
+  background-color: aliceblue;
 }
 
 .datesInfoContainer {
@@ -158,4 +185,10 @@
 .datesInfo {
   flex: 1;
   flex-wrap: wrap;
+}
+
+.datesInfo .value {
+  margin: 0.8rem 0;
+  color: dodgerblue;
+  font-weight: 600;
 }

@@ -2,7 +2,7 @@
 @import "/src/styles/global.css";
 
 .inputContainer {
-  max-width: 506px;
+  /* max-width: 506px; */
   height: 64px;
   font: var(--body-16);
   margin-bottom: 16px;
@@ -33,14 +33,15 @@
   color: #81a3be;
 }
 
-input:disabled {
-  background: var(--secondary-10);
-}
-
 .errorMessage {
   color: var(--semantics-error);
   font-size: 12px;
   margin: 4px 0;
+}
+
+.input:disabled {
+  background: #ecf3f9;
+  color: #467093;
 }
 
 /* Media queries */

@@ -1,6 +1,9 @@
 import React, { useState, useEffect } from "react";
 import InputWithLabel from "../../../components/common/input/InputWithLabel";
 import styles from "./ContactReservation.module.css";
+import { BsPlusCircle } from "react-icons/bs";
+import { FiMinusCircle } from "react-icons/fi";
+import { MdOutlineEmail, MdOutlineMail } from "react-icons/md";
 
 const ContactReservation = ({
   user,
@@ -76,7 +79,12 @@ const ContactReservation = ({
 
   return (
     <div className={styles.container}>
-      <h3 className={styles.title}>Datos de contacto</h3>
+      <div className={styles.header}>
+        <div>
+          <MdOutlineMail className={styles.headerIcon}/>{" "}
+        </div>
+        <h3 className={styles.title}>Datos de contacto</h3>
+      </div>
       <div className={styles.description}>
         <p>
           Utilizaremos esta información para enviarte la confirmación y
@@ -91,6 +99,7 @@ const ContactReservation = ({
                 value={user.name}
                 onChange={handleNameChange}
                 label="Nombre"
+                isEditable={false}
               >
                 Nombre
               </InputWithLabel>
@@ -100,6 +109,7 @@ const ContactReservation = ({
                 value={user.lastname}
                 onChange={handleLastNameChange}
                 label="Apellidos"
+                isEditable={false}
               >
                 Apellido
               </InputWithLabel>
@@ -107,9 +117,11 @@ const ContactReservation = ({
           </div>
           <div className={styles.inputContainer}>
             <InputWithLabel
+              className={styles.emailInput}
               value={user.sub}
               onChange={handleEmailChange}
               label="Email"
+              isEditable={false}
             >
               Email
             </InputWithLabel>
@@ -119,32 +131,37 @@ const ContactReservation = ({
       {(showAdditionalForm || additionalContact) && (
         <div className={styles.additionalFormContainer}>
           <h4>Segundo contacto</h4>
-          <div className={styles.inputContainer}>
-            <InputWithLabel
-              value={additionalName}
-              onChange={handleAdditionalNameChange}
-              label="Nombre (Segundo Contacto)"
-            >
-              Nombre (Segundo contacto)
-            </InputWithLabel>
+          <div className={styles.containerNameLastName}>
+            <div className={styles.inputContainer}>
+              <InputWithLabel
+                value={additionalName}
+                onChange={handleAdditionalNameChange}
+                label="Nombre (Segundo Contacto)"
+              >
+                Nombre (Segundo contacto)
+              </InputWithLabel>
+            </div>
+            <div className={styles.inputContainer}>
+              <InputWithLabel
+                value={additionalLastName}
+                onChange={handleAdditionalLastNameChange}
+                label="Apellidos (Segundo Contacto)"
+              >
+                Apellido (Segundo contacto)
+              </InputWithLabel>
+            </div>
           </div>
           <div className={styles.inputContainer}>
-            <InputWithLabel
-              value={additionalLastName}
-              onChange={handleAdditionalLastNameChange}
-              label="Apellidos (Segundo Contacto)"
-            >
-              Apellido (Segundo contacto)
-            </InputWithLabel>
-          </div>
-          <div className={styles.inputContainer}>
-            <InputWithLabel
-              value={additionalEmail}
-              onChange={handleAdditionalEmailChange}
-              label="Email (Segundo Contacto)"
-            >
-              Email (Segundo contacto)
-            </InputWithLabel>
+            <div className={styles.emailInput}>
+              <InputWithLabel
+                value={additionalEmail}
+                onChange={handleAdditionalEmailChange}
+                label="Email (Segundo Contacto)"
+                style={{ maxWidth: "100%" }}
+              >
+                Email (Segundo contacto)
+              </InputWithLabel>
+            </div>
           </div>
         </div>
       )}
@@ -161,6 +178,7 @@ const ContactReservation = ({
           equipamiento y actividades.
         </label>
       </div>
+
       <button
         type="button"
         onClick={handleToggleAdditionalForm}
@@ -170,9 +188,17 @@ const ContactReservation = ({
             : styles.addButton
         }`}
       >
-        {showAdditionalForm || additionalContact
-          ? "Eliminar segundo contacto"
-          : "Agregar segundo contacto"}
+        {showAdditionalForm || additionalContact ? (
+          <>
+            <FiMinusCircle className={styles.icon} />
+            <span>Eliminar segundo contacto</span>
+          </>
+        ) : (
+          <>
+            <BsPlusCircle className={styles.icon} />
+            <span>Agregar segundo contacto</span>
+          </>
+        )}
       </button>
     </div>
   );
