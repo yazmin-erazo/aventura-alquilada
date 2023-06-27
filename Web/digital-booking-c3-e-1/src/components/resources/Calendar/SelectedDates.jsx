@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import moment from "moment";
 import styles from "./CalendarProducts.module.css";
 import Swal from 'sweetalert2'
@@ -12,6 +12,8 @@ const SelectedDates = ({
 }) => {
 
   const navigate = useNavigate();
+  const [startDate, setStartDate] = useState(selectedStartDate);
+  const [endDate, setEndDate] = useState(selectedEndDate);
   const handleClick = () => {  
     if(JSON.parse(sessionStorage.getItem("user"))){
       const dates = {startDate: selectedStartDate, endDate: selectedEndDate};
@@ -23,10 +25,6 @@ const SelectedDates = ({
     }
 
   }
-
-  useEffect(() => {
-    sessionStorage.removeItem("dates")
-  },[])
 
   const formatDate = (date) => {
     return moment(date).format("DD/MM/YYYY");
