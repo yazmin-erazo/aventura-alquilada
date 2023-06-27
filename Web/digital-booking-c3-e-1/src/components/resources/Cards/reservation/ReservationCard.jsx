@@ -1,19 +1,42 @@
-import { useState, useCallback } from "react";
+import { useState, useCallback, useEffect } from "react";
 import styles from "./ReservationCard.module.css";
 import { BsCalendar4 } from "react-icons/bs";
+import Pagination from "../../pagination/Pagination";
+import moment from "moment";
 
 const ReservationCard = ({
   reservations,
   cancelReservation,
   rebookReservation,
 }) => {
+
+  const [currentPage, setCurrentPage] = useState(1);
+  const [pageLimit, setPageLimit] = useState(10);
+  const [currentReservations, setCurrentReservations] = useState(reservations)
+
+  const onPageChanged = () => {
+    const offset = (currentPage - 1) * pageLimit;
+    const slicedReservations = reservations.slice(offset, offset + pageLimit);
+    setCurrentReservations(slicedReservations)
+  }
+
+  useEffect(() => {
+    setCurrentPage(1)
+  }, [])
+
+  useEffect(() => {
+    onPageChanged();
+  }, [currentPage, pageLimit])
+
+
+
   return (
     <div className={styles["rents-container"]}>
       {reservations.length === 0 ? (
         <p className={styles["no-rents"]}>No hay reservaciones.</p>
-      ) : (
-        <ul className={styles["rents-list"]}>
-          {reservations.map((reservation) => (
+      ) :  ( <>
+       <ul className={styles["rents-list"]}>
+          {currentReservations.map((reservation) => (
             <ReservationItem
               key={reservation.id}
               reservation={reservation}
@@ -22,7 +45,16 @@ const ReservationCard = ({
             />
           ))}
         </ul>
-      )}
+      <Pagination
+        onPageChanged={onPageChanged}
+        limit={pageLimit}
+        total={reservations.length}
+        currentPage={currentPage}
+        setCurrentPage={setCurrentPage}
+        setLimit={setPageLimit}
+        />
+        </>
+        )}
     </div>
   );
 };
@@ -32,6 +64,11 @@ const ReservationItem = ({
   cancelReservation,
   rebookReservation,
 }) => {
+
+  const formatDate = (date) => {
+    return moment(date).format("DD/MM/YYYY");
+  };
+  
   return (
     <li className={styles["reservation-card"]}>
       <div className={styles["reservation-image"]}>
@@ -50,14 +87,14 @@ const ReservationItem = ({
               <div className={styles["date-start"]}>
                 <BsCalendar4 className={styles["date-icon"]} />
                 <span className={styles["date-text"]}>
-                  {reservation.starDate}
+                  {formatDate(reservation.starDate)}
                 </span>
               </div>
               <div className={styles["date-separator"]}>-</div>
               <div className={styles["date-end"]}>
                 <BsCalendar4 className={styles["date-icon"]} />
                 <span className={styles["date-text"]}>
-                  {reservation.endDate}
+                  {formatDate(reservation.endDate)}
                 </span>
               </div>
             </div>

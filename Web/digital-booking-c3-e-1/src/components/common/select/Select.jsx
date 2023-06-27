@@ -1,13 +1,14 @@
 import React, { useState } from "react";
 import selectStyles from "./select.module.css";
 
-const Select = ({ options, onChange, children, placeholder }) => {
-  const [isOpen, setIsOpen] = useState(false);
-  //const [selectedOption, setSelectedOption] = useState('');
+const Select = ({ options, onChange, children, placeholder, disabledOption }) => {
 
-  const handleSelectClick = () => {
-    setIsOpen(!isOpen);
-  };
+  let placeholderSelect = placeholder;
+  let defaultValue = 0;
+  if(disabledOption){
+    defaultValue = 2
+    placeholderSelect = 10
+  }
 
   const handleOptionClick = (e) => {
     const value = e.target.value;
@@ -19,19 +20,13 @@ const Select = ({ options, onChange, children, placeholder }) => {
       <label className={selectStyles.label}>{children}</label>
 
       <select
-        defaultValue={0}
+        defaultValue={defaultValue}
         className={selectStyles.select}
         placeholder={placeholder}
         onChange={handleOptionClick}
       >
-        {/* <div className={selectStyles.select} onClick={handleSelectClick}>
-        <div className={selectStyles.selectedOption}>{selectedOption}</div>
-        <div className={selectStyles.arrow}></div>
-      </div> */}
-        {/* {isOpen && ( */}
-        {/* <div className={selectStyles.optionsList}> */}
-        <option defaultValue={0} className={selectStyles.option}>
-          {placeholder}
+        <option value={defaultValue} className={selectStyles.option}>
+          {placeholderSelect}
         </option>
         {options.map((option) => (
           <option
@@ -42,8 +37,6 @@ const Select = ({ options, onChange, children, placeholder }) => {
             {option.name}
           </option>
         ))}
-        {/* </div> */}
-        {/* )} */}
       </select>
     </div>
   );
