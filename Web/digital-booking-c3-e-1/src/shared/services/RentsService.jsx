@@ -1,3 +1,4 @@
+import Swal from "sweetalert2";
 import API from "../environment/APIConfig";
 
 const RENTS_ENDPOINTS = {
@@ -15,7 +16,10 @@ const RentsService = {
     API.get(RENTS_ENDPOINTS.RENT_DETAILS + id).then((res) => res.data),
 
   create: (payload) =>
-    API.post(RENTS_ENDPOINTS.CREATE_RENT, payload).then((res) => res.data),
+    API.post(RENTS_ENDPOINTS.CREATE_RENT, payload).then((res) => res).catch( res =>{
+      Swal.fire("Error", res.response.data.mensaje, "error")
+    }
+    ),
 
   deleteByID: (id) =>
     API.delete(RENTS_ENDPOINTS.DELETE_RENT + id).then((res) => res),
