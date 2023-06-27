@@ -15,7 +15,7 @@
 .label {
   font: var(--body-14-normal);
   color: var(--secondary-600);
-  margin-left: 0.8rem;
+  /* margin-left: 0.8rem; */
 }
 
 .input {

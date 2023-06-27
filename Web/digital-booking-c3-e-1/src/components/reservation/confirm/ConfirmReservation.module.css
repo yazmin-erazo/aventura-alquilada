@@ -1,0 +1,161 @@
+.confirmationContainer {
+  max-width: 800px;
+  margin: 0 auto;
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.1);
+  color: var(--secondary-600);
+}
+
+.title {
+  font-size: 24px;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+.productContainer {
+  display: flex;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.productImage {
+  width: 100px;
+  height: 100px;
+  object-fit: cover;
+  margin-right: 20px;
+  border-radius: 8px;
+  border: 1px solid var(--secondary-50);
+  padding: 8px;
+}
+
+.category {
+  font-size: 14px;
+  font-weight: bold;
+  color: var(--secondary-300);
+}
+
+.productName {
+  font-size: 18px;
+  margin: 5px 0;
+}
+
+.location {
+  display: flex;
+  align-items: center;
+  font-size: 14px;
+  color: var(--secondary-300);
+}
+
+.locationIcon {
+  font-size: 16px;
+  margin-right: 5px;
+}
+
+.cancellationIcon {
+  font-size: 16px;
+  margin-right: 5px;
+  color: var(--primary-600);
+}
+
+.materialIcon {
+  font-size: 16px;
+  margin-right: 5px;
+}
+
+.userInfoContainer {
+  display: flex;
+  margin-bottom: 20px;
+  border-top: 1px solid var(--secondary-50);
+  padding-top: 20px;
+  flex-wrap: wrap;
+}
+
+.userInfo {
+  flex: 1;
+  margin-right: 20px;
+}
+
+.sectionTitle {
+  font-size: 18px;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+.userInfoItem {
+  margin-bottom: 10px;
+}
+
+.label {
+  font-weight: bold;
+}
+
+.additionalContactContainer {
+  margin-top: 20px;
+  border-top: 1px solid var(--secondary-50);
+  padding-top: 20px;
+}
+
+.additionalContactTitle {
+  font-size: 18px;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+.additionalContactInfo {
+  margin-bottom: 10px;
+}
+
+.datesContainer {
+  margin-top: 20px;
+  border-top: 1px solid var(--secondary-50);
+  padding-top: 20px;
+}
+
+.datesTitle {
+  font-size: 18px;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+.iconsContainer {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+}
+
+.iconItem {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-right: 20px;
+}
+
+.icon {
+  font-size: 24px;
+  margin-bottom: 10px;
+}
+
+.price {
+  font-size: 18px;
+  font-weight: bold;
+  text-align: center;
+  margin-top: 20px;
+  padding-top: 20px;
+  border-top: 1px solid var(--secondary-50);
+  border-top-style: dotted;
+  border-top-width: 2px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.datesInfoContainer {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.datesInfo {
+  flex: 1;
+  flex-wrap: wrap;
+}

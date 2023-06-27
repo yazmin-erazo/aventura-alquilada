@@ -1,0 +1,187 @@
+.container {
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.1);
+  color: var(--secondary-600);
+}
+
+.title {
+  font-size: 20px;
+  margin-bottom: 10px;
+}
+
+.detailsContainer {
+  margin-bottom: 20px;
+  display: flex;
+  gap: 1.5rem;
+  border-bottom: 1px solid var(--secondary-100);
+}
+
+.productImage {
+  width: 200px;
+  object-fit: cover;
+  margin-bottom: 10px;
+}
+
+.category {
+  font-size: 14px;
+  color: var(--secondary-600);
+  display: inline-block;
+  background-color: var(--secondary-100);
+  padding: 0.2rem 0.4rem;
+  border-radius: 4px;
+}
+
+.productName {
+  font-size: 18px;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+.location {
+  display: flex;
+  align-items: center;
+  font-size: 14px;
+  color: var(--secondary-600);
+}
+
+.locationIcon {
+  margin-right: 5px;
+}
+
+.cancellation {
+  display: flex;
+  align-items: center;
+  font-size: 14px;
+  color: var(--secondary-600);
+  margin-bottom: 5px;
+}
+
+.cancellationIcon {
+  margin-right: 5px;
+}
+
+.material {
+  font-size: 14px;
+  color: var(--secondary-600);
+  margin-bottom: 5px;
+}
+
+.materialIcon {
+  margin-right: 5px;
+}
+.inputContainer {
+  width: 100%;
+}
+.cancelationPolicy {
+  font-size: 14px;
+  color: var(--secondary-600);
+  text-decoration: none;
+  text-decoration: underline;
+}
+
+.cancelationPolicy:hover {
+  color: #004ad4;
+}
+
+.description {
+  font-size: 14px;
+  color: var(--secondary-600);
+  margin-bottom: 20px;
+}
+
+.containerInputs {
+  display: flex;
+  margin-bottom: 20px;
+  gap: 1rem;
+}
+
+.preferenceContainer {
+  margin-bottom: 20px;
+}
+
+.preferenceLabel {
+  font-weight: bold;
+  font-size: 16px;
+  margin-bottom: 10px;
+}
+
+.preferenceOptions {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.preferenceOption {
+  width: 100%;
+  flex-grow: 1;
+  padding: 10px;
+  border: 1px solid var(--secondary-100);
+  border-radius: 4px;
+  text-align: center;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.preferenceOption:hover {
+  background-color: var(--secondary-50);
+}
+
+.preferenceOption.active {
+  background-color: var(--primary-300);
+  color: #ffffff;
+  font-weight: bold;
+}
+
+.equipmentPreferences {
+  display: flex;
+  flex-direction: column;
+  margin-top: 10px;
+}
+
+.equipmentPreference {
+  display: flex;
+  align-items: center;
+  margin-bottom: 5px;
+}
+
+.equipmentCheckbox {
+  margin-right: 10px;
+}
+
+.preferenceText {
+  font-size: 14px;
+}
+
+.transparencyNote {
+  font-size: 12px;
+  color: var(--secondary-600);
+  margin-top: 10px;
+}
+
+.commentContainer {
+  margin-bottom: 20px;
+}
+
+.commentLabel {
+  display: block;
+  font-weight: bold;
+  font-size: 16px;
+  margin-bottom: 10px;
+}
+
+.commentInput {
+  width: 100%;
+  height: 100px;
+  padding: 10px;
+  border: 1px solid var(--secondary-100);
+  border-radius: 4px;
+  font-size: 14px;
+}
+
+@media (max-width: 768px) {
+  .containerInputs {
+    flex-direction: column;
+  }
+}

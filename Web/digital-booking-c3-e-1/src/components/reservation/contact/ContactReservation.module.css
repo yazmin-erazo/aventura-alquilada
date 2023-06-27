@@ -1,0 +1,77 @@
+.container {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.1);
+    color: var(--secondary-600);
+  }
+
+  .containerNameLastName{
+    display: flex;
+    gap: 1rem;
+  }
+  
+  .title {
+    font-size: 20px;
+    margin-bottom: 10px;
+  }
+  
+  .description {
+    color: var(--secondary-300);
+    margin-bottom: 20px;
+  }
+  
+  .userContainer {
+    margin-bottom: 20px;
+  }
+  
+  .inputContainer {
+    margin-bottom: 10px;
+    width: 100%;
+  }
+  
+  .additionalFormContainer {
+    margin-bottom: 20px;
+  }
+  
+  .checkboxContainer {
+    margin-bottom: 20px;
+  }
+  
+  .checkbox {
+    margin-right: 10px;
+  }
+  
+  .checkboxLabel {
+    font-size: 14px;
+    color: var(--secondary-600);
+  }
+  
+  .addButton {
+    background-color: var(--white-100);
+    color: var(--primary-600);
+    border: 1px solid var(--primary-600);
+    padding: 10px 16px;
+    font-size: 16px;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+  
+  .deleteButton {
+    background-color: var(--semantics-error);
+    color: #fff;
+    border: 1px solid var(--semantics-error);
+    padding: 10px 16px;
+    font-size: 16px;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+  
+  .addButton:hover {
+    background-color: var(--primary-600);
+    color: #fff;
+  }
+  
+  .deleteButton:hover {
+    background-color: #e45a3e;
+  }
