@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from "react";
-import moment from "moment";
 import Calendar from "react-calendar";
-import { registerLocale, setDefaultLocale } from "react-datepicker";
 import "react-calendar/dist/Calendar.css";
 import styles from "./CalendarProducts.module.css";
 import { useMediaQuery } from "react-responsive";
 import Swal from "sweetalert2";
-import es from "date-fns/locale/es";
+import { registerLocale, setDefaultLocale } from "react-datepicker";
+import moment from "moment";
+import { es } from "date-fns/locale";
 
 registerLocale("es", es);
 setDefaultLocale("es");
@@ -47,31 +47,31 @@ const CalendarProducts = ({ onSelectDates, rents }) => {
 
   const handleDateSelect = (date) => {
     const selectedDate = moment(date).startOf("day");
-
+  
     if (selectedEndDate) {
-      setSelectedStartDate(selectedDate);
-      setSelectedEndDate(null)
-      // if (selectedDate > selectedEndDate) {
-      //   setSelectedStartDate(selectedEndDate);
-      //   setSelectedEndDate(selectedDate);
-      // } else {
-      //   setSelectedStartDate(selectedDate);
-      // }
+      if (selectedDate > selectedEndDate) {
+        setSelectedStartDate(selectedEndDate);
+        setSelectedEndDate(selectedDate);
+      } else {
+        setSelectedStartDate(selectedDate);
+      }
+      setSelectedEndDate(null);
     } else if (!selectedStartDate) {
       setSelectedStartDate(selectedDate);
     } else {
-      setSelectedEndDate(selectedDate);
-
-      const diffDays =
-        Math.abs(selectedDate.diff(selectedStartDate, "days")) + 1;
-    
+      if (selectedDate < selectedStartDate) {
+        setSelectedEndDate(selectedStartDate);
+        setSelectedStartDate(selectedDate);
+      } else {
+        setSelectedEndDate(selectedDate);
+      }
+  
+      const diffDays = Math.abs(selectedDate.diff(selectedStartDate, "days")) + 1;
       setTotalRentalDays(diffDays);
-  }
+    }
   };
 
-  const formatDate = (date) => {
-    return moment(date).format("DD/MM/YYYY");
-  };
+
   useEffect(() => {
     if (selectedStartDate && selectedEndDate) {
       let diffDays = 0;

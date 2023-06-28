@@ -2,23 +2,40 @@ import React from "react";
 import InputWithLabel from "../../common/input/InputWithLabel";
 import styles from "./ReservationDetails.module.css";
 import { BsTicketPerforated } from "react-icons/bs";
+import "moment/locale/es";
+import CalendarProducts from "../../resources/Calendar/CalendarProducts";
+import { BiEdit } from "react-icons/bi";
+import { format } from "date-fns";
+import { es } from "date-fns/locale";
 
 const ReservationDetails = ({
   product,
   startDate,
   endDate,
+  selectedStartDate,
+  selectedEndDate,
   delivery,
   equipmentPreferences,
   comment,
   address,
-  handleStartDateChange,
-  handleEndDateChange,
   handlePreferenceChange,
   handleEquipmentPreferenceToggle,
   handleCommentChange,
   handleAddressChange,
+  handleStartDateChange,
+  handleEndDateChange,
+  toggleCalendar,
+  isCalendarOpen,
+  handleSelectDates,
 }) => {
-  console.log(delivery);
+  const inputStartDate = selectedStartDate || startDate;
+  const inputEndDate = selectedEndDate || endDate;
+
+  const formattedStartDate = format(new Date(inputStartDate), "dd 'de' MMMM 'de' yyyy", { locale: es });
+const formattedEndDate = format(new Date(inputEndDate), "dd 'de' MMMM 'de' yyyy", { locale: es });
+
+console.log(formattedEndDate);
+
   return (
     <>
       <div className={styles.container}>
@@ -33,14 +50,13 @@ const ReservationDetails = ({
           </>
         )}
         <div className={styles.containerInputs}>
-          <span className={styles.preferenceLabel}>
-            Preferencias de entrega
-          </span>
+          <span className={styles.preferenceLabel}>Fechas de reserva</span>
           <div className={styles.inputsContainer}>
             <div className={styles.inputContainer}>
               <InputWithLabel
-                value={startDate}
-                onChange={handleStartDateChange}
+                isEditable={false}
+                value={formattedStartDate}
+                onChange={(e) => handleStartDateChange(e.target.value)}
                 label="Fecha de inicio"
                 className={styles.input}
               >
@@ -49,15 +65,36 @@ const ReservationDetails = ({
             </div>
             <div className={styles.inputContainer}>
               <InputWithLabel
-                value={endDate}
-                onChange={handleEndDateChange}
+                isEditable={false}
+                value={formattedEndDate}
+                onChange={(e) => handleEndDateChange(e.target.value)}
                 label="Fecha de fin"
                 className={styles.input}
               >
                 Fecha de fin
               </InputWithLabel>
             </div>
+            <div className={styles.calendarButton}></div>
+            <button
+              className={styles.buttonContainerEdit}
+              onClick={toggleCalendar}
+            >
+              <div className={styles.calendarButton}>
+                <BiEdit className={styles.calendarButtonIcon} />
+              </div>
+            </button>
           </div>
+          {isCalendarOpen && (
+            <CalendarProducts
+              locale="es"
+              selectedDates={{
+                startDate: selectedStartDate,
+                endDate: selectedEndDate,
+              }}
+              onSelectDates={handleSelectDates}
+              rents={product.rents}
+            />
+          )}
         </div>
 
         <div className={styles.preferenceContainer}>
@@ -100,7 +137,7 @@ const ReservationDetails = ({
         </div>
         <div className={styles.preferenceContainer}>
           <span className={styles.preferenceLabel}>
-            Preferencias de equipamiento adicional:
+            Equipamiento adicional:
           </span>
           <div className={styles.equipmentPreferences}>
             <div className={styles.equipmentPreference}>
@@ -111,7 +148,9 @@ const ReservationDetails = ({
                 onChange={() => handleEquipmentPreferenceToggle("casco")}
                 className={styles.equipmentCheckbox}
               />
-              <label htmlFor="equipmentcasco" className={styles.preferenceText}>Casco <span>+ $10</span></label>
+              <label htmlFor="equipmentcasco" className={styles.preferenceText}>
+                Casco <span>+ $10</span>
+              </label>
             </div>
             <div className={styles.equipmentPreference}>
               <input
@@ -121,7 +160,9 @@ const ReservationDetails = ({
                 onChange={() => handleEquipmentPreferenceToggle("mapas")}
                 className={styles.equipmentCheckbox}
               />
-              <label htmlFor="equipmentmapas" className={styles.preferenceText}>Mapa de rutas <span>+ $2</span></label>
+              <label htmlFor="equipmentmapas" className={styles.preferenceText}>
+                Mapa de rutas <span>+ $2</span>
+              </label>
             </div>
           </div>
           <div className={styles.transparencyNote}>

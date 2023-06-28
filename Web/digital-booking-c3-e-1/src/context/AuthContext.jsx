@@ -68,35 +68,37 @@ const UserDataContext = ({ children }) => {
   const [state, dispatch] = useReducer(authReducer, initialState);
   // -------------- START LOCATION USER ------------------
   useEffect(() => {
-    const getUserLocation = async () => {
-      try {
-        if ("geolocation" in navigator) {
-          // Obtener la ubicación del usuario
-          navigator.geolocation.getCurrentPosition(
-            (position) => {
-              const userLocation = {
-                latitude: position.coords.latitude,
-                longitude: position.coords.longitude,
-              };
-              
-              dispatch({ type: "SET_USER_LOCATION", payload: userLocation });
-            },
-            (error) => {
-              console.error(
-                "Error al obtener la ubicación del usuario:",
-                error
-              );
-            }
-          );
-        } else {
-          console.error("El navegador no soporta la geolocalización.");
+    const handleClick = () => {
+      const getUserLocation = async () => {
+        try {
+          if ("geolocation" in navigator) {
+            navigator.geolocation.getCurrentPosition(
+              (position) => {
+                const userLocation = {
+                  latitude: position.coords.latitude,
+                  longitude: position.coords.longitude,
+                };
+                dispatch({ type: "SET_USER_LOCATION", payload: userLocation });
+              },
+              (error) => {
+                console.error("Error al obtener la ubicación del usuario:", error);
+              }
+            );
+          } else {
+            console.error("El navegador no soporta la geolocalización.");
+          }
+        } catch (error) {
+          console.error("Error al obtener la ubicación del usuario:", error);
         }
-      } catch (error) {
-        console.error("Error al obtener la ubicación del usuario:", error);
-      }
+      };
+  
+      getUserLocation();
     };
-
-    getUserLocation();
+  
+    window.addEventListener("click", handleClick);  
+    return () => {
+      window.removeEventListener("click", handleClick);
+    };
   }, []);
 
   // -------------- END LOCATION USER ------------------
