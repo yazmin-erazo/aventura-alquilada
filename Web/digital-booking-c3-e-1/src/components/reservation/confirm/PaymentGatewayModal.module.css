@@ -38,12 +38,12 @@
   line-height: 1.5;
   color: var(--secondary-600);
 }
-.modalHeader{
+.modalHeader {
   display: flex;
   align-items: center;
   gap: 1rem;
 }
-.modalHeaderIcon{
+.modalHeaderIcon {
   color: var(--secondary-300);
 }
 
@@ -130,6 +130,7 @@
   display: flex;
   align-items: center;
   margin-bottom: 10px;
+  justify-content: space-between;
 }
 
 .detailLabel {
@@ -139,4 +140,16 @@
 
 .detailValue {
   font-weight: normal;
+  text-align: end;
+}
+
+@media (max-width: 768px) {
+  .methodPay {
+    flex-direction: column;
+    gap: 0;
+  }
+
+  .modalContent {
+    padding:1rem;
+  }
 }

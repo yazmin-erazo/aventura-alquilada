@@ -4,10 +4,9 @@ import styles from "./ReservationDetails.module.css";
 import { BsTicketPerforated } from "react-icons/bs";
 import moment from "moment";
 import "moment/locale/es";
-import { registerLocale, setDefaultLocale } from "react-datepicker";
-import es from "date-fns/locale/es";
 import CalendarProducts from "../../resources/Calendar/CalendarProducts";
 import { BiEdit } from "react-icons/bi";
+// import { RentsService } from "../../../shared/services/RentsService"
 
 const ReservationDetails = ({
   product,
@@ -38,6 +37,8 @@ const ReservationDetails = ({
   const formattedEndDate = moment(inputEndDate).format(
     "DD [de] MMMM [de] YYYY"
   );
+
+  console.log(product.rents);
   return (
     <>
       <div className={styles.container}>
@@ -93,6 +94,7 @@ const ReservationDetails = ({
                 endDate: selectedEndDate,
               }}
               onSelectDates={handleSelectDates}
+              rents={product.rents}
             />
           )}
         </div>
