@@ -24,8 +24,7 @@ const Politics= () => {
             <section className={styles.detailItem}>
             <h3>Cancelación</h3>
              <p > Para un reembolso completo, cancela con al menos 48 horas de anticipación. 
-              Las cancelaciones con menos de 48 horas incurren en una tarifa del 50%. Sin reembolsos después
-             del envío o entrega.</p>
+              Las cancelaciones con menos de 48 horas incurren en una tarifa del 50%. No se ofrecen reembolsos después del envío o entrega del equipamiento deportivo.</p>
             </section>
             
           </div>
