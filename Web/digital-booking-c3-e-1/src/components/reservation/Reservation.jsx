@@ -31,6 +31,8 @@ const Reservation = ({
   const [address, setAddress] = useState("");
   const [isAddressValid, setIsAddressValid] = useState(false);
   const [isPrivacyAccepted, setIsPrivacyAccepted] = useState(false);
+  const [isPaymentCompletedButton, setIsPaymentCompletedButton] = useState(false);
+
 
   const handleStartDateChange = (value) => {};
 
@@ -182,6 +184,7 @@ const Reservation = ({
                 address={address}
                 isPrivacyAccepted={isPrivacyAccepted}
                 handlePrivacyAcceptanceChange={handlePrivacyAcceptanceChange}
+                setIsPaymentCompletedButton={setIsPaymentCompletedButton}
               />
             )}
             <div className={styles.buttonsContainer}>
@@ -202,7 +205,7 @@ const Reservation = ({
                     (step === 2 &&
                       delivery === "entrega" &&
                       !isAddressValid) ||
-                    (step === 3 && !isPrivacyAccepted)
+                    (step === 3 && (!isPrivacyAccepted || !isPaymentCompletedButton))
                   }
                 >
                   {step !== 3 ? "Siguiente" : "Reservar ahora"}

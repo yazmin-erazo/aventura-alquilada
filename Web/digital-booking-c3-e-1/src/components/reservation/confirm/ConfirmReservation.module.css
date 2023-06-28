@@ -169,14 +169,18 @@
   border-top: 1px solid var(--secondary-50);
   border-top-style: dotted;
   border-top-width: 2px;
-  display: flex;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-gap: 1rem;
   padding: 2rem;
   background-color: #f5f7fd;
   border-radius: 0 0 8px 8px;
 }
+
 .priceItem {
   flex: 1;
 }
+
 .datesInfoContainer {
   display: flex;
   flex-wrap: wrap;
@@ -216,4 +220,82 @@
 
 .privacyPolicy:hover {
   text-decoration: underline;
+}
+
+.submitButton {
+  background-color: #007bff;
+  color: #fff;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 4px;
+  font-size: 14px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.submitButton:disabled {
+  background-color: #ccc;
+  cursor: not-allowed;
+}
+
+.checkoutSuccess {
+  color: #5b5b5f;
+  font-family: 'Poppins', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 1.4;
+  font-size: 1.4rem;
+  box-sizing: border-box;
+  width: 600px;
+  max-width: 90%;
+  margin: 0 auto;
+}
+
+.top {
+  color: #5b5b5f;
+  font-family: 'Poppins', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 1.4;
+  font-size: 1.4rem;
+  box-sizing: border-box;
+  margin-top: -25px;
+  padding: 20px 30px;
+  background-color: #f3f3f3;
+  border-top-left-radius: 20px;
+  border-top-right-radius: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+
+.iconAproved::before {
+  color: #5b5b5f;
+  font-family: 'Poppins', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 1.4;
+  font-size: 1.4rem;
+  text-align: center;
+  box-sizing: border-box;
+  margin-top: -40px;
+  border-radius: 50%;
+  background-color: #46beb2;
+  border: 2px solid #63ddd2;
+  height: 50px;
+  width: 50px;
+  display: flex;
+  content: '\2713';
+  color: #fff;
+  font-size: 24px;
+  font-weight: bold;
+  text-shadow:
+    -1px -1px 0 #ffffff,
+    1px -1px 0 #ffffff;
+  text-decoration: none;
+  align-items: center;
+  justify-content: center;
 }
