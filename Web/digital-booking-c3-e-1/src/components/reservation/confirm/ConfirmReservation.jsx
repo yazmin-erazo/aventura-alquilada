@@ -32,7 +32,9 @@ const ConfirmReservation = ({
   address,
   isPrivacyAccepted,
   handlePrivacyAcceptanceChange,
-  setIsPaymentCompletedButton
+  setIsPaymentCompletedButton,
+  selectedStartDate,
+  selectedEndDate,
 }) => {
   const [showModal, setShowModal] = useState(false);
   const [showPaymentModal, setShowPaymentModal] = useState(false);
@@ -44,18 +46,25 @@ const ConfirmReservation = ({
 
   const handlePaymentCompleted = () => {
     setIsPaymentCompletedButton(true);
-    setIsPaymentCompleted(true)
-  }
+    setIsPaymentCompleted(true);
+  };
 
-  const totalDays = moment(endDate).diff(moment(startDate), 'days');
+  const totalDays = moment(endDate).diff(moment(startDate), "days");
   const totalPrice = product.price * totalDays;
 
-  const formattedStartDate = moment(startDate, "DD/MMMM/YYYY").format(
-    "DD [de] MMMM [de] YYYY"
-  );
-  const formattedEndDate = moment(endDate, "DD/MMMM/YYYY").format(
-    "DD [de] MMMM [de] YYYY"
-  );
+  // const formattedStartDate = moment(startDate, "DD/MMMM/YYYY").format(
+  //   "DD [de] MMMM [de] YYYY"
+  // );
+  // const formattedEndDate = moment(endDate, "DD/MMMM/YYYY").format(
+  //   "DD [de] MMMM [de] YYYY"
+  // );
+
+  const inputStartDate = selectedStartDate || startDate;
+  const inputEndDate = selectedEndDate || endDate;
+
+
+  const formattedStartDate = moment(inputStartDate).format("DD [de] MMMM [de] YYYY");
+  const formattedEndDate = moment(inputEndDate).format("DD [de] MMMM [de] YYYY");
 
   return (
     <div className={styles.confirmationContainer}>
@@ -188,7 +197,7 @@ const ConfirmReservation = ({
         <div className={styles.checkoutSuccess}>
           <div className={styles.top}>
             <div className={styles.iconAproved}></div>
-              <div className={styles.iconBefore}></div>
+            <div className={styles.iconBefore}></div>
             ¡Listo! Tu pago fue aprobado.
           </div>
         </div>
@@ -203,12 +212,14 @@ const ConfirmReservation = ({
         </div>
       )}
 
-      <button type="button"
+      <button
+        type="button"
         className={styles.submitButton}
-        onClick={() => setShowPaymentModal(true)} disabled={isPaymentCompleted}>
-        {isPaymentCompleted ? 'Pago Realizado' : 'Realizar Pago'}
+        onClick={() => setShowPaymentModal(true)}
+        disabled={isPaymentCompleted}
+      >
+        {isPaymentCompleted ? "Pago Realizado" : "Realizar Pago"}
       </button>
-
 
       <PaymentGatewayModal
         show={showPaymentModal}

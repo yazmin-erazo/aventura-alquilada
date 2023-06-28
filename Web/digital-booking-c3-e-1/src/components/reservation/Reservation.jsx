@@ -22,6 +22,10 @@ const Reservation = ({
   disabled,
   changeStep,
   step,
+  handleStartDateChange,
+  handleEndDateChange,
+  selectedStartDate,
+  selectedEndDate,
 }) => {
   const [isSubscribe, setIsSubscribe] = useState(false);
   const [delivery, setDelivery] = useState("recoger en tienda");
@@ -31,12 +35,8 @@ const Reservation = ({
   const [address, setAddress] = useState("");
   const [isAddressValid, setIsAddressValid] = useState(false);
   const [isPrivacyAccepted, setIsPrivacyAccepted] = useState(false);
-  const [isPaymentCompletedButton, setIsPaymentCompletedButton] = useState(false);
-
-
-  const handleStartDateChange = (value) => {};
-
-  const handleEndDateChange = (value) => {};
+  const [isPaymentCompletedButton, setIsPaymentCompletedButton] =
+    useState(false);
 
   const handleSubscribeChange = (e) => {
     setIsSubscribe(e.target.checked);
@@ -132,12 +132,9 @@ const Reservation = ({
     return moment(date).locale("es").format("DD/MMMM/YYYY");
   };
 
+
   return (
     <>
-      {/* <div className={styles.containerTitle}>
-        <h1 className={styles.title}>Datos de su reserva</h1>
-      </div> */}
-
       <div className={styles.container}>
         <div className={styles.formContainer}>
           <form onSubmit={handleSubmit} className={styles.form}>
@@ -168,6 +165,8 @@ const Reservation = ({
                 handleCommentChange={handleCommentChange}
                 address={address}
                 handleAddressChange={handleAddressChange}
+                selectedStartDate={selectedStartDate}
+                selectedEndDate={selectedEndDate}
               />
             )}
             {step === 3 && (
@@ -185,6 +184,8 @@ const Reservation = ({
                 isPrivacyAccepted={isPrivacyAccepted}
                 handlePrivacyAcceptanceChange={handlePrivacyAcceptanceChange}
                 setIsPaymentCompletedButton={setIsPaymentCompletedButton}
+                selectedStartDate={selectedStartDate}
+                selectedEndDate={selectedEndDate}
               />
             )}
             <div className={styles.buttonsContainer}>
@@ -202,10 +203,9 @@ const Reservation = ({
                   type="submit"
                   className={styles.submitButton}
                   disabled={
-                    (step === 2 &&
-                      delivery === "entrega" &&
-                      !isAddressValid) ||
-                    (step === 3 && (!isPrivacyAccepted || !isPaymentCompletedButton))
+                    (step === 2 && delivery === "entrega" && !isAddressValid) ||
+                    (step === 3 &&
+                      (!isPrivacyAccepted || !isPaymentCompletedButton))
                   }
                 >
                   {step !== 3 ? "Siguiente" : "Reservar ahora"}
@@ -223,3 +223,4 @@ const Reservation = ({
 };
 
 export default Reservation;
+

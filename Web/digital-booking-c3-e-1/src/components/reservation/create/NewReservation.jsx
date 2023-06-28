@@ -2,8 +2,8 @@ import React, { useContext, useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { ProductsContext } from "../../../context/ProductsContext";
 import styles from "./NewReservation.module.css";
-import ReservationDetails from "../reservationDetails/ReservationDetails";
 import Reservation from "../Reservation";
+import CalendarProducts from "../../resources/Calendar/CalendarProducts";
 
 const NewReservation = () => {
   const params = useParams();
@@ -11,6 +11,25 @@ const NewReservation = () => {
   const [product, setProduct] = useState(null);
   const [startDate, setStartDate] = useState(null);
   const [endDate, setEndDate] = useState(null);
+  const [isCalendarOpen, setCalendarOpen] = useState(false);
+  const [selectedStartDate, setSelectedStartDate] = useState(null);
+  const [selectedEndDate, setSelectedEndDate] = useState(null);
+
+  const handleStartDateChange = (startDate) => {
+    setSelectedStartDate(startDate);
+    setStartDate(selectedStartDate);
+  };
+console.log("startDate:", startDate);
+console.log("startDate:", selectedStartDate);
+
+  const handleEndDateChange = (endDate) => {
+    setSelectedEndDate(endDate);
+  };
+
+  const handleSelectDates = (startDate, endDate) => {
+    setSelectedStartDate(startDate);
+    setSelectedEndDate(endDate);
+  };
   const [active, setActive] = useState({
     step1: true,
     step2: false,
@@ -46,6 +65,11 @@ const NewReservation = () => {
     setUser(u);
   }, [data]);
 
+  const toggleCalendar = () => {
+    setCalendarOpen(!isCalendarOpen);
+  };
+
+
   return (
     <>
       <div className={styles.stepsContainer}>
@@ -69,7 +93,21 @@ const NewReservation = () => {
         user={user}
         changeStep={changeStep}
         step={step}
+        handleStartDateChange={handleStartDateChange}
+        handleEndDateChange={handleEndDateChange}
+        selectedStartDate={selectedStartDate}
+        selectedEndDate={selectedEndDate}
       />
+      <button onClick={toggleCalendar}>Editar fechas</button>{" "}
+      {isCalendarOpen && (
+        <CalendarProducts
+          selectedDates={{
+            startDate: selectedStartDate,
+            endDate: selectedEndDate,
+          }}
+          onSelectDates={handleSelectDates}
+        />
+      )}
     </>
   );
 };

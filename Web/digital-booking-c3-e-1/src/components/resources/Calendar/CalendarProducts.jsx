@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from "react";
-import moment from "moment";
 import Calendar from "react-calendar";
 import { registerLocale, setDefaultLocale } from "react-datepicker";
 import "react-calendar/dist/Calendar.css";
 import styles from "./CalendarProducts.module.css";
 import { useMediaQuery } from "react-responsive";
 import Swal from "sweetalert2";
+import moment from "moment";
 import es from "date-fns/locale/es";
 
 registerLocale("es", es);
