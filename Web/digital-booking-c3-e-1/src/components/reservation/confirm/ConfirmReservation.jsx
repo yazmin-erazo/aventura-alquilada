@@ -47,13 +47,6 @@ const ConfirmReservation = ({
   const inputStartDate = selectedStartDate || startDate;
   const inputEndDate = selectedEndDate || endDate;
 
-  // const formattedStartDate = moment(inputStartDate).format(
-  //   "DD [de] MMMM [de] YYYY"
-  // );
-  // const formattedEndDate = moment(inputEndDate).format(
-  //   "DD [de] MMMM [de] YYYY"
-  // );
-
   const formattedStartDate = format(new Date(inputStartDate), "dd 'de' MMMM 'de' yyyy", { locale: es });
 const formattedEndDate = format(new Date(inputEndDate), "dd 'de' MMMM 'de' yyyy", { locale: es });
 

@@ -34,7 +34,6 @@ const ReservationDetails = ({
   const formattedStartDate = format(new Date(inputStartDate), "dd 'de' MMMM 'de' yyyy", { locale: es });
 const formattedEndDate = format(new Date(inputEndDate), "dd 'de' MMMM 'de' yyyy", { locale: es });
 
-console.log(formattedEndDate);
 
   return (
     <>
