@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import styles from "./ConfirmReservation.module.css";
-import moment from "moment";
+import { differenceInDays } from "date-fns";
 import "moment/locale/es";
 import { format } from "date-fns";
 import { es } from "date-fns/locale";
@@ -41,7 +41,7 @@ const ConfirmReservation = ({
     setIsPaymentCompleted(true);
   };
 
-  const totalDays = moment(endDate).diff(moment(startDate), "days");
+  const totalDays = differenceInDays(new Date(endDate), new Date(startDate));
   const totalPrice = product.price * totalDays;
 
   const inputStartDate = selectedStartDate || startDate;
