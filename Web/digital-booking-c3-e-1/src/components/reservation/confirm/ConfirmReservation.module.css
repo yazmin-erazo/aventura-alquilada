@@ -163,7 +163,6 @@
 }
 
 .price {
-  font-size: 18px;
   font-weight: bold;
   margin-top: 16px;
   border-top: 1px solid var(--secondary-50);
@@ -198,7 +197,7 @@
 }
 
 .checkboxContainer {
-  margin-bottom: 40px;
+  margin-bottom: 4rem;
 }
 
 .checkbox {
@@ -222,7 +221,7 @@
   text-decoration: underline;
 }
 
-.submitButton {
+.submitButton, .buttonPayContainer {
   background-color: #007bff;
   color: #fff;
   padding: 10px 20px;
@@ -233,36 +232,37 @@
   cursor: pointer;
   transition: background-color 0.3s ease;
 }
+.buttonPayContainer {
+  margin-top: 1rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+}
+
+.buttonPayContainer:disabled {
+  display: none;
+}
 
 .submitButton:disabled {
-  background-color: #ccc;
+  background-color: var(--secondary-100);
   cursor: not-allowed;
 }
 
 .checkoutSuccess {
-  color: #5b5b5f;
-  font-family: 'Poppins', 'Helvetica Neue', Helvetica, Arial, sans-serif;
-  font-style: normal;
-  font-weight: 400;
+  color: var(--secondary-600);
   line-height: 1.4;
   font-size: 1.4rem;
-  box-sizing: border-box;
-  width: 600px;
-  max-width: 90%;
-  margin: 0 auto;
 }
 
+
+
 .top {
-  color: #5b5b5f;
-  font-family: 'Poppins', 'Helvetica Neue', Helvetica, Arial, sans-serif;
-  font-style: normal;
-  font-weight: 400;
+  color: var(--secondary-600);
   line-height: 1.4;
-  font-size: 1.4rem;
-  box-sizing: border-box;
-  margin-top: -25px;
+  font-size: 1.2rem;
   padding: 20px 30px;
-  background-color: #f3f3f3;
+  background-color: var(--secondary-50);
   border-top-left-radius: 20px;
   border-top-right-radius: 20px;
   display: flex;
@@ -273,18 +273,14 @@
 }
 
 .iconAproved::before {
-  color: #5b5b5f;
-  font-family: 'Poppins', 'Helvetica Neue', Helvetica, Arial, sans-serif;
-  font-style: normal;
-  font-weight: 400;
+  color: var(--secondary-600);
   line-height: 1.4;
   font-size: 1.4rem;
   text-align: center;
-  box-sizing: border-box;
-  margin-top: -40px;
+  margin-top: -50px;
   border-radius: 50%;
-  background-color: #46beb2;
-  border: 2px solid #63ddd2;
+  background-color: #3cc7b9;
+  border: 2px solid #72e9df;
   height: 50px;
   width: 50px;
   display: flex;
@@ -298,4 +294,43 @@
   text-decoration: none;
   align-items: center;
   justify-content: center;
+  animation: pulse 1s infinite;
+}
+
+.iconBefore{
+  margin-top: 16px;
+}
+
+.checkoutSuccess {
+  color: var(--secondary-600);
+  line-height: 1.4;
+  font-size: 1.4rem;
+  animation-name: successAnimation;
+  animation-duration: 0.5s;
+  animation-timing-function: ease-out;
+}
+
+
+
+@keyframes successAnimation {
+  0% {
+    transform: translateY(-20px);
+    opacity: 0;
+  }
+  100% {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+@keyframes pulse {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.2);
+  }
+  100% {
+    transform: scale(1);
+  }
 }

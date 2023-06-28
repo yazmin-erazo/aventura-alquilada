@@ -7,6 +7,7 @@ import "moment/locale/es";
 import { registerLocale, setDefaultLocale } from "react-datepicker";
 import es from "date-fns/locale/es";
 import CalendarProducts from "../../resources/Calendar/CalendarProducts";
+import { BiEdit } from "react-icons/bi";
 
 const ReservationDetails = ({
   product,
@@ -31,8 +32,12 @@ const ReservationDetails = ({
   const inputStartDate = selectedStartDate || startDate;
   const inputEndDate = selectedEndDate || endDate;
 
-  const formattedStartDate = moment(inputStartDate).format("DD [de] MMMM [de] YYYY");
-  const formattedEndDate = moment(inputEndDate).format("DD [de] MMMM [de] YYYY");
+  const formattedStartDate = moment(inputStartDate).format(
+    "DD [de] MMMM [de] YYYY"
+  );
+  const formattedEndDate = moment(inputEndDate).format(
+    "DD [de] MMMM [de] YYYY"
+  );
   return (
     <>
       <div className={styles.container}>
@@ -71,7 +76,15 @@ const ReservationDetails = ({
                 Fecha de fin
               </InputWithLabel>
             </div>
-            <button onClick={toggleCalendar}>Editar fechas</button>
+            <div className={styles.calendarButton}></div>
+            <button
+              className={styles.buttonContainerEdit}
+              onClick={toggleCalendar}
+            >
+              <div className={styles.calendarButton}>
+                <BiEdit className={styles.calendarButtonIcon} />
+              </div>
+            </button>
           </div>
           {isCalendarOpen && (
             <CalendarProducts
@@ -176,4 +189,3 @@ const ReservationDetails = ({
 };
 
 export default ReservationDetails;
-

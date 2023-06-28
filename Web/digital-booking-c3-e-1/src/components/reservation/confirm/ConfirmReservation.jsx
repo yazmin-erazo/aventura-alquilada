@@ -7,8 +7,8 @@ import es from "date-fns/locale/es";
 import {
   BsCalendar4,
   BsCheck2Square,
+  BsCreditCard,
   BsPerson,
-  BsPersonAdd,
   BsPersonPlus,
   BsTicketPerforated,
 } from "react-icons/bs";
@@ -22,7 +22,6 @@ const ConfirmReservation = ({
   user,
   isSubscribe,
   delivery,
-  frequency,
   product,
   equipmentPreferences,
   comment,
@@ -62,9 +61,12 @@ const ConfirmReservation = ({
   const inputStartDate = selectedStartDate || startDate;
   const inputEndDate = selectedEndDate || endDate;
 
-
-  const formattedStartDate = moment(inputStartDate).format("DD [de] MMMM [de] YYYY");
-  const formattedEndDate = moment(inputEndDate).format("DD [de] MMMM [de] YYYY");
+  const formattedStartDate = moment(inputStartDate).format(
+    "DD [de] MMMM [de] YYYY"
+  );
+  const formattedEndDate = moment(inputEndDate).format(
+    "DD [de] MMMM [de] YYYY"
+  );
 
   return (
     <div className={styles.confirmationContainer}>
@@ -198,26 +200,25 @@ const ConfirmReservation = ({
           <div className={styles.top}>
             <div className={styles.iconAproved}></div>
             <div className={styles.iconBefore}></div>
-            ¡Listo! Tu pago fue aprobado.
+            <p>¡Listo! Tu pago fue aprobado.</p>
           </div>
         </div>
       ) : (
         <div className={styles.price}>
-          <div className={styles.priceItem}>Precio del producto:</div>
-          <div className={styles.priceItem}>$ {product.price}</div>
-          <div className={styles.priceItem}>Días totales de la reserva:</div>
+          <div className={styles.priceItem}>Días totales de la reserva</div>
           <div className={styles.priceItem}>{totalDays} días</div>
-          <div className={styles.priceItem}>Precio total a pagar:</div>
+          <div className={styles.priceItem}>Precio total a pagar</div>
           <div className={styles.priceItem}>$ {totalPrice}</div>
         </div>
       )}
 
       <button
         type="button"
-        className={styles.submitButton}
+        className={styles.buttonPayContainer}
         onClick={() => setShowPaymentModal(true)}
         disabled={isPaymentCompleted}
       >
+        <BsCreditCard size={20} />
         {isPaymentCompleted ? "Pago Realizado" : "Realizar Pago"}
       </button>
 

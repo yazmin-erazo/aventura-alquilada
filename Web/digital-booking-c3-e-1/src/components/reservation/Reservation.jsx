@@ -80,8 +80,8 @@ const Reservation = ({
     const datos = {
       userId: user.iduser,
       productId: product.id,
-      starDate: startDate,
-      endDate: endDate,
+      starDate: selectedStartDate,
+      endDate: selectedEndDate,
       comment: comment,
       delivery: delivery,
       // deliveryAddress : address
