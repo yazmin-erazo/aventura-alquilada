@@ -3,7 +3,6 @@ import { useParams } from "react-router-dom";
 import { ProductsContext } from "../../../context/ProductsContext";
 import styles from "./NewReservation.module.css";
 import Reservation from "../Reservation";
-import CalendarProducts from "../../resources/Calendar/CalendarProducts";
 
 const NewReservation = () => {
   const params = useParams();
@@ -17,10 +16,7 @@ const NewReservation = () => {
 
   const handleStartDateChange = (startDate) => {
     setSelectedStartDate(startDate);
-    setStartDate(selectedStartDate);
   };
-console.log("startDate:", startDate);
-console.log("startDate:", selectedStartDate);
 
   const handleEndDateChange = (endDate) => {
     setSelectedEndDate(endDate);
@@ -65,10 +61,14 @@ console.log("startDate:", selectedStartDate);
     setUser(u);
   }, [data]);
 
-  const toggleCalendar = () => {
+  useEffect(() => {
+    setCalendarOpen(false);
+  }, [selectedEndDate]);
+
+  const toggleCalendar = (e) => {
+    e.preventDefault();
     setCalendarOpen(!isCalendarOpen);
   };
-
 
   return (
     <>
@@ -97,17 +97,10 @@ console.log("startDate:", selectedStartDate);
         handleEndDateChange={handleEndDateChange}
         selectedStartDate={selectedStartDate}
         selectedEndDate={selectedEndDate}
+        toggleCalendar={toggleCalendar}
+        isCalendarOpen={isCalendarOpen}
+        handleSelectDates={handleSelectDates}
       />
-      <button onClick={toggleCalendar}>Editar fechas</button>{" "}
-      {isCalendarOpen && (
-        <CalendarProducts
-          selectedDates={{
-            startDate: selectedStartDate,
-            endDate: selectedEndDate,
-          }}
-          onSelectDates={handleSelectDates}
-        />
-      )}
     </>
   );
 };

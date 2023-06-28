@@ -47,26 +47,28 @@ const CalendarProducts = ({ onSelectDates, rents }) => {
 
   const handleDateSelect = (date) => {
     const selectedDate = moment(date).startOf("day");
-
+  
     if (selectedEndDate) {
-      setSelectedStartDate(selectedDate);
-      setSelectedEndDate(null)
-      // if (selectedDate > selectedEndDate) {
-      //   setSelectedStartDate(selectedEndDate);
-      //   setSelectedEndDate(selectedDate);
-      // } else {
-      //   setSelectedStartDate(selectedDate);
-      // }
+      if (selectedDate > selectedEndDate) {
+        setSelectedStartDate(selectedEndDate);
+        setSelectedEndDate(selectedDate);
+      } else {
+        setSelectedStartDate(selectedDate);
+      }
+      setSelectedEndDate(null);
     } else if (!selectedStartDate) {
       setSelectedStartDate(selectedDate);
     } else {
-      setSelectedEndDate(selectedDate);
-
-      const diffDays =
-        Math.abs(selectedDate.diff(selectedStartDate, "days")) + 1;
-    
+      if (selectedDate < selectedStartDate) {
+        setSelectedEndDate(selectedStartDate);
+        setSelectedStartDate(selectedDate);
+      } else {
+        setSelectedEndDate(selectedDate);
+      }
+  
+      const diffDays = Math.abs(selectedDate.diff(selectedStartDate, "days")) + 1;
       setTotalRentalDays(diffDays);
-  }
+    }
   };
 
   const formatDate = (date) => {

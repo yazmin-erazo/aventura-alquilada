@@ -6,6 +6,7 @@ import moment from "moment";
 import "moment/locale/es";
 import { registerLocale, setDefaultLocale } from "react-datepicker";
 import es from "date-fns/locale/es";
+import CalendarProducts from "../../resources/Calendar/CalendarProducts";
 
 const ReservationDetails = ({
   product,
@@ -23,19 +24,15 @@ const ReservationDetails = ({
   handleAddressChange,
   handleStartDateChange,
   handleEndDateChange,
+  toggleCalendar,
+  isCalendarOpen,
+  handleSelectDates,
 }) => {
- 
-  
   const inputStartDate = selectedStartDate || startDate;
   const inputEndDate = selectedEndDate || endDate;
 
-  const formattedStartDate = moment(inputStartDate, "DD/MMMM/YYYY").format(
-    "DD [de] MMMM [de] YYYY"
-  );
-  const formattedEndDate = moment(inputEndDate, "DD/MMMM/YYYY").format(
-    "DD [de] MMMM [de] YYYY"
-  );
-
+  const formattedStartDate = moment(inputStartDate).format("DD [de] MMMM [de] YYYY");
+  const formattedEndDate = moment(inputEndDate).format("DD [de] MMMM [de] YYYY");
   return (
     <>
       <div className={styles.container}>
@@ -74,7 +71,17 @@ const ReservationDetails = ({
                 Fecha de fin
               </InputWithLabel>
             </div>
+            <button onClick={toggleCalendar}>Editar fechas</button>
           </div>
+          {isCalendarOpen && (
+            <CalendarProducts
+              selectedDates={{
+                startDate: selectedStartDate,
+                endDate: selectedEndDate,
+              }}
+              onSelectDates={handleSelectDates}
+            />
+          )}
         </div>
 
         <div className={styles.preferenceContainer}>
@@ -169,3 +176,4 @@ const ReservationDetails = ({
 };
 
 export default ReservationDetails;
+

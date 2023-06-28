@@ -26,6 +26,9 @@ const Reservation = ({
   handleEndDateChange,
   selectedStartDate,
   selectedEndDate,
+  toggleCalendar,
+  isCalendarOpen,
+  handleSelectDates,
 }) => {
   const [isSubscribe, setIsSubscribe] = useState(false);
   const [delivery, setDelivery] = useState("recoger en tienda");
@@ -132,7 +135,6 @@ const Reservation = ({
     return moment(date).locale("es").format("DD/MMMM/YYYY");
   };
 
-
   return (
     <>
       <div className={styles.container}>
@@ -167,6 +169,9 @@ const Reservation = ({
                 handleAddressChange={handleAddressChange}
                 selectedStartDate={selectedStartDate}
                 selectedEndDate={selectedEndDate}
+                toggleCalendar={toggleCalendar}
+                isCalendarOpen={isCalendarOpen}
+                handleSelectDates={handleSelectDates}
               />
             )}
             {step === 3 && (
@@ -223,4 +228,3 @@ const Reservation = ({
 };
 
 export default Reservation;
-
