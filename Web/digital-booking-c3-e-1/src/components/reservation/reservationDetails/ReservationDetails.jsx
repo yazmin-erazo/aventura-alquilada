@@ -3,10 +3,9 @@ import InputWithLabel from "../../common/input/InputWithLabel";
 import styles from "./ReservationDetails.module.css";
 import { BsTicketPerforated } from "react-icons/bs";
 import moment from "moment";
-import "moment/locale/es";
+import 'moment/locale/es';
 import CalendarProducts from "../../resources/Calendar/CalendarProducts";
 import { BiEdit } from "react-icons/bi";
-// import { RentsService } from "../../../shared/services/RentsService"
 
 const ReservationDetails = ({
   product,
@@ -34,11 +33,12 @@ const ReservationDetails = ({
   const formattedStartDate = moment(inputStartDate).format(
     "DD [de] MMMM [de] YYYY"
   );
-  const formattedEndDate = moment(inputEndDate).format(
+  const formattedEndDate = moment(inputEndDate).locale("es").format(
     "DD [de] MMMM [de] YYYY"
-  );
+  )
+  console.log(moment.locale()) 
+  console.log(formattedEndDate) 
 
-  console.log(product.rents);
   return (
     <>
       <div className={styles.container}>

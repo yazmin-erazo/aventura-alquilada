@@ -51,13 +51,6 @@ const ConfirmReservation = ({
   const totalDays = moment(endDate).diff(moment(startDate), "days");
   const totalPrice = product.price * totalDays;
 
-  // const formattedStartDate = moment(startDate, "DD/MMMM/YYYY").format(
-  //   "DD [de] MMMM [de] YYYY"
-  // );
-  // const formattedEndDate = moment(endDate, "DD/MMMM/YYYY").format(
-  //   "DD [de] MMMM [de] YYYY"
-  // );
-
   const inputStartDate = selectedStartDate || startDate;
   const inputEndDate = selectedEndDate || endDate;
 
