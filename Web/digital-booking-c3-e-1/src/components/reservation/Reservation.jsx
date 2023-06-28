@@ -32,6 +32,7 @@ const Reservation = ({
   const [isAddressValid, setIsAddressValid] = useState(false);
   const [isPrivacyAccepted, setIsPrivacyAccepted] = useState(false);
   const [isPaymentCompletedButton, setIsPaymentCompletedButton] = useState(false);
+  const [dis, setDis] = useState(false)
 
 
   const handleStartDateChange = (value) => {};
@@ -74,6 +75,13 @@ const Reservation = ({
   };
 
   const reserve = async () => {
+    setDis(true)
+    Swal.fire({
+      title: "Estamos armando su reserva...",
+      didOpen: () => {
+        Swal.showLoading();
+      },
+    });
     const datos = {
       userId: user.iduser,
       productId: product.id,
@@ -205,7 +213,7 @@ const Reservation = ({
                     (step === 2 &&
                       delivery === "entrega" &&
                       !isAddressValid) ||
-                    (step === 3 && (!isPrivacyAccepted || !isPaymentCompletedButton))
+                    (step === 3 && (!isPrivacyAccepted || !isPaymentCompletedButton)) || dis
                   }
                 >
                   {step !== 3 ? "Siguiente" : "Reservar ahora"}

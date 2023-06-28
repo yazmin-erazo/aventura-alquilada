@@ -16,10 +16,17 @@ const RentsService = {
     API.get(RENTS_ENDPOINTS.RENT_DETAILS + id).then((res) => res.data),
 
   create: (payload) =>
-    API.post(RENTS_ENDPOINTS.CREATE_RENT, payload).then((res) => res).catch( res =>{
+    API.post(RENTS_ENDPOINTS.CREATE_RENT, payload)
+    .then((res) => {
+      Swal.close();
+      return res.data;
+    })
+    .catch((err) => {
       Swal.fire("Error", res.response.data.mensaje, "error")
-    }
-    ),
+     .then((result) => {
+        if (result.isConfirmed) Swal.close();
+      });
+    }),
 
   deleteByID: (id) =>
     API.delete(RENTS_ENDPOINTS.DELETE_RENT + id).then((res) => res),
