@@ -32,7 +32,6 @@
   gap: 1rem;
 }
 
-
 .description {
   font-size: 14px;
   color: var(--secondary-600);
@@ -100,6 +99,10 @@
 
 .preferenceText {
   font-size: 14px;
+}
+.preferenceText span {
+  font-weight: 600;
+  color: var(--secondary-600);
 }
 
 .transparencyNote {

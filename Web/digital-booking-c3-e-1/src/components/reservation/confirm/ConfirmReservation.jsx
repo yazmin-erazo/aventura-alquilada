@@ -90,10 +90,10 @@ const ConfirmReservation = ({
           </div>
           <div className={styles.userInfoItem}>
             <p className={styles.label}>Preferencia de entrega:</p>
-            {delivery === "recoger" ? (
+            {delivery === "recoger en tienda" ? (
               <p className={styles.value}>Recoger en tienda</p>
             ) : (
-              <p className={styles.value}>Entrega en {address}</p>
+              <p className={styles.value}>Entregar en {address}</p>
             )}
           </div>
           <div className={styles.userInfoItem}>
@@ -133,7 +133,7 @@ const ConfirmReservation = ({
       <div className={styles.datesContainer}>
         <div className={styles.sectionTitle}>
           <BsCalendar4 size={16} className={styles.sectionTitleIcon} />{" "}
-          <h4>Fechas de reservas</h4>
+          <h4>Fechas de reserva</h4>
         </div>
         <div className={styles.datesInfoContainer}>
           <div className={styles.datesInfo}>

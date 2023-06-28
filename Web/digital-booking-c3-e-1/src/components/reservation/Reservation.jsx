@@ -24,8 +24,7 @@ const Reservation = ({
   step,
 }) => {
   const [isSubscribe, setIsSubscribe] = useState(false);
-  const [delivery, setDelivery] = useState("recoger");
-  const [frequency, setFrequency] = useState("");
+  const [delivery, setDelivery] = useState("recoger en tienda");
   const [equipmentPreferences, setEquipmentPreferences] = useState([]);
   const [comment, setComment] = useState("");
   const [additionalContact, setAdditionalContact] = useState(null);
@@ -44,7 +43,7 @@ const Reservation = ({
   const handlePreferenceChange = (preference) => {
     setDelivery(preference);
 
-    if (preference === "recoger") {
+    if (preference === "recoger en tienda") {
       setAddress("");
       setIsAddressValid(true);
     }
@@ -123,7 +122,7 @@ const Reservation = ({
 
   useEffect(() => {
     setIsAddressValid(
-      delivery === "recoger" || address.trim() !== ""
+      delivery === "recoger en tienda" || address.trim() !== ""
     );
   }, [delivery, address]);
 
@@ -158,7 +157,6 @@ const Reservation = ({
                 handleStartDateChange={handleStartDateChange}
                 handleEndDateChange={handleEndDateChange}
                 handlePreferenceChange={handlePreferenceChange}
-                frequency={frequency}
                 handleFrequencyOptionClick={handleFrequencyOptionClick}
                 equipmentPreferences={equipmentPreferences}
                 handleEquipmentPreferenceToggle={
@@ -175,7 +173,6 @@ const Reservation = ({
                 user={user}
                 isSubscribe={isSubscribe}
                 delivery={delivery}
-                frequency={frequency}
                 product={product}
                 equipmentPreferences={equipmentPreferences}
                 comment={comment}

@@ -61,10 +61,16 @@
 }
 
 .productName {
-  font-size: 18px;
+  font-size: 20px;
   font-weight: bold;
   margin: 4px 0;
   color: var(--secondary-600);
+}
+
+.productInfoHeader span{
+  font-size: 12px;
+  font-weight: 500;
+  color: #5c89b9;
 }
 
 .locationContainer {
@@ -90,12 +96,13 @@
   border-bottom: 1px solid var(--secondary-50);
   margin-bottom: 1rem;
   padding-bottom: 1rem ;
+  gap: 1rem;
+  align-items: baseline;
 }
 
 .feature {
   display: flex;
   align-items: center;
-  margin-right: 16px;
   color: #748fa7;
 }
 
@@ -130,4 +137,13 @@
   display: flex;
   margin-bottom: 1.5rem;
   flex-wrap: wrap;
+}
+
+.productPrice{
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  padding: 1rem 0;
+  margin-top: 1rem;
+  border-top: 1px solid var(--secondary-50);
 }
