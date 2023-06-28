@@ -13,6 +13,7 @@ import {
   BsTicketPerforated,
 } from "react-icons/bs";
 import PrivacyPolicyModal from "./PrivacyPolicies";
+import PaymentGatewayModal from "./PaymentGatewayModal";
 
 registerLocale("es", es);
 setDefaultLocale("es");
@@ -31,12 +32,23 @@ const ConfirmReservation = ({
   address,
   isPrivacyAccepted,
   handlePrivacyAcceptanceChange,
+  setIsPaymentCompletedButton
 }) => {
   const [showModal, setShowModal] = useState(false);
+  const [showPaymentModal, setShowPaymentModal] = useState(false);
+  const [isPaymentCompleted, setIsPaymentCompleted] = useState(false);
 
   const formatDate = (date) => {
     return moment(date).format("DD [de] MMMM [de] YYYY");
   };
+
+  const handlePaymentCompleted = () => {
+    setIsPaymentCompletedButton(true);
+    setIsPaymentCompleted(true)
+  }
+
+  const totalDays = moment(endDate).diff(moment(startDate), 'days');
+  const totalPrice = product.price * totalDays;
 
   const formattedStartDate = moment(startDate, "DD/MMMM/YYYY").format(
     "DD [de] MMMM [de] YYYY"
@@ -172,10 +184,41 @@ const ConfirmReservation = ({
         handleClose={() => setShowModal(false)}
       ></PrivacyPolicyModal>
 
-      <div className={styles.price}>
-        <div className={styles.priceItem}>Precio total:</div>
-        <div className={styles.priceItem}>$ {product.price}</div>
-      </div>
+      {isPaymentCompleted ? (
+        <div className={styles.checkoutSuccess}>
+          <div className={styles.top}>
+            <div className={styles.iconAproved}></div>
+              <div className={styles.iconBefore}></div>
+            ¡Listo! Tu pago fue aprobado.
+          </div>
+        </div>
+      ) : (
+        <div className={styles.price}>
+          <div className={styles.priceItem}>Precio del producto:</div>
+          <div className={styles.priceItem}>$ {product.price}</div>
+          <div className={styles.priceItem}>Días totales de la reserva:</div>
+          <div className={styles.priceItem}>{totalDays} días</div>
+          <div className={styles.priceItem}>Precio total a pagar:</div>
+          <div className={styles.priceItem}>$ {totalPrice}</div>
+        </div>
+      )}
+
+      <button type="button"
+        className={styles.submitButton}
+        onClick={() => setShowPaymentModal(true)} disabled={isPaymentCompleted}>
+        {isPaymentCompleted ? 'Pago Realizado' : 'Realizar Pago'}
+      </button>
+
+
+      <PaymentGatewayModal
+        show={showPaymentModal}
+        handleClose={() => setShowPaymentModal(false)}
+        productPrice={product.price}
+        totalDays={totalDays}
+        totalPrice={totalPrice}
+        delivery={delivery}
+        setIsPaymentCompleted={handlePaymentCompleted}
+      />
     </div>
   );
 };
