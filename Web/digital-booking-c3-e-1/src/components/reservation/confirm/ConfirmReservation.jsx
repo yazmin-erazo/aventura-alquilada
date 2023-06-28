@@ -20,7 +20,7 @@ setDefaultLocale("es");
 const ConfirmReservation = ({
   user,
   isSubscribe,
-  selectedPreference,
+  delivery,
   frequency,
   product,
   equipmentPreferences,
@@ -90,7 +90,7 @@ const ConfirmReservation = ({
           </div>
           <div className={styles.userInfoItem}>
             <p className={styles.label}>Preferencia de entrega:</p>
-            {selectedPreference === "recoger" ? (
+            {delivery === "recoger" ? (
               <p className={styles.value}>Recoger en tienda</p>
             ) : (
               <p className={styles.value}>Entrega en {address}</p>
@@ -159,7 +159,11 @@ const ConfirmReservation = ({
           <span
             className={styles.privacyPolicy}
             onClick={() => setShowModal(true)}
-          > política de privacidad </span> de Digital Booking, así como las normas y regulaciones.
+          >
+            {" "}
+            política de privacidad{" "}
+          </span>{" "}
+          de Digital Booking, así como las normas y regulaciones.
         </label>
       </div>
 

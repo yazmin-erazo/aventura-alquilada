@@ -20,7 +20,7 @@ const ReservationDetails = ({
   handleCommentChange,
   handleAddressChange,
 }) => {
-  console.log(address);
+  console.log(delivery);
   return (
     <>
       <div className={styles.container}>
