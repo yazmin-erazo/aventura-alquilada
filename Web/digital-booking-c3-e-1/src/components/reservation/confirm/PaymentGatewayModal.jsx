@@ -109,7 +109,7 @@ const PaymentGatewayModal = ({ show, handleClose, productPrice, totalDays, total
                             Tarjeta Crédito
                         </label>
 
-                        {delivery === 'recoger' && (
+                        {delivery === 'recoger en tienda' && (
                             <label>
                                 <input
                                     type="radio"
