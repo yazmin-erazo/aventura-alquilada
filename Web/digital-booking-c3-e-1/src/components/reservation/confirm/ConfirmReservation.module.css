@@ -177,6 +177,7 @@
 }
 
 .priceItem {
+  color: var(--secondary-600);
   flex: 1;
 }
 
@@ -209,8 +210,6 @@
   color: var(--secondary-600);
 }
 
-
-
 .privacyPolicy {
   font-size: 14px;
   color: #007bff;
@@ -221,7 +220,8 @@
   text-decoration: underline;
 }
 
-.submitButton, .buttonPayContainer {
+.submitButton,
+.buttonPayContainer {
   background-color: #007bff;
   color: #fff;
   padding: 10px 20px;
@@ -255,8 +255,6 @@
   font-size: 1.4rem;
 }
 
-
-
 .top {
   color: var(--secondary-600);
   line-height: 1.4;
@@ -284,19 +282,18 @@
   height: 50px;
   width: 50px;
   display: flex;
-  content: '\2713';
+  content: "\2713";
   color: #fff;
   font-size: 24px;
   font-weight: bold;
-  text-shadow:
-    -1px -1px 0 #ffffff;
+  text-shadow: -1px -1px 0 #ffffff;
   text-decoration: none;
   align-items: center;
   justify-content: center;
   animation: pulse 1s infinite;
 }
 
-.iconBefore{
+.iconBefore {
   margin-top: 16px;
 }
 
@@ -308,8 +305,6 @@
   animation-duration: 0.5s;
   animation-timing-function: ease-out;
 }
-
-
 
 @keyframes successAnimation {
   0% {

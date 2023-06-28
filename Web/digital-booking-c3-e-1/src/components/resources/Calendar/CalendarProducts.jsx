@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from "react";
 import Calendar from "react-calendar";
-import { registerLocale, setDefaultLocale } from "react-datepicker";
 import "react-calendar/dist/Calendar.css";
 import styles from "./CalendarProducts.module.css";
 import { useMediaQuery } from "react-responsive";
 import Swal from "sweetalert2";
+import { registerLocale, setDefaultLocale } from "react-datepicker";
 import moment from "moment";
-import es from "date-fns/locale/es";
+import { es } from "date-fns/locale";
 
 registerLocale("es", es);
 setDefaultLocale("es");
@@ -71,9 +71,7 @@ const CalendarProducts = ({ onSelectDates, rents }) => {
     }
   };
 
-  const formatDate = (date) => {
-    return moment(date).format("DD/MM/YYYY");
-  };
+
   useEffect(() => {
     if (selectedStartDate && selectedEndDate) {
       let diffDays = 0;

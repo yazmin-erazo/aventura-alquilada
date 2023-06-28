@@ -2,10 +2,11 @@ import React from "react";
 import InputWithLabel from "../../common/input/InputWithLabel";
 import styles from "./ReservationDetails.module.css";
 import { BsTicketPerforated } from "react-icons/bs";
-import moment from "moment";
-import 'moment/locale/es';
+import "moment/locale/es";
 import CalendarProducts from "../../resources/Calendar/CalendarProducts";
 import { BiEdit } from "react-icons/bi";
+import { format } from "date-fns";
+import { es } from "date-fns/locale";
 
 const ReservationDetails = ({
   product,
@@ -30,14 +31,10 @@ const ReservationDetails = ({
   const inputStartDate = selectedStartDate || startDate;
   const inputEndDate = selectedEndDate || endDate;
 
-  const formattedStartDate = moment(inputStartDate).format(
-    "DD [de] MMMM [de] YYYY"
-  );
-  const formattedEndDate = moment(inputEndDate).locale("es").format(
-    "DD [de] MMMM [de] YYYY"
-  )
-  console.log(moment.locale()) 
-  console.log(formattedEndDate) 
+  const formattedStartDate = format(new Date(inputStartDate), "dd 'de' MMMM 'de' yyyy", { locale: es });
+const formattedEndDate = format(new Date(inputEndDate), "dd 'de' MMMM 'de' yyyy", { locale: es });
+
+console.log(formattedEndDate);
 
   return (
     <>
@@ -89,6 +86,7 @@ const ReservationDetails = ({
           </div>
           {isCalendarOpen && (
             <CalendarProducts
+              locale="es"
               selectedDates={{
                 startDate: selectedStartDate,
                 endDate: selectedEndDate,
