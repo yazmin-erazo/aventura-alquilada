@@ -119,7 +119,7 @@ const NewRole = () => {
       cityList: formData.permissions.cities.list,
       cityCreate: formData.permissions.cities.add,
       cityUpdate: formData.permissions.cities.edit,
-      cityDelete: formData.permissions.recitiesnt.delete,
+      cityDelete: formData.permissions.cities.delete,
     };
 
     try {
