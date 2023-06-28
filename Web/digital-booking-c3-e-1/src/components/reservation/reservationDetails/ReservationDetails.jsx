@@ -8,14 +8,12 @@ const ReservationDetails = ({
   startDate,
   endDate,
   delivery,
-  frequency,
   equipmentPreferences,
   comment,
   address,
   handleStartDateChange,
   handleEndDateChange,
   handlePreferenceChange,
-  handleFrequencyOptionClick,
   handleEquipmentPreferenceToggle,
   handleCommentChange,
   handleAddressChange,
@@ -69,9 +67,9 @@ const ReservationDetails = ({
           <div className={styles.preferenceOptions}>
             <div
               className={`${styles.preferenceOption} ${
-                delivery === "recoger" ? styles.active : ""
+                delivery === "recoger en tienda" ? styles.active : ""
               }`}
-              onClick={() => handlePreferenceChange("recoger")}
+              onClick={() => handlePreferenceChange("recoger en tienda")}
             >
               Recoger
             </div>
@@ -113,7 +111,7 @@ const ReservationDetails = ({
                 onChange={() => handleEquipmentPreferenceToggle("casco")}
                 className={styles.equipmentCheckbox}
               />
-              <label htmlFor="equipmentcasco" className={styles.preferenceText}>Casco adicional</label>
+              <label htmlFor="equipmentcasco" className={styles.preferenceText}>Casco <span>+ $10</span></label>
             </div>
             <div className={styles.equipmentPreference}>
               <input
@@ -123,7 +121,7 @@ const ReservationDetails = ({
                 onChange={() => handleEquipmentPreferenceToggle("mapas")}
                 className={styles.equipmentCheckbox}
               />
-              <label htmlFor="equipmentmapas" className={styles.preferenceText}>Mapa de rutas</label>
+              <label htmlFor="equipmentmapas" className={styles.preferenceText}>Mapa de rutas <span>+ $2</span></label>
             </div>
           </div>
           <div className={styles.transparencyNote}>
@@ -150,37 +148,3 @@ const ReservationDetails = ({
 };
 
 export default ReservationDetails;
-
-{
-  /* <div className={styles.preferenceContainer}>
-          <span className={styles.preferenceLabel}>
-            Frecuencia de participación en la actividad:
-          </span>
-          <div className={styles.preferenceOptions}>
-            <div
-              className={`${styles.preferenceOption} ${
-                frequency === "primera" ? styles.active : ""
-              }`}
-              onClick={() => handleFrequencyOptionClick("primera")}
-            >
-              Primera vez
-            </div>
-            <div
-              className={`${styles.preferenceOption} ${
-                frequency === "ocasional" ? styles.active : ""
-              }`}
-              onClick={() => handleFrequencyOptionClick("ocasional")}
-            >
-              Ocasionalmente
-            </div>
-            <div
-              className={`${styles.preferenceOption} ${
-                frequency === "regular" ? styles.active : ""
-              }`}
-              onClick={() => handleFrequencyOptionClick("regular")}
-            >
-              Regularmente
-            </div>
-          </div>
-        </div> */
-}

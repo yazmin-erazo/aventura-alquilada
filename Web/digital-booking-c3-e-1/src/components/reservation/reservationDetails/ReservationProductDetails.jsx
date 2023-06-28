@@ -1,13 +1,12 @@
 import React, { useState } from "react";
 import { BiCheckCircle } from "react-icons/bi";
-import { MdOutlineTexture } from "react-icons/md";
 import styles from "./ReservationProductDetails.module.css";
 import { TfiLocationPin } from "react-icons/tfi";
 import CancellationPolicyModal from "./CancellationPolicyModal";
 
 const ReservationProductDetails = ({ product }) => {
   const [showModal, setShowModal] = useState(false);
-  
+
   return (
     <>
       {product && (
@@ -26,13 +25,8 @@ const ReservationProductDetails = ({ product }) => {
               </div>
               <div className={styles.productInfoHeader}>
                 <p className={styles.category}>{product.category}</p>
-                <h4 className={styles.productName}>
-                  {product.name} • {product.brand}
-                </h4>
-                <div className={styles.locationContainer}>
-                  <TfiLocationPin className={styles.locationIcon} />
-                  <p className={styles.location}>{product.city.name}</p>
-                </div>
+                <h4 className={styles.productName}>{product.name} </h4>
+                <span>• {product.brand}</span>
               </div>
             </div>
             <div className={styles.featuresContainer}>
@@ -41,8 +35,8 @@ const ReservationProductDetails = ({ product }) => {
                 <p className={styles.featureText}>Cancelación gratuita</p>
               </div>
               <div className={styles.feature}>
-                <MdOutlineTexture className={styles.featureIcon} />
-                <p className={styles.featureText}>{product.material}</p>
+                <TfiLocationPin className={styles.featureIcon} />
+                <p className={styles.featureText}>{product.city.name}</p>
               </div>
             </div>
             <p className={styles.description}>{product.description}</p>
@@ -56,6 +50,10 @@ const ReservationProductDetails = ({ product }) => {
               show={showModal}
               handleClose={() => setShowModal(false)}
             />
+            <div className={styles.productPrice}>
+              <h4 >Precio día</h4>
+              <h3>$ {product.price}</h3>
+            </div>
           </div>
         </div>
       )}
