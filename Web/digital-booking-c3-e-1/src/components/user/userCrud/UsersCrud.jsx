@@ -13,7 +13,6 @@ const UsersCrud = () => {
   const [currentUsers, setCurrentUsers] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
   const [reload, setReload] = useState(false);
-
   const pageLimit = 8;
 
   useEffect(() => {

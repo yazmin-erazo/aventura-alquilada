@@ -79,7 +79,7 @@ public class RepositoryProductImpl implements RepositoryProduct {
                     .and(byDelete((byte) 0));
         }
         if (StringUtils.isNotEmpty(brandFilter)) {
-            query = query.and(byBrand(brandFilter));
+            query = query.and(byBrandContains(brandFilter));
         }
         if (StringUtils.isNotEmpty(nameFilter)) {
             query = query.and(byNameContains(nameFilter));
@@ -94,16 +94,16 @@ public class RepositoryProductImpl implements RepositoryProduct {
             query = query.and(byPriceGreaterThan(priceGreaterThan));
         }
         if (StringUtils.isNotEmpty(sizeFilter)) {
-            query = query.and(bySize(sizeFilter));
+            query = query.and(bySizeContains(sizeFilter));
         }
         if (StringUtils.isNotEmpty(stateFilter)) {
             query = query.and(byState(stateFilter));
         }
         if (StringUtils.isNotEmpty(colorFilter)) {
-            query = query.and(byColor(colorFilter));
+            query = query.and(byColorContains(colorFilter));
         }
         if (StringUtils.isNotEmpty(materialFilter)) {
-            query = query.and(byMaterial(materialFilter));
+            query = query.and(byMaterialContains(materialFilter));
         }
         if(ObjectUtils.isNotEmpty(cityId)){
             query = query.and(byCityId(cityId));
@@ -121,6 +121,14 @@ public class RepositoryProductImpl implements RepositoryProduct {
     }
 
     @Override
+    public Optional<ProductDTO> findByIdAndDatesRents(Long id, Date startDate, Date endDate) {
+        var query = where(byDelete((byte) 0))
+                .and(byRentsNotBetweenDates(startDate,endDate))
+                .and(byId(id));
+        return repositoryProductMySql.findOne(query).map(MapToProduct::mapToProduct);
+    }
+
+    @Override
     public Optional<ProductDTO> findByNameAndIsDelete(String name) {
         return repositoryProductMySql.findByNameAndIsDelete(name, false).map(MapToProduct::mapToProduct);
     }
@@ -128,6 +136,13 @@ public class RepositoryProductImpl implements RepositoryProduct {
     @Override
     public Optional<ProductDTO> findByIdAndIsDelete(Long id) {
         return repositoryProductMySql.findByIdAndIsDelete(id, Boolean.FALSE).map(MapToProduct::mapToProduct);
+    }
+
+    @Override
+    public List<ProductDTO> findAllByIdCategoryAndIsDelete(Long id) {
+        CategoryEntity category = new CategoryEntity();
+        category.setId(id);
+        return repositoryProductMySql.findAllByCategoryAndIsDelete(category, Boolean.FALSE).stream().map(MapToProduct::mapToProduct).collect(Collectors.toList());
     }
 
     @Override

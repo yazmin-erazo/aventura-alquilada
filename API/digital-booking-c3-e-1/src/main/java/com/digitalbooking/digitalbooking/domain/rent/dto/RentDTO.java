@@ -20,5 +20,7 @@ public class RentDTO {
     private Date starDate;
     private Date endDate;
     private String comment;
+    private String delivery;
     private Double score;
+    private Date creationDate;
 }

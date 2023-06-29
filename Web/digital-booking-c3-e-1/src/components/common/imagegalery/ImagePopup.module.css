@@ -1,65 +1,76 @@
 .popupBackground {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.5);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    z-index: 1000;
-  }
-  
-  .modalContent {
-    background-color: white;
-    padding: 20px;
-    border-radius: 8px;
-    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
-    max-width: 80%;
-    max-height: 80%;
-    overflow: hidden;
-  }
-  
-  .carouselContainer {
-    position: relative;
-    width: 400px; 
-    height: 400px; 
-    overflow: hidden;
-  }
-  
-  .carouselSlides {
-    display: flex;
-    transition: transform 0.3s ease-in-out;
-  }
-  
-  .carouselImage {
-    width: 400px;  
-    height: 400px; 
-    object-fit: cover; 
-  }
-  
-  .carouselButton {
-    position: absolute;
-    top: 50%;
-    background-color: rgba(0, 0, 0, 0.2); /* Agrega un fondo semitransparente */
-    border: none;
-    font-size: 1rem;
-    cursor: pointer;
-    color: white;
-    z-index: 10;
-    padding: 5px;
-    border-radius: 30%; /* Hace que el fondo sea circular */
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.modalContent {
+  background-color: white;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
+  max-width: 80%;
+  max-height: 80%;
+  overflow: hidden;
+}
+
+.carouselContainer {
+  position: relative;
+  width: 400px;
+  height: 400px;
+  overflow: hidden;
+}
+
+.carouselSlides {
+  display: flex;
+  transition: transform 0.3s ease-in-out;
+}
+
+.carouselContainerImage {
+  width: 400px;
+  height: 400px;
+}
+
+.carouselImage {
+  width: 400px;
+  height: 400px;
+  object-fit: contain;
+}
+
+.carouselButton {
+  position: absolute;
+  top: 50%;
+  background-color:rgba(142, 165, 184, 0.8);
+  border: none;
+  font-size: 1rem;
+  cursor: pointer;
+  color: white;
+  z-index: 10;
+  padding: 5px;
+  border-radius: 30%; 
 }
 
 .prev {
-    left: 10px;
-    transform: translateY(-50%);
+  width: 42px;
+  height: 42px;
+  left: 0;
+  transform: translateY(-50%);
+  border-radius: 50%;
 }
-  
+
 .next {
-    right: 10px;
-    transform: translateY(-50%);
+  width: 42px;
+  height: 42px;
+  right: 0;
+  border-radius: 50%;
+  transform: translateY(-50%);
 }
 
 /* Estilos para el paginador */
@@ -75,12 +86,12 @@
 .paginatorDot {
   width: 10px;
   height: 10px;
-  background-color: white;
+  background-color: var(--secondary-50);
   border-radius: 50%;
   cursor: pointer;
 }
 
 /* Agrega esta clase para el punto activo */
 .activeDot {
-  background-color: green;
+  background-color: #8abe57;
 }

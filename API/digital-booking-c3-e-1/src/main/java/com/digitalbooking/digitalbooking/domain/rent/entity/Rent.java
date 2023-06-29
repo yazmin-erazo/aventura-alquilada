@@ -25,19 +25,20 @@ public class Rent {
     private Date endDate;
     private String comment;
     private Double score;
+    private String delivery;
 
     public Rent(Long id) {
         this.id = id;
     }
 
 
-    public static Rent create(Long productId, Long userId, Date starDate, Date endDate) {
+    public static Rent create(Long productId, Long userId, Date starDate, Date endDate, String comment ,String delivery) {
 
         Product product = Product.createById(productId);
         User user = User.createById(userId);
         Validator.validateMandatory(starDate, "La fecha de inicio es requerida para crear una reserva");
         Validator.validateMandatory(endDate, "La fecha de finalización es requerida para crear una reserva");
-        return new Rent(0L, product, user, "CREADO", dateWithoutHour(starDate), dateWithoutHour(endDate), null,null);
+        return new Rent(0L, product, user, "CREADO", dateWithoutHour(starDate), dateWithoutHour(endDate), comment,null,delivery);
     }
 
     public static Rent update(Long id,
@@ -45,14 +46,15 @@ public class Rent {
                               Long userId,
                               Date starDate,
                               Date endDate,
-                              String comment) {
+                              String comment,
+                              String delivery) {
 
         Product product = Product.createById(productId);
         User user = User.createById(userId);
         Validator.validateMandatory(starDate, "La fecha de inicio es requerida para actualizar una reserva");
         Validator.validateMandatory(endDate, "La fecha de finalización es requerida para actualizar una reserva");
         Validator.validateMandatory(comment, "El comentario es requerido para actualizar una reserva");
-        return new Rent(id, product, user, "ACTUALIZADO", dateWithoutHour(starDate), dateWithoutHour(endDate), comment, null);
+        return new Rent(id, product, user, "ACTUALIZADO", dateWithoutHour(starDate), dateWithoutHour(endDate), comment, null , delivery );
     }
 
     public static Rent createById(Long id) {
@@ -67,7 +69,6 @@ public class Rent {
         cal.set(Calendar.MINUTE, 0);
         cal.set(Calendar.SECOND, 0);
         cal.set(Calendar.MILLISECOND, 0);
-        cal.add(Calendar.DATE, 1);
         return cal.getTime();
     }
 }

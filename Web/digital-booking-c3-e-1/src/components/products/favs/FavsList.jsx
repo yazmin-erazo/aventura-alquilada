@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useContext } from "react";
 import FavCard from "../../resources/Cards/Fav/FavCard";
+import { Link } from "react-router-dom";
 import { UserContext } from "../../../context/AuthContext";
 import styles from "./FavsList.module.css";
 import { ProductsContext } from "../../../context/ProductsContext";
@@ -13,7 +14,6 @@ const FavsList = () => {
   const [favs, setFavs] = useState(user.favorites);
   const [productDetails, setProductDetails] = useState([]);
 
-  console.log(user.favorites);
   useEffect(() => {
     if (data.products.length > 0 && user.favorites.length > 0) {
       setProducts(data.products);
@@ -62,12 +62,17 @@ const FavsList = () => {
       <div className={styles.section}>
         {productDetails.length > 0 ? (
           productDetails.map((product) => (
-            <FavCard
+            <Link
               key={product.id}
-              product={product}
-              rentalType="Alquiler por día"
-              onRemoveFavorite={handleRemoveFavorite}
-            />
+              to={`/products/${product.id}`}
+              className={styles.productLink}
+            >
+              <FavCard
+                product={product}
+                rentalType="Alquiler por día"
+                onRemoveFavorite={handleRemoveFavorite}
+              />
+            </Link>
           ))
         ) : (
           <p className={styles.text}>No hay productos favoritos</p>

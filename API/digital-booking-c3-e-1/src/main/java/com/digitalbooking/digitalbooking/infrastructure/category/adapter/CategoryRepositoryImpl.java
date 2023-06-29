@@ -52,4 +52,5 @@ public class CategoryRepositoryImpl implements CategoryRepository {
         categoryEntity.setIsDelete(Boolean.TRUE);
         categoryRepositoryMySql.save(categoryEntity);
     }
+
 }

@@ -3,6 +3,7 @@ import { useParams, useNavigate } from "react-router-dom";
 import { UserContext } from "../../../context/AuthContext";
 import { ProductsContext } from "../../../context/ProductsContext";
 import moment from "moment";
+import { getDistance } from "geolib";
 
 import styles from "./ProductDetails.module.css";
 import { AiOutlineTag, AiOutlineClockCircle } from "react-icons/ai";
@@ -11,7 +12,6 @@ import { FaArrowLeft } from "react-icons/fa";
 import { FiInfo } from "react-icons/fi";
 import { MdOutlineTexture, MdLocationOn } from "react-icons/md";
 import { TfiRulerAlt } from "react-icons/tfi";
-
 import ImageGallery from "../../common/imagegalery/ImageGallery";
 import Qualification from "../../resources/qualification/Qualification";
 import RatingStats from "../../resources/rating/RatingStats";
@@ -19,7 +19,7 @@ import Politics from "../../resources/Politics/Politics";
 import CalendarProducts from "../../resources/Calendar/CalendarProducts";
 import ProductMap from "../../resources/productMap/ProductMap";
 import SelectedDates from "../../resources/Calendar/SelectedDates";
-import ShareIcon from "./ShareIcon";
+import ButtonShare from "../../common/Buttons/ButtonShare";
 
 const ProductDetails = () => {
   const data = useContext(ProductsContext);
@@ -32,8 +32,13 @@ const ProductDetails = () => {
   const [totalRentalDays, setTotalRentalDays] = useState(0);
 
   const handleSelectDates = (startDate, endDate) => {
-    setSelectedStartDate(startDate);
-    setSelectedEndDate(endDate);
+    if (startDate > endDate) {
+      setSelectedStartDate(endDate);
+      setSelectedEndDate(startDate);
+    } else {
+      setSelectedStartDate(startDate);
+      setSelectedEndDate(endDate);
+    }
   };
 
   const product = products.find((p) => {
@@ -42,7 +47,25 @@ const ProductDetails = () => {
 
   useEffect(() => {
     setProducts(data.products);
+    const dates = JSON.parse(sessionStorage.getItem("dates"));
+    if (dates) {
+      handleSelectDates(dates.startDate, dates.endDate);
+    }
   }, [data, product]);
+
+  // --------------------START calculo distancia usuario - producto --------------
+  let distance = null;
+  if (product) {
+    const userLocation = auth.userLocation;
+    const productLocation = {
+      latitude: product.city.latitude,
+      longitude: product.city.longitude,
+    };
+    distance = userLocation
+      ? getDistance(userLocation, productLocation) / 1000
+      : null;
+  }
+  // --------------------END calculo distancia usuario - producto --------------
 
   // --------------------START calcula la diferencia en días con la funcion diff de moment --------------
   useEffect(() => {
@@ -55,11 +78,10 @@ const ProductDetails = () => {
       setTotalRentalDays(0);
     }
   }, [selectedStartDate, selectedEndDate]);
-  // -------------------- FIN Total días --------------
+  // -------------------- END Total días --------------
 
   const showButton = selectedStartDate && selectedEndDate;
   const productId = product ? product.id : null;
-
 
   return (
     <>
@@ -87,10 +109,11 @@ const ProductDetails = () => {
 
                 <div>
                   <p className={styles.city}>{product.city.name}</p>
-                  <p className={styles.proximity}>
-                    {" "}
-                    {product.city.genericName}
-                  </p>
+                  {distance && (
+                    <p className={styles.distance}>
+                      A {distance.toFixed(0)} km de ti
+                    </p>
+                  )}
                 </div>
               </div>
 
@@ -105,7 +128,7 @@ const ProductDetails = () => {
           </div>
           <div className={styles.detailsContainer}>
             <div className={styles.shareButton}>
-              <ShareIcon product={product} />
+              <ButtonShare product={product} />
             </div>
             <ImageGallery product={product} />
             <div className={styles.productDetails}>
@@ -185,6 +208,7 @@ const ProductDetails = () => {
                         selectedStartDate={selectedStartDate}
                         selectedEndDate={selectedEndDate}
                         totalRentalDays={totalRentalDays}
+                        id={productId}
                       />
                     ) : (
                       <p>Selecciona las fechas de tu reserva</p>
@@ -196,7 +220,7 @@ const ProductDetails = () => {
               <div className={styles.politics}>
                 <Politics />
               </div>
-              <h3 className={styles.locationProduct}>Unicación del producto</h3>
+              <h3 className={styles.locationProduct}>Ubicación del producto</h3>
             </div>
           </div>
 

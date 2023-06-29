@@ -7,11 +7,12 @@ const FavCard = ({ product, rentalType, onRemoveFavorite }) => {
   const [showMenu, setShowMenu] = useState(false);
 
   const handleMenuToggle = (event) => {
-    event.stopPropagation();
+    event.preventDefault();
     setShowMenu(!showMenu);
   };
 
-  const handleDeleteFromFavorites = () => {
+  const handleDeleteFromFavorites = (event) => {
+    event.preventDefault();
     onRemoveFavorite(product.id);
   };
 

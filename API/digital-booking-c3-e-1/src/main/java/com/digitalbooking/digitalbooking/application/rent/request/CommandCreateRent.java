@@ -25,4 +25,10 @@ public class CommandCreateRent {
     @JsonProperty
     //@Schema(allowableValues = {"100"})
     private Date endDate;
+    @JsonProperty
+    @Schema(allowableValues = {"Great Product"})
+    private String comment;
+    @JsonProperty
+    @Schema(allowableValues = {"At home"})
+    private String delivery;
 }

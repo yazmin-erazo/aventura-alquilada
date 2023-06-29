@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { FaShareAlt } from 'react-icons/fa';
 import { FacebookShareButton, TwitterShareButton, WhatsappShareButton } from 'react-share';
 import { FacebookIcon, TwitterIcon, WhatsappIcon } from 'react-share';
-import './ShareButtons.css';
+import styles from './ShareButtons.module.css';
 
 const ShareButtons = () => {
   const [showModal, setShowModal] = useState(false);
@@ -19,30 +19,30 @@ const ShareButtons = () => {
   };
 
   const handleOutsideClick = (event) => {
-    if (event.target.className === 'modal') {
+    if (event.target.className.includes(styles.modal)) {
       closeModal();
     }
   };
 
   return (
-    <div className="share-buttons-container">
-      <button className="open-modal-button" onClick={openModal}>
-        <FaShareAlt className="share-icon" />
+    <div className={styles['share-buttons-container']}>
+      <button className={styles['open-modal-button']} onClick={openModal}>
+        <FaShareAlt className={styles['share-icon']} />
         Compartir
       </button>
       {showModal && (
-        <div className="modal" onClick={handleOutsideClick}>
-          <div className="modal-content">
-            <button className="close-button" onClick={closeModal}>&times;</button>
-            <h2 className="modal-heading">¡Comparte la emoción! Elige tu red social favorita para difundir la aventura.</h2>
+        <div className={styles.modal} onClick={handleOutsideClick}>
+          <div className={styles['modal-content']}>
+            <button className={styles['close-button']} onClick={closeModal}>&times;</button>
+            <h2 className={styles['modal-heading']}>¡Comparte la emoción! Elige tu red social favorita para difundir la aventura.</h2>
             <div>
-              <FacebookShareButton className="share-button" url={baseUrl} quote={message}>
+              <FacebookShareButton className={styles['share-button']} url={baseUrl} quote={message}>
                 <FacebookIcon size={36} round={true} />
               </FacebookShareButton>
-              <TwitterShareButton className="share-button" url={baseUrl} title={message}>
+              <TwitterShareButton className={styles['share-button']} url={baseUrl} title={message}>
                 <TwitterIcon size={36} round={true} />
               </TwitterShareButton>
-              <WhatsappShareButton className="share-button" url={baseUrl} title={message} separator=": ">
+              <WhatsappShareButton className={styles['share-button']} url={baseUrl} title={message} separator=": ">
                 <WhatsappIcon size={36} round={true} />
               </WhatsappShareButton>
             </div>

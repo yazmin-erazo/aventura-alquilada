@@ -32,4 +32,11 @@ public class QueryControllerCategory {
         return ResponseEntity.ok(categoryHandler.findById(id));
     }
 
+    @GetMapping("{id-category}/hasProducts")
+    @Operation(summary = "know if a category has products", description = "Method to find if a category by Id has products")
+    public boolean hasProducts(@PathVariable("id-category") Long id) {
+        //return ResponseEntity.ok(categoryHandler.hasProducts(id));
+        return true;
+    }
+
 }

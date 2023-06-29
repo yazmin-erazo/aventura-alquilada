@@ -1,0 +1,32 @@
+.stepsContainer {
+  display: flex;
+  width: 80%;
+  justify-content: space-evenly;
+  margin: auto;
+  margin-top: 25px;
+  border-bottom: 1px solid var(--secondary-50);
+  padding-bottom: 2rem;
+}
+
+.step {
+  height: 40px;
+  width: 40px;
+  border-radius: 50%;
+  text-align: center;
+  vertical-align: middle;
+  border: double 3px var(--secondary-300);
+  padding-top: 7px;
+  color: var(--secondary-600);
+}
+
+.stepActive {
+  background-color: var(--primary-300);
+  color: var(--bg-white-50);
+  border-color: var(--bg-white-50);
+}
+
+@media (max-width: 768px) {
+  .stepsContainer {
+    width: 100%;
+  }
+}

@@ -1,9 +1,10 @@
-import React, { createContext, useReducer } from "react";
+import React, { createContext, useEffect, useReducer } from "react";
 
 const UserContext = createContext();
-
+const userFromStorage = sessionStorage.getItem("user");
+const parsedUser = userFromStorage ? JSON.parse(userFromStorage) : null;
 const initialState = {
-  user: JSON.parse(sessionStorage.getItem("user")) || {
+  user: parsedUser || {
     name: "",
     lastname: "",
     role: "",
@@ -12,6 +13,7 @@ const initialState = {
   },
   token: sessionStorage.getItem("token") || "",
   isLogedIn: sessionStorage.getItem("token") ? true : false,
+  userLocation: null,
 };
 
 const authReducer = (state, action) => {
@@ -26,7 +28,8 @@ const authReducer = (state, action) => {
         token: action.payload.token,
       };
     case "LOGOUT":
-      sessionStorage.clear();
+      sessionStorage.removeItem("user");
+      sessionStorage.removeItem("token");
       return {
         ...state,
         user: {
@@ -51,6 +54,11 @@ const authReducer = (state, action) => {
         ...state,
         user: action.payload,
       };
+    case "SET_USER_LOCATION":
+      return {
+        ...state,
+        userLocation: action.payload,
+      };
     default:
       return state;
   }
@@ -58,11 +66,48 @@ const authReducer = (state, action) => {
 
 const UserDataContext = ({ children }) => {
   const [state, dispatch] = useReducer(authReducer, initialState);
+  // -------------- START LOCATION USER ------------------
+  useEffect(() => {
+    const handleClick = () => {
+      const getUserLocation = async () => {
+        try {
+          if ("geolocation" in navigator) {
+            navigator.geolocation.getCurrentPosition(
+              (position) => {
+                const userLocation = {
+                  latitude: position.coords.latitude,
+                  longitude: position.coords.longitude,
+                };
+                dispatch({ type: "SET_USER_LOCATION", payload: userLocation });
+              },
+              (error) => {
+                console.error("Error al obtener la ubicación del usuario:", error);
+              }
+            );
+          } else {
+            console.error("El navegador no soporta la geolocalización.");
+          }
+        } catch (error) {
+          console.error("Error al obtener la ubicación del usuario:", error);
+        }
+      };
+  
+      getUserLocation();
+    };
+  
+    window.addEventListener("click", handleClick);  
+    return () => {
+      window.removeEventListener("click", handleClick);
+    };
+  }, []);
+
+  // -------------- END LOCATION USER ------------------
 
   const data = {
     dispatch,
     user: state.user,
     isLogedIn: state.isLogedIn,
+    userLocation: state.userLocation,
   };
 
   return (

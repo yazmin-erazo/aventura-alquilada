@@ -14,6 +14,87 @@
 					"name": "/product",
 					"item": [
 						{
+							"name": "/favorite",
+							"item": [
+								{
+									"name": "addProductToFavorite",
+									"event": [
+										{
+											"listen": "test",
+											"script": {
+												"exec": [
+													""
+												],
+												"type": "text/javascript"
+											}
+										}
+									],
+									"request": {
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{baseURL}}/product/favorite",
+											"host": [
+												"{{baseURL}}"
+											],
+											"path": [
+												"product",
+												"favorite"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "/{id-product} deleteProductFromFavorite",
+									"event": [
+										{
+											"listen": "test",
+											"script": {
+												"exec": [
+													"pm.test(\"Status code is 404, product not found.\", function () {\r",
+													"    pm.response.to.have.status(404);\r",
+													"});\r",
+													"\r",
+													"\r",
+													"pm.test(\"Status code is 200, product deleted from favorites.\", function () {\r",
+													"    pm.response.to.have.status(200);\r",
+													"});\r",
+													""
+												],
+												"type": "text/javascript"
+											}
+										}
+									],
+									"request": {
+										"method": "DELETE",
+										"header": [],
+										"url": {
+											"raw": "{{baseURL}}/product/favorite/50",
+											"host": [
+												"{{baseURL}}"
+											],
+											"path": [
+												"product",
+												"favorite",
+												"50"
+											]
+										}
+									},
+									"response": []
+								}
+							]
+						},
+						{
 							"name": "createProduct",
 							"event": [
 								{
@@ -200,6 +281,56 @@
 								}
 							},
 							"response": []
+						},
+						{
+							"name": "/{id-product} updateProduct",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(`Status code is 404, product not found.` , function () {\r",
+											"    pm.response.to.have.status(404); \r",
+											"});\r",
+											"\r",
+											"// Succesful request\r",
+											"pm.test(\"Successful PUT request, product updated.\", function () {\r",
+											"    pm.expect(pm.response.code).to.be.oneOf([201,202]);\r",
+											"});\r",
+											"\r",
+											"// Bad request\r",
+											"pm.test(\"Bad PUT request.\", function () {\r",
+											"    pm.expect(pm.response.to.have.status(400));\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"name\": \"TestRunner Product2 updated\",\r\n  \"brand\": \"TestRunner Brand2 updated\",\r\n  \"state\": \"TestRunner State2 updated\",\r\n  \"price\": 100,\r\n  \"description\": \"TestRunner Description2 updated\",\r\n  \"size\": \"TestRunner Size2 updated\",\r\n  \"gender\": \"TestRunner Gender2 updated\",\r\n  \"deposit\": 10,\r\n  \"idCategory\": 1,\r\n  \"image\": \"image updated\",\r\n  \"fileName\": \"image.jpg\",\r\n  \"color\": \"TestColor updated\",\r\n  \"material\": \"TestMaterial updated\",\r\n  \"secundaryImages\": [\r\n      {\r\n          \"image\": \"image2 updated\",\r\n          \"fileName\": \"image2.jpg\"\r\n      }\r\n  ]\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseURL}}/product/50",
+									"host": [
+										"{{baseURL}}"
+									],
+									"path": [
+										"product",
+										"50"
+									]
+								}
+							},
+							"response": []
 						}
 					]
 				},
@@ -333,6 +464,44 @@
 								}
 							},
 							"response": []
+						},
+						{
+							"name": "/{id-category} deleteCategory",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 404, product not found.\", function () {\r",
+											"    pm.response.to.have.status(404);\r",
+											"});\r",
+											"\r",
+											"\r",
+											"pm.test(\"Status code is 200, product deleted.\", function () {\r",
+											"    pm.response.to.have.status(200);\r",
+											"});\r",
+											"\r",
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "{{baseURL}}/category/21",
+									"host": [
+										"{{baseURL}}"
+									],
+									"path": [
+										"category",
+										"21"
+									]
+								}
+							},
+							"response": []
 						}
 					]
 				},
@@ -346,7 +515,7 @@
 									"listen": "test",
 									"script": {
 										"exec": [
-											"pm.test('Status code is 200, showing user.', function () {\r",
+											"pm.test('Status code is 200, showing users.', function () {\r",
 											"    pm.response.to.have.status(200); \r",
 											"});\r",
 											"\r",
@@ -369,6 +538,52 @@
 									"path": [
 										"user",
 										"1"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "/users listUsers",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test('Status code is 200, showing users.', function () {\r",
+											"    pm.response.to.have.status(200); \r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "basic",
+									"basic": [
+										{
+											"key": "username",
+											"value": "digitalhouse.dh123@gmail.com",
+											"type": "string"
+										},
+										{
+											"key": "password",
+											"value": "{{auth_pass}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseURL}}/user/users",
+									"host": [
+										"{{baseURL}}"
+									],
+									"path": [
+										"user",
+										"users"
 									]
 								}
 							},
@@ -437,10 +652,676 @@
 							"response": []
 						}
 					]
+				},
+				{
+					"name": "/rent",
+					"item": [
+						{
+							"name": "/{id-rent} getRent",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test('Status code is 200, showing rent.', function () {\r",
+											"    pm.response.to.have.status(200); \r",
+											"});\r",
+											"\r",
+											"pm.test(`Status code is 404, rent not found.` , function () {\r",
+											"    pm.response.to.have.status(404); \r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseURL}}/rent/1",
+									"host": [
+										"{{baseURL}}"
+									],
+									"path": [
+										"rent",
+										"1"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "/rents listRents",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test('Status code is 200, showing rents.', function () {\r",
+											"    pm.response.to.have.status(200); \r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseURL}}/rent/rents",
+									"host": [
+										"{{baseURL}}"
+									],
+									"path": [
+										"rent",
+										"rents"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "createRent",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"// Succesful request\r",
+											"pm.test(\"Successful POST request, rent created.\", function () {\r",
+											"    pm.expect(pm.response.code).to.be.oneOf([201,202]);\r",
+											"});\r",
+											"\r",
+											"// Bad request\r",
+											"pm.test(\"Bad POST request.\", function () {\r",
+											"    pm.expect(pm.response.to.have.status(400));\r",
+											"});\r",
+											"\r",
+											"// No Not Null or Empty expected at any value\r",
+											"let reqBody = JSON.parse(pm.request.body.raw);\r",
+											"\r",
+											"pm.test(\"Verify the values are not null or empty\", function () {\r",
+											"    pm.expect(reqBody.productId).to.not.null\r",
+											"    pm.expect(reqBody.productId).to.not.empty;\r",
+											"\r",
+											"    pm.expect(reqBody.userId).to.not.null\r",
+											"    pm.expect(reqBody.userId).to.not.empty;\r",
+											"    \r",
+											"    pm.expect(reqBody.starDate).to.not.null\r",
+											"    pm.expect(reqBody.starDate).to.not.empty;\r",
+											"\r",
+											"    pm.expect(reqBody.endDate).to.not.null;\r",
+											"    pm.expect(reqBody.endDate).to.not.empty;\r",
+											"\r",
+											"    pm.expect(reqBody.comment).to.not.null;\r",
+											"    pm.expect(reqBody.comment).to.not.empty;\r",
+											"\r",
+											"    pm.expect(reqBody.delivery).to.not.null;\r",
+											"    pm.expect(reqBody.delivery).to.not.empty;\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"productId\": 1,\r\n    \"userId\": 1,\r\n    \"starDate\": \"2023-06-20\",\r\n    \"endDate\": \"2023-06-25\",\r\n    \"comment\": \"TestRunner comment\",\r\n    \"delivery\": \"TestRunner delivery\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseURL}}/rent",
+									"host": [
+										"{{baseURL}}"
+									],
+									"path": [
+										"rent"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "/{id-rent} deleteRent",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 404, rent not found.\", function () {\r",
+											"    pm.response.to.have.status(404);\r",
+											"});\r",
+											"\r",
+											"\r",
+											"pm.test(\"Status code is 200, rent deleted.\", function () {\r",
+											"    pm.response.to.have.status(200);\r",
+											"});\r",
+											"\r",
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "{{baseURL}}/rent/1",
+									"host": [
+										"{{baseURL}}"
+									],
+									"path": [
+										"rent",
+										"1"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "updateRent",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(`Status code is 404, rent not found.` , function () {\r",
+											"    pm.response.to.have.status(404); \r",
+											"});\r",
+											"\r",
+											"// Succesful request\r",
+											"pm.test(\"Successful PUT request, rent updated.\", function () {\r",
+											"    pm.expect(pm.response.code).to.be.oneOf([201,202]);\r",
+											"});\r",
+											"\r",
+											"// Bad request\r",
+											"pm.test(\"Bad PUT request.\", function () {\r",
+											"    pm.expect(pm.response.to.have.status(400));\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"rentId\": 1,\r\n    \"productId\": 1,\r\n    \"userId\": 1,\r\n    \"starDate\": \"2023-06-20\",\r\n    \"endDate\": \"2023-06-25\",\r\n    \"comment\": \"TestRunner comment\",\r\n    \"delivery\": \"TestRunner delivery\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseURL}}/rent",
+									"host": [
+										"{{baseURL}}"
+									],
+									"path": [
+										"rent"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "/role",
+					"item": [
+						{
+							"name": "/roles listRoles",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test('Status code is 200, showing roles.', function () {\r",
+											"    pm.response.to.have.status(200); \r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseURL}}/role/roles",
+									"host": [
+										"{{baseURL}}"
+									],
+									"path": [
+										"role",
+										"roles"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "/{id-role} getRole",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test('Status code is 200, showing role.', function () {\r",
+											"    pm.response.to.have.status(200); \r",
+											"});\r",
+											"\r",
+											"pm.test(`Status code is 404, role not found.` , function () {\r",
+											"    pm.response.to.have.status(404); \r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseURL}}/role/1",
+									"host": [
+										"{{baseURL}}"
+									],
+									"path": [
+										"role",
+										"1"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "/{id-role} deleteRole",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 404, role not found.\", function () {\r",
+											"    pm.response.to.have.status(404);\r",
+											"});\r",
+											"\r",
+											"\r",
+											"pm.test(\"Status code is 200, role deleted.\", function () {\r",
+											"    pm.response.to.have.status(200);\r",
+											"});\r",
+											"\r",
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "{{baseURL}}/role/1",
+									"host": [
+										"{{baseURL}}"
+									],
+									"path": [
+										"role",
+										"1"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "createRole",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"// Succesful request\r",
+											"pm.test(\"Successful POST request, role created.\", function () {\r",
+											"    pm.expect(pm.response.code).to.be.oneOf([201,202]);\r",
+											"});\r",
+											"\r",
+											"// Bad request\r",
+											"pm.test(\"Bad POST request.\", function () {\r",
+											"    pm.expect(pm.response.to.have.status(400));\r",
+											"});\r",
+											"\r",
+											"// No Not Null or Empty expected at any value\r",
+											"let reqBody = JSON.parse(pm.request.body.raw);\r",
+											"\r",
+											"pm.test(\"Verify the values are not null or empty\", function () {\r",
+											"    pm.expect(reqBody.name).to.not.null\r",
+											"    pm.expect(reqBody.name).to.not.empty;\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"name\": \"TestRunner Admin\",\r\n  \"categoryList\": true,\r\n  \"categoryCreate\": true,\r\n  \"categoryUpdate\": true,\r\n  \"categoryDelete\": true,\r\n  \"productList\": true,\r\n  \"productCreate\": true,\r\n  \"productUpdate\": true,\r\n  \"productDelete\": true,\r\n  \"userList\": true,\r\n  \"userCreate\": true,\r\n  \"userUpdate\": true,\r\n  \"userDelete\": true,\r\n  \"roleList\": true,\r\n  \"roleCreate\": true,\r\n  \"roleUpdate\": true,\r\n  \"roleDelete\": true,\r\n  \"rentList\": true,\r\n  \"rentCreate\": true,\r\n  \"rentUpdate\": true,\r\n  \"rentDelete\": true,\r\n  \"cityList\": true,\r\n  \"cityCreate\": true,\r\n  \"cityUpdate\": true,\r\n  \"cityDelete\": true\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseURL}}/role",
+									"host": [
+										"{{baseURL}}"
+									],
+									"path": [
+										"role"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "updateRole",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(`Status code is 404, role not found.` , function () {\r",
+											"    pm.response.to.have.status(404); \r",
+											"});\r",
+											"\r",
+											"// Succesful request\r",
+											"pm.test(\"Successful PUT request, role updated.\", function () {\r",
+											"    pm.expect(pm.response.code).to.be.oneOf([201,202]);\r",
+											"});\r",
+											"\r",
+											"// Bad request\r",
+											"pm.test(\"Bad PUT request.\", function () {\r",
+											"    pm.expect(pm.response.to.have.status(400));\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"idRole\": 1,\r\n  \"name\": \"TestRunner Admin\",\r\n  \"categoryList\": true,\r\n  \"categoryCreate\": true,\r\n  \"categoryUpdate\": true,\r\n  \"categoryDelete\": true,\r\n  \"productList\": true,\r\n  \"productCreate\": true,\r\n  \"productUpdate\": true,\r\n  \"productDelete\": true,\r\n  \"userList\": true,\r\n  \"userCreate\": true,\r\n  \"userUpdate\": true,\r\n  \"userDelete\": true,\r\n  \"roleList\": true,\r\n  \"roleCreate\": true,\r\n  \"roleUpdate\": true,\r\n  \"roleDelete\": true,\r\n  \"rentList\": true,\r\n  \"rentCreate\": true,\r\n  \"rentUpdate\": true,\r\n  \"rentDelete\": true,\r\n  \"cityList\": true,\r\n  \"cityCreate\": true,\r\n  \"cityUpdate\": true,\r\n  \"cityDelete\": true\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseURL}}/role",
+									"host": [
+										"{{baseURL}}"
+									],
+									"path": [
+										"role"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "/city",
+					"item": [
+						{
+							"name": "/cities listCities",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test('Status code is 200, showing cities.', function () {\r",
+											"    pm.response.to.have.status(200); \r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseURL}}/city/cities",
+									"host": [
+										"{{baseURL}}"
+									],
+									"path": [
+										"city",
+										"cities"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "/{id-city} getCity",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test('Status code is 200, showing city.', function () {\r",
+											"    pm.response.to.have.status(200); \r",
+											"});\r",
+											"\r",
+											"pm.test(`Status code is 404, city not found.` , function () {\r",
+											"    pm.response.to.have.status(404); \r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseURL}}/city/129",
+									"host": [
+										"{{baseURL}}"
+									],
+									"path": [
+										"city",
+										"129"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "/{id-city} deleteCity",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 404, city not found.\", function () {\r",
+											"    pm.response.to.have.status(404);\r",
+											"});\r",
+											"\r",
+											"\r",
+											"pm.test(\"Status code is 200, city deleted.\", function () {\r",
+											"    pm.response.to.have.status(200);\r",
+											"});\r",
+											"\r",
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "{{baseURL}}/city/1",
+									"host": [
+										"{{baseURL}}"
+									],
+									"path": [
+										"city",
+										"1"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "createCity",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"// Succesful request\r",
+											"pm.test(\"Successful POST request, city created.\", function () {\r",
+											"    pm.expect(pm.response.code).to.be.oneOf([201,202]);\r",
+											"});\r",
+											"\r",
+											"// Bad request\r",
+											"pm.test(\"Bad POST request.\", function () {\r",
+											"    pm.expect(pm.response.to.have.status(400));\r",
+											"});\r",
+											"\r",
+											"// No Not Null or Empty expected at any value\r",
+											"let reqBody = JSON.parse(pm.request.body.raw);\r",
+											"\r",
+											"pm.test(\"Verify the values are not null or empty\", function () {\r",
+											"    pm.expect(reqBody.name).to.not.null\r",
+											"    pm.expect(reqBody.name).to.not.empty;\r",
+											"\r",
+											"    pm.expect(reqBody.code).to.not.null\r",
+											"    pm.expect(reqBody.code).to.not.empty;\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"name\": \"TestRunner City Bogota\",\r\n  \"code\": \"DC\",\r\n  \"countryCode\": \"COL\",\r\n  \"latitude\": 4.671153,\r\n  \"longitude\": -74.100006,\r\n  \"genericName\": \"Bogota D.C.\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseURL}}/city",
+									"host": [
+										"{{baseURL}}"
+									],
+									"path": [
+										"city"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "updateCity",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(`Status code is 404, city not found.` , function () {\r",
+											"    pm.response.to.have.status(404); \r",
+											"});\r",
+											"\r",
+											"// Succesful request\r",
+											"pm.test(\"Successful PUT request, city updated.\", function () {\r",
+											"    pm.expect(pm.response.code).to.be.oneOf([201,202]);\r",
+											"});\r",
+											"\r",
+											"// Bad request\r",
+											"pm.test(\"Bad PUT request.\", function () {\r",
+											"    pm.expect(pm.response.to.have.status(400));\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"name\": \"TestRunner Update City Bogota\",\r\n  \"code\": \"DC\",\r\n  \"countryCode\": \"COL\",\r\n  \"latitude\": 4.671153,\r\n  \"longitude\": -74.100006,\r\n  \"genericName\": \"Bogota D.C.\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseURL}}/city",
+									"host": [
+										"{{baseURL}}"
+									],
+									"path": [
+										"city"
+									]
+								}
+							},
+							"response": []
+						}
+					]
 				}
 			]
 		}
 	],
+	"auth": {
+		"type": "basic",
+		"basic": [
+			{
+				"key": "username",
+				"value": "digitalhouse.dh123@gmail.com",
+				"type": "string"
+			},
+			{
+				"key": "password",
+				"value": "{{auth_pass}}",
+				"type": "string"
+			}
+		]
+	},
 	"event": [
 		{
 			"listen": "prerequest",
@@ -465,6 +1346,11 @@
 		{
 			"key": "baseURL",
 			"value": "http://localhost:8080/digitalbooking",
+			"type": "string"
+		},
+		{
+			"key": "auth_pass",
+			"value": "digitalDb12",
 			"type": "string"
 		}
 	]

@@ -18,4 +18,5 @@ public interface CategoryRepository {
     List<CategoryDTO> getAll();
 
     void deleteCategory(Long id);
+
 }

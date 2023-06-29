@@ -69,12 +69,16 @@
   font-size: 18px;
   font-weight: bold;
   margin: 0;
-  margin-bottom: 12px;
   overflow: hidden;
   text-overflow: ellipsis;
   display: -webkit-box;
   -webkit-line-clamp: 1;
   -webkit-box-orient: vertical;
+  margin-bottom: 4px;
+}
+
+.nameDistance{
+  margin-bottom: 12px;
 }
 
 .description {
@@ -173,6 +177,10 @@
   color: var(--secondary-100);
 }
 
+.distance{
+  font-size: 0.8rem;
+  color: #7197b7;
+}
 
 /* Mobile */
 @media (max-width: 600px) {

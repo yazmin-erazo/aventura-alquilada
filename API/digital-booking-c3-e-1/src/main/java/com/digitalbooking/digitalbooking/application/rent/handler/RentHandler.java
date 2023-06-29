@@ -21,12 +21,14 @@ public class RentHandler {
                 createRent.getProductId(),
                 createRent.getUserId(),
                 createRent.getStarDate(),
-                createRent.getEndDate()
+                createRent.getEndDate(),
+                createRent.getComment(),
+                createRent.getDelivery()
         ), userEmail);
     }
 
     public String updateRent(CommandUpdateRent updateRent, String userEmail) throws Exception {
-        return rentService.updateRent(Rent.update(updateRent.getRentId(), updateRent.getProductId(), updateRent.getUserId(), updateRent.getStarDate(), updateRent.getEndDate(), updateRent.getComment()), userEmail);
+        return rentService.updateRent(Rent.update(updateRent.getRentId(), updateRent.getProductId(), updateRent.getUserId(), updateRent.getStarDate(), updateRent.getEndDate(), updateRent.getComment(), updateRent.getDelivery()), userEmail);
     }
 
     public List<RentDTO> getRents(String userEmail) {
