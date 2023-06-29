@@ -1,5 +1,6 @@
 package com.digitalbooking.digitalbooking.infrastructure.product.adapter;
 
+import com.digitalbooking.digitalbooking.infrastructure.category.adapter.CategoryEntity;
 import com.digitalbooking.digitalbooking.infrastructure.rent.adapter.RentEntity;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -14,7 +15,7 @@ import java.util.Optional;
 
 public interface RepositoryProductMySql extends JpaRepository< ProductEntity, Long >, JpaSpecificationExecutor<ProductEntity> {
 
-    List<ProductEntity> findAllByIsDelete(Boolean isDelete);
+    List<ProductEntity> findAllByCategoryAndIsDelete(CategoryEntity category , Boolean isDelete);
 
     Optional<ProductEntity> findByIdAndIsDelete(Long id, Boolean isDelete);
 

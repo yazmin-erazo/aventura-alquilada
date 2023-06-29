@@ -28,6 +28,8 @@ public interface RepositoryProduct {
 
     Optional<ProductDTO> findByIdAndIsDelete(Long id);
 
+    List<ProductDTO> findAllByIdCategoryAndIsDelete(Long id);
+
     void deleteProduct(Long id);
 
     void createComment(CommentProduct commentProduct, Long userId);
