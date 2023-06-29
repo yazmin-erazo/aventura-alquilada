@@ -78,10 +78,11 @@ const ContactReservation = ({
   };
 
   return (
+    
     <div className={styles.container}>
       <div className={styles.header}>
         <div>
-          <MdOutlineMail className={styles.headerIcon}/>{" "}
+          <MdOutlineMail className={styles.headerIcon} />{" "}
         </div>
         <h3 className={styles.title}>Datos de contacto</h3>
       </div>
@@ -181,6 +182,7 @@ const ContactReservation = ({
 
       <button
         type="button"
+        data-testid="add-button"
         onClick={handleToggleAdditionalForm}
         className={`${styles.button} ${
           showAdditionalForm || additionalContact

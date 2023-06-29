@@ -67,7 +67,7 @@ const NewReservation = () => {
 
   return (
     <>
-      <div className={styles.stepsContainer}>
+      <div className={styles.stepsContainer} data-testid="reservation-component">
         <div className={`${styles.step} ${active.step1 && styles.stepActive}`}>
           {" "}
           1{" "}

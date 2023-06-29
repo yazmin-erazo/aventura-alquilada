@@ -5,7 +5,7 @@ import ActionButtons from "../Buttons/ActionButtons";
 import { BsCheckCircleFill } from "react-icons/bs";
 import { RiCloseCircleFill } from "react-icons/ri";
 
-const TableUser = ({ user, onDelete, onEdit }) => {
+const TableUser = ({ user, onDelete, onEdit, isEditable }) => {
 
 
   const getInitials = (name) => {
@@ -50,7 +50,7 @@ const TableUser = ({ user, onDelete, onEdit }) => {
       <td>{formattedDate}</td>
       <td>{user.role}</td>
       <td className={styles["actions"]}>
-        <ActionButtons onDelete={onDelete} onEdit={onEdit} />
+        <ActionButtons onDelete={onDelete} onEdit={onEdit} isDisabled={false}/>
       </td>
     </tr>
   );

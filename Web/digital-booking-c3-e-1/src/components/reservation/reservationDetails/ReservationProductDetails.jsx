@@ -44,7 +44,9 @@ const ReservationProductDetails = ({ product }) => {
               </div>
               <div className={styles.feature}>
                 <TfiLocationPin className={styles.featureIcon} />
-                <p className={styles.featureText}>{product.city.name}</p>
+                {product.city && (
+                  <p className={styles.featureText}>{product.city.name}</p>
+                )}
               </div>
             </div>
             <p className={styles.description}>{product.description}</p>
@@ -59,7 +61,7 @@ const ReservationProductDetails = ({ product }) => {
               handleClose={() => setShowModal(false)}
             />
             <div className={styles.productPrice}>
-              <h4 >Precio día</h4>
+              <h4>Precio día</h4>
               <h3>$ {product.price}</h3>
             </div>
           </div>
@@ -74,5 +76,6 @@ const ReservationProductDetails = ({ product }) => {
     </>
   );
 };
+
 
 export default ReservationProductDetails;

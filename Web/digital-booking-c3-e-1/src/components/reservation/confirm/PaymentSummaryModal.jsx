@@ -34,7 +34,7 @@ const PaymentSummaryModal = ({ show, handleClose, paymentData, setIsPaymentCompl
                     </>
                 )}
 
-                <button onClick={handleButtonClose}>Cerrar</button>
+                <button onClick={handleButtonClose} data-testid="close-button">Cerrar</button>
             </div>
         </div>
     );

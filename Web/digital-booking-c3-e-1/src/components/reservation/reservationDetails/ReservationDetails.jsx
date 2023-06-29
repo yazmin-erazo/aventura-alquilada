@@ -68,6 +68,7 @@ const ReservationDetails = ({
             </div>
             <div className={styles.calendarButton}></div>
             <button
+              data-testid="calendar-toggle"
               className={styles.buttonContainerEdit}
               onClick={toggleCalendar}
             >
@@ -131,6 +132,7 @@ const ReservationDetails = ({
                 checked={equipmentPreferences.some((equipment) => equipment.name === "Casco")}
                 onChange={() => handleEquipmentPreferenceToggle({name:"Casco",price:10})}
                 className={styles.equipmentCheckbox}
+                data-testid="casco-checkbox"
               />
               <label htmlFor="equipmentcasco" className={styles.preferenceText}>
                 Casco <span>+ $10 por día</span>
@@ -143,6 +145,7 @@ const ReservationDetails = ({
                 checked={equipmentPreferences.some((equipment) => equipment.name === "Mapas")}
                 onChange={() => handleEquipmentPreferenceToggle({name:"Mapas",price:2})}
                 className={styles.equipmentCheckbox}
+                data-testid="mapas"
               />
               <label htmlFor="equipmentmapas" className={styles.preferenceText}>
                 Mapa de rutas <span>+ $2 por día</span>

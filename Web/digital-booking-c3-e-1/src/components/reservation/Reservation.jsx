@@ -205,6 +205,7 @@ const Reservation = ({
                 <button
                   type="submit"
                   className={styles.submitButton}
+                  data-testid="submit-button"
                   disabled={
                     (step === 2 &&
                       delivery === "entrega" &&

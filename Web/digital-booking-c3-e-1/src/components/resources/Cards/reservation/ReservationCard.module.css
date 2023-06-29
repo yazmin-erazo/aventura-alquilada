@@ -86,19 +86,19 @@
   margin-right: 5px;
 }
 
-.state[data-state="Reservado"]:before {
+.state[data-state="PENDIENTE"]:before {
   background-color: #ffc107;
 }
 
-.state[data-state="En curso"]:before {
+.state[data-state="ACTUALIZADO"]:before {
   background-color: #007bff;
 }
 
-.state[data-state="Cancelado"]:before {
+.state[data-state="CANCELADO"]:before {
   background-color: #dc3545;
 }
 
-.state[data-state="Finalizado"]:before {
+.state[data-state="CREADO"]:before {
   background-color: #7fdf12;
 }
 
