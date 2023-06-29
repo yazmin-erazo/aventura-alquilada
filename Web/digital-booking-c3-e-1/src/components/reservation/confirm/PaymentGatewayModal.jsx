@@ -209,6 +209,7 @@ const PaymentGatewayModal = ({
           </form>
           <div className={styles.buttonsContainer}>
             <button
+              data-testid="button-close"
               className={styles.buttonClose}
               type="button"
               onClick={handleClose}
@@ -216,6 +217,7 @@ const PaymentGatewayModal = ({
               Cancelar
             </button>
             <button
+              data-testid="button-pay"
               className={styles.buttonPay}
               type="button"
               onClick={handlePayment}

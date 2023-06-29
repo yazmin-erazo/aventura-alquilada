@@ -11,52 +11,50 @@ const ReservationCard = ({
   cancelReservation,
   rebookReservation,
 }) => {
-
   const [currentPage, setCurrentPage] = useState(1);
   const [pageLimit, setPageLimit] = useState(10);
-  const [currentReservations, setCurrentReservations] = useState(reservations)
+  const [currentReservations, setCurrentReservations] = useState(reservations);
 
   const onPageChanged = () => {
     const offset = (currentPage - 1) * pageLimit;
     const slicedReservations = reservations.slice(offset, offset + pageLimit);
-    setCurrentReservations(slicedReservations)
-  }
+    setCurrentReservations(slicedReservations);
+  };
 
   useEffect(() => {
-    setCurrentPage(1)
-  }, [])
+    setCurrentPage(1);
+  }, []);
 
   useEffect(() => {
     onPageChanged();
-  }, [currentPage, pageLimit])
-
-
+  }, [currentPage, pageLimit]);
 
   return (
     <div className={styles["rents-container"]}>
       {reservations.length === 0 ? (
         <p className={styles["no-rents"]}>No hay reservaciones.</p>
-      ) :  ( <>
-       <ul className={styles["rents-list"]}>
-          {currentReservations.map((reservation) => (
-            <ReservationItem
-              key={reservation.id}
-              reservation={reservation}
-              cancelReservation={cancelReservation}
-              rebookReservation={rebookReservation}
-            />
-          ))}
-        </ul>
-      <Pagination
-        onPageChanged={onPageChanged}
-        limit={pageLimit}
-        total={reservations.length}
-        currentPage={currentPage}
-        setCurrentPage={setCurrentPage}
-        setLimit={setPageLimit}
-        />
+      ) : (
+        <>
+          <ul className={styles["rents-list"]}>
+            {currentReservations.map((reservation) => (
+              <ReservationItem
+                key={reservation.id}
+                reservation={reservation}
+                cancelReservation={cancelReservation}
+                rebookReservation={rebookReservation}
+              />
+            ))}
+          </ul>
+          <Pagination
+            onPageChanged={onPageChanged}
+            limit={pageLimit}
+            total={reservations.length}
+            currentPage={currentPage}
+            setCurrentPage={setCurrentPage}
+            setLimit={setPageLimit}
+          />
         </>
-        )}
+      )}
     </div>
   );
 };
@@ -66,11 +64,10 @@ const ReservationItem = ({
   cancelReservation,
   rebookReservation,
 }) => {
-
   const formatDate = (date) => {
-    return moment(date).add(1, 'days').format("DD/MM/YYYY");
-  };  
-  
+    return moment(date).add(1, "days").format("DD/MM/YYYY");
+  };
+
   return (
     <li className={styles["reservation-card"]}>
       <div className={styles["reservation-image"]}>
@@ -83,7 +80,9 @@ const ReservationItem = ({
           {reservation.product.name}
         </div>
         <div className={styles["container-categoryDate"]}>
-          <div className={styles["category"]}>{reservation.product.category}</div>
+          <div className={styles["category"]}>
+            {reservation.product.category}
+          </div>
           <div className={styles["date"]}>
             <div className={styles["dates-container"]}>
               <div className={styles["date-start"]}>
@@ -110,6 +109,7 @@ const ReservationItem = ({
         <div className={styles["button-container"]}>
           {reservation.state !== "CANCELADO" ? (
             <button
+              data-testid="cancel-button"
               className={`${styles["cancel-button"]} ${styles["button"]}`}
               onClick={() => cancelReservation(reservation.id)}
             >

@@ -1,12 +1,10 @@
 import React, { useCallback, useContext, useEffect, useState } from "react";
-//import { RentsContext } from "../../../context/RentsContext";
 import ReservationCard from "../../resources/Cards/reservation/ReservationCard";
 import styles from "./ReservationList.module.css"
 import RentsService from "../../../shared/services/RentsService";
 import Swal from "sweetalert2";
 
 const ReservationList = () => {
-  // const reservations = useContext(RentsContext);
 
   const [reservations, setReservations] = useState([]);
   

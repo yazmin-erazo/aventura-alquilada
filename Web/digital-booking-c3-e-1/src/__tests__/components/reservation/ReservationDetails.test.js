@@ -44,7 +44,8 @@ describe("ReservationDetails", () => {
     );
   });
 
-  it("renders the reservation details", () => {
+    // 🧪 =============================
+  it("proporciona los detalles de la reserva", () => {
     expect(screen.getByText("Preferencias de entrega")).toBeInTheDocument();
     expect(screen.getByText("Recoger")).toBeInTheDocument();
     expect(screen.getByText("Servicio de entrega")).toBeInTheDocument();
@@ -53,14 +54,17 @@ describe("ReservationDetails", () => {
     );
     expect(screen.getByTestId("casco-checkbox")).toBeChecked();
     expect(screen.getByTestId("mapas")).not.toBeChecked();
+
   });
 
-  it("toggles the calendar", () => {
+    // 🧪 =============================
+  it("toggles del calendario", () => {
     fireEvent.click(screen.getByTestId("calendar-toggle"));
     expect(toggleCalendar).toHaveBeenCalled();
   });
 
-  it("selects dates from the calendar", () => {
+    // 🧪 =============================
+  it("selecciona fechas del calendario", () => {
     const selectedDates = {
       startDate: "2023-06-10",
       endDate: "2023-06-12",

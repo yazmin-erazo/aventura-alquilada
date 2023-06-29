@@ -1,6 +1,7 @@
 import React from "react";
 import { render, screen, fireEvent } from "@testing-library/react";
 import Reservation from "../../../components/reservation/Reservation";
+import { MemoryRouter } from "react-router-dom";
 
 describe("Reservation", () => {
   const product = {
@@ -26,26 +27,29 @@ describe("Reservation", () => {
 
   beforeEach(() => {
     render(
-      <Reservation
-        product={product}
-        startDate={startDate}
-        endDate={endDate}
-        user={user}
-        disabled={disabled}
-        changeStep={changeStepMock}
-        step={1}
-        handleStartDateChange={handleStartDateChangeMock}
-        handleEndDateChange={handleEndDateChangeMock}
-        selectedStartDate={startDate}
-        selectedEndDate={endDate}
-        toggleCalendar={toggleCalendarMock}
-        isCalendarOpen={false}
-        handleSelectDates={handleSelectDatesMock}
-      />
+      <MemoryRouter>
+        <Reservation
+          product={product}
+          startDate={startDate}
+          endDate={endDate}
+          user={user}
+          disabled={disabled}
+          changeStep={changeStepMock}
+          step={1}
+          handleStartDateChange={handleStartDateChangeMock}
+          handleEndDateChange={handleEndDateChangeMock}
+          selectedStartDate={startDate}
+          selectedEndDate={endDate}
+          toggleCalendar={toggleCalendarMock}
+          isCalendarOpen={false}
+          handleSelectDates={handleSelectDatesMock}
+        />
+      </MemoryRouter>
     );
   });
 
-  it("renders the ContactReservation component in step 1", () => {
+  // 🧪 =============================
+  it("renderiza el componente ContactReservation en el paso 1", () => {
     expect(screen.getByText("Datos de contacto")).toBeInTheDocument();
     expect(
       screen.getByLabelText(
@@ -66,7 +70,8 @@ describe("Reservation", () => {
     ).toBeInTheDocument();
   });
 
-  it("renders the ReservationDetails component in step 2", () => {
+  // 🧪 =============================
+  it("renderiza el componente ReservationDetails en el paso 2", () => {
     changeStepMock.mockClear();
     fireEvent.click(screen.getByText("Siguiente"));
     expect(changeStepMock).toHaveBeenCalledWith("NEXT");
@@ -74,13 +79,13 @@ describe("Reservation", () => {
     expect(screen.getByText("Product Name")).toBeInTheDocument();
   });
 
-
-  it('renders the ConfirmReservation component in step 3', () => {
+  // 🧪 =============================
+  it("renderiza el componente ConfirmReservation en el paso 3", () => {
     changeStepMock.mockClear();
-    fireEvent.click(screen.getByText('Siguiente'));
-    fireEvent.click(screen.getByText('Siguiente'));
-    expect(changeStepMock).toHaveBeenCalledWith('NEXT');
+    fireEvent.click(screen.getByText("Siguiente"));
+    fireEvent.click(screen.getByText("Siguiente"));
+    expect(changeStepMock).toHaveBeenCalledWith("NEXT");
 
-    expect(screen.getByText('Product Name')).toBeInTheDocument();
+    expect(screen.getByText("Product Name")).toBeInTheDocument();
   });
 });

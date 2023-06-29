@@ -35,44 +35,55 @@ describe("ContactReservation", () => {
     );
   });
 
-  it("renders the user information correctly", () => {
+  // 🧪 =============================
+  it("renderiza la información del usuario correctamente", () => {
     expect(screen.getByLabelText("Nombre")).toHaveValue(user.name);
     expect(screen.getByLabelText("Apellido")).toHaveValue(user.lastname);
     expect(screen.getByLabelText("Email")).toHaveValue(user.sub);
   });
 
-  it('handles name change', () => {
-    const nameInput = screen.getByLabelText('Nombre');
+  // 🧪 =============================
+  it("maneja el cambio de nombre", () => {
+    const nameInput = screen.getByLabelText("Nombre");
 
-    fireEvent.change(nameInput, { target: { value: 'Jane' } });
+    fireEvent.change(nameInput, { target: { value: "Jane" } });
 
-    expect(onNameChange).toHaveBeenCalledWith('Jane');
+    expect(onNameChange).toHaveBeenCalledWith("Jane");
   });
 
-  it('handles last name change', () => {
-    const lastNameInput = screen.getByLabelText('Apellido');
+  // 🧪 =============================
+  it("maneja el cambio de apellido", () => {
+    const lastNameInput = screen.getByLabelText("Apellido");
 
-    fireEvent.change(lastNameInput, { target: { value: 'Smith' } });
+    fireEvent.change(lastNameInput, { target: { value: "Smith" } });
 
-    expect(onLastNameChange).toHaveBeenCalledWith('Smith');
+    expect(onLastNameChange).toHaveBeenCalledWith("Smith");
   });
 
-
-  it('toggles additional form on button click', () => {
-    const button = screen.getByTestId('add-button');
+  // 🧪 =============================
+  it("alterna el formulario adicional al hacer clic en el botón", () => {
+    const button = screen.getByTestId("add-button");
 
     fireEvent.click(button);
 
-    expect(screen.getByText('Nombre (Segundo contacto)')).toBeInTheDocument();
-    expect(screen.getByText('Apellido (Segundo contacto)')).toBeInTheDocument();
-    expect(screen.getByText('Email (Segundo contacto)')).toBeInTheDocument();
-
+    expect(screen.getByText("Nombre (Segundo contacto)")).toBeInTheDocument();
+    expect(screen.getByText("Apellido (Segundo contacto)")).toBeInTheDocument();
+    expect(screen.getByText("Email (Segundo contacto)")).toBeInTheDocument();
 
     fireEvent.click(button);
 
-    expect(screen.queryByText(' ')).not.toBeInTheDocument();
-    expect(screen.queryByText(' ')).not.toBeInTheDocument();
-    expect(screen.queryByText(' ')).not.toBeInTheDocument();
+    expect(screen.queryByText(" ")).not.toBeInTheDocument();
+    expect(screen.queryByText(" ")).not.toBeInTheDocument();
+    expect(screen.queryByText(" ")).not.toBeInTheDocument();
   });
 
+  // 🧪 =============================
+  it("llama a la función handleSubscribeChange cuando la casilla de verificación está activada", () => {
+    fireEvent.click(
+      screen.getByLabelText(
+        "Me gustaría recibir notificaciones y promociones relacionadas con el equipamiento y actividades."
+      )
+    );
+    expect(handleSubscribeChange).toHaveBeenCalledTimes(1);
+  });
 });
