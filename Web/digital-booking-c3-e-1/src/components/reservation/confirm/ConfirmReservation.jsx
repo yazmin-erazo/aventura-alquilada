@@ -42,7 +42,7 @@ const ConfirmReservation = ({
 
   const totalDays = differenceInDays(new Date(endDate), new Date(startDate))+1;
   const insuranceMulti = insuranceSelected ? 1.1 : 1;
-  const totalPrice = (product.price * insuranceMulti + equipmentPreferences.reduce((total, equipment) => total + equipment.price, 0) )* totalDays;
+  const totalPrice = Math.round((product.price * insuranceMulti + equipmentPreferences.reduce((total, equipment) => total + equipment.price, 0) )* totalDays);
 
 
   const formattedStartDate = format(new Date(startDate), "dd 'de' MMMM 'de' yyyy", { locale: es });
