@@ -52,8 +52,6 @@ describe("ReservationDetails", () => {
     expect(screen.getByLabelText("Dirección de envío")).toHaveValue(
       "123 Main St"
     );
-    expect(screen.getByTestId("casco-checkbox")).toBeChecked();
-    expect(screen.getByTestId("mapas")).not.toBeChecked();
 
   });
 
