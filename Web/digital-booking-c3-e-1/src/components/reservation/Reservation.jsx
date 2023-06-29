@@ -38,8 +38,9 @@ const Reservation = ({
   const [address, setAddress] = useState("");
   const [isAddressValid, setIsAddressValid] = useState(false);
   const [isPrivacyAccepted, setIsPrivacyAccepted] = useState(false);
-  const [isPaymentCompletedButton, setIsPaymentCompletedButton] = useState(false);
   const [dis, setDis] = useState(false)
+  const [isPaymentCompletedButton, setIsPaymentCompletedButton] =useState(false);
+  const [insuranceSelected, setInsuranceSelected] = useState(false);
 
   const handleSubscribeChange = (e) => {
     setIsSubscribe(e.target.checked);
@@ -118,10 +119,11 @@ const Reservation = ({
   };
 
   const handleEquipmentPreferenceToggle = (equipment) => {
-    const updatedPreferences = equipmentPreferences.includes(equipment)
-      ? equipmentPreferences.filter((item) => item !== equipment)
+    const updatedPreferences = equipmentPreferences.some((equi) => equi.name === equipment.name)
+      ? equipmentPreferences.filter((item) => item.name !== equipment.name)
       : [...equipmentPreferences, equipment];
     setEquipmentPreferences(updatedPreferences);
+    console.log(updatedPreferences)
   };
 
   const handleAdditionalContactChange = (contact) => {
@@ -167,9 +169,7 @@ const Reservation = ({
                 handlePreferenceChange={handlePreferenceChange}
                 handleFrequencyOptionClick={handleFrequencyOptionClick}
                 equipmentPreferences={equipmentPreferences}
-                handleEquipmentPreferenceToggle={
-                  handleEquipmentPreferenceToggle
-                }
+                handleEquipmentPreferenceToggle={handleEquipmentPreferenceToggle}
                 comment={comment}
                 handleCommentChange={handleCommentChange}
                 address={address}
@@ -179,6 +179,8 @@ const Reservation = ({
                 toggleCalendar={toggleCalendar}
                 isCalendarOpen={isCalendarOpen}
                 handleSelectDates={handleSelectDates}
+                insuranceSelected={insuranceSelected}
+                setInsuranceSelected={setInsuranceSelected}
               />
             )}
             {step === 3 && (
@@ -198,6 +200,7 @@ const Reservation = ({
                 setIsPaymentCompletedButton={setIsPaymentCompletedButton}
                 selectedStartDate={selectedStartDate}
                 selectedEndDate={selectedEndDate}
+                insuranceSelected={insuranceSelected}
               />
             )}
             <div className={styles.buttonsContainer}>

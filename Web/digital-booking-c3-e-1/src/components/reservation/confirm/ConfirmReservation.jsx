@@ -31,6 +31,7 @@ const ConfirmReservation = ({
   setIsPaymentCompletedButton,
   selectedStartDate,
   selectedEndDate,
+  insuranceSelected,
 }) => {
   const [showModal, setShowModal] = useState(false);
   const [showPaymentModal, setShowPaymentModal] = useState(false);
@@ -42,13 +43,14 @@ const ConfirmReservation = ({
   };
 
   const totalDays = differenceInDays(new Date(endDate), new Date(startDate));
-  const totalPrice = product.price * totalDays;
+  const insuranceMulti = insuranceSelected ? 1.1 : 1;
+  const totalPrice = (product.price * insuranceMulti + equipmentPreferences.reduce((total, equipment) => total + equipment.price, 0) )* totalDays;
 
   const inputStartDate = selectedStartDate || startDate;
   const inputEndDate = selectedEndDate || endDate;
 
   const formattedStartDate = format(new Date(inputStartDate), "dd 'de' MMMM 'de' yyyy", { locale: es });
-const formattedEndDate = format(new Date(inputEndDate), "dd 'de' MMMM 'de' yyyy", { locale: es });
+  const formattedEndDate = format(new Date(inputEndDate), "dd 'de' MMMM 'de' yyyy", { locale: es });
 
   return (
     <div className={styles.confirmationContainer}>
@@ -90,7 +92,7 @@ const formattedEndDate = format(new Date(inputEndDate), "dd 'de' MMMM 'de' yyyy"
             <p className={styles.value}>
               {equipmentPreferences.length === 0
                 ? "Sin equipamiento adicional"
-                : equipmentPreferences.join(", ")}
+                : equipmentPreferences.map((equipment) => equipment.name).join(", ")}
             </p>
           </div>
           <div className={styles.userInfoItem}>
@@ -189,6 +191,29 @@ const formattedEndDate = format(new Date(inputEndDate), "dd 'de' MMMM 'de' yyyy"
         <div className={styles.price}>
           <div className={styles.priceItem}>Días totales de la reserva</div>
           <div className={styles.priceItem}>{totalDays} días</div>
+          <div className={styles.priceItem}>Valor de los días totales</div>
+          <div className={styles.priceItem}>$ {product.price * totalDays}</div>
+          {equipmentPreferences.map(equipment => (
+            <>
+              <div className={styles.priceItem} key={equipment.name}>
+                {equipment.name}
+              </div>
+              <div className={styles.priceItem} key={equipment.price}>
+                $ {equipment.price * totalDays}
+              </div>
+            </>
+          ))}
+          {insuranceSelected ? 
+          (
+            <>
+              <div className={styles.priceItem}>
+                Seguro
+              </div>
+              <div className={styles.priceItem}>
+                $ {product.price * totalDays * 0.1}
+              </div>
+            </>
+          ):(null)}
           <div className={styles.priceItem}>Precio total a pagar</div>
           <div className={styles.priceItem}>$ {totalPrice}</div>
         </div>
