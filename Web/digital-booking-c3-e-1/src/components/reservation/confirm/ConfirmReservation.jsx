@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import styles from "./ConfirmReservation.module.css";
 import moment from "moment";
 import "moment/locale/es";
+import { differenceInDays } from "date-fns";
 import { format } from "date-fns";
 import { es } from "date-fns/locale";
 import {

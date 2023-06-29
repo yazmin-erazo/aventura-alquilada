@@ -55,8 +55,10 @@ const NewReservation = () => {
     const prod = data.products.find((p) => p.id === parseInt(params.id));
     setProduct(prod);
     const dates = JSON.parse(sessionStorage.getItem("dates"));
-    setStartDate(dates.startDate);
-    setEndDate(dates.endDate);
+    if (dates) {
+      setStartDate(dates.startDate);
+      setEndDate(dates.endDate);
+    }
     const u = JSON.parse(sessionStorage.getItem("user"));
     setUser(u);
   }, [data]);
@@ -72,7 +74,7 @@ const NewReservation = () => {
 
   return (
     <>
-      <div className={styles.stepsContainer}>
+      <div className={styles.stepsContainer} data-testid="reservation-component">
         <div className={`${styles.step} ${active.step1 && styles.stepActive}`}>
           {" "}
           1{" "}

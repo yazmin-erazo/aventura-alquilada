@@ -31,10 +31,18 @@ const ReservationDetails = ({
   const inputStartDate = selectedStartDate || startDate;
   const inputEndDate = selectedEndDate || endDate;
 
-  const formattedStartDate = format(new Date(inputStartDate), "dd 'de' MMMM 'de' yyyy", { locale: es });
-const formattedEndDate = format(new Date(inputEndDate), "dd 'de' MMMM 'de' yyyy", { locale: es });
+  const formattedStartDate = format(
+    new Date(inputStartDate),
+    "dd 'de' MMMM 'de' yyyy",
+    { locale: es }
+  );
+  const formattedEndDate = format(
+    new Date(inputEndDate),
+    "dd 'de' MMMM 'de' yyyy",
+    { locale: es }
+  );
 
-console.log(formattedEndDate);
+  console.log(formattedEndDate);
 
   return (
     <>
@@ -76,6 +84,7 @@ console.log(formattedEndDate);
             </div>
             <div className={styles.calendarButton}></div>
             <button
+              data-testid="calendar-toggle"
               className={styles.buttonContainerEdit}
               onClick={toggleCalendar}
             >
@@ -147,6 +156,7 @@ console.log(formattedEndDate);
                 checked={equipmentPreferences.includes("casco")}
                 onChange={() => handleEquipmentPreferenceToggle("casco")}
                 className={styles.equipmentCheckbox}
+                data-testid="casco-checkbox"
               />
               <label htmlFor="equipmentcasco" className={styles.preferenceText}>
                 Casco <span>+ $10</span>
@@ -159,6 +169,7 @@ console.log(formattedEndDate);
                 checked={equipmentPreferences.includes("mapas")}
                 onChange={() => handleEquipmentPreferenceToggle("mapas")}
                 className={styles.equipmentCheckbox}
+                data-testid="mapas"
               />
               <label htmlFor="equipmentmapas" className={styles.preferenceText}>
                 Mapa de rutas <span>+ $2</span>
