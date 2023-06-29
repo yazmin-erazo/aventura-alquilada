@@ -91,7 +91,7 @@ const Reservation = ({
       starDate: startDate,
       endDate: endDate,
       comment: comment,
-      delivery: delivery,
+      delivery: address,
       // deliveryAddress : address
       // subscribe: isSubscribe,
       // equipment: equipmentPreferences,
