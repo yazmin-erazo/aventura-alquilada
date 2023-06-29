@@ -3,6 +3,8 @@ import styles from "./ReservationCard.module.css";
 import { BsCalendar4 } from "react-icons/bs";
 import Pagination from "../../pagination/Pagination";
 import moment from "moment";
+import RentsService from "../../../../shared/services/RentsService";
+import Swal from "sweetalert2";
 
 const ReservationCard = ({
   reservations,

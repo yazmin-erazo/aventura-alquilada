@@ -38,8 +38,8 @@ const Reservation = ({
   const [address, setAddress] = useState("");
   const [isAddressValid, setIsAddressValid] = useState(false);
   const [isPrivacyAccepted, setIsPrivacyAccepted] = useState(false);
-  const [isPaymentCompletedButton, setIsPaymentCompletedButton] =
-    useState(false);
+  const [isPaymentCompletedButton, setIsPaymentCompletedButton] = useState(false);
+  const [dis, setDis] = useState(false)
 
   const handleSubscribeChange = (e) => {
     setIsSubscribe(e.target.checked);
@@ -77,6 +77,13 @@ const Reservation = ({
   };
 
   const reserve = async () => {
+    setDis(true)
+    Swal.fire({
+      title: "Estamos armando su reserva...",
+      didOpen: () => {
+        Swal.showLoading();
+      },
+    });
     const datos = {
       userId: user.iduser,
       productId: product.id,
@@ -208,9 +215,10 @@ const Reservation = ({
                   type="submit"
                   className={styles.submitButton}
                   disabled={
-                    (step === 2 && delivery === "entrega" && !isAddressValid) ||
-                    (step === 3 &&
-                      (!isPrivacyAccepted || !isPaymentCompletedButton))
+                    (step === 2 &&
+                      delivery === "entrega" &&
+                      !isAddressValid) ||
+                    (step === 3 && (!isPrivacyAccepted || !isPaymentCompletedButton)) || dis
                   }
                 >
                   {step !== 3 ? "Siguiente" : "Reservar ahora"}

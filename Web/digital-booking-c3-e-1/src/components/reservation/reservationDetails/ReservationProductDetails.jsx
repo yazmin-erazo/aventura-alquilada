@@ -3,9 +3,15 @@ import { BiCheckCircle } from "react-icons/bi";
 import styles from "./ReservationProductDetails.module.css";
 import { TfiLocationPin } from "react-icons/tfi";
 import CancellationPolicyModal from "./CancellationPolicyModal";
+import { Link, useNavigate } from "react-router-dom";
 
 const ReservationProductDetails = ({ product }) => {
   const [showModal, setShowModal] = useState(false);
+  const navigate = useNavigate();
+
+  const cancelReservation = () => {
+    navigate("/")
+  }
 
   return (
     <>
@@ -14,14 +20,16 @@ const ReservationProductDetails = ({ product }) => {
           <div className={styles.productInfo}>
             <div className={styles.productContainerHeader}>
               <div className={styles.productImageContainer}>
-                <img
-                  src={product.imageURL}
-                  alt={product.name}
-                  className={styles.productImage}
-                />
-                <div className={styles.overlay}>
-                  <span className={styles.overlayText}>Ver detalles</span>
-                </div>
+                <Link to={`/products/${product.id}`}>
+                  <img
+                    src={product.imageURL}
+                    alt={product.name}
+                    className={styles.productImage}
+                    />
+                  <div className={styles.overlay}>
+                    <span className={styles.overlayText}>Ver detalles</span>
+                  </div>
+                </Link>
               </div>
               <div className={styles.productInfoHeader}>
                 <p className={styles.category}>{product.category}</p>
@@ -57,6 +65,12 @@ const ReservationProductDetails = ({ product }) => {
           </div>
         </div>
       )}
+      <button
+        className={`${styles["cancel-button"]} ${styles["button"]}`}
+        onClick={() => cancelReservation()}
+      >
+        Cancelar Reserva
+      </button>
     </>
   );
 };
