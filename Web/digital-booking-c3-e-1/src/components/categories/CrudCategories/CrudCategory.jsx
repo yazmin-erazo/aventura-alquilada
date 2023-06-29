@@ -70,7 +70,7 @@ const CrudCategory = () => {
         } catch (error) {
           Swal.fire(
             "Error",
-            res.data.response,
+            error.response.data.mensaje,
             "error"
           );
         }
@@ -131,3 +131,4 @@ const CrudCategory = () => {
 };
 
 export default CrudCategory;
+

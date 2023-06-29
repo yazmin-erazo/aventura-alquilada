@@ -16,5 +16,6 @@ public class CategoryEntity {
     private String description;
     private Boolean isDelete;
     private String icon;
+    private Boolean hasProducts;
 
 }
