@@ -30,12 +30,7 @@ const SearchEngine = ({ handleSearch }) => {
       endDate: selectedEndDate,
     });
     if (selectedStartDate)
-      sessionStorage.setItem(
-        "dates",
-        JSON.stringify({
-          startDate: selectedStartDate,
-          endDate: selectedEndDate,
-        })
+      sessionStorage.setItem("dates",JSON.stringify({startDate: selectedStartDate,endDate: selectedEndDate})
       );
   };
 

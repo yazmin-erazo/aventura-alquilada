@@ -29,8 +29,6 @@ const ConfirmReservation = ({
   isPrivacyAccepted,
   handlePrivacyAcceptanceChange,
   setIsPaymentCompletedButton,
-  selectedStartDate,
-  selectedEndDate,
   insuranceSelected,
 }) => {
   const [showModal, setShowModal] = useState(false);
@@ -42,15 +40,13 @@ const ConfirmReservation = ({
     setIsPaymentCompleted(true);
   };
 
-  const totalDays = differenceInDays(new Date(endDate), new Date(startDate));
+  const totalDays = differenceInDays(new Date(endDate), new Date(startDate))+1;
   const insuranceMulti = insuranceSelected ? 1.1 : 1;
   const totalPrice = (product.price * insuranceMulti + equipmentPreferences.reduce((total, equipment) => total + equipment.price, 0) )* totalDays;
 
-  const inputStartDate = selectedStartDate || startDate;
-  const inputEndDate = selectedEndDate || endDate;
 
-  const formattedStartDate = format(new Date(inputStartDate), "dd 'de' MMMM 'de' yyyy", { locale: es });
-  const formattedEndDate = format(new Date(inputEndDate), "dd 'de' MMMM 'de' yyyy", { locale: es });
+  const formattedStartDate = format(new Date(startDate), "dd 'de' MMMM 'de' yyyy", { locale: es });
+  const formattedEndDate = format(new Date(endDate), "dd 'de' MMMM 'de' yyyy", { locale: es });
 
   return (
     <div className={styles.confirmationContainer}>
@@ -195,10 +191,10 @@ const ConfirmReservation = ({
           <div className={styles.priceItem}>$ {product.price * totalDays}</div>
           {equipmentPreferences.map(equipment => (
             <>
-              <div className={styles.priceItem} key={equipment.name}>
+              <div className={styles.priceItem} >
                 {equipment.name}
               </div>
-              <div className={styles.priceItem} key={equipment.price}>
+              <div className={styles.priceItem} >
                 $ {equipment.price * totalDays}
               </div>
             </>

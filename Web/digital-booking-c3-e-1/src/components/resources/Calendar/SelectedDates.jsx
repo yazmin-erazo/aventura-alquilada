@@ -45,7 +45,7 @@ const SelectedDates = ({
             <span>Fecha de fin:</span> {formatDate(maxDate)}
           </div>
           <div>
-            <span>Días totales de renta:</span> {totalRentalDays} días
+            <span>Días totales de reserva:</span> {totalRentalDays} días
           </div>
         </div>
         <div className={styles.buttonTextDates}>

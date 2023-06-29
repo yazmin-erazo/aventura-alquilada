@@ -22,10 +22,6 @@ const Reservation = ({
   disabled,
   changeStep,
   step,
-  handleStartDateChange,
-  handleEndDateChange,
-  selectedStartDate,
-  selectedEndDate,
   toggleCalendar,
   isCalendarOpen,
   handleSelectDates,
@@ -88,8 +84,8 @@ const Reservation = ({
     const datos = {
       userId: user.iduser,
       productId: product.id,
-      starDate: selectedStartDate,
-      endDate: selectedEndDate,
+      starDate: startDate,
+      endDate: endDate,
       comment: comment,
       delivery: delivery,
       // deliveryAddress : address
@@ -98,11 +94,10 @@ const Reservation = ({
       // additionalContact: additionalContact,
       // policyPrivacy: isPrivacyAccepted
     };
-
     const res = await RentsService.create(datos);
     console.log(res);
 
-    if (res.status === 201)
+    if (res.status === 201 )
       Swal.fire(
         "¡Muchas gracias!",
         "La reserva se ha efectuado con éxito. Recibirá un mail con los datos",
@@ -123,7 +118,6 @@ const Reservation = ({
       ? equipmentPreferences.filter((item) => item.name !== equipment.name)
       : [...equipmentPreferences, equipment];
     setEquipmentPreferences(updatedPreferences);
-    console.log(updatedPreferences)
   };
 
   const handleAdditionalContactChange = (contact) => {
@@ -164,8 +158,6 @@ const Reservation = ({
                 startDate={formatDate(startDate)}
                 endDate={formatDate(endDate)}
                 delivery={delivery}
-                handleStartDateChange={handleStartDateChange}
-                handleEndDateChange={handleEndDateChange}
                 handlePreferenceChange={handlePreferenceChange}
                 handleFrequencyOptionClick={handleFrequencyOptionClick}
                 equipmentPreferences={equipmentPreferences}
@@ -174,8 +166,6 @@ const Reservation = ({
                 handleCommentChange={handleCommentChange}
                 address={address}
                 handleAddressChange={handleAddressChange}
-                selectedStartDate={selectedStartDate}
-                selectedEndDate={selectedEndDate}
                 toggleCalendar={toggleCalendar}
                 isCalendarOpen={isCalendarOpen}
                 handleSelectDates={handleSelectDates}
@@ -198,8 +188,6 @@ const Reservation = ({
                 isPrivacyAccepted={isPrivacyAccepted}
                 handlePrivacyAcceptanceChange={handlePrivacyAcceptanceChange}
                 setIsPaymentCompletedButton={setIsPaymentCompletedButton}
-                selectedStartDate={selectedStartDate}
-                selectedEndDate={selectedEndDate}
                 insuranceSelected={insuranceSelected}
               />
             )}

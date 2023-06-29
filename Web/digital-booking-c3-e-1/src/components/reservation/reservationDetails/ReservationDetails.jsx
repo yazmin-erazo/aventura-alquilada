@@ -12,8 +12,6 @@ const ReservationDetails = ({
   product,
   startDate,
   endDate,
-  selectedStartDate,
-  selectedEndDate,
   delivery,
   equipmentPreferences,
   comment,
@@ -22,8 +20,6 @@ const ReservationDetails = ({
   handleEquipmentPreferenceToggle,
   handleCommentChange,
   handleAddressChange,
-  handleStartDateChange,
-  handleEndDateChange,
   toggleCalendar,
   isCalendarOpen,
   handleSelectDates,
@@ -31,11 +27,8 @@ const ReservationDetails = ({
   setInsuranceSelected,
 }) => {
 
-  const inputStartDate = selectedStartDate || startDate;
-  const inputEndDate = selectedEndDate || endDate;
-
-  const formattedStartDate = format(new Date(inputStartDate), "dd 'de' MMMM 'de' yyyy", { locale: es });
-  const formattedEndDate = format(new Date(inputEndDate), "dd 'de' MMMM 'de' yyyy", { locale: es });
+  const formattedStartDate = format(new Date(startDate), "dd 'de' MMMM 'de' yyyy", { locale: es });
+  const formattedEndDate = format(new Date(endDate), "dd 'de' MMMM 'de' yyyy", { locale: es });
 
   return (
     <>
@@ -57,7 +50,6 @@ const ReservationDetails = ({
               <InputWithLabel
                 isEditable={false}
                 value={formattedStartDate}
-                onChange={(e) => handleStartDateChange(e.target.value)}
                 label="Fecha de inicio"
                 className={styles.input}
               >
@@ -68,7 +60,6 @@ const ReservationDetails = ({
               <InputWithLabel
                 isEditable={false}
                 value={formattedEndDate}
-                onChange={(e) => handleEndDateChange(e.target.value)}
                 label="Fecha de fin"
                 className={styles.input}
               >
@@ -88,11 +79,6 @@ const ReservationDetails = ({
           </div>
           {isCalendarOpen && (
             <CalendarProducts
-              locale="es"
-              selectedDates={{
-                startDate: selectedStartDate,
-                endDate: selectedEndDate,
-              }}
               onSelectDates={handleSelectDates}
               rents={product.rents}
             />

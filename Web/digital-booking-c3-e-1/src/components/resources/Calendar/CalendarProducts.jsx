@@ -47,7 +47,8 @@ const CalendarProducts = ({ onSelectDates, rents }) => {
 
   const handleDateSelect = (date) => {
     const selectedDate = moment(date).startOf("day");
-  
+    sessionStorage.removeItem("dates")
+
     if (selectedEndDate) {
       if (selectedDate > selectedEndDate) {
         setSelectedStartDate(selectedEndDate);
@@ -99,7 +100,7 @@ const CalendarProducts = ({ onSelectDates, rents }) => {
 
 
   useEffect(() => {
-    if (onSelectDates) {
+    if (onSelectDates && selectedStartDate && selectedEndDate) {
       onSelectDates(selectedStartDate, selectedEndDate);
     }
   }, [selectedStartDate, selectedEndDate]);
