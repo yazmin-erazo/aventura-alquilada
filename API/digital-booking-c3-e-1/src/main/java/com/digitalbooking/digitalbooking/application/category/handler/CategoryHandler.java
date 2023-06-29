@@ -38,4 +38,8 @@ public class CategoryHandler {
     public String deleteCategory(Long id) throws Exception{
         return serviceCategory.deleteCategory(Category.createById(id));
     }
+
+    public boolean hasProducts(Long id) {
+        return serviceCategory.hasProducts(id);
+    }
 }

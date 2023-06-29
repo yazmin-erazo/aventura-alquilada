@@ -54,6 +54,11 @@ const CrudCategory = () => {
     }).then(async (result) => {
       if (result.isConfirmed) {
         try {
+          const resValidation = await CategoryService.hasProducts(categoryId);
+          if (resValidation.status === 200){
+            console.log("hasProducts??");
+            console.log(resValidation);
+          }
           const res = await CategoryService.deleteByID(categoryId);
           if (res.status === 200) {
             const updatedCategories = categories.filter(
@@ -131,3 +136,4 @@ const CrudCategory = () => {
 };
 
 export default CrudCategory;
+

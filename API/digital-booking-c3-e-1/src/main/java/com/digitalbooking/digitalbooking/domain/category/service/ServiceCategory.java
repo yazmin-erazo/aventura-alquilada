@@ -33,4 +33,8 @@ public class ServiceCategory {
         categoryRepository.deleteCategory(category.getId());
         return "Categoría eliminada correctamente";
     }
+
+    public boolean hasProducts(Long id){
+        return categoryRepository.hasProducts(id);
+    }
 }
