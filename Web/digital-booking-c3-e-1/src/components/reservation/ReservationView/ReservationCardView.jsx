@@ -5,7 +5,7 @@ import { differenceInDays } from "date-fns";
 
 
 const ReservationCard = ({ reservation }) => {
-  const { user, creationDate, endDate, delivery, product, comments } = reservation;
+  const { user, creationDate, endDate, delivery, product, comment } = reservation;
   const formattedStartDate = creationDate ? format(new Date(creationDate), "dd 'de' MMMM 'de' yyyy", { locale: es }) : null;
   const formattedEndDate = endDate ? format(new Date(endDate), "dd 'de' MMMM 'de' yyyy", { locale: es }) : null;
   const productPrice = product && product.price ? product.price : 0;
@@ -28,7 +28,7 @@ const ReservationCard = ({ reservation }) => {
         <p>Desde: {formattedStartDate}</p>
         <p>Hasta: {formattedEndDate}</p>
         <p>Entrega: {delivery === "recoger en tienda" ? "Recoger en tienda" : `Entregar en ${delivery}`}</p>
-        <p>Commentarios: {comments ? comments : "No hay comentarios"}</p>
+        <p>Comentarios: {comment ? comment : "No hay comentarios"}</p>
         <p>Precio total: $ {totalPrice}</p>
       </div>
     </div>
