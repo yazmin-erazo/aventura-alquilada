@@ -8,24 +8,17 @@ const NewReservation = () => {
   const params = useParams();
   const data = useContext(ProductsContext);
   const [product, setProduct] = useState(null);
-  const [startDate, setStartDate] = useState(null);
-  const [endDate, setEndDate] = useState(null);
+  const [startDate, setStartDate] = useState(new Date().toISOString());
+  const [endDate, setEndDate] = useState(new Date().toISOString());
   const [isCalendarOpen, setCalendarOpen] = useState(false);
-  const [selectedStartDate, setSelectedStartDate] = useState(null);
-  const [selectedEndDate, setSelectedEndDate] = useState(null);
 
-  const handleStartDateChange = (startDate) => {
-    setSelectedStartDate(startDate);
-  };
 
-  const handleEndDateChange = (endDate) => {
-    setSelectedEndDate(endDate);
-  };
 
   const handleSelectDates = (startDate, endDate) => {
-    setSelectedStartDate(startDate);
-    setSelectedEndDate(endDate);
+    setStartDate(startDate)
+    setEndDate(endDate)
   };
+
   const [active, setActive] = useState({
     step1: true,
     step2: false,
@@ -55,15 +48,17 @@ const NewReservation = () => {
     const prod = data.products.find((p) => p.id === parseInt(params.id));
     setProduct(prod);
     const dates = JSON.parse(sessionStorage.getItem("dates"));
-    setStartDate(dates.startDate);
-    setEndDate(dates.endDate);
+    if (dates && dates.startDate && dates.endDate) {
+      setStartDate(dates.startDate);
+      setEndDate(dates.endDate);
+    }
     const u = JSON.parse(sessionStorage.getItem("user"));
     setUser(u);
   }, [data]);
 
   useEffect(() => {
     setCalendarOpen(false);
-  }, [selectedEndDate]);
+  }, [endDate]);
 
   const toggleCalendar = (e) => {
     e.preventDefault();
@@ -93,10 +88,6 @@ const NewReservation = () => {
         user={user}
         changeStep={changeStep}
         step={step}
-        handleStartDateChange={handleStartDateChange}
-        handleEndDateChange={handleEndDateChange}
-        selectedStartDate={selectedStartDate}
-        selectedEndDate={selectedEndDate}
         toggleCalendar={toggleCalendar}
         isCalendarOpen={isCalendarOpen}
         handleSelectDates={handleSelectDates}

@@ -19,7 +19,7 @@ const RentsService = {
     API.post(RENTS_ENDPOINTS.CREATE_RENT, payload)
     .then((res) => {
       Swal.close();
-      return res.data;
+      return res;
     })
     .catch((err) => {
       Swal.fire("Error", res.response.data.mensaje, "error")
