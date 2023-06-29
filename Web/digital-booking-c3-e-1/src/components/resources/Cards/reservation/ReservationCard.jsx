@@ -3,6 +3,7 @@ import styles from "./ReservationCard.module.css";
 import { BsCalendar4 } from "react-icons/bs";
 import Pagination from "../../pagination/Pagination";
 import moment from "moment";
+import { useNavigate } from "react-router-dom";
 import RentsService from "../../../../shared/services/RentsService";
 import Swal from "sweetalert2";
 
@@ -64,9 +65,15 @@ const ReservationItem = ({
   cancelReservation,
   rebookReservation,
 }) => {
+  const navigate = useNavigate();
+
   const formatDate = (date) => {
     return moment(date).add(1, "days").format("DD/MM/YYYY");
   };
+
+  const detailsReservation = (id)=> {
+    navigate(`/reservacion/${id}`)
+  }
 
   return (
     <li className={styles["reservation-card"]}>
@@ -123,7 +130,8 @@ const ReservationItem = ({
               Hacer Reserva
             </button>
           )}
-          <button className={`${styles["details-button"]} ${styles["button"]}`}>
+          <button className={`${styles["details-button"]} ${styles["button"]}`}
+            onClick={() => detailsReservation(reservation.id)}>
             Ver Detalles
           </button>
         </div>

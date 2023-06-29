@@ -10,6 +10,7 @@ import es from "date-fns/locale/es";
 import ReservationProductDetails from "./reservationDetails/ReservationProductDetails";
 import Swal from "sweetalert2";
 import PrivacyPolicyModal from "./confirm/PrivacyPolicies";
+import { useNavigate } from "react-router-dom";
 
 registerLocale("es", es);
 setDefaultLocale("es");
@@ -35,8 +36,9 @@ const Reservation = ({
   const [isAddressValid, setIsAddressValid] = useState(false);
   const [isPrivacyAccepted, setIsPrivacyAccepted] = useState(false);
   const [dis, setDis] = useState(false)
-  const [isPaymentCompletedButton, setIsPaymentCompletedButton] =useState(false);
+  const [isPaymentCompletedButton, setIsPaymentCompletedButton] = useState(false);
   const [insuranceSelected, setInsuranceSelected] = useState(false);
+  const navigate = useNavigate();
 
   const handleSubscribeChange = (e) => {
     setIsSubscribe(e.target.checked);
@@ -76,11 +78,13 @@ const Reservation = ({
   const reserve = async () => {
     setDis(true)
     Swal.fire({
-      title: "Estamos armando su reserva...",
+      title: "¡Un momento por favor!",
+      text: "Estamos procesando tu reserva...",
       didOpen: () => {
         Swal.showLoading();
       },
     });
+
     const datos = {
       userId: user.iduser,
       productId: product.id,
@@ -97,12 +101,14 @@ const Reservation = ({
     const res = await RentsService.create(datos);
     console.log(res);
 
-    if (res.status === 201 )
+    if (res.status === 201)
       Swal.fire(
-        "¡Muchas gracias!",
-        "La reserva se ha efectuado con éxito. Recibirá un mail con los datos",
+        "¡Reserva Exitosa!",
+        "Gracias por tu reserva. Pronto recibirás un correo electrónico con todos los detalles. ¡Esperamos que disfrutes tu experiencia!",
         "success"
-      );
+      ).then(() => {
+        navigate(`/`)
+      });
   };
 
   const back = () => {
@@ -213,7 +219,7 @@ const Reservation = ({
                     (step === 3 && (!isPrivacyAccepted || !isPaymentCompletedButton)) || dis
                   }
                 >
-                  {step !== 3 ? "Siguiente" : "Reservar ahora"}
+                  {step !== 3 ? "Siguiente" : "Confirmar reserva"}
                 </button>
               </div>
             </div>

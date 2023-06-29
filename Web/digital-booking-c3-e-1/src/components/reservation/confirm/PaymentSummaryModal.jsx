@@ -23,6 +23,8 @@ const PaymentSummaryModal = ({ show, handleClose, paymentData, setIsPaymentCompl
                         <p>Nombre del Titular: {paymentData.cardHolder}</p>
                         <p>Número de la Tarjeta: {paymentData.cardNumber}</p>
                         <p>Fecha de Vencimiento: {paymentData.expiryDate}</p>
+                        <h3>Pago confirmado</h3>
+                        <p>Ahora ya puede continuar a confirmar la reserva</p>
                     </>
                 )}
 
@@ -31,6 +33,8 @@ const PaymentSummaryModal = ({ show, handleClose, paymentData, setIsPaymentCompl
                         <p>Por favor, realice el pago en efectivo cuando recoja su pedido en la tienda.</p>
                         <p>En lo posible,segúrese de traer la cantidad exacta en efectivo, ya que la tienda puede no tener cambio.</p>
                         <p>Recuerde que su pedido no será entregado hasta que se confirme el pago en efectivo.</p>
+                        <h3>Pago confirmado</h3>
+                        <p>Ahora ya puede continuar a confirmar la reserva</p>
                     </>
                 )}
 
