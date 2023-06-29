@@ -1,28 +1,24 @@
 import React, { useState } from "react";
 import styles from "./ConfirmReservation.module.css";
-import moment from "moment";
+import { differenceInDays } from "date-fns";
 import "moment/locale/es";
-import { registerLocale, setDefaultLocale } from "react-datepicker";
-import es from "date-fns/locale/es";
+import { format } from "date-fns";
+import { es } from "date-fns/locale";
 import {
   BsCalendar4,
   BsCheck2Square,
+  BsCreditCard,
   BsPerson,
-  BsPersonAdd,
   BsPersonPlus,
   BsTicketPerforated,
 } from "react-icons/bs";
 import PrivacyPolicyModal from "./PrivacyPolicies";
 import PaymentGatewayModal from "./PaymentGatewayModal";
 
-registerLocale("es", es);
-setDefaultLocale("es");
-
 const ConfirmReservation = ({
   user,
   isSubscribe,
   delivery,
-  frequency,
   product,
   equipmentPreferences,
   comment,
@@ -32,30 +28,27 @@ const ConfirmReservation = ({
   address,
   isPrivacyAccepted,
   handlePrivacyAcceptanceChange,
-  setIsPaymentCompletedButton
+  setIsPaymentCompletedButton,
+  selectedStartDate,
+  selectedEndDate,
 }) => {
   const [showModal, setShowModal] = useState(false);
   const [showPaymentModal, setShowPaymentModal] = useState(false);
   const [isPaymentCompleted, setIsPaymentCompleted] = useState(false);
 
-  const formatDate = (date) => {
-    return moment(date).format("DD [de] MMMM [de] YYYY");
-  };
-
   const handlePaymentCompleted = () => {
     setIsPaymentCompletedButton(true);
-    setIsPaymentCompleted(true)
-  }
+    setIsPaymentCompleted(true);
+  };
 
-  const totalDays = moment(endDate).diff(moment(startDate), 'days');
+  const totalDays = differenceInDays(new Date(endDate), new Date(startDate));
   const totalPrice = product.price * totalDays;
 
-  const formattedStartDate = moment(startDate, "DD/MMMM/YYYY").format(
-    "DD [de] MMMM [de] YYYY"
-  );
-  const formattedEndDate = moment(endDate, "DD/MMMM/YYYY").format(
-    "DD [de] MMMM [de] YYYY"
-  );
+  const inputStartDate = selectedStartDate || startDate;
+  const inputEndDate = selectedEndDate || endDate;
+
+  const formattedStartDate = format(new Date(inputStartDate), "dd 'de' MMMM 'de' yyyy", { locale: es });
+const formattedEndDate = format(new Date(inputEndDate), "dd 'de' MMMM 'de' yyyy", { locale: es });
 
   return (
     <div className={styles.confirmationContainer}>
@@ -188,27 +181,28 @@ const ConfirmReservation = ({
         <div className={styles.checkoutSuccess}>
           <div className={styles.top}>
             <div className={styles.iconAproved}></div>
-              <div className={styles.iconBefore}></div>
-            ¡Listo! Tu pago fue aprobado.
+            <div className={styles.iconBefore}></div>
+            <p>¡Listo! Tu pago fue aprobado.</p>
           </div>
         </div>
       ) : (
         <div className={styles.price}>
-          <div className={styles.priceItem}>Precio del producto:</div>
-          <div className={styles.priceItem}>$ {product.price}</div>
-          <div className={styles.priceItem}>Días totales de la reserva:</div>
+          <div className={styles.priceItem}>Días totales de la reserva</div>
           <div className={styles.priceItem}>{totalDays} días</div>
-          <div className={styles.priceItem}>Precio total a pagar:</div>
+          <div className={styles.priceItem}>Precio total a pagar</div>
           <div className={styles.priceItem}>$ {totalPrice}</div>
         </div>
       )}
 
-      <button type="button"
-        className={styles.submitButton}
-        onClick={() => setShowPaymentModal(true)} disabled={isPaymentCompleted}>
-        {isPaymentCompleted ? 'Pago Realizado' : 'Realizar Pago'}
+      <button
+        type="button"
+        className={styles.buttonPayContainer}
+        onClick={() => setShowPaymentModal(true)}
+        disabled={isPaymentCompleted}
+      >
+        <BsCreditCard size={20} />
+        {isPaymentCompleted ? "Pago Realizado" : "Realizar Pago"}
       </button>
-
 
       <PaymentGatewayModal
         show={showPaymentModal}

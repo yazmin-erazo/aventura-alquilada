@@ -68,8 +68,8 @@ const ReservationItem = ({
 }) => {
 
   const formatDate = (date) => {
-    return moment(date).format("DD/MM/YYYY");
-  };
+    return moment(date).add(1, 'days').format("DD/MM/YYYY");
+  };  
   
   return (
     <li className={styles["reservation-card"]}>

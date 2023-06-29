@@ -22,6 +22,13 @@ const Reservation = ({
   disabled,
   changeStep,
   step,
+  handleStartDateChange,
+  handleEndDateChange,
+  selectedStartDate,
+  selectedEndDate,
+  toggleCalendar,
+  isCalendarOpen,
+  handleSelectDates,
 }) => {
   const [isSubscribe, setIsSubscribe] = useState(false);
   const [delivery, setDelivery] = useState("recoger en tienda");
@@ -33,11 +40,6 @@ const Reservation = ({
   const [isPrivacyAccepted, setIsPrivacyAccepted] = useState(false);
   const [isPaymentCompletedButton, setIsPaymentCompletedButton] = useState(false);
   const [dis, setDis] = useState(false)
-
-
-  const handleStartDateChange = (value) => {};
-
-  const handleEndDateChange = (value) => {};
 
   const handleSubscribeChange = (e) => {
     setIsSubscribe(e.target.checked);
@@ -85,8 +87,8 @@ const Reservation = ({
     const datos = {
       userId: user.iduser,
       productId: product.id,
-      starDate: startDate,
-      endDate: endDate,
+      starDate: selectedStartDate,
+      endDate: selectedEndDate,
       comment: comment,
       delivery: delivery,
       // deliveryAddress : address
@@ -142,10 +144,6 @@ const Reservation = ({
 
   return (
     <>
-      {/* <div className={styles.containerTitle}>
-        <h1 className={styles.title}>Datos de su reserva</h1>
-      </div> */}
-
       <div className={styles.container}>
         <div className={styles.formContainer}>
           <form onSubmit={handleSubmit} className={styles.form}>
@@ -176,6 +174,11 @@ const Reservation = ({
                 handleCommentChange={handleCommentChange}
                 address={address}
                 handleAddressChange={handleAddressChange}
+                selectedStartDate={selectedStartDate}
+                selectedEndDate={selectedEndDate}
+                toggleCalendar={toggleCalendar}
+                isCalendarOpen={isCalendarOpen}
+                handleSelectDates={handleSelectDates}
               />
             )}
             {step === 3 && (
@@ -193,6 +196,8 @@ const Reservation = ({
                 isPrivacyAccepted={isPrivacyAccepted}
                 handlePrivacyAcceptanceChange={handlePrivacyAcceptanceChange}
                 setIsPaymentCompletedButton={setIsPaymentCompletedButton}
+                selectedStartDate={selectedStartDate}
+                selectedEndDate={selectedEndDate}
               />
             )}
             <div className={styles.buttonsContainer}>

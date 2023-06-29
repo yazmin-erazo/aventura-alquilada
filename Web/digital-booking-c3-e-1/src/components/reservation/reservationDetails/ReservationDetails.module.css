@@ -26,10 +26,11 @@
 
 .inputContainer {
   width: 100%;
+  margin-right: 16px;
 }
 .inputsContainer {
   display: flex;
-  gap: 1rem;
+  align-items: flex-end;
 }
 
 .description {
@@ -139,6 +140,23 @@
 .addressContainer span {
   font-size: 12px;
   color: green;
+}
+
+.buttonContainerEdit {
+  display: flex;
+  height: 40px;
+  width: 30%;
+  background-color: #007bff;
+  border-radius: 4px;
+  justify-content: center;
+  margin-bottom: 16px;
+  cursor: pointer;
+  border: none;
+  align-items: center;
+}
+.calendarButtonIcon {
+  font-size: 24px;
+  color: white;
 }
 @media (max-width: 768px) {
   .containerInputs {
