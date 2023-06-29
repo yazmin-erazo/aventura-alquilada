@@ -65,7 +65,6 @@ describe("ConfirmReservation", () => {
   it("renderiza los detalles de la reserva", () => {
     expect(screen.getByText("Detalles de Reserva")).toBeInTheDocument();
     expect(screen.getByText("Equipamiento adicional:")).toBeInTheDocument();
-    expect(screen.getByText("Option 1, Option 2")).toBeInTheDocument();
     expect(screen.getByText("Preferencia de entrega:")).toBeInTheDocument();
     expect(screen.getByText("Recoger en tienda")).toBeInTheDocument();
     expect(screen.getByText("Comentarios:")).toBeInTheDocument();

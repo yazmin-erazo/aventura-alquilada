@@ -69,66 +69,75 @@ const ReservationItem = ({
   };
 
   return (
-    <li className={styles["reservation-card"]}>
-      <div className={styles["reservation-image"]}>
-        <img src={reservation.product.imageURL} alt="Imagen de la reserva" />
-      </div>
-      <div className={styles["reservation-info"]}>
-        <div
-          className={`${styles["name-product"]} ${styles["reservation-name"]}`}
-        >
-          {reservation.product.name}
-        </div>
-        <div className={styles["container-categoryDate"]}>
-          <div className={styles["category"]}>
-            {reservation.product.category}
+    <>
+      {reservation && reservation.product && (
+        <li className={styles["reservation-card"]}>
+          <div className={styles["reservation-image"]}>
+            <img
+              src={reservation.product.imageURL}
+              alt="Imagen de la reserva"
+            />
           </div>
-          <div className={styles["date"]}>
-            <div className={styles["dates-container"]}>
-              <div className={styles["date-start"]}>
-                <BsCalendar4 className={styles["date-icon"]} />
-                <span className={styles["date-text"]}>
-                  {formatDate(reservation.starDate)}
-                </span>
+          <div className={styles["reservation-info"]}>
+            <div
+              className={`${styles["name-product"]} ${styles["reservation-name"]}`}
+            >
+              {reservation.product.name}
+            </div>
+            <div className={styles["container-categoryDate"]}>
+              <div className={styles["category"]}>
+                {reservation.product.category}
               </div>
-              <div className={styles["date-separator"]}>-</div>
-              <div className={styles["date-end"]}>
-                <BsCalendar4 className={styles["date-icon"]} />
-                <span className={styles["date-text"]}>
-                  {formatDate(reservation.endDate)}
-                </span>
+              <div className={styles["date"]}>
+                <div className={styles["dates-container"]}>
+                  <div className={styles["date-start"]}>
+                    <BsCalendar4 className={styles["date-icon"]} />
+                    <span className={styles["date-text"]}>
+                      {formatDate(reservation.starDate)}
+                    </span>
+                  </div>
+                  <div className={styles["date-separator"]}>-</div>
+                  <div className={styles["date-end"]}>
+                    <BsCalendar4 className={styles["date-icon"]} />
+                    <span className={styles["date-text"]}>
+                      {formatDate(reservation.endDate)}
+                    </span>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
-        </div>
-      </div>
-      <div className={styles["reservation-actions"]}>
-        <div className={styles["state"]} data-state={reservation.state}>
-          {reservation.state}
-        </div>
-        <div className={styles["button-container"]}>
-          {reservation.state !== "CANCELADO" ? (
-            <button
-              data-testid="cancel-button"
-              className={`${styles["cancel-button"]} ${styles["button"]}`}
-              onClick={() => cancelReservation(reservation.id)}
-            >
-              Cancelar Reserva
-            </button>
-          ) : (
-            <button
-              className={`${styles["rebook-button"]} ${styles["button"]}`}
-              onClick={() => rebookReservation(reservation.id)}
-            >
-              Hacer Reserva
-            </button>
-          )}
-          <button className={`${styles["details-button"]} ${styles["button"]}`}>
-            Ver Detalles
-          </button>
-        </div>
-      </div>
-    </li>
+          <div className={styles["reservation-actions"]}>
+            <div className={styles["state"]} data-state={reservation.state}>
+              {reservation.state}
+            </div>
+            <div className={styles["button-container"]}>
+              {reservation.state !== "CANCELADO" ? (
+                <button
+                  data-testid="cancel-button"
+                  className={`${styles["cancel-button"]} ${styles["button"]}`}
+                  onClick={() => cancelReservation(reservation.id)}
+                >
+                  Cancelar Reserva
+                </button>
+              ) : (
+                <button
+                  className={`${styles["rebook-button"]} ${styles["button"]}`}
+                  onClick={() => rebookReservation(reservation.id)}
+                >
+                  Hacer Reserva
+                </button>
+              )}
+              <button
+                className={`${styles["details-button"]} ${styles["button"]}`}
+              >
+                Ver Detalles
+              </button>
+            </div>
+          </div>
+        </li>
+      )}
+    </>
   );
 };
 
