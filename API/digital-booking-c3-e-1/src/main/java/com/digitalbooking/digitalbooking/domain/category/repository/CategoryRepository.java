@@ -19,5 +19,4 @@ public interface CategoryRepository {
 
     void deleteCategory(Long id);
 
-    boolean hasProducts(Long id);
 }

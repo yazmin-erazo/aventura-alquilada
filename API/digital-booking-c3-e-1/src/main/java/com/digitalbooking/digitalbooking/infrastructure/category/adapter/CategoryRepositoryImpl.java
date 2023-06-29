@@ -53,10 +53,4 @@ public class CategoryRepositoryImpl implements CategoryRepository {
         categoryRepositoryMySql.save(categoryEntity);
     }
 
-    @Override
-    public boolean hasProducts(Long id) {
-        CategoryEntity categoryEntity = categoryRepositoryMySql.findByIdAndIsDelete(id, Boolean.FALSE).orElseThrow(() -> new ExceptionNullValue("Categoría no encontrada"));
-
-        return categoryRepositoryMySql.hasProducts(categoryEntity.getId());
-    }
 }

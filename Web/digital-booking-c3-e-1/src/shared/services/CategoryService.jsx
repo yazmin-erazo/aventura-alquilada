@@ -23,8 +23,6 @@ const CategoryService = {
       }),
   deleteByID: id => 
     API.delete(CATEGORY_ENDPOINTS.DELETE_CATEGORY+id),
-  hasProducts: (id) =>
-    API.get(CATEGORY_ENDPOINTS.HAS_PRODUCTS+id+"/hasProducts").then((res) => res.data),
 };
 
 export default CategoryService;

@@ -9,5 +9,4 @@ public interface CategoryRepositoryMySql extends JpaRepository<CategoryEntity, L
    List<CategoryEntity> findAllByIsDelete(Boolean isDelete);
    Optional<CategoryEntity> findByIdAndIsDelete(Long id, Boolean isDelete);
    Optional<CategoryEntity> findByName(String name);
-   boolean hasProducts(Long id);
 }

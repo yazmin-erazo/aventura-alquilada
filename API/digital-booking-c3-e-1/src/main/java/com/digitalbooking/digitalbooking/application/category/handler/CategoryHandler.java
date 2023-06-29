@@ -39,7 +39,4 @@ public class CategoryHandler {
         return serviceCategory.deleteCategory(Category.createById(id));
     }
 
-    public boolean hasProducts(Long id) {
-        return serviceCategory.hasProducts(id);
-    }
 }
