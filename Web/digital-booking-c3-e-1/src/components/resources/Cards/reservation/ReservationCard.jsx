@@ -3,6 +3,8 @@ import styles from "./ReservationCard.module.css";
 import { BsCalendar4 } from "react-icons/bs";
 import Pagination from "../../pagination/Pagination";
 import moment from "moment";
+import RentsService from "../../../../shared/services/RentsService";
+import Swal from "sweetalert2";
 
 const ReservationCard = ({
   reservations,
@@ -66,8 +68,8 @@ const ReservationItem = ({
 }) => {
 
   const formatDate = (date) => {
-    return moment(date).format("DD/MM/YYYY");
-  };
+    return moment(date).add(1, 'days').format("DD/MM/YYYY");
+  };  
   
   return (
     <li className={styles["reservation-card"]}>

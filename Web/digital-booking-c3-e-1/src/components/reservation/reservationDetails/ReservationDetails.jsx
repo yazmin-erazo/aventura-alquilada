@@ -42,7 +42,6 @@ const ReservationDetails = ({
     { locale: es }
   );
 
-  console.log(formattedEndDate);
 
   return (
     <>
