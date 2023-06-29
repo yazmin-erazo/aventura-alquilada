@@ -1,0 +1,1110 @@
+{
+	"id": "fee95247-1d7c-4626-aeff-b069e852827b",
+	"name": "Digital Booking",
+	"timestamp": "2023-06-29T00:12:39.856Z",
+	"collection_id": "24445855-4d37278d-7d65-4446-8fce-8c68122adbf5",
+	"folder_id": "24445855-e508ab30-970b-4d45-a494-1a7933f1860a",
+	"environment_id": "0",
+	"totalPass": 12,
+	"delay": 0,
+	"persist": true,
+	"status": "finished",
+	"startedAt": "2023-06-29T00:12:27.495Z",
+	"totalFail": 49,
+	"results": [
+		{
+			"id": "fb9014de-eb79-4785-9407-55490d3f760a",
+			"name": "addProductToFavorite",
+			"url": "http://localhost:8080/digitalbooking/product/favorite",
+			"time": 9,
+			"responseCode": {
+				"code": 401,
+				"name": "Unauthorized"
+			},
+			"tests": {},
+			"testPassFailCounts": {},
+			"times": [
+				9
+			],
+			"allTests": [
+				{}
+			]
+		},
+		{
+			"id": "68baaf9a-8c73-49b9-adae-c44aedc23d87",
+			"name": "/{id-product} deleteProductFromFavorite",
+			"url": "http://localhost:8080/digitalbooking/product/favorite/50",
+			"time": 8,
+			"responseCode": {
+				"code": 401,
+				"name": "Unauthorized"
+			},
+			"tests": {
+				"Status code is 404, product not found.": false,
+				"Status code is 200, product deleted from favorites.": false
+			},
+			"testPassFailCounts": {
+				"Status code is 404, product not found.": {
+					"pass": 0,
+					"fail": 1
+				},
+				"Status code is 200, product deleted from favorites.": {
+					"pass": 0,
+					"fail": 1
+				}
+			},
+			"times": [
+				8
+			],
+			"allTests": [
+				{
+					"Status code is 404, product not found.": false,
+					"Status code is 200, product deleted from favorites.": false
+				}
+			]
+		},
+		{
+			"id": "6160978d-2f33-4873-9274-f9e257369846",
+			"name": "createProduct",
+			"url": "http://localhost:8080/digitalbooking/product",
+			"time": 6,
+			"responseCode": {
+				"code": 401,
+				"name": "Unauthorized"
+			},
+			"tests": {
+				"Successful POST request, product created.": false,
+				"Bad POST request.": false,
+				"Verify the values are not null or empty": true
+			},
+			"testPassFailCounts": {
+				"Successful POST request, product created.": {
+					"pass": 0,
+					"fail": 1
+				},
+				"Bad POST request.": {
+					"pass": 0,
+					"fail": 1
+				},
+				"Verify the values are not null or empty": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				6
+			],
+			"allTests": [
+				{
+					"Successful POST request, product created.": false,
+					"Bad POST request.": false,
+					"Verify the values are not null or empty": true
+				}
+			]
+		},
+		{
+			"id": "094f3619-c32d-4354-bde7-c0660d109ea8",
+			"name": "/products listProducts",
+			"url": "http://localhost:8080/digitalbooking/product/products",
+			"time": 7078,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {
+				"Status code is 200, showing product": true,
+				"Status code is 404, product not found.": false
+			},
+			"testPassFailCounts": {
+				"Status code is 200, showing product": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Status code is 404, product not found.": {
+					"pass": 0,
+					"fail": 1
+				}
+			},
+			"times": [
+				7078
+			],
+			"allTests": [
+				{
+					"Status code is 200, showing product": true,
+					"Status code is 404, product not found.": false
+				}
+			]
+		},
+		{
+			"id": "5375f284-31bc-46c6-a618-62d1a1876aac",
+			"name": "/{id-product} getProduct",
+			"url": "http://localhost:8080/digitalbooking/product/32",
+			"time": 605,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {
+				"Status code is 200, showing product.": true,
+				"Status code is 404, product not found.": false
+			},
+			"testPassFailCounts": {
+				"Status code is 200, showing product.": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Status code is 404, product not found.": {
+					"pass": 0,
+					"fail": 1
+				}
+			},
+			"times": [
+				605
+			],
+			"allTests": [
+				{
+					"Status code is 200, showing product.": true,
+					"Status code is 404, product not found.": false
+				}
+			]
+		},
+		{
+			"id": "27d97a52-054e-4bf6-bcf2-983a36309e62",
+			"name": "/{id-product} deleteProduct",
+			"url": "http://localhost:8080/digitalbooking/product/50",
+			"time": 6,
+			"responseCode": {
+				"code": 401,
+				"name": "Unauthorized"
+			},
+			"tests": {
+				"Status code is 404, product not found.": false,
+				"Status code is 200, product deleted.": false
+			},
+			"testPassFailCounts": {
+				"Status code is 404, product not found.": {
+					"pass": 0,
+					"fail": 1
+				},
+				"Status code is 200, product deleted.": {
+					"pass": 0,
+					"fail": 1
+				}
+			},
+			"times": [
+				6
+			],
+			"allTests": [
+				{
+					"Status code is 404, product not found.": false,
+					"Status code is 200, product deleted.": false
+				}
+			]
+		},
+		{
+			"id": "22e12ada-0e95-4e78-8e01-cbe200dd5c44",
+			"name": "/{id-product} updateProduct",
+			"url": "http://localhost:8080/digitalbooking/product/50",
+			"time": 6,
+			"responseCode": {
+				"code": 401,
+				"name": "Unauthorized"
+			},
+			"tests": {
+				"Status code is 404, product not found.": false,
+				"Successful PUT request, product updated.": false,
+				"Bad PUT request.": false
+			},
+			"testPassFailCounts": {
+				"Status code is 404, product not found.": {
+					"pass": 0,
+					"fail": 1
+				},
+				"Successful PUT request, product updated.": {
+					"pass": 0,
+					"fail": 1
+				},
+				"Bad PUT request.": {
+					"pass": 0,
+					"fail": 1
+				}
+			},
+			"times": [
+				6
+			],
+			"allTests": [
+				{
+					"Status code is 404, product not found.": false,
+					"Successful PUT request, product updated.": false,
+					"Bad PUT request.": false
+				}
+			]
+		},
+		{
+			"id": "a3d2fe12-cc4d-4072-a7da-c11de518d809",
+			"name": "/categories listCategories",
+			"url": "http://localhost:8080/digitalbooking/category/categories",
+			"time": 121,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {
+				"Status code is 200, showing categories.": true
+			},
+			"testPassFailCounts": {
+				"Status code is 200, showing categories.": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				121
+			],
+			"allTests": [
+				{
+					"Status code is 200, showing categories.": true
+				}
+			]
+		},
+		{
+			"id": "145be0e1-0175-4252-836b-5ade22c6b5f8",
+			"name": "/{id-category} getCategory",
+			"url": "http://localhost:8080/digitalbooking/category/3",
+			"time": 585,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {
+				"Status code is 200, showing category.": true,
+				"Status code is 404, category not found.": false
+			},
+			"testPassFailCounts": {
+				"Status code is 200, showing category.": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Status code is 404, category not found.": {
+					"pass": 0,
+					"fail": 1
+				}
+			},
+			"times": [
+				585
+			],
+			"allTests": [
+				{
+					"Status code is 200, showing category.": true,
+					"Status code is 404, category not found.": false
+				}
+			]
+		},
+		{
+			"id": "fe1f3fc5-73c1-4909-9c00-ed35d5692617",
+			"name": "createCategory",
+			"url": "http://localhost:8080/digitalbooking/category",
+			"time": 6,
+			"responseCode": {
+				"code": 401,
+				"name": "Unauthorized"
+			},
+			"tests": {
+				"Successful POST request, category created.": false,
+				"Bad POST request.": false,
+				"Verify the values are not null or empty": true
+			},
+			"testPassFailCounts": {
+				"Successful POST request, category created.": {
+					"pass": 0,
+					"fail": 1
+				},
+				"Bad POST request.": {
+					"pass": 0,
+					"fail": 1
+				},
+				"Verify the values are not null or empty": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				6
+			],
+			"allTests": [
+				{
+					"Successful POST request, category created.": false,
+					"Bad POST request.": false,
+					"Verify the values are not null or empty": true
+				}
+			]
+		},
+		{
+			"id": "41c28030-44a3-4516-9740-e501f34f3e96",
+			"name": "/{id-category} deleteCategory",
+			"url": "http://localhost:8080/digitalbooking/category/21",
+			"time": 5,
+			"responseCode": {
+				"code": 401,
+				"name": "Unauthorized"
+			},
+			"tests": {
+				"Status code is 404, product not found.": false,
+				"Status code is 200, product deleted.": false
+			},
+			"testPassFailCounts": {
+				"Status code is 404, product not found.": {
+					"pass": 0,
+					"fail": 1
+				},
+				"Status code is 200, product deleted.": {
+					"pass": 0,
+					"fail": 1
+				}
+			},
+			"times": [
+				5
+			],
+			"allTests": [
+				{
+					"Status code is 404, product not found.": false,
+					"Status code is 200, product deleted.": false
+				}
+			]
+		},
+		{
+			"id": "c981d9b3-d0ff-4320-ac3b-9f1b1a2676a5",
+			"name": "/{id-user} getUser",
+			"url": "http://localhost:8080/digitalbooking/user/1",
+			"time": 5,
+			"responseCode": {
+				"code": 401,
+				"name": "Unauthorized"
+			},
+			"tests": {
+				"Status code is 200, showing users.": false,
+				"Status code is 404, user not found.": false
+			},
+			"testPassFailCounts": {
+				"Status code is 200, showing users.": {
+					"pass": 0,
+					"fail": 1
+				},
+				"Status code is 404, user not found.": {
+					"pass": 0,
+					"fail": 1
+				}
+			},
+			"times": [
+				5
+			],
+			"allTests": [
+				{
+					"Status code is 200, showing users.": false,
+					"Status code is 404, user not found.": false
+				}
+			]
+		},
+		{
+			"id": "2b39348f-d069-4aeb-bdda-14da948cda72",
+			"name": "/users listUsers",
+			"url": "http://localhost:8080/digitalbooking/user/users",
+			"time": 6,
+			"responseCode": {
+				"code": 401,
+				"name": "Unauthorized"
+			},
+			"tests": {
+				"Status code is 200, showing users.": false
+			},
+			"testPassFailCounts": {
+				"Status code is 200, showing users.": {
+					"pass": 0,
+					"fail": 1
+				}
+			},
+			"times": [
+				6
+			],
+			"allTests": [
+				{
+					"Status code is 200, showing users.": false
+				}
+			]
+		},
+		{
+			"id": "b6bd5f60-4bbb-498b-9d02-0ddf67f6f0c9",
+			"name": "createUser",
+			"url": "http://localhost:8080/digitalbooking/user",
+			"time": 142,
+			"responseCode": {
+				"code": 400,
+				"name": "Bad Request"
+			},
+			"tests": {
+				"Successful POST request, user created.": false,
+				"Bad POST request.": true,
+				"Verify the values are not null or empty": true
+			},
+			"testPassFailCounts": {
+				"Successful POST request, user created.": {
+					"pass": 0,
+					"fail": 1
+				},
+				"Bad POST request.": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Verify the values are not null or empty": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				142
+			],
+			"allTests": [
+				{
+					"Successful POST request, user created.": false,
+					"Bad POST request.": true,
+					"Verify the values are not null or empty": true
+				}
+			]
+		},
+		{
+			"id": "2d13f8f4-c163-4ca2-a884-60301b902da8",
+			"name": "/{id-rent} getRent",
+			"url": "http://localhost:8080/digitalbooking/rent/1",
+			"time": 7,
+			"responseCode": {
+				"code": 401,
+				"name": "Unauthorized"
+			},
+			"tests": {
+				"Status code is 200, showing rent.": false,
+				"Status code is 404, rent not found.": false
+			},
+			"testPassFailCounts": {
+				"Status code is 200, showing rent.": {
+					"pass": 0,
+					"fail": 1
+				},
+				"Status code is 404, rent not found.": {
+					"pass": 0,
+					"fail": 1
+				}
+			},
+			"times": [
+				7
+			],
+			"allTests": [
+				{
+					"Status code is 200, showing rent.": false,
+					"Status code is 404, rent not found.": false
+				}
+			]
+		},
+		{
+			"id": "66545d4f-a6dc-4dc5-9a97-99ee48905828",
+			"name": "/rents listRents",
+			"url": "http://localhost:8080/digitalbooking/rent/rents",
+			"time": 5,
+			"responseCode": {
+				"code": 401,
+				"name": "Unauthorized"
+			},
+			"tests": {
+				"Status code is 200, showing rents.": false
+			},
+			"testPassFailCounts": {
+				"Status code is 200, showing rents.": {
+					"pass": 0,
+					"fail": 1
+				}
+			},
+			"times": [
+				5
+			],
+			"allTests": [
+				{
+					"Status code is 200, showing rents.": false
+				}
+			]
+		},
+		{
+			"id": "e260adcf-df67-47c5-a88b-4bb948d7bbaa",
+			"name": "createRent",
+			"url": "http://localhost:8080/digitalbooking/rent",
+			"time": 7,
+			"responseCode": {
+				"code": 401,
+				"name": "Unauthorized"
+			},
+			"tests": {
+				"Successful POST request, rent created.": false,
+				"Bad POST request.": false,
+				"Verify the values are not null or empty": false
+			},
+			"testPassFailCounts": {
+				"Successful POST request, rent created.": {
+					"pass": 0,
+					"fail": 1
+				},
+				"Bad POST request.": {
+					"pass": 0,
+					"fail": 1
+				},
+				"Verify the values are not null or empty": {
+					"pass": 0,
+					"fail": 1
+				}
+			},
+			"times": [
+				7
+			],
+			"allTests": [
+				{
+					"Successful POST request, rent created.": false,
+					"Bad POST request.": false,
+					"Verify the values are not null or empty": false
+				}
+			]
+		},
+		{
+			"id": "221c3676-144d-41f5-a7a4-4cc74ac7e086",
+			"name": "/{id-rent} deleteRent",
+			"url": "http://localhost:8080/digitalbooking/rent/1",
+			"time": 6,
+			"responseCode": {
+				"code": 401,
+				"name": "Unauthorized"
+			},
+			"tests": {
+				"Status code is 404, rent not found.": false,
+				"Status code is 200, rent deleted.": false
+			},
+			"testPassFailCounts": {
+				"Status code is 404, rent not found.": {
+					"pass": 0,
+					"fail": 1
+				},
+				"Status code is 200, rent deleted.": {
+					"pass": 0,
+					"fail": 1
+				}
+			},
+			"times": [
+				6
+			],
+			"allTests": [
+				{
+					"Status code is 404, rent not found.": false,
+					"Status code is 200, rent deleted.": false
+				}
+			]
+		},
+		{
+			"id": "b378d466-ceff-4c38-9389-f041456320cd",
+			"name": "updateRent",
+			"url": "http://localhost:8080/digitalbooking/rent",
+			"time": 5,
+			"responseCode": {
+				"code": 401,
+				"name": "Unauthorized"
+			},
+			"tests": {
+				"Status code is 404, rent not found.": false,
+				"Successful PUT request, rent updated.": false,
+				"Bad PUT request.": false
+			},
+			"testPassFailCounts": {
+				"Status code is 404, rent not found.": {
+					"pass": 0,
+					"fail": 1
+				},
+				"Successful PUT request, rent updated.": {
+					"pass": 0,
+					"fail": 1
+				},
+				"Bad PUT request.": {
+					"pass": 0,
+					"fail": 1
+				}
+			},
+			"times": [
+				5
+			],
+			"allTests": [
+				{
+					"Status code is 404, rent not found.": false,
+					"Successful PUT request, rent updated.": false,
+					"Bad PUT request.": false
+				}
+			]
+		},
+		{
+			"id": "434e2db5-c4c6-4194-8a1d-13cfee3be528",
+			"name": "/roles listRoles",
+			"url": "http://localhost:8080/digitalbooking/role/roles",
+			"time": 5,
+			"responseCode": {
+				"code": 401,
+				"name": "Unauthorized"
+			},
+			"tests": {
+				"Status code is 200, showing roles.": false
+			},
+			"testPassFailCounts": {
+				"Status code is 200, showing roles.": {
+					"pass": 0,
+					"fail": 1
+				}
+			},
+			"times": [
+				5
+			],
+			"allTests": [
+				{
+					"Status code is 200, showing roles.": false
+				}
+			]
+		},
+		{
+			"id": "743520c3-77fe-452d-bc9d-91fc0889ea22",
+			"name": "/{id-role} getRole",
+			"url": "http://localhost:8080/digitalbooking/role/1",
+			"time": 6,
+			"responseCode": {
+				"code": 401,
+				"name": "Unauthorized"
+			},
+			"tests": {
+				"Status code is 200, showing role.": false,
+				"Status code is 404, role not found.": false
+			},
+			"testPassFailCounts": {
+				"Status code is 200, showing role.": {
+					"pass": 0,
+					"fail": 1
+				},
+				"Status code is 404, role not found.": {
+					"pass": 0,
+					"fail": 1
+				}
+			},
+			"times": [
+				6
+			],
+			"allTests": [
+				{
+					"Status code is 200, showing role.": false,
+					"Status code is 404, role not found.": false
+				}
+			]
+		},
+		{
+			"id": "8a2d289e-675f-4d1c-be98-00e8c1370c7a",
+			"name": "/{id-role} deleteRole",
+			"url": "http://localhost:8080/digitalbooking/role/1",
+			"time": 5,
+			"responseCode": {
+				"code": 401,
+				"name": "Unauthorized"
+			},
+			"tests": {
+				"Status code is 404, role not found.": false,
+				"Status code is 200, role deleted.": false
+			},
+			"testPassFailCounts": {
+				"Status code is 404, role not found.": {
+					"pass": 0,
+					"fail": 1
+				},
+				"Status code is 200, role deleted.": {
+					"pass": 0,
+					"fail": 1
+				}
+			},
+			"times": [
+				5
+			],
+			"allTests": [
+				{
+					"Status code is 404, role not found.": false,
+					"Status code is 200, role deleted.": false
+				}
+			]
+		},
+		{
+			"id": "f1fbd7de-1e5d-4720-aeb1-7fac9347076b",
+			"name": "createRole",
+			"url": "http://localhost:8080/digitalbooking/role",
+			"time": 5,
+			"responseCode": {
+				"code": 401,
+				"name": "Unauthorized"
+			},
+			"tests": {
+				"Successful POST request, role created.": false,
+				"Bad POST request.": false,
+				"Verify the values are not null or empty": true
+			},
+			"testPassFailCounts": {
+				"Successful POST request, role created.": {
+					"pass": 0,
+					"fail": 1
+				},
+				"Bad POST request.": {
+					"pass": 0,
+					"fail": 1
+				},
+				"Verify the values are not null or empty": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				5
+			],
+			"allTests": [
+				{
+					"Successful POST request, role created.": false,
+					"Bad POST request.": false,
+					"Verify the values are not null or empty": true
+				}
+			]
+		},
+		{
+			"id": "29faea6b-e4ab-4ffe-b366-dfbdd93904e1",
+			"name": "updateRole",
+			"url": "http://localhost:8080/digitalbooking/role",
+			"time": 5,
+			"responseCode": {
+				"code": 401,
+				"name": "Unauthorized"
+			},
+			"tests": {
+				"Status code is 404, role not found.": false,
+				"Successful PUT request, role updated.": false,
+				"Bad PUT request.": false
+			},
+			"testPassFailCounts": {
+				"Status code is 404, role not found.": {
+					"pass": 0,
+					"fail": 1
+				},
+				"Successful PUT request, role updated.": {
+					"pass": 0,
+					"fail": 1
+				},
+				"Bad PUT request.": {
+					"pass": 0,
+					"fail": 1
+				}
+			},
+			"times": [
+				5
+			],
+			"allTests": [
+				{
+					"Status code is 404, role not found.": false,
+					"Successful PUT request, role updated.": false,
+					"Bad PUT request.": false
+				}
+			]
+		},
+		{
+			"id": "5b32eea5-3e0a-41b1-9ac5-bea9e2ba6601",
+			"name": "/cities listCities",
+			"url": "http://localhost:8080/digitalbooking/city/cities",
+			"time": 670,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {
+				"Status code is 200, showing cities.": true
+			},
+			"testPassFailCounts": {
+				"Status code is 200, showing cities.": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				670
+			],
+			"allTests": [
+				{
+					"Status code is 200, showing cities.": true
+				}
+			]
+		},
+		{
+			"id": "43748cc5-e7d7-438e-bd23-0d69c3917caa",
+			"name": "/{id-city} getCity",
+			"url": "http://localhost:8080/digitalbooking/city/129",
+			"time": 568,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {
+				"Status code is 200, showing city.": true,
+				"Status code is 404, city not found.": false
+			},
+			"testPassFailCounts": {
+				"Status code is 200, showing city.": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Status code is 404, city not found.": {
+					"pass": 0,
+					"fail": 1
+				}
+			},
+			"times": [
+				568
+			],
+			"allTests": [
+				{
+					"Status code is 200, showing city.": true,
+					"Status code is 404, city not found.": false
+				}
+			]
+		},
+		{
+			"id": "ec3f6a03-aa5b-43c2-be60-686b219e452e",
+			"name": "/{id-city} deleteCity",
+			"url": "http://localhost:8080/digitalbooking/city/1",
+			"time": 12,
+			"responseCode": {
+				"code": 401,
+				"name": "Unauthorized"
+			},
+			"tests": {
+				"Status code is 404, city not found.": false,
+				"Status code is 200, city deleted.": false
+			},
+			"testPassFailCounts": {
+				"Status code is 404, city not found.": {
+					"pass": 0,
+					"fail": 1
+				},
+				"Status code is 200, city deleted.": {
+					"pass": 0,
+					"fail": 1
+				}
+			},
+			"times": [
+				12
+			],
+			"allTests": [
+				{
+					"Status code is 404, city not found.": false,
+					"Status code is 200, city deleted.": false
+				}
+			]
+		},
+		{
+			"id": "577cdb58-f467-4758-be6a-caa4d8208a68",
+			"name": "createCity",
+			"url": "http://localhost:8080/digitalbooking/city",
+			"time": 6,
+			"responseCode": {
+				"code": 401,
+				"name": "Unauthorized"
+			},
+			"tests": {
+				"Successful POST request, city created.": false,
+				"Bad POST request.": false,
+				"Verify the values are not null or empty": true
+			},
+			"testPassFailCounts": {
+				"Successful POST request, city created.": {
+					"pass": 0,
+					"fail": 1
+				},
+				"Bad POST request.": {
+					"pass": 0,
+					"fail": 1
+				},
+				"Verify the values are not null or empty": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				6
+			],
+			"allTests": [
+				{
+					"Successful POST request, city created.": false,
+					"Bad POST request.": false,
+					"Verify the values are not null or empty": true
+				}
+			]
+		},
+		{
+			"id": "361be306-df38-41f3-ba61-e3c011c0741f",
+			"name": "updateCity",
+			"url": "http://localhost:8080/digitalbooking/city",
+			"time": 6,
+			"responseCode": {
+				"code": 401,
+				"name": "Unauthorized"
+			},
+			"tests": {
+				"Status code is 404, city not found.": false,
+				"Successful PUT request, city updated.": false,
+				"Bad PUT request.": false
+			},
+			"testPassFailCounts": {
+				"Status code is 404, city not found.": {
+					"pass": 0,
+					"fail": 1
+				},
+				"Successful PUT request, city updated.": {
+					"pass": 0,
+					"fail": 1
+				},
+				"Bad PUT request.": {
+					"pass": 0,
+					"fail": 1
+				}
+			},
+			"times": [
+				6
+			],
+			"allTests": [
+				{
+					"Status code is 404, city not found.": false,
+					"Successful PUT request, city updated.": false,
+					"Bad PUT request.": false
+				}
+			]
+		}
+	],
+	"count": 1,
+	"totalTime": 9906,
+	"collection": {
+		"requests": [
+			{
+				"id": "fb9014de-eb79-4785-9407-55490d3f760a",
+				"method": "POST"
+			},
+			{
+				"id": "68baaf9a-8c73-49b9-adae-c44aedc23d87",
+				"method": "DELETE"
+			},
+			{
+				"id": "6160978d-2f33-4873-9274-f9e257369846",
+				"method": "POST"
+			},
+			{
+				"id": "094f3619-c32d-4354-bde7-c0660d109ea8",
+				"method": "GET"
+			},
+			{
+				"id": "5375f284-31bc-46c6-a618-62d1a1876aac",
+				"method": "GET"
+			},
+			{
+				"id": "27d97a52-054e-4bf6-bcf2-983a36309e62",
+				"method": "DELETE"
+			},
+			{
+				"id": "22e12ada-0e95-4e78-8e01-cbe200dd5c44",
+				"method": "PUT"
+			},
+			{
+				"id": "a3d2fe12-cc4d-4072-a7da-c11de518d809",
+				"method": "GET"
+			},
+			{
+				"id": "145be0e1-0175-4252-836b-5ade22c6b5f8",
+				"method": "GET"
+			},
+			{
+				"id": "fe1f3fc5-73c1-4909-9c00-ed35d5692617",
+				"method": "POST"
+			},
+			{
+				"id": "41c28030-44a3-4516-9740-e501f34f3e96",
+				"method": "DELETE"
+			},
+			{
+				"id": "c981d9b3-d0ff-4320-ac3b-9f1b1a2676a5",
+				"method": "GET"
+			},
+			{
+				"id": "2b39348f-d069-4aeb-bdda-14da948cda72",
+				"method": "GET"
+			},
+			{
+				"id": "b6bd5f60-4bbb-498b-9d02-0ddf67f6f0c9",
+				"method": "POST"
+			},
+			{
+				"id": "2d13f8f4-c163-4ca2-a884-60301b902da8",
+				"method": "GET"
+			},
+			{
+				"id": "66545d4f-a6dc-4dc5-9a97-99ee48905828",
+				"method": "GET"
+			},
+			{
+				"id": "e260adcf-df67-47c5-a88b-4bb948d7bbaa",
+				"method": "POST"
+			},
+			{
+				"id": "221c3676-144d-41f5-a7a4-4cc74ac7e086",
+				"method": "DELETE"
+			},
+			{
+				"id": "b378d466-ceff-4c38-9389-f041456320cd",
+				"method": "PUT"
+			},
+			{
+				"id": "434e2db5-c4c6-4194-8a1d-13cfee3be528",
+				"method": "GET"
+			},
+			{
+				"id": "743520c3-77fe-452d-bc9d-91fc0889ea22",
+				"method": "GET"
+			},
+			{
+				"id": "8a2d289e-675f-4d1c-be98-00e8c1370c7a",
+				"method": "DELETE"
+			},
+			{
+				"id": "f1fbd7de-1e5d-4720-aeb1-7fac9347076b",
+				"method": "POST"
+			},
+			{
+				"id": "29faea6b-e4ab-4ffe-b366-dfbdd93904e1",
+				"method": "PUT"
+			},
+			{
+				"id": "5b32eea5-3e0a-41b1-9ac5-bea9e2ba6601",
+				"method": "GET"
+			},
+			{
+				"id": "43748cc5-e7d7-438e-bd23-0d69c3917caa",
+				"method": "GET"
+			},
+			{
+				"id": "ec3f6a03-aa5b-43c2-be60-686b219e452e",
+				"method": "DELETE"
+			},
+			{
+				"id": "577cdb58-f467-4758-be6a-caa4d8208a68",
+				"method": "POST"
+			},
+			{
+				"id": "361be306-df38-41f3-ba61-e3c011c0741f",
+				"method": "PUT"
+			}
+		]
+	}
+}
