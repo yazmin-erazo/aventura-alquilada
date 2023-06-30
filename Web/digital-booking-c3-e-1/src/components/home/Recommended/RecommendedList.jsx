@@ -95,8 +95,8 @@ const RecommendedList = ({
               (category) => category.name === product.category
             );
             const categoryIcon = category ? category.icon : null;
-            const isIconInSportsIcons = sportsIcons.includes(category.icon);
-            const IconComponent = ReactIcons[category.icon] || null;
+            const isIconInSportsIcons = category && sportsIcons.includes(category.icon);
+            const IconComponent = category && ReactIcons[category.icon] || null;
             const distance =
               userLocation && product.city
                 ? getDistance(

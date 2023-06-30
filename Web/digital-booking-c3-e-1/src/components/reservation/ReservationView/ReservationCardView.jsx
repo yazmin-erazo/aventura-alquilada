@@ -5,8 +5,8 @@ import { differenceInDays } from "date-fns";
 
 
 const ReservationCard = ({ reservation }) => {
-  const { user, creationDate, endDate, delivery, product, comment } = reservation;
-  const formattedStartDate = creationDate ? format(new Date(creationDate), "dd 'de' MMMM 'de' yyyy", { locale: es }) : null;
+  const { user, starDate, endDate, delivery, product, comment } = reservation;
+  const formattedStartDate = starDate ? format(new Date(starDate), "dd 'de' MMMM 'de' yyyy", { locale: es }) : null;
   const formattedEndDate = endDate ? format(new Date(endDate), "dd 'de' MMMM 'de' yyyy", { locale: es }) : null;
   const productPrice = product && product.price ? product.price : 0;
 
@@ -14,7 +14,7 @@ const ReservationCard = ({ reservation }) => {
   let totalPrice = 0;
 
   if (formattedStartDate && formattedEndDate) {
-    totalDays = differenceInDays(new Date(endDate), new Date(creationDate)) + 1;
+    totalDays = differenceInDays(new Date(endDate), new Date(starDate)) + 1;
     totalPrice = totalDays * productPrice;
   }
 
