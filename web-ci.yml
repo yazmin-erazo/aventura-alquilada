@@ -20,11 +20,15 @@ test-web:
     - npm install
     - npm run test --coverage
     - npm run coverage:html
-    - echo "Coverage report: $CI_PIPELINE_URL/coverage/index.html"
+    - ls
+    - echo "Coverage report $CI_PIPELINE_URL/coverage/index.html"
   artifacts:
     paths:
       - coverage/
-    
+      - Web/digital-booking-c3-e-1/coverage/
+    reports:
+      junit: Web/digital-booking-c3-e-1/coverage/junit.
+     
 
 build-web:
   stage: build
