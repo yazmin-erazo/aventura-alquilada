@@ -68,7 +68,7 @@ const ReservationItem = ({
   const navigate = useNavigate();
 
   const formatDate = (date) => {
-    return moment(date).add(1, "days").format("DD/MM/YYYY");
+    return moment(date).format("DD/MM/YYYY");
   };
 
   const detailsReservation = (id)=> {
@@ -137,7 +137,7 @@ const ReservationItem = ({
               )}
               <button
                 className={`${styles["details-button"]} ${styles["button"]}`}
-              >
+                onClick={() => detailsReservation(reservation.id)}>
                 Ver Detalles
               </button>
             </div>
