@@ -68,8 +68,10 @@ const ReservationItem = ({
   const navigate = useNavigate();
 
   const formatDate = (date) => {
-    return moment(date).format("DD/MM/YYYY");
+    return moment(date).add(1, "day").format("DD/MM/YYYY");
   };
+
+  
 
   const detailsReservation = (id)=> {
     navigate(`/reservacion/${id}`)

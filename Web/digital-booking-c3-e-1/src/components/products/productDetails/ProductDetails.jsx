@@ -16,10 +16,11 @@ import ImageGallery from "../../common/imagegalery/ImageGallery";
 import Qualification from "../../resources/qualification/Qualification";
 import RatingStats from "../../resources/rating/RatingStats";
 import Politics from "../../resources/Politics/Politics";
-import CalendarProducts from "../../resources/Calendar/CalendarProducts";
+
 import ProductMap from "../../resources/productMap/ProductMap";
 import SelectedDates from "../../resources/Calendar/SelectedDates";
 import ButtonShare from "../../common/Buttons/ButtonShare";
+import PruebaCalendar from "../../resources/Calendar/PruebaCalendar";
 
 const ProductDetails = () => {
   const data = useContext(ProductsContext);
@@ -32,13 +33,9 @@ const ProductDetails = () => {
   const [totalRentalDays, setTotalRentalDays] = useState(0);
 
   const handleSelectDates = (startDate, endDate) => {
-    if (startDate > endDate) {
-      setSelectedStartDate(endDate);
-      setSelectedEndDate(startDate);
-    } else {
-      setSelectedStartDate(startDate);
-      setSelectedEndDate(endDate);
-    }
+    setSelectedStartDate(startDate);
+    setSelectedEndDate(endDate);
+    calculateTotalRentalDays(startDate, endDate);
   };
 
   const product = products.find((p) => {
@@ -52,6 +49,15 @@ const ProductDetails = () => {
       handleSelectDates(dates.startDate, dates.endDate);
     }
   }, [data, product]);
+
+  useEffect(() => {
+    // Actualizar las fechas en sessionStorage cuando selectedDates cambie
+    const dates = {
+      startDate: selectedStartDate ? selectedStartDate : null,
+      endDate: selectedEndDate ? selectedEndDate : null,
+    };
+    sessionStorage.setItem("dates", JSON.stringify(dates));
+  }, [selectedStartDate, selectedEndDate]);
 
   // --------------------START calculo distancia usuario - producto --------------
   let distance = null;
@@ -68,17 +74,19 @@ const ProductDetails = () => {
   // --------------------END calculo distancia usuario - producto --------------
 
   // --------------------START calcula la diferencia en días con la funcion diff de moment --------------
-  useEffect(() => {
-    if (selectedStartDate && selectedEndDate) {
-      const diffDays = Math.abs(
-        moment(selectedEndDate).diff(selectedStartDate, "days") + 1
-      );
-      setTotalRentalDays(diffDays);
+  const calculateTotalRentalDays = (startDate, endDate) => {
+    if (startDate && endDate) {
+      const start = moment(startDate);
+      const end = moment(endDate);
+      const totalDays = end.diff(start, "days") + 1;
+      setTotalRentalDays(totalDays);
     } else {
       setTotalRentalDays(0);
     }
-  }, [selectedStartDate, selectedEndDate]);
+  };
+
   // -------------------- END Total días --------------
+
 
   const showButton = selectedStartDate && selectedEndDate;
   const productId = product ? product.id : null;
@@ -197,7 +205,7 @@ const ProductDetails = () => {
                 <h3 className={styles.calendarTitle}> Fechas disponibles </h3>
                 <div className={styles.calendarRent}>
                   <section className={styles.calendarRentSection}>
-                    <CalendarProducts
+                    <PruebaCalendar
                       onSelectDates={handleSelectDates}
                       rents={product.rents}
                     />

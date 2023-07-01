@@ -77,6 +77,13 @@ const RecommendedList = ({
           ...searchParams,
           ...filterParams,
         };
+
+        if (
+          combinedParams.startDate &&
+          typeof combinedParams.startDate.format === "function"
+        ) {
+        }
+
         const productosBuscados = await ProductsService.getAll(combinedParams);
         setDataFiltered(productosBuscados);
         setFilteredProducts(productosBuscados);
@@ -95,8 +102,10 @@ const RecommendedList = ({
               (category) => category.name === product.category
             );
             const categoryIcon = category ? category.icon : null;
-            const isIconInSportsIcons = category && sportsIcons.includes(category.icon);
-            const IconComponent = category && ReactIcons[category.icon] || null;
+            const isIconInSportsIcons =
+              category && sportsIcons.includes(category.icon);
+            const IconComponent =
+              (category && ReactIcons[category.icon]) || null;
             const distance =
               userLocation && product.city
                 ? getDistance(

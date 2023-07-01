@@ -3,10 +3,8 @@ import InputWithLabel from "../../common/input/InputWithLabel";
 import styles from "./ReservationDetails.module.css";
 import { BsTicketPerforated } from "react-icons/bs";
 import "moment/locale/es";
-import CalendarProducts from "../../resources/Calendar/CalendarProducts";
 import { BiEdit } from "react-icons/bi";
-import { format } from "date-fns";
-import { es } from "date-fns/locale";
+import PruebaCalendar from "../../resources/Calendar/PruebaCalendar";
 
 const ReservationDetails = ({
   product,
@@ -27,9 +25,6 @@ const ReservationDetails = ({
   setInsuranceSelected,
 }) => {
 
-  const formattedStartDate = format(new Date(startDate), "dd 'de' MMMM 'de' yyyy", { locale: es });
-  const formattedEndDate = format(new Date(endDate), "dd 'de' MMMM 'de' yyyy", { locale: es });
-
   return (
     <>
       <div className={styles.container}>
@@ -49,7 +44,7 @@ const ReservationDetails = ({
             <div className={styles.inputContainer}>
               <InputWithLabel
                 isEditable={false}
-                value={formattedStartDate}
+                value={startDate}
                 label="Fecha de inicio"
                 className={styles.input}
               >
@@ -59,7 +54,7 @@ const ReservationDetails = ({
             <div className={styles.inputContainer}>
               <InputWithLabel
                 isEditable={false}
-                value={formattedEndDate}
+                value={endDate}
                 label="Fecha de fin"
                 className={styles.input}
               >
@@ -78,7 +73,7 @@ const ReservationDetails = ({
             </button>
           </div>
           {isCalendarOpen && (
-            <CalendarProducts
+            <PruebaCalendar
               onSelectDates={handleSelectDates}
               rents={product.rents}
             />
@@ -90,15 +85,17 @@ const ReservationDetails = ({
           </span>
           <div className={styles.preferenceOptions}>
             <div
-              className={`${styles.preferenceOption} ${delivery === "recoger en tienda" ? styles.active : ""
-                }`}
+              className={`${styles.preferenceOption} ${
+                delivery === "recoger en tienda" ? styles.active : ""
+              }`}
               onClick={() => handlePreferenceChange("recoger en tienda")}
             >
               Recoger
             </div>
             <div
-              className={`${styles.preferenceOption} ${delivery === "entrega" ? styles.active : ""
-                }`}
+              className={`${styles.preferenceOption} ${
+                delivery === "entrega" ? styles.active : ""
+              }`}
               onClick={() => handlePreferenceChange("entrega")}
             >
               Servicio de entrega
@@ -129,8 +126,12 @@ const ReservationDetails = ({
               <input
                 type="checkbox"
                 id="equipmentcasco"
-                checked={equipmentPreferences.some((equipment) => equipment.name === "Casco")}
-                onChange={() => handleEquipmentPreferenceToggle({name:"Casco",price:10})}
+                checked={equipmentPreferences.some(
+                  (equipment) => equipment.name === "Casco"
+                )}
+                onChange={() =>
+                  handleEquipmentPreferenceToggle({ name: "Casco", price: 10 })
+                }
                 className={styles.equipmentCheckbox}
                 data-testid="casco-checkbox"
               />
@@ -142,8 +143,12 @@ const ReservationDetails = ({
               <input
                 type="checkbox"
                 id="equipmentmapas"
-                checked={equipmentPreferences.some((equipment) => equipment.name === "Mapas")}
-                onChange={() => handleEquipmentPreferenceToggle({name:"Mapas",price:2})}
+                checked={equipmentPreferences.some(
+                  (equipment) => equipment.name === "Mapas"
+                )}
+                onChange={() =>
+                  handleEquipmentPreferenceToggle({ name: "Mapas", price: 2 })
+                }
                 className={styles.equipmentCheckbox}
                 data-testid="mapas"
               />
@@ -155,11 +160,18 @@ const ReservationDetails = ({
               <input
                 type="checkbox"
                 id="equipmentguantes"
-                checked={equipmentPreferences.some((equipment) => equipment.name === "Guantes")}
-                onChange={() => handleEquipmentPreferenceToggle({name:"Guantes",price:5})}
+                checked={equipmentPreferences.some(
+                  (equipment) => equipment.name === "Guantes"
+                )}
+                onChange={() =>
+                  handleEquipmentPreferenceToggle({ name: "Guantes", price: 5 })
+                }
                 className={styles.equipmentCheckbox}
               />
-              <label htmlFor="equipmentguantes" className={styles.preferenceText}>
+              <label
+                htmlFor="equipmentguantes"
+                className={styles.preferenceText}
+              >
                 Guantes protectores <span>+ $5 por día</span>
               </label>
             </div>
@@ -167,11 +179,21 @@ const ReservationDetails = ({
               <input
                 type="checkbox"
                 id="equipmentrodilleras"
-                checked={equipmentPreferences.some((equipment) => equipment.name === "Rodilleras")}
-                onChange={() => handleEquipmentPreferenceToggle({name:"Rodilleras",price:8})}
+                checked={equipmentPreferences.some(
+                  (equipment) => equipment.name === "Rodilleras"
+                )}
+                onChange={() =>
+                  handleEquipmentPreferenceToggle({
+                    name: "Rodilleras",
+                    price: 8,
+                  })
+                }
                 className={styles.equipmentCheckbox}
               />
-              <label htmlFor="equipmentrodilleras" className={styles.preferenceText}>
+              <label
+                htmlFor="equipmentrodilleras"
+                className={styles.preferenceText}
+              >
                 Rodilleras y coderas <span>+ $8 por día</span>
               </label>
             </div>
@@ -179,11 +201,21 @@ const ReservationDetails = ({
               <input
                 type="checkbox"
                 id="equipmentmochilas"
-                checked={equipmentPreferences.some((equipment) => equipment.name === "Mochilas")}
-                onChange={() => handleEquipmentPreferenceToggle({name:"Mochilas",price:5})}
+                checked={equipmentPreferences.some(
+                  (equipment) => equipment.name === "Mochilas"
+                )}
+                onChange={() =>
+                  handleEquipmentPreferenceToggle({
+                    name: "Mochilas",
+                    price: 5,
+                  })
+                }
                 className={styles.equipmentCheckbox}
               />
-              <label htmlFor="equipmentmochilas" className={styles.preferenceText}>
+              <label
+                htmlFor="equipmentmochilas"
+                className={styles.preferenceText}
+              >
                 Mochilas o bolsas <span>+ $5 por día</span>
               </label>
             </div>
@@ -191,11 +223,21 @@ const ReservationDetails = ({
               <input
                 type="checkbox"
                 id="equipmentreparacion"
-                checked={equipmentPreferences.some((equipment) => equipment.name === "Reparacion")}
-                onChange={() => handleEquipmentPreferenceToggle({name:"Reparacion",price:5})}
+                checked={equipmentPreferences.some(
+                  (equipment) => equipment.name === "Reparacion"
+                )}
+                onChange={() =>
+                  handleEquipmentPreferenceToggle({
+                    name: "Reparacion",
+                    price: 5,
+                  })
+                }
                 className={styles.equipmentCheckbox}
               />
-              <label htmlFor="equipmentreparacion" className={styles.preferenceText}>
+              <label
+                htmlFor="equipmentreparacion"
+                className={styles.preferenceText}
+              >
                 Kit de reparación <span>+ $5 por día</span>
               </label>
             </div>
@@ -203,11 +245,21 @@ const ReservationDetails = ({
               <input
                 type="checkbox"
                 id="equipmentemergencia"
-                checked={equipmentPreferences.some((equipment) => equipment.name === "Emergencia")}
-                onChange={() => handleEquipmentPreferenceToggle({name:"Emergencia",price:7})}
+                checked={equipmentPreferences.some(
+                  (equipment) => equipment.name === "Emergencia"
+                )}
+                onChange={() =>
+                  handleEquipmentPreferenceToggle({
+                    name: "Emergencia",
+                    price: 7,
+                  })
+                }
                 className={styles.equipmentCheckbox}
               />
-              <label htmlFor="equipmentemergencia" className={styles.preferenceText}>
+              <label
+                htmlFor="equipmentemergencia"
+                className={styles.preferenceText}
+              >
                 Kit de emergencia <span>+ $7 por día</span>
               </label>
             </div>
@@ -215,11 +267,21 @@ const ReservationDetails = ({
               <input
                 type="checkbox"
                 id="equipmentchaleco"
-                checked={equipmentPreferences.some((equipment) => equipment.name === "Chaleco")}
-                onChange={() => handleEquipmentPreferenceToggle({name:"Chaleco",price:10})}
+                checked={equipmentPreferences.some(
+                  (equipment) => equipment.name === "Chaleco"
+                )}
+                onChange={() =>
+                  handleEquipmentPreferenceToggle({
+                    name: "Chaleco",
+                    price: 10,
+                  })
+                }
                 className={styles.equipmentCheckbox}
               />
-              <label htmlFor="equipmentchaleco" className={styles.preferenceText}>
+              <label
+                htmlFor="equipmentchaleco"
+                className={styles.preferenceText}
+              >
                 Chaleco salvavidas <span>+ $10 por día</span>
               </label>
             </div>
@@ -227,8 +289,12 @@ const ReservationDetails = ({
               <input
                 type="checkbox"
                 id="equipmentluces"
-                checked={equipmentPreferences.some((equipment) => equipment.name === "Luces")}
-                onChange={() => handleEquipmentPreferenceToggle({name:"Luces",price:5})}
+                checked={equipmentPreferences.some(
+                  (equipment) => equipment.name === "Luces"
+                )}
+                onChange={() =>
+                  handleEquipmentPreferenceToggle({ name: "Luces", price: 5 })
+                }
                 className={styles.equipmentCheckbox}
               />
               <label htmlFor="equipmentluces" className={styles.preferenceText}>
@@ -246,7 +312,8 @@ const ReservationDetails = ({
         </div>
         <div className={styles.preferenceContainer}>
           <span className={styles.preferenceLabel}>
-            Desea adquirir un seguro: + 10% adicional sobre el valor total de la reserva
+            Desea adquirir un seguro: + 10% adicional sobre el valor total de la
+            reserva
           </span>
           <div>
             <input
@@ -258,7 +325,10 @@ const ReservationDetails = ({
               onChange={() => setInsuranceSelected(true)}
               className={styles.equipmentCheckbox}
             />
-            <label htmlFor="insuranceOptionYes" className={styles.insuranceOptionLabel}>
+            <label
+              htmlFor="insuranceOptionYes"
+              className={styles.insuranceOptionLabel}
+            >
               Sí
             </label>
           </div>
@@ -272,7 +342,10 @@ const ReservationDetails = ({
               onChange={() => setInsuranceSelected(false)}
               className={styles.equipmentCheckbox}
             />
-            <label htmlFor="insuranceOptionNo" className={styles.insuranceOptionLabel}>
+            <label
+              htmlFor="insuranceOptionNo"
+              className={styles.insuranceOptionLabel}
+            >
               No
             </label>
           </div>

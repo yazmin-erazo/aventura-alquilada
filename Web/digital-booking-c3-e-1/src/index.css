@@ -70,3 +70,8 @@ button:focus-visible {
 p{
   margin-bottom: 0 !important;
 }
+
+
+.rmdp-mobile.rmdp-wrapper {
+  width: auto !important;
+}
