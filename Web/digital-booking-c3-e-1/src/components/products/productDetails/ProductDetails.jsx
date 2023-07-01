@@ -60,17 +60,17 @@ const ProductDetails = () => {
   }, [selectedStartDate, selectedEndDate]);
 
   // --------------------START calculo distancia usuario - producto --------------
-  // let distance = null;
-  // if (product) {
-  //   const userLocation = auth.userLocation;
-  //   const productLocation = {
-  //     latitude: product.city.latitude,
-  //     longitude: product.city.longitude,
-  //   };
-  //   distance = userLocation
-  //     ? getDistance(userLocation, productLocation) / 1000
-  //     : null;
-  // }
+  let distance = null;
+  if (product) {
+    const userLocation = auth.userLocation;
+    const productLocation = {
+      latitude: product.city.latitude,
+      longitude: product.city.longitude,
+    };
+    distance = userLocation
+      ? getDistance(userLocation, productLocation) / 1000
+      : null;
+  }
   // --------------------END calculo distancia usuario - producto --------------
 
   // --------------------START calcula la diferencia en días con la funcion diff de moment --------------
@@ -113,6 +113,15 @@ const ProductDetails = () => {
                   <div className={styles.circleIcon}>
                     <MdLocationOn size={24} />
                   </div>
+                </div>
+
+                <div>
+                  <p className={styles.city}>{product.city.name}</p>
+                  {distance && (
+                    <p className={styles.distance}>
+                      A {distance.toFixed(0)} km de ti
+                    </p>
+                  )}
                 </div>
               </div>
 
