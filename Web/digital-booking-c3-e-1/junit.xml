@@ -1,0 +1,251 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuites name="jest tests" tests="91" failures="0" errors="0" time="15.246">
+  <testsuite name="PaymentSummaryModal" errors="0" failures="0" skipped="0" timestamp="2023-07-01T23:31:34" time="5.986" tests="1">
+    <testcase classname="PaymentSummaryModal llama a la función setIsPaymentCompleted cuando se hace clic en el botón &quot;Cancelar&quot;" name="PaymentSummaryModal llama a la función setIsPaymentCompleted cuando se hace clic en el botón &quot;Cancelar&quot;" time="0.187">
+    </testcase>
+  </testsuite>
+  <testsuite name="ReservationList" errors="0" failures="0" skipped="0" timestamp="2023-07-01T23:31:34" time="6.337" tests="2">
+    <testcase classname="ReservationList obtiene datos de reservas y los representa correctamente" name="ReservationList obtiene datos de reservas y los representa correctamente" time="0.124">
+    </testcase>
+    <testcase classname="ReservationList debería recuperar las reservas con éxito" name="ReservationList debería recuperar las reservas con éxito" time="0.003">
+    </testcase>
+  </testsuite>
+  <testsuite name="ContactReservation" errors="0" failures="0" skipped="0" timestamp="2023-07-01T23:31:34" time="6.605" tests="5">
+    <testcase classname="ContactReservation renderiza la información del usuario correctamente" name="ContactReservation renderiza la información del usuario correctamente" time="0.231">
+    </testcase>
+    <testcase classname="ContactReservation maneja el cambio de nombre" name="ContactReservation maneja el cambio de nombre" time="0.062">
+    </testcase>
+    <testcase classname="ContactReservation maneja el cambio de apellido" name="ContactReservation maneja el cambio de apellido" time="0.049">
+    </testcase>
+    <testcase classname="ContactReservation alterna el formulario adicional al hacer clic en el botón" name="ContactReservation alterna el formulario adicional al hacer clic en el botón" time="0.09">
+    </testcase>
+    <testcase classname="ContactReservation llama a la función handleSubscribeChange cuando la casilla de verificación está activada" name="ContactReservation llama a la función handleSubscribeChange cuando la casilla de verificación está activada" time="0.046">
+    </testcase>
+  </testsuite>
+  <testsuite name="ButtonShare component" errors="0" failures="0" skipped="0" timestamp="2023-07-01T23:31:34" time="6.681" tests="5">
+    <testcase classname="ButtonShare component renderiza sin errores" name="ButtonShare component renderiza sin errores" time="0.152">
+    </testcase>
+    <testcase classname="ButtonShare component abre el modal cuando se hace clic en el botón" name="ButtonShare component abre el modal cuando se hace clic en el botón" time="0.139">
+    </testcase>
+    <testcase classname="ButtonShare component cierra el modal cuando se hace clic en el botón Cerrar" name="ButtonShare component cierra el modal cuando se hace clic en el botón Cerrar" time="0.071">
+    </testcase>
+    <testcase classname="ButtonShare component cierra el modal al hacer clic fuera del modal" name="ButtonShare component cierra el modal al hacer clic fuera del modal" time="0.049">
+    </testcase>
+    <testcase classname="ButtonShare component muestra la información correcta del producto en el modal" name="ButtonShare component muestra la información correcta del producto en el modal" time="0.048">
+    </testcase>
+  </testsuite>
+  <testsuite name="IconSelect" errors="0" failures="0" skipped="0" timestamp="2023-07-01T23:31:34" time="6.691" tests="3">
+    <testcase classname="IconSelect renderiza sin errores" name="IconSelect renderiza sin errores" time="0.179">
+    </testcase>
+    <testcase classname="IconSelect llama a handleIconSelect cuando se hace clic en una opción de icono" name="IconSelect llama a handleIconSelect cuando se hace clic en una opción de icono" time="0.142">
+    </testcase>
+    <testcase classname="IconSelect llama a handleIconSelect cuando se hace clic en una opción de icono" name="IconSelect llama a handleIconSelect cuando se hace clic en una opción de icono" time="0.147">
+    </testcase>
+  </testsuite>
+  <testsuite name="undefined" errors="0" failures="0" skipped="0" timestamp="2023-07-01T23:31:34" time="6.743" tests="1">
+    <testcase classname=" renders without error" name=" renders without error" time="0.28">
+    </testcase>
+  </testsuite>
+  <testsuite name="CrudCategory" errors="0" failures="0" skipped="0" timestamp="2023-07-01T23:31:34" time="6.997" tests="3">
+    <testcase classname="CrudCategory tabla de categorias" name="CrudCategory tabla de categorias" time="0.354">
+    </testcase>
+    <testcase classname="CrudCategory elimina una categoría" name="CrudCategory elimina una categoría" time="0.153">
+    </testcase>
+    <testcase classname="CrudCategory navega para editar la categoría" name="CrudCategory navega para editar la categoría" time="0.086">
+    </testcase>
+  </testsuite>
+  <testsuite name="App" errors="0" failures="0" skipped="0" timestamp="2023-07-01T23:31:34" time="7.204" tests="3">
+    <testcase classname="App renderiza sin errores" name="App renderiza sin errores" time="0.263">
+    </testcase>
+    <testcase classname="App renderiza header" name="App renderiza header" time="0.135">
+    </testcase>
+    <testcase classname="App renderiza footer" name="App renderiza footer" time="0.108">
+    </testcase>
+  </testsuite>
+  <testsuite name="RegisterCity" errors="0" failures="0" skipped="0" timestamp="2023-07-01T23:31:34" time="7.443" tests="4">
+    <testcase classname="RegisterCity renderiza el componente" name="RegisterCity renderiza el componente" time="0.4">
+    </testcase>
+    <testcase classname="RegisterCity envía el formulario" name="RegisterCity envía el formulario" time="0.339">
+    </testcase>
+    <testcase classname="RegisterCity campos de entrada están inicialmente vacíos" name="RegisterCity campos de entrada están inicialmente vacíos" time="0.097">
+    </testcase>
+    <testcase classname="RegisterCity campo de entrada de búsqueda está inicialmente vacío" name="RegisterCity campo de entrada de búsqueda está inicialmente vacío" time="0.078">
+    </testcase>
+  </testsuite>
+  <testsuite name="NewCategory" errors="0" failures="0" skipped="0" timestamp="2023-07-01T23:31:34" time="8.248" tests="5">
+    <testcase classname="NewCategory campo de entrada del título" name="NewCategory campo de entrada del título" time="0.355">
+    </testcase>
+    <testcase classname="NewCategory actualiza el valor de entrada del título" name="NewCategory actualiza el valor de entrada del título" time="0.254">
+    </testcase>
+    <testcase classname="NewCategory renderiza descripción textarea" name="NewCategory renderiza descripción textarea" time="0.107">
+    </testcase>
+    <testcase classname="NewCategory actualiza la descripción del valor del área de texto" name="NewCategory actualiza la descripción del valor del área de texto" time="0.121">
+    </testcase>
+    <testcase classname="NewCategory envía datos del formulario" name="NewCategory envía datos del formulario" time="0.742">
+    </testcase>
+  </testsuite>
+  <testsuite name="Footer component" errors="0" failures="0" skipped="0" timestamp="2023-07-01T23:31:40" time="2.329" tests="2">
+    <testcase classname="Footer component renderiza el logo" name="Footer component renderiza el logo" time="0.092">
+    </testcase>
+    <testcase classname="Footer component debe representar el texto correcto" name="Footer component debe representar el texto correcto" time="0.036">
+    </testcase>
+  </testsuite>
+  <testsuite name="Header component" errors="0" failures="0" skipped="0" timestamp="2023-07-01T23:31:40" time="2.066" tests="2">
+    <testcase classname="Header component renderiza el logo sin errores" name="Header component renderiza el logo sin errores" time="0.152">
+    </testcase>
+    <testcase classname="Header component renderiza el enlace del logotipo con el href correcto" name="Header component renderiza el enlace del logotipo con el href correcto" time="0.044">
+    </testcase>
+  </testsuite>
+  <testsuite name="PasswordInput" errors="0" failures="0" skipped="0" timestamp="2023-07-01T23:31:41" time="1.983" tests="2">
+    <testcase classname="PasswordInput llama a setIsVisible cuando se hace clic en el botón de alternar" name="PasswordInput llama a setIsVisible cuando se hace clic en el botón de alternar" time="0.256">
+    </testcase>
+    <testcase classname="PasswordInput renders con estilos personalizados" name="PasswordInput renders con estilos personalizados" time="0.042">
+    </testcase>
+  </testsuite>
+  <testsuite name="ActionButtons" errors="0" failures="0" skipped="0" timestamp="2023-07-01T23:31:41" time="2.145" tests="2">
+    <testcase classname="ActionButtons Llama a Eliminar cuando se hace clic en el botón de Eliminar" name="ActionButtons Llama a Eliminar cuando se hace clic en el botón de Eliminar" time="0.324">
+    </testcase>
+    <testcase classname="ActionButtons Llama a Editar cuando se hace clic en el botón de Editar" name="ActionButtons Llama a Editar cuando se hace clic en el botón de Editar" time="0.059">
+    </testcase>
+  </testsuite>
+  <testsuite name="TableRow" errors="0" failures="0" skipped="0" timestamp="2023-07-01T23:31:41" time="2.079" tests="3">
+    <testcase classname="TableRow renderiza el componente TableRow" name="TableRow renderiza el componente TableRow" time="0.141">
+    </testcase>
+    <testcase classname="TableRow muestra la imagen del producto si se proporciona imageURL" name="TableRow muestra la imagen del producto si se proporciona imageURL" time="0.036">
+    </testcase>
+    <testcase classname="TableRow no muestra la imagen del producto si no se proporciona imageURL" name="TableRow no muestra la imagen del producto si no se proporciona imageURL" time="0.034">
+    </testcase>
+  </testsuite>
+  <testsuite name="DropdownFilter" errors="0" failures="0" skipped="0" timestamp="2023-07-01T23:31:41" time="2.215" tests="4">
+    <testcase classname="DropdownFilter muestra la etiqueta del filtro desplegable" name="DropdownFilter muestra la etiqueta del filtro desplegable" time="0.093">
+    </testcase>
+    <testcase classname="DropdownFilter abre el menú desplegable en la etiqueta del filtro" name="DropdownFilter abre el menú desplegable en la etiqueta del filtro" time="0.028">
+    </testcase>
+    <testcase classname="DropdownFilter muestra el número correcto de opciones desplegables" name="DropdownFilter muestra el número correcto de opciones desplegables" time="0.02">
+    </testcase>
+    <testcase classname="DropdownFilter las opciones desplegables son visibles" name="DropdownFilter las opciones desplegables son visibles" time="0.225">
+    </testcase>
+  </testsuite>
+  <testsuite name="PaymentSummaryModal" errors="0" failures="0" skipped="0" timestamp="2023-07-01T23:31:41" time="2.057" tests="5">
+    <testcase classname="PaymentSummaryModal renderiza el modal cuando la propiedad &quot;mostrar&quot; es verdadera" name="PaymentSummaryModal renderiza el modal cuando la propiedad &quot;mostrar&quot; es verdadera" time="0.075">
+    </testcase>
+    <testcase classname="PaymentSummaryModal no renderiza el modal cuando la propiedad &quot;mostrar&quot; es falsa" name="PaymentSummaryModal no renderiza el modal cuando la propiedad &quot;mostrar&quot; es falsa" time="0.024">
+    </testcase>
+    <testcase classname="PaymentSummaryModal muestra el método de pago correctamente" name="PaymentSummaryModal muestra el método de pago correctamente" time="0.013">
+    </testcase>
+    <testcase classname="PaymentSummaryModal muestra los detalles de la tarjeta correctamente cuando el método de pago es tarjeta de débito" name="PaymentSummaryModal muestra los detalles de la tarjeta correctamente cuando el método de pago es tarjeta de débito" time="0.055">
+    </testcase>
+    <testcase classname="PaymentSummaryModal llama a las funciones handleClose y setIsPaymentCompleted cuando se hace clic en el botón &quot;Cerrar&quot;" name="PaymentSummaryModal llama a las funciones handleClose y setIsPaymentCompleted cuando se hace clic en el botón &quot;Cerrar&quot;" time="0.041">
+    </testcase>
+  </testsuite>
+  <testsuite name="ImageGallery" errors="0" failures="0" skipped="0" timestamp="2023-07-01T23:31:41" time="2.196" tests="3">
+    <testcase classname="ImageGallery renderiza la imagen principal y las imágenes del grid" name="ImageGallery renderiza la imagen principal y las imágenes del grid" time="0.109">
+    </testcase>
+    <testcase classname="ImageGallery abre una imagen emergente cuando se hace clic en el botón &apos;Ver más&apos;" name="ImageGallery abre una imagen emergente cuando se hace clic en el botón &apos;Ver más&apos;" time="0.213">
+    </testcase>
+    <testcase classname="ImageGallery cierra la ventana emergente de la imagen cuando está cerrada" name="ImageGallery cierra la ventana emergente de la imagen cuando está cerrada" time="0.065">
+    </testcase>
+  </testsuite>
+  <testsuite name="ImagePopup" errors="0" failures="0" skipped="0" timestamp="2023-07-01T23:31:42" time="2.072" tests="3">
+    <testcase classname="ImagePopup renderiza el componente sin errores" name="ImagePopup renderiza el componente sin errores" time="0.093">
+    </testcase>
+    <testcase classname="ImagePopup maneja los botones anterior y siguiente correctamente" name="ImagePopup maneja los botones anterior y siguiente correctamente" time="0.262">
+    </testcase>
+    <testcase classname="ImagePopup llama a la función onClose al hacer clic fuera del modal" name="ImagePopup llama a la función onClose al hacer clic fuera del modal" time="0.031">
+    </testcase>
+  </testsuite>
+  <testsuite name="undefined" errors="0" failures="0" skipped="0" timestamp="2023-07-01T23:31:42" time="1.655" tests="1">
+    <testcase classname=" renders without error" name=" renders without error" time="0.034">
+    </testcase>
+  </testsuite>
+  <testsuite name="ButtonPrimary" errors="0" failures="0" skipped="0" timestamp="2023-07-01T23:31:43" time="1.586" tests="5">
+    <testcase classname="ButtonPrimary renderiza sin errores" name="ButtonPrimary renderiza sin errores" time="0.049">
+    </testcase>
+    <testcase classname="ButtonPrimary renderiza las children" name="ButtonPrimary renderiza las children" time="0.018">
+    </testcase>
+    <testcase classname="ButtonPrimary llama onClick cuando se hace clic en el botón" name="ButtonPrimary llama onClick cuando se hace clic en el botón" time="0.021">
+    </testcase>
+    <testcase classname="ButtonPrimary deshabilita el botón cuando la propiedad deshabilitada es verdadera" name="ButtonPrimary deshabilita el botón cuando la propiedad deshabilitada es verdadera" time="0.008">
+    </testcase>
+    <testcase classname="ButtonPrimary no llama a onClick cuando se hace clic en el botón y el accesorio deshabilitado es verdadero" name="ButtonPrimary no llama a onClick cuando se hace clic en el botón y el accesorio deshabilitado es verdadero" time="0.011">
+    </testcase>
+  </testsuite>
+  <testsuite name="InputWithLabel" errors="0" failures="0" skipped="0" timestamp="2023-07-01T23:31:42" time="1.852" tests="5">
+    <testcase classname="InputWithLabel renderiza la entrada con la etiqueta y maneja el evento onChange" name="InputWithLabel renderiza la entrada con la etiqueta y maneja el evento onChange" time="0.078">
+    </testcase>
+    <testcase classname="InputWithLabel muestra el input con un mensaje de error" name="InputWithLabel muestra el input con un mensaje de error" time="0.015">
+    </testcase>
+    <testcase classname="InputWithLabel deshabilita el input cuando isEditable es falso" name="InputWithLabel deshabilita el input cuando isEditable es falso" time="0.014">
+    </testcase>
+    <testcase classname="InputWithLabel aplica un desplazamiento suave al hacer clic en la etiqueta" name="InputWithLabel aplica un desplazamiento suave al hacer clic en la etiqueta" time="0.127">
+    </testcase>
+    <testcase classname="InputWithLabel no aplica clase de error cuando no hay error" name="InputWithLabel no aplica clase de error cuando no hay error" time="0.013">
+    </testcase>
+  </testsuite>
+  <testsuite name="undefined" errors="0" failures="0" skipped="0" timestamp="2023-07-01T23:31:43" time="1.643" tests="1">
+    <testcase classname=" renders the ProductsContext provider without errors" name=" renders the ProductsContext provider without errors" time="0.109">
+    </testcase>
+  </testsuite>
+  <testsuite name="PrivacyPolicyModal" errors="0" failures="0" skipped="0" timestamp="2023-07-01T23:31:43" time="1.65" tests="2">
+    <testcase classname="PrivacyPolicyModal muestra la política de privacidad correctamente" name="PrivacyPolicyModal muestra la política de privacidad correctamente" time="0.112">
+    </testcase>
+    <testcase classname="PrivacyPolicyModal llama a la función handleClose cuando se hace clic en el botón &quot;Entendido&quot;" name="PrivacyPolicyModal llama a la función handleClose cuando se hace clic en el botón &quot;Entendido&quot;" time="0.026">
+    </testcase>
+  </testsuite>
+  <testsuite name="CancellationPolicyModal" errors="0" failures="0" skipped="0" timestamp="2023-07-01T23:31:43" time="1.747" tests="2">
+    <testcase classname="CancellationPolicyModal muestra la política de cancelación correctamente" name="CancellationPolicyModal muestra la política de cancelación correctamente" time="0.086">
+    </testcase>
+    <testcase classname="CancellationPolicyModal llama a handleClose cuando se hace clic en el botón &quot;Entendido&quot;" name="CancellationPolicyModal llama a handleClose cuando se hace clic en el botón &quot;Entendido&quot;" time="0.023">
+    </testcase>
+  </testsuite>
+  <testsuite name="undefined" errors="0" failures="0" skipped="0" timestamp="2023-07-01T23:31:43" time="1.448" tests="1">
+    <testcase classname=" renders the AuthContext provider without errors" name=" renders the AuthContext provider without errors" time="0.032">
+    </testcase>
+  </testsuite>
+  <testsuite name="Banner" errors="0" failures="0" skipped="0" timestamp="2023-07-01T23:31:43" time="1.684" tests="1">
+    <testcase classname="Banner muestra el banner con el contenido correcto" name="Banner muestra el banner con el contenido correcto" time="0.049">
+    </testcase>
+  </testsuite>
+  <testsuite name="ConfirmReservation" errors="0" failures="0" skipped="0" timestamp="2023-07-01T23:31:34" time="10.814" tests="3">
+    <testcase classname="ConfirmReservation renderiza la información del usuario" name="ConfirmReservation renderiza la información del usuario" time="0.27">
+    </testcase>
+    <testcase classname="ConfirmReservation renderiza los detalles de la reserva" name="ConfirmReservation renderiza los detalles de la reserva" time="0.067">
+    </testcase>
+    <testcase classname="ConfirmReservation renderiza labels de fechas de reserva" name="ConfirmReservation renderiza labels de fechas de reserva" time="0.033">
+    </testcase>
+  </testsuite>
+  <testsuite name="undefined" errors="0" failures="0" skipped="0" timestamp="2023-07-01T23:31:44" time="1.317" tests="1">
+    <testcase classname=" renders without error" name=" renders without error" time="0.019">
+    </testcase>
+  </testsuite>
+  <testsuite name="ReservationDetails" errors="0" failures="0" skipped="0" timestamp="2023-07-01T23:31:34" time="11.017" tests="3">
+    <testcase classname="ReservationDetails proporciona los detalles de la reserva" name="ReservationDetails proporciona los detalles de la reserva" time="0.146">
+    </testcase>
+    <testcase classname="ReservationDetails toggles del calendario" name="ReservationDetails toggles del calendario" time="0.03">
+    </testcase>
+    <testcase classname="ReservationDetails selecciona fechas del calendario" name="ReservationDetails selecciona fechas del calendario" time="0.019">
+    </testcase>
+  </testsuite>
+  <testsuite name="NewReservation" errors="0" failures="0" skipped="0" timestamp="2023-07-01T23:31:34" time="11.276" tests="3">
+    <testcase classname="NewReservation renders without errors" name="NewReservation renders without errors" time="0.058">
+    </testcase>
+    <testcase classname="NewReservation muestra los pasos correctamente" name="NewReservation muestra los pasos correctamente" time="0.015">
+    </testcase>
+    <testcase classname="NewReservation renderiza el boton submit correctamente" name="NewReservation renderiza el boton submit correctamente" time="0.018">
+    </testcase>
+  </testsuite>
+  <testsuite name="Reservation" errors="0" failures="0" skipped="0" timestamp="2023-07-01T23:31:34" time="11.493" tests="3">
+    <testcase classname="Reservation renderiza el componente ContactReservation en el paso 1" name="Reservation renderiza el componente ContactReservation en el paso 1" time="0.346">
+    </testcase>
+    <testcase classname="Reservation renderiza el componente ReservationDetails en el paso 2" name="Reservation renderiza el componente ReservationDetails en el paso 2" time="0.031">
+    </testcase>
+    <testcase classname="Reservation renderiza el componente ConfirmReservation en el paso 3" name="Reservation renderiza el componente ConfirmReservation en el paso 3" time="0.024">
+    </testcase>
+  </testsuite>
+  <testsuite name="Pruebas de geolocalización" errors="0" failures="0" skipped="0" timestamp="2023-07-01T23:31:34" time="11.846" tests="2">
+    <testcase classname="Pruebas de geolocalización Debe simular la geolocalización en una ubicación específica" name="Pruebas de geolocalización Debe simular la geolocalización en una ubicación específica" time="0.001">
+    </testcase>
+    <testcase classname="Pruebas de geolocalización renderiza app con routes" name="Pruebas de geolocalización renderiza app con routes" time="0.156">
+    </testcase>
+  </testsuite>
+</testsuites>

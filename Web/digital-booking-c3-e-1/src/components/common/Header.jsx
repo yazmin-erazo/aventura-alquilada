@@ -118,7 +118,7 @@ const Header = () => {
             <ul
               className={isProfileOpen ? "user-profile open" : "user-profile"}
             >
-              <li>Perfil</li>
+              <li>Perfil <span className="commingSoon"><i>(Próximamente)</i></span></li>
               <hr />
               <li className="menuOption">
                 <Link to="/favs">Mis favoritos</Link>
@@ -128,7 +128,7 @@ const Header = () => {
                 <Link to="/reservas">Mis reservas</Link>
               </li>
               <hr />
-              <li>Configuración</li>
+              <li>Configuración <span className="commingSoon"><i>(Proximamente)</i></span></li>
               <li className="logout" onClick={logoutHandler}>
                 Cerrar Sesión
               </li>

@@ -282,6 +282,11 @@ li:hover {
   font-weight: 700;
 }
 
+.commingSoon {
+  color: var(--secondary-200);
+  font-size: 12px;
+}
+
 @media (max-width: 1024px) {
   .cuentaBtn,
   .sesionBtn {

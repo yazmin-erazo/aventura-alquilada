@@ -1,6 +1,6 @@
 include:
   - local: 'web-ci.yml'
-  # - local: 'api-ci.yml'
+  - local: 'api-ci.yml'
 
 # stages:
 #   - cicd
