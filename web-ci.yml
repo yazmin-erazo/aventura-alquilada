@@ -18,14 +18,12 @@ test-web:
   script:
     - cd Web/digital-booking-c3-e-1
     - npm install
+    - rm -rf coverage/
     - npm run test --coverage
-    - npm run coverage:html
-    - ls
-    - echo "Coverage report $CI_PIPELINE_URL/coverage/index.html"
   artifacts:
     paths:
       - coverage/
-      - Web/digital-booking-c3-e-1/coverage/
+      - Web/digital-booking-c3-e-1/coverage/junit.xml
     reports:
       junit: Web/digital-booking-c3-e-1/coverage/junit.xml
 
