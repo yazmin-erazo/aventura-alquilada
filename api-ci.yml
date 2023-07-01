@@ -15,7 +15,7 @@ test-api:
     - main
       
 coverage-report:
-  stage: coverage report
+  stage: test
   image: maven:3.6-jdk-11
   script:
     - cd API/digital-booking-c3-e-1
