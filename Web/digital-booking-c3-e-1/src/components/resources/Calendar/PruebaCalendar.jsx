@@ -3,12 +3,9 @@ import { Calendar } from "react-multi-date-picker";
 import { registerLocale, setDefaultLocale } from "react-datepicker";
 import Swal from "sweetalert2";
 import { useMediaQuery } from "react-responsive";
-import "react-multi-date-picker/styles/layouts/mobile.css"
-import DatePickerHeader from "react-multi-date-picker/plugins/date_picker_header"
-import styles from "./PruebaCalendar.module.css";
+import "react-multi-date-picker/styles/layouts/mobile.css";
+import DatePickerHeader from "react-multi-date-picker/plugins/date_picker_header";
 import { es } from "date-fns/locale";
-import { format } from "date-fns";
-
 
 registerLocale("es", es);
 setDefaultLocale("es");
@@ -20,7 +17,6 @@ const PruebaCalendar = ({ onSelectDates, rents }) => {
   const [selectedDates, setSelectedDates] = useState([]);
   const isMobile = useMediaQuery({ maxWidth: 768 });
 
-
   const handleDateSelect = (dates) => {
     setSelectedDates(dates);
   };
@@ -29,13 +25,13 @@ const PruebaCalendar = ({ onSelectDates, rents }) => {
     if (rents) {
       return rents.some((rent) => {
         const startDate = new Date(rent.starDate);
-        const endDate = new Date(rent.endDate.split('T')[0]);
+        const endDate = new Date(rent.endDate.split("T")[0]);
 
         startDate.setDate(startDate.getDate() + 1);
         endDate.setDate(endDate.getDate() + 2);
-        
+
         const isUnavailable =
-        date >= startDate && date <= endDate && !rent.disabled;
+          date >= startDate && date <= endDate && !rent.disabled;
         return isUnavailable;
       });
     }
@@ -109,7 +105,7 @@ const PruebaCalendar = ({ onSelectDates, rents }) => {
   };
 
   return (
-    <div className={styles.containerCalendar}>
+    <div>
       <Calendar
         range
         rangeHover
@@ -118,11 +114,9 @@ const PruebaCalendar = ({ onSelectDates, rents }) => {
         className="rmdp-mobile"
         numberOfMonths={isMobile ? 1 : 2}
         containerStyle={{
-            width: "auto"
-          }}
-        plugins={[
-            <DatePickerHeader />
-          ]}
+          width: "auto",
+        }}
+        plugins={[<DatePickerHeader />]}
         weekStartDayIndex={1}
         onChange={handleDateSelect}
         selectedDates={selectedDates}
