@@ -17,7 +17,6 @@ const SinglePanel = ({ onMenuOpenChange }) => {
   const toggleMenu = () => {
     const newMenuOpenState = !isMenuOpen;
     setMenuOpen(newMenuOpenState);
-    // Llamar a la función de callback para notificar el cambio en el estado
     onMenuOpenChange(newMenuOpenState);
   };
 

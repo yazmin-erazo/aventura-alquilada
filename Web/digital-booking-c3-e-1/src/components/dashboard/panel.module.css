@@ -46,6 +46,9 @@
   border: none;
   border-top: 1px solid var(--secondary-300);
 }
+.toggleIcon{
+  cursor: pointer;
+}
 
 .burger-menu {
   display: none;
