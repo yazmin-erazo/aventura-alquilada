@@ -126,9 +126,9 @@ const PruebaCalendar = ({ onSelectDates, rents }) => {
         value={selectedDates}
         className="rmdp-mobile"
         numberOfMonths={isMobile ? 1 : 2}
-        containerStyle={{
-          width: "auto",
-        }}
+        // containerStyle={{
+        //   width: "auto",
+        // }}
         plugins={plugins}
         weekStartDayIndex={1}
         onChange={handleDateSelect}
@@ -140,7 +140,7 @@ const PruebaCalendar = ({ onSelectDates, rents }) => {
           if (isUnavailable) {
             return {
               disabled: true,
-              style: { color: "#ccc" },
+              style: { color: "#c3d4e4" },
             };
           }
         }}

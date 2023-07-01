@@ -1,7 +1,7 @@
 import React, { useContext, useEffect, useState } from "react";
 import styles from "./RecommendedProducts.module.css";
 import ButtonPrimary from "../../../common/Buttons/ButtonPrimary";
-import { BsClock, BsPin, BsPinMap } from "react-icons/bs";
+import { BsClock } from "react-icons/bs";
 import { FaStar } from "react-icons/fa";
 import RatingStats from "../../rating/RatingStats";
 import { IconContext } from "react-icons";
@@ -139,8 +139,6 @@ const RecommendedProducts = ({
                 className={styles.ratingStatsItem}
               />
             </div>
-            {/* <div className={styles.ratingStars}>{renderRatingStars()}</div> */}
-            {/* <p className={styles.numRatings}>{numRatings}</p> */}
           </div>
           {categoryIcon && (
             <div className={styles.categoryIconContainer}>
@@ -155,7 +153,6 @@ const RecommendedProducts = ({
         </div>
         <div className={styles.nameDistance}>
           <h3 className={styles.name}>{product.name}</h3>
-          <p className={styles.distance}> {product.distance.toFixed(0)} Km de ti</p>
         </div>
 
         <p className={styles.description}>{product.description}</p>
