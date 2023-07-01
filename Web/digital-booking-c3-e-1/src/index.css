@@ -67,11 +67,52 @@ button:focus-visible {
     background-color: #f9f9f9;
   }
 } */
-p{
+p {
   margin-bottom: 0 !important;
 }
 
+/* ----------------------- New Calendar ------------------------------- */
+
+.rmdp-border-right {
+  border-right: 1px solid #cfd8e2;
+  width: 100%;
+}
+
+.rmdp-border-right {
+  border-right: 1px solid #cfd8e2;
+  width: auto;
+}
+
+.rmdp-header-plugin.left.big,
+.rmdp-header-plugin.right.big {
+  min-width: 110px;
+  width: -webkit-fill-available;
+}
+
+.rmdp-border-right {
+  border-right: 1px solid #cfd8e2;
+  width: -webkit-fill-available;
+}
 
 .rmdp-mobile.rmdp-wrapper {
-  width: auto !important;
+  box-shadow: unset;
+  border: 1px solid #cfd8e2;
+  width: inherit;
+}
+
+.rmdp-day-picker {
+  display: flex;
+  justify-content: space-evenly;
+}
+
+.rmdp-top-class {
+  display: flex;
+  justify-content: space-evenly;
+}
+
+@media (max-height: 400px), (max-width: 400px) {
+  .rmdp-header-plugin.bottom.small,
+  .rmdp-header-plugin.top.small {
+    height: 80px !important;
+  }
 }

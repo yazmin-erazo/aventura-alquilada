@@ -48,7 +48,8 @@ const ProductDetails = () => {
     if (dates) {
       handleSelectDates(dates.startDate, dates.endDate);
     }
-  }, [data, product]);
+  }, [data]);
+
 
   useEffect(() => {
     // Actualizar las fechas en sessionStorage cuando selectedDates cambie
@@ -219,7 +220,7 @@ const ProductDetails = () => {
                         id={productId}
                       />
                     ) : (
-                      <p>Selecciona las fechas de tu reserva</p>
+                      <p className={styles.whitoutDates}>Selecciona las fechas de tu reserva</p>
                     )}
                   </section>
                 </div>

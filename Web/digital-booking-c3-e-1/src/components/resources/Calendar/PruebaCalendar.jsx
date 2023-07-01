@@ -15,8 +15,21 @@ const PruebaCalendar = ({ onSelectDates, rents }) => {
   const [selectedEndDate, setSelectedEndDate] = useState(null);
   const [totalRentalDays, setTotalRentalDays] = useState(0);
   const [selectedDates, setSelectedDates] = useState([]);
-  const isMobile = useMediaQuery({ maxWidth: 768 });
+  const isMobile = useMediaQuery({ maxWidth: 600 });
+  const isTablet = useMediaQuery({ maxWidth: 979 });
+  const isDesktop = useMediaQuery({ minWidth: 980 });
 
+  let defaultHeader = null;
+
+  if (isMobile) {
+    defaultHeader = <DatePickerHeader width="100%" position="top" size="small" />;
+  } else if (isTablet) {
+    defaultHeader = <DatePickerHeader size="small" />;
+  } else if (isDesktop) {
+    defaultHeader = <DatePickerHeader />;
+  }
+
+  const plugins = [defaultHeader].filter(Boolean);
   const handleDateSelect = (dates) => {
     setSelectedDates(dates);
   };
@@ -105,7 +118,7 @@ const PruebaCalendar = ({ onSelectDates, rents }) => {
   };
 
   return (
-    <div>
+    <div className="containerCalendarDiv">
       <Calendar
         range
         rangeHover
@@ -113,10 +126,10 @@ const PruebaCalendar = ({ onSelectDates, rents }) => {
         value={selectedDates}
         className="rmdp-mobile"
         numberOfMonths={isMobile ? 1 : 2}
-        containerStyle={{
-          width: "auto",
-        }}
-        plugins={[<DatePickerHeader />]}
+        // containerStyle={{
+        //   width: "auto",
+        // }}
+        plugins={plugins}
         weekStartDayIndex={1}
         onChange={handleDateSelect}
         selectedDates={selectedDates}
@@ -127,7 +140,7 @@ const PruebaCalendar = ({ onSelectDates, rents }) => {
           if (isUnavailable) {
             return {
               disabled: true,
-              style: { color: "#ccc" },
+              style: { color: "#c3d4e4" },
             };
           }
         }}
