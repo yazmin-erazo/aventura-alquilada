@@ -42,20 +42,36 @@ const NewReservation = () => {
     }
   };
 
+  // useEffect(() => {
+  //   const prod = data.products.find((p) => p.id === parseInt(params.id));
+  //   setProduct(prod);
+  //   const dates = JSON.parse(sessionStorage.getItem("dates"));
+  //   if (dates && dates.startDate && dates.endDate) {
+  //     setStartDate(dates.startDate);
+  //     setEndDate(dates.endDate);
+  //   }
+
+  //   const u = JSON.parse(sessionStorage.getItem("user"));
+  //   setUser(u);
+  // }, [data, product]);
+
   useEffect(() => {
     const prod = data.products.find((p) => p.id === parseInt(params.id));
     setProduct(prod);
+  }, [data, params.id]);
+  
+  useEffect(() => {
     const dates = JSON.parse(sessionStorage.getItem("dates"));
     if (dates && dates.startDate && dates.endDate) {
       setStartDate(dates.startDate);
       setEndDate(dates.endDate);
     }
-
+  
     const u = JSON.parse(sessionStorage.getItem("user"));
     setUser(u);
-  }, [data, product]);
+  }, [data]);
 
-  
+
   useEffect(() => {
     setCalendarOpen(false);
   }, [endDate]);

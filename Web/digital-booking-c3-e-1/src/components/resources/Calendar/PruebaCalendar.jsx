@@ -22,7 +22,7 @@ const PruebaCalendar = ({ onSelectDates, rents }) => {
   let defaultHeader = null;
 
   if (isMobile) {
-    defaultHeader = <DatePickerHeader position="top" size="small" />;
+    defaultHeader = <DatePickerHeader width="100%" position="top" size="small" />;
   } else if (isTablet) {
     defaultHeader = <DatePickerHeader size="small" />;
   } else if (isDesktop) {
@@ -118,7 +118,7 @@ const PruebaCalendar = ({ onSelectDates, rents }) => {
   };
 
   return (
-    <div>
+    <div className="containerCalendarDiv">
       <Calendar
         range
         rangeHover
