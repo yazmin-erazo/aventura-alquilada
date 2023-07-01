@@ -1,5 +1,6 @@
 import React from "react";
-import { render, screen, fireEvent } from "@testing-library/react";
+import { render, screen } from "@testing-library/react";
+import { BrowserRouter } from "react-router-dom";
 import ReservationList from "../../../components/reservation/list/ReservationList";
 import RentsService from "../../../shared/services/RentsService";
 
@@ -20,7 +21,11 @@ describe("ReservationList", () => {
 
   // 🧪 =============================
   it("obtiene datos de reservas y los representa correctamente", async () => {
-    render(<ReservationList />);
+    render(
+      <BrowserRouter>
+        <ReservationList />
+      </BrowserRouter>
+    );
 
     expect(RentsService.getAll).toHaveBeenCalledTimes(1);
     await screen.findByText("Mi historial de reservas");

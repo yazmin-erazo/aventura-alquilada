@@ -14,7 +14,7 @@ test-api:
   only:
     - main
       
-coverage-report:
+test-api:
   stage: test
   image: maven:3.6-jdk-11
   script:
