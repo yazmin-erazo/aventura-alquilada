@@ -1,4 +1,4 @@
-.react-calendar {
+/* .react-calendar {
   width: 100%;
   max-width: auto;
   background-color: #fff;
@@ -173,10 +173,10 @@
 .selected-date {
   background-color: rgb(72, 125, 240);
   color: white;
-}
+} */
 
 /* Estilos para pantallas móviles */
-@media screen and (max-width: 600px) {
+/* @media screen and (max-width: 600px) {
   .react-calendar {
     box-shadow: none;
     font-size: 14px;
@@ -212,10 +212,10 @@
   .react-calendar {
     width: 100%;
   }
-}
+} */
 
 /* Estilos generales */
-.react-calendar__tile:enabled:hover,
+/* .react-calendar__tile:enabled:hover,
 .react-calendar__tile:enabled:focus {
   background: rgb(72, 125, 240);
   color: var(--white-100);
@@ -290,4 +290,4 @@
   color: gray !important;
   visibility: hidden !important;
   pointer-events: none !important;
-}
+} */
