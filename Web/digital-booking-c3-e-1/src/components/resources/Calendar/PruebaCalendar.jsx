@@ -116,7 +116,10 @@ const PruebaCalendar = ({ onSelectDates, rents }) => {
         containerStyle={{
           width: "auto",
         }}
-        plugins={[<DatePickerHeader />]}
+        plugins={isMobile || window.innerWidth < 500 ? [ <DatePickerHeader 
+            position="top" 
+            size="small" 
+          />] : [<DatePickerHeader />]}
         weekStartDayIndex={1}
         onChange={handleDateSelect}
         selectedDates={selectedDates}

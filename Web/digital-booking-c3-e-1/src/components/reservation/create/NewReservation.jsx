@@ -55,6 +55,7 @@ const NewReservation = () => {
     setUser(u);
   }, [data, product]);
 
+  
   useEffect(() => {
     setCalendarOpen(false);
   }, [endDate]);
