@@ -10,16 +10,26 @@
   display: flex;
 }
 
-.withPanel .main {
+.withPanel .main.withMenuOpen {
   max-width: calc(100vw - 250px);
+}
+
+.withPanel .main.withMenuClosed {
+  max-width: calc(100vw - 80px);
 }
 
 .main {
   width: 100%;
 }
 
+
+
 @media (max-width: 767px) {
-  .withPanel .main {
+  .withPanel .main.withMenuOpen {
+    max-width: 100vw;
+  }
+
+  .withPanel .main.withMenuClosed {
     max-width: 100vw;
   }
   .withPanel {

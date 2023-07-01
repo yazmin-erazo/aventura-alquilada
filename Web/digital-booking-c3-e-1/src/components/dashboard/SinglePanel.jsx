@@ -3,19 +3,22 @@ import { UserContext } from "../../context/AuthContext";
 import { Link, useLocation } from "react-router-dom";
 
 import styles from "./panel.module.css";
-import { FiLayers, FiBriefcase, FiUsers, FiMenu } from "react-icons/fi";
+import { FiLayers, FiBriefcase, FiUsers, FiMenu, FiX } from "react-icons/fi";
 import { BiGridAlt } from "react-icons/bi";
 import { TfiLocationPin } from "react-icons/tfi";
 import DashboardSection from "../resources/dashboard/DashboardSection";
 
-const SinglePanel = () => {
+const SinglePanel = ({ onMenuOpenChange }) => {
   const { user } = useContext(UserContext);
   const location = useLocation();
   const [isMenuOpen, setMenuOpen] = useState(false);
   const [currentSection, setCurrentSection] = useState("");
 
   const toggleMenu = () => {
-    setMenuOpen(!isMenuOpen);
+    const newMenuOpenState = !isMenuOpen;
+    setMenuOpen(newMenuOpenState);
+    // Llamar a la función de callback para notificar el cambio en el estado
+    onMenuOpenChange(newMenuOpenState);
   };
 
   useEffect(() => {
@@ -29,26 +32,41 @@ const SinglePanel = () => {
     localStorage.setItem("currentSection", currentSection);
   }, [currentSection]);
 
+
   return (
     <>
       {user.role === "Admin" && (
-        <div className={styles.dashboard}>
+        <div
+          className={` ${isMenuOpen ? styles.dashboard : styles.menuClosed}`}
+        >
           <div className={styles.content}>
-            <div className={styles.title}>Dashboard</div>
-            <hr className={styles.divider} />
+            <div className={styles.toggleIcon} onClick={toggleMenu}>
+              {isMenuOpen ? (
+                <div className={styles.title}>
+                  <p>Dashboard</p>
+                  <FiX size={24} />
+                </div>
+              ) : (
+                <FiMenu size={24} />
+              )}
+            </div>
+            {isMenuOpen ? <hr className={styles.divider} /> : ""}
 
             {/* ------------------ USERS ------------------ */}
             <DashboardSection
+              className={styles.dashboardSection}
               icon={FiUsers}
               size={24}
               text="Usuarios"
               to="admin/user/"
               isActive={location.pathname === "/admin/user/"}
               onClick={() => setCurrentSection("Usuarios")}
+              isMenuOpen={isMenuOpen}
             />
 
             {/* ------------------ ROLES ------------------ */}
             <DashboardSection
+              className={styles.dashboardSection}
               icon={FiBriefcase}
               size={24}
               text="Roles"
@@ -58,10 +76,12 @@ const SinglePanel = () => {
                 location.pathname === "/admin/role/add"
               }
               onClick={() => setCurrentSection("Roles")}
+              isMenuOpen={isMenuOpen}
             />
 
             {/* ------------------ CATEGORY ------------------ */}
             <DashboardSection
+              className={styles.dashboardSection}
               icon={BiGridAlt}
               size={24}
               text="Categorias"
@@ -71,10 +91,12 @@ const SinglePanel = () => {
                 location.pathname === "/admin/category/add"
               }
               onClick={() => setCurrentSection("Categorías")}
+              isMenuOpen={isMenuOpen}
             />
 
             {/* ------------------ PRODUCTS ------------------ */}
             <DashboardSection
+              className={styles.dashboardSection}
               icon={FiLayers}
               size={24}
               text="Productos"
@@ -84,10 +106,12 @@ const SinglePanel = () => {
                 location.pathname === "/admin/product/add"
               }
               onClick={() => setCurrentSection("Productos")}
+              isMenuOpen={isMenuOpen}
             />
 
             {/* ------------------ CITIES ------------------ */}
             <DashboardSection
+              className={styles.dashboardSection}
               icon={TfiLocationPin}
               size={24}
               text="Ciudades"
@@ -98,6 +122,7 @@ const SinglePanel = () => {
                 location.pathname === "/admin/city/edit"
               }
               onClick={() => setCurrentSection("Ciudades")}
+              isMenuOpen={isMenuOpen}
             />
           </div>
         </div>

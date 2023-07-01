@@ -15,7 +15,8 @@
 
 .title {
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
+  justify-content: space-between;
   align-items: flex-start;
   padding: 0px;
   gap: 12px;
@@ -27,6 +28,18 @@
   font: var(--body-16);
   font-weight: bold;
   letter-spacing: 0.02rem;
+}
+
+.menuClosed {
+  min-width: 80px;
+  position: sticky;
+  background: var(--sencondary-900);
+  color: var(--bg-white-50);
+  padding: 24px;
+}
+
+.menuClosed .dashboardSection {
+  display: none;
 }
 
 .divider {
@@ -47,6 +60,9 @@
 }
 
 @media (max-width: 767px) {
+  .menuClosed{
+    display: none;
+  }
   .dashboard {
     display: none;
   }

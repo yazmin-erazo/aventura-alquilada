@@ -22,6 +22,7 @@ const NewReservation = () => {
     step2: false,
     step3: false,
   });
+
   const [step, setStep] = useState(1);
   const [user, setUser] = useState(null);
   const changeStep = (param) => {
@@ -58,19 +59,18 @@ const NewReservation = () => {
   useEffect(() => {
     const prod = data.products.find((p) => p.id === parseInt(params.id));
     setProduct(prod);
-  }, [data, params.id]);
-  
+  }, [data, product, params.id]);
+
   useEffect(() => {
     const dates = JSON.parse(sessionStorage.getItem("dates"));
     if (dates && dates.startDate && dates.endDate) {
       setStartDate(dates.startDate);
       setEndDate(dates.endDate);
     }
-  
+
     const u = JSON.parse(sessionStorage.getItem("user"));
     setUser(u);
   }, [data]);
-
 
   useEffect(() => {
     setCalendarOpen(false);
@@ -91,8 +91,7 @@ const NewReservation = () => {
           <div
             className={`${styles.step} ${active.step1 && styles.stepActive}`}
           >
-            {" "}
-            1{" "}
+            1
           </div>
           <div
             className={`${styles.step} ${active.step2 && styles.stepActive}`}
