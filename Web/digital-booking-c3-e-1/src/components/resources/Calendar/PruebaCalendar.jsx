@@ -15,8 +15,21 @@ const PruebaCalendar = ({ onSelectDates, rents }) => {
   const [selectedEndDate, setSelectedEndDate] = useState(null);
   const [totalRentalDays, setTotalRentalDays] = useState(0);
   const [selectedDates, setSelectedDates] = useState([]);
-  const isMobile = useMediaQuery({ maxWidth: 768 });
+  const isMobile = useMediaQuery({ maxWidth: 600 });
+  const isTablet = useMediaQuery({ maxWidth: 979 });
+  const isDesktop = useMediaQuery({ minWidth: 980 });
 
+  let defaultHeader = null;
+
+  if (isMobile) {
+    defaultHeader = <DatePickerHeader position="top" size="small" />;
+  } else if (isTablet) {
+    defaultHeader = <DatePickerHeader size="small" />;
+  } else if (isDesktop) {
+    defaultHeader = <DatePickerHeader />;
+  }
+
+  const plugins = [defaultHeader].filter(Boolean);
   const handleDateSelect = (dates) => {
     setSelectedDates(dates);
   };
@@ -116,10 +129,7 @@ const PruebaCalendar = ({ onSelectDates, rents }) => {
         containerStyle={{
           width: "auto",
         }}
-        plugins={isMobile || window.innerWidth < 500 ? [ <DatePickerHeader 
-            position="top" 
-            size="small" 
-          />] : [<DatePickerHeader />]}
+        plugins={plugins}
         weekStartDayIndex={1}
         onChange={handleDateSelect}
         selectedDates={selectedDates}
