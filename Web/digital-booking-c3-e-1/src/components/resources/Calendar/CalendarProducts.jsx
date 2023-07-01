@@ -16,6 +16,8 @@ const CalendarProducts = ({ onSelectDates, rents }) => {
   const [selectedEndDate, setSelectedEndDate] = useState(null);
   const [totalRentalDays, setTotalRentalDays] = useState(0);
   const isMobile = useMediaQuery({ maxWidth: 850 });
+
+  
   
 
   const isDateUnavailable = (date) => {
@@ -47,28 +49,20 @@ const CalendarProducts = ({ onSelectDates, rents }) => {
 
   const handleDateSelect = (date) => {
     const selectedDate = moment(date).startOf("day");
-    sessionStorage.removeItem("dates")
-
-    if (selectedEndDate) {
-      if (selectedDate > selectedEndDate) {
-        setSelectedStartDate(selectedEndDate);
-        setSelectedEndDate(selectedDate);
-      } else {
-        setSelectedStartDate(selectedDate);
-      }
-      setSelectedEndDate(null);
-    } else if (!selectedStartDate) {
+    
+    if (!selectedStartDate) {
       setSelectedStartDate(selectedDate);
-    } else {
+      setSelectedEndDate(null);
+    } else if (!selectedEndDate) {
       if (selectedDate < selectedStartDate) {
-        setSelectedEndDate(selectedStartDate);
         setSelectedStartDate(selectedDate);
+        setSelectedEndDate(selectedStartDate);
       } else {
         setSelectedEndDate(selectedDate);
       }
-  
-      const diffDays = Math.abs(selectedDate.diff(selectedStartDate, "days")) + 1;
-      setTotalRentalDays(diffDays);
+    } else {
+      setSelectedStartDate(selectedDate);
+      setSelectedEndDate(null);
     }
   };
 
@@ -102,6 +96,9 @@ const CalendarProducts = ({ onSelectDates, rents }) => {
   useEffect(() => {
     if (onSelectDates && selectedStartDate && selectedEndDate) {
       onSelectDates(selectedStartDate, selectedEndDate);
+    }
+    if (onSelectDates) {
+      onSelectDates(startDate, endDate);
     }
   }, [selectedStartDate, selectedEndDate]);
 

@@ -40,201 +40,216 @@ const ConfirmReservation = ({
     setIsPaymentCompleted(true);
   };
 
-  const totalDays = differenceInDays(new Date(endDate), new Date(startDate))+1;
+  const totalDays =
+    differenceInDays(new Date(endDate), new Date(startDate)) + 1;
   const insuranceMulti = insuranceSelected ? 1.1 : 1;
-  const totalPrice = Math.round((product.price * insuranceMulti + equipmentPreferences.reduce((total, equipment) => total + equipment.price, 0) )* totalDays);
+  const totalPrice = Math.round(
+    (product.price * insuranceMulti +
+      equipmentPreferences.reduce(
+        (total, equipment) => total + equipment.price,
+        0
+      )) *
+      totalDays
+  );
 
 
-  const formattedStartDate = format(new Date(startDate), "dd 'de' MMMM 'de' yyyy", { locale: es });
+  const formattedStartDate = format(new Date(startDate), "dd 'de' MMMM 'de' yyyy", { locale: es } );
   const formattedEndDate = format(new Date(endDate), "dd 'de' MMMM 'de' yyyy", { locale: es });
 
   return (
-    <div className={styles.confirmationContainer}>
-      <div className={styles.header}>
-        <div className={styles.headerIcon}>
-          <BsCheck2Square />{" "}
-        </div>
-        <h3 className={styles.title}>Confirmación de reserva</h3>
-      </div>
+    <>
+      {product && user && (
+        <div className={styles.confirmationContainer}>
+          <div className={styles.header}>
+            <div className={styles.headerIcon}>
+              <BsCheck2Square />{" "}
+            </div>
+            <h3 className={styles.title}>Confirmación de reserva</h3>
+          </div>
 
-      <div className={styles.userInfoContainer}>
-        <div className={styles.userInfo}>
-          <h4 className={styles.sectionTitle}>
-            <BsPerson size={20} className={styles.sectionTitleIcon} /> Detalles
-            de Usuario
-          </h4>
-          <div className={styles.userInfoItem}>
-            <p className={styles.label}>Nombre:</p>
-            <p className={styles.value}>
-              {user.name} {user.lastname}
-            </p>
-          </div>
-          <div className={styles.userInfoItem}>
-            <p className={styles.label}>Email:</p>
-            <p className={styles.value}>{user.sub}</p>
-          </div>
-          <div className={styles.userInfoItem}>
-            <p className={styles.label}>Subscripción:</p>
-            <p className={styles.value}>{isSubscribe ? "Sí" : "No"}</p>
-          </div>
-        </div>
-        <div className={styles.userInfo}>
-          <h4 className={styles.sectionTitle}>
-            <BsTicketPerforated size={20} className={styles.sectionTitleIcon} />{" "}
-            Detalles de Reserva
-          </h4>
-          <div className={styles.userInfoItem}>
-            <p className={styles.label}>Equipamiento adicional:</p>
-            <p className={styles.value}>
-              {equipmentPreferences.length === 0
-                ? "Sin equipamiento adicional"
-                : equipmentPreferences.map((equipment) => equipment.name).join(", ")}
-            </p>
-          </div>
-          <div className={styles.userInfoItem}>
-            <p className={styles.label}>Preferencia de entrega:</p>
-            {delivery === "recoger en tienda" ? (
-              <p className={styles.value}>Recoger en tienda</p>
-            ) : (
-              <p className={styles.value}>Entregar en {address}</p>
-            )}
-          </div>
-          <div className={styles.userInfoItem}>
-            <p className={styles.label}>Comentarios:</p>
-            {comment.trim() !== "" ? (
-              <p className={styles.value}>{comment}</p>
-            ) : (
-              <p className={styles.value}>Sin comentarios</p>
-            )}
-          </div>
-        </div>
-      </div>
-
-      {additionalContact && (
-        <>
-          <div className={styles.additionalContactContainer}>
-            <h4 className={styles.sectionTitle}>
-              <BsPersonPlus size={20} className={styles.sectionTitleIcon} />
-              Segundo Contacto
-            </h4>
-            <div className={styles.additionInfoContainer}>
-              <div className={styles.additionalContactInfo}>
+          <div className={styles.userInfoContainer}>
+            <div className={styles.userInfo}>
+              <h4 className={styles.sectionTitle}>
+                <BsPerson size={20} className={styles.sectionTitleIcon} />{" "}
+                Detalles de Usuario
+              </h4>
+              <div className={styles.userInfoItem}>
                 <p className={styles.label}>Nombre:</p>
                 <p className={styles.value}>
-                  {additionalContact.name} {additionalContact.lastName}
+                  {user.name} {user.lastname}
                 </p>
               </div>
-              <div className={styles.additionalContactInfo}>
+              <div className={styles.userInfoItem}>
                 <p className={styles.label}>Email:</p>
-                <p className={styles.value}>{additionalContact.email}</p>
+                <p className={styles.value}>{user.sub}</p>
+              </div>
+              <div className={styles.userInfoItem}>
+                <p className={styles.label}>Subscripción:</p>
+                <p className={styles.value}>{isSubscribe ? "Sí" : "No"}</p>
+              </div>
+            </div>
+            <div className={styles.userInfo}>
+              <h4 className={styles.sectionTitle}>
+                <BsTicketPerforated
+                  size={20}
+                  className={styles.sectionTitleIcon}
+                />{" "}
+                Detalles de Reserva
+              </h4>
+              <div className={styles.userInfoItem}>
+                <p className={styles.label}>Equipamiento adicional:</p>
+                <p className={styles.value}>
+                  {equipmentPreferences.length === 0
+                    ? "Sin equipamiento adicional"
+                    : equipmentPreferences
+                        .map((equipment) => equipment.name)
+                        .join(", ")}
+                </p>
+              </div>
+              <div className={styles.userInfoItem}>
+                <p className={styles.label}>Preferencia de entrega:</p>
+                {delivery === "recoger en tienda" ? (
+                  <p className={styles.value}>Recoger en tienda</p>
+                ) : (
+                  <p className={styles.value}>Entregar en {address}</p>
+                )}
+              </div>
+              <div className={styles.userInfoItem}>
+                <p className={styles.label}>Comentarios:</p>
+                {comment.trim() !== "" ? (
+                  <p className={styles.value}>{comment}</p>
+                ) : (
+                  <p className={styles.value}>Sin comentarios</p>
+                )}
               </div>
             </div>
           </div>
-        </>
-      )}
 
-      <div className={styles.datesContainer}>
-        <div className={styles.sectionTitle}>
-          <BsCalendar4 size={16} className={styles.sectionTitleIcon} />{" "}
-          <h4>Fechas de reserva</h4>
-        </div>
-        <div className={styles.datesInfoContainer}>
-          <div className={styles.datesInfo}>
-            <p className={styles.label}>Fecha de inicio:</p>
-            <p className={styles.value}>{formattedStartDate}</p>
+          {additionalContact && (
+            <>
+              <div className={styles.additionalContactContainer}>
+                <h4 className={styles.sectionTitle}>
+                  <BsPersonPlus size={20} className={styles.sectionTitleIcon} />
+                  Segundo Contacto
+                </h4>
+                <div className={styles.additionInfoContainer}>
+                  <div className={styles.additionalContactInfo}>
+                    <p className={styles.label}>Nombre:</p>
+                    <p className={styles.value}>
+                      {additionalContact.name} {additionalContact.lastName}
+                    </p>
+                  </div>
+                  <div className={styles.additionalContactInfo}>
+                    <p className={styles.label}>Email:</p>
+                    <p className={styles.value}>{additionalContact.email}</p>
+                  </div>
+                </div>
+              </div>
+            </>
+          )}
+
+          <div className={styles.datesContainer}>
+            <div className={styles.sectionTitle}>
+              <BsCalendar4 size={16} className={styles.sectionTitleIcon} />{" "}
+              <h4>Fechas de reserva</h4>
+            </div>
+            <div className={styles.datesInfoContainer}>
+              <div className={styles.datesInfo}>
+                <p className={styles.label}>Fecha de inicio:</p>
+                <p className={styles.value}>{formattedStartDate}</p>
+              </div>
+              <div className={styles.datesInfo}>
+                <p className={styles.label}>Fecha de fin:</p>
+                <p className={styles.value}>{formattedEndDate}</p>
+              </div>
+            </div>
           </div>
-          <div className={styles.datesInfo}>
-            <p className={styles.label}>Fecha de fin:</p>
-            <p className={styles.value}>{formattedEndDate}</p>
+          <div className={styles.checkboxContainer}>
+            <input
+              type="checkbox"
+              id="privacyCheckbox"
+              checked={isPrivacyAccepted}
+              onChange={handlePrivacyAcceptanceChange}
+              className={styles.checkbox}
+            />
+            <label htmlFor="privacyCheckbox" className={styles.checkboxLabel}>
+              Confirmo que conozco y acepto las condiciones de uso del cliente y
+              la
+              <span
+                className={styles.privacyPolicy}
+                onClick={() => setShowModal(true)}
+              >
+                {" "}
+                política de privacidad{" "}
+              </span>{" "}
+              de Digital Booking, así como las normas y regulaciones.
+            </label>
           </div>
-        </div>
-      </div>
-      <div className={styles.checkboxContainer}>
-        <input
-          type="checkbox"
-          id="privacyCheckbox"
-          checked={isPrivacyAccepted}
-          onChange={handlePrivacyAcceptanceChange}
-          className={styles.checkbox}
-        />
-        <label htmlFor="privacyCheckbox" className={styles.checkboxLabel}>
-          Confirmo que conozco y acepto las condiciones de uso del cliente y la
-          <span
-            className={styles.privacyPolicy}
-            onClick={() => setShowModal(true)}
+
+          <PrivacyPolicyModal
+            show={showModal}
+            handleClose={() => setShowModal(false)}
+          ></PrivacyPolicyModal>
+
+          {isPaymentCompleted ? (
+            <div className={styles.checkoutSuccess}>
+              <div className={styles.top}>
+                <div className={styles.iconAproved}></div>
+                <div className={styles.iconBefore}></div>
+                <p>¡Listo! Tu pago fue aprobado.</p>
+              </div>
+            </div>
+          ) : (
+            <div className={styles.price}>
+              <div className={styles.priceItem}>Días totales de la reserva</div>
+              <div className={styles.priceItem}>{totalDays} días</div>
+              <div className={styles.priceItem}>Valor de los días totales</div>
+              <div className={styles.priceItem}>
+                $ {product.price * totalDays}
+              </div>
+              {equipmentPreferences.map((equipment) => (
+                <>
+                  <div className={styles.priceItem}>{equipment.name}</div>
+                  <div className={styles.priceItem}>
+                    $ {equipment.price * totalDays}
+                  </div>
+                </>
+              ))}
+              {insuranceSelected ? (
+                <>
+                  <div className={styles.priceItem}>Seguro</div>
+                  <div className={styles.priceItem}>
+                    $ {product.price * totalDays * 0.1}
+                  </div>
+                </>
+              ) : null}
+              <div className={styles.priceItem}>Precio total a pagar</div>
+              <div className={styles.priceItem}>$ {totalPrice}</div>
+            </div>
+          )}
+
+          <button
+            type="button"
+            className={styles.buttonPayContainer}
+            onClick={() => setShowPaymentModal(true)}
+            disabled={isPaymentCompleted}
           >
-            {" "}
-            política de privacidad{" "}
-          </span>{" "}
-          de Digital Booking, así como las normas y regulaciones.
-        </label>
-      </div>
+            <BsCreditCard size={20} />
+            {isPaymentCompleted ? "Pago Realizado" : "Realizar Pago"}
+          </button>
 
-      <PrivacyPolicyModal
-        show={showModal}
-        handleClose={() => setShowModal(false)}
-      ></PrivacyPolicyModal>
-
-      {isPaymentCompleted ? (
-        <div className={styles.checkoutSuccess}>
-          <div className={styles.top}>
-            <div className={styles.iconAproved}></div>
-            <div className={styles.iconBefore}></div>
-            <p>¡Listo! Tu pago fue aprobado.</p>
-          </div>
-        </div>
-      ) : (
-        <div className={styles.price}>
-          <div className={styles.priceItem}>Días totales de la reserva</div>
-          <div className={styles.priceItem}>{totalDays} días</div>
-          <div className={styles.priceItem}>Valor de los días totales</div>
-          <div className={styles.priceItem}>$ {product.price * totalDays}</div>
-          {equipmentPreferences.map(equipment => (
-            <>
-              <div className={styles.priceItem} >
-                {equipment.name}
-              </div>
-              <div className={styles.priceItem} >
-                $ {equipment.price * totalDays}
-              </div>
-            </>
-          ))}
-          {insuranceSelected ? 
-          (
-            <>
-              <div className={styles.priceItem}>
-                Seguro
-              </div>
-              <div className={styles.priceItem}>
-                $ {product.price * totalDays * 0.1}
-              </div>
-            </>
-          ):(null)}
-          <div className={styles.priceItem}>Precio total a pagar</div>
-          <div className={styles.priceItem}>$ {totalPrice}</div>
+          <PaymentGatewayModal
+            show={showPaymentModal}
+            handleClose={() => setShowPaymentModal(false)}
+            productPrice={product.price}
+            totalDays={totalDays}
+            totalPrice={totalPrice}
+            delivery={delivery}
+            setIsPaymentCompleted={handlePaymentCompleted}
+          />
         </div>
       )}
-
-      <button
-        type="button"
-        className={styles.buttonPayContainer}
-        onClick={() => setShowPaymentModal(true)}
-        disabled={isPaymentCompleted}
-      >
-        <BsCreditCard size={20} />
-        {isPaymentCompleted ? "Pago Realizado" : "Realizar Pago"}
-      </button>
-
-      <PaymentGatewayModal
-        show={showPaymentModal}
-        handleClose={() => setShowPaymentModal(false)}
-        productPrice={product.price}
-        totalDays={totalDays}
-        totalPrice={totalPrice}
-        delivery={delivery}
-        setIsPaymentCompleted={handlePaymentCompleted}
-      />
-    </div>
+    </>
   );
 };
 

@@ -1,20 +1,22 @@
-import { format } from "date-fns";
+import { format, addDays  } from "date-fns";
 import { es } from "date-fns/locale";
 import styles from "./ReservationCardView.module.css";
 import { differenceInDays } from "date-fns";
+import moment from "moment";
 
 
 const ReservationCard = ({ reservation }) => {
-  const { user, starDate, endDate, delivery, product, comment } = reservation;
-  const formattedStartDate = starDate ? format(new Date(starDate), "dd 'de' MMMM 'de' yyyy", { locale: es }) : null;
-  const formattedEndDate = endDate ? format(new Date(endDate), "dd 'de' MMMM 'de' yyyy", { locale: es }) : null;
-  const productPrice = product && product.price ? product.price : 0;
 
+  const { user, starDate, endDate, delivery, product, comment } = reservation;
+  const formattedStartDate = starDate ? format(addDays(new Date(starDate), 1 ), "dd 'de' MMMM 'de' yyyy", { locale: es }) : null;
+  const formattedEndDate = endDate ? format(addDays(new Date(endDate), 1), "dd 'de' MMMM 'de' yyyy", { locale: es }) : null;
+  const productPrice = product && product.price ? product.price : 0;
+  
   let totalDays = 0;
   let totalPrice = 0;
-
+  
   if (formattedStartDate && formattedEndDate) {
-    totalDays = differenceInDays(new Date(endDate), new Date(starDate)) + 1;
+    totalDays = differenceInDays(new Date(endDate), new Date(starDate)) + 1 ;
     totalPrice = totalDays * productPrice;
   }
 

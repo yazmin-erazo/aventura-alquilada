@@ -8,15 +8,13 @@ const NewReservation = () => {
   const params = useParams();
   const data = useContext(ProductsContext);
   const [product, setProduct] = useState(null);
-  const [startDate, setStartDate] = useState(new Date().toISOString());
-  const [endDate, setEndDate] = useState(new Date().toISOString());
+  const [startDate, setStartDate] = useState(null);
+  const [endDate, setEndDate] = useState(null);
   const [isCalendarOpen, setCalendarOpen] = useState(false);
 
-
-
   const handleSelectDates = (startDate, endDate) => {
-    setStartDate(startDate)
-    setEndDate(endDate)
+    setStartDate(startDate);
+    setEndDate(endDate);
   };
 
   const [active, setActive] = useState({
@@ -52,9 +50,10 @@ const NewReservation = () => {
       setStartDate(dates.startDate);
       setEndDate(dates.endDate);
     }
+
     const u = JSON.parse(sessionStorage.getItem("user"));
     setUser(u);
-  }, [data]);
+  }, [data, product]);
 
   useEffect(() => {
     setCalendarOpen(false);
@@ -67,20 +66,31 @@ const NewReservation = () => {
 
   return (
     <>
-      <div className={styles.stepsContainer} data-testid="reservation-component">
-        <div className={`${styles.step} ${active.step1 && styles.stepActive}`}>
-          {" "}
-          1{" "}
+      {product && (
+        <div
+          className={styles.stepsContainer}
+          data-testid="reservation-component"
+        >
+          <div
+            className={`${styles.step} ${active.step1 && styles.stepActive}`}
+          >
+            {" "}
+            1{" "}
+          </div>
+          <div
+            className={`${styles.step} ${active.step2 && styles.stepActive}`}
+          >
+            {" "}
+            2{" "}
+          </div>
+          <div
+            className={`${styles.step} ${active.step3 && styles.stepActive}`}
+          >
+            {" "}
+            3{" "}
+          </div>
         </div>
-        <div className={`${styles.step} ${active.step2 && styles.stepActive}`}>
-          {" "}
-          2{" "}
-        </div>
-        <div className={`${styles.step} ${active.step3 && styles.stepActive}`}>
-          {" "}
-          3{" "}
-        </div>
-      </div>
+      )}
       <Reservation
         product={product}
         startDate={startDate}

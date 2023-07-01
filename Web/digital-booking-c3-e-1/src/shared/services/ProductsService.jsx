@@ -12,12 +12,14 @@ const PRODUCTS_ENDPOINTS = {
 };
 
 const ProductsService = {
-  getAll: (params = { search: "", cityId: "", startDate: "", endDate: "", brandFilter: "", genderFilter: "", priceLessThan: "", priceGreaterThan: "", sizeFilter: "", stateFilter: "", colorFilter: "", materialFilter: "", nameFilter:"" }) => {
+ getAll: (params = { search: "", cityId: "", startDate: "", endDate: "", brandFilter: "", genderFilter: "", priceLessThan: "", priceGreaterThan: "", sizeFilter: "", stateFilter: "", colorFilter: "", materialFilter: "", nameFilter:"" }) => {
     if (params.startDate) {
-      params.startDate = params.startDate.format("YYYY-MM-DD");
+      params.startDate = new Date(params.startDate); 
+      params.startDate = params.startDate.toISOString(); 
     }
     if (params.endDate) {
-      params.endDate = params.endDate.format("YYYY-MM-DD");
+      params.endDate = new Date(params.endDate);
+      params.endDate = params.endDate.toISOString();
     }
     return API.get(PRODUCTS_ENDPOINTS.ALL_PRODUCTS, { params }).then((res) => res.data);
   },

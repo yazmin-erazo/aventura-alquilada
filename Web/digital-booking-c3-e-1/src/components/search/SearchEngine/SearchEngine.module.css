@@ -22,6 +22,8 @@
   margin-top: 8px;
   position: absolute;
   width: 100%;
+  display: flex;
+  justify-content: center;
 }
 
 .hide {
@@ -38,7 +40,7 @@
   display: flex;
   align-items: center;
   padding: 12px;
-  min-width: 300px;
+  min-width: 250px;
   background: var(--bg-general);
   border: 0.5px solid #c3d4e4; /* secondary-100 */
   border-radius: 4px;

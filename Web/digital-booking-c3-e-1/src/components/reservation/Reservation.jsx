@@ -9,6 +9,7 @@ import { registerLocale, setDefaultLocale } from "react-datepicker";
 import es from "date-fns/locale/es";
 import ReservationProductDetails from "./reservationDetails/ReservationProductDetails";
 import Swal from "sweetalert2";
+import { format } from "date-fns";
 import PrivacyPolicyModal from "./confirm/PrivacyPolicies";
 import { useNavigate } from "react-router-dom";
 
@@ -144,6 +145,10 @@ const Reservation = ({
     return moment(date).locale("es").format("DD/MMMM/YYYY");
   };
 
+
+  const formattedStartDate = format(new Date(startDate), "dd '/' MMMM '/' yyyy", { locale: es } );
+  const formattedEndDate = format(new Date(endDate), "dd '/' MMMM '/' yyyy", { locale: es });
+
   return (
     <>
       <div className={styles.container}>
@@ -161,8 +166,8 @@ const Reservation = ({
             {step === 2 && (
               <ReservationDetails
                 product={product}
-                startDate={formatDate(startDate)}
-                endDate={formatDate(endDate)}
+                startDate={formattedStartDate}
+                endDate={formattedEndDate}
                 delivery={delivery}
                 handlePreferenceChange={handlePreferenceChange}
                 handleFrequencyOptionClick={handleFrequencyOptionClick}

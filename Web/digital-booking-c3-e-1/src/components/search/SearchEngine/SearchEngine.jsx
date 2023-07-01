@@ -6,6 +6,8 @@ import Select from "../../common/select/Select";
 import CitiesService from "../../../shared/services/CitiesService";
 import moment from "moment";
 import "moment/locale/es";
+import PruebaCalendar from "../../resources/Calendar/PruebaCalendar";
+import { isBefore } from "date-fns";
 
 const SearchEngine = ({ handleSearch }) => {
   const [text, setText] = useState("");
@@ -36,7 +38,7 @@ const SearchEngine = ({ handleSearch }) => {
 
   const handleSelectDates = (startDate, endDate) => {
     if (startDate && endDate) {
-      if (startDate.isBefore(endDate)) {
+      if (isBefore(startDate, endDate)) {
         setSelectedStartDate(startDate);
         setSelectedEndDate(endDate);
       } else {
@@ -121,7 +123,8 @@ const SearchEngine = ({ handleSearch }) => {
           </div>
           {calendarShow && (
             <div ref={calendarRef} className={styles.calendarWrapper}>
-              <CalendarProducts onSelectDates={handleSelectDates} />
+              <PruebaCalendar onSelectDates={handleSelectDates}/>
+              {/* <CalendarProducts onSelectDates={handleSelectDates} /> */}
             </div>
           )}
         </div>
