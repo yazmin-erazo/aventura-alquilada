@@ -27,7 +27,6 @@ test-web:
     reports:
       junit: Web/digital-booking-c3-e-1/coverage/junit.xml
 
-
 build-web:
   stage: build
   image: node:14
