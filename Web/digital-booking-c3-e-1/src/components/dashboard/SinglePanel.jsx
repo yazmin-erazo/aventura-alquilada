@@ -31,13 +31,10 @@ const SinglePanel = ({ onMenuOpenChange }) => {
     localStorage.setItem("currentSection", currentSection);
   }, [currentSection]);
 
-
   return (
     <>
       {user.role === "Admin" && (
-        <div
-          className={` ${isMenuOpen ? styles.dashboard : styles.menuClosed}`}
-        >
+        <div className={`${styles.dashboard} ${isMenuOpen ? "" : styles.menuClosed}`}>
           <div className={styles.content}>
             <div className={styles.toggleIcon} onClick={toggleMenu}>
               {isMenuOpen ? (
@@ -142,7 +139,8 @@ const SinglePanel = ({ onMenuOpenChange }) => {
 
       {/* ...... EN DISPOSITIVOS DE MAX 768PX ...... */}
       {isMenuOpen && (
-        <div className={`${styles.burgerMenuContainer} ${styles.mobileMenu}`}>
+        
+        <div className={`${styles.burgerMenuContainer} ${styles.mobileMenu} ${isMenuOpen ? "" : styles.menuClosed}`}>
           <div className={styles.burgerMenu}>
             <div className={styles.title}>Dashboard</div>
 
