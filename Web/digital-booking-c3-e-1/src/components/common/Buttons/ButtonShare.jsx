@@ -12,7 +12,7 @@ const ButtonShare = ({ product }) => {
   const [showModal, setShowModal] = useState(false);
 
   const baseUrl =
-    "http://equipamiento-deportivo-static.s3-website.us-east-2.amazonaws.com/";
+    "http://aventura-alquilada.ddns.net/";
   const productUrl = product && `${baseUrl}products/${product.id}`;
 
   const openModal = () => {

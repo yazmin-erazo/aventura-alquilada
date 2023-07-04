@@ -11,7 +11,7 @@ const PrivacyPolicyModal = ({ show, handleClose }) => {
             <div className={styles.modalContent}>
                 <h1>¡Aquí Estamos Para Cuidar de Tu Privacidad!</h1>
                 <p>En <strong>Digital Booking</strong>, tu seguridad es nuestra prioridad. Nosotros, los titulares del sitio web <a
-                    href="http://equipamiento-deportivo-static.s3-website.us-east-2.amazonaws.com/">http://equipamiento-deportivo-static.s3-website.us-east-2.amazonaws.com/</a>
+                    href="http://aventura-alquilada.ddns.net/">http://aventura-alquilada.ddns.net/</a>
                     (en adelante, "el sitio web"), estamos comprometidos con la protección y la confidencialidad de cualquier información personal que nos proporcionas. Cumplimos con la Ley Orgánica 15/1999, de 13 de diciembre, de Protección de
                     Datos de Carácter Personal y con el Reglamento (UE) 2016/679 del Parlamento y del Consejo.</p>
 

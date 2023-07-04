@@ -7,7 +7,7 @@ import styles from './ShareButtons.module.css';
 const ShareButtons = () => {
   const [showModal, setShowModal] = useState(false);
 
-  const baseUrl = 'http://equipamiento-deportivo-static.s3-website.us-east-2.amazonaws.com/';
+  const baseUrl = 'http://aventura-alquilada.ddns.net/';
   const message = `¡Desata tu lado aventurero con nuestro alquiler de equipo deportivo! 🌊🧗 De la escalada a los deportes acuáticos, lo tenemos TODO. ¡No sueñes, vive la aventura! 🔥 Equípate con lo mejor y sumérgete en la acción. 🚀 Tu próxima aventura te espera: `;
 
   const openModal = () => {
