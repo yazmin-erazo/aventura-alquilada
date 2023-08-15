@@ -11,16 +11,11 @@ Aventuraalquilada es una plataforma de alquiler y gestión de equipamiento depor
 Vista previa de la plataforma en mobile (general) y en desktop (Reserva de producto)
 Para una visión más completa de la plataforma, puedes ver el video completo de la demostración en 🎥 [este enlace](https://youtu.be/c8s-vUkj-TA)
 
-<div style="display: flex; justify-content: space-between; gap: 16px ;">
-  <figure>
-    <img alt="Vista previa mobile" src="https://res.cloudinary.com/dfkakq2ii/image/upload/v1692052763/mqdzevecrje2vw3u7fhs.gif" style="border-radius: 10px;">
-    <figcaption>Mobile</figcaption>
-  </figure>
-  
-  <figure>
-    <img alt="Vista previa desktop" src="https://res.cloudinary.com/dfkakq2ii/image/upload/v1692055089/f0msvkzesairy3hgu9q2.gif"  style="border-radius: 10px;">
-    <figcaption>Desktop</figcaption>
-  </figure>
+
+
+<div style="display:flex; justify-content:space-between; gap:16px ;">
+     <img src="https://github.com/yazmin-erazo/aventura-alquilada/assets/54871751/00712db1-b7a3-451a-99ed-bc2454298bca.gif" style="border-radius: 10px;"/>
+     <img src="https://github.com/yazmin-erazo/aventura-alquilada/assets/54871751/a44441ba-599c-4d82-8c58-282e394ba528.gif" style="border-radius: 10px;"/> 
 </div>
 
 
